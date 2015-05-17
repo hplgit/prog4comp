@@ -1,0 +1,24 @@
+function integral_trapezoid()
+    a = 0.0;  b = 1.0;  n = 64;
+    dt = (b-a)/n;
+    
+    exact_value = F(b) - F(a);  %i.e. to machine precision
+    
+    approximate_value = 0.5*dFdt(a) + 0.5 ;
+    for i = 0:(n-1)
+        approximate_value = approximate_value + dFdt((i+0.5)*dt);
+    end
+    approximate_value = approximate_value*dt;
+    
+    error = abs(exact_value - approximate_value);
+    rel_error = (error/exact_value)*100;
+    fprintf('The error is: %g m, i.e. %g per cent \n',error,rel_error);
+end
+
+function result = F(t)
+    result = exp(t^3) - 1;
+end
+
+function result = dFdt(t)
+    result = 3*(t^2)*exp(t^3);
+end
