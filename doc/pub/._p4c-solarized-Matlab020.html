@@ -1,0 +1,2442 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Programming for Computations - A Gentle Introduction to Numerical Simulations with MATLAB/Octave">
+<meta name="keywords" content="computer program,programming,language programming,language computer,MATLAB,Octave,Fortran,C,C++,Python,Maple,Mathematica,syntax,bug,debugging,script (and scripting),implement,print,program run,program execute,code,comment,instruction,program statement,variable,assignment,semi-colon (easy print),calculator,text editor,Idle,prompt,program typing,program run,program execute,ipython,m-file,function,function call,atan,function input parameter,function output parameter,function return,function take a parameter,library,library function,from,import,math,module,package,linspace,xlabel,ylabel,plot,interactive use (of Matlab),import,keyboard arrow up/down,operator Arithmetic,parentheses,variable type,variable name,float,integer,string,type conversion,reserved words,variable integer,variable float,variable string,variable assignment,default,single (precision),double (precision),printing formatted,printf formatting,default,array,array element,zeros,allocate,array index,indexing zero based,indexing one based,Matlab one-based indexing,array slice of,graph,hold (on/off),plot figure,title,legend,axis,hardcopy,format png,matrix mat,matrix vector product,transpose,linear algebra,matrix,vector,error message,debugging,debugger,try-exception,exception handling,program crash,program testing,program verification,program input,program output,input,raw input,list,tuple,symbolic computations,symbolic operations,symbolic simplifications,Symbolic Toolbox,WolframAlpha,Mathematica,Sage (symbolic package),Python documentation,garbage collection,variable delete,if,elif,else,colon,indent,boolean,boolean expression,True,False,boolean True,boolean False,pseudo code,operator Logical,function,function definition,def,return,argument,parameter input,parameter output,function nargin,function nargout,variable local,variable global,doc string,function handle,function local,function global,function nested,loop for,for loop,range,loop iteration,loop index,loop double,loop multiple,loop nested,linear algebra,while loop,loop while,loop infinite,loop iteration,loop index,array sorting,Leibniz pi,Euler pi,programming game,linear interpolation,least squares method,Fourier series,integral analytically,integral exact,integral approximately,integration points,code re-use,unit tests,complex domains,Monte Carlo integration,seed (random generators),scheme,finite difference method,forward difference approximation,Forward Euler scheme,logistic model,carrying capacity,SIR model,scalar ODE,ODE scalar,vector ODE,ODE vector,system of ODEs,Heun's method,Runge-Kutta, 2nd-order method,2nd-order Runge-Kutta method,RK2,PDE,heat equation,diffusion equation,MOL forward Euler,method of lines,MOL,mesh points,cell,method of lines,unstable solutions,instability,stability criterion,Poisson equation,Laplace equation,root finding,code robust,code try-except,code exception,Newton starting value,return None,sys.exit">
+
+<title>Programming for Computations - A Gentle Introduction to Numerical Simulations with MATLAB/Octave</title>
+
+
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+code { padding: 0px; background-color: inherit; }
+pre {
+  border: 0pt solid #93a1a1;
+  box-shadow: none;
+}
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+/* Let pre tags for code blocks have the same color as the surroundings */
+pre { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u' Preface ', 0, None, '___sec0'),
+              (u' Why learn programming? ', 3, None, '___sec1'),
+              (u' Target audience and background knowledge ',
+               3,
+               None,
+               '___sec2'),
+              (u' Numerical methods ', 3, None, '___sec3'),
+              (u' The computer language: Matlab ', 3, None, '___sec4'),
+              (u' How this book is different ', 3, None, '___sec5'),
+              (u' Acknowledgments ', 3, None, '___sec6'),
+              (u' The first few steps ',
+               0,
+               u'1st:TheFirstFewSteps',
+               u'1st:TheFirstFewSteps'),
+              (u' What is a program? And what is programming? ',
+               1,
+               None,
+               '___sec8'),
+              (u' A Matlab program with variables ',
+               1,
+               u'1st:ex1',
+               u'1st:ex1'),
+              (u' The program ', 2, None, '___sec10'),
+              (u' Dissection of the program ', 2, None, '___sec11'),
+              (u' Why not just use a pocket calculator? ',
+               2,
+               None,
+               '___sec12'),
+              (u' The importance of using a text editor to write programs ',
+               2,
+               None,
+               '___sec13'),
+              (u' Write and run your first program ', 2, None, '___sec14'),
+              (u' Write and run a program in Matlab ', 3, None, '___sec15'),
+              (u' Write a program in a text editor and run it in Octave ',
+               3,
+               None,
+               '___sec16'),
+              (u'  A Matlab program with a library function ',
+               1,
+               u'1st:ex2',
+               u'1st:ex2'),
+              (u' A Matlab program with vectorization and plotting ',
+               1,
+               u'1st:ex3',
+               u'1st:ex3'),
+              (u' More basic concepts ', 1, None, '___sec19'),
+              (u' Using Matlab interactively ', 2, None, '___sec20'),
+              (u' Arithmetics, parentheses and round-off errors ',
+               2,
+               None,
+               '___sec21'),
+              (u' Variables ', 2, None, '___sec22'),
+              (u' Formatting text and numbers ', 2, None, '___sec23'),
+              (u' Arrays ', 2, None, '___sec24'),
+              (u' Plotting ', 2, None, '___sec25'),
+              (u' Error messages and warnings ', 2, None, '___sec26'),
+              (u' Input data ', 2, None, '___sec27'),
+              (u' Symbolic computations ', 2, None, '___sec28'),
+              (u' Concluding remarks ', 2, None, '___sec29'),
+              (u' Exercises ', 1, None, '___sec30'),
+              (u' Exercise 1: Error messages ',
+               2,
+               u'1st:exer:ErrorMessages',
+               u'1st:exer:ErrorMessages'),
+              (u' Exercise 2: Volume of a cube ',
+               2,
+               u'1st:exer:cubeVolume',
+               u'1st:exer:cubeVolume'),
+              (u' Exercise 3: Area and circumference of a circle ',
+               2,
+               u'1st:exer:areaCircle',
+               u'1st:exer:areaCircle'),
+              (u' Exercise 4: Volumes of three cubes ',
+               2,
+               u'1st:exer:volumes3cubes',
+               u'1st:exer:volumes3cubes'),
+              (u' Exercise 5: Average of integers ',
+               2,
+               u'1st:exer:averageOf5Integers',
+               u'1st:exer:averageOf5Integers'),
+              (u' Exercise 6: Interactive computing of volume and area ',
+               2,
+               u'1st:exer:cubeVolInteractively',
+               u'1st:exer:cubeVolInteractively'),
+              (u' Exercise 7: Update variable at command prompt ',
+               2,
+               u'1st:exer:updateVarInteractively',
+               u'1st:exer:updateVarInteractively'),
+              (u' Exercise 8: Formatted print to screen ',
+               2,
+               u'1st:exer:printfScreen',
+               u'1st:exer:printfScreen'),
+              (u' Exercise 9: Matlab documentation and random numbers ',
+               2,
+               u'1st:exer:PythonDocRandom',
+               u'1st:exer:PythonDocRandom'),
+              (u' Basic constructions ',
+               0,
+               u'2nd:BasicConstructins',
+               u'2nd:BasicConstructins'),
+              (u' If tests, colon and indentation ', 1, None, '___sec41'),
+              (u' Functions ', 1, u'sec:functions', u'sec:functions'),
+              (u' For loops ', 1, u'sec:for:loops', u'sec:for:loops'),
+              (u' While loops ', 1, u'sec:while:loops', u'sec:while:loops'),
+              (u' Reading from and writing to files ',
+               1,
+               u'sec:file:reading:writing',
+               u'sec:file:reading:writing'),
+              (u' Exercises ', 1, None, '___sec46'),
+              (u' Exercise 10: Introducing errors ',
+               2,
+               u'2nd:exer:IntroducingErrors',
+               u'2nd:exer:IntroducingErrors'),
+              (u' Exercise 11: Compare integers a and b ',
+               2,
+               u'2nd:exer:compInt',
+               u'2nd:exer:compInt'),
+              (u' Exercise 12: Functions for circumference and area of a circle ',
+               2,
+               u'2nd:exer:funcCircArea',
+               u'2nd:exer:funcCircArea'),
+              (u' Exercise 13: Function for area of a rectangle ',
+               2,
+               u'2nd:exer:funcAreaRectangle',
+               u'2nd:exer:funcAreaRectangle'),
+              (u' Exercise 14: Area of a polygon ',
+               2,
+               u'2nd:exer:area:polygon',
+               u'2nd:exer:area:polygon'),
+              (u' Exercise 15: Average of integers ',
+               2,
+               u'2nd:exer:avNInt',
+               u'2nd:exer:avNInt'),
+              (u' Exercise 16: While loop with errors ',
+               2,
+               u'2nd:exer:whileLoopErrors',
+               u'2nd:exer:whileLoopErrors'),
+              (u' Exercise 17: Area of rectangle versus circle ',
+               2,
+               u'2nd:exer:areaRectCircle',
+               u'2nd:exer:areaRectCircle'),
+              (u' Exercise 18: Find crossing points of two graphs ',
+               2,
+               u'2nd:exer:Cross2Graphs',
+               u'2nd:exer:Cross2Graphs'),
+              (u' Exercise 19: Sort array with numbers ',
+               2,
+               u'2nd:exer:sortNumbers',
+               u'2nd:exer:sortNumbers'),
+              (u' Exercise 20: Compute $\\pi$ ',
+               2,
+               u'2nd:exer:computingPi',
+               u'2nd:exer:computingPi'),
+              (u' Exercise 21: Compute combinations of sets ',
+               2,
+               u'2nd:exer:combinatorics1',
+               u'2nd:exer:combinatorics1'),
+              (u' Exercise 22: Frequency of random numbers ',
+               2,
+               u'2nd:exer:numberOccurrence',
+               u'2nd:exer:numberOccurrence'),
+              (u' Remarks ', 3, None, '___sec60'),
+              (u' Exercise 23: Game 21 ',
+               2,
+               u'2nd:exer:Game21',
+               u'2nd:exer:Game21'),
+              (u' Exercise 24: Linear interpolation ',
+               2,
+               u'2nd:exer:linearInterpol',
+               u'2nd:exer:linearInterpol'),
+              (u' Exercise 25: Test straight line requirement ',
+               2,
+               u'2nd:exer:testStraightLine',
+               u'2nd:exer:testStraightLine'),
+              (u' Exercise 26: Fit straight line to data ',
+               2,
+               u'2nd:exer:fitLine',
+               u'2nd:exer:fitLine'),
+              (u' Remarks ', 3, None, '___sec65'),
+              (u' Exercise 27: Fit sines to straight line ',
+               2,
+               u'2nd:exer:fitSines',
+               u'2nd:exer:fitSines'),
+              (u' Remarks ', 3, None, '___sec67'),
+              (u' Exercise 28: Count occurrences of a string in a string ',
+               2,
+               u'2nd:exer:countTextString',
+               u'2nd:exer:countTextString'),
+              (u' Computing integrals ',
+               0,
+               u'sec:integrals',
+               u'sec:integrals'),
+              (u' Basic ideas of numerical integration ',
+               1,
+               u'sec:integrals:basic',
+               u'sec:integrals:basic'),
+              (u' Computational example ', 3, None, '___sec71'),
+              (u' The composite trapezoidal rule ',
+               1,
+               u'sec:integrals:trap',
+               u'sec:integrals:trap'),
+              (u' The general formula ',
+               2,
+               u'sec:integrals:formula',
+               u'sec:integrals:formula'),
+              (u' Implementation ',
+               2,
+               u'sec:integrals:trap:impl',
+               u'sec:integrals:trap:impl'),
+              (u' Specific or general implementation? ', 3, None, '___sec75'),
+              (u' Implementation with functions ', 3, None, '___sec76'),
+              (u' Solving our specific problem in a session ',
+               3,
+               None,
+               '___sec77'),
+              (u' Solving our specific problem in a program ',
+               3,
+               None,
+               '___sec78'),
+              (u' Alternative flat special-purpose implementation ',
+               2,
+               None,
+               '___sec79'),
+              (u' The composite midpoint method ',
+               1,
+               u'sec:integrals:Midpoint',
+               u'sec:integrals:Midpoint'),
+              (u' The idea ', 3, None, '___sec81'),
+              (u' The general formula ', 2, None, '___sec82'),
+              (u' Implementation ',
+               2,
+               u'sec:midpoint:code',
+               u'sec:midpoint:code'),
+              (u' Comparing the trapezoidal and the midpoint methods ',
+               2,
+               None,
+               '___sec84'),
+              (u' Testing ', 1, None, '___sec85'),
+              (u' Problems with brief testing procedures ',
+               2,
+               None,
+               '___sec86'),
+              (u' Test procedures ',
+               2,
+               u'sec:integrals:testprocs',
+               u'sec:integrals:testprocs'),
+              (u' Hand-computed results ', 3, None, '___sec88'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec89'),
+              (u' Demonstrating correct convergence rates ',
+               3,
+               None,
+               '___sec90'),
+              (u' Constructing unit tests and writing test functions ',
+               2,
+               u'sec:integrals:test:functions',
+               u'sec:integrals:test:functions'),
+              (u' Hand-computed numerical results ', 3, None, '___sec92'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec93'),
+              (u' Demonstrating correct convergence rates ',
+               3,
+               None,
+               '___sec94'),
+              (u' Vectorization ', 1, None, '___sec95'),
+              (u' Vectorizing the midpoint rule ', 3, None, '___sec96'),
+              (u' Vectorizing the trapezoidal rule ', 3, None, '___sec97'),
+              (u' Measuring computational speed ', 1, None, '___sec98'),
+              (u' Double and triple integrals ',
+               1,
+               u'sec:int:double',
+               u'sec:int:double'),
+              (u' The midpoint rule for a double integral ',
+               2,
+               u'sec:int:double:midpoint',
+               u'sec:int:double:midpoint'),
+              (u' Derivation via one-dimensional integrals ',
+               3,
+               None,
+               '___sec101'),
+              (u' Direct derivation ', 3, None, '___sec102'),
+              (u' Programming a double sum ', 3, None, '___sec103'),
+              (u' Reusing code for one-dimensional integrals ',
+               3,
+               None,
+               '___sec104'),
+              (u' Verification via test functions ', 3, None, '___sec105'),
+              (u' The midpoint rule for a triple integral ',
+               2,
+               None,
+               '___sec106'),
+              (u' Theory ', 3, None, '___sec107'),
+              (u' Implementation ', 3, None, '___sec108'),
+              (u' Monte Carlo integration for complex-shaped domains ',
+               2,
+               u'sec:int:complex:domain',
+               u'sec:int:complex:domain'),
+              (u' The Monte Carlo integration algorithm ',
+               3,
+               None,
+               '___sec110'),
+              (u' Implementation ', 3, None, '___sec111'),
+              (u' Verification ', 3, None, '___sec112'),
+              (u' Test function for function with random numbers ',
+               3,
+               None,
+               '___sec113'),
+              (u' Integral over a circle ', 3, None, '___sec114'),
+              (u' Exercises ', 1, None, '___sec115'),
+              (u' Exercise 29: Hand calculations for the trapezoidal method ',
+               2,
+               u'sec:exer:trap:hand',
+               u'sec:exer:trap:hand'),
+              (u' Exercise 30: Hand calculations for the midpoint method ',
+               2,
+               u'sec:exer:midpt:hand',
+               u'sec:exer:midpt:hand'),
+              (u' Exercise 31: Compute a simple integral ',
+               2,
+               u'sec:exer:trap:mid:parabola',
+               u'sec:exer:trap:mid:parabola'),
+              (u' Exercise 32: Hand-calculations with sine integrals ',
+               2,
+               u'sec:exer:hand:sine',
+               u'sec:exer:hand:sine'),
+              (u' Exercise 33: Make test functions for the midpoint method ',
+               2,
+               u'sec:exer:test:midpoint',
+               u'sec:exer:test:midpoint'),
+              (u' Exercise 34: Explore round-off errors with large numbers ',
+               2,
+               u'sec:exer:test:roundoff',
+               u'sec:exer:test:roundoff'),
+              (u' Exercise 35: Write test functions for $\\int_0^4\\sqrt{x}dx$ ',
+               2,
+               u'sec:exer:test:convrates:sqrt',
+               u'sec:exer:test:convrates:sqrt'),
+              (u' Remarks ', 3, None, '___sec123'),
+              (u' Exercise 36: Rectangle methods ',
+               2,
+               u'sec:exer:rectangleMethod',
+               u'sec:exer:rectangleMethod'),
+              (u' Exercise 37: Adaptive integration ',
+               2,
+               u'sec:exer:adaptive:int',
+               u'sec:exer:adaptive:int'),
+              (u' Remarks ', 3, None, '___sec126'),
+              (u' Exercise 38: Integrating x raised to x ',
+               2,
+               u'sec:exer:integrate:x2x',
+               u'sec:exer:integrate:x2x'),
+              (u' Exercise 39: Integrate products of sine functions ',
+               2,
+               u'sec:exer:sine:products',
+               u'sec:exer:sine:products'),
+              (u' Exercise 40: Revisit fit of sines to a function ',
+               2,
+               u'sec:exer:revisitFitSines',
+               u'sec:exer:revisitFitSines'),
+              (u' Exercise 41: Derive the trapezoidal rule for a double integral ',
+               2,
+               u'sec:exer:trapezoidal:2D',
+               u'sec:exer:trapezoidal:2D'),
+              (u' Exercise 42: Compute the area of a triangle by Monte Carlo integration ',
+               2,
+               u'sec:exer:MC:ellipse',
+               u'sec:exer:MC:ellipse'),
+              (u' Solving ordinary differential equations ',
+               0,
+               u'5th:SolvODEs',
+               u'5th:SolvODEs'),
+              (u' Population growth ', 1, u'sec:de:pg', u'sec:de:pg'),
+              (u' Derivation of the model ',
+               2,
+               u'sec:de:pg:model',
+               u'sec:de:pg:model'),
+              (u' Numerical solution ',
+               2,
+               u'sec:de:pg:numerics',
+               u'sec:de:pg:numerics'),
+              (u' Programming the Forward Euler scheme; the special case ',
+               2,
+               u'sec:de:pg:prog1',
+               u'sec:de:pg:prog1'),
+              (u' Understanding the Forward Euler method ',
+               2,
+               u'sec:de:pg:geom',
+               u'sec:de:pg:geom'),
+              (u' Programming the Forward Euler scheme; the general case ',
+               2,
+               u'sec:de:FE:gen',
+               u'sec:de:FE:gen'),
+              (u' Making the population growth model more realistic ',
+               2,
+               None,
+               '___sec139'),
+              (u' Verification: exact linear solution of the discrete equations ',
+               2,
+               u'sec:de:growth:test:linear',
+               u'sec:de:growth:test:linear'),
+              (u' Spreading of diseases ', 1, None, '___sec141'),
+              (u' Spreading of a flu ', 2, u'sec:de:flu', u'sec:de:flu'),
+              (u' A Forward Euler method for the differential equation system ',
+               2,
+               u'sec:de:flu:FE',
+               u'sec:de:flu:FE'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:flu:prog:spec',
+               u'sec:de:flu:prog:spec'),
+              (u' Outbreak or not ', 2, None, '___sec145'),
+              (u' Abstract problem and notation ',
+               2,
+               u'sec:de:flu:generic',
+               u'sec:de:flu:generic'),
+              (u' Programming the numerical method; the general case ',
+               2,
+               u'sec:de:flu:prog:generic',
+               u'sec:de:flu:prog:generic'),
+              (u' Time-restricted immunity ', 2, None, '___sec148'),
+              (u' Incorporating vaccination ',
+               2,
+               u'sec:de:flu:vaccine',
+               u'sec:de:flu:vaccine'),
+              (u' Discontinuous coefficients: a vaccination campaign ',
+               2,
+               u'sec:de:flu:vaccine:discont',
+               u'sec:de:flu:vaccine:discont'),
+              (u' Oscillating one-dimensional systems ',
+               1,
+               u'sec:de:vib',
+               u'sec:de:vib'),
+              (u' Derivation of a simple model ', 2, None, '___sec152'),
+              (u' Numerical solution ', 2, None, '___sec153'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:vib:special',
+               u'sec:de:vib:special'),
+              (u' A magic fix of the numerical method ',
+               2,
+               None,
+               '___sec155'),
+              (u" The 2nd-order Runge-Kutta method (or Heun's method) ",
+               2,
+               u'sec:de:osc:Heun',
+               u'sec:de:osc:Heun'),
+              (u' Odespy: software for solving ODEs ',
+               2,
+               u'sec:de:osc:odespy',
+               u'sec:de:osc:odespy'),
+              (u' The 4th-order Runge-Kutta method ', 2, None, '___sec158'),
+              (u' The algorithm ', 3, None, '___sec159'),
+              (u' Application ', 3, None, '___sec160'),
+              (u' Implementation ', 3, None, '___sec161'),
+              (u' Derivation ', 3, None, '___sec162'),
+              (u' More effects: damping, nonlinearity, and external forces ',
+               2,
+               None,
+               '___sec163'),
+              (u' The Euler-Cromer scheme ', 3, None, '___sec164'),
+              (u' The 4-th order Runge-Kutta method ', 3, None, '___sec165'),
+              (u' Illustration of linear damping ', 2, None, '___sec166'),
+              (u' Illustration of linear damping with sinusoidal excitation ',
+               2,
+               None,
+               '___sec167'),
+              (u' Spring-mass system with sliding friction ',
+               2,
+               u'sec:de:vib:ode2:sliding:friction',
+               u'sec:de:vib:ode2:sliding:friction'),
+              (u' A finite difference method; undamped, linear case ',
+               2,
+               u'sec:de:vib:2nd',
+               u'sec:de:vib:2nd'),
+              (u' A finite difference method; linear damping ',
+               2,
+               u'sec:de:vib:2nd:damped1',
+               u'sec:de:vib:2nd:damped1'),
+              (u' Exercises ', 1, None, '___sec171'),
+              (u' Exercise 43: Geometric construction of the Forward Euler method ',
+               2,
+               u'sec:de:exer:geom',
+               u'sec:de:exer:geom'),
+              (u' Exercise 44: Make test functions for the Forward Euler method ',
+               2,
+               u'sec:de:exer:FE:test1',
+               u'sec:de:exer:FE:test1'),
+              (u" Exercise 45: Implement and evaluate Heun's method ",
+               2,
+               u'sec:de:exer:Heun:pg',
+               u'sec:de:exer:Heun:pg'),
+              (u' Exercise 46: Find an appropriate time step; logistic model ',
+               2,
+               u'sec:de:exer:logistic:dtopt',
+               u'sec:de:exer:logistic:dtopt'),
+              (u' Exercise 47: Find an appropriate time step; SIR model ',
+               2,
+               u'sec:de:exer:SIR:dtopt',
+               u'sec:de:exer:SIR:dtopt'),
+              (u' Exercise 48: Model an adaptive vaccination campaign ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 49: Make a SIRV model with time-limited effect of vaccination ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 50: Refactor a flat program ',
+               2,
+               u'sec:de:exer:vib:FE:func',
+               u'sec:de:exer:vib:FE:func'),
+              (u' Exercise 51: Simulate oscillations by a general ODE solver ',
+               2,
+               u'sec:de:exer:vib:ode_FE',
+               u'sec:de:exer:vib:ode_FE'),
+              (u' Exercise 52: Compute the energy in oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Exercise 53: Use a Backward Euler scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:BE',
+               u'sec:de:exer:pg:BE'),
+              (u' Exercise 54: Use a Crank-Nicolson scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:CN',
+               u'sec:de:exer:pg:CN'),
+              (u' Exercise 55: Understand finite differences via Taylor series ',
+               2,
+               u'sec:de:exer:fd:Taylor',
+               u'sec:de:exer:fd:Taylor'),
+              (u' Exercise 56: Use a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Remarks ', 3, None, '___sec186'),
+              (u" Exercise 57: Use Heun's method for the SIR model ",
+               2,
+               u'sec:de:exer:SIR:Heun',
+               u'sec:de:exer:SIR:Heun'),
+              (u' Exercise 58: Use Odespy to solve a simple ODE ',
+               2,
+               u'sec:de:exer:odespy:decay',
+               u'sec:de:exer:odespy:decay'),
+              (u' Exercise 59: Set up a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:osc:BE',
+               u'sec:de:exer:osc:BE'),
+              (u' Exercise 60: Set up a Forward Euler scheme for nonlinear and damped oscillations ',
+               2,
+               u'sec:de:exer:osc:FE:general',
+               u'sec:de:exer:osc:FE:general'),
+              (u' Exercise 61: Discretize an initial condition ',
+               2,
+               u'sec:de:exer:osc:2nd:V0ic',
+               u'sec:de:exer:osc:2nd:V0ic'),
+              (u' Solving partial differential equations ',
+               0,
+               u'6th:SolvPDEs',
+               u'6th:SolvPDEs'),
+              (u' Finite difference methods ',
+               1,
+               u'6th:SolvPDEs:MOLandFE',
+               u'6th:SolvPDEs:MOLandFE'),
+              (u' Reduction of a PDE to a system of ODEs ',
+               2,
+               u'sec:pde:diff1D:reduce',
+               u'sec:pde:diff1D:reduce'),
+              (u' Construction of a test problem with known discrete solution ',
+               2,
+               u'sec:pde:diff1D:testproblem',
+               u'sec:pde:diff1D:testproblem'),
+              (u' Implementation: Forward Euler method ',
+               2,
+               None,
+               '___sec196'),
+              (u' Application: heat conduction in a rod ',
+               2,
+               u'sec:pde:diff1D:rod',
+               u'sec:pde:diff1D:rod'),
+              (u' Vectorization ', 2, None, '___sec198'),
+              (u' Using Odespy to solve the system of ODEs ',
+               2,
+               None,
+               '___sec199'),
+              (u' Implicit methods ', 2, None, '___sec200'),
+              (u' Exercises ', 1, None, '___sec201'),
+              (u' Exercise 62: Simulate a diffusion equation by hand ',
+               2,
+               u'sec:pde:diff1D:exer:handFE',
+               u'sec:pde:diff1D:exer:handFE'),
+              (u' Exercise 63: Compute temperature variations in the ground ',
+               2,
+               u'sec:pde:diff1D:exer:groundtemp',
+               u'sec:pde:diff1D:exer:groundtemp'),
+              (u' Exercise 64: Compare implicit methods ',
+               2,
+               u'sec:pde:diff1D:exer:compare:implicit',
+               u'sec:pde:diff1D:exer:compare:implicit'),
+              (u' Exercise 65: Explore adaptive and implicit methods ',
+               2,
+               u'sec:pde:diff1D:exer:groundtemp:adapt',
+               u'sec:pde:diff1D:exer:groundtemp:adapt'),
+              (u' Exercise 66: Investigate the $\\theta$ rule ',
+               2,
+               u'sec:pde:diff1D:exer:CN',
+               u'sec:pde:diff1D:exer:CN'),
+              (u' Remarks ', 3, None, '___sec207'),
+              (u' Exercise 67: Compute the diffusion of a Gaussian peak ',
+               2,
+               u'sec:pde:diff1D:exer:Gaussian',
+               u'sec:pde:diff1D:exer:Gaussian'),
+              (u' Exercise 68: Vectorize a function for computing the area of a polygon ',
+               2,
+               u'2nd:exer:area:polygon2',
+               u'2nd:exer:area:polygon2'),
+              (u' Exercise 69: Explore symmetry ',
+               2,
+               u'sec:pde:diff1D:exer:Gaussian:symm',
+               u'sec:pde:diff1D:exer:Gaussian:symm'),
+              (u' Remarks ', 3, None, '___sec211'),
+              (u' Exercise 70: Compute solutions as $t\\rightarrow\\infty$ ',
+               2,
+               u'sec:pde:diff1D:exer:stationary',
+               u'sec:pde:diff1D:exer:stationary'),
+              (u' Remarks ', 3, None, '___sec213'),
+              (u' Exercise 71: Solve a two-point boundary value problem ',
+               2,
+               u'sec:pde:diff1D:exer:stationary2',
+               u'sec:pde:diff1D:exer:stationary2'),
+              (u' Solving nonlinear algebraic equations ',
+               0,
+               u'4th:NonlinAlgEq',
+               u'4th:NonlinAlgEq'),
+              (u' Brute force methods ',
+               1,
+               u'4th:bruteforce',
+               u'4th:bruteforce'),
+              (u' Brute force root finding ', 2, None, '___sec217'),
+              (u' Numerical algorithm ', 3, None, '___sec218'),
+              (u' Implementation ', 3, None, '___sec219'),
+              (u' Brute force optimization ', 2, None, '___sec220'),
+              (u' Numerical algorithm ', 3, None, '___sec221'),
+              (u' Implementation ', 3, None, '___sec222'),
+              (u' Model problem for algebraic equations ',
+               2,
+               None,
+               '___sec223'),
+              (u" Newton's method ",
+               1,
+               u'4th:NonlinAlgEq:Newt',
+               u'4th:NonlinAlgEq:Newt'),
+              (u" Deriving and implementing Newton's method ",
+               2,
+               None,
+               '___sec225'),
+              (u' Making a more efficient and robust implementation ',
+               2,
+               u'4th:Newton:robust',
+               u'4th:Newton:robust'),
+              (u' The secant method ',
+               1,
+               u'4th:NonlinAlgEq:Secant',
+               u'4th:NonlinAlgEq:Secant'),
+              (u' The bisection method ',
+               1,
+               u'4th:NonlinAlgEq:Bisect',
+               u'4th:NonlinAlgEq:Bisect'),
+              (u' Rate of convergence ',
+               1,
+               u'4th:NonlinAlgEq:RateConv',
+               u'4th:NonlinAlgEq:RateConv'),
+              (u' Exercises ', 1, None, '___sec230'),
+              (u" Exercise 72: Understand why Newton's method can fail ",
+               2,
+               u'4th:exer:Newton:failure',
+               u'4th:exer:Newton:failure'),
+              (u' Exercise 73: See if the secant method fails ',
+               2,
+               u'4th:exer:Secant:failure',
+               u'4th:exer:Secant:failure'),
+              (u' Exercise 74: Understand how the bisection method cannot fail ',
+               2,
+               u'4th:exer:Bisection:failure',
+               u'4th:exer:Bisection:failure'),
+              (u" Exercise 75: Combine the bisection method with Newton's method ",
+               2,
+               u'4th:exer:Bisection:Newton',
+               u'4th:exer:Bisection:Newton'),
+              (u" Exercise 76: Write a test function for Newton's method ",
+               2,
+               u'4th:exer:NewtonHand',
+               u'4th:exer:NewtonHand'),
+              (u' Exercise 77: Solve nonlinear equation for a vibrating beam ',
+               2,
+               u'4th:exer:beam:vib',
+               u'4th:exer:beam:vib'),
+              (u' References ', 0, None, '___sec237')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands.tex -->
+$$
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+$$
+
+
+
+
+    
+<a name="part0020"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._p4c-solarized-Matlab019.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._p4c-solarized-Matlab021.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1 id="___sec171">Exercises </h1>
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:de:exer:geom">Exercise 43: Geometric construction of the Forward Euler method</h2>
+
+<p>
+The section <a href="._p4c-solarized-Matlab017.html#sec:de:pg:geom">Understanding the Forward Euler method</a> describes a geometric interpretation of
+the Forward Euler method. This exercise will demonstrate the geometric
+construction of the solution in detail. Consider the differential
+equation \( u'=u \) with \( u(0)=1 \). We use time steps \( \Delta t = 1 \).
+
+<p>
+<b>a)</b>
+Start at \( t=0 \) and draw a straight line with slope \( u'(0)=u(0)=1 \).
+Go one time step forward to \( t=\Delta t \) and mark the solution point
+on the line.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+See plot and comments given below.
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>b)</b>
+Draw a straight line through the solution point \( (\Delta t, u^1) \)
+with slope \( u'(\Delta t)=u^1 \). Go one time step forward to
+\( t=2\Delta t \) and mark the solution point on the line.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+See plot and comments given below.
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>c)</b>
+Draw a straight line through the solution point \( (2\Delta t, u^2) \)
+with slope \( u'(2\Delta t)=u^2 \). Go one time step forward to
+\( t=3\Delta t \) and mark the solution point on the line.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+See plot and comments given below.
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>d)</b>
+Set up the Forward Euler scheme for the problem \( u'=u \).
+Calculate \( u^1 \), \( u^2 \), and \( u^3 \). Check that the numbers are
+the same as obtained in a)-c).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+The code may be written as
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: ForwardEuler_geometric_solution
+</div>
+<!-- end box -->
+
+
+<p>
+Running the program will print the numbers 1, 2, 4 and 8, as well as produce the plot seen in
+Figure <a href="#fig:FEgeom">52</a>. We see the values computed in a)-c) as circles
+(which in a)-c) are connected by straight line segments). For comparison, the true solution
+is also given. The very large timestep gives a rather poor numerical solution.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 52:  Forward Euler method (red filled circles) applied to the ode \( u' = u \). For easy comparison, the true solution \( u(t) = e^t \) is also shown (blue continuous line). <div id="fig:FEgeom"></div> </p></center>
+<p><img src="figs/fE_geom_sol.png" align="bottom" width=800></p>
+</center>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>ForwardEuler_geometric_solution.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:de:exer:FE:test1">Exercise 44: Make test functions for the Forward Euler method</h2>
+
+<p>
+The purpose of this exercise is to
+make a file <code>test_ode_FE.m</code> that makes use of the <code>ode_FE</code>
+function in the file <code>ode_FE.m</code> and automatically verifies the
+implementation of <code>ode_FE</code>.
+
+<p>
+<b>a)</b>
+The solution computed by hand in <a href="#sec:de:exer:geom">Exercise 43: Geometric construction of the Forward Euler method</a> can be
+used as a reference solution. Make a function <code>test_ode_FE_1()</code>
+that calls <code>ode_FE</code> to compute
+three time steps in the problem \( u'=u \), \( u(0)=1 \), and compare the
+three values \( u^1 \), \( u^2 \), and \( u^3 \) with the values obtained in
+<a href="#sec:de:exer:geom">Exercise 43: Geometric construction of the Forward Euler method</a>.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+See code presented below.
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>b)</b>
+The test in a) can be made more general using the fact
+that if \( f \) is linear in \( u \) and does not depend on \( t \), i.e., we
+have \( u'=ru \), for
+some constant \( r \), the Forward Euler method has a closed form solution
+as outlined in the section <a href="._p4c-solarized-Matlab017.html#sec:de:pg:model">Derivation of the model</a>: \( u^n=U_0(1+r\Delta t)^n \).
+Use this result to construct a test function <code>test_ode_FE_2()</code> that
+runs a number of steps in <code>ode_FE</code> and compares the computed
+solution with the listed formula for \( u^n \).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+The code may be written as:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: growth2_test
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>test_ode_FE.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:de:exer:Heun:pg">Exercise 45: Implement and evaluate Heun's method</h2>
+
+<p>
+<b>a)</b>
+A 2nd-order Runge-Kutta method, also known has Heun's method,
+is derived in the section <a href="._p4c-solarized-Matlab019.html#sec:de:osc:Heun">The 2nd-order Runge-Kutta method (or Heun's method)</a>. Make a function
+<code>ode_Heun(f, U_0, dt, T)</code> (as a counterpart to <code>ode_FE(f, U_0, dt, T)</code>
+in <code>ode_FE.m</code>) for solving  a scalar ODE problem \( u'=f(u,t) \),
+\( u(0)=U_0 \), \( t\in (0,T] \), with
+this method using a time step size \( \Delta t \).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+The code may be written as:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: ode_Heun
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>b)</b>
+Solve the simple ODE problem \( u'=u \), \( u(0)=1 \), by the <code>ode_Heun</code> and
+the <code>ode_FE</code> function. Make
+a plot that compares Heun's method and the Forward Euler method
+with the exact solution \( u(t)=e^t \) for \( t\in [0,6] \). Use a
+time step \( \Delta t = 0.5 \).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+The given ODE may be solved by the function <code>demo_ode_Heun</code>:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: demo_ode_Heun
+</div>
+<!-- end box -->
+
+
+<p>
+Running the code with \( \Delta t = 0.5 \) (seen in the code) gives the plot seen in Figure <a href="#H_FE_comp">53</a>.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 53:  Heun and Forward Euler with timestep \( \Delta t = 0.5 \). <div id="H_FE_comp"></div> </p></center>
+<p><img src="figs/H_FE_comp.png" align="bottom" width=800></p>
+</center>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>c)</b>
+For the case in b),
+find through experimentation the largest value of \( \Delta t \) where the
+exact solution and the numerical solution by Heun's method
+cannot be distinguished visually. It is of interest to see how far
+off the curve the Forward Euler method is when Heun's method can
+be regarded as &quot;exact&quot; (for visual purposes).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+A timestep of \( \Delta t = 0.1 \) was found to be the largest reasonable timestep
+that still made the solution from Heun's method come on top of the exact solution
+(from graphical inspection only), see Figure <a href="#H_exact_FE_comp">54</a>.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 54:  Heun and Forward Euler with timestep \( \Delta t = 0.1 \). A larger timestep makes Heun's method deviate from the true solution (only judged graphically). <div id="H_exact_FE_comp"></div> </p></center>
+<p><img src="figs/H_exact_FE_comp.png" align="bottom" width=800></p>
+</center>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>ode_Heun.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:de:exer:logistic:dtopt">Exercise 46: Find an appropriate time step; logistic model</h2>
+
+<p>
+Compute the numerical solution of the logistic equation for a set of
+repeatedly halved time steps: \( \Delta t_k = 2^{-k}\Delta t \),
+\( k=0,1,\ldots \).  Plot the solutions corresponding to the last two time
+steps \( \Delta t_{k} \) and \( \Delta t_{k-1} \) in the same plot.  Continue
+doing this until you cannot visually distinguish the two curves in the
+plot. Then one has found a sufficiently small time step.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Extend the <code>logistic.py</code> file. Introduce a loop over \( k \), write out
+\( \Delta t_k \), and ask the
+user if the loop is to be continued.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+This may be implemented as:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: logistic_dt
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>logistic_dt.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:de:exer:SIR:dtopt">Exercise 47: Find an appropriate time step; SIR model</h2>
+
+<p>
+Repeat <a href="#sec:de:exer:logistic:dtopt">Exercise 46: Find an appropriate time step; logistic model</a> for the SIR model.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Import the <code>ode_FE</code> function from the <code>ode_system_FE</code> module
+and make a modified <code>demo_SIR</code> function that has a loop
+over repeatedly halved time steps. Plot \( S \), \( I \), and \( R \)
+versus time for the two last time step sizes in the same plot.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+This may be implemented as:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: SIR_dt
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>SIR_dt.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="___sec177">Exercise 48: Model an adaptive vaccination campaign </h2>
+<div id="sec:de:exer:SIRV:padapt"></div>
+
+<p>
+In the SIRV model with time-dependent vaccination from
+the section <a href="._p4c-solarized-Matlab018.html#sec:de:flu:vaccine:discont">Discontinuous coefficients: a vaccination campaign</a>, we want to test the effect
+of an adaptive vaccination campaign where vaccination is offered as
+long as half of the population is not vaccinated. The campaign starts
+after \( \Delta \) days. That is,
+\( p=p_0 \) if \( V < \frac{1}{2}(S^0+I^0) \) and \( t>\Delta \) days,
+otherwise \( p=0 \).
+
+<p>
+Demonstrate the effect of this vaccination policy: choose \( \beta \),
+\( \gamma \), and \( \nu \) as in the section <a href="._p4c-solarized-Matlab018.html#sec:de:flu:vaccine:discont">Discontinuous coefficients: a vaccination campaign</a>,
+set \( p=0.001 \), \( \Delta =10 \) days, and simulate for 200 days.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+This discontinuous \( p(t) \) function is easiest implemented as a
+Matlab function containing the indicated <code>if</code> test.
+You may use the file <code>SIRV1.m</code>
+as starting point, but note that it implements a time-dependent
+\( p(t) \) via an array.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+An appropriate program is
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: SIRV_p_adapt
+</div>
+<!-- end box -->
+
+
+<p>
+The result looks like
+
+<p>
+<center><p><img src="figs/SIRV_p_adapt.png" align="bottom" width=600></p></center>
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>SIRV_p_adapt.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:de:exer:SIRV:padapt">Exercise 49: Make a SIRV model with time-limited effect of vaccination</h2>
+
+<p>
+We consider the SIRV model from
+the section <a href="._p4c-solarized-Matlab018.html#sec:de:flu:vaccine">Incorporating vaccination</a>, but now the effect of vaccination is
+time-limited. After a characteristic period of time, \( \pi \), the
+vaccination is no more effective and individuals are
+consequently moved from the V
+to the S category and can be infected again. Mathematically, this
+can be modeled as an average leakage \( -\pi^{-1}V \) from the V category to the S
+category (i.e., a gain \( \pi^{-1}V \) in the latter). Write up the
+complete model, implement it, and rerun the case from
+the section <a href="._p4c-solarized-Matlab018.html#sec:de:flu:vaccine">Incorporating vaccination</a> with various choices of parameters to
+illustrate various effects.
+Filename: <code>SIRV1_V2S.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:de:exer:vib:FE:func">Exercise 50: Refactor a flat program</h2>
+
+<p>
+Consider the file <code>osc_FE.m</code> implementing the Forward Euler
+method for the oscillating system model
+<a href="._p4c-solarized-Matlab019.html#mjx-eqn-48">(48)</a>-<a href="._p4c-solarized-Matlab019.html#mjx-eqn-49">(49)</a>.
+The <code>osc_FE.m</code> is what we often refer to as a flat program,
+meaning that it is just one main program with no functions.
+To easily reuse the numerical computations in other contexts,
+place the part that produces the numerical solution (allocation of arrays,
+initializing the arrays at time zero, and the time loop) in
+a function <code>osc_FE(X_0, omega, dt, T)</code>, which returns <code>u, v, t</code>.
+Place the particular
+computational example in <code>osc_FE.m</code> in a function
+<code>demo()</code>.
+Construct the file <code>osc_FE_func.m</code> such that the
+<code>osc_FE</code> function can easily be reused
+in other programs.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+Here is the file
+<code>osc_FE.m</code>:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: osc_FE
+</div>
+<!-- end box -->
+
+
+<p>
+which is run from the demo file:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: demo_osc_FE
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>osc_FE_func.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:de:exer:vib:ode_FE">Exercise 51: Simulate oscillations by a general ODE solver</h2>
+
+<p>
+Solve the system <a href="._p4c-solarized-Matlab019.html#mjx-eqn-48">(48)</a>-<a href="._p4c-solarized-Matlab019.html#mjx-eqn-49">(49)</a>
+using the general solver <code>ode_FE</code> in the file <code>ode_system_FE.m</code>
+described in the section <a href="._p4c-solarized-Matlab018.html#sec:de:flu:prog:generic">Programming the numerical method; the general case</a>. Program the ODE system
+and the call to the <code>ode_FE</code> function in a separate file
+<code>osc_ode_FE.m</code>.
+
+<p>
+Equip this file with a test function that reads a file with correct
+\( u \) values and compares these with those computed by the <code>ode_FE</code>
+function. To find correct \( u \) values, modify the program
+<code>osc_FE.m</code> to dump the <code>u</code> array to file, run <code>osc_FE.m</code>, and
+let the test function read the reference results from that file.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+The program may be implemented as:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: osc_ode_FE
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>osc_ode_FE.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="___sec181">Exercise 52: Compute the energy in oscillations </h2>
+<div id="sec:de:exer:vib:BE"></div>
+
+<p>
+<b>a)</b>
+Make a function <code>osc_energy(u, v, omega)</code> for returning the potential and
+kinetic energy of an oscillating system described by
+<a href="._p4c-solarized-Matlab019.html#mjx-eqn-48">(48)</a>-<a href="._p4c-solarized-Matlab019.html#mjx-eqn-49">(49)</a>.
+The potential energy is taken as \( \frac{1}{2}\omega^2u^2 \) while
+the kinetic energy is \( \frac{1}{2}v^2 \). (Note that these expressions
+are not exactly the <em>physical</em> potential and kinetic energy, since
+these would be \( \frac{1}{2}mv^2 \) and \( \frac{1}{2}ku^2 \) for a model
+\( mx'' + kx=0 \).)
+
+<p>
+Place the <code>osc_energy</code> in a separate file <code>osc_energy.m</code>
+such that the function can be called from other functions.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+The function may be implemented as:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: osc_energy
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>b)</b>
+Add a call to <code>osc_energy</code> in the programs <code>osc_FE.m</code> and
+<code>osc_EC.m</code> and plot the <em>sum</em> of the kinetic and potential energy.
+How does the total energy develop for the Forward Euler and the
+Euler-Cromer schemes?
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+The Forward Euler code reads
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: osc_FE_energy
+</div>
+<!-- end box -->
+
+
+<p>
+The program generates the following plot showing how the energy increases with time.
+
+<p>
+<center><p><img src="figs/osc_FE_energy.png" align="bottom" width=600></p></center>
+
+<p>
+The Euler-Cromer code might be implemented as
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: osc_EC_energy
+</div>
+<!-- end box -->
+
+
+<p>
+In this case, as illustrated by the plot produced, the energy does not increase.
+
+<p>
+<center><p><img src="figs/osc_EC_energy.png" align="bottom" width=600></p></center>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filenames: <code>osc_energy.m</code>, <code>osc_FE_energy.m</code>, <code>osc_EC_energy.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:de:exer:pg:BE">Exercise 53: Use a Backward Euler scheme for population growth</h2>
+
+<p>
+We consider the ODE problem \( N'(t)=rN(t) \),
+\( N(0)=N_0 \). At some time, \( t_n=n\Delta t \),
+we can approximate the derivative \( N'(t_n) \) by a <em>backward difference</em>,
+see Figure <a href="._p4c-solarized-Matlab019.html#sec:de:fig:BE">38</a>:
+
+$$ N'(t_n)\approx \frac{N(t_n) - N(t_n-\Delta t)}{\Delta t} = \frac{N^n - N^{n-1}}{\Delta t},$$
+
+which leads to
+
+$$ \frac{N^n - N^{n-1}}{\Delta t} = rN^n\thinspace,$$
+
+called the <em>Backward Euler scheme</em>.
+
+<p>
+<b>a)</b>
+Find an expression for the \( N^n \) in terms of \( N^{n-1} \) and formulate
+an algorithm for computing \( N^n \), \( n=1,2,\ldots,N_t \).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+Re-arranging the given expression leads to:
+
+$$
+\begin{equation}
+N^n = \frac{N^{n-1}}{1-r\Delta t}.
+\end{equation}
+$$
+
+<p>
+Noting that the right hand side may be expressed by use of \( N^0 \), we
+may formulate the following algorithm:
+
+<p>
+For \( n = 1,2,...,N \) compute
+
+$$
+\begin{equation}
+N^n = \left(1-r\Delta t\right)^{-n} N^0.
+\end{equation}
+$$
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>b)</b>
+Implement the algorithm in a) in a function <code>growth_BE(N_0, dt, T)</code>
+for solving \( N'=rN \), \( N(0)=N_0 \), \( t\in (0,T] \), with time step \( \Delta t \) (<code>dt</code>).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+Here is the code:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: growth_BE
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>c)</b>
+Implement the Forward Euler scheme in a function <code>growth_FE(N_0, dt, T)</code>
+as described in b).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+The FE function reads:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: growth_FE
+</div>
+<!-- end box -->
+
+
+<p>
+To use the two functions and produce the requested results, we
+implemented the following function:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: apply_growth_BE_and_FE
+</div>
+<!-- end box -->
+
+
+<p>
+The two plots generated are seen below.
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>d)</b>
+Compare visually the solution produced by the Forward and Backward
+Euler schemes with the exact solution when \( r=1 \) and \( T=6 \). Make
+two plots, one with
+\( \Delta t = 0.5 \) and one with \( \Delta t=0.05 \).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+With a time step of 0.5, the BE approach deviates substantially more
+from the true solution than the FE. This is a consequence of the very large
+time step used.
+
+<p>
+<center><p><img src="figs/growth_BE_FE_dt05.png" align="bottom" width=600></p></center>
+
+<p>
+Reducing the time step to 0.05 improves the situation for BE, so that
+FE and BE now give approximately the same error at each time step, but
+with opposite signs.
+
+<p>
+<center><p><img src="figs/growth_BE_FE_dt005.png" align="bottom" width=600></p></center>
+
+<p>
+With both time steps and both methods, the error grows with time. It should
+be noted that the graph produced with FE is <em>below</em> the true solution, while
+the one from BE is <em>above</em>. This should be expected because of the following.
+The slope of the true graph (or solution) increases with time. The FE does, at
+each time step, use the derivative from the <em>beginning</em> of the time step. This
+derivative is the smallest on the time interval covered by that time step. Therefore,
+the corresponding graph ends up below the true one. With BE, it is the other
+way around, since it uses the derivative at the <em>end</em> of each timestep, which
+then is the largest derivative on the time interval covered by that time step.
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>growth_BE.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:de:exer:pg:CN">Exercise 54: Use a Crank-Nicolson scheme for population growth</h2>
+
+<p>
+It is recommended to do <a href="#sec:de:exer:pg:BE">Exercise 53: Use a Backward Euler scheme for population growth</a> prior to the
+present one.
+Here we look at the same population growth model \( N'(t)=rN(t) \), \( N(0)=N_0 \).
+The time derivative \( N'(t) \) can be approximated by various types of
+finite differences. <a href="#sec:de:exer:pg:BE">Exercise 53: Use a Backward Euler scheme for population growth</a> considers
+a backward difference (Figure <a href="._p4c-solarized-Matlab019.html#sec:de:fig:BE">38</a>), while the section <a href="._p4c-solarized-Matlab017.html#sec:de:pg:numerics">Numerical solution</a> explained the forward difference (Figure <a href="._p4c-solarized-Matlab017.html#sec:de:fig:FE">21</a>).
+A <em>centered difference</em> is more accurate than a backward or forward
+difference:
+
+$$ N'(t_n+\frac{1}{2}\Delta t)\approx\frac{N(t_n+\Delta t)-N(t_n)}{\Delta t}=
+\frac{N^{n+1}-N^n}{\Delta t}\thinspace .$$
+
+This type of difference, applied at the point \( t_{n+\frac{1}{2}}=t_n +
+\frac{1}{2}\Delta t \), is illustrated geometrically in Figure
+<a href="._p4c-solarized-Matlab019.html#sec:de:fig:CN">39</a>.
+
+<p>
+<b>a)</b>
+Insert the finite difference approximation in the ODE \( N'=rN \) and
+solve for the unknown \( N^{n+1} \), assuming \( N^n \) is already computed and
+hence known. The resulting computational scheme is often referred
+to as a <em>Crank-Nicolson</em> scheme.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+With a central difference approximation used for the derivative, we also
+need to reformulate the function (expressing the derivative) on the right
+hand side to include the unknowns that we want only. For the right hand
+side we use the average of the derivative from \( n \) and \( n+1 \), i.e. at
+each end of the time step. We then get
+
+$$ \frac{N^{n+1} - N^n}{\Delta t} = \frac{1}{2}(rN^n + rN^{n+1})\thinspace,$$
+
+<p>
+which means that
+
+$$ N^{n+1} - \frac{\Delta t}{2}rN^{n+1} = N^n + \frac{\Delta t}{2}(rN^n)\thinspace.$$
+
+<p>
+Isolating \( N^{n+1} \), we get the Crank-Nicolson scheme as
+
+$$ N^{n+1} =  \frac{1+\frac{\Delta t}{2}r}{1-\frac{\Delta t}{2}r} N^n\thinspace.$$
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>b)</b>
+Implement the algorithm in a) in a function <code>growth_CN(N_0, dt, T)</code>
+for solving \( N'=rN \), \( N(0)=N_0 \), \( t\in (0,T] \), with time step \( \Delta t \) (<code>dt</code>).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+The function was implemented as
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: growth_CN
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>c)</b>
+Make plots for comparing
+the Crank-Nicolson scheme with the Forward and Backward Euler
+schemes in the same test problem as in
+<a href="#sec:de:exer:pg:BE">Exercise 53: Use a Backward Euler scheme for population growth</a>.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+To use the CN function and produce the requested results, we
+implemented the following function:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: apply_growth_CN
+</div>
+<!-- end box -->
+
+
+<p>
+With a time step of 0.5, we get the following plot:
+
+<p>
+<center><p><img src="figs/growth_CN_dt05.png" align="bottom" width=600></p></center>
+
+<p>
+Reducing the time step to 0.05, it changes into:
+
+<p>
+<center><p><img src="figs/growth_CN_dt005.png" align="bottom" width=600></p></center>
+
+<p>
+We observe that CN produces the best solution of the three alternatives.
+This should be expected, since it is the most accurate one (second order
+accuracy compared to first order with FE and BE).
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>growth_CN.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:de:exer:fd:Taylor">Exercise 55: Understand finite differences via Taylor series</h2>
+
+<p>
+The Taylor series around a point \( x=a \) can for a function \( f(x) \) be
+written
+
+$$
+\begin{align*}
+f(x) &= f(a) + \frac{d}{dx}f(a)(x-a) + \frac{1}{2!}\frac{d^2}{dx^2}f(a)(x-a)^2
+ + \frac{1}{3!}\frac{d^3}{dx^3}f(a)(x-a)^3 + \ldots\\ 
+& =
+\sum_{i=0}^\infty \frac{1}{i!}\frac{d^i}{dx^i}f(a)(x-a)^i\thinspace .
+\end{align*}
+$$
+
+For a function of time, as addressed in our ODE problems, we would
+use \( u \) instead of \( f \), \( t \) instead of \( x \), and a time point \( t_n \) instead
+of \( a \):
+
+$$
+\begin{align*}
+u(t) &= u(t_n) + \frac{d}{dt}u(t_n)(t-t_n) +
+\frac{1}{2!}\frac{d^2}{dt^2}u(t_n)(t-t_n)^2
+ + \frac{1}{3!}\frac{d^3}{dt^3}u(t_n)(t-t_n)^3 + \ldots\\ 
+& =
+\sum_{i=0}^\infty \frac{1}{i!}\frac{d^i}{dt^i}u(t_n)(t-t_n)^i\thinspace .
+\end{align*}
+$$
+
+<p>
+<b>a)</b>
+A forward finite difference approximation to the derivative \( f'(a) \) reads
+
+$$ u'(t_n) \approx \frac{u(t_n+\Delta t)- u(t_n)}{\Delta t}\thinspace .$$
+
+We can justify this formula mathematically through Taylor series.
+Write up the Taylor series for \( u(t_n+\Delta t) \) (around \( t=t_n \), as
+given above), and then solve the expression with respect to \( u'(t_n) \).
+Identify, on the right-hand side, the finite difference approximation <em>and</em>
+an infinite series. This series is then the error in the finite difference
+approximation. If \( \Delta t \) is assumed small (i.e. \( \Delta t < < 1 \)),
+\( \Delta t \) will be much larger than \( \Delta t^2 \), which will be much
+larger than \( \Delta t^3 \), and so on. The <em>leading order term</em> in the
+series for the error, i.e., the error with the least power of \( \Delta t \)
+is a good approximation of the error. Identify this term.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+We get
+
+$$
+\begin{align*}
+u(t_n+\Delta t) &= u(t_n) + \frac{d}{dt}u(t_n)\Delta t +
+\frac{1}{2!}\frac{d^2}{dt^2}u(t_n)\Delta t^2
+ + \frac{1}{3!}\frac{d^3}{dt^3}u(t_n)\Delta t^3 + \ldots\\ 
+\frac{d}{dt}u(t_n) & = \frac{u(t_n+\Delta t) - u(t_n)}{\Delta t} -
+\frac{1}{2!}\frac{d^2}{dt^2}u(t_n)\Delta t -
+ \frac{1}{3!}\frac{d^3}{dt^3}u(t_n)\Delta t^2 + \ldots\\ 
+\thinspace .
+\end{align*}
+$$
+
+The finite difference approximation is found as the first term on the right
+hand side, while the remaining terms make up the infinite series that represents
+the error of the finite difference approximation.
+
+<p>
+The leading order error term is therefore \( -\frac{1}{2!}\frac{d^2}{dt^2}u(t_n)\Delta t \).
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>b)</b>
+Repeat a) for a backward difference:
+
+$$ u'(t_n) \approx \frac{u(t_n)- u(t_n-\Delta t)}{\Delta t}\thinspace .$$
+
+This time, write up the Taylor series for \( u(t_n-\Delta t) \) around
+\( t_n \). Solve with respect to \( u'(t_n) \), and identify the leading order
+term in the error. How is the error compared to the forward difference?
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+We get
+
+$$
+\begin{align*}
+u(t_n-\Delta t) &= u(t_n) - \frac{d}{dt}u(t_n)\Delta t +
+\frac{1}{2!}\frac{d^2}{dt^2}u(t_n)\Delta t^2
+ - \frac{1}{3!}\frac{d^3}{dt^3}u(t_n)\Delta t^3 + \ldots\\ 
+\frac{d}{dt}u(t_n) & = \frac{u(t_n) - u(t_n-\Delta t)}{\Delta t} +
+\frac{1}{2!}\frac{d^2}{dt^2}u(t_n)\Delta t -
+ \frac{1}{3!}\frac{d^3}{dt^3}u(t_n)\Delta t^2 + \ldots\\ 
+\thinspace .
+\end{align*}
+$$
+
+The finite difference approximation is found as the first term on the right
+hand side, while the remaining terms make up the infinite series that represents
+the error of the finite difference approximation.
+
+<p>
+The leading order error term is therefore \( +\frac{1}{2!}\frac{d^2}{dt^2}u(t_n)\Delta t \),
+which is of the same magnitude as the corresponding error in a), but with opposite sign.
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>c)</b>
+A centered difference approximation to the derivative,
+as explored in <a href="#sec:de:exer:pg:CN">Exercise 54: Use a Crank-Nicolson scheme for population growth</a>,
+can be written
+
+$$ u'(t_n+\frac{1}{2}\Delta t) \approx \frac{u(t_n+\Delta t)- u(t_n)}{\Delta t}\thinspace .$$
+
+Write up the Taylor series for \( u(t_n) \) around \( t_n+\frac{1}{2}\Delta t \)
+and the Taylor series for \( u(t_n+\Delta t) \) around \( t_n+\frac{1}{2}\Delta t \).
+Subtract the two series, solve with respect to
+\( u'(t_n+\frac{1}{2}\Delta t) \), identify the finite difference approximation
+and the error terms on the right-hand side, and write up the leading order
+error term. How is this term compared to the ones for the forward and
+backward differences?
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+We write
+
+$$
+\begin{align*}
+u(t_n) &= u(t_n+\frac{\Delta t}{2}) - \frac{d}{dt}u(t_n+\frac{\Delta t}{2})\frac{\Delta t}{2} +
+\frac{1}{2!}\frac{d^2}{dt^2}u(t_n+\frac{\Delta t}{2})\left(\frac{\Delta t}{2}\right)^2 -
+ \frac{1}{3!}\frac{d^3}{dt^3}u(t_n+\frac{\Delta t}{2})\left(\frac{\Delta t}{2}\right)^3 + \ldots\\ 
+u(t_n+\Delta t) &= u(t_n+\frac{\Delta t}{2}) + \frac{d}{dt}u(t_n+\frac{\Delta t}{2})\frac{\Delta t}{2} +
+\frac{1}{2!}\frac{d^2}{dt^2}u(t_n+\frac{\Delta t}{2})\left(\frac{\Delta t}{2}\right)^2 +
+ \frac{1}{3!}\frac{d^3}{dt^3}u(t_n+\frac{\Delta t}{2})\left(\frac{\Delta t}{2}\right)^3 + \ldots\\ 
+\thinspace .
+\end{align*}
+$$
+
+If we next subtract the first of these two equations from the last one, we may proceed as
+$$
+\begin{align*}
+u(t_n+\Delta t) - u(t_n) &= 2\frac{d}{dt}u(t_n+\frac{\Delta t}{2})\frac{\Delta t}{2} +
+  2\frac{1}{3!}\frac{d^3}{dt^3}u(t_n+\frac{\Delta t}{2})\left(\frac{\Delta t}{2}\right)^3 + \ldots\\ 
+\frac{d}{dt}u(t_n+\frac{\Delta t}{2}) &= \frac{u(t_n+\Delta t) - u(t_n)}{\Delta t} -
+ \frac{1}{3!}\frac{d^3}{dt^3}u(t_n+\frac{\Delta t}{2})\left(\frac{\Delta t}{2}\right)^2 - \ldots\\ 
+\thinspace .
+\end{align*}
+$$
+
+The finite difference approximation is found as the first term on the right
+hand side, while the remaining terms make up the infinite series that represents
+the error of the finite difference approximation.
+
+<p>
+The leading order error term is
+\( -\frac{1}{3!}\frac{d^3}{dt^3}u(t_n+\frac{\Delta t}{2})\left(\frac{\Delta t}{2}\right)^2 \).
+This term will be smaller than the corresponding error terms from the previous approximations
+since \( \frac{\Delta t}{2}^2 < < \Delta t \).
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>d)</b>
+Can you use the leading order error terms in a)-c) to explain the
+visual observations in the numerical experiment in
+<a href="#sec:de:exer:pg:CN">Exercise 54: Use a Crank-Nicolson scheme for population growth</a>?
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+The error term for the centered difference is \( \Delta t^2 \) and hence
+smaller than the error terms for the forward and backward differences.
+Therefore, the Crank-Nicolson curve is closer to the analytical solution.
+Also, the error terms of the forward and backward differences are
+the same, except for the sign, which explains why the corresponding curves
+lie on each side of the analytical solution, with approximately the
+same distance. Note: the leading order error term is only a good
+approximation to the true error as \( \Delta t\rightarrow 0 \), so for
+small \( \Delta t \), the forward and backward schemes will deviate
+an equal amount from the analytical solution in the center, but for
+large \( \Delta t \) errors will deviate from this observation (and,
+in particular, the backward scheme may give oscillatory solutions for
+large \( \Delta t \) in this problem).
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>e)</b>
+Find the leading order error term in the following standard
+finite difference approximation
+to the second-order derivative:
+
+$$ u''(t_n) \approx \frac{u(t_n+\Delta t)- 2u(t_n) + u(t_n-\Delta t)}{\Delta t}\thinspace .$$
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Express \( u(t_n\pm \Delta t) \) via Taylor series and insert them in
+the difference formula.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+We write
+
+$$
+\begin{align*}
+u(t_n+\Delta t) &= u(t_n) + \frac{d}{dt}u(t_n)\Delta t +
+\frac{1}{2!}\frac{d^2}{dt^2}u(t_n)\Delta t^2 +
+ \frac{1}{3!}\frac{d^3}{dt^3}u(t_n)\Delta t^3 + \ldots\\ 
+u(t_n-\Delta t) &= u(t_n) - \frac{d}{dt}u(t_n)\Delta t +
+\frac{1}{2!}\frac{d^2}{dt^2}u(t_n)\Delta t^2 -
+ \frac{1}{3!}\frac{d^3}{dt^3}u(t_n)\Delta t^3 + \ldots\\ 
+\thinspace .
+\end{align*}
+$$
+
+If we now add the two equations, it gives us
+$$ u(t_n+\Delta t) + u(t_n-\Delta t) = 2 u(t_n) +
+2\frac{1}{2!}\frac{d^2}{dt^2}u(t_n)\Delta t^2 +
+2\frac{1}{4!}\frac{d^4}{dt^4}u(t_n)\Delta t^4 + \ldots\thinspace .$$
+
+This allows us to isolate \( u''(t_n) \) on the left hand side as
+$$ \frac{d^2}{dt^2}u(t_n) = \frac{u(t_n+\Delta t) - 2 u(t_n) + u(t_n-\Delta t)}{\Delta t^2} -
+2\frac{1}{4!}\frac{d^4}{dt^4}u(t_n)\Delta t^2 - \ldots\thinspace .$$
+
+The leading error term therefore appears as \( -2\frac{1}{4!}\frac{d^4}{dt^4}u(t_n)\Delta t^2 \).
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>Taylor_differences.pdf</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:de:exer:vib:BE">Exercise 56: Use a Backward Euler scheme for oscillations</h2>
+
+<p>
+Consider <a href="._p4c-solarized-Matlab019.html#mjx-eqn-48">(48)</a>-<a href="._p4c-solarized-Matlab019.html#mjx-eqn-49">(49)</a>
+modeling an oscillating engineering system. This \( 2\times 2 \) ODE system
+can be solved by the <em>Backward Euler scheme</em>, which is based on
+discretizing derivatives by collecting information backward
+in time. More specifically, \( u'(t) \) is approximated as
+
+$$ u'(t) \approx \frac{u(t) - u(t-\Delta t)}{\Delta t}\thinspace .$$
+
+A general vector ODE \( u'=f(u,t) \), where \( u \) and \( f \) are vectors,
+can use this approximation as follows:
+
+$$ \frac{u^{n} - u^{n-1}}{\Delta t} = f(u^n,t_n),$$
+
+which leads to an equation for the new value \( u^n \):
+
+$$ u^n -\Delta tf(u^n,t_n) = u^{n-1}\thinspace .$$
+
+For a general \( f \), this is a system of <em>nonlinear algebraic equations</em>.
+
+<p>
+However, the ODE <a href="._p4c-solarized-Matlab019.html#mjx-eqn-48">(48)</a>-<a href="._p4c-solarized-Matlab019.html#mjx-eqn-49">(49)</a>
+is <em>linear</em>, so a Backward Euler scheme leads to a system of two
+algebraic equations for two unknowns:
+
+$$
+\begin{align}
+u^{n} - \Delta t v^{n} &= u^{n-1},
+\tag{80}\\ 
+v^{n} + \Delta t \omega^2 u^{n} &= v^{n-1}
+\tag{81}
+\thinspace .
+\end{align}
+$$
+
+<p>
+<b>a)</b>
+Solve the system for \( u^n \) and \( v^n \).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+In the first of these equations, we may isolate \( u^n \) on the left hand side.
+This gives
+$$ u^n = \Delta t v^n + u^{n-1}\thinspace .$$
+
+Inserting this for \( u^n \) in the second equation, we can solve for \( v^n \). That is,
+$$ v^n + \Delta t \omega^2 (\Delta t v^n + u^{n-1}) = v^{n-1}\thinspace ,$$
+
+so that
+$$ v^n = \frac{1}{1 + (\Delta t \omega)^2}(-\Delta t \omega^2 u^{n-1} + v^{n-1})\thinspace .$$
+
+Finally, we may insert this expression for \( v^n \) into the one for \( u^n \), which gives
+$$ u^n = \Delta t (\frac{1}{1 + (\Delta t \omega)^2}(-\Delta t \omega^2 u^{n-1} + v^{n-1})) + u^{n-1}\thinspace .$$
+
+Simplifying, we arrive at
+$$ u^n = \frac{\Delta t v^{n-1} + u^{n-1}}{1 + (\Delta t \omega)^2}\thinspace .$$
+
+Thus, we have an explicit scheme for advancing the solution \( v^n \) and \( u^n \) in time.
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>b)</b>
+Implement the found formulas for \( u^n \) and \( v^n \)
+in a program for computing the entire numerical solution of
+<a href="._p4c-solarized-Matlab019.html#mjx-eqn-48">(48)</a>-<a href="._p4c-solarized-Matlab019.html#mjx-eqn-49">(49)</a>.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: osc_BE
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>c)</b>
+Run the program with a \( \Delta t \) corresponding to 20 time steps per
+period of the oscillations (see the section <a href="._p4c-solarized-Matlab019.html#sec:de:vib:special">Programming the numerical method; the special case</a>
+for how to find such a \( \Delta t \)). What do you observe?
+Increase to 2000 time steps per period. How much does this improve
+the solution?
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+With 20 time steps per period, the oscillations develop as
+
+<p>
+<center><p><img src="figs/osc_BE_20.png" align="bottom" width=600></p></center>
+
+<p>
+Changing to 2000 time steps per period, the solution improves dramatically into
+
+<p>
+<center><p><img src="figs/osc_BE_2000.png" align="bottom" width=600></p></center>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>osc_BE.m</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec186">Remarks </h3>
+
+<p>
+While the Forward Euler method applied to oscillation problems
+\( u''+\omega^2u=0 \) gives growing amplitudes, the Backward Euler
+method leads to significantly damped amplitudes.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:de:exer:SIR:Heun">Exercise 57: Use Heun's method for the SIR model</h2>
+
+<p>
+Make a program that computes the solution of the SIR model from
+the section <a href="._p4c-solarized-Matlab018.html#sec:de:flu">Spreading of a flu</a> both by the Forward Euler method and by Heun's method
+(or equivalently: the 2nd-order Runge-Kutta method) from
+the section <a href="._p4c-solarized-Matlab019.html#sec:de:osc:Heun">The 2nd-order Runge-Kutta method (or Heun's method)</a>. Compare the two methods in
+the simulation case from the section <a href="._p4c-solarized-Matlab018.html#sec:de:flu:prog:spec">Programming the numerical method; the special case</a>.
+Make two comparison plots, one for a large and one for a
+small time step. Experiment to find what &quot;large&quot; and &quot;small&quot;
+should be: the large one gives significant differences, while
+the small one lead to very similar curves.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: SIR_Heun
+</div>
+<!-- end box -->
+
+
+<p>
+With a (large) time step of \( 24 h \), we get the following behavior,
+
+<p>
+<center><p><img src="figs/SIR_H_large_dt_eq_24.png" align="bottom" width=600></p></center>
+
+<p>
+Reducing the time step to \( 4 h \), the curves get very similar.
+
+<p>
+<center><p><img src="figs/SIR_H_small_dt_eq_4.png" align="bottom" width=600></p></center>
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>SIR_Heun.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:de:exer:odespy:decay">Exercise 58: Use Odespy to solve a simple ODE</h2>
+
+<p>
+Solve
+
+$$ u' = -au + b,\quad u(0)=U_0,\quad t\in (0,T]$$
+
+by the Odespy software. Let the problem parameters \( a \) and \( b \)
+be arguments to the right-hand side function that specifies the
+ODE to be solved. Plot the solution for the case when
+\( a=2 \), \( b=1 \), \( T=6/a \), and we use 100 time intervals in \( [0,T] \).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+<!-- begin verbatim block  pypro-->
+<pre><code>import odespy
+import numpy as np
+import matplotlib.pyplot as plt
+
+def f(u, t, a, b):
+    return -a*u + b
+
+# Problem parameters
+a = 2
+b = 1
+U0 = 2
+method = odespy.RK2
+
+# Run Odespy solver
+solver = method(f, f_args=[a, b])
+solver.set_initial_condition(U0)
+T = 6.0/a  # final simulation time
+N_t = 100  # no of intervals
+time_points = np.linspace(0, T, N_t+1)
+u, t = solver.solve(time_points)
+
+plt.plot(t, u)
+plt.show
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>odespy_demo.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:de:exer:osc:BE">Exercise 59: Set up a Backward Euler scheme for oscillations</h2>
+
+<p>
+Write the ODE \( u'' + \omega^2u=0 \) as a system of two first-order
+ODEs and discretize these with backward differences as illustrated
+in Figure <a href="._p4c-solarized-Matlab019.html#sec:de:fig:BE">38</a>. The resulting method is referred to as
+a Backward Euler scheme. Identify the matrix and right-hand side
+of the linear system that has to be solved at each time level.
+Implement the method, either from scratch yourself or using
+Odespy (the name is <code>odespy.BackwardEuler</code>).
+Demonstrate that contrary to a Forward Euler scheme, the Backward
+Euler scheme leads to significant non-physical damping. The figure
+below shows that even with 60 time steps per period, the results
+after a few periods are useless:
+
+<p>
+<center><p><img src="figs/osc_odespy_BE.png" align="bottom" width=600></p></center>
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+The first-order system is
+
+$$
+\begin{align*}
+v' &= -\omega^2 u\\ 
+u' &= v
+\end{align*}
+$$
+
+Backward differences mean
+
+$$
+\begin{align*}
+\frac{v^{n}-v^{n-1}}{\Delta t} &= -\omega^2 u^n\\ 
+\frac{u^{n}-u^{n-1}}{\Delta t} &= v^n
+\end{align*}
+$$
+
+Collecting the unknowns \( u^n \) and \( v^n \) on the left-hand side,
+
+$$
+\begin{align*}
+v^{n} + \Delta t\omega^2 u^n &= v^{n-1} \\ 
+u^{n} - \Delta t v^n &= u^{n-1}
+\end{align*}
+$$
+
+shows that this is a coupled \( 2\times 2 \) system for \( u^n \) and \( v^n \):
+
+$$ \left(\begin{array}{cc}
+1 & \Delta t\omega^2\\ 
+-\Delta t & 1
+\end{array}\right)
+\left(\begin{array}{c}
+v^n\\ 
+u^n
+\end{array}\right)
+=
+\left(\begin{array}{c}
+v^{n-1}\\ 
+u^{n-1}
+\end{array}\right)
+$$
+
+<p>
+The simplest way of implementing the scheme is to use the
+<code>osc_odespy.py</code> code explained in the section <a href="._p4c-solarized-Matlab019.html#sec:de:osc:odespy">Odespy: software for solving ODEs</a>
+and make a call
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>compare(odespy_methods=[odespy.EulerCromer, odespy.BackwardEuler],
+        omega=2, X_0=2,number_of_periods=6,
+        time_intervals_per_period=60)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>osc_BE.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:de:exer:osc:FE:general">Exercise 60: Set up a Forward Euler scheme for nonlinear and damped oscillations</h2>
+
+<p>
+Derive a Forward Euler method for the ODE system
+<a href="._p4c-solarized-Matlab019.html#mjx-eqn-66">(66)</a>-<a href="._p4c-solarized-Matlab019.html#mjx-eqn-67">(67)</a>.
+Compare the method with the Euler-Cromer scheme for
+the sliding friction problem
+from the section <a href="._p4c-solarized-Matlab019.html#sec:de:vib:ode2:sliding:friction">Spring-mass system with sliding friction</a>:
+
+<ol>
+<li> Does the Forward Euler scheme give growing amplitudes?</li>
+<li> Is the period of oscillation accurate?</li>
+<li> What is the required time step size for the two methods to
+   have visually coinciding curves?</li>
+</ol>
+
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+A Forward Euler scheme is easy to derive:
+
+$$
+\begin{align}
+\frac{v^{n+1}-v^n}{\Delta t} &= \frac{1}{m}\left(F(t_n) - s(u^n) - f(v^n)\right),
+\tag{82}\\ 
+\frac{u^{n+1}-u^n}{\Delta t} &= v^n,
+\tag{83}
+\end{align}
+$$
+
+which is, as usual, reordered to the algorithmic form
+
+$$
+\begin{align}
+v^{n+1} &= v^n + \frac{\Delta t}{m}\left(F(t_n) - s(u^n) - f(v^n)\right),
+\tag{84}\\ 
+u^{n+1} &= u^n + \Delta t v^n\thinspace .
+\tag{85}
+\end{align}
+$$
+
+However, we have already seen that the Forward Euler method is not
+well suited for simulating oscillations as the scheme gives rise
+to a non-physical, growing amplitude. It remains to see how
+damped systems are treated.
+
+<p>
+An implementation can be done utilizing Odespy and the <code>compare</code>
+function in <code>osc_odespy_general.py</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def sliding_friction():
+    from numpy import tanh, sign
+
+    f = lambda v: mu*m*g*sign(v)
+    alpha = 60.0
+    s = lambda u: k/alpha*tanh(alpha*u)
+    #s = lambda u: k*u
+    F = lambda t: 0
+
+    g = 9.81
+    mu = 0.4
+    m = 1
+    k = 1000
+
+    U_0 = 0.1
+    V_0 = 0
+
+    T = 1
+    dt = T/100.
+
+    methods = [odespy.EulerCromer, odespy.ForwardEuler]
+    compare(methods, f=f, s=s, F=F, m=1, U_0=U_0, V_0=V_0,
+            T=T, dt=dt, start_of_plot=0)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+With \( \Delta t =10^{-2} \) we get the plot below.
+
+<p>
+<center><p><img src="figs/osc_FE_general_dt100.png" align="bottom" width=600></p></center>
+
+<p>
+We observe that 1) the amplitude is not growing, it is decaying, but
+not at all at the rate it should, compared to the Euler-Cromer
+scheme (which we anticipate is fairly accurate, also for this fairly
+coarse time resolution), and 2) there is a significant phase error.
+
+<p>
+Reducing \( \Delta t \) by a factor of 10 increases the accuracy
+incredibly:
+
+<p>
+<center><p><img src="figs/osc_FE_general_dt1000.png" align="bottom" width=600></p></center>
+
+<p>
+Experimenting a bit, we arrive at \( \Delta t=5\cdot 10^{-3} \) as
+a time step size where the two methods gives approximately equal
+results:
+
+<p>
+<center><p><img src="figs/osc_FE_general_dt5000.png" align="bottom" width=600></p></center>
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>osc_FE_general.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:de:exer:osc:2nd:V0ic">Exercise 61: Discretize an initial condition</h2>
+
+<p>
+Assume that the initial condition on \( u' \) is nonzero in
+the finite difference method from the section <a href="._p4c-solarized-Matlab019.html#sec:de:vib:2nd">A finite difference method; undamped, linear case</a>:
+\( u'(0)=V_0 \). Derive the special formula for \( u^1 \) in this case.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+We use the same centered finite difference approximation,
+
+$$ u'(0)\approx = \frac{u^1 - u^{-1}}{2\Delta t}=V_0,$$
+
+which leads to
+
+$$ u^{-1} = u^1 - 2\Delta t\,V_0\thinspace .$$
+
+Using this expression to eliminate \( u^{-1} \) in <a href="._p4c-solarized-Matlab019.html#mjx-eqn-74">(74)</a>
+leads to
+
+$$ u^1 = u^0 + \Delta t\,V_0 - \frac{1}{2}\Delta t^2\omega^2 u^0\thinspace .$$
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>ic_with_V_0.pdf</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._p4c-solarized-Matlab019.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._p4c-solarized-Matlab021.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

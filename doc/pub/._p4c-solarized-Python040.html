@@ -1,0 +1,1005 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="A Gentle Introduction to Programming for Computations">
+<meta name="keywords" content="installation,download,computer program,programming,language programming,language computer,Matlab,Octave,Fortran,C,C++,Python,Maple,Mathematica,syntax,bug,debugging,script (and scripting),implement,print,program run,program execute,code,comment,instruction,program statement,variable,assignment,calculator,text editor,Idle,prompt,program typing,program run,program execute,ipython,function,function call,atan,function input parameter,function output parameter,function return,function take a parameter,library,library function,from,import,math,module,package,linspace,xlabel,ylabel,plot,interactive use (of Python),import,keyboard arrow up/down,Python shell,operator Arithmetic,parentheses,variable type,variable name,object,float,int,str,type conversion,reserved words,variable int,variable float,variable str,variable assignment,type conversion automatic,integer division,round-off error,printing formatted,printf formatting,default,array,array element,zeros,allocate,array index,indexing zero based,indexing one based,Python zero-based indexing,array slice of,graph,hold (on/off),plot figure,title,legend,axis,hardcopy,format png,matrix mat,matrix vector product,transpose,linear algebra,matrix,vector,error message,debugging,debugger,try-exception,exception handling,program crash,program testing,program verification,program input,program output,input,raw input,symbolic computations,symbolic operations,symbolic simplifications,SymPy,library SymPy,WolframAlpha,Mathematica,Sage (symbolic package),Python documentation,garbage collection,variable delete,if,elif,else,colon,indent,boolean,boolean expression,True,False,boolean True,boolean False,operator Logical,function,function definition,def,return,argument,parameter input,parameter output,variable local,variable global,argument keyword,argument named,argument ordinary,argument positional,doc string,function handle,function local,function global,function nested,lambda function,loop for,for loop,range,loop iteration,loop index,loop double,loop multiple,loop nested,linear algebra,while loop,loop while,loop infinite,loop iteration,loop index,list,list append,list convert to array,list delete,list create,list comprehension,array sorting,Leibniz pi,Euler pi,programming game,linear interpolation,least squares method,Fourier series,integral analytically,integral exact,integral approximately,integration points,pseudo code,code re-use,unit tests,finite difference method,forward difference approximation,Forward Euler scheme,logistic model,carrying capacity,SIR model,scalar ODE,ODE scalar,vector ODE,ODE vector,system of ODEs,Heun's method,Runge-Kutta, 2nd-order method,2nd-order Runge-Kutta method,RK2,PDE,heat equation,diffusion equation,MOL forward Euler,method of lines,MOL,stability,instability,MOL backward Euler,tridiagonal matrix,stability,instability,Taylor series approximation,polynomial,equation solver,code robust,code try-except,code exception,Newton starting value,return None,sys.exit,tolerance,Idle,Emacs,Vim,Gedit,TextWrangler,Notepad++">
+
+<title>A Gentle Introduction to Programming for Computations</title>
+
+
+<link href="https://raw.githubusercontent.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+/* Let pre tags for code blocks have the same color as the surroundings */
+pre { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u' Preface ', 0, None, '___sec0'),
+              (u' Installing Python ', 1, None, '___sec1'),
+              (u' The first few steps ',
+               0,
+               u'1st:TheFirstFewSteps',
+               u'1st:TheFirstFewSteps'),
+              (u' What is a program? And what is programming? ',
+               1,
+               None,
+               '___sec3'),
+              (u' A Python program with variables ',
+               1,
+               u'1st:ex1',
+               u'1st:ex1'),
+              (u' The program ', 2, None, '___sec5'),
+              (u' Dissection of the program ', 2, None, '___sec6'),
+              (u' Why not just use a pocket calculator? ',
+               2,
+               None,
+               '___sec7'),
+              (u' The importance of using a text editor to write programs ',
+               2,
+               None,
+               '___sec8'),
+              (u' Installation of Python ', 2, None, '___sec9'),
+              (u' Write and run your first program ', 2, None, '___sec10'),
+              (u'  A Python program with a library function ',
+               1,
+               u'1st:ex2',
+               u'1st:ex2'),
+              (u' A Python program with vectorization and plotting ',
+               1,
+               u'1st:ex3',
+               u'1st:ex3'),
+              (u' More basic concepts ', 1, None, '___sec13'),
+              (u' Using Python interactively ', 2, None, '___sec14'),
+              (u' Arithmetics, parentheses and round-off error ',
+               2,
+               None,
+               '___sec15'),
+              (u' Variables and objects ', 2, None, '___sec16'),
+              (u' Integer division ', 2, None, '___sec17'),
+              (u' Formatting text and numbers ', 2, None, '___sec18'),
+              (u' Arrays and more on plotting ', 2, None, '___sec19'),
+              (u' Error messages and warnings ', 2, None, '___sec20'),
+              (u' Input data ', 2, None, '___sec21'),
+              (u' Reading from and writing to files ', 2, None, '___sec22'),
+              (u' Symbolic computations ', 2, None, '___sec23'),
+              (u' Exercises ', 1, None, '___sec24'),
+              (u' Exercise 1: Error messages ',
+               2,
+               u'1st:exer:ErrorMessages',
+               u'1st:exer:ErrorMessages'),
+              (u' Exercise 2: Volume of a cube ',
+               2,
+               u'1st:exer:cubeVolume',
+               u'1st:exer:cubeVolume'),
+              (u' Exercise 3: Area and circumference of a circle ',
+               2,
+               u'1st:exer:areaCircle',
+               u'1st:exer:areaCircle'),
+              (u' Exercise 4: Volumes of three cubes ',
+               2,
+               u'1st:exer:volumes3cubes',
+               u'1st:exer:volumes3cubes'),
+              (u' Exercise 5: Average of integers ',
+               2,
+               u'1st:exer:averageOf5Integers',
+               u'1st:exer:averageOf5Integers'),
+              (u' Exercise 6: Volume and area at command prompt ',
+               2,
+               u'1st:exer:cubeVolInteractively',
+               u'1st:exer:cubeVolInteractively'),
+              (u' Exercise 7: Strange division ',
+               2,
+               u'1st:exer:intDivInteractively',
+               u'1st:exer:intDivInteractively'),
+              (u' Exercise 8: Update variable at command prompt ',
+               2,
+               u'1st:exer:updateVarInteractively',
+               u'1st:exer:updateVarInteractively'),
+              (u' Exercise 9: Formatted print to screen ',
+               2,
+               u'1st:exer:printfScreen',
+               u'1st:exer:printfScreen'),
+              (u' Exercise 10: Python documentation and random numbers ',
+               2,
+               u'1st:exer:PythonDocRandom',
+               u'1st:exer:PythonDocRandom'),
+              (u' Basic constructions ',
+               0,
+               u'2nd:BasicConstructins',
+               u'2nd:BasicConstructins'),
+              (u' if tests, colon and indent ', 1, None, '___sec36'),
+              (u' Functions ', 1, None, '___sec37'),
+              (u' For loops ', 1, u'sec:for:loops', u'sec:for:loops'),
+              (u' While loops ', 1, u'sec:while:loops', u'sec:while:loops'),
+              (u' Lists - an alternative to arrays ',
+               1,
+               u'sec:lists',
+               u'sec:lists'),
+              (u' Exercises ', 1, None, '___sec41'),
+              (u' Exercise 11: Errors with colon, indent, etc. ',
+               2,
+               u'2nd:exer:ErrorsColonIndent',
+               u'2nd:exer:ErrorsColonIndent'),
+              (u' Exercise 12: Compare integers a and b ',
+               2,
+               u'2nd:exer:compInt',
+               u'2nd:exer:compInt'),
+              (u' Exercise 13: Functions for circumference and area of a circle ',
+               2,
+               u'2nd:exer:funcCircArea',
+               u'2nd:exer:funcCircArea'),
+              (u' Exercise 14: Function for area of a rectangle ',
+               2,
+               u'2nd:exer:funcAreaRectangle',
+               u'2nd:exer:funcAreaRectangle'),
+              (u' Exercise 15: Average of integers ',
+               2,
+               u'2nd:exer:avNInt',
+               u'2nd:exer:avNInt'),
+              (u' Exercise 16: While loop with errors ',
+               2,
+               u'2nd:exer:whileLoopErrors',
+               u'2nd:exer:whileLoopErrors'),
+              (u' Exercise 17: Area of rectangle versus circle ',
+               2,
+               u'2nd:exer:areaRectCircle',
+               u'2nd:exer:areaRectCircle'),
+              (u' Exercise 18: Find crossing points of two graphs ',
+               2,
+               u'2nd:exer:Cross2Graphs',
+               u'2nd:exer:Cross2Graphs'),
+              (u' Exercise 19: Sort array with numbers ',
+               2,
+               u'2nd:exer:sortNumbers',
+               u'2nd:exer:sortNumbers'),
+              (u' Exercise 20: Computing $\\pi$ ',
+               2,
+               u'2nd:exer:computingPi',
+               u'2nd:exer:computingPi'),
+              (u' Exercise 21: Find right number combination ',
+               2,
+               u'2nd:exer:numberCombination',
+               u'2nd:exer:numberCombination'),
+              (u' Exercise 22: Frequency of random numbers ',
+               2,
+               u'2nd:exer:numberOccurrence',
+               u'2nd:exer:numberOccurrence'),
+              (u' Remarks ', 3, None, '___sec54'),
+              (u' Exercise 23: Game 21 ',
+               2,
+               u'2nd:exer:Game21',
+               u'2nd:exer:Game21'),
+              (u' Exercise 24: Linear interpolation ',
+               2,
+               u'2nd:exer:linearInterpol',
+               u'2nd:exer:linearInterpol'),
+              (u' Exercise 25: Test straight line requirement ',
+               2,
+               u'2nd:exer:testStraightLine',
+               u'2nd:exer:testStraightLine'),
+              (u' Exercise 26: Fit straight line to data ',
+               2,
+               u'2nd:exer:fitLine',
+               u'2nd:exer:fitLine'),
+              (u' Remarks ', 3, None, '___sec59'),
+              (u' Exercise 27: Fit sines to straight line ',
+               2,
+               u'2nd:exer:fitSines',
+               u'2nd:exer:fitSines'),
+              (u' Remarks ', 3, None, '___sec61'),
+              (u' Exercise 28: Count occurrences of a text string in a list ',
+               2,
+               u'2nd:exer:countTextString',
+               u'2nd:exer:countTextString'),
+              (u' Exercise 29: Create sub-list from list ',
+               2,
+               u'2nd:exer:createSublistFromList',
+               u'2nd:exer:createSublistFromList'),
+              (u' Computing integrals ',
+               0,
+               u'sec:integrals',
+               u'sec:integrals'),
+              (u' Basic ideas of numerical integration ',
+               1,
+               u'sec:integrals:basic',
+               u'sec:integrals:basic'),
+              (u' The composite trapezoidal rule ',
+               1,
+               u'sec:integrals:trap',
+               u'sec:integrals:trap'),
+              (u' The idea ',
+               2,
+               u'sec:integrals:trap:idea',
+               u'sec:integrals:trap:idea'),
+              (u' The general formula ',
+               2,
+               u'sec:integrals:formula',
+               u'sec:integrals:formula'),
+              (u' Implementation ',
+               2,
+               u'sec:integrals:trap:impl',
+               u'sec:integrals:trap:impl'),
+              (u' Specific or general implementation? ', 3, None, '___sec70'),
+              (u' Implementation with functions ', 3, None, '___sec71'),
+              (u' Solving our specific problem in a session ',
+               3,
+               None,
+               '___sec72'),
+              (u' Solving our specific problem in a program ',
+               3,
+               None,
+               '___sec73'),
+              (u' Making a module ', 2, None, '___sec74'),
+              (u' Alternative flat special-purpose implementation ',
+               2,
+               None,
+               '___sec75'),
+              (u' The composite midpoint method ',
+               1,
+               u'sec:integrals:Midpoint',
+               u'sec:integrals:Midpoint'),
+              (u' The idea ', 3, None, '___sec77'),
+              (u' The general formula ', 2, None, '___sec78'),
+              (u' Implementation ', 2, None, '___sec79'),
+              (u' Comparing the trapezoidal and the midpoint methods ',
+               2,
+               None,
+               '___sec80'),
+              (u' Testing ', 1, None, '___sec81'),
+              (u' Problems with brief testing procedures ',
+               2,
+               None,
+               '___sec82'),
+              (u' Test procedures ',
+               2,
+               u'sec:integrals:testprocs',
+               u'sec:integrals:testprocs'),
+              (u' Hand-computed results ', 3, None, '___sec84'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec85'),
+              (u' Demonstrate correct convergence rates ',
+               3,
+               None,
+               '___sec86'),
+              (u' Test functions for test procedures ',
+               2,
+               u'sec:integrals:test:functions',
+               u'sec:integrals:test:functions'),
+              (u' Hand-computed results ', 3, None, '___sec88'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec89'),
+              (u' Demonstrate correct convergence rates ',
+               3,
+               None,
+               '___sec90'),
+              (u' Vectorization ', 1, None, '___sec91'),
+              (u' Measuring computational speed ', 1, None, '___sec92'),
+              (u' Double and triple integrals ', 1, None, '___sec93'),
+              (u' Exercises ', 1, None, '___sec94'),
+              (u' Exercise 30: Hand calculations for the trapezoidal method ',
+               2,
+               u'sec:exer:trap:hand',
+               u'sec:exer:trap:hand'),
+              (u' Exercise 31: Hand calculations for the midpoint method ',
+               2,
+               u'sec:exer:midpt:hand',
+               u'sec:exer:midpt:hand'),
+              (u' Exercise 32: Compute a simple integral ',
+               2,
+               u'sec:exer:trap:mid:parabola',
+               u'sec:exer:trap:mid:parabola'),
+              (u' Exercise 33: Hand-calculations with sine integrals ',
+               2,
+               u'sec:exer:hand:sine',
+               u'sec:exer:hand:sine'),
+              (u' Exercise 34: Make test functions for the midpoint method ',
+               2,
+               u'sec:exer:test:midpoint',
+               u'sec:exer:test:midpoint'),
+              (u' Exercise 35: Explore round-off errors with large numbers ',
+               2,
+               u'sec:exer:test:roundoff',
+               u'sec:exer:test:roundoff'),
+              (u' Exercise 36: Write test functions for $\\int_0^4\\sqrt{x}dx$ ',
+               2,
+               u'sec:exer:test:convrates:sqrt',
+               u'sec:exer:test:convrates:sqrt'),
+              (u' Remarks ', 3, None, '___sec102'),
+              (u' Exercise 37: Rectangle methods ',
+               2,
+               u'sec:exer:rectangleMethod',
+               u'sec:exer:rectangleMethod'),
+              (u' Exercise 38: Adaptive integration ',
+               2,
+               u'sec:exer:adaptive:int',
+               u'sec:exer:adaptive:int'),
+              (u' Remarks ', 3, None, '___sec105'),
+              (u' Exercise 39: Integrating x raised to x ',
+               2,
+               u'sec:exer:integrate:x2x',
+               u'sec:exer:integrate:x2x'),
+              (u' Exercise 40: Revisit fit of sines to a function ',
+               2,
+               u'sec:exer:revisitFitSines',
+               u'sec:exer:revisitFitSines'),
+              (u' Solving ordinary differential equations ',
+               0,
+               u'5th:SolvODEs',
+               u'5th:SolvODEs'),
+              (u' Population growth ', 1, u'sec:de:pg', u'sec:de:pg'),
+              (u' Derivation of the model ',
+               2,
+               u'sec:de:pg:model',
+               u'sec:de:pg:model'),
+              (u' Numerical solution ',
+               2,
+               u'sec:de:pg:numerics',
+               u'sec:de:pg:numerics'),
+              (u' Programming the Forward Euler scheme; the special case ',
+               2,
+               u'sec:de:pg:prog1',
+               u'sec:de:pg:prog1'),
+              (u' Understanding the Forward Euler method ',
+               2,
+               u'sec:de:pg:geom',
+               u'sec:de:pg:geom'),
+              (u' Programming the Forward Euler scheme; the general case ',
+               2,
+               u'sec:de:FE:gen',
+               u'sec:de:FE:gen'),
+              (u' Making the population growth model more realistic ',
+               2,
+               None,
+               '___sec115'),
+              (u' Verification: exact linear solution of the discrete equations ',
+               2,
+               u'sec:de:growth:test:linear',
+               u'sec:de:growth:test:linear'),
+              (u' Spreading of diseases ', 1, None, '___sec117'),
+              (u' Spreading of a flu ', 2, u'sec:de:flu', u'sec:de:flu'),
+              (u' A Forward Euler method for the differential equation system ',
+               2,
+               u'sec:de:flu:FE',
+               u'sec:de:flu:FE'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:flu:prog:spec',
+               u'sec:de:flu:prog:spec'),
+              (u' Outbreak or not ', 2, None, '___sec121'),
+              (u' Abstract problem and notation ',
+               2,
+               u'sec:de:flu:generic',
+               u'sec:de:flu:generic'),
+              (u' Programming the numerical method; the general case ',
+               2,
+               u'sec:de:flu:prog:generic',
+               u'sec:de:flu:prog:generic'),
+              (u' Time-restricted immunity ', 2, None, '___sec124'),
+              (u' Incorporating vaccination ', 2, None, '___sec125'),
+              (u' Discontinuous coefficients: a vaccination campaign ',
+               2,
+               u'sec:de:flu:vaccine:discont',
+               u'sec:de:flu:vaccine:discont'),
+              (u' Oscillating one-dimensional systems ',
+               1,
+               u'sec:de:vib',
+               u'sec:de:vib'),
+              (u' Derivation of a simple model ', 2, None, '___sec128'),
+              (u' Numerical solution ', 2, None, '___sec129'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:vib:special',
+               u'sec:de:vib:special'),
+              (u' A magic fix of the numerical method ',
+               2,
+               None,
+               '___sec131'),
+              (u" The 2nd-order Runge-Kutta method (or Heun's method) ",
+               2,
+               u'sec:de:osc:Heun',
+               u'sec:de:osc:Heun'),
+              (u' Odespy: software for solving ODEs ',
+               2,
+               u'sec:de:osc:odespy',
+               u'sec:de:osc:odespy'),
+              (u' The 4th-order Runge-Kutta method ', 2, None, '___sec134'),
+              (u' The algorithm ', 3, None, '___sec135'),
+              (u' Application ', 3, None, '___sec136'),
+              (u' Implementation ', 3, None, '___sec137'),
+              (u' Derivation ', 3, None, '___sec138'),
+              (u' More effects: damping, nonlinearity, and external forces ',
+               2,
+               None,
+               '___sec139'),
+              (u' The Euler-Cromer scheme ', 3, None, '___sec140'),
+              (u' The 4-th order Runge-Kutta method ', 3, None, '___sec141'),
+              (u' Illustration of linear damping ', 2, None, '___sec142'),
+              (u' Illustration of linear damping with sinusoidal excitation ',
+               2,
+               None,
+               '___sec143'),
+              (u' Spring-mass system with sliding friction ',
+               2,
+               u'sec:de:vib:ode2:sliding:friction',
+               u'sec:de:vib:ode2:sliding:friction'),
+              (u' A finite difference method; undamped, linear case ',
+               2,
+               u'sec:de:vib:2nd',
+               u'sec:de:vib:2nd'),
+              (u' A finite difference method; linear damping ',
+               2,
+               u'sec:de:vib:2nd:damped1',
+               u'sec:de:vib:2nd:damped1'),
+              (u' Exercises ', 1, None, '___sec147'),
+              (u' Exercise 41: Geometric construction of the Forward Euler method ',
+               2,
+               u'sec:de:exer:geom',
+               u'sec:de:exer:geom'),
+              (u' Exercise 42: Make test functions for the Forward Euler method ',
+               2,
+               u'sec:de:exer:FE:test1',
+               u'sec:de:exer:FE:test1'),
+              (u" Exercise 43: Implement and evaluate Heun's method ",
+               2,
+               u'sec:de:exer:Heun:pg',
+               u'sec:de:exer:Heun:pg'),
+              (u' Exercise 44: Find an appropriate time step; logistic model ',
+               2,
+               u'sec:de:exer:logistic:dtopt',
+               u'sec:de:exer:logistic:dtopt'),
+              (u' Exercise 45: Find an appropriate time step; SIR model ',
+               2,
+               u'sec:de:exer:SIR:dtopt',
+               u'sec:de:exer:SIR:dtopt'),
+              (u' Exercise 46: Model an adaptive vaccination campaign ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 47: Refactor a flat program ',
+               2,
+               u'sec:de:exer:vib:FE:func',
+               u'sec:de:exer:vib:FE:func'),
+              (u' Exercise 48: Simulate oscillations by a general ODE solver ',
+               2,
+               u'sec:de:exer:vib:ode_FE',
+               u'sec:de:exer:vib:ode_FE'),
+              (u' Exercise 49: Compute the energy in oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Exercise 50: Use a Backward Euler scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:BE',
+               u'sec:de:exer:pg:BE'),
+              (u' Exercise 51: Use a Crank-Nicolson scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:CN',
+               u'sec:de:exer:pg:CN'),
+              (u' Exercise 52: Understand finite differences via Taylor series ',
+               2,
+               u'sec:de:exer:fd:Taylor',
+               u'sec:de:exer:fd:Taylor'),
+              (u' Exercise 53: Use a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Remarks ', 3, None, '___sec161'),
+              (u" Exercise 54: Use Heun's method for the SIR model ",
+               2,
+               u'sec:de:exer:SIR:Heun',
+               u'sec:de:exer:SIR:Heun'),
+              (u' Exercise 55: Use Odespy to solve a simple ODE ',
+               2,
+               u'sec:de:exer:odespy:decay',
+               u'sec:de:exer:odespy:decay'),
+              (u' Exercise 56: Set up a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:osc:BE',
+               u'sec:de:exer:osc:BE'),
+              (u' Exercise 57: Set up a Forward Euler scheme for nonlinear and damped oscillations ',
+               2,
+               u'sec:de:exer:osc:FE:general',
+               u'sec:de:exer:osc:FE:general'),
+              (u' Exercise 58: Discretize an initial condition ',
+               2,
+               u'sec:de:exer:osc:2nd:V0ic',
+               u'sec:de:exer:osc:2nd:V0ic'),
+              (u' Solving Partial Differential Equations ',
+               0,
+               u'6th:SolvPDEs',
+               u'6th:SolvPDEs'),
+              (u' The Method of Lines combined with the Forward Euler scheme ',
+               1,
+               u'6th:SolvPDEs:MOLandFE',
+               u'6th:SolvPDEs:MOLandFE'),
+              (u' The Method of Lines combined with the Backward Euler scheme ',
+               1,
+               u'6th:SolvPDEs:MOLandBE',
+               u'6th:SolvPDEs:MOLandBE'),
+              (u' A glimpse of the Finite Element Method  ',
+               1,
+               u'6th:SolvPDEs:FEM',
+               u'6th:SolvPDEs:FEM'),
+              (u' Exercises ', 1, None, '___sec171'),
+              (u' Exercise 59: Temperature distribution with forward Euler ',
+               2,
+               u'6th:exer:TempDistribFE',
+               u'6th:exer:TempDistribFE'),
+              (u' Exercise 60: Matrix-vector hand calculations ',
+               2,
+               u'6th:exer:MatrixVectorHandCalc',
+               u'6th:exer:MatrixVectorHandCalc'),
+              (u' Exercise 61: Temperature distribution with backward Euler ',
+               2,
+               u'6th:exer:tempDistribBE',
+               u'6th:exer:tempDistribBE'),
+              (u' Exercise 62: Temperature distribution with Crank-Nicolson ',
+               2,
+               u'6th:exer:tempDistribCN',
+               u'6th:exer:tempDistribCN'),
+              (u' Appendix: Taylor series approximation ',
+               0,
+               u'A:AppTaylor',
+               u'A:AppTaylor'),
+              (u' Appendix: Solving nonlinear algebraic equations ',
+               0,
+               u'4th:NonlinAlgEq',
+               u'4th:NonlinAlgEq'),
+              (u' Brute force method ',
+               2,
+               u'4th:bruteforce',
+               u'4th:bruteforce'),
+              (u' Model problem for algebraic equations ',
+               2,
+               None,
+               '___sec179'),
+              (u" Newton's method ",
+               1,
+               u'4th:NonlinAlgEq:Newt',
+               u'4th:NonlinAlgEq:Newt'),
+              (u' Making a more efficient and robust implementation ',
+               2,
+               u'4th:Newton:robust',
+               u'4th:Newton:robust'),
+              (u' The Secant method ',
+               1,
+               u'4th:NonlinAlgEq:Secant',
+               u'4th:NonlinAlgEq:Secant'),
+              (u' The Bisection method ',
+               1,
+               u'4th:NonlinAlgEq:Bisect',
+               u'4th:NonlinAlgEq:Bisect'),
+              (u' Rate of convergence ',
+               1,
+               u'4th:NonlinAlgEq:RateConv',
+               u'4th:NonlinAlgEq:RateConv'),
+              (u' Solving multiple nonlinear algebraic equations ',
+               1,
+               u'4th:NonlinAlgEq:MultEqNewt',
+               u'4th:NonlinAlgEq:MultEqNewt'),
+              (u' Exercises ', 1, None, '___sec186'),
+              (u' Exercise 63: Brute force solver based on zero crossings ',
+               2,
+               u'4th:exer:crossings',
+               u'4th:exer:crossings'),
+              (u" Exercise 64: Understand why Newton's method can fail ",
+               2,
+               u'4th:exer:Newton:failure',
+               u'4th:exer:Newton:failure'),
+              (u' Exercise 65: See if the Secant method fails ',
+               2,
+               u'4th:exer:Secant:failure',
+               u'4th:exer:Secant:failure'),
+              (u' Exercise 66: Understand how the Bisection method cannot fail ',
+               2,
+               u'4th:exer:Bisection:failure',
+               u'4th:exer:Bisection:failure'),
+              (u" Exercise 67: Combine the Bisection method with Newton's method ",
+               2,
+               u'4th:exer:Bisection:Newton',
+               u'4th:exer:Bisection:Newton'),
+              (u' Exercise 68: Straight line crossing (Bisection method) ',
+               2,
+               u'4th:exer:straightLineCrossing',
+               u'4th:exer:straightLineCrossing'),
+              (u" Exercise 69: Newton's method by hand ",
+               2,
+               u'4th:exer:NewtonHand',
+               u'4th:exer:NewtonHand'),
+              (u" Exercise 70: Intersecting graphs (Newton's method) ",
+               2,
+               u'4th:exer:intersectingGraphsNewton',
+               u'4th:exer:intersectingGraphsNewton'),
+              (u' Exercise 71: Finding many solutions ',
+               2,
+               u'4th:exer:findingManySolutions',
+               u'4th:exer:findingManySolutions'),
+              (u' Exercise 72: Combining Bisection and Newton ',
+               2,
+               u'4th:exer:combBisectNewt',
+               u'4th:exer:combBisectNewt'),
+              (u" Exercise 73: Timing Newton's method ",
+               2,
+               u'4th:exer:timingNewton',
+               u'4th:exer:timingNewton'),
+              (u' Exercise 74: Problematic starting value ',
+               2,
+               u'4th:exer:problemStartVal',
+               u'4th:exer:problemStartVal'),
+              (u' Exercise 75: Secant method by hand ',
+               2,
+               u'4th:exer:secantHand',
+               u'4th:exer:secantHand'),
+              (u' Exercise 76: Intersecting graphs (Secant method) ',
+               2,
+               u'4th:exer:intersectingGraphsSecant',
+               u'4th:exer:intersectingGraphsSecant'),
+              (u' Exercise 77: Two nonlinear equations ',
+               2,
+               u'4th:exer:twoNonlinEqns',
+               u'4th:exer:twoNonlinEqns'),
+              (u' Exercise 78: Fixed point iteration ',
+               2,
+               u'4th:exer:fixedPointIt',
+               u'4th:exer:fixedPointIt'),
+              (u' Appendix: Getting access to Python ',
+               0,
+               u'app:accesspy',
+               u'app:accesspy'),
+              (u' Required software ',
+               2,
+               u'sec:accesspy:softwarelist',
+               u'sec:accesspy:softwarelist'),
+              (u' Installing software on your laptop: Mac OS X and Windows ',
+               2,
+               u'sec:accesspy:MacWin',
+               u'sec:accesspy:MacWin'),
+              (u' Anaconda and Spyder ',
+               2,
+               u'sec:accesspy:anaconda',
+               u'sec:accesspy:anaconda'),
+              (u' Spyder on Mac ', 3, None, '___sec207'),
+              (u' Installation of additional packages ',
+               3,
+               None,
+               '___sec208'),
+              (u' Installing SciTools on Mac ', 3, None, '___sec209'),
+              (u' Installing SciTools on Windows ', 3, None, '___sec210'),
+              (u' VMWare Fusion virtual machine ',
+               2,
+               u'sec:accesspy:vmware',
+               u'sec:accesspy:vmware'),
+              (u' Installing Ubuntu ',
+               3,
+               u'sec:accesspy:vmware:fullblown:machine',
+               u'sec:accesspy:vmware:fullblown:machine'),
+              (u' Installing software on Ubuntu ', 3, None, '___sec213'),
+              (u' File sharing ', 3, None, '___sec214'),
+              (u' Dual boot on Windows ', 2, None, '___sec215'),
+              (u' Vagrant virtual machine ',
+               2,
+               u'sec:accesspy:vagrant',
+               u'sec:accesspy:vagrant'),
+              (u' How to write and run a Python program ',
+               2,
+               u'sec:accesspy:writerun',
+               u'sec:accesspy:writerun'),
+              (u' The need for a text editor ', 3, None, '___sec218'),
+              (u' Spyder ', 3, None, '___sec219'),
+              (u' Text editors ', 3, None, '___sec220'),
+              (u' Terminal windows ', 3, None, '___sec221'),
+              (u' Using a plain text editor and a terminal window ',
+               3,
+               None,
+               '___sec222'),
+              (u' The SageMathCloud and Wakari web services ',
+               2,
+               u'sec:accesspy:sagemath:wakari',
+               u'sec:accesspy:sagemath:wakari'),
+              (u' Basic intro to SageMathCloud ', 3, None, '___sec224'),
+              (u' Basic intro to Wakari ', 3, None, '___sec225'),
+              (u' Installing your own Python packages ',
+               3,
+               None,
+               '___sec226'),
+              (u' Writing IPython notebooks ',
+               2,
+               u'sec:accesspy:ipynb',
+               u'sec:accesspy:ipynb'),
+              (u' A simple program in the notebook ', 3, None, '___sec228'),
+              (u' Mixing text, mathematics, code, and graphics ',
+               3,
+               None,
+               '___sec229'),
+              (u' References ', 0, None, '___sec230')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands.tex -->
+$$
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+$$
+
+
+
+
+    
+<a name="part0040"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._p4c-solarized-Python039.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._p4c-solarized-Python041.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h2>VMWare Fusion virtual machine <a name="sec:accesspy:vmware"></a></h2>
+
+<p>
+A virtual machine allows you to run another complete computer system in a
+separate window.
+For Mac users, I recommend VMWare Fusion over
+VirtualBox for running a Linux (or Windows) virtual
+machine.  (VMWare Fusion's hardware integration seems superior to
+that of VirtualBox.) VMWare Fusion is commercial software, but
+there is a free trial version you can start with. Alternatively,
+you can use the simpler VMWare Player, which is free for personal use.
+
+<h3>Installing Ubuntu <a name="sec:accesspy:vmware:fullblown:machine"></a></h3>
+
+<p>
+The following recipe will install a Ubuntu virtual machine under VMWare
+Fusion.
+
+<ol>
+  <li> <a href="http://www.ubuntu.com/desktop/get-ubuntu/download" target="_self">Download Ubuntu</a>.
+     Choose a version that is compatible with your computer, usually
+     a 64-bit version nowadays.</li>
+  <li> Launch VMWare fusion.</li>
+  <li> Click on <em>File - New</em> and choose to <em>install Windows or another
+     operating system in a new virtual machine</em>.</li>
+  <li> Double-click on <em>Use operating system installation disc or image</em>.</li>
+  <li> Choose <em>Linux</em> and <em>Ubuntu 64 bit</em>. You will be asked to give provide
+     the name of the Ubuntu file you downloaded.</li>
+  <li> Choose <em>Customize Settings</em> and make the following
+     settings (these settings can be changed later, if desired):</li>
+
+<ul>
+      <li> <em>Processors and Memory</em>: Set a minimum of 2 Gb memory, but
+        not more than half of your computer's total memory.
+        The virtual machine can use all processors.</li>
+      <li> <em>Hard Disk</em>: Choose how much disk space you want to use inside
+        the virtual machine (20 Gb is considered a minimum).</li>
+</ul>
+
+  <li> Choose where you want to store the Ubuntu iso file on the hard disk.
+     The Ubuntu iso file is a single file containing all of the Ubuntu
+     operating system and all of the associated file system. Backing
+     up this file means backing up your whole Ubuntu installation, something
+     you should frequently do!</li>
+  <li> When the start-up of Ubuntu is finished, click on the Ubuntu window
+     to launch the Install application. Click <em>Install</em>. On the next
+     page, fill in <em>Download updates while installing</em> and <em>Install third-party
+     software</em>. Then click <em>Continue</em>.
+     On the next page, choose <em>Erase disk and install Ubuntu</em>, then provide
+     your location, choose a keyboard layout (English is recommended for
+     programmers, but you can easily set up Ubuntu to switch between different
+     keyboards by means of a short-key). Fill in name, etc.
+     Ubuntu will then eventually install the operating system.</li>
+  <li> You may need to define a higher resolution of the display.
+     Find the <em>System settings</em> icon on the left, go to <em>Display</em>,
+     choose some display (you can try several, click <em>Keep this configuration</em>
+     when you are satisfied).</li>
+ <li> You can have multiple keyboards on Ubuntu.
+     Launch <em>System settings</em>, go to <em>Keyboard</em>,
+     click the <em>Text entry</em> hyperlink, add keyboard(s) (<em>Input sources to use</em>),
+     and choose a shortcut, say <code>Ctrl+space</code> or <code>Ctrl+backslash</code>, in the
+     <em>Switch to next source using</em> field. Then you can use the shortcut
+     to quickly switch keyboard.</li>
+</ol>
+
+<h3>Installing software on Ubuntu  <a name="___sec213"></a></h3>
+
+<p>
+You now have a full Ubuntu machine, but there is not much software
+on a it for doing scientific computing with Python.
+Installation is performed through the Ubuntu Software Center (a
+graphical application) or through Unix commands, typically
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; sudo apt-get install packagename
+</code></pre>
+<!-- end verbatim block -->
+To look up the right package name, run <code>apt-cache search</code> followed by
+typical words of that package. The strength of the <code>apt-get</code> way
+of installing software is that the package <em>and all packages it depends on</em>
+are automatically installed through the <code>apt-get install</code> command.
+This is in a nutshell why Ubuntu (or Debian-based Linux systems)
+are so user-friendly for installing sophisticated mathematical software.
+
+<p>
+To install a lot of useful packages for scientific work, go to
+<a href="http://goo.gl/RVHixr" target="_self"><tt>http://goo.gl/RVHixr</tt></a> and click on <em>one</em> of the following
+files, which will install a collection of software for scientific work
+using <code>apt-get</code>:
+
+<ul>
+ <li> <code>install_minimal.sh</code>: install a minimal collection</li>
+ <li> <code>install_rich.sh</code>: install a rich collection (takes time to run)</li>
+</ul>
+
+Then click the <em>Raw</em> button. The file comes up in the browser window,
+right-click and choose <em>Save As...</em> to save the file on your computer.
+The next step is to find the file and run it:
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; cd ~/Downloads
+Terminal&gt; bash install_minimal.sh
+</code></pre>
+<!-- end verbatim block -->
+The program will run for quite some time, hopefully without problems.
+If it stops, set a comment sign <code>#</code> in front of the line where it stopped
+and rerun.
+
+<h3>File sharing  <a name="___sec214"></a></h3>
+
+<p>
+The Ubuntu machine can see the files on your host system if you
+download <em>VMWare Tools</em>. Go to the <em>Virtual Machine</em> pull-down menu in
+VMWare Fusion and choose <em>Install VMWare Tools</em>. A tarfile is
+downloaded. Click on it and it will open a folder <code>vmware-tools-distrib</code>,
+normally in your home folder. Move to the new folder and
+run <code>sudo perl vmware-install.pl</code>.
+You can go with the default answers to all the questions.
+
+<p>
+On a Mac, you must open <em>Virtual Machine - Settings...</em> and choose
+<em>Sharing</em> to bring up a dialog where you can add the folders you want
+to be visible in Ubuntu. Just choose your home folder. Then turn on
+the file sharing button (or turn off and on again). Go to Ubuntu and
+check if you can see all your host system's files in <code>/mnt/hgfs/</code>.
+
+<p>
+If you later detect that <code>/mnt/hgfs/</code> folder has become empty,
+VMWare Tools must be reinstalled by first turning shared folders
+off, and then running
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; sudo /usr/bin/vmware-config-tools.pl
+</code></pre>
+<!-- end verbatim block -->
+Occasionally it is necessary to do a full reinstall by
+<code>sudo perl vmware-install.pl</code> as above.
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal">
+<b>Backup of a VMWare virtual machine on a Mac.</b>
+<p>
+The entire Ubuntu machine is a folder on the host computer,
+typically with a name like <code>Documents/Virtual Machines/Ubuntu 64-bit</code>.
+Backing up the Ubuntu machine means backing up this folder.
+However, if you use tools like Time Machine and work in Ubuntu during
+backup, the copy of the state of the Ubuntu machine is likely to
+be corrupt. You are therefore strongly recommended to shut down the
+virtual machine prior to running Time Machine or simply copying the
+folder with the virtual machine to some backup disk.
+
+<p>
+If something happens to your virtual machine, it is usually a straightforward
+task to make a new machine and import data and software automatically
+from the previous machine.
+</div>
+
+
+<h2>Dual boot on Windows  <a name="___sec215"></a></h2>
+
+<p>
+Instead of running Ubuntu in a virtual machine, Windows users also have
+the option of deciding on the operating system when turning on the
+machine (so-called dual boot). The <a href="http://wubi-installer.org" target="_self">Wubi</a>
+tool makes it very easy to get Ubuntu on a Windows machine this way.
+There are problems with Wubi on Windows 8, see
+<a href="https://www.youtube.com/watch?v=gZqsXAoLBDI" target="_self">instructions</a> for how
+to get around them. It is also relatively straightforward to
+perform
+a direct install of Ubuntu by downloading an Ubuntu image,
+creating a bootable USB stick on <a href="http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-windows" target="_self">Windows</a> or <a href="http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx" target="_self">Mac</a>, restarting the machine and
+finally <a href="http://www.ubuntu.com/download/desktop/install-ubuntu-desktop" target="_self">installing Ubuntu</a>.
+However, with the powerful computers we now have, a virtual machine
+is more flexible since you can switch between Windows and Ubuntu as
+easily as going from one window to another.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._p4c-solarized-Python039.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._p4c-solarized-Python041.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

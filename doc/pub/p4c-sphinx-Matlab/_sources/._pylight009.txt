@@ -1,0 +1,155 @@
+
+
+.. |nbsp| unicode:: 0xA0
+   :trim:
+
+.. !split
+
+References
+%%%%%%%%%%
+
+.. [Ref01]
+   **S. D. Conte and C. d. Boor**. *Elementary Numerical Analysis - An Algorithmic Approach*,
+   third edition,
+   McGraw-Hill,
+   1980.
+
+.. [Ref02]
+   **W. H. Press, S. A. Teukolsky, W. T. Vetterling and B. P. Flannery**. *Numerical Recipes*,
+   Cambridge,
+   1992,
+   `http://www.nrbook.com/a/bookcpdf.php <http://www.nrbook.com/a/bookcpdf.php>`_.
+
+.. [Ref03]
+   **G. Recktenwald**. *Numerical Methods with MATLAB: Implementations and Applications*,
+   Prentice-Hall,
+   2000.
+
+.. [Ref04]
+   **S. Nakamura**. *Numerical Analysis and Graphic Visualization with Matlab*,
+   second edition,
+   Prentice Hall,
+   2002.
+
+.. [Ref05]
+   **S. Otto and J. P. Denier**. *An Introduction to Programming and Numerical Methods in MATLAB*,
+   Springer,
+   2005.
+
+.. [Ref06]
+   **C. Moler**. *Numerical Computing with MATLAB*,
+   SIAM,
+   2004,
+   `http://se.mathworks.com/moler/chapters.html <http://se.mathworks.com/moler/chapters.html>`_.
+
+.. [Ref07]
+   **G. Sewell**. *The Numerical Solution of Ordinary and Partial Differential Equations*,
+   Wiley,
+   2005.
+
+.. [Ref08]
+   **I. Danaila, P. Joly, S. M. Kaber and M. Postel**. *An Introduction to Scientific Computing*,
+   Springer,
+   2007.
+
+.. [Ref09]
+   **L. N. Trefethen**. *Spectral Methods in MATLAB*,
+   SIAM,
+   2000.
+
+.. [Ref10]
+   **L. N. Trefethen**. *Approximation Theory and Approximation Practice*,
+   SIAM,
+   2012.
+
+.. [Ref11]
+   **T. Lyche and J.-L. Merrien**. *Exercises in Computational Mathematics with MATLAB*,
+   Springer,
+   2014.
+
+.. [Ref12]
+   **T. Siauw and A. Bayen**. *An Introduction to MATLAB Programming and Numerical Methods for Engineers*,
+   Academic Press,
+   2014,
+   `http://www.sciencedirect.com/science/book/9780124202283 <http://www.sciencedirect.com/science/book/9780124202283>`_.
+
+.. [Ref13]
+   **D. W. Harder and R.**. *Numerical Analysis for Engineering*,
+   2015,
+   `https://ece.uwaterloo.ca/~dwharder/NumericalAnalysis/ <https://ece.uwaterloo.ca/~dwharder/NumericalAnalysis/>`_.
+
+.. [Ref14]
+   **T. Young and M. J. Mohlenkamp**. *Introduction to Numerical Methods and MATLAB Programming for Engineers*,
+   2015,
+   `https://www.math.ohiou.edu/courses/math3600/book.pdf <https://www.math.ohiou.edu/courses/math3600/book.pdf>`_.
+
+.. [Ref15]
+   **L. Baochuan**. *Introduction to Numerical Methods*,
+   2015,
+   `http://en.wikibooks.org/wiki/Introduction_to_Numerical_Methods <http://en.wikibooks.org/wiki/Introduction_to_Numerical_Methods>`_.
+
+.. [Ref16]
+   **J. Kiusalaas**. *Numerical Methods in Engineering with Python*,
+   second edition,
+   Cambridge,
+   2014.
+
+.. [Ref17]
+   **H. P. Langtangen**. *A Primer on Scientific Programming with Python*,
+   fourth edition,
+   *Texts in Computational Science and Engineering*,
+   Springer,
+   2014.
+
+.. [Ref18]
+   **H. P. Langtangen**. DocOnce Publishing Platform,
+   `https://github.com/hplgit/doconce <https://github.com/hplgit/doconce>`_.
+
+.. [Ref19]
+   Python Programming Language. `http://python.org <http://python.org>`_.
+
+.. [Ref20]
+   **T. E. Oliphant et al.**. NumPy Array Processing Package for Python,
+   `http://www.numpy.org <http://www.numpy.org>`_.
+
+.. [Ref21]
+   **T. E. Oliphant**. Python for Scientific Computing,
+   *Computing in Science \& Engineering*,
+   9,
+   2007.
+
+.. [Ref22]
+   **J. D. Hunter et al.**. Matplotlib: Software Package for 2D Graphics,
+   `http://matplotlib.org/ <http://matplotlib.org/>`_.
+
+.. [Ref23]
+   **J. D. Hunter**. Matplotlib: a 2D Graphics Environment,
+   *Computing in Science \& Engineering*,
+   9,
+   2007.
+
+.. [Ref24]
+   **F. Perez, B. E. Granger et al.**. IPython Software Package for Interactive Scientific Computing,
+   `http://ipython.org/ <http://ipython.org/>`_.
+
+.. [Ref25]
+   **F. Perez and B. E. Granger**. IPython: a System for Interactive Scientific Computing,
+   *Computing in Science \& Engineering*,
+   9,
+   2007.
+
+.. [Ref26]
+   **H. P. Langtangen and J. H. Ring**. SciTools: Software Tools for Scientific Computing,
+   `https://github.com/hplgit/scitools <https://github.com/hplgit/scitools>`_.
+
+.. [Ref27]
+   ScientificPython Software Package. `http://starship.python.net/crew/hinsen <http://starship.python.net/crew/hinsen>`_.
+
+.. [Ref28]
+   **O. Certik et al.**. SymPy: Python library for symbolic mathematics,
+   `http://sympy.org <http://sympy.org>`_.
+
+.. [Ref29]
+   **E. Jones, T. E. Oliphant, P. Peterson et al.**. SciPy Scientific Computing Library for Python,
+   `http://scipy.org <http://scipy.org>`_.
+

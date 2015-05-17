@@ -1,0 +1,3394 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Programming for Computations - A Gentle Introduction to Numerical Simulations with Python">
+<meta name="keywords" content="computer program,programming,language programming,language computer,MATLAB,Octave,Fortran,C,C++,Python,Maple,Mathematica,syntax,bug,debugging,script (and scripting),implement,print,program run,program execute,code,comment,instruction,program statement,variable,assignment,calculator,text editor,Idle,prompt,program typing,program run,program execute,ipython,function,function call,atan,function input parameter,function output parameter,function return,function take a parameter,library,library function,from,import,math,module,package,linspace,xlabel,ylabel,plot,interactive use (of Python),import,keyboard arrow up/down,Python shell,operator Arithmetic,parentheses,variable type,variable name,object,float,int,str,type conversion,reserved words,variable int,variable float,variable str,variable assignment,type conversion automatic,integer division,round-off error,printing formatted,printf formatting,default,array,array element,zeros,allocate,array index,indexing zero based,indexing one based,Python zero-based indexing,array slice of,graph,hold (on/off),plot figure,title,legend,axis,hardcopy,format png,matrix mat,matrix vector product,transpose,linear algebra,matrix,vector,error message,debugging,debugger,try-exception,exception handling,program crash,program testing,program verification,program input,program output,input,raw input,list,tuple,symbolic computations,symbolic operations,symbolic simplifications,SymPy,library SymPy,WolframAlpha,Mathematica,Sage (symbolic package),Python documentation,garbage collection,variable delete,if,elif,else,colon,indent,boolean,boolean expression,True,False,boolean True,boolean False,pseudo code,operator Logical,function,function definition,def,return,argument,parameter input,parameter output,variable local,variable global,argument keyword,argument named,argument ordinary,argument positional,doc string,function handle,function local,function global,function nested,lambda function,loop for,for loop,range,loop iteration,loop index,loop double,loop multiple,loop nested,linear algebra,while loop,loop while,loop infinite,loop iteration,loop index,list,list append,list convert to array,list delete,list create,tuple,list comprehension,array sorting,Leibniz pi,Euler pi,programming game,linear interpolation,least squares method,Fourier series,integral analytically,integral exact,integral approximately,integration points,code re-use,unit tests,complex domains,Monte Carlo integration,seed (random generators),scheme,finite difference method,forward difference approximation,Forward Euler scheme,logistic model,carrying capacity,SIR model,scalar ODE,ODE scalar,vector ODE,ODE vector,system of ODEs,Heun's method,Runge-Kutta, 2nd-order method,2nd-order Runge-Kutta method,RK2,PDE,heat equation,diffusion equation,MOL forward Euler,method of lines,MOL,mesh points,cell,method of lines,unstable solutions,instability,stability criterion,Poisson equation,Laplace equation,root finding,code robust,code try-except,code exception,Newton starting value,return None,sys.exit,Idle,Emacs,Vim,Gedit,TextWrangler,Notepad++">
+
+<title>Programming for Computations - A Gentle Introduction to Numerical Simulations with Python</title>
+
+<!-- Bootstrap style: bootswatch_journal -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/journal/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+/* Let pre tags for code blocks have the same color as the surroundings */
+pre { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u' Preface ', 0, None, '___sec0'),
+              (u' Why learn programming? ', 3, None, '___sec1'),
+              (u' Target audience and background knowledge ',
+               3,
+               None,
+               '___sec2'),
+              (u' Numerical methods ', 3, None, '___sec3'),
+              (u' The computer language: Python ', 3, None, '___sec4'),
+              (u' How this book is different ', 3, None, '___sec5'),
+              (u' Acknowledgments ', 3, None, '___sec6'),
+              (u' The first few steps ',
+               0,
+               u'1st:TheFirstFewSteps',
+               u'1st:TheFirstFewSteps'),
+              (u' What is a program? And what is programming? ',
+               1,
+               None,
+               '___sec8'),
+              (u' A Python program with variables ',
+               1,
+               u'1st:ex1',
+               u'1st:ex1'),
+              (u' The program ', 2, None, '___sec10'),
+              (u' Dissection of the program ', 2, None, '___sec11'),
+              (u' Why not just use a pocket calculator? ',
+               2,
+               None,
+               '___sec12'),
+              (u' The importance of using a text editor to write programs ',
+               2,
+               None,
+               '___sec13'),
+              (u' Installation of Python ', 2, None, '___sec14'),
+              (u' Write and run your first program ', 2, None, '___sec15'),
+              (u'  A Python program with a library function ',
+               1,
+               u'1st:ex2',
+               u'1st:ex2'),
+              (u' A Python program with vectorization and plotting ',
+               1,
+               u'1st:ex3',
+               u'1st:ex3'),
+              (u' More basic concepts ', 1, None, '___sec18'),
+              (u' Using Python interactively ', 2, None, '___sec19'),
+              (u' Arithmetics, parentheses and round-off errors ',
+               2,
+               None,
+               '___sec20'),
+              (u' Variables and objects ', 2, None, '___sec21'),
+              (u' Integer division ', 2, None, '___sec22'),
+              (u' Formatting text and numbers ', 2, None, '___sec23'),
+              (u' Arrays ', 2, None, '___sec24'),
+              (u' Plotting ', 2, None, '___sec25'),
+              (u' Error messages and warnings ', 2, None, '___sec26'),
+              (u' Input data ', 2, None, '___sec27'),
+              (u' Symbolic computations ', 2, None, '___sec28'),
+              (u' Concluding remarks ', 2, None, '___sec29'),
+              (u' Exercises ', 1, None, '___sec30'),
+              (u' Exercise 1: Error messages ',
+               2,
+               u'1st:exer:ErrorMessages',
+               u'1st:exer:ErrorMessages'),
+              (u' Exercise 2: Volume of a cube ',
+               2,
+               u'1st:exer:cubeVolume',
+               u'1st:exer:cubeVolume'),
+              (u' Exercise 3: Area and circumference of a circle ',
+               2,
+               u'1st:exer:areaCircle',
+               u'1st:exer:areaCircle'),
+              (u' Exercise 4: Volumes of three cubes ',
+               2,
+               u'1st:exer:volumes3cubes',
+               u'1st:exer:volumes3cubes'),
+              (u' Exercise 5: Average of integers ',
+               2,
+               u'1st:exer:averageOf5Integers',
+               u'1st:exer:averageOf5Integers'),
+              (u' Exercise 6: Interactive computing of volume and area ',
+               2,
+               u'1st:exer:cubeVolInteractively',
+               u'1st:exer:cubeVolInteractively'),
+              (u' Exercise 7: Peculiar results from division ',
+               2,
+               u'1st:exer:intDivInteractively',
+               u'1st:exer:intDivInteractively'),
+              (u' Exercise 8: Update variable at command prompt ',
+               2,
+               u'1st:exer:updateVarInteractively',
+               u'1st:exer:updateVarInteractively'),
+              (u' Exercise 9: Formatted print to screen ',
+               2,
+               u'1st:exer:printfScreen',
+               u'1st:exer:printfScreen'),
+              (u' Exercise 10: Python documentation and random numbers ',
+               2,
+               u'1st:exer:PythonDocRandom',
+               u'1st:exer:PythonDocRandom'),
+              (u' Basic constructions ',
+               0,
+               u'2nd:BasicConstructins',
+               u'2nd:BasicConstructins'),
+              (u' If tests, colon and indentation ', 1, None, '___sec42'),
+              (u' Functions ', 1, u'sec:functions', u'sec:functions'),
+              (u' For loops ', 1, u'sec:for:loops', u'sec:for:loops'),
+              (u' While loops ', 1, u'sec:while:loops', u'sec:while:loops'),
+              (u' Lists and tuples - alternatives to arrays ',
+               1,
+               u'sec:lists',
+               u'sec:lists'),
+              (u' Reading from and writing to files ',
+               1,
+               u'sec:file:reading:writing',
+               u'sec:file:reading:writing'),
+              (u' Exercises ', 1, None, '___sec48'),
+              (u' Exercise 11: Errors with colon, indent, etc. ',
+               2,
+               u'2nd:exer:ErrorsColonIndent',
+               u'2nd:exer:ErrorsColonIndent'),
+              (u' Exercise 12: Compare integers a and b ',
+               2,
+               u'2nd:exer:compInt',
+               u'2nd:exer:compInt'),
+              (u' Exercise 13: Functions for circumference and area of a circle ',
+               2,
+               u'2nd:exer:funcCircArea',
+               u'2nd:exer:funcCircArea'),
+              (u' Exercise 14: Function for area of a rectangle ',
+               2,
+               u'2nd:exer:funcAreaRectangle',
+               u'2nd:exer:funcAreaRectangle'),
+              (u' Exercise 15: Area of a polygon ',
+               2,
+               u'2nd:exer:area:polygon',
+               u'2nd:exer:area:polygon'),
+              (u' Exercise 16: Average of integers ',
+               2,
+               u'2nd:exer:avNInt',
+               u'2nd:exer:avNInt'),
+              (u' Exercise 17: While loop with errors ',
+               2,
+               u'2nd:exer:whileLoopErrors',
+               u'2nd:exer:whileLoopErrors'),
+              (u' Exercise 18: Area of rectangle versus circle ',
+               2,
+               u'2nd:exer:areaRectCircle',
+               u'2nd:exer:areaRectCircle'),
+              (u' Exercise 19: Find crossing points of two graphs ',
+               2,
+               u'2nd:exer:Cross2Graphs',
+               u'2nd:exer:Cross2Graphs'),
+              (u' Exercise 20: Sort array with numbers ',
+               2,
+               u'2nd:exer:sortNumbers',
+               u'2nd:exer:sortNumbers'),
+              (u' Exercise 21: Compute $\\pi$ ',
+               2,
+               u'2nd:exer:computingPi',
+               u'2nd:exer:computingPi'),
+              (u' Exercise 22: Compute combinations of sets ',
+               2,
+               u'2nd:exer:combinatorics1',
+               u'2nd:exer:combinatorics1'),
+              (u' Exercise 23: Frequency of random numbers ',
+               2,
+               u'2nd:exer:numberOccurrence',
+               u'2nd:exer:numberOccurrence'),
+              (u' Remarks ', 3, None, '___sec62'),
+              (u' Exercise 24: Game 21 ',
+               2,
+               u'2nd:exer:Game21',
+               u'2nd:exer:Game21'),
+              (u' Exercise 25: Linear interpolation ',
+               2,
+               u'2nd:exer:linearInterpol',
+               u'2nd:exer:linearInterpol'),
+              (u' Exercise 26: Test straight line requirement ',
+               2,
+               u'2nd:exer:testStraightLine',
+               u'2nd:exer:testStraightLine'),
+              (u' Exercise 27: Fit straight line to data ',
+               2,
+               u'2nd:exer:fitLine',
+               u'2nd:exer:fitLine'),
+              (u' Remarks ', 3, None, '___sec67'),
+              (u' Exercise 28: Fit sines to straight line ',
+               2,
+               u'2nd:exer:fitSines',
+               u'2nd:exer:fitSines'),
+              (u' Remarks ', 3, None, '___sec69'),
+              (u' Exercise 29: Count occurrences of a string in a string ',
+               2,
+               u'2nd:exer:countTextString',
+               u'2nd:exer:countTextString'),
+              (u' Remarks ', 3, None, '___sec71'),
+              (u' Computing integrals ',
+               0,
+               u'sec:integrals',
+               u'sec:integrals'),
+              (u' Basic ideas of numerical integration ',
+               1,
+               u'sec:integrals:basic',
+               u'sec:integrals:basic'),
+              (u' Computational example ', 3, None, '___sec74'),
+              (u' The composite trapezoidal rule ',
+               1,
+               u'sec:integrals:trap',
+               u'sec:integrals:trap'),
+              (u' The general formula ',
+               2,
+               u'sec:integrals:formula',
+               u'sec:integrals:formula'),
+              (u' Implementation ',
+               2,
+               u'sec:integrals:trap:impl',
+               u'sec:integrals:trap:impl'),
+              (u' Specific or general implementation? ', 3, None, '___sec78'),
+              (u' Implementation with functions ', 3, None, '___sec79'),
+              (u' Solving our specific problem in a session ',
+               3,
+               None,
+               '___sec80'),
+              (u' Solving our specific problem in a program ',
+               3,
+               None,
+               '___sec81'),
+              (u' Making a module ', 2, None, '___sec82'),
+              (u' Alternative flat special-purpose implementation ',
+               2,
+               None,
+               '___sec83'),
+              (u' The composite midpoint method ',
+               1,
+               u'sec:integrals:Midpoint',
+               u'sec:integrals:Midpoint'),
+              (u' The idea ', 3, None, '___sec85'),
+              (u' The general formula ', 2, None, '___sec86'),
+              (u' Implementation ',
+               2,
+               u'sec:midpoint:code',
+               u'sec:midpoint:code'),
+              (u' Comparing the trapezoidal and the midpoint methods ',
+               2,
+               None,
+               '___sec88'),
+              (u' Testing ', 1, None, '___sec89'),
+              (u' Problems with brief testing procedures ',
+               2,
+               None,
+               '___sec90'),
+              (u' Test procedures ',
+               2,
+               u'sec:integrals:testprocs',
+               u'sec:integrals:testprocs'),
+              (u' Hand-computed results ', 3, None, '___sec92'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec93'),
+              (u' Demonstrating correct convergence rates ',
+               3,
+               None,
+               '___sec94'),
+              (u' Constructing unit tests and writing test functions ',
+               2,
+               u'sec:integrals:test:functions',
+               u'sec:integrals:test:functions'),
+              (u' Hand-computed numerical results ', 3, None, '___sec96'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec97'),
+              (u' Demonstrating correct convergence rates ',
+               3,
+               None,
+               '___sec98'),
+              (u' Vectorization ', 1, None, '___sec99'),
+              (u' Vectorizing the midpoint rule ', 3, None, '___sec100'),
+              (u' Vectorizing the trapezoidal rule ', 3, None, '___sec101'),
+              (u' Measuring computational speed ', 1, None, '___sec102'),
+              (u' Double and triple integrals ',
+               1,
+               u'sec:int:double',
+               u'sec:int:double'),
+              (u' The midpoint rule for a double integral ',
+               2,
+               u'sec:int:double:midpoint',
+               u'sec:int:double:midpoint'),
+              (u' Derivation via one-dimensional integrals ',
+               3,
+               None,
+               '___sec105'),
+              (u' Direct derivation ', 3, None, '___sec106'),
+              (u' Programming a double sum ', 3, None, '___sec107'),
+              (u' Reusing code for one-dimensional integrals ',
+               3,
+               None,
+               '___sec108'),
+              (u' Verification via test functions ', 3, None, '___sec109'),
+              (u' The midpoint rule for a triple integral ',
+               2,
+               None,
+               '___sec110'),
+              (u' Theory ', 3, None, '___sec111'),
+              (u' Implementation ', 3, None, '___sec112'),
+              (u' Monte Carlo integration for complex-shaped domains ',
+               2,
+               u'sec:int:complex:domain',
+               u'sec:int:complex:domain'),
+              (u' The Monte Carlo integration algorithm ',
+               3,
+               None,
+               '___sec114'),
+              (u' Implementation ', 3, None, '___sec115'),
+              (u' Verification ', 3, None, '___sec116'),
+              (u' Test function for function with random numbers ',
+               3,
+               None,
+               '___sec117'),
+              (u' Integral over a circle ', 3, None, '___sec118'),
+              (u' Exercises ', 1, None, '___sec119'),
+              (u' Exercise 30: Hand calculations for the trapezoidal method ',
+               2,
+               u'sec:exer:trap:hand',
+               u'sec:exer:trap:hand'),
+              (u' Exercise 31: Hand calculations for the midpoint method ',
+               2,
+               u'sec:exer:midpt:hand',
+               u'sec:exer:midpt:hand'),
+              (u' Exercise 32: Compute a simple integral ',
+               2,
+               u'sec:exer:trap:mid:parabola',
+               u'sec:exer:trap:mid:parabola'),
+              (u' Exercise 33: Hand-calculations with sine integrals ',
+               2,
+               u'sec:exer:hand:sine',
+               u'sec:exer:hand:sine'),
+              (u' Exercise 34: Make test functions for the midpoint method ',
+               2,
+               u'sec:exer:test:midpoint',
+               u'sec:exer:test:midpoint'),
+              (u' Exercise 35: Explore round-off errors with large numbers ',
+               2,
+               u'sec:exer:test:roundoff',
+               u'sec:exer:test:roundoff'),
+              (u' Exercise 36: Write test functions for $\\int_0^4\\sqrt{x}dx$ ',
+               2,
+               u'sec:exer:test:convrates:sqrt',
+               u'sec:exer:test:convrates:sqrt'),
+              (u' Remarks ', 3, None, '___sec127'),
+              (u' Exercise 37: Rectangle methods ',
+               2,
+               u'sec:exer:rectangleMethod',
+               u'sec:exer:rectangleMethod'),
+              (u' Exercise 38: Adaptive integration ',
+               2,
+               u'sec:exer:adaptive:int',
+               u'sec:exer:adaptive:int'),
+              (u' Remarks ', 3, None, '___sec130'),
+              (u' Exercise 39: Integrating x raised to x ',
+               2,
+               u'sec:exer:integrate:x2x',
+               u'sec:exer:integrate:x2x'),
+              (u' Exercise 40: Integrate products of sine functions ',
+               2,
+               u'sec:exer:sine:products',
+               u'sec:exer:sine:products'),
+              (u' Exercise 41: Revisit fit of sines to a function ',
+               2,
+               u'sec:exer:revisitFitSines',
+               u'sec:exer:revisitFitSines'),
+              (u' Exercise 42: Derive the trapezoidal rule for a double integral ',
+               2,
+               u'sec:exer:trapezoidal:2D',
+               u'sec:exer:trapezoidal:2D'),
+              (u' Exercise 43: Compute the area of a triangle by Monte Carlo integration ',
+               2,
+               u'sec:exer:MC:ellipse',
+               u'sec:exer:MC:ellipse'),
+              (u' Solving ordinary differential equations ',
+               0,
+               u'5th:SolvODEs',
+               u'5th:SolvODEs'),
+              (u' Population growth ', 1, u'sec:de:pg', u'sec:de:pg'),
+              (u' Derivation of the model ',
+               2,
+               u'sec:de:pg:model',
+               u'sec:de:pg:model'),
+              (u' Numerical solution ',
+               2,
+               u'sec:de:pg:numerics',
+               u'sec:de:pg:numerics'),
+              (u' Programming the Forward Euler scheme; the special case ',
+               2,
+               u'sec:de:pg:prog1',
+               u'sec:de:pg:prog1'),
+              (u' Understanding the Forward Euler method ',
+               2,
+               u'sec:de:pg:geom',
+               u'sec:de:pg:geom'),
+              (u' Programming the Forward Euler scheme; the general case ',
+               2,
+               u'sec:de:FE:gen',
+               u'sec:de:FE:gen'),
+              (u' Making the population growth model more realistic ',
+               2,
+               None,
+               '___sec143'),
+              (u' Verification: exact linear solution of the discrete equations ',
+               2,
+               u'sec:de:growth:test:linear',
+               u'sec:de:growth:test:linear'),
+              (u' Spreading of diseases ', 1, None, '___sec145'),
+              (u' Spreading of a flu ', 2, u'sec:de:flu', u'sec:de:flu'),
+              (u' A Forward Euler method for the differential equation system ',
+               2,
+               u'sec:de:flu:FE',
+               u'sec:de:flu:FE'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:flu:prog:spec',
+               u'sec:de:flu:prog:spec'),
+              (u' Outbreak or not ', 2, None, '___sec149'),
+              (u' Abstract problem and notation ',
+               2,
+               u'sec:de:flu:generic',
+               u'sec:de:flu:generic'),
+              (u' Programming the numerical method; the general case ',
+               2,
+               u'sec:de:flu:prog:generic',
+               u'sec:de:flu:prog:generic'),
+              (u' Time-restricted immunity ', 2, None, '___sec152'),
+              (u' Incorporating vaccination ',
+               2,
+               u'sec:de:flu:vaccine',
+               u'sec:de:flu:vaccine'),
+              (u' Discontinuous coefficients: a vaccination campaign ',
+               2,
+               u'sec:de:flu:vaccine:discont',
+               u'sec:de:flu:vaccine:discont'),
+              (u' Oscillating one-dimensional systems ',
+               1,
+               u'sec:de:vib',
+               u'sec:de:vib'),
+              (u' Derivation of a simple model ', 2, None, '___sec156'),
+              (u' Numerical solution ', 2, None, '___sec157'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:vib:special',
+               u'sec:de:vib:special'),
+              (u' A magic fix of the numerical method ',
+               2,
+               None,
+               '___sec159'),
+              (u" The 2nd-order Runge-Kutta method (or Heun's method) ",
+               2,
+               u'sec:de:osc:Heun',
+               u'sec:de:osc:Heun'),
+              (u' Odespy: software for solving ODEs ',
+               2,
+               u'sec:de:osc:odespy',
+               u'sec:de:osc:odespy'),
+              (u' The 4th-order Runge-Kutta method ', 2, None, '___sec162'),
+              (u' The algorithm ', 3, None, '___sec163'),
+              (u' Application ', 3, None, '___sec164'),
+              (u' Implementation ', 3, None, '___sec165'),
+              (u' Derivation ', 3, None, '___sec166'),
+              (u' More effects: damping, nonlinearity, and external forces ',
+               2,
+               None,
+               '___sec167'),
+              (u' The Euler-Cromer scheme ', 3, None, '___sec168'),
+              (u' The 4-th order Runge-Kutta method ', 3, None, '___sec169'),
+              (u' Illustration of linear damping ', 2, None, '___sec170'),
+              (u' Illustration of linear damping with sinusoidal excitation ',
+               2,
+               None,
+               '___sec171'),
+              (u' Spring-mass system with sliding friction ',
+               2,
+               u'sec:de:vib:ode2:sliding:friction',
+               u'sec:de:vib:ode2:sliding:friction'),
+              (u' A finite difference method; undamped, linear case ',
+               2,
+               u'sec:de:vib:2nd',
+               u'sec:de:vib:2nd'),
+              (u' A finite difference method; linear damping ',
+               2,
+               u'sec:de:vib:2nd:damped1',
+               u'sec:de:vib:2nd:damped1'),
+              (u' Exercises ', 1, None, '___sec175'),
+              (u' Exercise 44: Geometric construction of the Forward Euler method ',
+               2,
+               u'sec:de:exer:geom',
+               u'sec:de:exer:geom'),
+              (u' Exercise 45: Make test functions for the Forward Euler method ',
+               2,
+               u'sec:de:exer:FE:test1',
+               u'sec:de:exer:FE:test1'),
+              (u" Exercise 46: Implement and evaluate Heun's method ",
+               2,
+               u'sec:de:exer:Heun:pg',
+               u'sec:de:exer:Heun:pg'),
+              (u' Exercise 47: Find an appropriate time step; logistic model ',
+               2,
+               u'sec:de:exer:logistic:dtopt',
+               u'sec:de:exer:logistic:dtopt'),
+              (u' Exercise 48: Find an appropriate time step; SIR model ',
+               2,
+               u'sec:de:exer:SIR:dtopt',
+               u'sec:de:exer:SIR:dtopt'),
+              (u' Exercise 49: Model an adaptive vaccination campaign ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 50: Make a SIRV model with time-limited effect of vaccination ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 51: Refactor a flat program ',
+               2,
+               u'sec:de:exer:vib:FE:func',
+               u'sec:de:exer:vib:FE:func'),
+              (u' Exercise 52: Simulate oscillations by a general ODE solver ',
+               2,
+               u'sec:de:exer:vib:ode_FE',
+               u'sec:de:exer:vib:ode_FE'),
+              (u' Exercise 53: Compute the energy in oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Exercise 54: Use a Backward Euler scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:BE',
+               u'sec:de:exer:pg:BE'),
+              (u' Exercise 55: Use a Crank-Nicolson scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:CN',
+               u'sec:de:exer:pg:CN'),
+              (u' Exercise 56: Understand finite differences via Taylor series ',
+               2,
+               u'sec:de:exer:fd:Taylor',
+               u'sec:de:exer:fd:Taylor'),
+              (u' Exercise 57: Use a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Remarks ', 3, None, '___sec190'),
+              (u" Exercise 58: Use Heun's method for the SIR model ",
+               2,
+               u'sec:de:exer:SIR:Heun',
+               u'sec:de:exer:SIR:Heun'),
+              (u' Exercise 59: Use Odespy to solve a simple ODE ',
+               2,
+               u'sec:de:exer:odespy:decay',
+               u'sec:de:exer:odespy:decay'),
+              (u' Exercise 60: Set up a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:osc:BE',
+               u'sec:de:exer:osc:BE'),
+              (u' Exercise 61: Set up a Forward Euler scheme for nonlinear and damped oscillations ',
+               2,
+               u'sec:de:exer:osc:FE:general',
+               u'sec:de:exer:osc:FE:general'),
+              (u' Exercise 62: Discretize an initial condition ',
+               2,
+               u'sec:de:exer:osc:2nd:V0ic',
+               u'sec:de:exer:osc:2nd:V0ic'),
+              (u' Solving partial differential equations ',
+               0,
+               u'6th:SolvPDEs',
+               u'6th:SolvPDEs'),
+              (u' Finite difference methods ',
+               1,
+               u'6th:SolvPDEs:MOLandFE',
+               u'6th:SolvPDEs:MOLandFE'),
+              (u' Reduction of a PDE to a system of ODEs ',
+               2,
+               u'sec:pde:diff1D:reduce',
+               u'sec:pde:diff1D:reduce'),
+              (u' Construction of a test problem with known discrete solution ',
+               2,
+               u'sec:pde:diff1D:testproblem',
+               u'sec:pde:diff1D:testproblem'),
+              (u' Implementation: Forward Euler method ',
+               2,
+               None,
+               '___sec200'),
+              (u' Application: heat conduction in a rod ',
+               2,
+               u'sec:pde:diff1D:rod',
+               u'sec:pde:diff1D:rod'),
+              (u' Vectorization ', 2, None, '___sec202'),
+              (u' Using Odespy to solve the system of ODEs ',
+               2,
+               None,
+               '___sec203'),
+              (u' Implicit methods ', 2, None, '___sec204'),
+              (u' Exercises ', 1, None, '___sec205'),
+              (u' Exercise 63: Simulate a diffusion equation by hand ',
+               2,
+               u'sec:pde:diff1D:exer:handFE',
+               u'sec:pde:diff1D:exer:handFE'),
+              (u' Exercise 64: Compute temperature variations in the ground ',
+               2,
+               u'sec:pde:diff1D:exer:groundtemp',
+               u'sec:pde:diff1D:exer:groundtemp'),
+              (u' Exercise 65: Compare implicit methods ',
+               2,
+               u'sec:pde:diff1D:exer:compare:implicit',
+               u'sec:pde:diff1D:exer:compare:implicit'),
+              (u' Exercise 66: Explore adaptive and implicit methods ',
+               2,
+               u'sec:pde:diff1D:exer:groundtemp:adapt',
+               u'sec:pde:diff1D:exer:groundtemp:adapt'),
+              (u' Exercise 67: Investigate the $\\theta$ rule ',
+               2,
+               u'sec:pde:diff1D:exer:CN',
+               u'sec:pde:diff1D:exer:CN'),
+              (u' Remarks ', 3, None, '___sec211'),
+              (u' Exercise 68: Compute the diffusion of a Gaussian peak ',
+               2,
+               u'sec:pde:diff1D:exer:Gaussian',
+               u'sec:pde:diff1D:exer:Gaussian'),
+              (u' Exercise 69: Vectorize a function for computing the area of a polygon ',
+               2,
+               u'2nd:exer:area:polygon2',
+               u'2nd:exer:area:polygon2'),
+              (u' Exercise 70: Explore symmetry ',
+               2,
+               u'sec:pde:diff1D:exer:Gaussian:symm',
+               u'sec:pde:diff1D:exer:Gaussian:symm'),
+              (u' Remarks ', 3, None, '___sec215'),
+              (u' Exercise 71: Compute solutions as $t\\rightarrow\\infty$ ',
+               2,
+               u'sec:pde:diff1D:exer:stationary',
+               u'sec:pde:diff1D:exer:stationary'),
+              (u' Remarks ', 3, None, '___sec217'),
+              (u' Exercise 72: Solve a two-point boundary value problem ',
+               2,
+               u'sec:pde:diff1D:exer:stationary2',
+               u'sec:pde:diff1D:exer:stationary2'),
+              (u' Solving nonlinear algebraic equations ',
+               0,
+               u'4th:NonlinAlgEq',
+               u'4th:NonlinAlgEq'),
+              (u' Brute force methods ',
+               1,
+               u'4th:bruteforce',
+               u'4th:bruteforce'),
+              (u' Brute force root finding ', 2, None, '___sec221'),
+              (u' Numerical algorithm ', 3, None, '___sec222'),
+              (u' Implementation ', 3, None, '___sec223'),
+              (u' Brute force optimization ', 2, None, '___sec224'),
+              (u' Numerical algorithm ', 3, None, '___sec225'),
+              (u' Implementation ', 3, None, '___sec226'),
+              (u' Model problem for algebraic equations ',
+               2,
+               None,
+               '___sec227'),
+              (u" Newton's method ",
+               1,
+               u'4th:NonlinAlgEq:Newt',
+               u'4th:NonlinAlgEq:Newt'),
+              (u" Deriving and implementing Newton's method ",
+               2,
+               None,
+               '___sec229'),
+              (u' Making a more efficient and robust implementation ',
+               2,
+               u'4th:Newton:robust',
+               u'4th:Newton:robust'),
+              (u' The secant method ',
+               1,
+               u'4th:NonlinAlgEq:Secant',
+               u'4th:NonlinAlgEq:Secant'),
+              (u' The bisection method ',
+               1,
+               u'4th:NonlinAlgEq:Bisect',
+               u'4th:NonlinAlgEq:Bisect'),
+              (u' Rate of convergence ',
+               1,
+               u'4th:NonlinAlgEq:RateConv',
+               u'4th:NonlinAlgEq:RateConv'),
+              (u' Exercises ', 1, None, '___sec234'),
+              (u" Exercise 73: Understand why Newton's method can fail ",
+               2,
+               u'4th:exer:Newton:failure',
+               u'4th:exer:Newton:failure'),
+              (u' Exercise 74: See if the secant method fails ',
+               2,
+               u'4th:exer:Secant:failure',
+               u'4th:exer:Secant:failure'),
+              (u' Exercise 75: Understand how the bisection method cannot fail ',
+               2,
+               u'4th:exer:Bisection:failure',
+               u'4th:exer:Bisection:failure'),
+              (u" Exercise 76: Combine the bisection method with Newton's method ",
+               2,
+               u'4th:exer:Bisection:Newton',
+               u'4th:exer:Bisection:Newton'),
+              (u" Exercise 77: Write a test function for Newton's method ",
+               2,
+               u'4th:exer:NewtonHand',
+               u'4th:exer:NewtonHand'),
+              (u' Exercise 78: Solve nonlinear equation for a vibrating beam ',
+               2,
+               u'4th:exer:beam:vib',
+               u'4th:exer:beam:vib'),
+              (u' Appendix: Getting access to Python ',
+               0,
+               u'app:accesspy',
+               u'app:accesspy'),
+              (u' Required software ',
+               1,
+               u'sec:accesspy:softwarelist',
+               u'sec:accesspy:softwarelist'),
+              (u' Installing software on your laptop: Mac OS X and Windows ',
+               1,
+               u'sec:accesspy:MacWin',
+               u'sec:accesspy:MacWin'),
+              (u' Anaconda and Spyder ',
+               1,
+               u'sec:accesspy:anaconda',
+               u'sec:accesspy:anaconda'),
+              (u' Spyder on Mac ', 2, None, '___sec245'),
+              (u' Installation of additional packages ',
+               2,
+               None,
+               '___sec246'),
+              (u' Installing SciTools on Mac ', 2, None, '___sec247'),
+              (u' Installing SciTools on Windows ', 2, None, '___sec248'),
+              (u' VMWare Fusion virtual machine ',
+               1,
+               u'sec:accesspy:vmware',
+               u'sec:accesspy:vmware'),
+              (u' Installing Ubuntu ',
+               2,
+               u'sec:accesspy:vmware:fullblown:machine',
+               u'sec:accesspy:vmware:fullblown:machine'),
+              (u' Installing software on Ubuntu ', 2, None, '___sec251'),
+              (u' File sharing ', 2, None, '___sec252'),
+              (u' Dual boot on Windows ', 1, None, '___sec253'),
+              (u' Vagrant virtual machine ',
+               1,
+               u'sec:accesspy:vagrant',
+               u'sec:accesspy:vagrant'),
+              (u' How to write and run a Python program ',
+               1,
+               u'sec:accesspy:writerun',
+               u'sec:accesspy:writerun'),
+              (u' The need for a text editor ', 2, None, '___sec256'),
+              (u' Spyder ', 2, None, '___sec257'),
+              (u' Text editors ', 2, None, '___sec258'),
+              (u' Terminal windows ', 2, None, '___sec259'),
+              (u' Using a plain text editor and a terminal window ',
+               2,
+               None,
+               '___sec260'),
+              (u' The SageMathCloud and Wakari web services ',
+               1,
+               u'sec:accesspy:sagemath:wakari',
+               u'sec:accesspy:sagemath:wakari'),
+              (u' Basic intro to SageMathCloud ', 2, None, '___sec262'),
+              (u' Basic intro to Wakari ', 2, None, '___sec263'),
+              (u' Installing your own Python packages ',
+               2,
+               None,
+               '___sec264'),
+              (u' Writing IPython notebooks ',
+               1,
+               u'sec:accesspy:ipynb',
+               u'sec:accesspy:ipynb'),
+              (u' A simple program in the notebook ', 2, None, '___sec266'),
+              (u' Mixing text, mathematics, code, and graphics ',
+               2,
+               None,
+               '___sec267'),
+              (u' References ', 0, None, '___sec268')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands.tex -->
+$$
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="p4c-bootstrap-Python.html">Programming for Computations - A Gentle Introduction to Numerical Simulations with Python</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Python000.html#___sec0" style="font-size: 80%;">Preface</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Python001.html#1st:TheFirstFewSteps" style="font-size: 80%;">The first few steps</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Python007.html#2nd:BasicConstructins" style="font-size: 80%;">Basic constructions</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Python013.html#sec:integrals" style="font-size: 80%;">Computing integrals</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Python017.html#5th:SolvODEs" style="font-size: 80%;">Solving ordinary differential equations</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Python022.html#6th:SolvPDEs" style="font-size: 80%;">Solving partial differential equations</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Python024.html#4th:NonlinAlgEq" style="font-size: 80%;">Solving nonlinear algebraic equations</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Python030.html#app:accesspy" style="font-size: 80%;">Appendix: Getting access to Python</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Python039.html#___sec268" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0012"></a>
+<!-- !split -->
+
+<h1 id="___sec48">Exercises </h1>
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="2nd:exer:ErrorsColonIndent">Exercise 11: Errors with colon, indent, etc.</h2>
+
+<p>
+<!-- solution=`sol_errors_colon_indent_etc.pdf` -->
+
+<p>
+Write the program <code>ball_function.py</code> as given in the text and
+confirm that the program runs correctly. Then save a copy of the
+program and use that program during the following error testing.
+
+<p>
+You are supposed to introduce errors in the code, one by one. For each
+error introduced, save and run the program, and comment how well
+Python's response corresponds to the actual error. When you are
+finished with one error, re-set the program to correct behavior (and
+check that it works!) before moving on to the next error.
+
+<p>
+<b>a)</b>
+Change the first line from <code>def y(t):</code> to <code>def y(t)</code>, i.e., remove the colon.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_11_1" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_11_1">
+
+<p>
+Running the program gives a syntax error:
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    def y(t)
+            ^
+SyntaxError: invalid syntax
+</pre></div>
+<p>
+Python repeats the line where it found a problem and then tells us that
+the line has a syntax error. It is up to the programmer to find the error,
+although a little "hat" is used to show were in the line Python thinks the
+problem is. In this case, that "hat" is placed underneath where the colon
+should have been placed.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>b)</b>
+Remove the indent in front of the statement <code>v0 = 5</code> inside the
+function <code>y</code>, i.e., shift the text four spaces to the left.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_11_2" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_11_2">
+
+<p>
+Running the program gives an indentation error:
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    v0 = 5
+     ^
+IndentationError: expected an indented block
+</pre></div>
+<p>
+Python repeats the line where it suspects a missing indentation. In the
+error message, Python refers to a "block", meaning that all of <code>v0 = 5</code>
+should be shifted to the right (indented).
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>c)</b>
+Now let the statement <code>v0 = 5</code> inside the function <code>y</code> have an
+indent of three spaces (while the remaining two lines of the
+function have four).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_11_3" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_11_3">
+
+<p>
+Running the program gives an indentation error, differing slightly from
+the one we just experienced above:
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    g = 9.81
+    ^
+IndentationError: unexpected indent
+</pre></div>
+<p>
+Python repeats the line where it found an unexpected indentation. The thing
+is that the first line (here <code>v0 = 5</code>) sets the minimum indentation for the
+function. If larger indents are to be used for succeeding lines (within the
+function), it must be done according to syntax rules (see the text). In the
+present case, indenting <code>g = 9.81</code> violates the rules. Larger indents would
+be relevant, e.g., for the statements within a <code>for</code> loop.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>d)</b>
+Remove the left parenthesis in the first statement <code>def y(t):</code>
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_11_4" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_11_4">
+
+<p>
+Running the program gives a syntax error:
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    def yt):
+          ^
+SyntaxError: invalid syntax
+</pre></div>
+<p>
+Python repeats the line where it found the syntax problem and states that
+(somewhere in this line) there is a syntax error.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>e)</b>
+Change the first line of the function definition from <code>def y(t):</code>
+to <code>def y():</code>, i.e., remove the parameter <code>t</code>.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_11_5" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_11_5">
+
+<p>
+Running the program gives a type error:
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    print y(time)
+
+TypeError: y() takes no arguments (1 given)
+</pre></div>
+<p>
+Python repeats the line where it found a syntax problem and tells us that
+the function <code>y</code> is used in the wrong way, since one argument is used when
+calling it. To Python, this is the logical way of responding, since Python
+assumes our definition of the function was correct. This definition (which
+actually is what is wrong!) states that the function takes no parameters.
+By comparing with the function definition, it is up to the programmer to
+understand whether such an error is in the function definition (as here) or in
+the function call.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>f)</b>
+Change the first occurrence of the statement <code>print y(time)</code> to <code>print y()</code>.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_11_6" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_11_6">
+
+<p>
+Running the program gives a type error:
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">    print y()
+
+TypeError: y() takes exactly 1 argument (0 given)
+</pre></div>
+<p>
+Python repeats the line where it found a syntax problem and tells us that
+the function <code>y</code> is used in the wrong way, since no argument is used in
+the call. Again, Python discovered a mismatch between function definition and
+use of the function. Now, the definition specifies one parameter, whereas the
+call uses none.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>errors_colon_indent_etc.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="2nd:exer:compInt">Exercise 12: Compare integers a and b</h2>
+
+<p>
+<!-- solution=`sol_compare_integers.pdf` -->
+
+<p>
+Explain briefly, in your own words, what the following program
+does.
+
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">a = input(&#39;Give an integer a: &#39;)
+b = input(&#39;Give an integer b: &#39;)
+
+if a &lt; b:
+    print &quot;a is the smallest of the two numbers&quot;
+elif a == b:
+    print &quot;a and b are equal&quot;
+else:
+    print &quot;a is the largest of the two numbers&quot;
+</pre></div>
+<p>
+Proceed by writing the program, and then run it a few times with
+different values for <code>a</code> and <code>b</code> to confirm that it works as
+intended. In particular, choose combinations for <code>a</code> and <code>b</code> so that
+all three branches of the <code>if</code> construction get tested.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_12_1" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_12_1">
+
+<p>
+The program takes two integers as input and checks if the number <code>a</code> is
+smaller than <code>b</code>, equal to <code>b</code>, or larger than <code>b</code>. A message is printed
+to the screen in each case.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>compare_a_and_b.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="2nd:exer:funcCircArea">Exercise 13: Functions for circumference and area of a circle</h2>
+
+<p>
+<!-- solution=`sol_functions_circumference_area.pdf` -->
+
+<p>
+Write a program that takes a circle radius <code>r</code> as input from the user
+and then computes the circumference <code>C</code> and area <code>A</code> of the
+circle. Implement the computations of <code>C</code> and <code>A</code> as two separate
+functions that each takes <code>r</code> as input parameter. Print <code>C</code> and <code>A</code> to
+the screen along with an appropriate text. Run the program with \( r =
+1 \) and confirm that you get the right answer.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_13_1" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_13_1">
+
+<p>
+The code reads:
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">from math import *
+
+def circumference(r):
+    return 2*pi*r
+def area(r):
+    return pi*r**2
+
+r = input(&#39;Give the radius of a circle: &#39;)
+C = circumference(r)
+A = area(r)
+print &quot;Circumference: %g , Area: %g&quot; % (C, A)
+</pre></div>
+<p>
+Running the program, choosing <code>r = 1</code>, gives the following dialog:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Give the radius of a circle: 1
+Circumference: 6.28319 , Area: 3.14159
+</pre></div>
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>functions_circumference_area.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="2nd:exer:funcAreaRectangle">Exercise 14: Function for area of a rectangle</h2>
+
+<p>
+<!-- solution=`sol_function_area_rectangle.pdf` -->
+
+<p>
+Write a program that computes the area \( A = b c \) of a rectangle. The
+values of \( b \) and \( c \) should be user input to the program. Also, write
+the area computation as a function that takes \( b \) and \( c \) as input
+parameters and returns the computed area. Let the program print the
+result to screen along with an appropriate text. Run the program with
+\( b = 2 \) and \( c = 3 \) to confirm correct program behavior.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_14_1" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_14_1">
+
+<p>
+The code reads:
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">def area(s1, s2):
+    return s1*s2
+
+b = input(&#39;Give the one side of the rectangle: &#39;)
+c = input(&#39;Give the other side of the rectangle: &#39;)
+print &quot;Area: &quot;, area(b, c)
+</pre></div>
+<p>
+Running the program, gives the following dialog:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Give the one side of the rectangle: 2
+Give the other side of the rectangle: 3
+Area: 6
+</pre></div>
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>function_area_rectangle.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="2nd:exer:area:polygon">Exercise 15: Area of a polygon</h2>
+
+<p>
+One of the most important mathematical problems through all times has been
+to find the area of a polygon, especially because real estate areas often
+had the shape of polygons, and it was necessary to pay tax for the area.
+We have a polygon as depicted below.
+
+<p>
+<center><p><img src="figs/polygon.png" align="bottom" width=500></p></center>
+
+<p>
+The vertices (&quot;corners&quot;)
+of the polygon have coordinates \( (x_1,y_1) \), \( (x_2,y_2) \),
+\( \ldots \), \( (x_n, y_n) \), numbered either in a clockwise or
+counter clockwise fashion.
+The area \( A \) of the polygon can amazingly be computed by just knowing the
+boundary coordinates:
+<!-- (see <a href="http://en.wikipedia.org/wiki/Shoelace_formula" target="_self">Wikipedia</a> for explanation): -->
+
+$$ A = \frac{1}{2}\left| (x_1y_2+x_2y_3 + \cdots + x_{n-1}y_n + x_ny_1)
+- (y_1x_2 + y_2x_3 + \cdots + y_{n-1}x_n + y_nx_1)\right|\thinspace .$$
+
+Write a function <code>polyarea(x, y)</code> that takes two coordinate arrays
+with the vertices as arguments and returns the area.
+Assume that <code>x</code> and <code>y</code> are either lists or arrays.
+
+<p>
+Test the function on a triangle, a quadrilateral, and a pentagon where
+you can calculate the area by alternative methods for comparison.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_15_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_15_1">
+
+<p>
+Since Python lists and arrays has 0 as their first index, it is wise to
+rewrite the mathematical formula in terms of vertex coordinates numbered
+as \( x_0,x_1,\ldots,x_{n-1} \) and \( y_0, y_1,\ldots,y_{n-1} \).
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_15_2" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_15_2">
+
+<p>
+Code:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">Computes the area of a polygon from vertex </span>
+<span style="color: #BA2121; font-style: italic">coordinates only.</span>
+<span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">polyarea</span>(x, y):
+    n <span style="color: #666666">=</span> <span style="color: #008000">len</span>(x)
+    <span style="color: #408080; font-style: italic"># next we may initialize area with those terms in the</span>
+    <span style="color: #408080; font-style: italic"># sum that does not follow the &quot;increasing index pattern&quot;</span>
+    area <span style="color: #666666">=</span> x[n<span style="color: #666666">-1</span>]<span style="color: #666666">*</span>y[<span style="color: #666666">0</span>] <span style="color: #666666">-</span> y[n<span style="color: #666666">-1</span>]<span style="color: #666666">*</span>x[<span style="color: #666666">0</span>]  
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>,n<span style="color: #666666">-1</span>,<span style="color: #666666">1</span>):
+        area <span style="color: #666666">+=</span> x[i]<span style="color: #666666">*</span>y[i<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> y[i]<span style="color: #666666">*</span>x[i<span style="color: #666666">+1</span>]
+    <span style="color: #008000; font-weight: bold">return</span> <span style="color: #666666">0.5*</span><span style="color: #008000">abs</span>(area)
+</pre></div>
+<p>
+The function can be tested, e.g., by the lines
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"># pentagon
+x = [0, 2, 2, 1, 0]
+y = [0, 0, 2, 3, 2]
+print &#39;Area pentagon (true value = 5): &#39;, polyarea(x, y)
+# quadrilateral
+x = [0, 2, 2, 0]
+y = [0, 0, 2, 2]
+print &#39;Area quadrilateral (true value = 4): &#39;, polyarea(x, y)
+# triangle
+x = [0, 2, 0]
+y = [0, 0, 2]
+print &#39;Area triangle (true value = 2): &#39;, polyarea(x, y)
+</pre></div>
+<p>
+which may be added after the function definition.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>polyarea.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="2nd:exer:avNInt">Exercise 16: Average of integers</h2>
+
+<p>
+<!-- solution=`sol_average_1_to_N.pdf` -->
+
+<p>
+Write a program that gets an integer \( N > 1 \) from the user and
+computes the average of all integers \( i = 1,\ldots,N \). The
+computation should be done in a function that takes \( N \) as input
+parameter. Print the result to the screen with an appropriate text. Run
+the program with \( N = 5 \) and confirm that you get the correct answer.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_16_1" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_16_1">
+
+<p>
+The code reads:
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">def average(N):
+    sum = 0
+    for i in range(1, N+1):    # Note: Must use `N+1` to get `N`
+        sum += i
+    return sum/float(N)
+
+N = input(&#39;Give an integer &gt; 1: &#39;)
+average_1_to_N = average(N)
+print &quot;The average of 1,..., %d is: %g&quot; % (N, average_1_to_N)
+</pre></div>
+<p>
+Running the program, using <code>N = 5</code>, gives the following dialog:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Give an integer &gt; 1: 5
+The average of 1,..., 5 is: 3
+</pre></div>
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>average_1_to_N.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="2nd:exer:whileLoopErrors">Exercise 17: While loop with errors</h2>
+
+<p>
+<!-- solution=`sol_while_loop_with_errors.pdf` -->
+
+<p>
+Assume some program has been written for the task of adding all
+integers \( i = 1,2,\ldots,10 \):
+
+<p>
+
+<!-- code=text (!bc pro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">some_number = 0
+i = 1
+while i &lt; 11
+    some_number += 1
+print some_number
+</pre></div>
+<p>
+<b>a)</b>
+Identify the errors in the program by just reading the code and
+simulating the program by hand.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_17_1" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_17_1">
+
+<p>
+There is a missing colon at the end of the while loop header.
+Within the loop, <code>some_number</code> is updated by adding 1 instead of <code>i</code>.
+Finally, there is no update of the loop index <code>i</code>.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>b)</b>
+Write a new version of the program with errors corrected.
+Run this program and confirm that it gives the correct output.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_17_2" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_17_2">
+
+<p>
+The code reads:
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">some_number = 0;
+i = 1
+while i &lt; 11:
+    some_number += i
+    i += 1
+print some_number
+</pre></div>
+<p>
+Running the program gives 55 as the answer.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>while_loop_errors.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="2nd:exer:areaRectCircle">Exercise 18: Area of rectangle versus circle</h2>
+
+<p>
+<!-- solution=`sol_area_rectangle_vs_circle.pdf` -->
+
+<p>
+Consider one circle and one rectangle. The circle has a radius \( r =
+10.6 \). The rectangle has sides \( a \) and \( b \), but only \( a \) is known from
+the outset. Let \( a = 1.3 \) and write a program that uses a <code>while</code> loop
+to find the largest possible integer \( b \) that gives a rectangle area
+smaller than, but as close as possible to, the area of the circle. Run
+the program and confirm that it gives the right answer (which is \( b =
+271 \)).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_18_1" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_18_1">
+
+<p>
+The code reads:
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">from math import *
+
+r = 10.6
+a = 1.3    # one side of rectangle
+circle_area = pi*r**2
+
+b = 0      # chosen starting value for other side of rectangle
+while a*b &lt; circle_area:
+    b += 1
+b -= 1     # must reverse the last update to get the right value
+print &quot;The largest possible value of b: &quot;, b
+</pre></div>
+<p>
+Running the program gives 271 as output for b.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>area_rectangle_vs_circle.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="2nd:exer:Cross2Graphs">Exercise 19: Find crossing points of two graphs</h2>
+
+<p>
+<!-- solution=`sol_crossing_2_graphs.pdf` -->
+
+<p>
+Consider two functions \( f(x) = x \) and \( g(x) = x^2 \) on the interval \( [-4,4] \).
+
+<p>
+Write a program that, by trial and error, finds approximately for
+which values of \( x \) the two graphs cross, i.e., \( f(x) = g(x) \). Do this
+by considering \( N \) equally distributed points on the interval, at each
+point checking whether \( |f(x) - g(x)| < \epsilon \), where \( \epsilon \) is some
+small number. Let \( N \) and \( \epsilon \) be user input to the program and let
+the result be printed to screen. Run your program with \( N = 400 \) and
+\( \epsilon = 0.01 \). Explain the output from the program. Finally, try also
+other values of \( N \), keeping the value of \( \epsilon \) fixed.
+Explain your observations.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_19_1" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_19_1">
+
+<p>
+The code reads:
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">from numpy import *
+
+def f(x):
+    return x
+
+def g(x):
+    return x**2
+
+N = input(&#39;Give the number of check points N: &#39;)
+epsilon = input(&#39;Give the error tolerance: &#39;)
+x_values = linspace(-4, 4, N)
+
+# Next, we run over all indices in the array `x_values` and
+# check if the difference between function values is smaller than
+# the chosen limit
+
+for i in range(N):
+    if abs(f(x_values[i]) - g(x_values[i])) &lt; epsilon:
+        print x_values[i]
+</pre></div>
+<p>
+Running the program with 400 check-points (i.e. <code>N = 400</code>) and
+an error tolerance of 0.01 (i.e. <code>epsilon = 0.01</code>) gives the following dialog:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Give the number of check-points N: 400
+
+Give the error tolerance: 0.01
+0.0100250626566
+0.992481203008
+</pre></div>
+<p>
+We note that we do not get exactly 0 and 1 (which we know are the answers). This
+owes to the chosen distribution of \( x \)-values. This distribution is decided by <code>N</code>.
+Trying other combinations of <code>N</code> and <code>epsilon</code> might give more than 2 "solutions",
+or fewer, maybe even none. All of this boils down to whether the <code>if</code> test becomes
+true or not. For example, if you let <code>epsilon</code> stay constant while increasing <code>N</code>,
+you realize that the difference between \( f(x) \) and \( g(x) \) will be small for several
+values of \( x \), allowing more than one \( x \) value to "be a solution". Decreasing <code>N</code> while
+<code>epsilon</code> is constant will eventually give no solutions, since the difference between
+\( f(x) \) and \( g(x) \) at the tested \( x \)-values gets too large.
+
+<p>
+Is is important here to realize the difference between the numerical test we do and the
+exact solution. The numerical test just gives us an approximation which we may get as
+"good as we want" by the right choices of <code>N</code> and <code>epsilon</code>.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>crossing_2_graphs.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="2nd:exer:sortNumbers">Exercise 20: Sort array with numbers</h2>
+
+<p>
+<!-- solution=`sol_sort_numbers.pdf` -->
+
+<p>
+The import statement <code>from random import *</code> will give access to a
+function <code>uniform</code> that may be used to draw (pseudo-)random numbers
+from a uniform distribution between two numbers \( a \) (inclusive) and
+\( b \) (inclusive). For example, writing <code>x = uniform(0,10)</code> makes <code>x</code> a
+float value larger than, or equal to, \( 0 \), and smaller than, or equal
+to, \( 10 \).
+
+<p>
+Write a script that generates an array of \( 6 \) random numbers between
+\( 0 \) and \( 10 \). The program should then sort the array so that numbers
+appear in increasing order. Let the program make a formatted print of
+the array to the screen both before and after sorting. The printouts
+should appear on the screen so that comparison is made easy. Confirm
+that the array has been sorted correctly.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_20_1" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_20_1">
+
+<p>
+The code may be written as follows
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> zeros
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">random</span> <span style="color: #008000; font-weight: bold">import</span> uniform
+
+N <span style="color: #666666">=</span> <span style="color: #666666">6</span>
+numbers <span style="color: #666666">=</span> zeros(N)
+
+<span style="color: #408080; font-style: italic"># Draw random numbers</span>
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(numbers)):
+    numbers[i] <span style="color: #666666">=</span> uniform(<span style="color: #666666">0</span>, <span style="color: #666666">10</span>)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;Unsorted: </span><span style="color: #BB6688; font-weight: bold">%5.3f</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%5.3f</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%5.3f</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%5.3f</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%5.3f</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%5.3f</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">%</span> \
+        (numbers[<span style="color: #666666">0</span>], numbers[<span style="color: #666666">1</span>], numbers[<span style="color: #666666">2</span>],\
+         numbers[<span style="color: #666666">3</span>], numbers[<span style="color: #666666">4</span>], numbers[<span style="color: #666666">5</span>])
+
+<span style="color: #008000; font-weight: bold">for</span> reference <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(N):
+    smallest <span style="color: #666666">=</span> numbers[reference]
+    i_smallest <span style="color: #666666">=</span> reference
+    <span style="color: #408080; font-style: italic"># Find the smallest number in remaining unprinted array</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(reference <span style="color: #666666">+</span> <span style="color: #666666">1</span>, N, <span style="color: #666666">1</span>):
+        <span style="color: #008000; font-weight: bold">if</span> numbers[i] <span style="color: #666666">&lt;=</span> smallest:
+            smallest <span style="color: #666666">=</span> numbers[i]
+            i_smallest <span style="color: #666666">=</span> i
+    <span style="color: #408080; font-style: italic"># Switch numbers, and use an extra variable for that</span>
+    switch <span style="color: #666666">=</span> numbers[reference]
+    numbers[reference] <span style="color: #666666">=</span> numbers[i_smallest]
+    numbers[i_smallest] <span style="color: #666666">=</span> switch
+
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;Sorted  : </span><span style="color: #BB6688; font-weight: bold">%5.3f</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%5.3f</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%5.3f</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%5.3f</span><span style="color: #BA2121">  </span><span style="color: #BB6688; font-weight: bold">%5.3f</span><span style="color: #BA2121"> </span><span style="color: #BB6688; font-weight: bold">%5.3f</span><span style="color: #BA2121">&quot;</span> <span style="color: #666666">%</span> \
+        (numbers[<span style="color: #666666">0</span>], numbers[<span style="color: #666666">1</span>], numbers[<span style="color: #666666">2</span>],\
+         numbers[<span style="color: #666666">3</span>], numbers[<span style="color: #666666">4</span>], numbers[<span style="color: #666666">5</span>])
+</pre></div>
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>sort_numbers.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="2nd:exer:computingPi">Exercise 21: Compute \( \pi \)</h2>
+
+<p>
+<!-- solution=`sol_compute_pi.pdf` -->
+
+<p>
+Up through history, great minds have developed different computational
+schemes for the number \( \pi \). We will here consider two such schemes,
+one by Leibniz (\( 1646-1716 \)), and one by Euler (\( 1707-1783 \)).
+
+<p>
+The scheme by Leibniz may be written
+
+$$
+\begin{equation}
+\pi = 8\sum_{k=0}^{\infty}\frac{1}{(4k + 1)(4k + 3)} , \nonumber
+\end{equation}
+$$
+
+while one form of the Euler scheme may appear as
+
+$$
+\begin{equation}
+\pi = \sqrt[]{6\sum_{k=1}^{\infty}\frac{1}{k^2}} . \nonumber
+\end{equation}
+$$
+
+If only the first \( N \) terms of each sum are used as an approximation to
+\( \pi \), each modified scheme will have computed \( \pi \) with some error.
+
+<p>
+Write a program that takes \( N \) as input from the user, and plots the
+error development with both schemes as the number of iterations
+approaches \( N \). Your program should also print out the final error
+achieved with both schemes, i.e. when the number of terms is <code>N</code>.
+Run the program with \( N = 100 \) and explain briefly what the graphs show.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_21_1" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_21_1">
+
+<p>
+The code may be written as follows
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> pi, zeros, sqrt
+
+no_of_terms <span style="color: #666666">=</span> <span style="color: #008000">input</span>(<span style="color: #BA2121">&#39;Give number of terms in sum for pi: &#39;</span>)
+Leibniz_error <span style="color: #666666">=</span> zeros(no_of_terms)
+Euler_error <span style="color: #666666">=</span> zeros(no_of_terms)
+
+<span style="color: #408080; font-style: italic">#Leibniz</span>
+sum1 <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+<span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>, no_of_terms):
+    sum1 <span style="color: #666666">+=</span> <span style="color: #666666">1.0/</span>((<span style="color: #666666">4*</span>k <span style="color: #666666">+</span> <span style="color: #666666">1</span>)<span style="color: #666666">*</span>(<span style="color: #666666">4*</span>k <span style="color: #666666">+</span> <span style="color: #666666">3</span>))
+    Leibniz_error[k] <span style="color: #666666">=</span> pi <span style="color: #666666">-</span> <span style="color: #666666">8*</span>sum1
+sum1 <span style="color: #666666">*=</span> <span style="color: #666666">8</span>
+final_Leibniz_error <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(pi <span style="color: #666666">-</span> sum1)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;Leibniz: &quot;</span>, final_Leibniz_error
+
+<span style="color: #408080; font-style: italic"># Euler</span>
+sum2 <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+<span style="color: #008000; font-weight: bold">for</span> k <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, no_of_terms<span style="color: #666666">+1</span>):  <span style="color: #408080; font-style: italic"># Note index range</span>
+    sum2 <span style="color: #666666">+=</span> <span style="color: #666666">1.0/</span>k<span style="color: #666666">**2</span>
+    Euler_error[k<span style="color: #666666">-1</span>] <span style="color: #666666">=</span> pi <span style="color: #666666">-</span> sqrt(<span style="color: #666666">6*</span>sum2)
+sum2 <span style="color: #666666">*=</span> <span style="color: #666666">6</span>
+sum2 <span style="color: #666666">=</span> sqrt(sum2)
+final_Euler_error <span style="color: #666666">=</span> <span style="color: #008000">abs</span>(pi <span style="color: #666666">-</span> sum2)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;Euler: &quot;</span>, final_Euler_error
+
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+plt<span style="color: #666666">.</span>plot(<span style="color: #008000">range</span>(no_of_terms), Leibniz_error, <span style="color: #BA2121">&#39;b-&#39;</span>,\
+         <span style="color: #008000">range</span>(no_of_terms), Euler_error, <span style="color: #BA2121">&#39;r-&#39;</span>)
+plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;No of terms&#39;</span>)
+plt<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;Error with Leibniz (blue) and Euler (red)&#39;</span>)
+plt<span style="color: #666666">.</span>show()
+</pre></div>
+<p>
+Running the program as told produces the dialog
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Give number of terms in sum for pi: 100
+Leibniz: 0.00499996875098
+Euler: 0.00951612178069
+</pre></div>
+<p>
+and the plot in Figure <a href="#fig:pi_comp">3</a>
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 3:  Error as a function of number of terms. <div id="fig:pi_comp"></div> </p></center>
+<p><img src="figs/pi_Leibniz_Euler.png" align="bottom" width=400></p>
+</center>
+
+<p>
+We see that the scheme of Leibniz gives the least error all over the interval. However,
+the difference in the error with the two schemes becomes smaller as the number of terms increases.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>compute_pi.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="2nd:exer:combinatorics1">Exercise 22: Compute combinations of sets</h2>
+
+<p>
+Consider an ID number consisting of two letters and three digits, e.g.,
+RE198. How many different numbers can we have, and how can a program
+generate all these combinations?
+
+<p>
+If a collection of \( n \) things can have \( m_1 \) variations of the first thing,
+\( m_2 \) of the second and so on, the total number of variations of
+the collection equals \( m_1m_2\cdots m_n \). In particular, the ID number
+exemplified above can have \( 26\cdot 26\cdot 10\cdot 10\cdot 10 =676,000 \)
+variations. To generate all the combinations, we must have five
+nested for loops. The first two run over all letters A, B, and so on to Z,
+while the next three run over all digits \( 0,1,\ldots,9 \).
+
+<p>
+To convince yourself about this result, start out with an ID number on the
+form A3 where the first part can vary among A, B, and C, and the
+digit can be among 1, 2, or 3. We must start with A and combine
+it with 1, 2, and 3, then continue with B, combined with 1, 2, and 3,
+and finally combine C with 1, 2, and 3. A double for loop does the work.
+
+<p>
+<b>a)</b>
+In a deck of cards, each card is a combination of a rank and a suit.
+There are 13 ranks: ace (A), 2, 3, 4, 5, 6, 7, 8, 9, 10, jack (J),
+queen (Q), king (K), and
+four suits: clubs (C), diamonds (D), hearts (H), and spades (S).
+A typical card may be D3. Write statements that generate a
+deck of cards, i.e., all the combinations <code>CA</code>, <code>C2</code>, <code>C3</code>, and so on
+to <code>SK</code>.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_22_3" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_22_3">
+
+<p>
+Program:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">ranks <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;A&#39;</span>, <span style="color: #BA2121">&#39;2&#39;</span>, <span style="color: #BA2121">&#39;3&#39;</span>, <span style="color: #BA2121">&#39;4&#39;</span>, <span style="color: #BA2121">&#39;5&#39;</span>, <span style="color: #BA2121">&#39;6&#39;</span>, <span style="color: #BA2121">&#39;7&#39;</span>,
+         <span style="color: #BA2121">&#39;8&#39;</span>, <span style="color: #BA2121">&#39;9&#39;</span>, <span style="color: #BA2121">&#39;10&#39;</span>, <span style="color: #BA2121">&#39;J&#39;</span>, <span style="color: #BA2121">&#39;Q&#39;</span>, <span style="color: #BA2121">&#39;K&#39;</span>]
+suits <span style="color: #666666">=</span> [<span style="color: #BA2121">&#39;C&#39;</span>, <span style="color: #BA2121">&#39;D&#39;</span>, <span style="color: #BA2121">&#39;H&#39;</span>, <span style="color: #BA2121">&#39;S&#39;</span>]
+deck <span style="color: #666666">=</span> []
+<span style="color: #008000; font-weight: bold">for</span> s <span style="color: #AA22FF; font-weight: bold">in</span> suits:
+    <span style="color: #008000; font-weight: bold">for</span> r <span style="color: #AA22FF; font-weight: bold">in</span> ranks:
+        deck<span style="color: #666666">.</span>append(s <span style="color: #666666">+</span> r)
+<span style="color: #008000; font-weight: bold">print</span> deck
+</pre></div>
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>b)</b>
+A vehicle registration number is on the form <code>DE562</code>, where the letters
+vary from A to Z and the digits from 0 to 9. Write statements that compute
+all the possible registration numbers and stores them in a list.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_22_4" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_22_4">
+
+<p>
+Program:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">string</span>
+letters <span style="color: #666666">=</span> string<span style="color: #666666">.</span>ascii_uppercase
+digits <span style="color: #666666">=</span> <span style="color: #008000">range</span>(<span style="color: #666666">10</span>)
+registration_numbers <span style="color: #666666">=</span> []
+<span style="color: #008000; font-weight: bold">for</span> place1 <span style="color: #AA22FF; font-weight: bold">in</span> letters:
+    <span style="color: #008000; font-weight: bold">for</span> place2 <span style="color: #AA22FF; font-weight: bold">in</span> letters:
+        <span style="color: #008000; font-weight: bold">for</span> place3 <span style="color: #AA22FF; font-weight: bold">in</span> digits:
+            <span style="color: #008000; font-weight: bold">for</span> place4 <span style="color: #AA22FF; font-weight: bold">in</span> digits:
+                <span style="color: #008000; font-weight: bold">for</span> place5 <span style="color: #AA22FF; font-weight: bold">in</span> digits:
+                    registration_numbers<span style="color: #666666">.</span>append(
+                        <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%s%s%s%s%s</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span>
+                        (place1, place2, place3, place4, place5))
+<span style="color: #008000; font-weight: bold">print</span> registration_numbers
+</pre></div>
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>c)</b>
+Generate all the combinations of throwing two dice (the number of eyes
+can vary from 1 to 6). Count how many combinations where the sum of
+the eyes equals 7.
+
+<p>
+<!-- --- begin answer of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_22_1" style="font-size: 80%;"></a>
+<b>Answer.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_22_1">
+
+<p>
+6
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end answer of exercise --- -->
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_22_5" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_22_5">
+
+<p>
+Program:
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">dice <span style="color: #666666">=</span> []
+<span style="color: #008000; font-weight: bold">for</span> d1 <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, <span style="color: #666666">7</span>):
+    <span style="color: #008000; font-weight: bold">for</span> d2 <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, <span style="color: #666666">7</span>):
+        dice<span style="color: #666666">.</span>append((d1, d2))
+
+n <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+<span style="color: #008000; font-weight: bold">for</span> d1, d2 <span style="color: #AA22FF; font-weight: bold">in</span> dice:
+    <span style="color: #008000; font-weight: bold">if</span> d1 <span style="color: #666666">+</span> d2 <span style="color: #666666">==</span> <span style="color: #666666">7</span>:
+        n <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> combinations results in the sum 7&#39;</span> <span style="color: #666666">%</span> n
+</pre></div>
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>combine_sets.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="2nd:exer:numberOccurrence">Exercise 23: Frequency of random numbers</h2>
+
+<p>
+<!-- solution=`sol_number_occurrence.pdf` -->
+
+<p>
+Write a program that takes a positive integer \( N \) as input and then draws
+\( N \) random integers in the interval \( [1,6] \) (both ends inclusive). In the program,
+count how many of the numbers, \( M \), that equal 6 and write out
+the fraction \( M/N \). Also, print all the random numbers to the screen so that
+you can check for yourself that the counting is correct. Run the program with
+a small value for <code>N</code> (e.g., <code>N = 10</code>) to confirm that it works as intended.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_23_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_23_1">
+
+<p>
+Use <code>random.randint(1,6)</code> to draw
+a random integer between 1 and 6.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_23_2" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_23_2">
+
+<p>
+The code may be written as follows
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">random</span> <span style="color: #008000; font-weight: bold">import</span> randint
+
+N <span style="color: #666666">=</span> <span style="color: #008000">input</span>(<span style="color: #BA2121">&#39;How many random numbers should be drawn? &#39;</span>)
+
+<span style="color: #408080; font-style: italic"># Draw random numbers</span>
+M <span style="color: #666666">=</span> <span style="color: #666666">0</span>   <span style="color: #408080; font-style: italic"># Counter for the occurences of 6</span>
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(N):
+    drawn_number <span style="color: #666666">=</span> randint(<span style="color: #666666">1</span>, <span style="color: #666666">6</span>)
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;Draw number </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> gave: </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (i<span style="color: #666666">+1</span>, drawn_number)
+    <span style="color: #008000; font-weight: bold">if</span> drawn_number <span style="color: #666666">==</span> <span style="color: #666666">6</span>:
+        M <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;The fraction M/N became: </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (M<span style="color: #666666">/</span><span style="color: #008000">float</span>(N))
+</pre></div>
+<p>
+Running the program produces the dialog
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">How many random numbers should be drawn? 10
+Draw number 1 gave: 2
+Draw number 2 gave: 4
+Draw number 3 gave: 3
+Draw number 4 gave: 2
+Draw number 5 gave: 2
+Draw number 6 gave: 1
+Draw number 7 gave: 2
+Draw number 8 gave: 6
+Draw number 9 gave: 2
+Draw number 10 gave: 3
+The fraction M/N became: 0.1
+</pre></div>
+<p>
+We see that, in this case, 6 was drawn just a
+single time, so one out of ten gives a fraction
+<code>M/N</code> of \( 0.1 \).
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>count_random_numbers.py</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec62">Remarks </h3>
+
+<p>
+For large \( N \), this program computes the probability \( M/N \)
+of getting six eyes when throwing a die.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="2nd:exer:Game21">Exercise 24: Game 21</h2>
+
+<p>
+<!-- solution=`sol_game_21.pdf` -->
+
+<p>
+Consider some game where each participant draws a series of random
+integers evenly distributed from \( 0 \) and \( 10 \), with the aim of getting
+the sum as close as possible to \( 21 \), but <em>not larger</em> than \( 21 \).  You
+are out of the game if the sum passes \( 21 \).  After each draw, you are
+told the number and your total sum, and is asked whether you want
+another draw or not. The one coming closest to \( 21 \) is the winner.
+
+<p>
+Implement this game in a program.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_24_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_24_1">
+
+<p>
+Use <code>random.randint(0,10)</code> to draw
+random integers in \( [0,10] \).
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_24_2" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_24_2">
+
+<p>
+The code may be written as follows
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">random</span> <span style="color: #008000; font-weight: bold">import</span> randint
+
+upper_limit <span style="color: #666666">=</span> <span style="color: #666666">21</span>
+not_finished <span style="color: #666666">=</span> <span style="color: #008000">True</span>
+<span style="color: #008000">sum</span> <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+<span style="color: #008000; font-weight: bold">while</span> not_finished:
+    next_number <span style="color: #666666">=</span> randint(<span style="color: #666666">0</span>, <span style="color: #666666">10</span>)
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;You got: &quot;</span>, next_number
+    <span style="color: #008000">sum</span> <span style="color: #666666">+=</span> next_number
+    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">sum</span> <span style="color: #666666">&gt;</span> upper_limit:
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;Game over, you passed 21 (with your </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> points)!&quot;</span>\
+                <span style="color: #666666">%</span> <span style="color: #008000">sum</span>
+        not_finished <span style="color: #666666">=</span> <span style="color: #008000">False</span>
+    <span style="color: #008000; font-weight: bold">else</span>:
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;Your score is now: </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121"> points!&quot;</span> <span style="color: #666666">%</span> (<span style="color: #008000">sum</span>)
+        answer <span style="color: #666666">=</span> <span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Another draw (y/n)? &#39;</span>)
+        <span style="color: #008000; font-weight: bold">if</span> answer <span style="color: #666666">!=</span> <span style="color: #BA2121">&#39;y&#39;</span>:
+            not_finished <span style="color: #666666">=</span> <span style="color: #008000">False</span>
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&quot;Finished!&quot;</span>
+</pre></div>
+<p>
+Running the program may produce this dialog
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">You got: 8
+Your score is now: 8 points!
+
+Another draw (y/n)? y
+You got: 6
+Your score is now: 14 points!
+
+Another draw (y/n)? y
+You got: 8
+Game over, you passed 21 (with your 22 points)!
+</pre></div>
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>game_21.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="2nd:exer:linearInterpol">Exercise 25: Linear interpolation</h2>
+
+<p>
+<!-- solution=`sol_linear_interpolation.pdf` -->
+
+<p>
+Some measurements \( y_i \), \( i = 1,2,\ldots,N \) (given below), of a
+quantity \( y \) have been collected regularly, once every minute, at
+times \( t_i=i \), \( i=0,1,\ldots,N \).  We want to find the value \( y \)
+<em>in between</em> the measurements, e.g., at \( t=3.2 \) min. Computing such
+\( y \) values is called <em>interpolation</em>.
+
+<p>
+Let your program use <em>linear interpolation</em> to compute \( y \)
+between two consecutive measurements:
+
+<ol>
+  <li> Find \( i \) such that \( t_i\leq t \leq t_{i+1} \).</li>
+  <li> Find a mathematical expression for the straight line that goes through the
+     points \( (i,y_i) \) and \( (i+1,y_{i+1}) \).</li>
+  <li> Compute the \( y \) value by inserting the user's time value in
+     the expression for the straight line.</li>
+</ol>
+
+<b>a)</b>
+Implement the linear interpolation technique in a function that
+takes an array with the \( y_i \) measurements as input, together with
+some time \( t \), and returns the interpolated \( y \) value at time \( t \).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_25_1" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_25_1">
+
+<p>
+See the function <code>interpolate</code> in the script below
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>b)</b>
+Write another function with in a loop where the user is asked
+for a
+time on the interval \( [0,N] \) and the corresponding (interpolated)
+\( y \) value is written to the screen.
+The loop is terminated when the user gives a negative time.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_25_2" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_25_2">
+
+<p>
+See the function <code>find_y</code> in the script below
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>c)</b>
+Use the following measurements: \( 4.4, 2.0, 11.0, 21.5, 7.5 \), corresponding
+to times \( 0,1,\ldots,4 \) (min), and compute interpolated values at
+\( t=2.5 \) and \( t=3.1 \) min.
+Perform separate hand calculations to check that the output from the
+program is correct.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_25_3" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_25_3">
+
+<p>
+The code may be written as follows
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> zeros
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">interpolate</span>(y, t):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Uses linear interpolation to find intermediate y&quot;&quot;&quot;</span>
+    i <span style="color: #666666">=</span> <span style="color: #008000">int</span>(t)
+    <span style="color: #408080; font-style: italic"># Scheme: y(t) = y_i + delta-y/delta-t * dt</span>
+    <span style="color: #008000; font-weight: bold">return</span> y[i] <span style="color: #666666">+</span> ((y[i<span style="color: #666666">+1</span>] <span style="color: #666666">-</span> y[i])<span style="color: #666666">/</span>delta_t)<span style="color: #666666">*</span>(t<span style="color: #666666">-</span>i)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">find_y</span>():
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Repeatedly finds y at t by interpolation&quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;For time t on the interval [0,</span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">]...&#39;</span> <span style="color: #666666">%</span> (N)
+    t <span style="color: #666666">=</span> <span style="color: #008000">input</span>(<span style="color: #BA2121">&#39;Give your desired t &gt; 0: &#39;</span>)
+    <span style="color: #008000; font-weight: bold">while</span> t <span style="color: #666666">&gt;=</span> <span style="color: #666666">0</span>:
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;y(t) = </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (interpolate(y, t))
+        t <span style="color: #666666">=</span> <span style="color: #008000">input</span>(<span style="color: #BA2121">&#39;Give new time t (to stop, enter t &lt; 0): &#39;</span>)
+
+<span style="color: #408080; font-style: italic"># Note: do not need to store the sequence of times</span>
+N <span style="color: #666666">=</span> <span style="color: #666666">4</span>            <span style="color: #408080; font-style: italic"># Total number of measurements</span>
+delta_t <span style="color: #666666">=</span> <span style="color: #666666">1.0</span>    <span style="color: #408080; font-style: italic"># Time difference between measurements</span>
+
+y <span style="color: #666666">=</span> zeros(<span style="color: #666666">5</span>)
+y[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">4.4</span>; y[<span style="color: #666666">1</span>] <span style="color: #666666">=</span> <span style="color: #666666">2.0</span>; y[<span style="color: #666666">2</span>] <span style="color: #666666">=</span> <span style="color: #666666">11.0</span>;
+y[<span style="color: #666666">3</span>] <span style="color: #666666">=</span> <span style="color: #666666">21.5</span>; y[<span style="color: #666666">4</span>] <span style="color: #666666">=</span> <span style="color: #666666">7.5</span>
+
+find_y()
+</pre></div>
+<p>
+Running the program may produce this dialog
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">For time t on the interval [0,4]...
+Give your desired t: 2.5
+y(t) = 16.25
+
+Give new time t: 0.5
+y(t) = 3.2
+
+Give new time t: -1
+</pre></div>
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>linear_interpolation.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="2nd:exer:testStraightLine">Exercise 26: Test straight line requirement</h2>
+
+<p>
+<!-- solution=`sol_test_straight_line.pdf` -->
+
+<p>
+Assume the straight line function \( f(x) = 4x + 1 \). Write a script that
+tests the &quot;point-slope&quot; form for this line as follows. Within a chosen
+interval on the \( x \)-axis (for example, for \( x \) between 0 and 10), randomly
+pick \( 100 \) points on the line and check
+if the following requirement is fulfilled for each point:
+$$ \frac{f(x_i) - f(c)}{x_i - c} = a,\hspace{.3in}  i = 1,2,\ldots,100\thinspace , $$
+
+where \( a \) is the slope of the line and \( c \) defines a fixed point \( (c,f(c)) \)
+on the line. Let \( c = 2 \) here.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_26_1" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_26_1">
+
+<p>
+The code may be written as follows
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">For a straight line f(x) = ax + b, and the fixed point (2,f(2)) on </span>
+<span style="color: #BA2121; font-style: italic">the line, the script tests whether (f(x_i) - f(2)) / (x_i - 2) = a </span>
+<span style="color: #BA2121; font-style: italic">for randomly chosen x_i, i = 1,...,100.</span>
+<span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+
+<span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">random</span> <span style="color: #008000; font-weight: bold">import</span> random
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(x):
+    <span style="color: #008000; font-weight: bold">return</span> a<span style="color: #666666">*</span>x <span style="color: #666666">+</span> b
+
+a <span style="color: #666666">=</span> <span style="color: #666666">4.0</span>; b <span style="color: #666666">=</span> <span style="color: #666666">1.0</span>
+c <span style="color: #666666">=</span> <span style="color: #666666">2</span>; f_c <span style="color: #666666">=</span> f(c)  <span style="color: #408080; font-style: italic"># Fixed point on the line</span>
+epsilon <span style="color: #666666">=</span> <span style="color: #666666">1e-6</span>
+i <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+<span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">100</span>):
+    x <span style="color: #666666">=</span> <span style="color: #666666">10*</span>random()   <span style="color: #408080; font-style: italic"># random() returns number between 0 and 1</span>
+    numerator <span style="color: #666666">=</span> f(x) <span style="color: #666666">-</span> f_c
+    denominator <span style="color: #666666">=</span> x <span style="color: #666666">-</span> c
+    <span style="color: #008000; font-weight: bold">if</span> denominator <span style="color: #666666">&gt;</span> epsilon:   <span style="color: #408080; font-style: italic"># To avoid zero division</span>
+        fraction <span style="color: #666666">=</span> numerator<span style="color: #666666">/</span>denominator
+        <span style="color: #408080; font-style: italic"># The following printout should be very close to zero in</span>
+        <span style="color: #408080; font-style: italic"># each case if the points are on the line</span>
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;For x = </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121"> : </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (x,<span style="color: #008000">abs</span>(fraction <span style="color: #666666">-</span> a))
+</pre></div>
+<p>
+The potential problem of zero division is here simply handled by the <code>if</code> test, meaning
+that if the denominator is too close to zero, that particular \( x \) is skipped.
+A more elegant procedure would be to use a <code>try-except</code> construction.
+
+<p>
+Running the program generates a printout of \( 100 \) lines that for each \( x \) drawn
+gives 0 as result from the test. The two last lines of the printout read:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">For x = 2.67588 : 0
+For x = 9.75893 : 0
+</pre></div>
+<p>
+Note that since the \( x \) values are (pseudo-)random in nature, a second run gives
+different values for \( x \) (but still 0 for each test!).
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>test_straight_line.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="2nd:exer:fitLine">Exercise 27: Fit straight line to data</h2>
+
+<p>
+<!-- solution=`sol_fit_straight_line.pdf` -->
+
+<p>
+Assume some measurements \( y_i, i = 1,2,\ldots,5 \) have been collected,
+once every second. Your task is to write a program that
+fits a straight line to those data.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_27_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_27_1">
+
+<p>
+To make your program work, you may have to insert
+<code>from matplotlib.pylab import *</code> at the top and also add
+<code>show()</code> after the plot command in the loop.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>a)</b>
+Make a function that computes the error between the straight line
+\( f(x)=ax+b \) and the measurements:
+
+$$ e = \sum_{i=1}^{5} \left(ax_i+b - y_i\right)^2\thinspace . $$
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_27_3" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_27_3">
+
+<p>
+See the function <code>find_error</code> in the script below.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>b)</b>
+Make a function with a loop where you give \( a \) and \( b \), the
+corresponding value of \( e \) is written to the screen, and
+a plot of the straight line \( f(x)=ax+b \) together with the
+discrete measurements is shown.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_27_2" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_27_2">
+
+<p>
+To make the plotting from the loop to work, you may have to insert
+<code>from matplotlib.pylab import *</code> at the top of the script and also add
+<code>show()</code> after the plot command in the loop.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_27_4" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_27_4">
+
+<p>
+See the function <code>interactive_line_fit</code> in the script below.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>c)</b>
+Given the measurements \( 0.5, 2.0, 1.0, 1.5, 7.5 \), at times
+\( 0, 1, 2, 3, 4 \), use the function in b) to interactively search
+for \( a \) and \( b \) such that \( e \) is minimized.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_27_5" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_27_5">
+
+<p>
+The code may be written as follows
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> array
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(t,a,b):
+    <span style="color: #008000; font-weight: bold">return</span> a<span style="color: #666666">*</span>t <span style="color: #666666">+</span> b
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">find_error</span>(a, b):
+    E <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(time)):
+        E <span style="color: #666666">+=</span> (f(time[i],a,b) <span style="color: #666666">-</span> data[i])<span style="color: #666666">**2</span>
+    <span style="color: #008000; font-weight: bold">return</span> E
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">interactive_line_fit</span>():
+    one_more <span style="color: #666666">=</span> <span style="color: #008000">True</span>
+    <span style="color: #008000; font-weight: bold">while</span> one_more:
+        a <span style="color: #666666">=</span> <span style="color: #008000">input</span>(<span style="color: #BA2121">&#39;Give a: &#39;</span>)
+        b <span style="color: #666666">=</span> <span style="color: #008000">input</span>(<span style="color: #BA2121">&#39;Give b: &#39;</span>)
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;The error is: </span><span style="color: #BB6688; font-weight: bold">%g</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> (find_error(a, b))
+        y <span style="color: #666666">=</span> f(time, a, b)
+        plt<span style="color: #666666">.</span>plot(time, y, time, data, <span style="color: #BA2121">&#39;*&#39;</span>) 
+        plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;Time (s)&#39;</span>)
+        plt<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;y (stars) and straight line f(t)&#39;</span>)
+        plt<span style="color: #666666">.</span>show()
+        answer <span style="color: #666666">=</span> <span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Do you want another fit (y/n)? &#39;</span>)
+        <span style="color: #008000; font-weight: bold">if</span> answer <span style="color: #666666">==</span> <span style="color: #BA2121">&quot;n&quot;</span>:
+            one_more <span style="color: #666666">=</span> <span style="color: #008000">False</span>
+
+data <span style="color: #666666">=</span> array([<span style="color: #666666">0.5</span>, <span style="color: #666666">2.0</span>, <span style="color: #666666">1.0</span>, <span style="color: #666666">1.5</span>, <span style="color: #666666">7.5</span>])
+time <span style="color: #666666">=</span> array([<span style="color: #666666">0</span>, <span style="color: #666666">1</span>, <span style="color: #666666">2</span>, <span style="color: #666666">3</span>, <span style="color: #666666">4</span>])
+
+interactive_line_fit()
+</pre></div>
+<p>
+Running the program may produce this dialog
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Give a: 1
+Give b: 0
+The error is: 16.75
+</pre></div>
+<p>
+(followed by the plot seen in Figure <a href="#fig:fit_line_1">4</a>)
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 4:  Straight line fitted to data with first choice of line parameters (a and b). <div id="fig:fit_line_1"></div> </p></center>
+<p><img src="figs/fit_straight_line_1.png" align="bottom" width=400></p>
+</center>
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Do you want another fit (y/n)? y
+Give a: 0.5
+Give b: 1
+The error is: 22.75
+</pre></div>
+<p>
+(followed by the plot seen in Figure <a href="#fig:fit_line_2">5</a>)
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 5:  Straight line fitted to data with second choice of line parameters (a and b). <div id="fig:fit_line_2"></div> </p></center>
+<p><img src="figs/fit_straight_line_2.png" align="bottom" width=400></p>
+</center>
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Do you want another fit (y/n)? n
+</pre></div>
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>fit_straight_line.py</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec67">Remarks </h3>
+
+<p>
+Fitting a straight line to measured data points is a very common
+task. The manual search procedure in c) can be automated by using a
+mathematical method called the <em>method of least squares</em>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="2nd:exer:fitSines">Exercise 28: Fit sines to straight line</h2>
+
+<p>
+<!-- solution=`sol_fit_sines.pdf` -->
+
+<p>
+A lot of technology, especially most types of digital audio devices
+for processing sound, is based on representing a signal of time
+as a sum of sine functions. Say the signal is some function \( f(t) \)
+on the interval \( [-\pi,\pi] \) (a more general interval \( [a,b] \)
+can easily be treated, but leads to slightly more complicated
+formulas). Instead of working with \( f(t) \) directly,
+we approximate \( f \) by the sum
+
+$$
+\begin{equation}
+S_N(t) = \sum_{n=1}^{N} b_n \sin(nt),
+\end{equation}
+$$
+
+where the coefficients \( b_n \) must be adjusted such that \( S_N(t) \) is
+a good approximation to \( f(t) \). We shall in this exercise adjust
+\( b_n \) by a trial-and-error process.
+
+<p>
+<b>a)</b>
+Make a function <code>sinesum(t, b)</code> that returns \( S_N(t) \), given the
+coefficients \( b_n \) in an array <code>b</code> and time coordinates in an
+array <code>t</code>. Note that if <code>t</code> is an array, the return value is also
+an array.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_28_2" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_28_2">
+
+<p>
+See the script below.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>b)</b>
+Write a function <code>test_sinesum()</code> that calls <code>sinesum(t, b)</code> in a)
+and determines if the function computes a test case correctly.
+As test case, let <code>t</code> be an array with values \( -\pi/2 \) and \( \pi/4 \),
+choose \( N=2 \), and \( b_1=4 \) and \( b_2=-3 \). Compute \( S_N(t) \) by hand
+to get reference values.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_28_3" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_28_3">
+
+<p>
+See the script below. Note that the call to <code>test_sinesum</code> is
+commented out, but the function will step into action if the
+leading <code>#</code> is removed.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>c)</b>
+Make a function <code>plot_compare(f, N, M)</code> that plots the original
+function \( f(t) \) together with the sum of sines \( S_N(t) \), so that
+the quality of the approximation \( S_N(t) \) can be examined visually.
+The argument <code>f</code> is a Python function implementing \( f(t) \), <code>N</code>
+is the number of terms in the sum \( S_N(t) \), and <code>M</code> is the number
+of uniformly distributed \( t \) coordinates used to plot \( f \) and \( S_N \).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_28_4" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_28_4">
+
+<p>
+See the script below.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>d)</b>
+Write a function <code>error(b, f, M)</code> that returns a mathematical measure
+of the error in \( S_N(t) \) as an approximation to \( f(t) \):
+
+$$ E = \sqrt{\sum_{i} \left(f(t_i) - S_N(t_i)\right)^2},$$
+
+where the \( t_i \) values are \( M \) uniformly distributed coordinates on
+\( [-\pi, \pi] \).
+The array <code>b</code> holds the coefficients in \( S_N \) and <code>f</code> is a Python
+function implementing the mathematical function \( f(t) \).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_28_5" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_28_5">
+
+<p>
+See the script below.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>e)</b>
+Make a function <code>trial(f, N)</code> for interactively giving \( b_n \)
+values and getting a plot on the screen where the resulting
+\( S_N(t) \) is plotted together with \( f(t) \). The error in the
+approximation should also be computed as indicated in d).
+The argument <code>f</code>
+is a Python function for \( f(t) \) and <code>N</code> is the number of terms \( N \) in
+the sum \( S_N(t) \). The <code>trial</code> function can run a loop where
+the user is asked for the \( b_n \) values in each pass of the
+loop and the corresponding plot is shown.
+You must find a way to terminate the loop when the
+experiments are over. Use <code>M=500</code> in the calls to <code>plot_compare</code>
+and <code>error</code>.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_28_1" style="font-size: 80%;"></a>
+<b>Hint.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_28_1">
+
+<p>
+To make this part of your program work, you may have to insert
+<code>from matplotlib.pylab import *</code> at the top and also add
+<code>show()</code> after the plot command in the loop.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_28_6" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_28_6">
+
+<p>
+See the script below. Note that the call to <code>trial</code> is
+commented out, but the function will run if the leading <code>#</code> is removed.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>f)</b>
+Choose \( f(t) \) to be a straight line
+\( f(t) = \frac{1}{\pi}t \) on \( [-\pi,\pi] \). Call <code>trial(f, 3)</code>
+and try to find through experimentation
+some values \( b_1 \), \( b_2 \), and \( b_3 \) such that
+the sum of sines \( S_N(t) \) is a good approximation to the straight line.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_28_7" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_28_7">
+
+<p>
+See the function <code>trial</code> in the script below.
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>g)</b>
+Now we shall try to automate the procedure in f). Write a function
+that has three nested loops over values of \( b_1 \), \( b_2 \), and \( b_3 \).
+Let each loop cover the interval \( [-1,1] \) in steps of \( 0.1 \). For each
+combination of \( b_1 \), \( b_2 \), and \( b_3 \), the error in the approximation \( S_N \)
+should be computed. Use this to find, and print, the smallest error and the
+corresponding values of \( b_1 \), \( b_2 \), and \( b_3 \). Let the program also plot
+\( f \) and the approximation \( S_N \) corresponding to the smallest error.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_28_8" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_28_8">
+
+<p>
+The code may be written as follows
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">from</span> <span style="color: #0000FF; font-weight: bold">numpy</span> <span style="color: #008000; font-weight: bold">import</span> zeros, linspace, sin, sqrt, pi, copy, arange
+<span style="color: #008000; font-weight: bold">import</span> <span style="color: #0000FF; font-weight: bold">matplotlib.pyplot</span> <span style="color: #008000; font-weight: bold">as</span> <span style="color: #0000FF; font-weight: bold">plt</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">sinesum</span>(t, b):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;</span>
+<span style="color: #BA2121; font-style: italic">    Computes S as the sum over n of b_n * sin(n*t).</span>
+<span style="color: #BA2121; font-style: italic">    For each point in time (M) we loop over all b_n to</span>
+<span style="color: #BA2121; font-style: italic">    produce one element S[M], i.e. one element in</span>
+<span style="color: #BA2121; font-style: italic">    S corresponds to one point in time.</span>
+<span style="color: #BA2121; font-style: italic">    &quot;&quot;&quot;</span>
+    S <span style="color: #666666">=</span> zeros(<span style="color: #008000">len</span>(t))
+    <span style="color: #008000; font-weight: bold">for</span> M <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">0</span>, <span style="color: #008000">len</span>(t), <span style="color: #666666">1</span>):
+        <span style="color: #008000; font-weight: bold">for</span> n <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #666666">1</span>, <span style="color: #008000">len</span>(b)<span style="color: #666666">+1</span>, <span style="color: #666666">1</span>):
+            S[M] <span style="color: #666666">+=</span> b[n<span style="color: #666666">-1</span>]<span style="color: #666666">*</span>sin(n<span style="color: #666666">*</span>t[M])
+    <span style="color: #008000; font-weight: bold">return</span> S
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">test_sinesum</span>():
+    t <span style="color: #666666">=</span> zeros(<span style="color: #666666">2</span>); t[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">-</span>pi<span style="color: #666666">/2</span>;  t[<span style="color: #666666">1</span>] <span style="color: #666666">=</span> pi<span style="color: #666666">/4</span>
+    b <span style="color: #666666">=</span> zeros(<span style="color: #666666">2</span>); b[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">4.0</span>;  b[<span style="color: #666666">1</span>] <span style="color: #666666">=</span> <span style="color: #666666">-3</span>
+    <span style="color: #008000; font-weight: bold">print</span> sinesum(t, b)
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">plot_compare</span>(f, N, M):
+    time <span style="color: #666666">=</span> linspace(left_end, right_end, M)
+    y <span style="color: #666666">=</span> f(time)
+    S <span style="color: #666666">=</span> sinesum(time, b)
+    plt<span style="color: #666666">.</span>plot(time, y, <span style="color: #BA2121">&#39;b-&#39;</span>, time, S, <span style="color: #BA2121">&#39;r--&#39;</span>)
+    plt<span style="color: #666666">.</span>xlabel(<span style="color: #BA2121">&#39;Time&#39;</span>)
+    plt<span style="color: #666666">.</span>ylabel(<span style="color: #BA2121">&#39;f (blue) and S (red)&#39;</span>)
+    plt<span style="color: #666666">.</span>show()
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">error</span>(b, f, M):
+    time <span style="color: #666666">=</span> linspace(left_end, right_end, M)
+    y <span style="color: #666666">=</span> f(time)
+    S <span style="color: #666666">=</span> sinesum(time, b)
+    E <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(time)):
+        E <span style="color: #666666">+=</span> sqrt((y[i] <span style="color: #666666">-</span> S[i])<span style="color: #666666">**2</span>)
+    <span style="color: #008000; font-weight: bold">return</span> E
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">trial</span>(f, N):
+    M <span style="color: #666666">=</span> <span style="color: #666666">500</span>
+    new_trial <span style="color: #666666">=</span> <span style="color: #008000">True</span>
+    <span style="color: #008000; font-weight: bold">while</span> new_trial:
+        <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(N):
+            text <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;Give b&#39;</span> <span style="color: #666666">+</span> <span style="color: #008000">str</span>(i<span style="color: #666666">+1</span>) <span style="color: #666666">+</span> <span style="color: #BA2121">&#39; : &#39;</span>
+            b[i] <span style="color: #666666">=</span> <span style="color: #008000">input</span>(text)
+        plot_compare(f, N, M)
+        <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;The error is: &#39;</span>, error(b, f, M)
+        answer <span style="color: #666666">=</span> <span style="color: #008000">raw_input</span>(<span style="color: #BA2121">&#39;Another trial (y/n)? &#39;</span>)
+        <span style="color: #008000; font-weight: bold">if</span> answer <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;n&#39;</span>:
+            new_trial <span style="color: #666666">=</span> <span style="color: #008000">False</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">f</span>(t):
+    <span style="color: #008000; font-weight: bold">return</span> (<span style="color: #666666">1/</span>pi)<span style="color: #666666">*</span>t
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">automatic_fit</span>(f, N):
+    <span style="color: #BA2121; font-style: italic">&quot;&quot;&quot;Search for b-values, - just pick limits and step&quot;&quot;&quot;</span>
+    <span style="color: #008000; font-weight: bold">global</span> b
+    M <span style="color: #666666">=</span> <span style="color: #666666">500</span>
+    <span style="color: #408080; font-style: italic"># Produce and store an initially &quot;smallest&quot; error</span>
+    b[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> <span style="color: #666666">-1</span>; b[<span style="color: #666666">1</span>] <span style="color: #666666">=</span> <span style="color: #666666">-1</span>; b[<span style="color: #666666">2</span>] <span style="color: #666666">=</span> <span style="color: #666666">-1</span>
+    test_b <span style="color: #666666">=</span> copy(b)
+    smallest_E <span style="color: #666666">=</span> error(test_b, f, M)
+    db <span style="color: #666666">=</span> <span style="color: #666666">0.1</span>
+    <span style="color: #008000; font-weight: bold">for</span> b1 <span style="color: #AA22FF; font-weight: bold">in</span> arange(<span style="color: #666666">-1</span>, <span style="color: #666666">1+</span>db, db):
+        <span style="color: #008000; font-weight: bold">for</span> b2 <span style="color: #AA22FF; font-weight: bold">in</span> arange(<span style="color: #666666">-1</span>, <span style="color: #666666">1+</span>db, db):
+            <span style="color: #008000; font-weight: bold">for</span> b3 <span style="color: #AA22FF; font-weight: bold">in</span> arange(<span style="color: #666666">-1</span>, <span style="color: #666666">1+</span>db, db):
+                test_b[<span style="color: #666666">0</span>] <span style="color: #666666">=</span> b1; test_b[<span style="color: #666666">1</span>] <span style="color: #666666">=</span> b2;
+                test_b[<span style="color: #666666">2</span>] <span style="color: #666666">=</span> b3
+                E <span style="color: #666666">=</span> error(test_b, f, M)
+                <span style="color: #008000; font-weight: bold">if</span> E <span style="color: #666666">&lt;</span> smallest_E:
+                    b <span style="color: #666666">=</span> copy(test_b)
+                    smallest_E <span style="color: #666666">=</span> E
+    plot_compare(f, N, M)
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;The b coeffiecients: &#39;</span>, b
+    <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;The smallest error found: &#39;</span>, smallest_E
+
+left_end <span style="color: #666666">=</span> <span style="color: #666666">-</span>pi;  right_end <span style="color: #666666">=</span> pi
+N <span style="color: #666666">=</span> <span style="color: #666666">3</span>
+b <span style="color: #666666">=</span> zeros(N)
+<span style="color: #408080; font-style: italic">#test_sinesum()</span>
+<span style="color: #408080; font-style: italic">#trial(f, N)</span>
+automatic_fit(f, N)
+</pre></div>
+<p>
+Running the program may produce this dialog
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">The b coefficients: [ 0.6 -0.2 0.1 ]
+The smallest error found: 67.1213886326
+</pre></div>
+<p>
+and the plot seen in Figure <a href="#fig:fit_sines">6</a>
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 6:  Straight line fitted to data with first choice of line parameters (a and b). <div id="fig:fit_sines"></div> </p></center>
+<p><img src="figs/fit_sines.png" align="bottom" width=400></p>
+</center>
+
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>fit_sines.py</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec69">Remarks </h3>
+
+<ol>
+<li> The function \( S_N(x) \) is a special case of what is called a <em>Fourier series</em>. At the beginning of the 19th century, Joseph Fourier (1768-1830) showed that any function can be approximated analytically by a sum of cosines and sines. The approximation improves as the number of terms (\( N \)) is increased. Fourier series are very important throughout science and engineering today.</li>
+
+<ol>
+<li> Finding the coefficients \( b_n \) is solved much more accurately in <a href="._p4c-bootstrap-Python016.html#sec:exer:revisitFitSines">Exercise 41: Revisit fit of sines to a function</a>, by a procedure that also requires much less human and computer work!</li>
+<li> In real applications, \( f(t) \) is not known as a continuous function, but function values of \( f(t) \) are provided. For example, in digital sound applications, music in a CD-quality WAV file is a signal with 44100 samples of the corresponding analog signal \( f(t) \) per second.</li>
+</ol>
+
+</ol>
+
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="2nd:exer:countTextString">Exercise 29: Count occurrences of a string in a string</h2>
+
+<p>
+<!-- solution=`count_substrings.pdf` -->
+
+<p>
+In the analysis of genes one encounters many problem settings
+involving searching for certain combinations of letters in a long
+string. For example, we may have a string like
+
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">gene = &#39;AGTCAATGGAATAGGCCAAGCGAATATTTGGGCTACCA&#39;
+</pre></div>
+<p>
+We may traverse this string, letter by letter,
+by the for loop <code>for letter in gene</code>. The length of the string
+is given by <code>len(gene)</code>, so an alternative traversal over an index <code>i</code> is
+<code>for i in range(len(gene))</code>. Letter number <code>i</code> is reached through
+<code>gene[i]</code>, and a substring from index <code>i</code> up to, but not including <code>j</code>,
+is created by <code>gene[i:j]</code>.
+
+<p>
+<b>a)</b>
+Write a function <code>freq(letter, text)</code> that returns the frequency of the
+letter <code>letter</code> in the string <code>text</code>, i.e., the number of occurrences of
+<code>letter</code> divided by the length of <code>text</code>.
+Call the function to determine the frequency of <code>C</code> and <code>G</code> in the
+<code>gene</code> string above. Compute the frequency by hand too.
+
+<p>
+<b>b)</b>
+Write a function <code>pairs(letter, text)</code>
+that counts how many times a pair of the letter <code>letter</code> (e.g., <code>GG</code>)
+occurs within the string <code>text</code>. Use the function to determine
+how many times the pair <code>AA</code> appears in the string <code>gene</code> above.
+Perform a manual counting too to check the answer.
+
+<p>
+<b>c)</b>
+Write a function <code>mystruct(text)</code> that counts the number of a certain
+structure in the string <code>text</code>. The structure is defined as <code>G</code> followed by
+<code>A</code> or <code>T</code> until a double <code>GG</code>. Perform a manual search for the structure
+too to control the computations by <code>mystruct</code>.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+
+<p>
+<a class="glyphicon glyphicon-hand-right showdetails" data-toggle="collapse"
+ data-target="#exer_29_1" style="font-size: 80%;"></a>
+<b>Solution.</b>
+<div class="collapse-group">
+<p><div class="collapse" id="exer_29_1">
+
+<p>
+Here is a program:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">gene <span style="color: #666666">=</span> <span style="color: #BA2121">&#39;AGTCAATGGAATAGGCCAAGCGAATATTTGGGCTACCA&#39;</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">freq</span>(letter, text):
+    counter <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> text:
+        <span style="color: #008000; font-weight: bold">if</span> i <span style="color: #666666">==</span> letter:
+            counter <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">return</span> counter<span style="color: #666666">/</span><span style="color: #008000">float</span>(<span style="color: #008000">len</span>(text))
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">pairs</span>(letter, text):
+    counter <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(text)):
+        <span style="color: #008000; font-weight: bold">if</span> i <span style="color: #666666">&lt;</span> <span style="color: #008000">len</span>(text)<span style="color: #666666">-1</span> <span style="color: #AA22FF; font-weight: bold">and</span> \
+               text[i] <span style="color: #666666">==</span> letter <span style="color: #AA22FF; font-weight: bold">and</span> text[i<span style="color: #666666">+1</span>] <span style="color: #666666">==</span> letter:
+            counter <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+    <span style="color: #008000; font-weight: bold">return</span> counter
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">mystruct</span>(text):
+    counter <span style="color: #666666">=</span> <span style="color: #666666">0</span>
+    <span style="color: #008000; font-weight: bold">for</span> i <span style="color: #AA22FF; font-weight: bold">in</span> <span style="color: #008000">range</span>(<span style="color: #008000">len</span>(text)):
+        <span style="color: #408080; font-style: italic"># Search for the structure from position i</span>
+        <span style="color: #008000; font-weight: bold">if</span> text[i] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;G&#39;</span>:
+            <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;found G at&#39;</span>, i
+            <span style="color: #408080; font-style: italic"># Search among A and T letters</span>
+            j <span style="color: #666666">=</span> i <span style="color: #666666">+</span> <span style="color: #666666">1</span>
+            <span style="color: #008000; font-weight: bold">while</span> text[j] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;A&#39;</span> <span style="color: #AA22FF; font-weight: bold">or</span> text[j] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;T&#39;</span>:
+                <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;next is ok:&#39;</span>, text[j]
+                j <span style="color: #666666">=</span> j <span style="color: #666666">+</span> <span style="color: #666666">1</span>
+            <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;ending is&#39;</span>, text[j:j<span style="color: #666666">+2</span>]
+            <span style="color: #008000; font-weight: bold">if</span> text[j:j<span style="color: #666666">+2</span>] <span style="color: #666666">==</span> <span style="color: #BA2121">&#39;GG&#39;</span>:
+                <span style="color: #408080; font-style: italic"># Correct ending of structure</span>
+                counter <span style="color: #666666">+=</span> <span style="color: #666666">1</span>
+                <span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;yes&#39;</span>
+    <span style="color: #008000; font-weight: bold">return</span> counter
+
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;frequency of C: </span><span style="color: #BB6688; font-weight: bold">%.1f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> freq(<span style="color: #BA2121">&#39;C&#39;</span>, gene)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;frequency of G: </span><span style="color: #BB6688; font-weight: bold">%.1f</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> freq(<span style="color: #BA2121">&#39;G&#39;</span>, gene)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;no of pairs AA: </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> pairs(<span style="color: #BA2121">&#39;A&#39;</span>, gene)
+<span style="color: #008000; font-weight: bold">print</span> <span style="color: #BA2121">&#39;no of structures: </span><span style="color: #BB6688; font-weight: bold">%d</span><span style="color: #BA2121">&#39;</span> <span style="color: #666666">%</span> mystruct(gene)
+</pre></div>
+<p>
+</div></p>
+</div>
+</p>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>count_substrings.py</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec71">Remarks </h3>
+
+<p>
+You are supposed to solve the tasks using simple programming with loops
+and variables. While a) and b) are quite straightforward, c) quickly
+involves demanding logic.
+However, there are powerful tools available in Python that
+can solve the tasks efficiently in very compact code: a)
+<code>text.count(letter)/float(len(text))</code>; b) <code>text.count(letter*2)</code>;
+c) <code>len(re.findall('G[AT]+?GG', text))</code>. That is, there is rich
+functionality for analysis of text in Python and this is particularly
+useful in analysis of gene sequences.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._p4c-bootstrap-Python011.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._p4c-bootstrap-Python013.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

@@ -1,0 +1,1191 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Programming for Computations - A Gentle Introduction to Numerical Simulations with MATLAB/Octave">
+<meta name="keywords" content="computer program,programming,language programming,language computer,MATLAB,Octave,Fortran,C,C++,Python,Maple,Mathematica,syntax,bug,debugging,script (and scripting),implement,print,program run,program execute,code,comment,instruction,program statement,variable,assignment,semi-colon (easy print),calculator,text editor,Idle,prompt,program typing,program run,program execute,ipython,m-file,function,function call,atan,function input parameter,function output parameter,function return,function take a parameter,library,library function,from,import,math,module,package,linspace,xlabel,ylabel,plot,interactive use (of Matlab),import,keyboard arrow up/down,operator Arithmetic,parentheses,variable type,variable name,float,integer,string,type conversion,reserved words,variable integer,variable float,variable string,variable assignment,default,single (precision),double (precision),printing formatted,printf formatting,default,array,array element,zeros,allocate,array index,indexing zero based,indexing one based,Matlab one-based indexing,array slice of,graph,hold (on/off),plot figure,title,legend,axis,hardcopy,format png,matrix mat,matrix vector product,transpose,linear algebra,matrix,vector,error message,debugging,debugger,try-exception,exception handling,program crash,program testing,program verification,program input,program output,input,raw input,list,tuple,symbolic computations,symbolic operations,symbolic simplifications,Symbolic Toolbox,WolframAlpha,Mathematica,Sage (symbolic package),Python documentation,garbage collection,variable delete,if,elif,else,colon,indent,boolean,boolean expression,True,False,boolean True,boolean False,pseudo code,operator Logical,function,function definition,def,return,argument,parameter input,parameter output,function nargin,function nargout,variable local,variable global,doc string,function handle,function local,function global,function nested,loop for,for loop,range,loop iteration,loop index,loop double,loop multiple,loop nested,linear algebra,while loop,loop while,loop infinite,loop iteration,loop index,array sorting,Leibniz pi,Euler pi,programming game,linear interpolation,least squares method,Fourier series,integral analytically,integral exact,integral approximately,integration points,code re-use,unit tests,complex domains,Monte Carlo integration,seed (random generators),scheme,finite difference method,forward difference approximation,Forward Euler scheme,logistic model,carrying capacity,SIR model,scalar ODE,ODE scalar,vector ODE,ODE vector,system of ODEs,Heun's method,Runge-Kutta, 2nd-order method,2nd-order Runge-Kutta method,RK2,PDE,heat equation,diffusion equation,MOL forward Euler,method of lines,MOL,mesh points,cell,method of lines,unstable solutions,instability,stability criterion,Poisson equation,Laplace equation,root finding,code robust,code try-except,code exception,Newton starting value,return None,sys.exit">
+
+<title>Programming for Computations - A Gentle Introduction to Numerical Simulations with MATLAB/Octave</title>
+
+
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+code { padding: 0px; background-color: inherit; }
+pre {
+  border: 0pt solid #93a1a1;
+  box-shadow: none;
+}
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+/* Let pre tags for code blocks have the same color as the surroundings */
+pre { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u' Preface ', 0, None, '___sec0'),
+              (u' Why learn programming? ', 3, None, '___sec1'),
+              (u' Target audience and background knowledge ',
+               3,
+               None,
+               '___sec2'),
+              (u' Numerical methods ', 3, None, '___sec3'),
+              (u' The computer language: Matlab ', 3, None, '___sec4'),
+              (u' How this book is different ', 3, None, '___sec5'),
+              (u' Acknowledgments ', 3, None, '___sec6'),
+              (u' The first few steps ',
+               0,
+               u'1st:TheFirstFewSteps',
+               u'1st:TheFirstFewSteps'),
+              (u' What is a program? And what is programming? ',
+               1,
+               None,
+               '___sec8'),
+              (u' A Matlab program with variables ',
+               1,
+               u'1st:ex1',
+               u'1st:ex1'),
+              (u' The program ', 2, None, '___sec10'),
+              (u' Dissection of the program ', 2, None, '___sec11'),
+              (u' Why not just use a pocket calculator? ',
+               2,
+               None,
+               '___sec12'),
+              (u' The importance of using a text editor to write programs ',
+               2,
+               None,
+               '___sec13'),
+              (u' Write and run your first program ', 2, None, '___sec14'),
+              (u' Write and run a program in Matlab ', 3, None, '___sec15'),
+              (u' Write a program in a text editor and run it in Octave ',
+               3,
+               None,
+               '___sec16'),
+              (u'  A Matlab program with a library function ',
+               1,
+               u'1st:ex2',
+               u'1st:ex2'),
+              (u' A Matlab program with vectorization and plotting ',
+               1,
+               u'1st:ex3',
+               u'1st:ex3'),
+              (u' More basic concepts ', 1, None, '___sec19'),
+              (u' Using Matlab interactively ', 2, None, '___sec20'),
+              (u' Arithmetics, parentheses and round-off errors ',
+               2,
+               None,
+               '___sec21'),
+              (u' Variables ', 2, None, '___sec22'),
+              (u' Formatting text and numbers ', 2, None, '___sec23'),
+              (u' Arrays ', 2, None, '___sec24'),
+              (u' Plotting ', 2, None, '___sec25'),
+              (u' Error messages and warnings ', 2, None, '___sec26'),
+              (u' Input data ', 2, None, '___sec27'),
+              (u' Symbolic computations ', 2, None, '___sec28'),
+              (u' Concluding remarks ', 2, None, '___sec29'),
+              (u' Exercises ', 1, None, '___sec30'),
+              (u' Exercise 1: Error messages ',
+               2,
+               u'1st:exer:ErrorMessages',
+               u'1st:exer:ErrorMessages'),
+              (u' Exercise 2: Volume of a cube ',
+               2,
+               u'1st:exer:cubeVolume',
+               u'1st:exer:cubeVolume'),
+              (u' Exercise 3: Area and circumference of a circle ',
+               2,
+               u'1st:exer:areaCircle',
+               u'1st:exer:areaCircle'),
+              (u' Exercise 4: Volumes of three cubes ',
+               2,
+               u'1st:exer:volumes3cubes',
+               u'1st:exer:volumes3cubes'),
+              (u' Exercise 5: Average of integers ',
+               2,
+               u'1st:exer:averageOf5Integers',
+               u'1st:exer:averageOf5Integers'),
+              (u' Exercise 6: Interactive computing of volume and area ',
+               2,
+               u'1st:exer:cubeVolInteractively',
+               u'1st:exer:cubeVolInteractively'),
+              (u' Exercise 7: Update variable at command prompt ',
+               2,
+               u'1st:exer:updateVarInteractively',
+               u'1st:exer:updateVarInteractively'),
+              (u' Exercise 8: Formatted print to screen ',
+               2,
+               u'1st:exer:printfScreen',
+               u'1st:exer:printfScreen'),
+              (u' Exercise 9: Matlab documentation and random numbers ',
+               2,
+               u'1st:exer:PythonDocRandom',
+               u'1st:exer:PythonDocRandom'),
+              (u' Basic constructions ',
+               0,
+               u'2nd:BasicConstructins',
+               u'2nd:BasicConstructins'),
+              (u' If tests, colon and indentation ', 1, None, '___sec41'),
+              (u' Functions ', 1, u'sec:functions', u'sec:functions'),
+              (u' For loops ', 1, u'sec:for:loops', u'sec:for:loops'),
+              (u' While loops ', 1, u'sec:while:loops', u'sec:while:loops'),
+              (u' Reading from and writing to files ',
+               1,
+               u'sec:file:reading:writing',
+               u'sec:file:reading:writing'),
+              (u' Exercises ', 1, None, '___sec46'),
+              (u' Exercise 10: Introducing errors ',
+               2,
+               u'2nd:exer:IntroducingErrors',
+               u'2nd:exer:IntroducingErrors'),
+              (u' Exercise 11: Compare integers a and b ',
+               2,
+               u'2nd:exer:compInt',
+               u'2nd:exer:compInt'),
+              (u' Exercise 12: Functions for circumference and area of a circle ',
+               2,
+               u'2nd:exer:funcCircArea',
+               u'2nd:exer:funcCircArea'),
+              (u' Exercise 13: Function for area of a rectangle ',
+               2,
+               u'2nd:exer:funcAreaRectangle',
+               u'2nd:exer:funcAreaRectangle'),
+              (u' Exercise 14: Area of a polygon ',
+               2,
+               u'2nd:exer:area:polygon',
+               u'2nd:exer:area:polygon'),
+              (u' Exercise 15: Average of integers ',
+               2,
+               u'2nd:exer:avNInt',
+               u'2nd:exer:avNInt'),
+              (u' Exercise 16: While loop with errors ',
+               2,
+               u'2nd:exer:whileLoopErrors',
+               u'2nd:exer:whileLoopErrors'),
+              (u' Exercise 17: Area of rectangle versus circle ',
+               2,
+               u'2nd:exer:areaRectCircle',
+               u'2nd:exer:areaRectCircle'),
+              (u' Exercise 18: Find crossing points of two graphs ',
+               2,
+               u'2nd:exer:Cross2Graphs',
+               u'2nd:exer:Cross2Graphs'),
+              (u' Exercise 19: Sort array with numbers ',
+               2,
+               u'2nd:exer:sortNumbers',
+               u'2nd:exer:sortNumbers'),
+              (u' Exercise 20: Compute $\\pi$ ',
+               2,
+               u'2nd:exer:computingPi',
+               u'2nd:exer:computingPi'),
+              (u' Exercise 21: Compute combinations of sets ',
+               2,
+               u'2nd:exer:combinatorics1',
+               u'2nd:exer:combinatorics1'),
+              (u' Exercise 22: Frequency of random numbers ',
+               2,
+               u'2nd:exer:numberOccurrence',
+               u'2nd:exer:numberOccurrence'),
+              (u' Remarks ', 3, None, '___sec60'),
+              (u' Exercise 23: Game 21 ',
+               2,
+               u'2nd:exer:Game21',
+               u'2nd:exer:Game21'),
+              (u' Exercise 24: Linear interpolation ',
+               2,
+               u'2nd:exer:linearInterpol',
+               u'2nd:exer:linearInterpol'),
+              (u' Exercise 25: Test straight line requirement ',
+               2,
+               u'2nd:exer:testStraightLine',
+               u'2nd:exer:testStraightLine'),
+              (u' Exercise 26: Fit straight line to data ',
+               2,
+               u'2nd:exer:fitLine',
+               u'2nd:exer:fitLine'),
+              (u' Remarks ', 3, None, '___sec65'),
+              (u' Exercise 27: Fit sines to straight line ',
+               2,
+               u'2nd:exer:fitSines',
+               u'2nd:exer:fitSines'),
+              (u' Remarks ', 3, None, '___sec67'),
+              (u' Exercise 28: Count occurrences of a string in a string ',
+               2,
+               u'2nd:exer:countTextString',
+               u'2nd:exer:countTextString'),
+              (u' Computing integrals ',
+               0,
+               u'sec:integrals',
+               u'sec:integrals'),
+              (u' Basic ideas of numerical integration ',
+               1,
+               u'sec:integrals:basic',
+               u'sec:integrals:basic'),
+              (u' Computational example ', 3, None, '___sec71'),
+              (u' The composite trapezoidal rule ',
+               1,
+               u'sec:integrals:trap',
+               u'sec:integrals:trap'),
+              (u' The general formula ',
+               2,
+               u'sec:integrals:formula',
+               u'sec:integrals:formula'),
+              (u' Implementation ',
+               2,
+               u'sec:integrals:trap:impl',
+               u'sec:integrals:trap:impl'),
+              (u' Specific or general implementation? ', 3, None, '___sec75'),
+              (u' Implementation with functions ', 3, None, '___sec76'),
+              (u' Solving our specific problem in a session ',
+               3,
+               None,
+               '___sec77'),
+              (u' Solving our specific problem in a program ',
+               3,
+               None,
+               '___sec78'),
+              (u' Alternative flat special-purpose implementation ',
+               2,
+               None,
+               '___sec79'),
+              (u' The composite midpoint method ',
+               1,
+               u'sec:integrals:Midpoint',
+               u'sec:integrals:Midpoint'),
+              (u' The idea ', 3, None, '___sec81'),
+              (u' The general formula ', 2, None, '___sec82'),
+              (u' Implementation ',
+               2,
+               u'sec:midpoint:code',
+               u'sec:midpoint:code'),
+              (u' Comparing the trapezoidal and the midpoint methods ',
+               2,
+               None,
+               '___sec84'),
+              (u' Testing ', 1, None, '___sec85'),
+              (u' Problems with brief testing procedures ',
+               2,
+               None,
+               '___sec86'),
+              (u' Test procedures ',
+               2,
+               u'sec:integrals:testprocs',
+               u'sec:integrals:testprocs'),
+              (u' Hand-computed results ', 3, None, '___sec88'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec89'),
+              (u' Demonstrating correct convergence rates ',
+               3,
+               None,
+               '___sec90'),
+              (u' Constructing unit tests and writing test functions ',
+               2,
+               u'sec:integrals:test:functions',
+               u'sec:integrals:test:functions'),
+              (u' Hand-computed numerical results ', 3, None, '___sec92'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec93'),
+              (u' Demonstrating correct convergence rates ',
+               3,
+               None,
+               '___sec94'),
+              (u' Vectorization ', 1, None, '___sec95'),
+              (u' Vectorizing the midpoint rule ', 3, None, '___sec96'),
+              (u' Vectorizing the trapezoidal rule ', 3, None, '___sec97'),
+              (u' Measuring computational speed ', 1, None, '___sec98'),
+              (u' Double and triple integrals ',
+               1,
+               u'sec:int:double',
+               u'sec:int:double'),
+              (u' The midpoint rule for a double integral ',
+               2,
+               u'sec:int:double:midpoint',
+               u'sec:int:double:midpoint'),
+              (u' Derivation via one-dimensional integrals ',
+               3,
+               None,
+               '___sec101'),
+              (u' Direct derivation ', 3, None, '___sec102'),
+              (u' Programming a double sum ', 3, None, '___sec103'),
+              (u' Reusing code for one-dimensional integrals ',
+               3,
+               None,
+               '___sec104'),
+              (u' Verification via test functions ', 3, None, '___sec105'),
+              (u' The midpoint rule for a triple integral ',
+               2,
+               None,
+               '___sec106'),
+              (u' Theory ', 3, None, '___sec107'),
+              (u' Implementation ', 3, None, '___sec108'),
+              (u' Monte Carlo integration for complex-shaped domains ',
+               2,
+               u'sec:int:complex:domain',
+               u'sec:int:complex:domain'),
+              (u' The Monte Carlo integration algorithm ',
+               3,
+               None,
+               '___sec110'),
+              (u' Implementation ', 3, None, '___sec111'),
+              (u' Verification ', 3, None, '___sec112'),
+              (u' Test function for function with random numbers ',
+               3,
+               None,
+               '___sec113'),
+              (u' Integral over a circle ', 3, None, '___sec114'),
+              (u' Exercises ', 1, None, '___sec115'),
+              (u' Exercise 29: Hand calculations for the trapezoidal method ',
+               2,
+               u'sec:exer:trap:hand',
+               u'sec:exer:trap:hand'),
+              (u' Exercise 30: Hand calculations for the midpoint method ',
+               2,
+               u'sec:exer:midpt:hand',
+               u'sec:exer:midpt:hand'),
+              (u' Exercise 31: Compute a simple integral ',
+               2,
+               u'sec:exer:trap:mid:parabola',
+               u'sec:exer:trap:mid:parabola'),
+              (u' Exercise 32: Hand-calculations with sine integrals ',
+               2,
+               u'sec:exer:hand:sine',
+               u'sec:exer:hand:sine'),
+              (u' Exercise 33: Make test functions for the midpoint method ',
+               2,
+               u'sec:exer:test:midpoint',
+               u'sec:exer:test:midpoint'),
+              (u' Exercise 34: Explore round-off errors with large numbers ',
+               2,
+               u'sec:exer:test:roundoff',
+               u'sec:exer:test:roundoff'),
+              (u' Exercise 35: Write test functions for $\\int_0^4\\sqrt{x}dx$ ',
+               2,
+               u'sec:exer:test:convrates:sqrt',
+               u'sec:exer:test:convrates:sqrt'),
+              (u' Remarks ', 3, None, '___sec123'),
+              (u' Exercise 36: Rectangle methods ',
+               2,
+               u'sec:exer:rectangleMethod',
+               u'sec:exer:rectangleMethod'),
+              (u' Exercise 37: Adaptive integration ',
+               2,
+               u'sec:exer:adaptive:int',
+               u'sec:exer:adaptive:int'),
+              (u' Remarks ', 3, None, '___sec126'),
+              (u' Exercise 38: Integrating x raised to x ',
+               2,
+               u'sec:exer:integrate:x2x',
+               u'sec:exer:integrate:x2x'),
+              (u' Exercise 39: Integrate products of sine functions ',
+               2,
+               u'sec:exer:sine:products',
+               u'sec:exer:sine:products'),
+              (u' Exercise 40: Revisit fit of sines to a function ',
+               2,
+               u'sec:exer:revisitFitSines',
+               u'sec:exer:revisitFitSines'),
+              (u' Exercise 41: Derive the trapezoidal rule for a double integral ',
+               2,
+               u'sec:exer:trapezoidal:2D',
+               u'sec:exer:trapezoidal:2D'),
+              (u' Exercise 42: Compute the area of a triangle by Monte Carlo integration ',
+               2,
+               u'sec:exer:MC:ellipse',
+               u'sec:exer:MC:ellipse'),
+              (u' Solving ordinary differential equations ',
+               0,
+               u'5th:SolvODEs',
+               u'5th:SolvODEs'),
+              (u' Population growth ', 1, u'sec:de:pg', u'sec:de:pg'),
+              (u' Derivation of the model ',
+               2,
+               u'sec:de:pg:model',
+               u'sec:de:pg:model'),
+              (u' Numerical solution ',
+               2,
+               u'sec:de:pg:numerics',
+               u'sec:de:pg:numerics'),
+              (u' Programming the Forward Euler scheme; the special case ',
+               2,
+               u'sec:de:pg:prog1',
+               u'sec:de:pg:prog1'),
+              (u' Understanding the Forward Euler method ',
+               2,
+               u'sec:de:pg:geom',
+               u'sec:de:pg:geom'),
+              (u' Programming the Forward Euler scheme; the general case ',
+               2,
+               u'sec:de:FE:gen',
+               u'sec:de:FE:gen'),
+              (u' Making the population growth model more realistic ',
+               2,
+               None,
+               '___sec139'),
+              (u' Verification: exact linear solution of the discrete equations ',
+               2,
+               u'sec:de:growth:test:linear',
+               u'sec:de:growth:test:linear'),
+              (u' Spreading of diseases ', 1, None, '___sec141'),
+              (u' Spreading of a flu ', 2, u'sec:de:flu', u'sec:de:flu'),
+              (u' A Forward Euler method for the differential equation system ',
+               2,
+               u'sec:de:flu:FE',
+               u'sec:de:flu:FE'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:flu:prog:spec',
+               u'sec:de:flu:prog:spec'),
+              (u' Outbreak or not ', 2, None, '___sec145'),
+              (u' Abstract problem and notation ',
+               2,
+               u'sec:de:flu:generic',
+               u'sec:de:flu:generic'),
+              (u' Programming the numerical method; the general case ',
+               2,
+               u'sec:de:flu:prog:generic',
+               u'sec:de:flu:prog:generic'),
+              (u' Time-restricted immunity ', 2, None, '___sec148'),
+              (u' Incorporating vaccination ',
+               2,
+               u'sec:de:flu:vaccine',
+               u'sec:de:flu:vaccine'),
+              (u' Discontinuous coefficients: a vaccination campaign ',
+               2,
+               u'sec:de:flu:vaccine:discont',
+               u'sec:de:flu:vaccine:discont'),
+              (u' Oscillating one-dimensional systems ',
+               1,
+               u'sec:de:vib',
+               u'sec:de:vib'),
+              (u' Derivation of a simple model ', 2, None, '___sec152'),
+              (u' Numerical solution ', 2, None, '___sec153'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:vib:special',
+               u'sec:de:vib:special'),
+              (u' A magic fix of the numerical method ',
+               2,
+               None,
+               '___sec155'),
+              (u" The 2nd-order Runge-Kutta method (or Heun's method) ",
+               2,
+               u'sec:de:osc:Heun',
+               u'sec:de:osc:Heun'),
+              (u' Odespy: software for solving ODEs ',
+               2,
+               u'sec:de:osc:odespy',
+               u'sec:de:osc:odespy'),
+              (u' The 4th-order Runge-Kutta method ', 2, None, '___sec158'),
+              (u' The algorithm ', 3, None, '___sec159'),
+              (u' Application ', 3, None, '___sec160'),
+              (u' Implementation ', 3, None, '___sec161'),
+              (u' Derivation ', 3, None, '___sec162'),
+              (u' More effects: damping, nonlinearity, and external forces ',
+               2,
+               None,
+               '___sec163'),
+              (u' The Euler-Cromer scheme ', 3, None, '___sec164'),
+              (u' The 4-th order Runge-Kutta method ', 3, None, '___sec165'),
+              (u' Illustration of linear damping ', 2, None, '___sec166'),
+              (u' Illustration of linear damping with sinusoidal excitation ',
+               2,
+               None,
+               '___sec167'),
+              (u' Spring-mass system with sliding friction ',
+               2,
+               u'sec:de:vib:ode2:sliding:friction',
+               u'sec:de:vib:ode2:sliding:friction'),
+              (u' A finite difference method; undamped, linear case ',
+               2,
+               u'sec:de:vib:2nd',
+               u'sec:de:vib:2nd'),
+              (u' A finite difference method; linear damping ',
+               2,
+               u'sec:de:vib:2nd:damped1',
+               u'sec:de:vib:2nd:damped1'),
+              (u' Exercises ', 1, None, '___sec171'),
+              (u' Exercise 43: Geometric construction of the Forward Euler method ',
+               2,
+               u'sec:de:exer:geom',
+               u'sec:de:exer:geom'),
+              (u' Exercise 44: Make test functions for the Forward Euler method ',
+               2,
+               u'sec:de:exer:FE:test1',
+               u'sec:de:exer:FE:test1'),
+              (u" Exercise 45: Implement and evaluate Heun's method ",
+               2,
+               u'sec:de:exer:Heun:pg',
+               u'sec:de:exer:Heun:pg'),
+              (u' Exercise 46: Find an appropriate time step; logistic model ',
+               2,
+               u'sec:de:exer:logistic:dtopt',
+               u'sec:de:exer:logistic:dtopt'),
+              (u' Exercise 47: Find an appropriate time step; SIR model ',
+               2,
+               u'sec:de:exer:SIR:dtopt',
+               u'sec:de:exer:SIR:dtopt'),
+              (u' Exercise 48: Model an adaptive vaccination campaign ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 49: Make a SIRV model with time-limited effect of vaccination ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 50: Refactor a flat program ',
+               2,
+               u'sec:de:exer:vib:FE:func',
+               u'sec:de:exer:vib:FE:func'),
+              (u' Exercise 51: Simulate oscillations by a general ODE solver ',
+               2,
+               u'sec:de:exer:vib:ode_FE',
+               u'sec:de:exer:vib:ode_FE'),
+              (u' Exercise 52: Compute the energy in oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Exercise 53: Use a Backward Euler scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:BE',
+               u'sec:de:exer:pg:BE'),
+              (u' Exercise 54: Use a Crank-Nicolson scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:CN',
+               u'sec:de:exer:pg:CN'),
+              (u' Exercise 55: Understand finite differences via Taylor series ',
+               2,
+               u'sec:de:exer:fd:Taylor',
+               u'sec:de:exer:fd:Taylor'),
+              (u' Exercise 56: Use a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Remarks ', 3, None, '___sec186'),
+              (u" Exercise 57: Use Heun's method for the SIR model ",
+               2,
+               u'sec:de:exer:SIR:Heun',
+               u'sec:de:exer:SIR:Heun'),
+              (u' Exercise 58: Use Odespy to solve a simple ODE ',
+               2,
+               u'sec:de:exer:odespy:decay',
+               u'sec:de:exer:odespy:decay'),
+              (u' Exercise 59: Set up a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:osc:BE',
+               u'sec:de:exer:osc:BE'),
+              (u' Exercise 60: Set up a Forward Euler scheme for nonlinear and damped oscillations ',
+               2,
+               u'sec:de:exer:osc:FE:general',
+               u'sec:de:exer:osc:FE:general'),
+              (u' Exercise 61: Discretize an initial condition ',
+               2,
+               u'sec:de:exer:osc:2nd:V0ic',
+               u'sec:de:exer:osc:2nd:V0ic'),
+              (u' Solving partial differential equations ',
+               0,
+               u'6th:SolvPDEs',
+               u'6th:SolvPDEs'),
+              (u' Finite difference methods ',
+               1,
+               u'6th:SolvPDEs:MOLandFE',
+               u'6th:SolvPDEs:MOLandFE'),
+              (u' Reduction of a PDE to a system of ODEs ',
+               2,
+               u'sec:pde:diff1D:reduce',
+               u'sec:pde:diff1D:reduce'),
+              (u' Construction of a test problem with known discrete solution ',
+               2,
+               u'sec:pde:diff1D:testproblem',
+               u'sec:pde:diff1D:testproblem'),
+              (u' Implementation: Forward Euler method ',
+               2,
+               None,
+               '___sec196'),
+              (u' Application: heat conduction in a rod ',
+               2,
+               u'sec:pde:diff1D:rod',
+               u'sec:pde:diff1D:rod'),
+              (u' Vectorization ', 2, None, '___sec198'),
+              (u' Using Odespy to solve the system of ODEs ',
+               2,
+               None,
+               '___sec199'),
+              (u' Implicit methods ', 2, None, '___sec200'),
+              (u' Exercises ', 1, None, '___sec201'),
+              (u' Exercise 62: Simulate a diffusion equation by hand ',
+               2,
+               u'sec:pde:diff1D:exer:handFE',
+               u'sec:pde:diff1D:exer:handFE'),
+              (u' Exercise 63: Compute temperature variations in the ground ',
+               2,
+               u'sec:pde:diff1D:exer:groundtemp',
+               u'sec:pde:diff1D:exer:groundtemp'),
+              (u' Exercise 64: Compare implicit methods ',
+               2,
+               u'sec:pde:diff1D:exer:compare:implicit',
+               u'sec:pde:diff1D:exer:compare:implicit'),
+              (u' Exercise 65: Explore adaptive and implicit methods ',
+               2,
+               u'sec:pde:diff1D:exer:groundtemp:adapt',
+               u'sec:pde:diff1D:exer:groundtemp:adapt'),
+              (u' Exercise 66: Investigate the $\\theta$ rule ',
+               2,
+               u'sec:pde:diff1D:exer:CN',
+               u'sec:pde:diff1D:exer:CN'),
+              (u' Remarks ', 3, None, '___sec207'),
+              (u' Exercise 67: Compute the diffusion of a Gaussian peak ',
+               2,
+               u'sec:pde:diff1D:exer:Gaussian',
+               u'sec:pde:diff1D:exer:Gaussian'),
+              (u' Exercise 68: Vectorize a function for computing the area of a polygon ',
+               2,
+               u'2nd:exer:area:polygon2',
+               u'2nd:exer:area:polygon2'),
+              (u' Exercise 69: Explore symmetry ',
+               2,
+               u'sec:pde:diff1D:exer:Gaussian:symm',
+               u'sec:pde:diff1D:exer:Gaussian:symm'),
+              (u' Remarks ', 3, None, '___sec211'),
+              (u' Exercise 70: Compute solutions as $t\\rightarrow\\infty$ ',
+               2,
+               u'sec:pde:diff1D:exer:stationary',
+               u'sec:pde:diff1D:exer:stationary'),
+              (u' Remarks ', 3, None, '___sec213'),
+              (u' Exercise 71: Solve a two-point boundary value problem ',
+               2,
+               u'sec:pde:diff1D:exer:stationary2',
+               u'sec:pde:diff1D:exer:stationary2'),
+              (u' Solving nonlinear algebraic equations ',
+               0,
+               u'4th:NonlinAlgEq',
+               u'4th:NonlinAlgEq'),
+              (u' Brute force methods ',
+               1,
+               u'4th:bruteforce',
+               u'4th:bruteforce'),
+              (u' Brute force root finding ', 2, None, '___sec217'),
+              (u' Numerical algorithm ', 3, None, '___sec218'),
+              (u' Implementation ', 3, None, '___sec219'),
+              (u' Brute force optimization ', 2, None, '___sec220'),
+              (u' Numerical algorithm ', 3, None, '___sec221'),
+              (u' Implementation ', 3, None, '___sec222'),
+              (u' Model problem for algebraic equations ',
+               2,
+               None,
+               '___sec223'),
+              (u" Newton's method ",
+               1,
+               u'4th:NonlinAlgEq:Newt',
+               u'4th:NonlinAlgEq:Newt'),
+              (u" Deriving and implementing Newton's method ",
+               2,
+               None,
+               '___sec225'),
+              (u' Making a more efficient and robust implementation ',
+               2,
+               u'4th:Newton:robust',
+               u'4th:Newton:robust'),
+              (u' The secant method ',
+               1,
+               u'4th:NonlinAlgEq:Secant',
+               u'4th:NonlinAlgEq:Secant'),
+              (u' The bisection method ',
+               1,
+               u'4th:NonlinAlgEq:Bisect',
+               u'4th:NonlinAlgEq:Bisect'),
+              (u' Rate of convergence ',
+               1,
+               u'4th:NonlinAlgEq:RateConv',
+               u'4th:NonlinAlgEq:RateConv'),
+              (u' Exercises ', 1, None, '___sec230'),
+              (u" Exercise 72: Understand why Newton's method can fail ",
+               2,
+               u'4th:exer:Newton:failure',
+               u'4th:exer:Newton:failure'),
+              (u' Exercise 73: See if the secant method fails ',
+               2,
+               u'4th:exer:Secant:failure',
+               u'4th:exer:Secant:failure'),
+              (u' Exercise 74: Understand how the bisection method cannot fail ',
+               2,
+               u'4th:exer:Bisection:failure',
+               u'4th:exer:Bisection:failure'),
+              (u" Exercise 75: Combine the bisection method with Newton's method ",
+               2,
+               u'4th:exer:Bisection:Newton',
+               u'4th:exer:Bisection:Newton'),
+              (u" Exercise 76: Write a test function for Newton's method ",
+               2,
+               u'4th:exer:NewtonHand',
+               u'4th:exer:NewtonHand'),
+              (u' Exercise 77: Solve nonlinear equation for a vibrating beam ',
+               2,
+               u'4th:exer:beam:vib',
+               u'4th:exer:beam:vib'),
+              (u' References ', 0, None, '___sec237')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands.tex -->
+$$
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+$$
+
+
+
+
+    
+<a name="part0023"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._p4c-solarized-Matlab022.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._p4c-solarized-Matlab024.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1 id="4th:NonlinAlgEq">Solving nonlinear algebraic equations</h1> <hr>
+
+<p>
+<center><p><img src="figs/comic_root.png" align="bottom" width=800></p></center>
+
+<p>
+As a reader of this book you are probably well into mathematics and
+often &quot;accused&quot; of being particularly good at &quot;solving equations&quot; (typically
+at family dinners!). However, is it <em>really</em> true that you, with pen and paper, can
+solve <em>many</em> equations? How many kinds of equations can you actually solve?
+If we restrict our attention to <em>algebraic equations in one unknown</em> \( x \),
+you can certainly do linear equations: \( ax+b=0 \) and quadratic
+ones: \( ax^2 + bx + c = 0 \). You may also know that there
+are formulas for the roots of cubic and quartic equations too.
+Maybe you can do the special trigonometric equation
+\( \sin x + \cos x = 1 \) as well, but there it (probably) stops. Equations that are
+not reducible to one of the mentioned cannot be solved, which
+means that most algebraic equations arising in applications cannot
+be treated with pen and paper!
+
+<p>
+If we exchange the traditional idea of finding <em>exact</em> solutions to equations with
+the idea of rather finding <em>approximate</em> solutions, a whole new world of possibilities
+opens up! With such an approach, we can in principle solve <em>any</em> algebraic equation.
+
+<p>
+Let us start by introducing a common generic form for any algebraic equation:
+
+$$ f(x) = 0\thinspace .$$
+
+Here, \( f(x) \) is some prescribed formula involving \( x \). For example,
+the equation
+
+$$ e^{-x}\sin x = \cos x$$
+
+has
+
+$$ f(x)= e^{-x}\sin x - \cos x\thinspace .$$
+
+Just move all terms to the left-hand side and then the formula
+to the left of the equality sign is \( f(x) \).
+
+<p>
+So, when do we really need to solve algebraic equations beyond the
+simplest types we can treat with pen and paper?  There are two major
+application areas. One is when using <em>implicit</em> numerical methods for
+ordinary differential equations.  These give rise to one or a system of
+algebraic equations.  The other major application type is
+optimization, i.e., finding the maxima or minima of a function.  These
+maxima and minima are normally found by solving the algebraic equation
+\( F'(x)=0 \) if \( F(x) \) is the function to be optimized.  Differential
+equations are very much used throughout science and engineering, and
+actually most engineering problems are optimization problems in the
+end because one wants a design that maximizes performance and
+minimizes cost.
+
+<p>
+We restrict the attention here to one algebraic equation in one variable,
+with our usual emphasis how to program the algorithms.
+<em>Systems</em> of nonlinear algebraic equations with <em>many variables</em>
+arise from implicit methods for ordinary and partial differential
+equations as well as in multivariate optimization. However,
+we consider this topic beyond the scope of the current text.
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal">
+<b>Terminology.</b>
+<p>
+When solving algebraic equations \( f(x)=0 \), we often say that the
+solution \( x \) is a <em>root</em> of the equation. The solution process itself
+is thus often called <em>root finding</em>.
+</div>
+
+
+<h1 id="4th:bruteforce">Brute force methods</h1>
+
+<p>
+The representation of a mathematical function \( f(x) \) on a computer
+takes two forms.  One is a Matlab function returning the function
+value given the argument, while the other is a collection of points \( (x,
+f(x)) \) along the function curve. The latter is the representation we
+use for plotting, together with an assumption of linear variation
+between the points. This representation is also very suited for
+equation solving and optimization: we simply go through all points and
+see if the function crosses the \( x \) axis, or for optimization, test
+for a local maximum or minimum point. Because there is a lot of work to
+examine a huge number of points, and also because the idea is extremely
+simple, such approaches are often referred to as <em>brute force</em>
+methods. However, we are not embarrassed of explaining the methods
+in detail and implementing them.
+
+<h2 id="___sec217">Brute force root finding </h2>
+
+<p>
+Assume that we have a set of points along the curve of a function \( f(x) \):
+
+<p>
+<center><p><img src="figs/brute_force_roots.png" align="bottom" width=600></p></center>
+
+<p>
+We want to solve \( f(x)=0 \), i.e., find the points \( x \)
+where \( f \) crosses the \( x \) axis.
+A brute force algorithm is to run through all points on the
+curve and check if one point is below the \( x \) axis and if the next
+point is above the \( x \) axis, or the other way around.
+If this is found to be the case, we know that \( f \) must be zero
+in between these two \( x \) points.
+
+<h3 id="___sec218">Numerical algorithm </h3>
+
+<p>
+More precisely, we have a set of \( n+1 \) points \( (x_i, y_i)) \),
+\( y_i=f(x_i) \), \( i=0,\ldots,n \), where
+\( x_0 < \ldots < x_n \).
+We check if \( y_i < 0 \) and \( y_{i+1} > 0 \) (or the other way around). A compact expression
+for this check is to perform the test \( y_i y_{i+1} < 0 \).
+If so, the root of \( f(x)=0 \)
+is in \( [x_i, x_{i+1}] \). Assuming a linear variation of \( f \)
+between \( x_i \) and \( x_{i+1} \), we have the approximation
+
+$$
+f(x)\approx \frac{f(x_{i+1})-f(x_i)}{x_{i+1}-x_i}(x-x_i) + f(x_i)
+= \frac{y_{i+1}-y_i}{x_{i+1}-x_i}(x-x_i) + y_i,
+$$
+
+which, when set equal to zero, gives the root
+
+$$ x = x_i - \frac{x_{i+1}-x_i}{y_{i+1}-y_i}y_i\thinspace .$$
+
+<h3 id="___sec219">Implementation </h3>
+
+<p>
+Given some Matlab implementation <code>f(x)</code> of our mathematical
+function, straightforward programming of the above numerical
+algorithm leads to
+
+<p>
+<!-- begin verbatim block  mcod-->
+<pre><code>x = linspace(0, 4, 10001);
+y = f(x);
+
+root = NaN;  % Initialization
+for i = 1:(length(x)-1) 
+    if y(i)*y(i+1) &lt; 0
+         root = x(i) - (x(i+1) - x(i))/(y(i+1) - y(i))*y(i);
+         break;  % Jump out of loop
+    end
+end
+if isnan(root)
+    fprintf('Could not find any root in [%g, %g]\n', x(0), x(-1));
+else
+    fprintf('Find (the first) root as x=%g\n', root);
+end
+</code></pre>
+<!-- end verbatim block -->
+(See the file
+<a href="https://github.com/hplgit/prog4comp/src/m/brute_force_root_finder_flat.m" target="_self"><tt>brute_force_root_finder_flat.m</tt></a>.)
+
+<p>
+Note the nice use of setting <code>root</code> to <code>NaN</code>: we can simply test
+<code>if isnan(root)</code> to see if we found a root and overwrote the <code>NaN</code>
+value, or if we did not find any root among the tested points.
+
+<p>
+Running this program with some function, say \( f(x)=e^{-x^2}\cos(4x) \)
+(which has a solution at \( x = \frac{\pi}{8} \)),
+gives the root 0.392699, which has an error of \( 8.2\cdot 10^{-8} \).
+Increasing the number of points with a factor of ten gives a root
+with an error of \( 3.1\cdot 10^{-10} \).
+
+<p>
+After such a quick &quot;flat&quot; implementation of an algorithm, we should
+always try to offer the algorithm as a Matlab function, applicable to as
+wide a problem domain as possible. The function should take \( f \) and
+an associated interval
+\( [a,b] \) as input, as well as a number of points (\( n \)), and return
+a list of all the roots in \( [a,b] \). Here is our candidate
+for a good implementation of the brute force rooting finding algorithm:
+
+<p>
+<!-- begin verbatim block  mpro-->
+<pre><code>function all_roots = brute_force_root_finder(f, a, b, n)
+    x = linspace(a, b, n);
+    y = f(x);
+    roots = [];
+    for i = 1:(n-1)
+        if y(i)*y(i+1) &lt; 0
+            root = x(i) - (x(i+1) - x(i))/(y(i+1) - y(i))*y(i);
+            roots = [roots; root];
+        end
+    end
+    all_roots = roots;
+end
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+This function is found in the file
+<a href="https://github.com/hplgit/prog4comp/src/m/brute_force_foot_finder.m" target="_self"><tt>brute_force_root_finder.m</tt></a>.
+
+<p>
+This time we use another elegant technique to indicate if roots were found
+or not: <code>roots</code> is empty (an array of length zero) if the root finding was unsuccessful,
+otherwise it contains all the roots. Application of the function to
+the previous example can be coded as
+(<a href="https://github.com/hplgit/prog4comp/src/m/demo_brute_force_foot_finder.m" target="_self"><tt>demo_brute_force_root_finder.m</tt></a>):
+
+<p>
+<!-- begin verbatim block  mpro-->
+<pre><code>function demo_brute_force_root_finder()
+    roots = brute_force_root_finder(
+        @(x) exp(-x.^2).*cos(4*x), 0, 4, 1001);
+    if length(roots) &gt; 0
+        roots
+    else
+        fprintf('Could not find any roots');
+    end
+end
+</code></pre>
+<!-- end verbatim block -->
+
+<h2 id="___sec220">Brute force optimization </h2>
+
+<h3 id="___sec221">Numerical algorithm </h3>
+
+<p>
+We realize that \( x_i \)
+corresponds to a maximum point if \( y_{i-1} < y_i > y_{i+1} \).
+Similarly, \( x_i \) corresponds to a minimum if
+\( y_{i-1} > y_i < y_{i+1} \). We can do this test for all &quot;inner&quot;
+points \( i=1,\ldots,n-1 \) to find all local minima and maxima.
+In addition, we need to add an end
+point, \( i=0 \) or \( i=n \), if the corresponding \( y_i \) is a global
+maximum or minimum.
+
+<h3 id="___sec222">Implementation </h3>
+
+<p>
+The algorithm above can be translated to the following Matlab function
+(file <a href="https://github.com/hplgit/prog4comp/src/m/brute_force_optimizer.m" target="_self"><tt>brute_force_optimizer.m</tt></a>):
+
+<p>
+<!-- begin verbatim block  mpro-->
+<pre><code>function [xy_minima, xy_maxima] = brute_force_optimizer(f, a, b, n)
+    x = linspace(a, b, n);
+    y = f(x);
+    % Let maxima and minima hold the indices corresponding
+    % to (local) maxima and minima points    
+    minima = [];
+    maxima = [];
+    for i = 2:(n-1)
+        if y(i-1) &lt; y(i) &amp;&amp; y(i) &gt; y(i+1)
+            maxima = [maxima; i];
+        end
+        if y(i-1) &gt; y(i) &amp;&amp; y(i) &lt; y(i+1)
+            minima = [minima; i];
+        end
+    end
+
+    % What about the end points?
+    y_min_inner = y(minima(1));   % Initialize
+    for i = 1:length(minima)
+        if y(minima(i)) &lt; y_min_inner
+            y_min_inner = y(minima(i));
+        end        
+    end
+    y_max_inner = y(maxima(1));   % Initialize
+    for i = 1:length(maxima)
+        if y(maxima(i)) &gt; y_max_inner
+            y_max_inner = y(maxima(i));
+        end
+    end
+    
+    if y(1) &gt; y_max_inner
+        maxima = [maxima; 1];
+    end
+    if y(length(x)) &gt; y_max_inner
+       maxima = [maxima; length(x)];
+    end
+    if y(1) &lt; y_min_inner
+        minima = [minima; 1];
+    end
+    if y(length(x)) &lt; y_min_inner
+        minima = [minima; length(x)];
+    end
+    
+    % Compose return values
+    xy_minima = [];
+    for i = 1:length(minima)
+        xy_minima = [xy_minima; [x(minima(i)) y(minima(i))]];
+    end 
+    xy_maxima = [];
+    for i = 1:length(maxima)
+        xy_maxima = [xy_maxima; [x(maxima(i)) y(maxima(i))]];
+    end 
+end
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+An application to \( f(x)=e^{-x^2}\cos(4x) \) looks like
+
+<p>
+<!-- begin verbatim block  mpro-->
+<pre><code>function demo_brute_force_optimizer
+    [xy_minima, xy_maxima] = brute_force_optimizer(
+        @(x) exp(-x.^2).*cos(4*x), 0, 4, 1001);
+    xy_minima
+    xy_maxima
+end
+</code></pre>
+<!-- end verbatim block -->
+
+<h2 id="___sec223">Model problem for algebraic equations </h2>
+
+<p>
+We shall consider the
+very simple problem of finding the square root of 9, which is the
+positive solution of \( x^2=9 \). The nice feature of solving an equation
+whose solution is known beforehand is that we can easier investigate
+how the numerical method and the implementation perform in the search
+for the solution. The \( f(x) \) function corresponding to the equation
+\( x^2=9 \) is
+
+$$ f(x) = x^2 - 9\thinspace .$$
+
+Our interval of interest for solutions will be \( [0,1000] \) (the upper
+limit here is chosen somewhat arbitrarily).
+
+<p>
+In the following, we will present several efficient and
+accurate methods for solving nonlinear algebraic equations, both
+single equations and systems of equations. The methods all have in
+common that they search for <em>approximate</em> solutions.
+The methods differ, however, in the
+way they perform the search for solutions. The idea for the search
+influences the efficiency of the search and the reliability of
+actually finding a solution. For example, Newton's method is very
+fast, but not reliable, while the bisection method is the slowest,
+but absolutely reliable. No method is best at all problems, so we
+need different methods for different problems.
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal">
+<b>What is the difference between linear and nonlinear equations?</b>
+<p>
+You know how to solve linear equations \( ax+b=0 \): \( x=-b/a \).
+All other types of equations \( f(x) \), i.e., when \( f(x) \) is not a linear
+function of \( x \), are called nonlinear.
+A typical way of recognizing a nonlinear equation is to observe
+that \( x \) is &quot;not alone&quot; as in \( ax \),
+but involved in a product with itself, such as in \( x^3 + 2x^2 -9=0 \).
+We say that \( x^3 \) and \( 2x^2 \) are nonlinear terms. An equation like
+\( \sin x + e^x\cos x=0 \) is also nonlinear although \( x \) is not explicitly
+multiplied by itself, but the Taylor series of \( \sin x \), \( e^x \), and
+\( \cos x \) all involve polynomials of \( x \) where \( x \) is multiplied by itself.
+</div>
+
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._p4c-solarized-Matlab022.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._p4c-solarized-Matlab024.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

@@ -1,0 +1,1468 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="A Gentle Introduction to Programming for Computations">
+<meta name="keywords" content="computer program,programming,language programming,language computer,Matlab,Octave,Fortran,C,C++,Python,Maple,Mathematica,syntax,bug,debugging,script (and scripting),implement,print,program run,program execute,code,comment,instruction,program statement,variable,assignment,semi-colon (easy print),calculator,text editor,Idle,prompt,program typing,program run,program execute,ipython,m-file,function,function call,atan,function input parameter,function output parameter,function return,function take a parameter,library,library function,from,import,math,module,package,linspace,xlabel,ylabel,plot,interactive use (of Matlab),import,keyboard arrow up/down,operator Arithmetic,parentheses,variable type,variable name,float,integer,string,type conversion,reserved words,variable integer,variable float,variable string,variable assignment,default,single (precision),double (precision),printing formatted,printf formatting,default,array,array element,zeros,allocate,array index,indexing zero based,indexing one based,Matlab one-based indexing,array slice of,graph,hold (on/off),plot figure,title,legend,axis,hardcopy,format png,matrix mat,matrix vector product,transpose,linear algebra,matrix,vector,error message,debugging,debugger,try-exception,exception handling,program crash,program testing,program verification,program input,program output,input,raw input,symbolic computations,symbolic operations,symbolic simplifications,Symbolic Toolbox,WolframAlpha,Mathematica,Sage (symbolic package),Python documentation,garbage collection,variable delete,if,elif,else,colon,indent,boolean,boolean expression,True,False,boolean True,boolean False,operator Logical,function,function definition,def,return,argument,parameter input,parameter output,function nargin,function nargout,variable local,variable global,doc string,function handle,function local,function global,function nested,loop for,for loop,range,loop iteration,loop index,loop double,loop multiple,loop nested,linear algebra,while loop,loop while,loop infinite,loop iteration,loop index,array sorting,Leibniz pi,Euler pi,programming game,linear interpolation,least squares method,Fourier series,integral analytically,integral exact,integral approximately,integration points,pseudo code,code re-use,unit tests,finite difference method,forward difference approximation,Forward Euler scheme,logistic model,carrying capacity,SIR model,scalar ODE,ODE scalar,vector ODE,ODE vector,system of ODEs,Heun's method,Runge-Kutta, 2nd-order method,2nd-order Runge-Kutta method,RK2,PDE,heat equation,diffusion equation,MOL forward Euler,method of lines,MOL,stability,instability,MOL backward Euler,tridiagonal matrix,stability,instability,Taylor series approximation,polynomial,equation solver,code robust,code try-except,code exception,Newton starting value,return None,sys.exit,tolerance">
+
+<title>A Gentle Introduction to Programming for Computations</title>
+
+<!-- Bootstrap style: bootswatch_journal -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/journal/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+/* Let pre tags for code blocks have the same color as the surroundings */
+pre { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u' Preface ', 0, None, '___sec0'),
+              (u' The first few steps ',
+               0,
+               u'1st:TheFirstFewSteps',
+               u'1st:TheFirstFewSteps'),
+              (u' What is a program? And what is programming? ',
+               1,
+               None,
+               '___sec2'),
+              (u' A Matlab program with variables ',
+               1,
+               u'1st:ex1',
+               u'1st:ex1'),
+              (u' The program ', 2, None, '___sec4'),
+              (u' Dissection of the program ', 2, None, '___sec5'),
+              (u' Why not just use a pocket calculator? ',
+               2,
+               None,
+               '___sec6'),
+              (u' The importance of using a text editor to write programs ',
+               2,
+               None,
+               '___sec7'),
+              (u' Write and run your first program ', 2, None, '___sec8'),
+              (u' Write and run a program in Matlab ', 3, None, '___sec9'),
+              (u' Write a program in a text editor and run it in Octave ',
+               3,
+               None,
+               '___sec10'),
+              (u'  A Matlab program with a library function ',
+               1,
+               u'1st:ex2',
+               u'1st:ex2'),
+              (u' A Matlab program with vectorization and plotting ',
+               1,
+               u'1st:ex3',
+               u'1st:ex3'),
+              (u' More basic concepts ', 1, None, '___sec13'),
+              (u' Using Matlab interactively ', 2, None, '___sec14'),
+              (u' Arithmetics, parentheses and round-off error ',
+               2,
+               None,
+               '___sec15'),
+              (u' Variables ', 2, None, '___sec16'),
+              (u' Formatting text and numbers ', 2, None, '___sec17'),
+              (u' Arrays and more on plotting ', 2, None, '___sec18'),
+              (u' Error messages and warnings ', 2, None, '___sec19'),
+              (u' Input data ', 2, None, '___sec20'),
+              (u' Reading from and writing to files ', 2, None, '___sec21'),
+              (u' Symbolic computations ', 2, None, '___sec22'),
+              (u' Exercises ', 1, None, '___sec23'),
+              (u' Exercise 1: Error messages ',
+               2,
+               u'1st:exer:ErrorMessages',
+               u'1st:exer:ErrorMessages'),
+              (u' Exercise 2: Volume of a cube ',
+               2,
+               u'1st:exer:cubeVolume',
+               u'1st:exer:cubeVolume'),
+              (u' Exercise 3: Area and circumference of a circle ',
+               2,
+               u'1st:exer:areaCircle',
+               u'1st:exer:areaCircle'),
+              (u' Exercise 4: Volumes of three cubes ',
+               2,
+               u'1st:exer:volumes3cubes',
+               u'1st:exer:volumes3cubes'),
+              (u' Exercise 5: Average of integers ',
+               2,
+               u'1st:exer:averageOf5Integers',
+               u'1st:exer:averageOf5Integers'),
+              (u' Exercise 6: Volume and area at command prompt ',
+               2,
+               u'1st:exer:cubeVolInteractively',
+               u'1st:exer:cubeVolInteractively'),
+              (u' Exercise 7: Update variable at command prompt ',
+               2,
+               u'1st:exer:updateVarInteractively',
+               u'1st:exer:updateVarInteractively'),
+              (u' Exercise 8: Formatted print to screen ',
+               2,
+               u'1st:exer:printfScreen',
+               u'1st:exer:printfScreen'),
+              (u' Exercise 9: Matlab documentation and random numbers ',
+               2,
+               u'1st:exer:PythonDocRandom',
+               u'1st:exer:PythonDocRandom'),
+              (u' Basic constructions ',
+               0,
+               u'2nd:BasicConstructins',
+               u'2nd:BasicConstructins'),
+              (u' if tests, colon and indent ', 1, None, '___sec34'),
+              (u' Functions ', 1, None, '___sec35'),
+              (u' For loops ', 1, u'sec:for:loops', u'sec:for:loops'),
+              (u' While loops ', 1, u'sec:while:loops', u'sec:while:loops'),
+              (u' Exercises ', 1, None, '___sec38'),
+              (u' Exercise 10: Introducing errors ',
+               2,
+               u'2nd:exer:IntroducingErrors',
+               u'2nd:exer:IntroducingErrors'),
+              (u' Exercise 11: Compare integers a and b ',
+               2,
+               u'2nd:exer:compInt',
+               u'2nd:exer:compInt'),
+              (u' Exercise 12: Functions for circumference and area of a circle ',
+               2,
+               u'2nd:exer:funcCircArea',
+               u'2nd:exer:funcCircArea'),
+              (u' Exercise 13: Function for area of a rectangle ',
+               2,
+               u'2nd:exer:funcAreaRectangle',
+               u'2nd:exer:funcAreaRectangle'),
+              (u' Exercise 14: Average of integers ',
+               2,
+               u'2nd:exer:avNInt',
+               u'2nd:exer:avNInt'),
+              (u' Exercise 15: While loop with errors ',
+               2,
+               u'2nd:exer:whileLoopErrors',
+               u'2nd:exer:whileLoopErrors'),
+              (u' Exercise 16: Area of rectangle versus circle ',
+               2,
+               u'2nd:exer:areaRectCircle',
+               u'2nd:exer:areaRectCircle'),
+              (u' Exercise 17: Find crossing points of two graphs ',
+               2,
+               u'2nd:exer:Cross2Graphs',
+               u'2nd:exer:Cross2Graphs'),
+              (u' Exercise 18: Sort array with numbers ',
+               2,
+               u'2nd:exer:sortNumbers',
+               u'2nd:exer:sortNumbers'),
+              (u' Exercise 19: Computing $\\pi$ ',
+               2,
+               u'2nd:exer:computingPi',
+               u'2nd:exer:computingPi'),
+              (u' Exercise 20: Find right number combination ',
+               2,
+               u'2nd:exer:numberCombination',
+               u'2nd:exer:numberCombination'),
+              (u' Exercise 21: Frequency of random numbers ',
+               2,
+               u'2nd:exer:numberOccurrence',
+               u'2nd:exer:numberOccurrence'),
+              (u' Remarks ', 3, None, '___sec51'),
+              (u' Exercise 22: Game 21 ',
+               2,
+               u'2nd:exer:Game21',
+               u'2nd:exer:Game21'),
+              (u' Exercise 23: Linear interpolation ',
+               2,
+               u'2nd:exer:linearInterpol',
+               u'2nd:exer:linearInterpol'),
+              (u' Exercise 24: Test straight line requirement ',
+               2,
+               u'2nd:exer:testStraightLine',
+               u'2nd:exer:testStraightLine'),
+              (u' Exercise 25: Fit straight line to data ',
+               2,
+               u'2nd:exer:fitLine',
+               u'2nd:exer:fitLine'),
+              (u' Remarks ', 3, None, '___sec56'),
+              (u' Exercise 26: Fit sines to straight line ',
+               2,
+               u'2nd:exer:fitSines',
+               u'2nd:exer:fitSines'),
+              (u' Remarks ', 3, None, '___sec58'),
+              (u' Computing integrals ',
+               0,
+               u'sec:integrals',
+               u'sec:integrals'),
+              (u' Basic ideas of numerical integration ',
+               1,
+               u'sec:integrals:basic',
+               u'sec:integrals:basic'),
+              (u' The composite trapezoidal rule ',
+               1,
+               u'sec:integrals:trap',
+               u'sec:integrals:trap'),
+              (u' The idea ',
+               2,
+               u'sec:integrals:trap:idea',
+               u'sec:integrals:trap:idea'),
+              (u' The general formula ',
+               2,
+               u'sec:integrals:formula',
+               u'sec:integrals:formula'),
+              (u' Implementation ',
+               2,
+               u'sec:integrals:trap:impl',
+               u'sec:integrals:trap:impl'),
+              (u' Specific or general implementation? ', 3, None, '___sec65'),
+              (u' Implementation with functions ', 3, None, '___sec66'),
+              (u' Solving our specific problem in a session ',
+               3,
+               None,
+               '___sec67'),
+              (u' Solving our specific problem in a program ',
+               3,
+               None,
+               '___sec68'),
+              (u' Alternative flat special-purpose implementation ',
+               2,
+               None,
+               '___sec69'),
+              (u' The composite midpoint method ',
+               1,
+               u'sec:integrals:Midpoint',
+               u'sec:integrals:Midpoint'),
+              (u' The idea ', 3, None, '___sec71'),
+              (u' The general formula ', 2, None, '___sec72'),
+              (u' Implementation ', 2, None, '___sec73'),
+              (u' Comparing the trapezoidal and the midpoint methods ',
+               2,
+               None,
+               '___sec74'),
+              (u' Testing ', 1, None, '___sec75'),
+              (u' Problems with brief testing procedures ',
+               2,
+               None,
+               '___sec76'),
+              (u' Test procedures ',
+               2,
+               u'sec:integrals:testprocs',
+               u'sec:integrals:testprocs'),
+              (u' Hand-computed results ', 3, None, '___sec78'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec79'),
+              (u' Demonstrate correct convergence rates ',
+               3,
+               None,
+               '___sec80'),
+              (u' Test functions for test procedures ',
+               2,
+               u'sec:integrals:test:functions',
+               u'sec:integrals:test:functions'),
+              (u' Hand-computed results ', 3, None, '___sec82'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec83'),
+              (u' Demonstrate correct convergence rates ',
+               3,
+               None,
+               '___sec84'),
+              (u' Vectorization ', 1, None, '___sec85'),
+              (u' Measuring computational speed ', 1, None, '___sec86'),
+              (u' Double and triple integrals ', 1, None, '___sec87'),
+              (u' Exercises ', 1, None, '___sec88'),
+              (u' Exercise 27: Hand calculations for the trapezoidal method ',
+               2,
+               u'sec:exer:trap:hand',
+               u'sec:exer:trap:hand'),
+              (u' Exercise 28: Hand calculations for the midpoint method ',
+               2,
+               u'sec:exer:midpt:hand',
+               u'sec:exer:midpt:hand'),
+              (u' Exercise 29: Compute a simple integral ',
+               2,
+               u'sec:exer:trap:mid:parabola',
+               u'sec:exer:trap:mid:parabola'),
+              (u' Exercise 30: Hand-calculations with sine integrals ',
+               2,
+               u'sec:exer:hand:sine',
+               u'sec:exer:hand:sine'),
+              (u' Exercise 31: Make test functions for the midpoint method ',
+               2,
+               u'sec:exer:test:midpoint',
+               u'sec:exer:test:midpoint'),
+              (u' Exercise 32: Explore round-off errors with large numbers ',
+               2,
+               u'sec:exer:test:roundoff',
+               u'sec:exer:test:roundoff'),
+              (u' Exercise 33: Write test functions for $\\int_0^4\\sqrt{x}dx$ ',
+               2,
+               u'sec:exer:test:convrates:sqrt',
+               u'sec:exer:test:convrates:sqrt'),
+              (u' Remarks ', 3, None, '___sec96'),
+              (u' Exercise 34: Rectangle methods ',
+               2,
+               u'sec:exer:rectangleMethod',
+               u'sec:exer:rectangleMethod'),
+              (u' Exercise 35: Adaptive integration ',
+               2,
+               u'sec:exer:adaptive:int',
+               u'sec:exer:adaptive:int'),
+              (u' Remarks ', 3, None, '___sec99'),
+              (u' Exercise 36: Integrating x raised to x ',
+               2,
+               u'sec:exer:integrate:x2x',
+               u'sec:exer:integrate:x2x'),
+              (u' Exercise 37: Revisit fit of sines to a function ',
+               2,
+               u'sec:exer:revisitFitSines',
+               u'sec:exer:revisitFitSines'),
+              (u' Solving ordinary differential equations ',
+               0,
+               u'5th:SolvODEs',
+               u'5th:SolvODEs'),
+              (u' Population growth ', 1, u'sec:de:pg', u'sec:de:pg'),
+              (u' Derivation of the model ',
+               2,
+               u'sec:de:pg:model',
+               u'sec:de:pg:model'),
+              (u' Numerical solution ',
+               2,
+               u'sec:de:pg:numerics',
+               u'sec:de:pg:numerics'),
+              (u' Programming the Forward Euler scheme; the special case ',
+               2,
+               u'sec:de:pg:prog1',
+               u'sec:de:pg:prog1'),
+              (u' Understanding the Forward Euler method ',
+               2,
+               u'sec:de:pg:geom',
+               u'sec:de:pg:geom'),
+              (u' Programming the Forward Euler scheme; the general case ',
+               2,
+               u'sec:de:FE:gen',
+               u'sec:de:FE:gen'),
+              (u' Making the population growth model more realistic ',
+               2,
+               None,
+               '___sec109'),
+              (u' Verification: exact linear solution of the discrete equations ',
+               2,
+               u'sec:de:growth:test:linear',
+               u'sec:de:growth:test:linear'),
+              (u' Spreading of diseases ', 1, None, '___sec111'),
+              (u' Spreading of a flu ', 2, u'sec:de:flu', u'sec:de:flu'),
+              (u' A Forward Euler method for the differential equation system ',
+               2,
+               u'sec:de:flu:FE',
+               u'sec:de:flu:FE'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:flu:prog:spec',
+               u'sec:de:flu:prog:spec'),
+              (u' Outbreak or not ', 2, None, '___sec115'),
+              (u' Abstract problem and notation ',
+               2,
+               u'sec:de:flu:generic',
+               u'sec:de:flu:generic'),
+              (u' Programming the numerical method; the general case ',
+               2,
+               u'sec:de:flu:prog:generic',
+               u'sec:de:flu:prog:generic'),
+              (u' Time-restricted immunity ', 2, None, '___sec118'),
+              (u' Incorporating vaccination ', 2, None, '___sec119'),
+              (u' Discontinuous coefficients: a vaccination campaign ',
+               2,
+               u'sec:de:flu:vaccine:discont',
+               u'sec:de:flu:vaccine:discont'),
+              (u' Oscillating one-dimensional systems ',
+               1,
+               u'sec:de:vib',
+               u'sec:de:vib'),
+              (u' Derivation of a simple model ', 2, None, '___sec122'),
+              (u' Numerical solution ', 2, None, '___sec123'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:vib:special',
+               u'sec:de:vib:special'),
+              (u' A magic fix of the numerical method ',
+               2,
+               None,
+               '___sec125'),
+              (u" The 2nd-order Runge-Kutta method (or Heun's method) ",
+               2,
+               u'sec:de:osc:Heun',
+               u'sec:de:osc:Heun'),
+              (u' Odespy: software for solving ODEs ',
+               2,
+               u'sec:de:osc:odespy',
+               u'sec:de:osc:odespy'),
+              (u' The 4th-order Runge-Kutta method ', 2, None, '___sec128'),
+              (u' The algorithm ', 3, None, '___sec129'),
+              (u' Application ', 3, None, '___sec130'),
+              (u' Implementation ', 3, None, '___sec131'),
+              (u' Derivation ', 3, None, '___sec132'),
+              (u' More effects: damping, nonlinearity, and external forces ',
+               2,
+               None,
+               '___sec133'),
+              (u' The Euler-Cromer scheme ', 3, None, '___sec134'),
+              (u' The 4-th order Runge-Kutta method ', 3, None, '___sec135'),
+              (u' Illustration of linear damping ', 2, None, '___sec136'),
+              (u' Illustration of linear damping with sinusoidal excitation ',
+               2,
+               None,
+               '___sec137'),
+              (u' Spring-mass system with sliding friction ',
+               2,
+               u'sec:de:vib:ode2:sliding:friction',
+               u'sec:de:vib:ode2:sliding:friction'),
+              (u' A finite difference method; undamped, linear case ',
+               2,
+               u'sec:de:vib:2nd',
+               u'sec:de:vib:2nd'),
+              (u' A finite difference method; linear damping ',
+               2,
+               u'sec:de:vib:2nd:damped1',
+               u'sec:de:vib:2nd:damped1'),
+              (u' Exercises ', 1, None, '___sec141'),
+              (u' Exercise 38: Geometric construction of the Forward Euler method ',
+               2,
+               u'sec:de:exer:geom',
+               u'sec:de:exer:geom'),
+              (u' Exercise 39: Make test functions for the Forward Euler method ',
+               2,
+               u'sec:de:exer:FE:test1',
+               u'sec:de:exer:FE:test1'),
+              (u" Exercise 40: Implement and evaluate Heun's method ",
+               2,
+               u'sec:de:exer:Heun:pg',
+               u'sec:de:exer:Heun:pg'),
+              (u' Exercise 41: Find an appropriate time step; logistic model ',
+               2,
+               u'sec:de:exer:logistic:dtopt',
+               u'sec:de:exer:logistic:dtopt'),
+              (u' Exercise 42: Find an appropriate time step; SIR model ',
+               2,
+               u'sec:de:exer:SIR:dtopt',
+               u'sec:de:exer:SIR:dtopt'),
+              (u' Exercise 43: Model an adaptive vaccination campaign ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 44: Refactor a flat program ',
+               2,
+               u'sec:de:exer:vib:FE:func',
+               u'sec:de:exer:vib:FE:func'),
+              (u' Exercise 45: Simulate oscillations by a general ODE solver ',
+               2,
+               u'sec:de:exer:vib:ode_FE',
+               u'sec:de:exer:vib:ode_FE'),
+              (u' Exercise 46: Compute the energy in oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Exercise 47: Use a Backward Euler scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:BE',
+               u'sec:de:exer:pg:BE'),
+              (u' Exercise 48: Use a Crank-Nicolson scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:CN',
+               u'sec:de:exer:pg:CN'),
+              (u' Exercise 49: Understand finite differences via Taylor series ',
+               2,
+               u'sec:de:exer:fd:Taylor',
+               u'sec:de:exer:fd:Taylor'),
+              (u' Exercise 50: Use a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Remarks ', 3, None, '___sec155'),
+              (u" Exercise 51: Use Heun's method for the SIR model ",
+               2,
+               u'sec:de:exer:SIR:Heun',
+               u'sec:de:exer:SIR:Heun'),
+              (u' Exercise 52: Use Odespy to solve a simple ODE ',
+               2,
+               u'sec:de:exer:odespy:decay',
+               u'sec:de:exer:odespy:decay'),
+              (u' Exercise 53: Set up a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:osc:BE',
+               u'sec:de:exer:osc:BE'),
+              (u' Exercise 54: Set up a Forward Euler scheme for nonlinear and damped oscillations ',
+               2,
+               u'sec:de:exer:osc:FE:general',
+               u'sec:de:exer:osc:FE:general'),
+              (u' Exercise 55: Discretize an initial condition ',
+               2,
+               u'sec:de:exer:osc:2nd:V0ic',
+               u'sec:de:exer:osc:2nd:V0ic'),
+              (u' Solving Partial Differential Equations ',
+               0,
+               u'6th:SolvPDEs',
+               u'6th:SolvPDEs'),
+              (u' The Method of Lines combined with the Forward Euler scheme ',
+               1,
+               u'6th:SolvPDEs:MOLandFE',
+               u'6th:SolvPDEs:MOLandFE'),
+              (u' The Method of Lines combined with the Backward Euler scheme ',
+               1,
+               u'6th:SolvPDEs:MOLandBE',
+               u'6th:SolvPDEs:MOLandBE'),
+              (u' A glimpse of the Finite Element Method  ',
+               1,
+               u'6th:SolvPDEs:FEM',
+               u'6th:SolvPDEs:FEM'),
+              (u' Exercises ', 1, None, '___sec165'),
+              (u' Exercise 56: Temperature distribution with forward Euler ',
+               2,
+               u'6th:exer:TempDistribFE',
+               u'6th:exer:TempDistribFE'),
+              (u' Exercise 57: Matrix-vector hand calculations ',
+               2,
+               u'6th:exer:MatrixVectorHandCalc',
+               u'6th:exer:MatrixVectorHandCalc'),
+              (u' Exercise 58: Temperature distribution with backward Euler ',
+               2,
+               u'6th:exer:tempDistribBE',
+               u'6th:exer:tempDistribBE'),
+              (u' Exercise 59: Temperature distribution with Crank-Nicolson ',
+               2,
+               u'6th:exer:tempDistribCN',
+               u'6th:exer:tempDistribCN'),
+              (u' Appendix: Taylor series approximation ',
+               0,
+               u'A:AppTaylor',
+               u'A:AppTaylor'),
+              (u' Appendix: Solving nonlinear algebraic equations ',
+               0,
+               u'4th:NonlinAlgEq',
+               u'4th:NonlinAlgEq'),
+              (u' Brute force method ',
+               2,
+               u'4th:bruteforce',
+               u'4th:bruteforce'),
+              (u' Model problem for algebraic equations ',
+               2,
+               None,
+               '___sec173'),
+              (u" Newton's method ",
+               1,
+               u'4th:NonlinAlgEq:Newt',
+               u'4th:NonlinAlgEq:Newt'),
+              (u' Making a more efficient and robust implementation ',
+               2,
+               u'4th:Newton:robust',
+               u'4th:Newton:robust'),
+              (u' The Secant method ',
+               1,
+               u'4th:NonlinAlgEq:Secant',
+               u'4th:NonlinAlgEq:Secant'),
+              (u' The Bisection method ',
+               1,
+               u'4th:NonlinAlgEq:Bisect',
+               u'4th:NonlinAlgEq:Bisect'),
+              (u' Rate of convergence ',
+               1,
+               u'4th:NonlinAlgEq:RateConv',
+               u'4th:NonlinAlgEq:RateConv'),
+              (u' Solving multiple nonlinear algebraic equations ',
+               1,
+               u'4th:NonlinAlgEq:MultEqNewt',
+               u'4th:NonlinAlgEq:MultEqNewt'),
+              (u' Exercises ', 1, None, '___sec180'),
+              (u' Exercise 60: Brute force solver based on zero crossings ',
+               2,
+               u'4th:exer:crossings',
+               u'4th:exer:crossings'),
+              (u" Exercise 61: Understand why Newton's method can fail ",
+               2,
+               u'4th:exer:Newton:failure',
+               u'4th:exer:Newton:failure'),
+              (u' Exercise 62: See if the Secant method fails ',
+               2,
+               u'4th:exer:Secant:failure',
+               u'4th:exer:Secant:failure'),
+              (u' Exercise 63: Understand how the Bisection method cannot fail ',
+               2,
+               u'4th:exer:Bisection:failure',
+               u'4th:exer:Bisection:failure'),
+              (u" Exercise 64: Combine the Bisection method with Newton's method ",
+               2,
+               u'4th:exer:Bisection:Newton',
+               u'4th:exer:Bisection:Newton'),
+              (u' Exercise 65: Straight line crossing (Bisection method) ',
+               2,
+               u'4th:exer:straightLineCrossing',
+               u'4th:exer:straightLineCrossing'),
+              (u" Exercise 66: Newton's method by hand ",
+               2,
+               u'4th:exer:NewtonHand',
+               u'4th:exer:NewtonHand'),
+              (u" Exercise 67: Intersecting graphs (Newton's method) ",
+               2,
+               u'4th:exer:intersectingGraphsNewton',
+               u'4th:exer:intersectingGraphsNewton'),
+              (u' Exercise 68: Finding many solutions ',
+               2,
+               u'4th:exer:findingManySolutions',
+               u'4th:exer:findingManySolutions'),
+              (u' Exercise 69: Combining Bisection and Newton ',
+               2,
+               u'4th:exer:combBisectNewt',
+               u'4th:exer:combBisectNewt'),
+              (u" Exercise 70: Timing Newton's method ",
+               2,
+               u'4th:exer:timingNewton',
+               u'4th:exer:timingNewton'),
+              (u' Exercise 71: Problematic starting value ',
+               2,
+               u'4th:exer:problemStartVal',
+               u'4th:exer:problemStartVal'),
+              (u' Exercise 72: Secant method by hand ',
+               2,
+               u'4th:exer:secantHand',
+               u'4th:exer:secantHand'),
+              (u' Exercise 73: Intersecting graphs (Secant method) ',
+               2,
+               u'4th:exer:intersectingGraphsSecant',
+               u'4th:exer:intersectingGraphsSecant'),
+              (u' Exercise 74: Two nonlinear equations ',
+               2,
+               u'4th:exer:twoNonlinEqns',
+               u'4th:exer:twoNonlinEqns'),
+              (u' Exercise 75: Fixed point iteration ',
+               2,
+               u'4th:exer:fixedPointIt',
+               u'4th:exer:fixedPointIt'),
+              (u' References ', 0, None, '___sec197')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands.tex -->
+$$
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="p4c-bootstrap-Matlab.html">A Gentle Introduction to Programming for Computations</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Matlab000.html#___sec0" style="font-size: 80%;">Preface</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Matlab001.html#1st:TheFirstFewSteps" style="font-size: 80%;">The first few steps</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Matlab007.html#2nd:BasicConstructins" style="font-size: 80%;">Basic constructions</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Matlab012.html#sec:integrals" style="font-size: 80%;">Computing integrals</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Matlab016.html#5th:SolvODEs" style="font-size: 80%;">Solving ordinary differential equations</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Matlab021.html#6th:SolvPDEs" style="font-size: 80%;">Solving Partial Differential Equations</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Matlab026.html#A:AppTaylor" style="font-size: 80%;">Appendix: Taylor series approximation</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Matlab027.html#4th:NonlinAlgEq" style="font-size: 80%;">Appendix: Solving nonlinear algebraic equations</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Matlab034.html#___sec197" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0033"></a>
+<!-- !split -->
+
+<h1 id="___sec180">Exercises <a name="___sec180"></a></h1>
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="4th:exer:crossings">Exercise 60: Brute force solver based on zero crossings<a name="4th:exer:crossings"></a></h2>
+
+<p>
+<!-- solution=`sol_search_crossings_1eqn.pdf` -->
+
+<p>
+The brute force method from the section <a href="._p4c-bootstrap-Matlab027.html#4th:bruteforce">Brute force method</a> is based on the
+idea of solving \( f(x)=0 \) by computing \( f \) at a large number of \( x \)
+points and choosing the \( x \) points where \( f(x) \) is close enough to
+the \( x \) axis, i.e., \( |f(x)| < \epsilon \). The problem with the method
+is that it finds too many solutions. A better idea is to check where
+\( f \) crosses the \( x \) axis.
+
+<p>
+More specifically, compute a set of evenly distributed
+points \( x_i=a+ih \), \( i=0,\ldots,n \),
+\( h=(b-a)/n \). For each pair of points, \( x_i \) and \( x_{i+1} \), check if
+\( f \) crosses the \( x \) axis: \( f(x_i)f(x_{i+1}) < =0 \). If so, we have a solution
+of the equation \( f(x) \) in the interval \( [x_i,x_{i+1}] \).
+We may take the midpoint of this final interval as the approximate solution.
+Write a program that implements this idea and test it on the same
+equation as in the section <a href="._p4c-bootstrap-Matlab027.html#4th:bruteforce">Brute force method</a>.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+The program may be written as:
+
+<p>
+
+<!-- code=matlab (!bc mpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">function</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">search_crossings_1eqn</span>()<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>f = @(x) <span style="color: #008000">exp</span>(<span style="color: #008000">sqrt</span>(x))<span style="color: #666666">.*</span><span style="color: #008000">sin</span>(<span style="color: #666666">2*</span>x) <span style="color: #666666">+</span> <span style="color: #008000">cos</span>(x)<span style="color: #666666">.^5</span> <span style="color: #666666">+</span> <span style="color: #666666">8</span>;
+    
+    a = <span style="color: #666666">0</span>; b = <span style="color: #666666">7</span>; n = <span style="color: #666666">200</span>;
+    dx = (b<span style="color: #666666">-</span>a)<span style="color: #666666">/</span>n;
+    x = <span style="color: #008000">linspace</span>(a,b,n<span style="color: #666666">+1</span>);
+    <span style="color: #008000">eps</span> = <span style="color: #666666">0.001</span>;
+
+    <span style="color: #008000; font-weight: bold">for</span> <span style="color: #008000">i</span> = <span style="color: #666666">1</span>:n 
+        <span style="color: #008000; font-weight: bold">if</span> f(x(<span style="color: #008000">i</span>))<span style="color: #666666">*</span>f(x(<span style="color: #008000">i</span><span style="color: #666666">+1</span>)) <span style="color: #666666">&lt;</span>= <span style="color: #666666">0</span>
+            x_sol = (x(<span style="color: #008000">i</span>)<span style="color: #666666">+</span>x(<span style="color: #008000">i</span><span style="color: #666666">+1</span>))<span style="color: #666666">/2</span>;
+            fprintf(<span style="color: #BA2121">&#39;x: %g , f_value: %g \n&#39;</span>,x_sol,f(x_sol));
+        <span style="color: #008000; font-weight: bold">end</span>
+    <span style="color: #008000; font-weight: bold">end</span>
+    
+    plot(x,f(x),<span style="color: #BA2121">&#39;b-&#39;</span>);
+    xlabel(<span style="color: #BA2121">&#39;x&#39;</span>);
+    ylabel(<span style="color: #BA2121">&#39;f(x)&#39;</span>);
+    grid(<span style="color: #BA2121">&#39;on&#39;</span>);
+<span style="color: #008000; font-weight: bold">end</span>
+</pre></div>
+<p>
+Running the program produces the following printout:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">x: 5.194157 , f_value: 0.000068
+x: 5.845892 , f_value: 0.000128
+</pre></div>
+<p>
+and the plot of \( f(x) \) seen in Figure <a href="#fig:search_cross">61</a>.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 61:  The function \( f(x) = e^{\sqrt{x}} sin(2 x) + cos^5(x) + 8 \) plotted as a function of \( x \). <a name="fig:search_cross"></a> </p></center>
+<p><img src="figs/search_crossings.png" align="bottom" width=400></p>
+</center>
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>search_crossings_1eqn.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="4th:exer:Newton:failure">Exercise 61: Understand why Newton's method can fail<a name="4th:exer:Newton:failure"></a></h2>
+
+<p>
+The purpose of this exercise is to understand when Newton's method works
+and fails. To this end, solve \( \tanh x=0 \) by Newton's method
+and study the intermediate details of the algorithm. Start with \( x_0=1.08 \).
+Plot the tangent in each iteration of Newton's method. Then repeat the calculations
+and the plotting when \( x_0=1.09 \). Explain what you observe.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+The program may be written as:
+
+<p>
+
+<!-- code=matlab (!bc mpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">function</span> [solution, no_iterations] =...<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">                                </span><span style="color: #0000FF">Newton_failure</span>(f, dfdx, x0, eps)<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>x = x0;
+    f_value = f(x);
+    iteration_counter = <span style="color: #666666">0</span>;
+    <span style="color: #008000; font-weight: bold">while</span> <span style="color: #008000">abs</span>(f_value) <span style="color: #666666">&gt;</span> <span style="color: #008000">eps</span> <span style="color: #666666">&amp;&amp;</span> iteration_counter <span style="color: #666666">&lt;</span> <span style="color: #666666">100</span>
+        <span style="color: #008000; font-weight: bold">try</span>
+            fprintf(<span style="color: #BA2121">&#39;Current x vaule: %g \n&#39;</span>, x);
+            plot_line(f, x, f_value, dfdx(x));
+            x = x <span style="color: #666666">-</span> (f_value)<span style="color: #666666">/</span>dfdx(x);
+        <span style="color: #008000; font-weight: bold">catch</span>
+            fprintf(<span style="color: #BA2121">&#39;Error! - derivative zero for x = \n&#39;</span>,x)
+            exit(<span style="color: #666666">1</span>)
+        <span style="color: #008000; font-weight: bold">end</span>
+        f_value = f(x);
+        iteration_counter = iteration_counter <span style="color: #666666">+</span> <span style="color: #666666">1</span>;
+    <span style="color: #008000; font-weight: bold">end</span>
+    <span style="color: #408080; font-style: italic">%Here, either a solution is found, or too many iterations</span>
+    <span style="color: #008000; font-weight: bold">if</span> <span style="color: #008000">abs</span>(f_value) <span style="color: #666666">&gt;</span> <span style="color: #008000">eps</span>
+        iteration_counter = <span style="color: #666666">-1</span>;
+    <span style="color: #008000; font-weight: bold">end</span>
+    solution = x;
+    no_iterations = iteration_counter;
+<span style="color: #008000; font-weight: bold">end</span>
+</pre></div>
+<p>
+which may be called from the script <code>use_my_Newton_failure.m</code>:
+
+<p>
+
+<!-- code=matlab (!bc mpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">f = @(x) <span style="color: #008000">tanh</span>(x);
+dfdx = @(x) <span style="color: #666666">1</span> <span style="color: #666666">-</span> <span style="color: #008000">tanh</span>(x)^<span style="color: #666666">2</span>;
+
+[solution, no_iterations] = Newton_failure(f, dfdx, <span style="color: #666666">1.08</span>, <span style="color: #666666">0.001</span>)
+
+<span style="color: #008000; font-weight: bold">if</span> no_iterations <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>             <span style="color: #408080; font-style: italic">%solution found</span>
+    fprintf(<span style="color: #BA2121">&#39;Number of function calls: %d \n&#39;</span>, <span style="color: #666666">1</span> <span style="color: #666666">+</span> <span style="color: #666666">2*</span>no_iterations); 
+    fprintf(<span style="color: #BA2121">&#39;A solution is: %f \n&#39;</span>, solution);
+<span style="color: #008000; font-weight: bold">else</span>
+    fprintf(<span style="color: #BA2121">&#39;Solution not found! \n&#39;</span>);
+<span style="color: #008000; font-weight: bold">end</span>
+</pre></div>
+<p>
+Note that <code>Newton_failure.m</code> calls the function <code>plot_line</code> (located in <code>plot_line.m</code>),
+reading:
+
+<p>
+
+<!-- code=matlab (!bc mpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">function</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">plot_line</span>(f, xn, f_xn, slope)<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #408080; font-style: italic">%plot both f(x) and the tangent or secant</span>
+    x_f = <span style="color: #008000">linspace</span>(<span style="color: #666666">-2</span>,<span style="color: #666666">2</span>,<span style="color: #666666">100</span>);
+    y_f = f(x_f);
+    x_t = <span style="color: #008000">linspace</span>(xn<span style="color: #666666">-2</span>,xn<span style="color: #666666">+2</span>,<span style="color: #666666">10</span>);
+    y_t = slope<span style="color: #666666">*</span>x_t <span style="color: #666666">+</span> (f_xn <span style="color: #666666">-</span> slope<span style="color: #666666">*</span>xn); <span style="color: #408080; font-style: italic">%straight line: ax + b</span>
+    figure(); 
+    plot(x_t,y_t,<span style="color: #BA2121">&#39;r-&#39;</span>,x_f,y_f,<span style="color: #BA2121">&#39;b-&#39;</span>); grid(<span style="color: #BA2121">&#39;on&#39;</span>);
+    xlabel(<span style="color: #BA2121">&#39;x&#39;</span>); ylabel(<span style="color: #BA2121">&#39;f(x)&#39;</span>);
+    <span style="color: #008000">disp</span>(<span style="color: #BA2121">&#39;...press enter to continue&#39;</span>)
+    pause on; pause;
+<span style="color: #008000; font-weight: bold">end</span>
+</pre></div>
+<p>
+(The function <code>plot_line</code> is placed as a separate m-file so that it may be used also
+by the function <code>secant_failure</code>, which is to be written in another exercise.)
+
+<p>
+Running the program with <code>x</code> set to \( 1.08 \) produces a series of plots (and prints) showing
+the graph and the tangent for the present value of <code>x</code>. There are quite many
+plots, so we do not show them here. However, the tangent line "jumps" around
+a few times before it settles. In the final plot the tangent line goes through
+the solution at \( x = 0 \). The final printout brings the information:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Number of function calls: 13
+A solution is: 0.000024
+</pre></div>
+<p>
+When we run the program anew, this time with <code>x</code> set to \( 1.09 \), we get another series of
+plots (and prints), but this time the tangent moves away from the (known) solution.
+The final printout we get states that:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Number of function calls: 19
+A solution is: nan
+</pre></div>
+<p>
+Here, <code>nan</code> stands for "not a number", meaning that we got no solution value for <code>x</code>.
+That is, Newton's method diverged.
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>Newton_failure.*</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="4th:exer:Secant:failure">Exercise 62: See if the Secant method fails<a name="4th:exer:Secant:failure"></a></h2>
+
+<p>
+Does the Secant method behave better than Newton's method in
+the problem described in <a href="#4th:exer:Newton:failure">Exercise 61: Understand why Newton's method can fail</a>?
+Try the initial guesses
+
+<ol>
+<li> \( x_0=1.08 \) and \( x_1=1.09 \)</li>
+<li> \( x_0=1.09 \) and \( x_1=1.1 \)</li>
+<li> \( x_0=1 \) and \( x_1=2.3 \)</li>
+<li> \( x_0=1 \) and \( x_1=2.4 \)</li>
+</ol>
+
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+The program may be written as:
+
+<p>
+
+<!-- code=matlab (!bc mpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #408080; font-style: italic">% This file is not yet written.</span>
+</pre></div>
+<p>
+which may be called from the script <code>use_my_secant_failure.m</code>:
+
+<p>
+
+<!-- code=matlab (!bc mpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">f = @(x) <span style="color: #008000">tanh</span>(x);
+dfdx = @(x) <span style="color: #666666">1</span> <span style="color: #666666">-</span> <span style="color: #008000">tanh</span>(x)^<span style="color: #666666">2</span>;
+
+<span style="color: #408080; font-style: italic">%Requested trials:</span>
+<span style="color: #408080; font-style: italic">%x0 = 1.08 , x1 = 1.09</span>
+<span style="color: #408080; font-style: italic">%x0 = 1.09 , x1 = 1.1</span>
+<span style="color: #408080; font-style: italic">%x0 = 1 , x1 = 2.3</span>
+<span style="color: #408080; font-style: italic">%x0 = 1 , x1 = 2.4</span>
+[solution, no_iterations] = Secant_failure(f, <span style="color: #666666">1</span>, <span style="color: #666666">2.4</span>, <span style="color: #666666">0.001</span>)
+
+<span style="color: #008000; font-weight: bold">if</span> no_iterations <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>             <span style="color: #408080; font-style: italic">%solution found</span>
+    fprintf(<span style="color: #BA2121">&#39;Number of function calls: %d \n&#39;</span>, <span style="color: #666666">1</span> <span style="color: #666666">+</span> <span style="color: #666666">2*</span>no_iterations); 
+    fprintf(<span style="color: #BA2121">&#39;A solution is: %f \n&#39;</span>, solution);
+<span style="color: #008000; font-weight: bold">else</span>
+    fprintf(<span style="color: #BA2121">&#39;Solution not found! \n&#39;</span>);
+<span style="color: #008000; font-weight: bold">end</span>
+</pre></div>
+<p>
+Note that, as with <code>Newton_failure.m</code>, the script <code>plot_line.m</code> is called for
+plotting each tangent.
+
+<p>
+The script converges with the three first-mentioned alternatives for \( x_0 \) and \( x_1 \).
+With the final set of parameter values, the method diverges with a printout:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">Error! - denominator zero for x = 360.600893792
+</pre></div>
+<p>
+and a few more lines stating that an exception error has occurred.
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>Secant_failure.*</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="4th:exer:Bisection:failure">Exercise 63: Understand how the Bisection method cannot fail<a name="4th:exer:Bisection:failure"></a></h2>
+
+<p>
+Solve the same problem as in <a href="#4th:exer:Newton:failure">Exercise 61: Understand why Newton's method can fail</a>,
+using the Bisection method, but let the initial interval be
+\( [-5,3] \). Report how the interval containing the solution evolves
+during the iterations.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+The code may be written as:
+
+<p>
+
+<!-- code=matlab (!bc mpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">function</span> [result1, result2] = ...<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">                           </span><span style="color: #0000FF">bisection_nonfailure</span>(f, x_L, x_R, eps)<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #008000; font-weight: bold">if</span> f(x_L)<span style="color: #666666">*</span>f(x_R) <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>
+       fprintf(<span style="color: #BA2121">&#39;Error! Function does not have opposite \n&#39;</span>);
+       fprintf(<span style="color: #BA2121">&#39;signs at interval endpoints!&#39;</span>);
+       exit(<span style="color: #666666">1</span>); 
+    <span style="color: #008000; font-weight: bold">end</span>
+    x_M = (x_L <span style="color: #666666">+</span> x_R)<span style="color: #666666">/2</span>;
+    f_M = f(x_M);
+    iteration_counter = <span style="color: #666666">1</span>;
+    <span style="color: #008000; font-weight: bold">while</span> <span style="color: #008000">abs</span>(f_M) <span style="color: #666666">&gt;</span> <span style="color: #008000">eps</span>
+        left_f = f(x_L);
+        right_f = f(x_R);
+        <span style="color: #008000; font-weight: bold">if</span> left_f<span style="color: #666666">*</span>f_M <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>            <span style="color: #408080; font-style: italic">%i.e., same sign</span>
+            x_L = x_M;
+        <span style="color: #008000; font-weight: bold">else</span>
+            x_R = x_M;
+        <span style="color: #008000; font-weight: bold">end</span>
+        fprintf(<span style="color: #BA2121">&#39;interval: [%f, %f]\n&#39;</span>,x_L, x_R); <span style="color: #408080; font-style: italic">%print new int.v.</span>
+        x_M = (x_L <span style="color: #666666">+</span> x_R)<span style="color: #666666">/2</span>;
+        f_M = f(x_M);
+        iteration_counter = iteration_counter <span style="color: #666666">+</span> <span style="color: #666666">1</span>;
+    <span style="color: #008000; font-weight: bold">end</span>
+    result1 = x_M;
+    result2 = iteration_counter;
+<span style="color: #008000; font-weight: bold">end</span>
+</pre></div>
+<p>
+which may be called from the script <code>use_my_bisection_nonfailure.m</code>:
+
+<p>
+
+<!-- code=matlab (!bc mpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">f = @(x) <span style="color: #008000">tanh</span>(x);
+
+a = <span style="color: #666666">-5</span>; b = <span style="color: #666666">3</span>;
+
+[solution, no_iterations] =<span style="color: #408080; font-style: italic">...</span>
+                   bisection_nonfailure(f, a, b, <span style="color: #666666">1.0e-6</span>);
+
+fprintf(<span style="color: #BA2121">&#39;Number of function calls: %d\n&#39;</span>,<span style="color: #666666">1</span> <span style="color: #666666">+</span> <span style="color: #666666">2*</span>no_iterations);
+fprintf(<span style="color: #BA2121">&#39;A solution is: %f\n&#39;</span>,solution);
+</pre></div>
+<p>
+Running the program produces the following printout:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">interval: [-1.000000, 3.000000]
+interval: [-1.000000, 1.000000]
+Number of function calls: 7
+A solution is: 0.000000
+</pre></div>
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>bisection_nonfailure.*</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="4th:exer:Bisection:Newton">Exercise 64: Combine the Bisection method with Newton's method<a name="4th:exer:Bisection:Newton"></a></h2>
+
+<p>
+<!-- solution=`sol_bisection_Newton.pdf` -->
+
+<p>
+An attractive idea is to combine the reliability of the Bisection method
+with the speed of Newton's method, even if the potential divergence with
+Newton's method then still is an issue. Such a combinations is implemented
+by running the Bisection method until we have a narrow interval, and then switch
+to Newton's method for speed.
+
+<p>
+Write a function that implements this idea.
+Start with an interval \( [a,b] \) and switch to Newton's method when
+the current interval in the Bisection method is a fraction \( s \)
+of the initial interval (i.e., when the interval has length \( s(b-a) \)).
+The value of \( s \) must be given as an argument to the function, but
+it may have a default value of 0.1.
+
+<p>
+Try the new method on \( \tanh(x)=0 \) with an initial interval \( [-10,15] \).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+The code may be written as:
+
+<p>
+
+<!-- code=matlab (!bc mpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">function</span> [solution, no_iterations] = ...<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">                      </span><span style="color: #0000FF">bisection_Newton</span>(f, dfdx, x_L, x_R, eps, s)<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>f_L = f(x_L);
+    <span style="color: #008000; font-weight: bold">if</span> f_L<span style="color: #666666">*</span>f(x_R) <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>
+        fprintf(<span style="color: #BA2121">&#39;Error! Function does not have opposite&#39;</span>);
+        fprintf(<span style="color: #BA2121">&#39;signs at interval endpoints!&#39;</span>);
+        exit(<span style="color: #666666">1</span>);
+    <span style="color: #008000; font-weight: bold">end</span>
+    x_M = (x_L <span style="color: #666666">+</span> x_R)<span style="color: #666666">/2</span>;
+    f_M = f(x_M);
+    iteration_counter = <span style="color: #666666">1</span>;
+    interval_Newton = s<span style="color: #666666">*</span>(x_R <span style="color: #666666">-</span> x_L);  <span style="color: #408080; font-style: italic">%limit for swith to Newton</span>
+    <span style="color: #008000; font-weight: bold">while</span> (x_R <span style="color: #666666">-</span> x_L) <span style="color: #666666">&gt;</span> interval_Newton
+        <span style="color: #008000; font-weight: bold">if</span> f_L<span style="color: #666666">*</span>f_M <span style="color: #666666">&gt;</span> <span style="color: #666666">0</span>    <span style="color: #408080; font-style: italic">%i.e. same sign</span>
+            x_L = x_M;
+            f_L = f_M;
+        <span style="color: #008000; font-weight: bold">else</span>
+            x_R = x_M;
+        <span style="color: #008000; font-weight: bold">end</span>
+        x_M = (x_L <span style="color: #666666">+</span> x_R)<span style="color: #666666">/2</span>;
+        f_M = f(x_M);
+        iteration_counter = iteration_counter <span style="color: #666666">+</span> <span style="color: #666666">1</span>;
+    <span style="color: #008000; font-weight: bold">end</span>
+    [x, no_iter] = Newton(f, dfdx, x_M, <span style="color: #008000">eps</span>);
+    solution = x;
+    no_iterations = iteration_counter <span style="color: #666666">+</span> no_iter;
+<span style="color: #008000; font-weight: bold">end</span>
+</pre></div>
+<p>
+which may be called from the script <code>use_my_bisection_Newton.m</code>:
+
+<p>
+
+<!-- code=matlab (!bc mpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">f = @(x) <span style="color: #008000">tanh</span>(x);
+dfdx = @(x) <span style="color: #666666">1</span> <span style="color: #666666">-</span> <span style="color: #008000">tanh</span>(x)^<span style="color: #666666">2</span>; 
+
+<span style="color: #008000">eps</span> = <span style="color: #666666">1e-6</span>;
+a = <span style="color: #666666">-10</span>; b = <span style="color: #666666">15</span>;
+s = <span style="color: #666666">0.1</span>;
+[solution, no_iterations] =<span style="color: #408080; font-style: italic">...</span>
+                        bisection_Newton(f, dfdx, a, b, <span style="color: #008000">eps</span>, s);
+fprintf(<span style="color: #BA2121">&#39;A solution x = %f was reached in %d iterations \n&#39;</span>,<span style="color: #408080; font-style: italic">...</span>
+                                         solution,no_iterations);
+</pre></div>
+<p>
+Running the program produces the following printout:
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">A solution x = 0.000000 was reached in 7 iterations
+</pre></div>
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>bisection_Newton.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="4th:exer:straightLineCrossing">Exercise 65: Straight line crossing (Bisection method)<a name="4th:exer:straightLineCrossing"></a></h2>
+
+<p>
+<!-- solution=`sol_straight_line_crossing.pdf` -->
+
+<p>
+Write your own version of the Bisection method in a program applied to the following problem.
+
+<p>
+Assume a straight line defined as \( y = 2x - 4 \) on the interval \( [-1e6,1e6] \). Write a program that uses the Bisection method to find approximately where that line crosses the \( x \) axis. Include a printout of <code>middle_x</code> for each iteration of the while loop. Use the same error limit as in the original program. Run the program and confirm that the answer is correct.
+Filename: <code>straight_line_crossing.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="4th:exer:NewtonHand">Exercise 66: Newton's method by hand<a name="4th:exer:NewtonHand"></a></h2>
+
+<p>
+<!-- solution=`sol_Newton_hand.pdf` -->
+
+<p>
+Write the program <code>Newtons_method.m</code> as given in the text. Run the program and confirm that you get the same output. Then, inside the function <code>Newton</code>, as a new (extra) last line of the <code>try</code> block, insert a statement for printing the value of <code>x</code> to screen.
+
+<p>
+Before you next run the modified program, follow the two first iterations of the <code>while</code> loop by hand, and write down the values of <code>x</code> that will be printed to screen. Finally, run the modified program and compare with your predictions.
+Filename: <code>Newton_hand.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="4th:exer:intersectingGraphsNewton">Exercise 67: Intersecting graphs (Newton's method)<a name="4th:exer:intersectingGraphsNewton"></a></h2>
+
+<p>
+<!-- solution=`sol_intersecting_graphs_Newton.pdf` -->
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+In c, consider how you would solve it with pen and paper.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>a)</b>
+Write your own version of Newton's method in a program applied to the following problem. Consider \( f(x) = x^2 \) and \( g(x) = 2x + 40 \) on the interval \( [-10,10] \). Write a program that uses Newton's method to find approximately where the two graphs cross. Let the staring value for Newton's method be user input to the program. Your program should also plot the two graphs together in the same plot for comparison with computations. Run the program two times, using \( 10 \) and \( -10 \) as input starting values, respectively. Do the computed solutions appear reasonable? Explain briefly.
+
+<p>
+<b>b)</b>
+What starting value can <em>not</em> be used in your program? Explain briefly.
+
+<p>
+<b>c)</b>
+Explain briefly (i.e., no coding required) how you might use Newton's method to find the (non-usable) starting value considered in b.
+
+<p>
+Filename: <code>intersecting_graphs_Newton.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="4th:exer:findingManySolutions">Exercise 68: Finding many solutions<a name="4th:exer:findingManySolutions"></a></h2>
+
+<p>
+<!-- solution=`sol_finding_many_solutions.pdf` -->
+
+<p>
+Write a program that uses Newton's method to find all solutions to \( sin(x) = 0 \) on the interval \( [0,4\pi] \) during a single execution of the program.
+
+<p>
+Let your program use \( 40 \) evenly distributed starting values on the interval. For each starting value, print the solution found to the screen. Also, let your program plot \( sin(x) \) on the interval. After execution, count the number of <em>different</em> solutions found and compare with the graph. Did your program find all the solutions (including the endpoints)? In the sequence of solutions printed to screen, why do some of the previously found solutions get printed again? Explain briefly.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Call Newton's method in a <code>for</code> loop that iterates \( 40 \) times.
+
+<p>
+<!-- --- end hint in exercise --- -->
+Filename: <code>finding_many_solutions.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="4th:exer:combBisectNewt">Exercise 69: Combining Bisection and Newton<a name="4th:exer:combBisectNewt"></a></h2>
+
+<p>
+<!-- solution=`sol_combining_bisection_Newton.pdf` -->
+
+<p>
+Consider \( x^2 = 9 \) on the interval \( [0,1000] \). Write a program that solves the equation by first using four iterations with the Bisection method (to reduce the interval) before switching to Newton's method for the final calculations.
+
+<p>
+Use the midpoint of the interval as starting value for Newton's method. The program should print to the screen each new interval found by the Bisection method, and also each new \( x \) produced by Newton's method.
+Filename: <code>combining_bisection_Newton.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="4th:exer:timingNewton">Exercise 70: Timing Newton's method<a name="4th:exer:timingNewton"></a></h2>
+
+<p>
+<!-- solution=`sol_timing_Newton.pdf` -->
+
+<p>
+Write a program that measures the CPU time spent on \( 100000 \) solves done by <code>Newtons_method.m</code>. Do the implementation in the same way as illustrated in <code>bisection_method_with_timing.m</code> and compare CPU times from the two methods. Explain briefly your observations.
+Filename: <code>timing_Newton.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="4th:exer:problemStartVal">Exercise 71: Problematic starting value<a name="4th:exer:problemStartVal"></a></h2>
+
+<p>
+<!-- solution=`sol_problematic_starting_value.pdf` -->
+
+<p>
+Consider the equation \( sin(x) = \frac{-20}{e^{0.5x}} \) on the interval \( [0,10] \).
+
+<p>
+<b>a)</b>
+The equation will have one solution on the given interval. Write a program that solves the equation with Newton's method, letting the starting value be user input to the program. Your program should print each new estimate of the solution as Newton's method proceeds. Also, let your program generate a relevant plot so that you see graphically where the solution is located.
+
+<p>
+Run your program first with \( 0 \) as your starting value. What do you observe? Explain briefly.
+
+<p>
+Then run again, now with \( 10 \) as your starting value. Explain briefly what you observe.
+
+<p>
+<b>b)</b>
+You observed in a that the choice of starting value was critical. Suggest another method that would have avoided this problem.
+
+<p>
+Filename: <code>problematic_starting_value.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="4th:exer:secantHand">Exercise 72: Secant method by hand<a name="4th:exer:secantHand"></a></h2>
+
+<p>
+<!-- solution=`sol_secant_hand.pdf` -->
+
+<p>
+Write the program <code>secant_method.m</code> as given in the text. Run the program and confirm that you get the same output. Then, inside the function <code>secant</code>, as a new (extra) last line of the <code>try</code> block, insert a statement that prints the value of <code>x</code> to screen.
+
+<p>
+Before you next run the modified program, follow the two first iterations of the <code>while</code> loop by hand, and write down the values of <code>x</code> that will be printed to screen. Finally, run the modified program and compare with your predictions.
+Filename: <code>secant_hand.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="4th:exer:intersectingGraphsSecant">Exercise 73: Intersecting graphs (Secant method)<a name="4th:exer:intersectingGraphsSecant"></a></h2>
+
+<p>
+<!-- solution=`sol_intersecting_graphs_secant.pdf` -->
+
+<p>
+Write your own version of the secant method in a program applied to the following problem.
+
+<p>
+Consider \( f(x) = x^2 \) and \( g(x) = 2x + 40 \) on the interval \( [0,10] \) only. Write a program that uses the secant method to find approximately where the two graphs cross. Use <code>x1 = 10</code> and <code>x2 = 9</code> as your two starting values and print each new \( x \) value to the screen.
+
+<p>
+Let your program plot the graphs of \( f(x) \) and \( g(x) \) in the same coordinate system, allowing you to judge the finding of your program. Run the program. Is the computed solution consistent with the plot?
+Filename: <code>intersecting_graphs_secant.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="4th:exer:twoNonlinEqns">Exercise 74: Two nonlinear equations<a name="4th:exer:twoNonlinEqns"></a></h2>
+
+<p>
+<!-- solution=`sol_two_nonlinear_equations.pdf` -->
+
+<p>
+Write a program that uses Newton's method for several equations to solve
+$$
+\begin{align}
+sin(x) = y - 2       ,   \nonumber  \\ 
+y = e^x              ~.   \nonumber
+\end{align}
+$$
+
+Use \( x = 4.0 \) and \( y = 4.0 \) as your starting values and let your program plot the relevant graphs on the interval \( [-3.0,3.0] \). Compare briefly the solution of your program with the plot.
+Filename: <code>two_nonlinear_equations.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="4th:exer:fixedPointIt">Exercise 75: Fixed point iteration<a name="4th:exer:fixedPointIt"></a></h2>
+
+<p>
+<!-- solution=`sol_fixed_point_iteration.pdf` -->
+
+<p>
+Consider solving \( x^3 + 2x = e^{-x} \) on the interval \( [-2,2] \).
+
+<p>
+Note that the equation may be rewritten as \( x = \frac{e^{-x} - x^3}{2} \), where the left and right hand sides can be defined as \( f(x) \) and \( g(x) \), respectively. There is only one solution to the equation, and it may be regarded as that \( x \) value where the graphs of \( f(x) \) and \( g(x) \) intersect.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+The method applied here is called <em>fixed point iterations</em>. In d), use Internet to find relevant information, e.g., Wikipedia.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>a)</b>
+Write a program that iteratively uses \( x = \frac{e^{-x} - x^3}{2} \) to update x, starting with \( x = 1 \). Do this by use of a for loop with, e.g., \( 20 \) iterations and print the value of \( x \) to the screen with each iteration.
+Your program should also plot \( f(x) \) and \( g(x) \) on the interval in the same coordinate system. Compare the computations with the plot. Does your program find the solution?
+
+<p>
+<b>b)</b>
+Modify the starting value to \( x = -0.5 \) and run your program again. Does your program find the solution?
+
+<p>
+<b>c)</b>
+Do as in b), but use starting value \( x = -2 \) first, and then \( x = 2 \). Does your program find the solution now?
+
+<p>
+<b>d)</b>
+Whether you get convergence or not is related to the characteristics of \( g(x) \). Try to come up with a criterion that assures convergence (you might like to try even more starting values than those from above).
+
+<p>
+Filename: <code>fixed_point_iteration.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._p4c-bootstrap-Matlab032.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._p4c-bootstrap-Matlab034.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

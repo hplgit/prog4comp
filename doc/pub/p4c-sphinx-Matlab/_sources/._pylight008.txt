@@ -1,0 +1,114 @@
+
+
+.. |nbsp| unicode:: 0xA0
+   :trim:
+
+.. !split
+
+References
+%%%%%%%%%%
+
+.. [Ref01]
+   MATLAB Software by The MathWorks. `http://se.mathworks.com/products/matlab/ <http://se.mathworks.com/products/matlab/>`_.
+
+.. [Ref02]
+   **J. W. Eaton, D. Bateman and S. Hauberg**. GNU Octave version 3.0.1 manual: a high-level interactive language for numerical computations,
+   `http://www.gnu.org/software/octave/doc/interpreter/ <http://www.gnu.org/software/octave/doc/interpreter/>`_.
+
+.. [Ref03]
+   **S. D. Conte and C. d. Boor**. *Elementary Numerical Analysis - An Algorithmic Approach*,
+   third edition,
+   McGraw-Hill,
+   1980.
+
+.. [Ref04]
+   **W. H. Press, S. A. Teukolsky, W. T. Vetterling and B. P. Flannery**. *Numerical Recipes*,
+   Cambridge,
+   1992,
+   `http://www.nrbook.com/a/bookcpdf.php <http://www.nrbook.com/a/bookcpdf.php>`_.
+
+.. [Ref05]
+   **G. Recktenwald**. *Numerical Methods with MATLAB: Implementations and Applications*,
+   Prentice-Hall,
+   2000.
+
+.. [Ref06]
+   **S. Nakamura**. *Numerical Analysis and Graphic Visualization with Matlab*,
+   second edition,
+   Prentice Hall,
+   2002.
+
+.. [Ref07]
+   **S. Otto and J. P. Denier**. *An Introduction to Programming and Numerical Methods in MATLAB*,
+   Springer,
+   2005.
+
+.. [Ref08]
+   **C. Moler**. *Numerical Computing with MATLAB*,
+   SIAM,
+   2004,
+   `http://se.mathworks.com/moler/chapters.html <http://se.mathworks.com/moler/chapters.html>`_.
+
+.. [Ref09]
+   **G. Sewell**. *The Numerical Solution of Ordinary and Partial Differential Equations*,
+   Wiley,
+   2005.
+
+.. [Ref10]
+   **I. Danaila, P. Joly, S. M. Kaber and M. Postel**. *An Introduction to Scientific Computing*,
+   Springer,
+   2007.
+
+.. [Ref11]
+   **L. N. Trefethen**. *Spectral Methods in MATLAB*,
+   SIAM,
+   2000.
+
+.. [Ref12]
+   **L. N. Trefethen**. *Approximation Theory and Approximation Practice*,
+   SIAM,
+   2012.
+
+.. [Ref13]
+   **T. Lyche and J.-L. Merrien**. *Exercises in Computational Mathematics with MATLAB*,
+   Springer,
+   2014.
+
+.. [Ref14]
+   **T. Siauw and A. Bayen**. *An Introduction to MATLAB Programming and Numerical Methods for Engineers*,
+   Academic Press,
+   2014,
+   `http://www.sciencedirect.com/science/book/9780124202283 <http://www.sciencedirect.com/science/book/9780124202283>`_.
+
+.. [Ref15]
+   **D. W. Harder and R.**. *Numerical Analysis for Engineering*,
+   2015,
+   `https://ece.uwaterloo.ca/~dwharder/NumericalAnalysis/ <https://ece.uwaterloo.ca/~dwharder/NumericalAnalysis/>`_.
+
+.. [Ref16]
+   **T. Young and M. J. Mohlenkamp**. *Introduction to Numerical Methods and MATLAB Programming for Engineers*,
+   2015,
+   `https://www.math.ohiou.edu/courses/math3600/book.pdf <https://www.math.ohiou.edu/courses/math3600/book.pdf>`_.
+
+.. [Ref17]
+   **L. Baochuan**. *Introduction to Numerical Methods*,
+   2015,
+   `http://en.wikibooks.org/wiki/Introduction_to_Numerical_Methods <http://en.wikibooks.org/wiki/Introduction_to_Numerical_Methods>`_.
+
+.. [Ref18]
+   **J. Kiusalaas**. *Numerical Methods in Engineering with Python*,
+   second edition,
+   Cambridge,
+   2014.
+
+.. [Ref19]
+   **H. P. Langtangen**. *A Primer on Scientific Programming with Python*,
+   fourth edition,
+   *Texts in Computational Science and Engineering*,
+   Springer,
+   2014.
+
+.. [Ref20]
+   **H. P. Langtangen**. DocOnce Publishing Platform,
+   `https://github.com/hplgit/doconce <https://github.com/hplgit/doconce>`_.
+

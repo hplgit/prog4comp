@@ -1,0 +1,3550 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Programming for Computations - A Gentle Introduction to Numerical Simulations with Python">
+<meta name="keywords" content="computer program,programming,language programming,language computer,MATLAB,Octave,Fortran,C,C++,Python,Maple,Mathematica,syntax,bug,debugging,script (and scripting),implement,print,program run,program execute,code,comment,instruction,program statement,variable,assignment,calculator,text editor,Idle,prompt,program typing,program run,program execute,ipython,function,function call,atan,function input parameter,function output parameter,function return,function take a parameter,library,library function,from,import,math,module,package,linspace,xlabel,ylabel,plot,interactive use (of Python),import,keyboard arrow up/down,Python shell,operator Arithmetic,parentheses,variable type,variable name,object,float,int,str,type conversion,reserved words,variable int,variable float,variable str,variable assignment,type conversion automatic,integer division,round-off error,printing formatted,printf formatting,default,array,array element,zeros,allocate,array index,indexing zero based,indexing one based,Python zero-based indexing,array slice of,graph,hold (on/off),plot figure,title,legend,axis,hardcopy,format png,matrix mat,matrix vector product,transpose,linear algebra,matrix,vector,error message,debugging,debugger,try-exception,exception handling,program crash,program testing,program verification,program input,program output,input,raw input,list,tuple,symbolic computations,symbolic operations,symbolic simplifications,SymPy,library SymPy,WolframAlpha,Mathematica,Sage (symbolic package),Python documentation,garbage collection,variable delete,if,elif,else,colon,indent,boolean,boolean expression,True,False,boolean True,boolean False,pseudo code,operator Logical,function,function definition,def,return,argument,parameter input,parameter output,variable local,variable global,argument keyword,argument named,argument ordinary,argument positional,doc string,function handle,function local,function global,function nested,lambda function,loop for,for loop,range,loop iteration,loop index,loop double,loop multiple,loop nested,linear algebra,while loop,loop while,loop infinite,loop iteration,loop index,list,list append,list convert to array,list delete,list create,tuple,list comprehension,array sorting,Leibniz pi,Euler pi,programming game,linear interpolation,least squares method,Fourier series,integral analytically,integral exact,integral approximately,integration points,code re-use,unit tests,complex domains,Monte Carlo integration,seed (random generators),scheme,finite difference method,forward difference approximation,Forward Euler scheme,logistic model,carrying capacity,SIR model,scalar ODE,ODE scalar,vector ODE,ODE vector,system of ODEs,Heun's method,Runge-Kutta, 2nd-order method,2nd-order Runge-Kutta method,RK2,PDE,heat equation,diffusion equation,MOL forward Euler,method of lines,MOL,mesh points,cell,method of lines,unstable solutions,instability,stability criterion,Poisson equation,Laplace equation,root finding,code robust,code try-except,code exception,Newton starting value,return None,sys.exit,Idle,Emacs,Vim,Gedit,TextWrangler,Notepad++">
+
+<title>Programming for Computations - A Gentle Introduction to Numerical Simulations with Python</title>
+
+
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+code { padding: 0px; background-color: inherit; }
+pre {
+  border: 0pt solid #93a1a1;
+  box-shadow: none;
+}
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+/* Let pre tags for code blocks have the same color as the surroundings */
+pre { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u' Preface ', 0, None, '___sec0'),
+              (u' Why learn programming? ', 3, None, '___sec1'),
+              (u' Target audience and background knowledge ',
+               3,
+               None,
+               '___sec2'),
+              (u' Numerical methods ', 3, None, '___sec3'),
+              (u' The computer language: Python ', 3, None, '___sec4'),
+              (u' How this book is different ', 3, None, '___sec5'),
+              (u' Acknowledgments ', 3, None, '___sec6'),
+              (u' The first few steps ',
+               0,
+               u'1st:TheFirstFewSteps',
+               u'1st:TheFirstFewSteps'),
+              (u' What is a program? And what is programming? ',
+               1,
+               None,
+               '___sec8'),
+              (u' A Python program with variables ',
+               1,
+               u'1st:ex1',
+               u'1st:ex1'),
+              (u' The program ', 2, None, '___sec10'),
+              (u' Dissection of the program ', 2, None, '___sec11'),
+              (u' Why not just use a pocket calculator? ',
+               2,
+               None,
+               '___sec12'),
+              (u' The importance of using a text editor to write programs ',
+               2,
+               None,
+               '___sec13'),
+              (u' Installation of Python ', 2, None, '___sec14'),
+              (u' Write and run your first program ', 2, None, '___sec15'),
+              (u'  A Python program with a library function ',
+               1,
+               u'1st:ex2',
+               u'1st:ex2'),
+              (u' A Python program with vectorization and plotting ',
+               1,
+               u'1st:ex3',
+               u'1st:ex3'),
+              (u' More basic concepts ', 1, None, '___sec18'),
+              (u' Using Python interactively ', 2, None, '___sec19'),
+              (u' Arithmetics, parentheses and round-off errors ',
+               2,
+               None,
+               '___sec20'),
+              (u' Variables and objects ', 2, None, '___sec21'),
+              (u' Integer division ', 2, None, '___sec22'),
+              (u' Formatting text and numbers ', 2, None, '___sec23'),
+              (u' Arrays ', 2, None, '___sec24'),
+              (u' Plotting ', 2, None, '___sec25'),
+              (u' Error messages and warnings ', 2, None, '___sec26'),
+              (u' Input data ', 2, None, '___sec27'),
+              (u' Symbolic computations ', 2, None, '___sec28'),
+              (u' Concluding remarks ', 2, None, '___sec29'),
+              (u' Exercises ', 1, None, '___sec30'),
+              (u' Exercise 1: Error messages ',
+               2,
+               u'1st:exer:ErrorMessages',
+               u'1st:exer:ErrorMessages'),
+              (u' Exercise 2: Volume of a cube ',
+               2,
+               u'1st:exer:cubeVolume',
+               u'1st:exer:cubeVolume'),
+              (u' Exercise 3: Area and circumference of a circle ',
+               2,
+               u'1st:exer:areaCircle',
+               u'1st:exer:areaCircle'),
+              (u' Exercise 4: Volumes of three cubes ',
+               2,
+               u'1st:exer:volumes3cubes',
+               u'1st:exer:volumes3cubes'),
+              (u' Exercise 5: Average of integers ',
+               2,
+               u'1st:exer:averageOf5Integers',
+               u'1st:exer:averageOf5Integers'),
+              (u' Exercise 6: Interactive computing of volume and area ',
+               2,
+               u'1st:exer:cubeVolInteractively',
+               u'1st:exer:cubeVolInteractively'),
+              (u' Exercise 7: Peculiar results from division ',
+               2,
+               u'1st:exer:intDivInteractively',
+               u'1st:exer:intDivInteractively'),
+              (u' Exercise 8: Update variable at command prompt ',
+               2,
+               u'1st:exer:updateVarInteractively',
+               u'1st:exer:updateVarInteractively'),
+              (u' Exercise 9: Formatted print to screen ',
+               2,
+               u'1st:exer:printfScreen',
+               u'1st:exer:printfScreen'),
+              (u' Exercise 10: Python documentation and random numbers ',
+               2,
+               u'1st:exer:PythonDocRandom',
+               u'1st:exer:PythonDocRandom'),
+              (u' Basic constructions ',
+               0,
+               u'2nd:BasicConstructins',
+               u'2nd:BasicConstructins'),
+              (u' If tests, colon and indentation ', 1, None, '___sec42'),
+              (u' Functions ', 1, u'sec:functions', u'sec:functions'),
+              (u' For loops ', 1, u'sec:for:loops', u'sec:for:loops'),
+              (u' While loops ', 1, u'sec:while:loops', u'sec:while:loops'),
+              (u' Lists and tuples - alternatives to arrays ',
+               1,
+               u'sec:lists',
+               u'sec:lists'),
+              (u' Reading from and writing to files ',
+               1,
+               u'sec:file:reading:writing',
+               u'sec:file:reading:writing'),
+              (u' Exercises ', 1, None, '___sec48'),
+              (u' Exercise 11: Errors with colon, indent, etc. ',
+               2,
+               u'2nd:exer:ErrorsColonIndent',
+               u'2nd:exer:ErrorsColonIndent'),
+              (u' Exercise 12: Compare integers a and b ',
+               2,
+               u'2nd:exer:compInt',
+               u'2nd:exer:compInt'),
+              (u' Exercise 13: Functions for circumference and area of a circle ',
+               2,
+               u'2nd:exer:funcCircArea',
+               u'2nd:exer:funcCircArea'),
+              (u' Exercise 14: Function for area of a rectangle ',
+               2,
+               u'2nd:exer:funcAreaRectangle',
+               u'2nd:exer:funcAreaRectangle'),
+              (u' Exercise 15: Area of a polygon ',
+               2,
+               u'2nd:exer:area:polygon',
+               u'2nd:exer:area:polygon'),
+              (u' Exercise 16: Average of integers ',
+               2,
+               u'2nd:exer:avNInt',
+               u'2nd:exer:avNInt'),
+              (u' Exercise 17: While loop with errors ',
+               2,
+               u'2nd:exer:whileLoopErrors',
+               u'2nd:exer:whileLoopErrors'),
+              (u' Exercise 18: Area of rectangle versus circle ',
+               2,
+               u'2nd:exer:areaRectCircle',
+               u'2nd:exer:areaRectCircle'),
+              (u' Exercise 19: Find crossing points of two graphs ',
+               2,
+               u'2nd:exer:Cross2Graphs',
+               u'2nd:exer:Cross2Graphs'),
+              (u' Exercise 20: Sort array with numbers ',
+               2,
+               u'2nd:exer:sortNumbers',
+               u'2nd:exer:sortNumbers'),
+              (u' Exercise 21: Compute $\\pi$ ',
+               2,
+               u'2nd:exer:computingPi',
+               u'2nd:exer:computingPi'),
+              (u' Exercise 22: Compute combinations of sets ',
+               2,
+               u'2nd:exer:combinatorics1',
+               u'2nd:exer:combinatorics1'),
+              (u' Exercise 23: Frequency of random numbers ',
+               2,
+               u'2nd:exer:numberOccurrence',
+               u'2nd:exer:numberOccurrence'),
+              (u' Remarks ', 3, None, '___sec62'),
+              (u' Exercise 24: Game 21 ',
+               2,
+               u'2nd:exer:Game21',
+               u'2nd:exer:Game21'),
+              (u' Exercise 25: Linear interpolation ',
+               2,
+               u'2nd:exer:linearInterpol',
+               u'2nd:exer:linearInterpol'),
+              (u' Exercise 26: Test straight line requirement ',
+               2,
+               u'2nd:exer:testStraightLine',
+               u'2nd:exer:testStraightLine'),
+              (u' Exercise 27: Fit straight line to data ',
+               2,
+               u'2nd:exer:fitLine',
+               u'2nd:exer:fitLine'),
+              (u' Remarks ', 3, None, '___sec67'),
+              (u' Exercise 28: Fit sines to straight line ',
+               2,
+               u'2nd:exer:fitSines',
+               u'2nd:exer:fitSines'),
+              (u' Remarks ', 3, None, '___sec69'),
+              (u' Exercise 29: Count occurrences of a string in a string ',
+               2,
+               u'2nd:exer:countTextString',
+               u'2nd:exer:countTextString'),
+              (u' Remarks ', 3, None, '___sec71'),
+              (u' Computing integrals ',
+               0,
+               u'sec:integrals',
+               u'sec:integrals'),
+              (u' Basic ideas of numerical integration ',
+               1,
+               u'sec:integrals:basic',
+               u'sec:integrals:basic'),
+              (u' Computational example ', 3, None, '___sec74'),
+              (u' The composite trapezoidal rule ',
+               1,
+               u'sec:integrals:trap',
+               u'sec:integrals:trap'),
+              (u' The general formula ',
+               2,
+               u'sec:integrals:formula',
+               u'sec:integrals:formula'),
+              (u' Implementation ',
+               2,
+               u'sec:integrals:trap:impl',
+               u'sec:integrals:trap:impl'),
+              (u' Specific or general implementation? ', 3, None, '___sec78'),
+              (u' Implementation with functions ', 3, None, '___sec79'),
+              (u' Solving our specific problem in a session ',
+               3,
+               None,
+               '___sec80'),
+              (u' Solving our specific problem in a program ',
+               3,
+               None,
+               '___sec81'),
+              (u' Making a module ', 2, None, '___sec82'),
+              (u' Alternative flat special-purpose implementation ',
+               2,
+               None,
+               '___sec83'),
+              (u' The composite midpoint method ',
+               1,
+               u'sec:integrals:Midpoint',
+               u'sec:integrals:Midpoint'),
+              (u' The idea ', 3, None, '___sec85'),
+              (u' The general formula ', 2, None, '___sec86'),
+              (u' Implementation ',
+               2,
+               u'sec:midpoint:code',
+               u'sec:midpoint:code'),
+              (u' Comparing the trapezoidal and the midpoint methods ',
+               2,
+               None,
+               '___sec88'),
+              (u' Testing ', 1, None, '___sec89'),
+              (u' Problems with brief testing procedures ',
+               2,
+               None,
+               '___sec90'),
+              (u' Test procedures ',
+               2,
+               u'sec:integrals:testprocs',
+               u'sec:integrals:testprocs'),
+              (u' Hand-computed results ', 3, None, '___sec92'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec93'),
+              (u' Demonstrating correct convergence rates ',
+               3,
+               None,
+               '___sec94'),
+              (u' Constructing unit tests and writing test functions ',
+               2,
+               u'sec:integrals:test:functions',
+               u'sec:integrals:test:functions'),
+              (u' Hand-computed numerical results ', 3, None, '___sec96'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec97'),
+              (u' Demonstrating correct convergence rates ',
+               3,
+               None,
+               '___sec98'),
+              (u' Vectorization ', 1, None, '___sec99'),
+              (u' Vectorizing the midpoint rule ', 3, None, '___sec100'),
+              (u' Vectorizing the trapezoidal rule ', 3, None, '___sec101'),
+              (u' Measuring computational speed ', 1, None, '___sec102'),
+              (u' Double and triple integrals ',
+               1,
+               u'sec:int:double',
+               u'sec:int:double'),
+              (u' The midpoint rule for a double integral ',
+               2,
+               u'sec:int:double:midpoint',
+               u'sec:int:double:midpoint'),
+              (u' Derivation via one-dimensional integrals ',
+               3,
+               None,
+               '___sec105'),
+              (u' Direct derivation ', 3, None, '___sec106'),
+              (u' Programming a double sum ', 3, None, '___sec107'),
+              (u' Reusing code for one-dimensional integrals ',
+               3,
+               None,
+               '___sec108'),
+              (u' Verification via test functions ', 3, None, '___sec109'),
+              (u' The midpoint rule for a triple integral ',
+               2,
+               None,
+               '___sec110'),
+              (u' Theory ', 3, None, '___sec111'),
+              (u' Implementation ', 3, None, '___sec112'),
+              (u' Monte Carlo integration for complex-shaped domains ',
+               2,
+               u'sec:int:complex:domain',
+               u'sec:int:complex:domain'),
+              (u' The Monte Carlo integration algorithm ',
+               3,
+               None,
+               '___sec114'),
+              (u' Implementation ', 3, None, '___sec115'),
+              (u' Verification ', 3, None, '___sec116'),
+              (u' Test function for function with random numbers ',
+               3,
+               None,
+               '___sec117'),
+              (u' Integral over a circle ', 3, None, '___sec118'),
+              (u' Exercises ', 1, None, '___sec119'),
+              (u' Exercise 30: Hand calculations for the trapezoidal method ',
+               2,
+               u'sec:exer:trap:hand',
+               u'sec:exer:trap:hand'),
+              (u' Exercise 31: Hand calculations for the midpoint method ',
+               2,
+               u'sec:exer:midpt:hand',
+               u'sec:exer:midpt:hand'),
+              (u' Exercise 32: Compute a simple integral ',
+               2,
+               u'sec:exer:trap:mid:parabola',
+               u'sec:exer:trap:mid:parabola'),
+              (u' Exercise 33: Hand-calculations with sine integrals ',
+               2,
+               u'sec:exer:hand:sine',
+               u'sec:exer:hand:sine'),
+              (u' Exercise 34: Make test functions for the midpoint method ',
+               2,
+               u'sec:exer:test:midpoint',
+               u'sec:exer:test:midpoint'),
+              (u' Exercise 35: Explore round-off errors with large numbers ',
+               2,
+               u'sec:exer:test:roundoff',
+               u'sec:exer:test:roundoff'),
+              (u' Exercise 36: Write test functions for $\\int_0^4\\sqrt{x}dx$ ',
+               2,
+               u'sec:exer:test:convrates:sqrt',
+               u'sec:exer:test:convrates:sqrt'),
+              (u' Remarks ', 3, None, '___sec127'),
+              (u' Exercise 37: Rectangle methods ',
+               2,
+               u'sec:exer:rectangleMethod',
+               u'sec:exer:rectangleMethod'),
+              (u' Exercise 38: Adaptive integration ',
+               2,
+               u'sec:exer:adaptive:int',
+               u'sec:exer:adaptive:int'),
+              (u' Remarks ', 3, None, '___sec130'),
+              (u' Exercise 39: Integrating x raised to x ',
+               2,
+               u'sec:exer:integrate:x2x',
+               u'sec:exer:integrate:x2x'),
+              (u' Exercise 40: Integrate products of sine functions ',
+               2,
+               u'sec:exer:sine:products',
+               u'sec:exer:sine:products'),
+              (u' Exercise 41: Revisit fit of sines to a function ',
+               2,
+               u'sec:exer:revisitFitSines',
+               u'sec:exer:revisitFitSines'),
+              (u' Exercise 42: Derive the trapezoidal rule for a double integral ',
+               2,
+               u'sec:exer:trapezoidal:2D',
+               u'sec:exer:trapezoidal:2D'),
+              (u' Exercise 43: Compute the area of a triangle by Monte Carlo integration ',
+               2,
+               u'sec:exer:MC:ellipse',
+               u'sec:exer:MC:ellipse'),
+              (u' Solving ordinary differential equations ',
+               0,
+               u'5th:SolvODEs',
+               u'5th:SolvODEs'),
+              (u' Population growth ', 1, u'sec:de:pg', u'sec:de:pg'),
+              (u' Derivation of the model ',
+               2,
+               u'sec:de:pg:model',
+               u'sec:de:pg:model'),
+              (u' Numerical solution ',
+               2,
+               u'sec:de:pg:numerics',
+               u'sec:de:pg:numerics'),
+              (u' Programming the Forward Euler scheme; the special case ',
+               2,
+               u'sec:de:pg:prog1',
+               u'sec:de:pg:prog1'),
+              (u' Understanding the Forward Euler method ',
+               2,
+               u'sec:de:pg:geom',
+               u'sec:de:pg:geom'),
+              (u' Programming the Forward Euler scheme; the general case ',
+               2,
+               u'sec:de:FE:gen',
+               u'sec:de:FE:gen'),
+              (u' Making the population growth model more realistic ',
+               2,
+               None,
+               '___sec143'),
+              (u' Verification: exact linear solution of the discrete equations ',
+               2,
+               u'sec:de:growth:test:linear',
+               u'sec:de:growth:test:linear'),
+              (u' Spreading of diseases ', 1, None, '___sec145'),
+              (u' Spreading of a flu ', 2, u'sec:de:flu', u'sec:de:flu'),
+              (u' A Forward Euler method for the differential equation system ',
+               2,
+               u'sec:de:flu:FE',
+               u'sec:de:flu:FE'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:flu:prog:spec',
+               u'sec:de:flu:prog:spec'),
+              (u' Outbreak or not ', 2, None, '___sec149'),
+              (u' Abstract problem and notation ',
+               2,
+               u'sec:de:flu:generic',
+               u'sec:de:flu:generic'),
+              (u' Programming the numerical method; the general case ',
+               2,
+               u'sec:de:flu:prog:generic',
+               u'sec:de:flu:prog:generic'),
+              (u' Time-restricted immunity ', 2, None, '___sec152'),
+              (u' Incorporating vaccination ',
+               2,
+               u'sec:de:flu:vaccine',
+               u'sec:de:flu:vaccine'),
+              (u' Discontinuous coefficients: a vaccination campaign ',
+               2,
+               u'sec:de:flu:vaccine:discont',
+               u'sec:de:flu:vaccine:discont'),
+              (u' Oscillating one-dimensional systems ',
+               1,
+               u'sec:de:vib',
+               u'sec:de:vib'),
+              (u' Derivation of a simple model ', 2, None, '___sec156'),
+              (u' Numerical solution ', 2, None, '___sec157'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:vib:special',
+               u'sec:de:vib:special'),
+              (u' A magic fix of the numerical method ',
+               2,
+               None,
+               '___sec159'),
+              (u" The 2nd-order Runge-Kutta method (or Heun's method) ",
+               2,
+               u'sec:de:osc:Heun',
+               u'sec:de:osc:Heun'),
+              (u' Odespy: software for solving ODEs ',
+               2,
+               u'sec:de:osc:odespy',
+               u'sec:de:osc:odespy'),
+              (u' The 4th-order Runge-Kutta method ', 2, None, '___sec162'),
+              (u' The algorithm ', 3, None, '___sec163'),
+              (u' Application ', 3, None, '___sec164'),
+              (u' Implementation ', 3, None, '___sec165'),
+              (u' Derivation ', 3, None, '___sec166'),
+              (u' More effects: damping, nonlinearity, and external forces ',
+               2,
+               None,
+               '___sec167'),
+              (u' The Euler-Cromer scheme ', 3, None, '___sec168'),
+              (u' The 4-th order Runge-Kutta method ', 3, None, '___sec169'),
+              (u' Illustration of linear damping ', 2, None, '___sec170'),
+              (u' Illustration of linear damping with sinusoidal excitation ',
+               2,
+               None,
+               '___sec171'),
+              (u' Spring-mass system with sliding friction ',
+               2,
+               u'sec:de:vib:ode2:sliding:friction',
+               u'sec:de:vib:ode2:sliding:friction'),
+              (u' A finite difference method; undamped, linear case ',
+               2,
+               u'sec:de:vib:2nd',
+               u'sec:de:vib:2nd'),
+              (u' A finite difference method; linear damping ',
+               2,
+               u'sec:de:vib:2nd:damped1',
+               u'sec:de:vib:2nd:damped1'),
+              (u' Exercises ', 1, None, '___sec175'),
+              (u' Exercise 44: Geometric construction of the Forward Euler method ',
+               2,
+               u'sec:de:exer:geom',
+               u'sec:de:exer:geom'),
+              (u' Exercise 45: Make test functions for the Forward Euler method ',
+               2,
+               u'sec:de:exer:FE:test1',
+               u'sec:de:exer:FE:test1'),
+              (u" Exercise 46: Implement and evaluate Heun's method ",
+               2,
+               u'sec:de:exer:Heun:pg',
+               u'sec:de:exer:Heun:pg'),
+              (u' Exercise 47: Find an appropriate time step; logistic model ',
+               2,
+               u'sec:de:exer:logistic:dtopt',
+               u'sec:de:exer:logistic:dtopt'),
+              (u' Exercise 48: Find an appropriate time step; SIR model ',
+               2,
+               u'sec:de:exer:SIR:dtopt',
+               u'sec:de:exer:SIR:dtopt'),
+              (u' Exercise 49: Model an adaptive vaccination campaign ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 50: Make a SIRV model with time-limited effect of vaccination ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 51: Refactor a flat program ',
+               2,
+               u'sec:de:exer:vib:FE:func',
+               u'sec:de:exer:vib:FE:func'),
+              (u' Exercise 52: Simulate oscillations by a general ODE solver ',
+               2,
+               u'sec:de:exer:vib:ode_FE',
+               u'sec:de:exer:vib:ode_FE'),
+              (u' Exercise 53: Compute the energy in oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Exercise 54: Use a Backward Euler scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:BE',
+               u'sec:de:exer:pg:BE'),
+              (u' Exercise 55: Use a Crank-Nicolson scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:CN',
+               u'sec:de:exer:pg:CN'),
+              (u' Exercise 56: Understand finite differences via Taylor series ',
+               2,
+               u'sec:de:exer:fd:Taylor',
+               u'sec:de:exer:fd:Taylor'),
+              (u' Exercise 57: Use a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Remarks ', 3, None, '___sec190'),
+              (u" Exercise 58: Use Heun's method for the SIR model ",
+               2,
+               u'sec:de:exer:SIR:Heun',
+               u'sec:de:exer:SIR:Heun'),
+              (u' Exercise 59: Use Odespy to solve a simple ODE ',
+               2,
+               u'sec:de:exer:odespy:decay',
+               u'sec:de:exer:odespy:decay'),
+              (u' Exercise 60: Set up a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:osc:BE',
+               u'sec:de:exer:osc:BE'),
+              (u' Exercise 61: Set up a Forward Euler scheme for nonlinear and damped oscillations ',
+               2,
+               u'sec:de:exer:osc:FE:general',
+               u'sec:de:exer:osc:FE:general'),
+              (u' Exercise 62: Discretize an initial condition ',
+               2,
+               u'sec:de:exer:osc:2nd:V0ic',
+               u'sec:de:exer:osc:2nd:V0ic'),
+              (u' Solving partial differential equations ',
+               0,
+               u'6th:SolvPDEs',
+               u'6th:SolvPDEs'),
+              (u' Finite difference methods ',
+               1,
+               u'6th:SolvPDEs:MOLandFE',
+               u'6th:SolvPDEs:MOLandFE'),
+              (u' Reduction of a PDE to a system of ODEs ',
+               2,
+               u'sec:pde:diff1D:reduce',
+               u'sec:pde:diff1D:reduce'),
+              (u' Construction of a test problem with known discrete solution ',
+               2,
+               u'sec:pde:diff1D:testproblem',
+               u'sec:pde:diff1D:testproblem'),
+              (u' Implementation: Forward Euler method ',
+               2,
+               None,
+               '___sec200'),
+              (u' Application: heat conduction in a rod ',
+               2,
+               u'sec:pde:diff1D:rod',
+               u'sec:pde:diff1D:rod'),
+              (u' Vectorization ', 2, None, '___sec202'),
+              (u' Using Odespy to solve the system of ODEs ',
+               2,
+               None,
+               '___sec203'),
+              (u' Implicit methods ', 2, None, '___sec204'),
+              (u' Exercises ', 1, None, '___sec205'),
+              (u' Exercise 63: Simulate a diffusion equation by hand ',
+               2,
+               u'sec:pde:diff1D:exer:handFE',
+               u'sec:pde:diff1D:exer:handFE'),
+              (u' Exercise 64: Compute temperature variations in the ground ',
+               2,
+               u'sec:pde:diff1D:exer:groundtemp',
+               u'sec:pde:diff1D:exer:groundtemp'),
+              (u' Exercise 65: Compare implicit methods ',
+               2,
+               u'sec:pde:diff1D:exer:compare:implicit',
+               u'sec:pde:diff1D:exer:compare:implicit'),
+              (u' Exercise 66: Explore adaptive and implicit methods ',
+               2,
+               u'sec:pde:diff1D:exer:groundtemp:adapt',
+               u'sec:pde:diff1D:exer:groundtemp:adapt'),
+              (u' Exercise 67: Investigate the $\\theta$ rule ',
+               2,
+               u'sec:pde:diff1D:exer:CN',
+               u'sec:pde:diff1D:exer:CN'),
+              (u' Remarks ', 3, None, '___sec211'),
+              (u' Exercise 68: Compute the diffusion of a Gaussian peak ',
+               2,
+               u'sec:pde:diff1D:exer:Gaussian',
+               u'sec:pde:diff1D:exer:Gaussian'),
+              (u' Exercise 69: Vectorize a function for computing the area of a polygon ',
+               2,
+               u'2nd:exer:area:polygon2',
+               u'2nd:exer:area:polygon2'),
+              (u' Exercise 70: Explore symmetry ',
+               2,
+               u'sec:pde:diff1D:exer:Gaussian:symm',
+               u'sec:pde:diff1D:exer:Gaussian:symm'),
+              (u' Remarks ', 3, None, '___sec215'),
+              (u' Exercise 71: Compute solutions as $t\\rightarrow\\infty$ ',
+               2,
+               u'sec:pde:diff1D:exer:stationary',
+               u'sec:pde:diff1D:exer:stationary'),
+              (u' Remarks ', 3, None, '___sec217'),
+              (u' Exercise 72: Solve a two-point boundary value problem ',
+               2,
+               u'sec:pde:diff1D:exer:stationary2',
+               u'sec:pde:diff1D:exer:stationary2'),
+              (u' Solving nonlinear algebraic equations ',
+               0,
+               u'4th:NonlinAlgEq',
+               u'4th:NonlinAlgEq'),
+              (u' Brute force methods ',
+               1,
+               u'4th:bruteforce',
+               u'4th:bruteforce'),
+              (u' Brute force root finding ', 2, None, '___sec221'),
+              (u' Numerical algorithm ', 3, None, '___sec222'),
+              (u' Implementation ', 3, None, '___sec223'),
+              (u' Brute force optimization ', 2, None, '___sec224'),
+              (u' Numerical algorithm ', 3, None, '___sec225'),
+              (u' Implementation ', 3, None, '___sec226'),
+              (u' Model problem for algebraic equations ',
+               2,
+               None,
+               '___sec227'),
+              (u" Newton's method ",
+               1,
+               u'4th:NonlinAlgEq:Newt',
+               u'4th:NonlinAlgEq:Newt'),
+              (u" Deriving and implementing Newton's method ",
+               2,
+               None,
+               '___sec229'),
+              (u' Making a more efficient and robust implementation ',
+               2,
+               u'4th:Newton:robust',
+               u'4th:Newton:robust'),
+              (u' The secant method ',
+               1,
+               u'4th:NonlinAlgEq:Secant',
+               u'4th:NonlinAlgEq:Secant'),
+              (u' The bisection method ',
+               1,
+               u'4th:NonlinAlgEq:Bisect',
+               u'4th:NonlinAlgEq:Bisect'),
+              (u' Rate of convergence ',
+               1,
+               u'4th:NonlinAlgEq:RateConv',
+               u'4th:NonlinAlgEq:RateConv'),
+              (u' Exercises ', 1, None, '___sec234'),
+              (u" Exercise 73: Understand why Newton's method can fail ",
+               2,
+               u'4th:exer:Newton:failure',
+               u'4th:exer:Newton:failure'),
+              (u' Exercise 74: See if the secant method fails ',
+               2,
+               u'4th:exer:Secant:failure',
+               u'4th:exer:Secant:failure'),
+              (u' Exercise 75: Understand how the bisection method cannot fail ',
+               2,
+               u'4th:exer:Bisection:failure',
+               u'4th:exer:Bisection:failure'),
+              (u" Exercise 76: Combine the bisection method with Newton's method ",
+               2,
+               u'4th:exer:Bisection:Newton',
+               u'4th:exer:Bisection:Newton'),
+              (u" Exercise 77: Write a test function for Newton's method ",
+               2,
+               u'4th:exer:NewtonHand',
+               u'4th:exer:NewtonHand'),
+              (u' Exercise 78: Solve nonlinear equation for a vibrating beam ',
+               2,
+               u'4th:exer:beam:vib',
+               u'4th:exer:beam:vib'),
+              (u' Appendix: Getting access to Python ',
+               0,
+               u'app:accesspy',
+               u'app:accesspy'),
+              (u' Required software ',
+               1,
+               u'sec:accesspy:softwarelist',
+               u'sec:accesspy:softwarelist'),
+              (u' Installing software on your laptop: Mac OS X and Windows ',
+               1,
+               u'sec:accesspy:MacWin',
+               u'sec:accesspy:MacWin'),
+              (u' Anaconda and Spyder ',
+               1,
+               u'sec:accesspy:anaconda',
+               u'sec:accesspy:anaconda'),
+              (u' Spyder on Mac ', 2, None, '___sec245'),
+              (u' Installation of additional packages ',
+               2,
+               None,
+               '___sec246'),
+              (u' Installing SciTools on Mac ', 2, None, '___sec247'),
+              (u' Installing SciTools on Windows ', 2, None, '___sec248'),
+              (u' VMWare Fusion virtual machine ',
+               1,
+               u'sec:accesspy:vmware',
+               u'sec:accesspy:vmware'),
+              (u' Installing Ubuntu ',
+               2,
+               u'sec:accesspy:vmware:fullblown:machine',
+               u'sec:accesspy:vmware:fullblown:machine'),
+              (u' Installing software on Ubuntu ', 2, None, '___sec251'),
+              (u' File sharing ', 2, None, '___sec252'),
+              (u' Dual boot on Windows ', 1, None, '___sec253'),
+              (u' Vagrant virtual machine ',
+               1,
+               u'sec:accesspy:vagrant',
+               u'sec:accesspy:vagrant'),
+              (u' How to write and run a Python program ',
+               1,
+               u'sec:accesspy:writerun',
+               u'sec:accesspy:writerun'),
+              (u' The need for a text editor ', 2, None, '___sec256'),
+              (u' Spyder ', 2, None, '___sec257'),
+              (u' Text editors ', 2, None, '___sec258'),
+              (u' Terminal windows ', 2, None, '___sec259'),
+              (u' Using a plain text editor and a terminal window ',
+               2,
+               None,
+               '___sec260'),
+              (u' The SageMathCloud and Wakari web services ',
+               1,
+               u'sec:accesspy:sagemath:wakari',
+               u'sec:accesspy:sagemath:wakari'),
+              (u' Basic intro to SageMathCloud ', 2, None, '___sec262'),
+              (u' Basic intro to Wakari ', 2, None, '___sec263'),
+              (u' Installing your own Python packages ',
+               2,
+               None,
+               '___sec264'),
+              (u' Writing IPython notebooks ',
+               1,
+               u'sec:accesspy:ipynb',
+               u'sec:accesspy:ipynb'),
+              (u' A simple program in the notebook ', 2, None, '___sec266'),
+              (u' Mixing text, mathematics, code, and graphics ',
+               2,
+               None,
+               '___sec267'),
+              (u' References ', 0, None, '___sec268')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands.tex -->
+$$
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+$$
+
+
+
+
+    
+<a name="part0023"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._p4c-solarized-Python022.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._p4c-solarized-Python024.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1 id="6th:SolvPDEs:MOLandFE">Finite difference methods</h1>
+
+<p>
+We shall now construct a numerical method for the diffusion equation.
+We know how to solve ordinary differential equations, so in a way we
+are able to deal with the time derivative. Very often in mathematics,
+a new problem can be solved by reducing it to a series of problems we
+know how to solve. In the present case, it means that we must do something
+with the spatial derivative \( \partial^2 /\partial x^2 \) in order to
+reduce the partial differential equation to ordinary differential equations.
+One important technique for achieving this, is based on finite difference discretization of
+spatial derivatives.
+
+<h2 id="sec:pde:diff1D:reduce">Reduction of a PDE to a system of ODEs</h2>
+
+<p>
+Introduce a spatial mesh in \( \Omega \) with <em>mesh points</em>
+
+$$ x_0=0 < x_1 < x_2 < \cdots < x_N=L \thinspace .$$
+
+The space between two mesh points \( x_i \) and \( x_{i+1} \), i.e.&nbsp;the interval
+\( [x_i,x_{i+1}] \), is call a <em>cell</em>. We shall here, for simplicity,
+assume that each cell has the same length \( \Delta x = x_{i+1}-x_i \),
+\( i=0,\ldots, N-1 \).
+
+<p>
+The partial differential equation is valid at all spatial points \( x\in\Omega \),
+but we may relax this condition and demand that it is fulfilled at
+the internal mesh points only, \( x_1,\ldots,x_{N-1} \):
+
+$$
+\begin{equation}
+\frac{\partial u(x_i,t)}{\partial t} = \beta
+\frac{\partial^{2}u(x_i,t)}{\partial x^2} + g(x_i,t),\quad i=1,\ldots,N-1
+\thinspace .
+\tag{90}
+\end{equation}
+$$
+
+Now, at any point \( x_i \) we can approximate the second-order derivative
+by a <em>finite difference</em>:
+
+$$
+\begin{equation}
+\frac{\partial^{2}u(x_i,t)}{\partial x^2} \approx
+\frac{u(x_{i+1},t) - 2u(x_i,t) + u(x_{i-1},t)}{\Delta x^2}\thinspace .
+\tag{91}
+\end{equation}
+$$
+
+It is common to introduce a short notation \( u_i(t) \) for \( u(x_i,t) \), i.e.,
+\( u \) approximated at some mesh point \( x_i \) in space.
+With this new notation we can, after inserting
+<a href="#mjx-eqn-91">(91)</a> in <a href="#mjx-eqn-90">(90)</a>, write
+an approximation to the partial differential equation at
+mesh point \( (x_i,t \)) as
+
+$$
+\begin{equation}
+\frac{d u_i(t)}{d t} = \beta
+\frac{u_{i+1}(t) - 2u_i(t) + u_{i-1}(t)}{\Delta x^2} + g_i(t),\quad i=1,\ldots,N-1
+\thinspace .
+\tag{92}
+\end{equation}
+$$
+
+Note that we have adopted the notation \( g_i(t) \) for \( g(x_i,t) \) too.
+
+<p>
+What is <a href="#mjx-eqn-92">(92)</a>? This is nothing but a <em>system of
+ordinary differential equations</em> in \( N+1 \) unknowns \( u_0(t),\ldots,u_N(t) \)!
+In other words, with aid of the finite difference approximation <a href="#mjx-eqn-91">(91)</a>,
+we have reduced the single partial differential equation to a system of ODEs,
+which we know how to solve. In the literature, this strategy is called the <em>method of lines</em>.
+
+<p>
+We need to look into the initial and boundary conditions as well. The
+initial condition \( u(x,0)=I(x) \) translates to an initial condition for
+every unknown function \( u_i(t) \): \( u_i(0)=I(x_i) \), \( i=0,\ldots,N \). At
+the boundary \( x=0 \) we need an ODE in our ODE system, which must come
+from the boundary condition at this point. The boundary condition
+reads \( u(0,t)=s(t) \). We can make an ODE from this equation by
+differentiating both sides: \( u_0'(t)=s'(t) \). The ODE system above
+cannot be used for \( u_0' \) since that equation involves some quantity
+\( u_{-1}' \) outside the domain. Instead, we use the equation
+\( u_0'(t)=s'(t) \) derived from the boundary condition. For this
+particular equation we also need make sure the initial condition is
+\( u_0(0)=s(0) \) (otherwise nothing will happen: we get \( u=283 \) K
+forever).
+
+<p>
+We remark that a separate ODE for the (known) boundary condition
+\( u_0=s(t) \) is not strictly needed. We can just work with the ODE
+system for \( u_1,\ldots,u_{N} \), and in the ODE for \( u_1 \) replace \( u_0(t) \)
+by \( s(t) \). However, these authors prefer to have an ODE for every
+point value \( u_i \), \( i=0,\ldots,N \), which requires formulating the known boundary
+at \( x=0 \) as an ODE.
+
+<p>
+The condition \( \partial u/\partial x=0 \) at
+\( x=L \) is a bit more complicated, but we can approximate the spatial derivative
+by a centered finite difference:
+
+$$ \left.\frac{\partial u}{\partial x}\right|_{i=N}\approx \frac{u_{N+1}-u_{N-1}}{2\Delta x} = 0\thinspace .$$
+
+This approximation involves a fictitious point \( x_{N+1} \) outside the domain.
+A common trick is to use <a href="#mjx-eqn-92">(92)</a> for \( i=N \)
+and eliminate \( u_{N+1} \) by use of the discrete boundary condition
+(\( u_{N+1}=u_{N-1} \)):
+
+$$
+\begin{equation}
+\frac{d u_N(t)}{d t} = \beta
+\frac{2u_{N-1}(t) - 2u_N(t)}{\Delta x^2} + g_N(t)\thinspace .
+\tag{93}
+\end{equation}
+$$
+
+That is, we have a special version of <a href="#mjx-eqn-92">(92)</a> at
+the boundary \( i=N \).
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal">
+<b>What about simpler finite differences at the boundary?</b>
+<p>
+Some reader may think that a smarter trick is to approximate the
+boundary condition \( \partial u/\partial x \) at \( x=L \) by a one-sided
+difference:
+
+$$ \left.\frac{\partial u}{\partial x}\right|_{i=N}\approx \frac{u_{N}-u_{N-1}}{\Delta x} = 0\thinspace .$$
+
+This gives a simple equation \( u_N=u_{N-1} \) for the boundary value, and
+a corresponding ODE \( u_N'=u_{N-1}' \). However, this approximation has
+an error of order \( \Delta x \), while the centered approximation we used
+above has an error of order \( \Delta x^2 \). The finite difference approximation
+we used for the second-order derivative in the diffusion equation also
+has an error of order \( \Delta x^2 \). Thus, if we use the simpler one-sided
+difference above, it turns out that we reduce the overall accuracy of
+the method.
+</div>
+
+
+<p>
+We are now in a position to summarize how we can approximate the
+partial differential equation problem <a href="._p4c-solarized-Python022.html#mjx-eqn-86">(86)</a>-<a href="._p4c-solarized-Python022.html#mjx-eqn-89">(89)</a>
+by a system of ordinary differential equations:
+
+$$
+\begin{align}
+\frac{du_0}{dt} &= s'(t),
+\tag{94}\\ 
+\frac{du_i}{dt} &=  \frac{\beta}{\Delta x^2}
+(u_{i+1}(t) - 2u_i(t) + u_{i-1}(t)) + g_i(t),\quad i=1,\ldots,N-1,
+\tag{95}\\ 
+\frac{du_N}{dt} &=  \frac{2\beta}{\Delta x^2}
+(u_{N-1}(t) - u_N(t)) + g_N(t)\thinspace .
+\tag{96}
+\end{align}
+$$
+
+The initial conditions are
+
+$$
+\begin{align}
+u_0(0) &= s(0),\\ 
+u_i(0) &= I(x_i),\quad i=1,\ldots,N\thinspace .
+\end{align}
+$$
+
+We can apply any method for systems of ODEs to solve
+<a href="#mjx-eqn-94">(94)</a>-<a href="#mjx-eqn-96">(96)</a>.
+
+<h2 id="sec:pde:diff1D:testproblem">Construction of a test problem with known discrete solution</h2>
+
+<p>
+At this point, it is tempting to implement a real physical case and run it.
+However, partial differential equations constitute a non-trivial topic where
+mathematical and programming mistakes come easy. A better start is therefore to address
+a carefully designed test example where we can check that the
+method works. The most attractive examples for testing implementations
+are those without approximation errors, because then we know exactly what
+numbers the program should produce. It turns out that solutions
+\( u(x,t) \) that are linear in time and in space can be exactly
+reproduced by most numerical methods for partial differential equations.
+A candidate solution might be
+
+$$ u(x,t) = (3t+2)(x-L)\thinspace .$$
+
+Inserting this \( u \) in the governing equation gives
+
+$$ 3(x-L) = 0 + g(x,t)
+\quad\Rightarrow\quad g(x,t)= 3(x-L)
+\thinspace .$$
+
+What about the boundary conditions? We realize that \( \partial u/\partial x
+= 3t+2 \) for \( x=L \), which breaks the assumption of \( \partial u/\partial x=0 \)
+at \( x=L \) in the formulation of the numerical method above.
+Moreover, \( u(0,t)=-L(3t+2) \),
+so we must set \( s(t)=-L(3t+2) \) and \( s'(t)=-3L \).
+Finally, the initial condition dictates \( I(x)=2(x-L) \), but recall that
+we must have \( u_0=s(0) \), and \( u_i=I(x_i) \), \( i=1,\ldots,N \): it is important
+that \( u_0 \) starts out at the right value dictated by \( s(t) \) in case
+\( I(0) \) is not equal this value.
+
+<p>
+First we need to generalize our method to handle \( \partial u/\partial x=\gamma
+\neq 0 \) at \( x=L \). We then have
+
+$$ \frac{u_{N+1}(t)- u_{N-1}(t)}{2\Delta x}= \gamma\quad\Rightarrow
+\quad u_{N+1} = u_{N-1} + 2\gamma \Delta x,$$
+
+which inserted in <a href="#mjx-eqn-92">(92)</a> gives
+
+$$
+\begin{equation}
+\frac{d u_N(t)}{d t} = \beta
+\frac{2u_{N-1}(t) + 2\gamma\Delta x - 2u_N(t)}{\Delta x^2} + g_N(t)\thinspace .
+\tag{97}
+\end{equation}
+$$
+
+<h2 id="___sec200">Implementation: Forward Euler method </h2>
+
+<p>
+In particular, we may use the Forward Euler method as implemented
+in the general function <code>ode_FE</code> in the module <code>ode_system_FE</code>
+from the section <a href="._p4c-solarized-Python019.html#sec:de:flu:prog:generic">Programming the numerical method; the general case</a>. The <code>ode_FE</code> function
+needs a specification of the right-hand side of the ODE system.
+This is a matter of translating <a href="#mjx-eqn-94">(94)</a>,
+<a href="#mjx-eqn-95">(95)</a>, and
+<a href="#mjx-eqn-97">(97)</a> to Python code
+(in file
+<a href="https://github.com/hplgit/prog4comp/src/py/test_diffusion_pde_exact_linear.py" target="_self"><tt>test_diffusion_pde_exact_linear.py</tt></a>):
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def rhs(u, t):
+    N = len(u) - 1
+    rhs = zeros(N+1)
+    rhs[0] = dsdt(t)
+    for i in range(1, N):
+        rhs[i] = (beta/dx**2)*(u[i+1] - 2*u[i] + u[i-1]) + \ 
+                 f(x[i], t)
+    rhs[N] = (beta/dx**2)*(2*u[N-1] + 2*dx*dudx(t) -
+                           2*u[N]) + f(x[N], t)
+    return rhs
+
+def u_exact(x, t):
+    return (3*t + 2)*(x - L)
+
+def dudx(t):
+    return (3*t + 2)
+
+def s(t):
+    return u_exact(0, t)
+
+def dsdt(t):
+    return 3*(-L)
+
+def f(x, t):
+    return 3*(x-L)
+</code></pre>
+<!-- end verbatim block -->
+Note that <code>dudx(t)</code> is the function representing the \( \gamma \) parameter
+in <a href="#mjx-eqn-97">(97)</a>.
+Also note that the <code>rhs</code> function relies on access to global variables
+<code>beta</code>, <code>dx</code>, <code>L</code>, <code>x</code>, <code>dsdt</code>, <code>g</code>, and <code>dudx</code>.
+
+<p>
+We expect the solution to be correct
+regardless of \( N \) and \( \Delta t \), so we can choose a small \( N \), \( N=4 \),
+and \( \Delta t = 0.1 \). A test function with \( N=4 \) goes like
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def test_diffusion_exact_linear():
+    global beta, dx, L, x  # needed in rhs
+    L = 1.5
+    beta = 0.5
+    N = 4
+    x = linspace(0, L, N+1)
+    dx = x[1] - x[0]
+    u = zeros(N+1)
+
+    U_0 = zeros(N+1)
+    U_0[0] = s(0)
+    U_0[1:] = u_exact(x[1:], 0)
+    dt = 0.1
+    print dt
+
+    u, t = ode_FE(rhs, U_0, dt, T=1.2)
+
+    tol = 1E-12
+    for i in range(0, u.shape[0]):
+        diff = abs(u_exact(x, t[i]) - u[i,:]).max()
+        assert diff &lt; tol, 'diff=%.16g' % diff
+        print 'diff=%g at t=%g' % (diff, t[i])
+</code></pre>
+<!-- end verbatim block -->
+With \( N=4 \) we reproduce the linear solution exactly. This brings confidence
+to the implementation, which is just what we need for attacking a real
+physical problem next.
+
+<p>
+<div class="alert alert-block alert-warning alert-text-normal">
+<b>Problems with reusing the <code>rhs</code> function.</b>
+<p>
+The <code>rhs</code> function <em>must</em> take <code>u</code> and <code>t</code> as arguments, because that
+is required by the <code>ode_FE</code> function. What about the variables
+<code>beta</code>, <code>dx</code>, <code>L</code>, <code>x</code>, <code>dsdt</code>, <code>g</code>, and <code>dudx</code>
+that the <code>rhs</code> function needs?
+These are global in the solution we have presented so far.
+Unfortunately, this has an undesired side effect: we cannot import
+the <code>rhs</code> function in a new file, define <code>dudx</code> and <code>dsdt</code>
+in this new file and get the imported <code>rhs</code> to use these functions.
+The imported <code>rhs</code> will use the global variables, including functions,
+in its own module.
+
+<p>
+How can we find solutions to this problem? Technically, we must
+pack the extra data
+<code>beta</code>, <code>dx</code>, <code>L</code>, <code>x</code>, <code>dsdt</code>, <code>g</code>, and <code>dudx</code> with the
+<code>rhs</code> function, which requires more advanced programming considered
+to beyond scope of this text.
+
+
+</div>
+
+
+<h2 id="sec:pde:diff1D:rod">Application: heat conduction in a rod</h2>
+
+<p>
+Let us return to the case with heat conduction in a rod
+<a href="._p4c-solarized-Python022.html#mjx-eqn-86">(86)</a>-<a href="._p4c-solarized-Python022.html#mjx-eqn-89">(89)</a>. Assume that the rod is 50 cm long
+and made of aluminum alloy 6082. The \( \beta \) parameter equals
+\( \kappa/(\varrho c) \), where
+\( \kappa \) is the heat conduction coefficient,
+\( \varrho \) is the density, and \( c \) is the heat
+capacity. We can find proper values for these values in case of
+aluminum alloy 6082:
+\( \varrho = 2.7\cdot 10^3\hbox{ kg/m}^3 \), \( \kappa = 200\,\,\frac{\hbox{W}}{\hbox{mK}} \),
+\( c=900\,\,\frac{\hbox{J}}{\hbox{Kkg}} \). This results in
+\( \beta = \kappa/(\varrho c) = 8.2\cdot 10^{-5}\hbox{ m}^2/\hbox{s} \).
+Preliminary simulations show that we are close to a constant
+steady state temperature after 1 h, i.e., \( T=3600 \) s.
+
+<p>
+The <code>rhs</code> function from the previous
+section can be reused, only the functions <code>s</code>, <code>dsdt</code>, <code>g</code>, and <code>dudx</code>
+must be changed (see file
+<a href="https://github.com/hplgit/prog4comp/src/py/rod_FE.py" target="_self"><tt>rod_FE.py</tt></a>):
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def dudx(t):
+    return 0
+
+def s(t):
+    return 323
+
+def dsdt(t):
+    return 0
+
+def g(x, t):
+    return 0
+</code></pre>
+<!-- end verbatim block -->
+Parameters can be set as
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>L = 0.5
+beta = 8.2E-5
+N = 40
+x = linspace(0, L, N+1)
+dx = x[1] - x[0]
+u = zeros(N+1)
+
+U_0 = zeros(N+1)
+U_0[0] = s(0)
+U_0[1:] = 283
+</code></pre>
+<!-- end verbatim block -->
+Let us use \( \Delta t = 0.00034375 \).
+We can now call <code>ode_FE</code> and then make an animation on the screen
+to see how \( u(x,t) \) develops in time:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>t0 = time.clock()
+from ode_system_FE import ode_FE
+u, t = ode_FE(rhs, U_0, dt, T=1*60*60)
+t1 = time.clock()
+print 'CPU time: %.1fs' % (t1 - t0)
+
+# Make movie
+import os
+os.system('rm tmp_*.png')
+import matplotlib.pyplot as plt
+plt.ion()
+y = u[0,:]
+lines = plt.plot(x, y)
+plt.axis([x[0], x[-1], 273, s(0)+10])
+plt.xlabel('x')
+plt.ylabel('u(x,t)')
+counter = 0
+# Plot each of the first 100 frames, then increase speed by 10x
+change_speed = 100
+for i in range(0, u.shape[0]):
+    print t[i]
+    plot = True if i &lt;= change_speed else i % 10 == 0
+    lines[0].set_ydata(u[i,:])
+    if i &gt; change_speed:
+        plt.legend(['t=%.0f 10x' % t[i]])
+    else:
+        plt.legend(['t=%.0f' % t[i]])
+    plt.draw()
+    if plot:
+        plt.savefig('tmp_%04d.png' % counter)
+        counter += 1
+    #time.sleep(0.2)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The plotting statements update the \( u(x,t) \) curve on the screen.
+In addition, we save a fraction of the plots to files <code>tmp_0000.png</code>,
+<code>tmp_0001.png</code>, <code>tmp_0002.png</code>, and so on. These plots can be combined to
+ordinary video files. A common tool is <code>ffmpeg</code> or its sister <code>avconv</code>.
+
+<p>
+These programs take the same type of command-line options.
+To make a Flash video <code>movie.flv</code>, run
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; ffmpeg -i tmp_%04d.png -r 4 -vcodec flv movie.flv
+</code></pre>
+<!-- end verbatim block -->
+The <code>-i</code> option specifies the naming of the plot files in printf syntax,
+and <code>-r</code> specifies the number of frames per second in the movie.
+On Mac, run <code>ffmpeg</code> instead of <code>avconv</code> with the same options.
+Other video formats, such as MP4, WebM, and Ogg can also be produced:
+
+<p>
+<!-- begin verbatim block  sys-->
+<pre><code>Terminal&gt; ffmpeg -i tmp_%04d.png -r 4 -vcodec libx264   movie.mp4
+Terminal&gt; ffmpeg -i tmp_%04d.png -r 4 -vcodec libvpx    movie.webm
+Terminal&gt; ffmpeg -i tmp_%04d.png -r 4 -vcodec libtheora movie.ogg
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The results of a simulation start out as in Figures
+<a href="#sec:pde:diff1D:fig:instability1">55</a> and
+<a href="#sec:pde:diff1D:fig:instability2">56</a>. We see that the solution
+definitely looks wrong. The temperature is expected to be smooth, not
+having such a saw-tooth shape. Also, after some time (Figure
+<a href="#sec:pde:diff1D:fig:instability2">56</a>), the temperature starts to
+increase much more than expected. We say that this solution is
+<em>unstable</em>, meaning that it does not display the same characteristics
+as the true, physical solution. Even though we tested the code
+carefully in the previous section, it does not seem to work for a
+physical application! How can that be?
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 55:  Unstable simulation of the temperature in a rod. <div id="sec:pde:diff1D:fig:instability1"></div> </p></center>
+<p><img src="figs/rod_instability1.png" align="bottom" width=800></p>
+</center>
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 56:  Unstable simulation of the temperature in a rod. <div id="sec:pde:diff1D:fig:instability2"></div> </p></center>
+<p><img src="figs/rod_instability2.png" align="bottom" width=800></p>
+</center>
+
+<p>
+The problem is that \( \Delta t \) is too large, making the solution <em>unstable</em>.
+It turns out that the Forward Euler time integration method
+puts a restriction on the size of \( \Delta t \). For the heat equation and the
+way we have discretized it, this restriction can be shown to be
+
+$$
+\begin{equation}
+\Delta t \leq \frac{\Delta x^2}{2\beta}\thinspace .
+\tag{98}
+\end{equation}
+$$
+
+This is called a <em>stability criterion</em>. With the chosen parameters,
+<a href="#mjx-eqn-98">(98)</a> tells us that the upper limit is
+\( \Delta t=0.0003125 \), which is smaller than our choice above.
+Rerunning the case with a \( \Delta t \) equal to \( \Delta x^2/(2\beta) \), indeed
+shows a smooth evolution of
+\( u(x,t) \). Find the program <code>rod_FE.py</code> and run it to see
+an animation of the \( u(x,t) \) function on the screen.
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal">
+<b>Scaling and dimensionless quantities.</b>
+<p>
+Our setting of parameters required finding three physical properties of
+a certain material. The time interval for simulation and the time step
+depend crucially on the values for \( \beta \) and \( L \), which can vary significantly
+from case to case. Often, we are more interested in how
+the shape of \( u(x,t) \) develops, than in the actual \( u \), \( x \), and \( t \)
+values for a specific material. We can then simplify the setting of
+physical parameters by <em>scaling</em> the problem.
+
+<p>
+Scaling means that we introduce dimensionless independent and dependent
+variables, here denoted by a bar:
+
+$$ \bar u = \frac{u-u^*}{u_c-u^*},\quad \bar x=\frac{x}{x_c},\quad \bar t = \frac{t}{t_c},
+$$
+
+where \( u_c \) is a characteristic size of the temperature, \( u^* \) is
+some reference temperature, while \( x_c \) and
+\( t_c \) are characteristic time and space scales.
+Here, it is natural to choose \( u^* \) as the initial
+condition, and set \( u_c \) to the stationary (end) temperature.
+Then \( \bar u\in [0,1] \), starting at 0 and ending at 1 as \( t\rightarrow\infty \).
+The length \( L \) is \( x_c \), while choosing \( t_c \) is more challenging, but
+one can argue for \( t_c = L^2/\beta \).
+The resulting equation for \( \bar u \) reads
+
+$$ \frac{\partial \bar u}{\partial \bar t} =
+\frac{\partial^2 \bar u}{\partial \bar x^2},\quad \bar x\in (0,1)\thinspace .$$
+
+Note that in this equation, there are <em>no physical parameters</em>!
+In other words, we have found a model that is independent of the
+material the rod is made of and the length of it (!).
+
+<p>
+We can easily solve this equation with our program by setting \( \beta=1 \),
+\( L=1 \), \( I(x)=0 \), and \( s(t)=1 \).
+It turns out that the total simulation time (to &quot;infinity&quot;)
+can be taken as 1.2. When we have the solution \( \bar u(\bar x,\bar t) \),
+the solution with dimension Kelvin, reflecting the true temperature
+in our medium, is given by
+
+$$ u(x,t) = u^* + (u_c-u^*)\bar u(x/L, t\beta/L^2)\thinspace .$$
+
+Through this formula we can quickly generate the solutions for
+a rod made of aluminum, wood, or rubber - it is just a matter of
+plugging in the right \( \beta \) value.
+
+<p>
+Figure <a href="#sec:pde:diff1D:fig:scaled">57</a> shows four snapshots of the scaled (dimensionless)
+solution \( \bar (\bar x,\bar t) \).
+
+<p>
+The power of scaling is to reduce the number of physical parameters
+in a problem, and in the present case, we found one single problem
+that is independent of the material (\( \beta \)) and the geometry (\( L \)).
+
+<p>
+<!-- <a href="http://en.wikipedia.org/wiki/List_of_thermal_conductivities" target="_self"><tt>http://en.wikipedia.org/wiki/List_of_thermal_conductivities</tt></a> -->
+<!-- <a href="http://en.wikipedia.org/wiki/Heat_capacity" target="_self"><tt>http://en.wikipedia.org/wiki/Heat_capacity</tt></a> -->
+<!-- <a href="http://en.wikipedia.org/wiki/Density#Various_materials" target="_self"><tt>http://en.wikipedia.org/wiki/Density#Various_materials</tt></a> -->
+</div>
+
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 57:  Snapshots of the dimensionless solution of a scaled problem. <div id="sec:pde:diff1D:fig:scaled"></div> </p></center>
+<p><img src="figs/rod_temp_scaled.png" align="bottom" width=800></p>
+</center>
+
+<h2 id="___sec202">Vectorization </h2>
+
+<p>
+Occasionally in this book, we show how to speed up code by replacing
+loops over arrays by vectorized expressions.
+The present problem involves a loop for computing the right-hand side:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>for i in range(1, N):
+    rhs[i] = (beta/dx**2)*(u[i+1] - 2*u[i] + u[i-1]) + gf(x[i], t)
+</code></pre>
+<!-- end verbatim block -->
+This loop can be replaced by a vectorized expression with the following
+reasoning. We want to set all the inner points at once: <code>rhs[1:N-1]</code>
+(this goes from index <code>1</code> up to, but not including, <code>N</code>). As the loop
+index <code>i</code> runs from <code>1</code> to <code>N-1</code>, the <code>u[i+1]</code>
+term will cover all the inner <code>u</code> values displaced one index to the right
+(compared to <code>1:N</code>), i.e., <code>u[2:N+1]</code>. Similarly, <code>u[i-1]</code> corresponds
+to all inner <code>u</code> values displaced one index to the left: <code>u[0:N-1]</code>.
+Finally, <code>u[i]</code> has the same indices as <code>rhs</code>: <code>u[1:N]</code>. The
+vectorized loop can therefore be written in terms of slices:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>rhs[1:N] = (beta/dx**2)*(u[2:N+1] - 2*u[1:N] + u[0:N-1]) +
+           g(x[1:N], t)
+</code></pre>
+<!-- end verbatim block -->
+This rewrite speeds up the code by about a factor of 10.
+A complete code is found in the file <code>rod_FE_vec.py</code>.
+
+<h2 id="___sec203">Using Odespy to solve the system of ODEs </h2>
+
+<p>
+Let us now show how to apply a general ODE package
+like Odespy (see the section <a href="._p4c-solarized-Python020.html#sec:de:osc:odespy">Odespy: software for solving ODEs</a>) to solve
+our diffusion problem. As long as we have defined a right-hand
+side function <code>rhs</code> this is very straightforward:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import odespy
+solver = odespy.RKFehlberg(rhs)
+solver.set_initial_condition(U_0)
+T = 1.2
+N_t = int(round(T/float(dt)))
+time_points = linspace(0, T, N_t+1)
+u, t = solver.solve(time_points)
+
+# Check how many time steps are required by adaptive vs
+# fixed-step methods
+if hasattr(solver, 't_all'):
+    print '# time steps:', len(solver.t_all)
+else:
+    print '# time steps:', len(t)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The very nice thing is that we can now experiment with a lot of
+time integration methods. Trying out some simple ones first, like
+<code>RK2</code> and <code>RK4</code>, quickly reveals that the time step limitation of
+the Forward Euler scheme also applies to these more sophisticated
+Runge-Kutta methods, but their accuracy is better. However, the Odespy package
+offers also adaptive methods. We can then specify a much larger
+time step in <code>time_points</code>, and the solver will figure out
+the appropriate step. Above we indicated how to use the adaptive
+Runge-Kutta-Fehlberg 4-5 solver. While the \( \Delta t \) corresponding
+to the Forward Euler method requires over 8000 steps for a
+simulation, we started the <code>RKFehlberg</code> method with 100 times this
+time step and in the end it required just slightly more than 2500
+steps, using the default tolerance parameters. Lowering the tolerance
+did not save any significant amount of computational work.
+Figure <a href="#sec:pde:diff1D:fig:RKFehlberg">58</a>
+shows a comparison of the length of all the time steps
+for two values of the tolerance. We see that the influence of the tolerance
+is minor in this computational example, so it seems that the blow-up
+due to instability is what governs the time step size. The nice feature
+of this adaptive method is that we can just specify when we want the
+solution to be computed, and the method figures out on its own what
+time step that has to be used because of stability restrictions.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 58:  Time steps used by the Runge-Kutta-Fehlberg method: error tolerance \( 10^{-3} \) (left) and \( 10^{-6} \) (right). <div id="sec:pde:diff1D:fig:RKFehlberg"></div> </p></center>
+<p><img src="figs/rod_RKFehlberg_dt.png" align="bottom" width=700></p>
+</center>
+
+<p>
+We have seen how easy it is to apply sophisticated methods for
+ODEs to this PDE example. We shall take the use of Odespy one step
+further in the next section.
+
+<h2 id="___sec204">Implicit methods </h2>
+
+<p>
+A major problem with the stability criterion <a href="#mjx-eqn-98">(98)</a>
+is that the time step becomes very small if \( \Delta x \) is small.
+For example, halving \( \Delta x \) requires four times as many time
+steps and eight times the work. Now, with \( N=40 \), which is a reasonable
+resolution for the test problem above, the computations are very fast.
+What takes time, is the visualization on the screen, but for that purpose one
+can visualize only a subset of the time steps. However, there are occasions
+when you need to take larger time steps with the
+diffusion equation, especially if interest is in the long-term behavior
+as \( t\rightarrow\infty \). You must then turn to <em>implicit methods</em> for ODEs.
+These methods require the solutions of <em>linear systems</em>, if the underlying
+PDE is linear, and systems of <em>nonlinear algebraic equations</em> if the
+underlying PDE is non-linear.
+
+<p>
+The simplest implicit method is the Backward Euler scheme, which puts
+no restrictions on \( \Delta t \) for stability, but obviously, a large
+\( \Delta t \) leads to inaccurate results. The Backward Euler scheme
+for a scalar ODE \( u' = f(u,t) \) reads
+
+$$ \frac{u^{n+1} - u^{n}}{\Delta t} = f(u^{n+1}, t)\thinspace .$$
+
+This equation is to be solved for \( u^{n+1} \). If \( f \) is linear in \( u \),
+it is a linear equation, but if \( f \) is nonlinear in \( u \), one needs
+approximate methods for nonlinear equations (the chapter <a href="._p4c-solarized-Python024.html#4th:NonlinAlgEq">Solving nonlinear algebraic equations</a>).
+
+<p>
+In our case, we have a system of linear ODEs
+<a href="#mjx-eqn-94">(94)</a>-<a href="#mjx-eqn-96">(96)</a>. The Backward
+Euler scheme applied to each equation leads to
+
+$$
+\begin{align}
+\frac{u_0^{n+1}-u_0^n}{\Delta t} &= s'(t),
+\tag{99}\\ 
+\frac{u_i^{n+1} - u_i^{n}}{\Delta t} &=  \frac{\beta}{\Delta x^2}
+(u_{i+1}^{n+1}(t) - 2u_i^{n+1}(t) + u_{i-1}^{n+1}(t)) + g_i(t),
+\tag{100}\\ 
+&\qquad\qquad \quad i=1,\ldots,N-1,\nonumber\\ 
+\frac{u_N^{n+1} - u_N^{n}}{\Delta t} &=  \frac{2\beta}{\Delta x^2}
+(u_{N-1}^{n+1}(t) - u_N^{n+1}(t)) + g_i(t)\thinspace .
+\tag{101}
+\end{align}
+$$
+
+This is a system of linear equations in the unknowns
+\( u_i^{n+1} \), \( i=0,\ldots,N \), which is easy to realize by writing out
+the equations for the case \( N=3 \), collecting all the unknown
+terms on the left-hand side and all the known terms on the right-hand side:
+
+$$
+\begin{align}
+u_0^{n+1} &= u_0^n + \Delta t\,s'(t),
+\tag{102}\\ 
+u_1^{n+1} - \Delta t \frac{\beta}{\Delta x^2}
+(u_{2}^{n+1}(t) - 2u_1^{n+1}(t) + u_{0}^{n+1}(t))
+&= u_1^{n}  + \Delta t\,g_1(t),
+\tag{103}\\ 
+u_2^{n+1} - \Delta t\frac{2\beta}{\Delta x^2}
+(u_{1}^{n+1}(t) - u_2^{n+1}(t))  &= u_2^{n}  + \Delta t\,g_2(t)\thinspace .
+\tag{104}
+\end{align}
+$$
+
+<p>
+A system of linear equations like this, is usually written on matrix form
+\( Au=b \), where \( A \) is a coefficient matrix, \( u=(u_0^{n+1},\ldots,n_N^{n+1}) \)
+is the vector of unknowns, and \( b \) is a vector of known values.
+The coefficient matrix for the case <a href="#mjx-eqn-102">(102)</a>-<a href="#mjx-eqn-104">(104)</a> becomes
+
+$$ A = \left(\begin{array}{ccc}
+1 & 0 & 0\\ 
+-\Delta t \frac{\beta}{\Delta x^2} & 1 + 2\Delta t \frac{\beta}{\Delta x^2}
+& - \Delta t \frac{\beta}{\Delta x^2}\\ 
+0 & - \Delta t\frac{2\beta}{\Delta x^2} & 1 + \Delta t\frac{2\beta}{\Delta x^2}
+\end{array}\right)
+$$
+
+In the general case <a href="#mjx-eqn-99">(99)</a>-<a href="#mjx-eqn-101">(101)</a>, the coefficient matrix is an \( (N+1)\times(N+1) \) matrix with
+zero entries, except for
+
+$$
+\begin{align}
+A_{1,1} &= 1\\ 
+A_{i,i-1} &= -\Delta t \frac{\beta}{\Delta x^2},\quad i=2,\ldots,N-1\\ 
+A_{i,i+1} &= -\Delta t \frac{\beta}{\Delta x^2},\quad i=2,\ldots,N-1\\ 
+A_{i,i} &= 1 + 2\Delta t \frac{\beta}{\Delta x^2},\quad i=2,\ldots,N-1\\ 
+A_{N,N-1} & = - \Delta t\frac{2\beta}{\Delta x^2}\\ 
+A_{N,N} &= 1 + \Delta t\frac{2\beta}{\Delta x^2}
+\end{align}
+$$
+
+<p>
+If we want to apply general methods for systems of ODEs on the form
+\( u'=f(u,t) \), we can assume a linear \( f(u,t)=Ku \). The coefficient
+matrix \( K \) is found from the right-hand side of
+<a href="#mjx-eqn-99">(99)</a>-<a href="#mjx-eqn-101">(101)</a> to
+be
+
+$$
+\begin{align}
+K_{1,1} &= 0\\ 
+K_{i,i-1} &= \frac{\beta}{\Delta x^2},\quad i=2,\ldots,N-1\\ 
+K_{i,i+1} &= \frac{\beta}{\Delta x^2},\quad i=2,\ldots,N-1\\ 
+K_{i,i} &= -\frac{2\beta}{\Delta x^2},\quad i=2,\ldots,N-1\\ 
+K_{N,N-1} & = \frac{2\beta}{\Delta x^2}\\ 
+K_{N,N} &= -\frac{2\beta}{\Delta x^2}
+\end{align}
+$$
+
+We see that \( A=I-\Delta t\,K \).
+
+<p>
+To implement the Backward Euler scheme, we can either fill a matrix
+and call a linear solver, or we can apply Odespy. We follow the
+latter strategy. Implicit methods in Odespy need the \( K \) matrix above,
+given as an argument <code>jac</code> (Jacobian of \( f \)) in the call to
+<code>odespy.BackwardEuler</code>.
+Here is Python code for the right-hand side of the ODE system (<code>rhs</code>)
+and the \( K \) matrix (<code>K</code>) as well as statements
+for initializing and running the Odespy solver <code>BackwardEuler</code>
+(in the file <a href="https://github.com/hplgit/prog4comp/src/py/rod_BE.py" target="_self"><tt>rod_BE.py</tt></a>):
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def rhs(u, t):
+    N = len(u) - 1
+    rhs = zeros(N+1)
+    rhs[0] = dsdt(t)
+    for i in range(1, N):
+        rhs[i] = (beta/dx**2)*(u[i+1] - 2*u[i] + u[i-1]) + \ 
+                 g(x[i], t)
+    rhs[N] = (beta/dx**2)*(2*u[i-1] + 2*dx*dudx(t) -
+                           2*u[i]) + g(x[N], t)
+    return rhs
+
+def K(u, t):
+    N = len(u) - 1
+    K = zeros((N+1,N+1))
+    K[0,0] = 0
+    for i in range(1, N):
+        K[i,i-1] = beta/dx**2
+        K[i,i] = -2*beta/dx**2
+        K[i,i+1] = beta/dx**2
+    K[N,N-1] = (beta/dx**2)*2
+    K[N,N] = (beta/dx**2)*(-2)
+    return K
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import odespy
+solver = odespy.BackwardEuler(rhs, f_is_linear=True, jac=K)
+solver = odespy.ThetaRule(rhs, f_is_linear=True, jac=K, theta=0.5)
+solver.set_initial_condition(U_0)
+T = 1*60*60
+N_t = int(round(T/float(dt)))
+time_points = linspace(0, T, N_t+1)
+u, t = solver.solve(time_points)
+</code></pre>
+<!-- end verbatim block -->
+The file <code>rod_BE.py</code> has all the details and shows a movie of
+the solution. We can run with any \( \Delta t \) we want, its size just
+impacts the accuracy of the first steps.
+
+<p>
+<div class="alert alert-block alert-warning alert-text-normal">
+<b>Odespy solvers apply dense matrices!</b>
+<p>
+Looking at the entries of the \( K \) matrix, we realize that there are
+at maximum three entries different from zero in each row. Therefore,
+most of the entries are zeroes. The Odespy solvers expect dense
+square matrices as input, here with \( (N+1)\times(N+1) \) elements.
+When solving the linear systems, a lot of storage and work are spent
+on the zero entries in the matrix. It would be much more efficient to
+store the matrix as a <em>tridiagonal</em> matrix and apply a specialized
+Gaussian elimination solver for tridiagonal systems. Actually, this
+reduces the work from \( \mathcal{O}(N^3) \) to \( \mathcal{O}(N) \).
+
+<p>
+In one-dimensional diffusion problems, the savings of using a tridiagonal
+matrix are modest in practice, since the matrices are very small anyway.
+In two- and three-dimensional PDE problems, however, one cannot afford dense
+square matrices. Rather, one <em>must</em> resort to more efficient storage formats
+and algorithms tailored to such formats, but this is beyond scope of the present text.
+</div>
+
+
+<h1 id="___sec205">Exercises </h1>
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:pde:diff1D:exer:handFE">Exercise 63: Simulate a diffusion equation by hand</h2>
+
+<p>
+Consider the problem given by <a href="#mjx-eqn-94">(94)</a>, <a href="#mjx-eqn-95">(95)</a>
+and <a href="#mjx-eqn-97">(97)</a>.
+Set \( N=2 \) and compute \( u_i^0 \), \( u_i^1 \) and \( u_i^2 \) by hand for \( i=0,1,2 \).
+Use these values to construct a test function for checking that the
+implementation is correct.
+Copy useful functions from
+<code>test_diffusion_pde_exact_linear.py</code>
+and make a new test function <code>test_diffusion_hand_calculation</code>.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+Applying the forward Euler method to <a href="#mjx-eqn-94">(94)</a>, we get
+$$ u_0^{n+1}=u_0^n - \Delta t (3L),\quad n=0,1\thinspace .$$
+
+For the requested <code>n</code> values, we then find that
+$$
+\begin{align}
+u_0^0 &= 2(0-L)=-2L=-2(1.5)=-3.0\thinspace ,\nonumber \\ 
+u_0^1 &= u_0^0 - \Delta t (3L)=-3.0 - 0.1(3(1.5))=-3.45\thinspace ,\nonumber \\ 
+u_0^2 &= u_0^1 - \Delta t (3L)=-3.45 - 0.1(3(1.5))=-3.90\thinspace .\nonumber
+\end{align}
+$$
+
+Similarly, with forward Euler applied to <a href="#mjx-eqn-95">(95)</a>, we get
+$$ u_1^{n+1}=u_1^n + \frac{\beta \Delta t}{\Delta x^2} (u_2^n - 2u_1^n + u_0^n) + \Delta t (f_1^n),\quad n=0,1\thinspace .$$
+
+For the requested <code>n</code> values, we find
+$$
+\begin{align}
+u_1^0 &= 2(0.75-L)=2(0.75-1.5)=-1.5\thinspace ,\nonumber \\ 
+u_1^1 &= u_1^0 + \frac{\beta \Delta t}{\Delta x^2} (u_2^0 - 2u_1^0 + u_0^0) + \Delta t (f_1^0)\thinspace ,\nonumber \\ 
+      &= -1.5 + \frac{(0.5)(0.1)}{0.75^2} (0 - 2(-1.5) + (-3.0)) + 0.1 (3(0.75-1.5))\thinspace ,\nonumber \\ 
+      &= -1.725\thinspace ,\nonumber \\ 
+u_1^2 &= u_1^1 + \frac{\beta \Delta t}{\Delta x^2} (u_2^1 - 2u_1^1 + u_0^1) + \Delta t (f_1^1)\thinspace ,\nonumber \\ 
+      &= -1.725 + \frac{(0.5)(0.1)}{0.75^2} (0 - 2(-1.725) + (-3.45)) + 0.1(3(0.75-1.5))\thinspace ,\nonumber \\ 
+      &= -1.95\thinspace .\nonumber
+\end{align}
+$$
+
+Finally, applying the forward Euler method to <a href="#mjx-eqn-97">(97)</a>, we get
+$$ u_2^{n+1}=u_2^n + \frac{2\beta \Delta t}{\Delta x^2} (u_1^n + \Delta x\gamma - u_2^n) + \Delta t (f_2^n),\quad n=0,1\thinspace .$$
+
+For the requested <code>n</code> values, we find
+$$
+\begin{align}
+u_2^0 &= 2(L-L)=0\thinspace ,\nonumber \\ 
+u_2^1 &= u_2^0 + \frac{2\beta \Delta t}{\Delta x^2} (u_1^0 + \Delta x\gamma + u_2^0) + \Delta t (f_2^0)\thinspace ,\nonumber \\ 
+      &= 0 + \frac{2(0.5)(0.1)}{0.75^2} (2(0.75-1.5) + \frac{1.5}{2}(3(0) + 2) - 0) + 0.1 (0))\thinspace ,\nonumber \\ 
+      &= 0\thinspace ,\nonumber \\ 
+u_2^2 &= u_2^1 + \frac{2\beta \Delta t}{\Delta x^2} (u_1^1 + \Delta x\gamma - u_2^1) + \Delta t (f_2^1)\thinspace ,\nonumber \\ 
+      &= 0 + \frac{2(0.5)(0.1)}{0.75^2} (-1.725 + \frac{1.5}{2}(3(0.1)+2)-0) + 0.1(3(1.5-1.5))\thinspace ,\nonumber \\ 
+      &= 0\thinspace .\nonumber
+\end{align}
+$$
+
+<p>
+Code:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>&quot;&quot;&quot;Hand calc: Verify implementation of the diffusion equation&quot;&quot;&quot;
+
+from ode_system_FE import ode_FE
+from numpy import linspace, zeros, abs
+#from test_diffusion_pde_exact_linear import rhs, u_exact, dudx, s, dsdt, f
+
+def rhs(u, t):
+    N = len(u) - 1
+    rhs = zeros(N+1)
+    rhs[0] = dsdt(t)
+    for i in range(1, N):
+        rhs[i] = (beta/dx**2)*(u[i+1] - 2*u[i] + u[i-1]) + \
+                 g(x[i], t)
+    rhs[N] = (beta/dx**2)*(2*u[N-1] + 2*dx*dudx(t) -
+                           2*u[N]) + g(x[N], t)
+    return rhs
+
+def u_exact(x, t):
+    return (3*t + 2)*(x - L)
+
+def dudx(t):
+    return (3*t + 2)
+
+def s(t):
+    return u_exact(0, t)
+
+def dsdt(t):
+    return 3*(-L)
+
+def g(x, t):
+    return 3*(x-L)
+
+def test_rod_diffusion_hand():
+    global beta, dx, L, x      # needed in rhs
+    L = 1.5
+    beta = 0.5
+    N = 2
+    x = linspace(0, L, N+1)
+    dx = x[1] - x[0]
+    u = zeros(N+1)
+
+    U_0 = zeros(N+1)
+    U_0[0] = s(0)
+    U_0[1:] = u_exact(x[1:], 0)
+
+    u_hand = zeros((3, len(U_0)))
+    u_hand[0,:] = -3.0, -1.5, 0.0    # spatial indices: 0, 1 and 2
+    u_hand[1,:] = -3.45, -1.725, 0.0
+    u_hand[2,:] = -3.90, -1.95, 0.0
+
+    dt = 0.1
+
+    u, t = ode_FE(rhs, U_0, dt, T=1.2)
+
+    tol = 1E-12
+    for i in [0, 1, 2]:
+	print u_hand[i,:]
+	print u[i,:]
+        diff = abs(u_hand[i,:] - u[i,:]).max()
+        assert diff &lt; tol, 'diff=%.16g' % diff
+        print 'diff=%g at t=%g' % (diff, t[i])
+
+if __name__ == '__main__':
+    test_rod_diffusion_hand()
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>test_rod_hand_calculations.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:pde:diff1D:exer:groundtemp">Exercise 64: Compute temperature variations in the ground</h2>
+
+<p>
+The surface temperature at the ground shows daily and seasonal oscillations.
+When the temperature rises at the surface, heat is propagated into
+the ground, and the coefficient \( \beta \) in the diffusion equation determines
+how fast this propagation is. It takes some time before the temperature
+rises down in the ground. At the surface, the temperature has then fallen.
+We are interested in how the temperature varies down in the ground because
+of temperature oscillations on the surface.
+
+<p>
+Assuming homogeneous horizontal properties of the ground, at least locally,
+and no variations of the temperature at the surface at a fixed point of time,
+we can neglect the horizontal variations of the temperature.
+Then a one-dimensional diffusion equation governs the heat
+propagation along a vertical axis called \( x \). The surface corresponds to
+\( x=0 \) and the \( x \) axis point downwards into the ground.
+There is no source term in the equation (actually, if rocks in
+the ground are radioactive, they emit heat and that can be modeled by
+a source term, but this effect is neglected here).
+
+<p>
+At some depth \( x=L \)
+we assume that the heat changes in \( x \) vanish, so \( \partial u/\partial x=0 \)
+is an appropriate boundary condition at \( x=L \).
+We assume a simple sinusoidal temperature variation at the surface:
+
+$$ u(0,t) = T_0 + T_a\sin\left(\frac{2\pi}{P}t\right),$$
+
+where \( P \) is the period, taken here as 24 hours (\( 24\cdot 60\cdot 60 \) s).
+The \( \beta \) coefficient may be set to \( 10^{-6}\hbox{ m}^2/\hbox{s} \).
+Time is then measured in seconds. Set appropriate values for \( T_0 \) ad \( T_a \).
+
+<p>
+<b>a)</b>
+Show that the present problem has an analytical solution of the form
+
+$$ u(x,t) = A + Be^{-rx}\sin(\omega t - rx),$$
+
+for appropriate values of \( A \), \( B \), \( r \), and \( \omega \). Extend the
+program to also plot this analytical solution for comparison.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+Any function that is supposed to be a solution, must fit the equation, boundary
+conditions and initial conditions, so we go ahead and check this.
+
+<p>
+From before, we have the temperature at the surface as a given sine function, i.e.
+using \( x = 0 \) in the suggested (or given) solution should make it equal to the temperature function previously
+given for the surface. This implies immediately that \( A = T_0 \), \( B = T_a \) and \( \omega = \frac{2\pi}{P} \).
+
+<p>
+At the other boundary, we see that the suggested solution approaches zero when x goes to infinity, which
+is consistent with the boundary condition \( \frac{\partial u}{\partial x} = 0 \).
+
+<p>
+With \( t = 0 \), we find that
+$$ u(x,0) = A + B e^{-rx}\sin\left(-rx\right),$$
+
+So, by making this our initial temperature distribution, also the initial conditions will be consistent
+with the suggested solution.
+
+<p>
+Finally, the suggested solution must be consistent with \( \frac{\partial u}{\partial t} = \beta\frac{\partial^2 u}{\partial x^2} \), so
+we perform the required partial derivatives to check.
+$$ \frac{\partial u}{\partial t} = \omega B e^{-rx}\cos\left(\omega t -rx\right),$$
+
+
+$$ \frac{\partial u}{\partial x} = -r B e^{-rx}\sin\left(\omega t -rx\right) -r B e^{-rx}\cos\left(\omega t -rx\right)  ,$$
+
+
+$$ \frac{\partial^2 u}{\partial x^2} =
+-r\left[-r B e^{-rx}\sin\left(\omega t - rx\right) -
+r B e^{-rx}\cos\left(\omega t - rx\right)\right] -
+r\left[-r B e^{-rx}\cos\left(\omega t - rx\right) +
+r B e^{-rx}\sin\left(\omega t -rx\right)\right]  ,$$
+
+which reduces to
+$$ \frac{\partial^2 u}{\partial x^2} =
+2 r^2 B e^{-rx}\cos\left(\omega t - rx\right)   ,$$
+
+This means that we can decide the final parameter \( r \) as well, since if only \( r = \sqrt{\frac{\omega}{2\beta}} \), we have that \( \frac{\partial u}{\partial t} = \beta\frac{\partial^2 u}{\partial x^2} \).
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>b)</b>
+Solve this heat propagation problem numerically for some days and animate the
+temperature. You may use the Forward Euler method in time. Plot both
+the numerical and analytical solution. As initial condition for
+the numerical solution, use the exact solution during program development,
+and when the curves coincide in the animation for all times, your
+implementation works, and you can then switch to a constant
+initial condition: \( u(x,0)=T_0 \).
+For this latter initial condition,
+how many periods of oscillations are necessary before there is a good
+(visual) match between the numerical and exact solution (despite
+differences at \( t=0 \))?
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+Code:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>&quot;&quot;&quot;Temperature vertically down in the ground (with Forward Euler).&quot;&quot;&quot;
+
+from numpy import linspace, zeros, linspace, exp, sin, cos, pi, sqrt
+import time
+
+def U(x, t):
+    &quot;&quot;&quot; True temperature &quot;&quot;&quot;
+    return A + B*exp(-r*x)*sin(omega*t - r*x)
+
+def rhs(u, t):
+    N = len(u) - 1
+    rhs = zeros(N+1)
+    rhs[0] = dsdt(t)
+    for i in range(1, N):
+        rhs[i] = (beta/dx**2)*(u[i+1] - 2*u[i] + u[i-1]) + \
+                 f(x[i], t)
+    i = N
+    rhs[i] = (beta/dx**2)*(2*u[i-1] - 2*u[i]) + f(x[N], t)
+    return rhs
+
+def dudx(t):
+    return 0
+
+def s(t):
+    return T0 + Ta*sin((2*pi/P)*t)
+
+def dsdt(t):
+    return (Ta*2*pi/P)*cos((2*pi/P)*t)
+
+def f(x, t):
+    return 0
+
+def I(x):
+    &quot;&quot;&quot;Initial temp distribution&quot;&quot;&quot;
+    return A + B*exp(-r*x)*sin(-r*x)
+
+def I(x):
+    &quot;&quot;&quot;Initial temp distribution.&quot;&quot;&quot;
+    return A
+
+beta = 1E-6
+T0 = 283	# just some choice
+Ta = 20		# amplitude of temp osc
+P = 24*60*60	# period, 24 hours
+A = T0
+B = Ta
+omega = 2*pi/P
+r = sqrt(omega/(2*beta))
+L = 2		# depth vertically down in the ground
+N = 100
+x = linspace(0, L, N+1)
+dx = x[1] - x[0]
+u = zeros(N+1)
+
+U_0 = zeros(N+1)
+U_0[0] = s(0)
+U_0[1:] = I(x[1:])
+
+dt = dx**2/float(2*beta)
+print 'stability limit:', dt
+
+t0 = time.clock()
+from ode_system_FE import ode_FE
+T=(24*60*60)*6	                # simulate 6 days
+u, t = ode_FE(rhs, U_0, dt, T)
+t1 = time.clock()
+print 'CPU time: %.1fs' % (t1 - t0)
+
+
+# Make movie
+import os
+os.system('rm tmp_*.png')
+import matplotlib.pyplot as plt
+plt.ion()
+lines = plt.plot(x, u[0,:], x, U(x, 0))
+plt.axis([x[0], x[-1], 283-30, 283+30])
+plt.xlabel('x')
+plt.ylabel('u(x,t) and U(x,t)')
+counter = 0
+for i in range(0, u.shape[0]):
+    print t[i]
+    lines[0].set_ydata(u[i,:])
+    lines[1].set_ydata(U(x, t[i]))
+    plt.legend(['t=%.3f' % t[i]])
+    plt.draw()
+    if i % 10 == 0: # plot every x steps
+        #plt.savefig('tmp_%04d.png' % counter)
+        counter += 1
+    #time.sleep(0.2)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>ground_temp.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:pde:diff1D:exer:compare:implicit">Exercise 65: Compare implicit methods</h2>
+
+<p>
+An equally stable, but more accurate method than the Backward Euler scheme,
+is the
+so-called 2-step backward scheme, which for an ODE \( u'=f(u,t) \) can
+be expressed by
+
+$$ \frac{3u^{n+1} - 4u^{n} + u^{n-1}}{2\Delta t} = f(u^{n+1},t_{n+1})
+\thinspace .$$
+
+The Odespy package offers this method as <code>odespy.Backward2Step</code>.
+The purpose of this exercise is to compare three methods and animate
+the three solutions:
+
+<ol>
+<li> The Backward Euler method with \( \Delta t =0.001 \)</li>
+<li> The backward 2-step method with \( \Delta t =0.001 \)</li>
+<li> The backward 2-step method with \( \Delta t =0.01 \)</li>
+</ol>
+
+Choose the model problem from the section <a href="#sec:pde:diff1D:rod">Application: heat conduction in a rod</a>.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+Here is the code:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>&quot;&quot;&quot;
+Temperature evolution in a rod,
+computed by a BackwardEuler method and a 2-step
+backward method.
+&quot;&quot;&quot;
+
+from numpy import linspace, zeros, linspace
+
+def rhs(u, t):
+    N = len(u) - 1
+    rhs = zeros(N+1)
+    rhs[0] = dsdt(t)
+    for i in range(1, N):
+        rhs[i] = (beta/dx**2)*(u[i+1] - 2*u[i] + u[i-1]) + \
+                 f(x[i], t)
+    rhs[N] = (beta/dx**2)*(2*u[N-1] + 2*dx*dudx(t) -
+                           2*u[N]) + g(x[N], t)
+    return rhs
+
+def K(u, t):
+    N = len(u) - 1
+    K = zeros((N+1,N+1))
+    K[0,0] = 0
+    for i in range(1, N):
+        K[i,i-1] = beta/dx**2
+        K[i,i] = -2*beta/dx**2
+        K[i,i+1] = beta/dx**2
+    K[N,N-1] = (beta/dx**2)*2
+    K[N,N] = (beta/dx**2)*(-2)
+    return K
+
+def dudx(t):
+    return 0
+
+def s(t):
+    return 323
+
+def dsdt(t):
+    return 0
+
+def g(x, t):
+    return 0
+
+
+L = 0.5
+beta = 8.2E-5
+N = 40
+x = linspace(0, L, N+1)
+dx = x[1] - x[0]
+u = zeros(N+1)
+
+U_0 = zeros(N+1)
+U_0[0] = s(0)
+U_0[1:] = 283
+dt = dx**2/(2*beta)
+print 'stability limit:', dt
+dt = 12
+
+import odespy
+solver0 = odespy.BackwardEuler(rhs, f_is_linear=True, jac=K)
+solver1 = odespy.Backward2Step(rhs, f_is_linear=True, jac=K)
+solver2 = odespy.Backward2Step(rhs, f_is_linear=True, jac=K)
+solver0.set_initial_condition(U_0)
+solver1.set_initial_condition(U_0)
+solver2.set_initial_condition(U_0)
+T = 1*60*60
+N_t = int(round(T/float(dt)))
+time_points = linspace(0, T, N_t+1)
+u0, t0 = solver0.solve(time_points)
+u1, t1 = solver1.solve(time_points)
+# Solve with larger time step in the 2-step method
+factor = 10
+dt = factor*dt
+N_t = int(round(T/float(dt)))
+time_points = linspace(0, T, N_t+1)
+u2, t2 = solver2.solve(time_points)
+
+# Make movie
+import os
+os.system('rm tmp_*.png')
+import matplotlib.pyplot as plt
+import time
+plt.ion()
+lines = plt.plot(x, u0[0,:], x, u1[0,:], x, u2[0,:])
+plt.axis([x[0], x[-1], 273, s(0)+10])
+plt.xlabel('x')
+plt.ylabel('u(x,t)')
+counter = 0
+for i in range(len(t2)):
+    print t2[i]
+    lines[2].set_ydata(u2[i,:])
+    lines[0].set_ydata(u0[factor*i,:])
+    lines[1].set_ydata(u1[factor*i,:])
+    plt.title('t=%.3f' % t2[i])
+    plt.legend(['BE', 'B2Step', 'B2Step 2*dt'])
+    plt.draw()
+    time.sleep(0.5)
+    plt.savefig('tmp_%04d.png' % counter)
+    counter += 1
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>rod_BE_vs_B2Step.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:pde:diff1D:exer:groundtemp:adapt">Exercise 66: Explore adaptive and implicit methods</h2>
+
+<p>
+We consider the same problem as in <a href="#sec:pde:diff1D:exer:groundtemp">Exercise 64: Compute temperature variations in the ground</a>.
+Now we want to explore the use of adaptive and implicit methods from Odespy
+to see if they are more efficient than the Forward Euler method.
+Assume that you want the accuracy provided by the Forward Euler method with
+its maximum \( \Delta t \) value. Since there exists an analytical solution,
+you can compute an error measure that summarizes the error in space and
+time over the whole simulation:
+
+$$ E = \sqrt{\Delta x\Delta t\sum_{i}\sum_n (U_i^n - u_i^n)^2}\thinspace .$$
+
+Here, \( U_i^n \) is the exact solution.
+Use the Odespy package to run the following implicit and adaptive
+solvers:
+
+<ol>
+<li> <code>BackwardEuler</code></li>
+<li> <code>Backward2Step</code></li>
+<li> <code>RKFehlberg</code></li>
+</ol>
+
+Experiment to see if you can use larger time steps than what is required
+by the Forward Euler method and get solutions with the same order of accuracy.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+To avoid oscillations in the solutions when using the RKFehlberg method,
+the <code>rtol</code> and <code>atol</code> parameters to <code>RKFFehlberg</code> must be set no
+larger than 0.001 and 0.0001, respectively.
+You can print out <code>solver_RKF.t_all</code> to see all the time steps used
+by the RKFehlberg solver (if <code>solver</code> is the <code>RKFehlberg</code> object).
+You can then compare the number of time steps with what is required
+by the other methods.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+Code:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>&quot;&quot;&quot;
+Temperature vertically down in the ground with Forward Euler,
+Backward Euler, backward 2-step and RKFehlberg .
+&quot;&quot;&quot;
+
+from numpy import linspace, zeros, linspace, sin, cos, pi, \
+                  exp, sqrt
+import time
+
+def rhs(u, t):
+    N = len(u) - 1
+    rhs = zeros(N+1)
+    rhs[0] = dsdt(t)
+    for i in range(1, N):
+        rhs[i] = (beta/dx**2)*(u[i+1] - 2*u[i] + u[i-1]) + \
+                 g(x[i], t)
+    i = N
+    rhs[i] = (beta/dx**2)*(2*u[i-1] - 2*u[i]) + g(x[N], t)
+    return rhs
+
+def K(u, t):
+    N = len(u) - 1
+    K = zeros((N+1, N+1))
+    K[0, 0] = 0
+    for i in range(1, N):
+        K[i, i-1] = beta/dx**2
+        K[i, i]   = -2*beta/dx**2
+        K[i, i+1] = beta/dx**2
+    K[N, N-1] = (beta/dx**2)*2
+    K[N, N]   = (beta/dx**2)*(-2)
+    return K
+
+def dudx(t):
+    return 0
+
+def s(t):
+    return T0 + Ta*sin((2*pi/P)*t)
+
+def dsdt(t):
+    return (Ta*2*pi/P)*cos((2*pi/P)*t)
+
+def g(x, t):
+    return 0
+
+def U(x, t):
+    &quot;&quot;&quot; True temperature.&quot;&quot;&quot;
+    return A + B*exp(-r*x)*sin(omega*t - r*x)
+
+def I(x):
+    &quot;&quot;&quot;Initial temp distribution.&quot;&quot;&quot;
+    return U(x, 0)
+
+T0 = 283	# just some choice
+Ta = 20		# amplitude of temp osc
+P = 24*60*60	# period, 24 hours
+A = T0
+B = Ta
+omega = 2*pi/P
+beta = 1E-6
+r = sqrt(omega/(2*beta))
+L = 2		# depth vertically down in the ground
+N = 100
+x = linspace(0, L, N+1)
+dx = x[1] - x[0]
+u = zeros(N+1)
+
+U_0 = zeros(N+1)
+U_0[0] = s(0)
+U_0[1:] = I(x[1:])
+FE_stability_limit = dx**2/float(2*beta)
+dt = 1*FE_stability_limit
+print 'dt/(FE stability limit): %.1f' % (dt/FE_stability_limit)
+T=(24*60*60)*6   # simulate 6 days
+
+import odespy
+solver1 = odespy.BackwardEuler(rhs, f_is_linear=True, jac=K)
+solver2 = odespy.Backward2Step(rhs, f_is_linear=True, jac=K)
+solver3 = odespy.RKFehlberg(rhs, rtol=0.001, atol=0.0001)
+solver1.set_initial_condition(U_0)
+solver2.set_initial_condition(U_0)
+solver3.set_initial_condition(U_0)
+N_t = int(round(T/float(dt)))
+time_points = linspace(0, T, N_t+1)
+u1, t1 = solver1.solve(time_points)
+u2, t2 = solver2.solve(time_points)
+u3, t3 = solver3.solve(time_points)
+print 'N_t=%d, RKF N_t:%d' % (N_t, len(solver3.t_all))
+print 'Average dt for RKF: %.2f' % (T/float(len(solver3.t_all)))
+
+if dt &lt;= FE_stability_limit:
+    from ode_system_FE import ode_FE
+    u4, t4 = ode_FE(rhs, U_0, dt, T)
+
+# Compute error with each method
+E1 = 0; E2 = 0; E3 = 0; E_FE = 0
+for i in range(len(x)):
+    for n in range(len(time_points)):
+        if dt &lt;= FE_stability_limit:
+            E_FE += (U(x[i], time_points[n]) - u4[n,i])**2
+        E1 += (U(x[i], time_points[n]) - u1[n,i])**2
+        E2 += (U(x[i], time_points[n]) - u2[n,i])**2
+        E3 += (U(x[i], time_points[n]) - u3[n,i])**2
+if dt &lt;= FE_stability_limit:
+    E_FE = sqrt(dx*dt*E_FE)
+E1 = sqrt(dx*dt*E1)
+E2 = sqrt(dx*dt*E2)
+E3 = sqrt(dx*dt*E3)
+
+#print E0  # gives 31.86 with dt on stability limit
+if dt &lt;= FE_stability_limit:
+    ref_error = E_FE
+else:
+    ref_error = 66.31
+print  'ref_error:', ref_error
+
+if E1 &gt; (ref_error*10):
+    print 'ref_error: %.2f , dt = %.4f at stability lim' % \
+                          (ref_error, FE_stability_limit)
+    print 'E1 (with BE) too large: %.2f, dt = %.4f' % (E1, dt)
+elif E2 &gt; (ref_error*10):
+    print 'ref_error: %.2f , dt = %.4f at stability lim' % \
+                          (ref_error, FE_stability_limit)
+    print 'E2 (with B2Step) too large: %.2f, dt = %.4f' % (E2, dt)
+elif E3 &gt; (ref_error*10):
+    print 'ref_error: %.2f , dt = %.4f at stability lim' % \
+                          (ref_error, FE_stability_limit)
+    print 'E3 (with RKF) too large: %.2f, dt = %.4f' % (E3, dt)
+
+# Make movie
+import os
+os.system('rm tmp_*.png')
+import matplotlib.pyplot as plt
+plt.ion()
+u0 = U(x, 0)
+if dt &lt;= FE_stability_limit:
+    lines = plt.plot(x, u0, x, u1[0,:], x, u2[0,:], x, u3[0,:], x, u4[0,:])
+else:
+    lines = plt.plot(x, u0, x, u1[0,:], x, u2[0,:], x, u3[0,:])
+plt.axis([x[0], x[-1], 283-30, 283+30])
+plt.xlabel('x')
+plt.ylabel('u(x,t)')
+counter = 0
+for i in range(len(t1)):
+    u0 = U(x, t1[i])
+    lines[0].set_ydata(u0)
+    lines[1].set_ydata(u1[i,:])
+    lines[2].set_ydata(u2[i,:])
+    lines[3].set_ydata(u3[i,:])
+    if dt &lt;= FE_stability_limit:
+        lines[4].set_ydata(u4[i,:])
+    plt.title('t=%.1f days' % (t1[i]/(60*60*24.)))
+    if dt &lt;= FE_stability_limit:
+        plt.legend(['exact', 'BE', 'B2Step', 'RKF', 'FE'])
+    else:
+        plt.legend(['exact', 'BE', 'B2Step', 'RKF'])
+    plt.draw()
+    #time.sleep(0.1)
+    plt.savefig('tmp_%04d.png' % counter)
+    counter += 1
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 59:  Time step equal to the FE stability limit. </p></center>
+<p><img src="mov/ground_temp_adaptive.gif" align="bottom" width=600></p>
+</center>
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 60:  Time step 10 times the FE stability limit. </p></center>
+<p><img src="mov/ground_temp_adaptive.gif" align="bottom" width=600></p>
+</center>
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 61:  Time step 30 times the FE stability limit. </p></center>
+<p><img src="mov/ground_temp_adaptive.gif" align="bottom" width=600></p>
+</center>
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 62:  Time step 50 times the FE stability limit. </p></center>
+<p><img src="mov/ground_temp_adaptive.gif" align="bottom" width=600></p>
+</center>
+
+<p>
+From experiments it is clear that RKFehlberg uses many more steps, even
+at the Forward Euler stability limit than the other schemes without giving
+more accuracy. It seems that the 2-step Backward method is the best one.
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>ground_temp_adaptive.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:pde:diff1D:exer:CN">Exercise 67: Investigate the \( \theta \) rule</h2>
+
+<p>
+<b>a)</b>
+The Crank-Nicolson method for ODEs is very popular when combined with
+diffusion equations. For a linear ODE \( u'=au \) it reads
+
+$$ \frac{u^{n+1}-u^n}{\Delta t} = \frac{1}{2}(au^{n} + au^{n+1})
+\thinspace .$$
+
+<p>
+Apply the Crank-Nicolson method in time to the ODE system for a one-dimensional
+diffusion equation. Identify the linear system to be solved.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+Our system of ODEs reads
+$$
+\begin{align}
+\frac{du_0}{dt} &= s'(t),
+\nonumber\\ 
+\frac{du_i}{dt} &=  \frac{\beta}{\Delta x^2}
+(u_{i+1}(t) - 2u_i(t) + u_{i-1}(t)) + f_i(t),\quad i=1,\ldots,N-1,
+\nonumber\\ 
+\frac{du_N}{dt} &=  \frac{2\beta}{\Delta x^2}
+(u_{N-1}(t) - u_N(t)) + f_N(t)\thinspace .
+\nonumber
+\end{align}
+$$
+
+To ease reading, we now proceed by writing the variables without showing
+explicitly the dependence on time \( t \). With the Crank-Nicolson method,  we get
+$$
+\begin{align}
+\frac{u_0^{n+1} - u_0^n}{\Delta t} &= \frac{1}{2}\left(s^n + s^{n+1}\right),
+\nonumber\\ 
+\frac{u_i^{n+1} - u_i^n}{\Delta t} &= \frac{1}{2}
+\left(\frac{\beta}{\Delta x^2} (u_{i+1}^n - 2u_i^n + u_{i-1}^n) + f_i^n +
+\frac{\beta}{\Delta x^2} (u_{i+1}^{n+1} - 2u_i^{n+1} + u_{i-1}^{n+1}) + f_i^{n+1}\right),\quad i=1,\ldots,N-1,
+\nonumber\\ 
+\frac{u_N^{n+1} - u_N^n}{\Delta t} &= \frac{1}{2}
+\left(\frac{2\beta}{\Delta x^2}(u_{N-1}^n - u_N^n) + f_N^n +
+\frac{2\beta}{\Delta x^2}(u_{N-1}^{n+1} - u_N^{n+1}) + f_N^{n+1}\right)\thinspace .
+\nonumber
+\end{align}
+$$
+
+Collecting the unknowns on the left hand side, brings us to
+$$
+\begin{align}
+u_0^{n+1} &= u_0^n + \frac{\Delta t}{2}\left(s^n + s^{n+1}\right),
+\nonumber\\ 
+-\frac{\Delta t\beta}{2\Delta x^2}u_{i-1}^{n+1} + (1+\frac{\Delta t\beta}{\Delta x^2})u_i^{n+1} - \frac{\Delta t\beta}{2\Delta x^2}u_{i+1}^{n+1} &=
+u_i^n + \frac{\Delta t\beta}{2\Delta x^2}(u_{i+1}^n - 2u_i^n + u_{i-1}^n) + \frac{\Delta t}{2}(f_i^n + f_i^{n+1}),\quad i=1,\ldots,N-1,
+\nonumber\\ 
+-\frac{\Delta t\beta}{\Delta x^2}u_{N-1}^{n+1} + (1+\frac{\Delta t\beta}{\Delta x^2})u_N^{n+1} &=
+u_N^n + \frac{\Delta t\beta}{\Delta x^2}(u_{N-1}^n - u_N^n) + \frac{\Delta t}{2}(f_N^n + f_N^{n+1})\thinspace .
+\nonumber
+\end{align}
+$$
+
+This is a system of linear equations \( Au = b \), where \( A \) is filled with zeros, except for the elements
+$$
+\begin{align}
+A_{1,1} &= 1\nonumber\\ 
+A_{i,i-1} &= -\Delta t \frac{\beta}{\Delta x^2},\quad i=2,\ldots,N-1\nonumber\\ 
+A_{i,i+1} &= -\Delta t \frac{\beta}{\Delta x^2},\quad i=2,\ldots,N-1\nonumber\\ 
+A_{i,i} &= 1 + \Delta t \frac{\beta}{\Delta x^2},\quad i=2,\ldots,N-1\nonumber\\ 
+A_{N,N-1} & = - \Delta t\frac{\beta}{\Delta x^2}\nonumber\\ 
+A_{N,N} &= 1 + \Delta t\frac{\beta}{\Delta x^2}\nonumber
+\end{align}
+$$
+
+and
+$$
+\begin{align}
+b_1 &= u_0^n + \frac{\Delta t}{2}\left(s^n + s^{n+1}\right)\nonumber\\ 
+b_i &= u_i^n +\Delta t \frac{\beta}{2\Delta x^2}\left(u_{i+1}^n - 2u_i^n + u_{i-1}^n\right) + \frac{\Delta t}{2}\left(f_i^n + f_i^{n+1}\right)
+,\quad i=2,\ldots,N-1\nonumber\\ 
+b_N &= u_N^n + \Delta t\frac{\beta}{\Delta x^2}\left(u_{N-1}^n - u_N^n\right) + \frac{\Delta t}{2}\left(f_N^n + f_N^{n+1}\right)\nonumber
+\end{align}
+$$
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>b)</b>
+The Backward Euler, Forward Euler, and Crank-Nicolson methods can be given
+a unified implementation. For a linear ODE \( u'=au \) this formulation is
+known as the \( \theta \) rule:
+
+$$ \frac{u^{n+1}-u^n}{\Delta t} = (1-\theta)au^{n} + \theta au^{n+1}
+\thinspace .$$
+
+For \( \theta =0 \) we recover the Forward Euler method, \( \theta=1 \) gives
+the Backward Euler scheme, and \( \theta=1/2 \) corresponds to the
+Crank-Nicolson method. The accuracy of the \( \theta \) rule is
+\( \mathcal{O}(\Delta t) \), except for \( \theta =1/2 \) where it is
+\( \mathcal{O}(\Delta t^2) \). For \( \theta \geq 1/2 \) the method is
+stable for all \( \Delta t \).
+
+<p>
+Apply the \( \theta \) rule to the ODE system for a one-dimensional
+diffusion equation. Identify the linear system to be solved.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+With the theta rule,  we get
+$$
+\begin{align}
+\frac{u_0^{n+1} - u_0^n}{\Delta t} &= (1-\theta) s^n + \theta s^{n+1},
+\nonumber\\ 
+\frac{u_i^{n+1} - u_i^n}{\Delta t} &=
+(1-\theta)\left(\frac{\beta}{\Delta x^2} (u_{i+1}^n - 2u_i^n + u_{i-1}^n) + f_i^n\right) +
+\theta \left(\frac{\beta}{\Delta x^2} (u_{i+1}^{n+1} - 2u_i^{n+1} + u_{i-1}^{n+1}) + f_i^{n+1}\right),\quad i=1,\ldots,N-1,
+\nonumber\\ 
+\frac{u_N^{n+1} - u_N^n}{\Delta t} &=
+(1-\theta)\left(\frac{2\beta}{\Delta x^2}(u_{N-1}^n - u_N^n) + f_N^n\right) +
+\theta \left(\frac{2\beta}{\Delta x^2}(u_{N-1}^{n+1} - u_N^{n+1}) + f_N^{n+1}\right)\thinspace .
+\nonumber
+\end{align}
+$$
+
+Collecting the unknowns on the left hand side gives
+$$
+\begin{align}
+u_0^{n+1} &= u_0^n + \Delta t\left((1-\theta) s^n + \theta s^{n+1}\right),\nonumber\\ 
+-\theta\frac{\Delta t\beta}{\Delta x^2}u_{i-1}^{n+1} + \left(1+\theta\frac{2\Delta t\beta}{\Delta x^2}u_i^{n+1}\right) -
+\theta\frac{\Delta t\beta}{\Delta x^2}u_{i+1}{n+1} &= u_i^n +
+\Delta t\left(1-\theta\right)\frac{\beta}{\Delta x^2}\left(u_{i+1}^n - 2u_i^n + u_{i-1}^n\right) +
+\Delta t\left((1-\theta)f_i^n + \theta f_i^{n+1}\right),\quad i=1,\ldots,N-1,\nonumber\\ 
+-\theta\frac{2\Delta t\beta}{\Delta x^2}u_{N-1}^{n+1} + \left(1+\theta\frac{2\Delta t\beta}{\Delta x^2}u_N^{n+1}\right) &= u_N^n +
+\Delta t(1-\theta)\frac{2\beta}{\Delta x^2}\left(u_{N-1}^n - u_N^n\right) + \Delta t\left((1-\theta)f_N^n + \theta f_N^{n+1}\right)\thinspace ,
+\nonumber
+\end{align}
+$$
+
+which is a system of linear equations \( Au = b \), where \( A \) is filled with zeros, except for the elements
+$$
+\begin{align}
+A_{1,1} &= 1\nonumber\\ 
+A_{i,i-1} &= -\theta \Delta t \frac{\beta}{\Delta x^2},\quad i=2,\ldots,N-1\nonumber\\ 
+A_{i,i+1} &= -\theta \Delta t \frac{\beta}{\Delta x^2},\quad i=2,\ldots,N-1\nonumber\\ 
+A_{i,i} &= 1 + \theta \Delta t \frac{2\beta}{\Delta x^2},\quad i=2,\ldots,N-1\nonumber\\ 
+A_{N,N-1} & = - \theta \Delta t\frac{2\beta}{\Delta x^2}\nonumber\\ 
+A_{N,N} &= 1 + \theta \Delta t\frac{2\beta}{\Delta x^2}\nonumber
+\end{align}
+$$
+
+and
+$$
+\begin{align}
+b_1 &= u_0^n + \Delta t\left((1-\theta)s^n + \theta s^{n+1}\right)\nonumber\\ 
+b_i &= u_i^n +\Delta t(1-\theta) \frac{\beta}{\Delta x^2}\left(u_{i+1}^n - 2u_i^n + u_{i-1}^n\right) +
+\Delta t\left((1-\theta)f_i^n + \theta f_i^{n+1}\right),\quad i=2,\ldots,N-1\nonumber\\ 
+b_N &= u_N^n + \Delta t(1-\theta)\frac{2\beta}{\Delta x^2}\left(u_{N-1}^n - u_N^n\right) +
+\Delta t\left((1-\theta)f_N^n + \theta f_N^{n+1}\right)\nonumber
+\end{align}
+$$
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>c)</b>
+Implement the \( \theta \) rule with aid of the Odespy package. The
+relevant object name is <code>ThetaRule</code>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>solver = odespy.ThetaRule(rhs, f_is_linear=True, jac=K, theta=0.5)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<b>d)</b>
+Consider the physical application from the section <a href="#sec:pde:diff1D:rod">Application: heat conduction in a rod</a>. Run this case with the \( \theta \) rule and \( \theta =1/2 \) for
+the following values of \( \Delta t \): 0.001, 0.01, 0.05.
+Report what you see.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+With the two larger time steps we see some non-physical oscillations near the end with constant temperature.
+These oscillations die out as the stationary case is approached. With a time step of \( 0.001 \), there are no oscillations
+at all.
+
+<p>
+Code:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>&quot;&quot;&quot;Temperature evolution in a rod, computed by a BackwardEuler method.&quot;&quot;&quot;
+
+from numpy import linspace, zeros, linspace
+
+def rhs(u, t):
+    N = len(u) - 1
+    rhs = zeros(N+1)
+    rhs[0] = dsdt(t)
+    for i in range(1, N):
+        rhs[i] = (beta/dx**2)*(u[i+1] - 2*u[i] + u[i-1]) + \
+                 f(x[i], t)
+    rhs[N] = (beta/dx**2)*(2*u[i-1] + 2*dx*dudx(t) -
+                           2*u[i]) + f(x[N], t)
+    return rhs
+
+def K(u, t):
+    N = len(u) - 1
+    K = zeros((N+1,N+1))
+    K[0,0] = 0
+    for i in range(1, N):
+        K[i,i-1] = beta/dx**2
+        K[i,i] = -2*beta/dx**2
+        K[i,i+1] = beta/dx**2
+    K[N,N-1] = (beta/dx**2)*2
+    K[N,N] = (beta/dx**2)*(-2)
+    return K
+
+def K_vec(u, t):
+    &quot;&quot;&quot;Vectorized computation of K.&quot;&quot;&quot;
+    N = len(u) - 1
+    K = zeros((N+1,N+1))
+    K[0,0] = 0
+    K[1:N-1] = beta/dx**2
+    K[1:N] = -2*beta/dx**2
+    K[2:N+1] = beta/dx**2
+    K[N,N-1] = (beta/dx**2)*2
+    K[N,N] = (beta/dx**2)*(-2)
+    return K
+
+def dudx(t):
+    return 0
+
+def s(t):
+    return 423
+
+def dsdt(t):
+    return 0
+
+def f(x, t):
+    return 0
+
+
+L = 1
+beta = 1
+N = 40
+x = linspace(0, L, N+1)
+dx = x[1] - x[0]
+u = zeros(N+1)
+
+U_0 = zeros(N+1)
+U_0[0] = s(0)
+U_0[1:] = 283
+dt = dx**2/(2*beta)
+print 'stability limit:', dt
+dt = 0.05
+#dt = 0.00034375  # ForwardEuler limit
+
+import odespy
+solver = odespy.ThetaRule(rhs, f_is_linear=True, jac=K, theta=0.5)
+solver.set_initial_condition(U_0)
+T = 1.2
+N_t = int(round(T/float(dt)))
+time_points = linspace(0, T, N_t+1)
+u, t = solver.solve(time_points)
+
+# Make movie
+import os
+os.system('rm tmp_*.png')
+import matplotlib.pyplot as plt
+import time
+plt.ion()
+y = u[0,:]
+lines = plt.plot(x, y)
+plt.axis([x[0], x[-1], 273, 1.2*s(0)])
+plt.xlabel('x')
+plt.ylabel('u(x,t)')
+counter = 0
+for i in range(0, u.shape[0]):
+    print t[i]
+    lines[0].set_ydata(u[i,:])
+    plt.legend(['t=%.3f' % t[i]])
+    plt.draw()
+    plt.savefig('tmp_%04d.png' % counter)
+    counter += 1
+    time.sleep(0.2)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>rod_ThetaRule.py</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec211">Remarks </h3>
+
+<p>
+Despite the fact that the Crank-Nicolson method, or the \( \theta \) rule with
+\( \theta=1/2 \), is theoretically more accurate than the Backward Euler and
+Forward Euler schemes, it may exhibit non-physical oscillations as in the
+present example if the solution is very steep. The oscillations are
+damped in time, and decreases with decreasing \( \Delta t \). To avoid
+oscillations one must have \( \Delta t \) at maximum twice the
+stability limit of the Forward Euler method. This is one reason why
+the Backward Euler method (or a 2-step backward scheme,
+see <a href="#sec:pde:diff1D:exer:compare:implicit">Exercise 65: Compare implicit methods</a>) are popular
+for diffusion equations with abrupt initial conditions.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:pde:diff1D:exer:Gaussian">Exercise 68: Compute the diffusion of a Gaussian peak</h2>
+
+<p>
+Solve the following diffusion problem:
+
+$$
+\begin{align}
+\frac{\partial u}{\partial t} &= \beta\frac{\partial^2 u}{\partial x^2},
+& x\in (-1,1),\ t\in (0,T]\\ 
+u(x,0) &= \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{x^2}{2\sigma^2}\right)},
+& x\in [-1,1],\\ 
+\frac{\partial}{\partial x}u(-1,t) & = 0 & t\in (0,T],\\ 
+\frac{\partial}{\partial x}u(1,t) & = 0 & t\in (0,T]\thinspace .
+\end{align}
+$$
+
+The initial condition is the famous and widely used <em>Gaussian function</em>
+with standard deviation (or &quot;width&quot;) \( \sigma \), which is here taken
+to be small, \( \sigma = 0.01 \), such that the initial condition is a peak.
+This peak will then diffuse and become lower and wider.
+Compute \( u(x,t) \) until \( u\approx 0 \).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+Code:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>&quot;&quot;&quot;
+Initially, u has a Gaussian distribution and we
+follow the distribution over x = [-1,1] until u
+is approximately zero.
+&quot;&quot;&quot;
+
+from numpy import linspace, zeros, linspace, exp, sqrt, pi
+
+def rhs(u, t):
+    N = len(u) - 1
+    rhs = zeros(N+1)
+    rhs[0] = (2*beta/dx**2)*(u[1] - u[0]) + g(x[0], t)
+    for i in range(1, N):
+        rhs[i] = (beta/dx**2)*(u[i+1] - 2*u[i] + u[i-1]) + \
+                 g(x[i], t)
+    rhs[N] = (2*beta/dx**2)*(u[N-1] - u[N]) + g(x[N], t)
+    return rhs
+
+def K(u, t):
+    N = len(u) - 1
+    K = zeros((N+1,N+1))
+    K[0,0] = -2*beta/dx**2;
+    K[0,1] =  2*beta/dx**2;
+    for i in range(1, N):
+        K[i,i-1] = beta/dx**2
+        K[i,i] = -2*beta/dx**2
+        K[i,i+1] = beta/dx**2
+    K[N,N-1] = 2*beta/dx**2
+    K[N,N] = -2*beta/dx**2
+    return K
+
+def I(x):
+    &quot;&quot;&quot;Initial conditions for 1D diffusion&quot;&quot;&quot;
+    #return (1.0/(sqrt(2*pi)*sigma)*exp(-(x**2)/(2*sigma**2)))
+    # Not clean:
+    #return (1.0/(sqrt(2*pi)*sigma)*exp(-(x**2)/(2*sigma**2)))
+    return exp(-(x**2)/(2*sigma**2))
+
+def g(x, t):
+    return 0
+
+sigma = 0.01
+#sigma = 0.2
+a = -1; b = 2*pi
+beta = 1
+N = 80
+x = linspace(a, b, N+1)
+dx = x[1] - x[0]
+u = zeros(N+1)
+U_0 = I(x)
+
+dt = dx**2/(2*beta)
+print 'FE stability limit:', dt
+print 'stability limit for FE alternative:', dt
+# gives: dt = 0.0003125
+#dt = 0.01	# choose much longer time step
+#dt = 100.0
+
+import odespy
+solver0 = odespy.Backward2Step(rhs, f_is_linear=True, jac=K)
+solver0 = odespy.ThetaRule(rhs, f_is_linear=True, jac=K, theta=0)
+solver0.set_initial_condition(U_0)
+T = 10
+N_t = int(round(T/float(dt)))
+time_points = linspace(0, T, N_t+1)
+u0, t0 = solver0.solve(time_points)
+
+# Make movie
+import os
+os.system('rm -f tmp_*.png')
+import matplotlib.pyplot as plt
+import time
+plt.ion()
+lines = plt.plot(x, u0[0,:])
+plt.axis([x[0], x[-1], 0, 1.0/(sqrt(2*pi)*sigma)])
+plt.xlabel('x')
+plt.ylabel('u(x,t)')
+counter = 0
+for i in range(len(t0)):
+    print t0[i], u0[i,round(N/2)]  # u approx at middle (dep on N)
+    lines[0].set_ydata(u0[i,:])
+    plt.title('t=%.3f' % t0[i])
+    plt.legend([solver0.__class__.__name__])
+    plt.draw()
+    #time.sleep(0.2)
+    #plt.savefig('tmp_%04d.png' % counter)
+    #counter += 1
+raw_input()
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>gaussian_diffusion.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="2nd:exer:area:polygon2">Exercise 69: Vectorize a function for computing the area of a polygon</h2>
+
+<p>
+Vectorize the implementation of the function for computing the area of
+a polygon in <a href="._p4c-solarized-Python012.html#2nd:exer:area:polygon">Exercise 15: Area of a polygon</a>. Make a test function
+that compares the scalar implementation in <a href="._p4c-solarized-Python012.html#2nd:exer:area:polygon">Exercise 15: Area of a polygon</a>
+and the new vectorized implementation for the test cases used
+in <a href="._p4c-solarized-Python012.html#2nd:exer:area:polygon">Exercise 15: Area of a polygon</a>.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Notice that the formula \( x_1y_2+x_2y_3 + \cdots + x_{n-1}y_n =
+\sum_{i=0}^{n-1}x_iy_{i+1} \) is the dot product of two vectors,
+<code>x[:-1]</code> and
+<code>y[1:]</code>,
+which can be computed as <code>numpy.dot(x[:-1], y[1:])</code>,
+or more explicitly as <code>numpy.sum(x[:-1]*y[1:])</code>.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+Code:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>&quot;&quot;&quot;
+Computes the area of a polygon from vertex 
+coordinates only. Vectorization is exploited.
+&quot;&quot;&quot;
+
+from polyarea import polyarea
+from numpy import sum, asarray
+
+def polyarea_vec(x, y):
+    x = asarray(x); y = asarray(y)	# since sum requires arrays
+    return 0.5*abs(sum(x[:-1]*y[1:]) - sum(y[:-1]*x[1:]) + \
+                    x[len(x)-1]*y[0] - y[len(x)-1]*x[0])
+
+def test_polyarea_vec():
+    tol = 1E-14
+    # pentagon
+    x1 = [0, 2, 2, 1, 0]
+    y1 = [0, 0, 2, 3, 2]
+    #print abs(polyarea(x1, y1) - polyarea_vec(x1, y1))
+    assert abs(polyarea(x1, y1) - polyarea_vec(x1, y1)) &lt; tol
+    # quadrilateral
+    x2 = [0, 2, 2, 0]
+    y2 = [0, 0, 2, 2]
+    #print abs(polyarea(x2, y2) - polyarea_vec(x2, y2))
+    assert abs(polyarea(x2, y2) - polyarea_vec(x2, y2)) &lt; tol
+    # triangle
+    x3 = [0, 2, 0]
+    y3 = [0, 0, 2]
+    #print abs(polyarea(x3, y3) - polyarea_vec(x3, y3))
+    assert abs(polyarea(x3, y3) - polyarea_vec(x3, y3)) &lt; tol
+
+if __name__ == '__main__':
+    test_polyarea_vec()
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>polyarea_vec.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:pde:diff1D:exer:Gaussian:symm">Exercise 70: Explore symmetry</h2>
+
+<p>
+One can observe (and also mathematically prove)
+that the solution \( u(x,t) \) of the problem in <a href="#sec:pde:diff1D:exer:Gaussian">Exercise 68: Compute the diffusion of a Gaussian peak</a> is symmetric around \( x=0 \): \( u(-x,t) = u(x,t) \).
+In such cases, we can split the domain in two and compute \( u \) in only
+one half, \( [-1,0] \) or \( [0,1] \). At the symmetry line \( x=0 \) we have
+the symmetry boundary condition \( \partial u/\partial x=0 \).
+Reformulate the problem in <a href="#sec:pde:diff1D:exer:Gaussian">Exercise 68: Compute the diffusion of a Gaussian peak</a>
+such that we compute only for \( x\in [0,1] \). Display the solution and
+observe that it equals the right part of the solution in
+<a href="#sec:pde:diff1D:exer:Gaussian">Exercise 68: Compute the diffusion of a Gaussian peak</a>.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+Reformulating gives
+
+$$
+\begin{align}
+\frac{\partial u}{\partial t} &= \beta\frac{\partial^2 u}{\partial x^2},
+& x\in (0,1),\ t\in (0,T]\\ 
+u(x,0) &= \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{x^2}{2\sigma^2}\right)},
+& x\in [0,1],\\ 
+\frac{\partial}{\partial x}u(0,t) & = 0 & t\in (0,T],\\ 
+\frac{\partial}{\partial x}u(1,t) & = 0 & t\in (0,T]\thinspace .
+\end{align}
+$$
+
+<p>
+Code:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>&quot;&quot;&quot;
+Initially, u has a Gaussian distribution symmetric around x = 0.
+We utilize symmetry here and follow the distribution over 
+x = [0,1] until u is approximately zero.
+&quot;&quot;&quot;
+
+from numpy import linspace, zeros, linspace, exp, sqrt, pi
+
+def rhs(u, t):
+    N = len(u) - 1
+    rhs = zeros(N+1)
+    rhs[0] = (2*beta/dx**2)*(u[1] - u[0]) + f(x[0], t)
+    for i in range(1, N):
+        rhs[i] = (beta/dx**2)*(u[i+1] - 2*u[i] + u[i-1]) + \
+                 f(x[i], t)
+    rhs[N] = (2*beta/dx**2)*(u[N-1] - u[N]) + f(x[N], t)
+    return rhs
+
+def K(u, t):
+    N = len(u) - 1
+    K = zeros((N+1,N+1))
+    K[0,0] = -2*beta/dx**2;
+    K[0,1] =  2*beta/dx**2;
+    for i in range(1, N):
+        K[i,i-1] = beta/dx**2
+        K[i,i] = -2*beta/dx**2
+        K[i,i+1] = beta/dx**2
+    K[N,N-1] = (beta/dx**2)*2
+    K[N,N] = (beta/dx**2)*(-2)
+    return K
+
+def I(x):
+    &quot;&quot;&quot;Initial conditions for 1D diffusion&quot;&quot;&quot;
+    return (1.0/(sqrt(2*pi)*sigma)*exp(-(x**2)/(2*sigma**2)))
+
+def f(x, t):
+    return 0
+
+sigma = 0.01
+a = 0; b = 1
+beta = 1
+N = 40
+x = linspace(a, b, N+1)
+dx = x[1] - x[0]
+u = zeros(N+1)
+U_0 = I(x)
+
+dt = dx**2/(2*beta)
+print 'stability limit for alternative FE:', dt
+# gives: dt = 0.003125
+dt = 0.05	# choose much longer time step 
+
+import odespy
+solver0 = odespy.Backward2Step(rhs, f_is_linear=True, jac=K)
+solver0.set_initial_condition(U_0)
+T = 10
+N_t = int(round(T/float(dt)))
+time_points = linspace(0, T, N_t+1)
+u0, t0 = solver0.solve(time_points)
+
+# Make movie
+import os
+os.system('rm tmp_*.png')
+import matplotlib.pyplot as plt
+import time
+plt.ion()
+lines = plt.plot(x, u0[0,:])
+plt.axis([x[0], x[-1], 0, 1.0/(sqrt(2*pi)*sigma)])
+plt.xlabel('x')
+plt.ylabel('u(x,t)')
+counter = 0
+for i in range(len(t0)):
+    print t0[i], u0[i,round(N/2)]  # u approx at middle (dep on N)
+    lines[0].set_ydata(u0[i,:])
+    plt.title('t=%.3f' % t0[i])
+    plt.legend(['B2Step'])
+    plt.draw()
+    time.sleep(0.2)
+    #plt.savefig('tmp_%04d.png' % counter)
+    #counter += 1
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>symmetric_gaussian_diffusion.py</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec215">Remarks </h3>
+
+<p>
+In 2D and 3D problems, where the CPU time to compute a solution of PDE
+can be hours and days, it is very important to utilize symmetry as
+we do above to reduce the size of the problem.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:pde:diff1D:exer:stationary">Exercise 71: Compute solutions as \( t\rightarrow\infty \)</h2>
+
+<p>
+Many diffusion problems reaches a stationary time-independent solution
+as \( t\rightarrow\infty \). The model problem from the section <a href="#sec:pde:diff1D:rod">Application: heat conduction in a rod</a>
+is one example where \( u(x,t)=s(t)=\hbox{const} \) for \( t\rightarrow\infty \).
+When \( u \) does not depend on time, the diffusion equation reduces to
+
+$$ -\beta u''(x) = f(x),$$
+
+in one dimension, and
+
+$$ -\beta \nabla^2 u = f(x),$$
+
+in 2D and 3D. This is the famous <em>Poisson</em> equation, or if \( f=0 \), it is
+known as the <em>Laplace</em> equation.
+In this limit \( t\rightarrow\infty \), there is no need for an initial
+condition, but the boundary conditions are the same as for the diffusion
+equation.
+
+<p>
+We now consider a one-dimensional problem
+
+$$
+\begin{equation}
+ -u''(x) = 0,\ x\in (0,L),\quad u(0)=C, \ u'(L)=0,
+\tag{105}
+\end{equation}
+$$
+
+which is known as a <em>two-point boundary value problem</em>. This is nothing
+but the stationary limit of the diffusion problem in
+the section <a href="#sec:pde:diff1D:rod">Application: heat conduction in a rod</a>. How can we solve such a stationary
+problem <a href="#mjx-eqn-105">(105)</a>?
+The simplest strategy, when we already have a solver for
+the corresponding time-dependent problem, is to use that solver and
+simulate until \( t\rightarrow\infty \), which in practice means that
+\( u(x,t) \) no longer changes in time (within some tolerance).
+
+<p>
+A nice feature of implicit methods like the Backward Euler scheme
+is that one can take <em>one very long time step to &quot;infinity&quot;</em> and
+produce the solution of <a href="#mjx-eqn-105">(105)</a>.
+
+<p>
+<b>a)</b>
+Let <a href="#mjx-eqn-105">(105)</a> be valid at mesh
+points \( x_i \) in space, discretize \( u'' \) by a finite difference, and
+set up a system of equations for the point values \( u_i \),$i =0,\ldots,N$,
+where \( u_i \) is the approximation at mesh point \( x_i \).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+With the standard approximation introduced for the second derivative, we
+get for the inner points that
+
+$$
+\begin{equation}
+-\frac{1}{\Delta x^2}(u_{i+1} - 2u_i + u_{i-1}) = 0,\quad i=1,\ldots,N-1,\nonumber
+\end{equation}
+$$
+
+i.e.,
+$$
+\begin{equation}
+u_{i+1} - 2u_i + u_{i-1} = 0,\quad i=1,\ldots,N-1.\nonumber
+\end{equation}
+$$
+
+In addition, for the end with a constant temperature, we have that \( u_0 = C \).
+At the other boundary, we may introduce a central difference approximation
+to the first derivative and find that
+$$
+\begin{equation}
+\frac{u_{N+1} - u_{N-1}}{2\Delta x} \approx 0,\nonumber
+\end{equation}
+$$
+
+i.e.,
+$$
+\begin{equation}
+u_{N+1} = u_{N-1}.\nonumber
+\end{equation}
+$$
+
+Introducing this equality in the equation above applied for \( i = N \),
+gives
+$$
+\begin{equation}
+u_{N-1} - 2u_{N} + u_{N-1},\nonumber
+\end{equation}
+$$
+
+i.e.,
+$$
+\begin{equation}
+u_{N} = u_{N-1}.\nonumber
+\end{equation}
+$$
+
+Summarizing for all the mesh points, we have the equations
+$$
+\begin{align}
+u_0 &= C,\nonumber\\ 
+u_{i+1} - 2u_i + u_{i-1} &= 0,\quad i=1,\ldots,N-1,\nonumber\\ 
+ u_N &= u_{N-1}\nonumber\thinspace ,
+\end{align}
+$$
+
+which is a system of linear equations in the unknowns \( u_i \), \( i=0,\ldots,N \).
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>b)</b>
+Show that if \( \Delta t\rightarrow\infty \) in <a href="#mjx-eqn-99">(99)</a> - <a href="#mjx-eqn-101">(101)</a>,
+it leads to the same equations as in a).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+From <a href="#mjx-eqn-99">(99)</a> - <a href="#mjx-eqn-101">(101)</a>,
+letting \( \Delta t\rightarrow\infty \), we see that the left hand sides go to zero, i.e.
+$$
+\begin{align}
+0 &= s'(t), \nonumber\\ 
+0 &=  \frac{\beta}{\Delta x^2}(u_{i+1}^{n+1}(t) - 2u_i^{n+1}(t) + u_{i-1}^{n+1}(t)) + f_i(t),
+\quad i=1,\ldots,N-1,\nonumber\\ 
+0 &=  \frac{2\beta}{\Delta x^2}(u_{N-1}^{n+1}(t) - u_N^{n+1}(t)) + f_i(t)\thinspace .\nonumber
+\end{align}
+$$
+
+Our \( s(t) = C \), which is consistent with the first one of these three equations. The \( \beta \) factor
+in the two other equations disappear by division and \( f_i(t) = 0 \). Since the time index \( n+1 \) has no importance
+now that \( \Delta t\rightarrow\infty \), we see that the equations just derived, are, in fact, just the same as the ones in a).
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>c)</b>
+Demonstrate, by running a program,
+that you can take one large time step with the Backward Euler
+scheme and compute the solution of <a href="#mjx-eqn-105">(105)</a>.
+The solution is very boring since it is constant: \( u(x)=C \).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+Code:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>&quot;&quot;&quot;Compute final and stationary temperature distribution
+in a rod by a BackwardEuler method.
+&quot;&quot;&quot;
+
+from numpy import linspace, zeros, linspace
+
+def rhs(u, t):
+    N = len(u) - 1
+    rhs = zeros(N+1)
+    rhs[0] = dsdt(t)
+    for i in range(1, N):
+        rhs[i] = (beta/dx**2)*(u[i+1] - 2*u[i] + u[i-1]) + \
+                 f(x[i], t)
+    rhs[N] = (beta/dx**2)*(2*u[i-1] + 2*dx*dudx(t) -
+                           2*u[i]) + f(x[N], t)
+    return rhs
+
+def K(u, t):
+    N = len(u) - 1
+    K = zeros((N+1,N+1))
+    K[0,0] = 0
+    for i in range(1, N):
+        K[i,i-1] = beta/dx**2
+        K[i,i] = -2*beta/dx**2
+        K[i,i+1] = beta/dx**2
+    K[N,N-1] = (beta/dx**2)*2
+    K[N,N] = (beta/dx**2)*(-2)
+    return K
+
+def dudx(t):
+    return 0
+
+def s(t):
+    return 423
+
+def dsdt(t):
+    return 0
+
+def f(x, t):
+    return 0
+
+L = 1
+beta = 1
+N = 40
+x = linspace(0, L, N+1)
+dx = x[1] - x[0]
+u = zeros(N+1)
+
+U_0 = zeros(N+1)
+U_0[0] = s(0)
+U_0[1:] = 300
+dt = 60			# choose one large timestep
+
+import odespy
+solver = odespy.BackwardEuler(rhs, f_is_linear=True, jac=K)
+solver.set_initial_condition(U_0)
+#T = 1.2
+T = dt
+N_t = int(round(T/float(dt)))
+time_points = linspace(0, T, N_t+1)
+u, t = solver.solve(time_points)
+
+import matplotlib.pyplot as plt
+plt.plot(x,u[N_t,:])
+plt.axis([x[0], x[-1], 273, 1.2*s(0)])
+plt.show()
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>rod_stationary.py</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec217">Remarks </h3>
+
+<p>
+If the interest is in the stationary limit of a diffusion equation,
+one can either solve the associated Laplace or Poisson equation directly,
+or use a Backward Euler scheme for the time-dependent diffusion equation
+with a very long time step. Using a Forward Euler scheme with small time
+steps is typically inappropriate in such situations because the
+solution changes more and more slowly, but the time step must still be
+kept small, and it takes &quot;forever&quot; to approach the stationary state.
+This is yet another example why one needs implicit methods like the
+Backward Euler scheme.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:pde:diff1D:exer:stationary2">Exercise 72: Solve a two-point boundary value problem</h2>
+
+<p>
+Solve the following two-point boundary-value problem
+
+$$ u''(x) = 2,\ x\in (0,1),\quad u(0)=0,\ u(1)=1\thinspace .$$
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Do <a href="#sec:pde:diff1D:exer:stationary">Exercise 71: Compute solutions as \( t\rightarrow\infty \)</a>. Modify the
+boundary condition in the code so it incorporates a known value
+for \( u(1) \).
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+Code:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>&quot;&quot;&quot;
+Solve 2-point BVP.
+&quot;&quot;&quot;
+
+from numpy import linspace, zeros, linspace
+
+def rhs(u, t):
+    N = len(u) - 1
+    rhs = zeros(N+1)
+    rhs[0] = ds1dt(t)
+    for i in range(1, N):
+        rhs[i] = (beta/dx**2)*(u[i+1] - 2*u[i] + u[i-1]) + \
+                 f(x[i], t)
+    rhs[N] = ds2dt(t)
+    return rhs
+
+def K(u, t):
+    N = len(u) - 1
+    K = zeros((N+1,N+1))
+    K[0,0] = 0
+    for i in range(1, N):
+        K[i,i-1] = beta/dx**2
+        K[i,i] = -2*beta/dx**2
+        K[i,i+1] = beta/dx**2
+    K[N,N-1] = 0
+    K[N,N] = 0
+    return K
+
+def dudx(t):
+    return 0
+
+def s1(t):
+    return 0
+
+def ds1dt(t):
+    return 0
+
+def s2(t):
+    return 1
+
+def ds2dt(t):
+    return 0
+
+def f(x, t):
+    return -2
+
+L = 1
+beta = 1
+N = 40
+x = linspace(0, L, N+1)
+dx = x[1] - x[0]
+u = zeros(N+1)
+
+U_0 = zeros(N+1)
+U_0[0] = s1(0)
+U_0[1:-1] = 0.5
+U_0[-1] = s2(0)
+dt = 10			# choose one large timestep
+
+import odespy
+solver = odespy.BackwardEuler(rhs, f_is_linear=True, jac=K)
+solver.set_initial_condition(U_0)
+#T = 1.2
+T = dt
+N_t = int(round(T/float(dt)))
+time_points = linspace(0, T, N_t+1)
+u, t = solver.solve(time_points)
+
+import matplotlib.pyplot as plt
+plt.plot(x, u[N_t,:], x, x**2)
+plt.legend(['numerical', 'exact'])
+plt.show()
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>2ptBVP.py</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._p4c-solarized-Python022.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._p4c-solarized-Python024.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

@@ -1,0 +1,2218 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Programming for Computations - A Gentle Introduction to Numerical Simulations with Python">
+<meta name="keywords" content="computer program,programming,language programming,language computer,MATLAB,Octave,Fortran,C,C++,Python,Maple,Mathematica,syntax,bug,debugging,script (and scripting),implement,print,program run,program execute,code,comment,instruction,program statement,variable,assignment,calculator,text editor,Idle,prompt,program typing,program run,program execute,ipython,function,function call,atan,function input parameter,function output parameter,function return,function take a parameter,library,library function,from,import,math,module,package,linspace,xlabel,ylabel,plot,interactive use (of Python),import,keyboard arrow up/down,Python shell,operator Arithmetic,parentheses,variable type,variable name,object,float,int,str,type conversion,reserved words,variable int,variable float,variable str,variable assignment,type conversion automatic,integer division,round-off error,printing formatted,printf formatting,default,array,array element,zeros,allocate,array index,indexing zero based,indexing one based,Python zero-based indexing,array slice of,graph,hold (on/off),plot figure,title,legend,axis,hardcopy,format png,matrix mat,matrix vector product,transpose,linear algebra,matrix,vector,error message,debugging,debugger,try-exception,exception handling,program crash,program testing,program verification,program input,program output,input,raw input,list,tuple,symbolic computations,symbolic operations,symbolic simplifications,SymPy,library SymPy,WolframAlpha,Mathematica,Sage (symbolic package),Python documentation,garbage collection,variable delete,if,elif,else,colon,indent,boolean,boolean expression,True,False,boolean True,boolean False,pseudo code,operator Logical,function,function definition,def,return,argument,parameter input,parameter output,variable local,variable global,argument keyword,argument named,argument ordinary,argument positional,doc string,function handle,function local,function global,function nested,lambda function,loop for,for loop,range,loop iteration,loop index,loop double,loop multiple,loop nested,linear algebra,while loop,loop while,loop infinite,loop iteration,loop index,list,list append,list convert to array,list delete,list create,tuple,list comprehension,array sorting,Leibniz pi,Euler pi,programming game,linear interpolation,least squares method,Fourier series,integral analytically,integral exact,integral approximately,integration points,code re-use,unit tests,complex domains,Monte Carlo integration,seed (random generators),scheme,finite difference method,forward difference approximation,Forward Euler scheme,logistic model,carrying capacity,SIR model,scalar ODE,ODE scalar,vector ODE,ODE vector,system of ODEs,Heun's method,Runge-Kutta, 2nd-order method,2nd-order Runge-Kutta method,RK2,PDE,heat equation,diffusion equation,MOL forward Euler,method of lines,MOL,mesh points,cell,method of lines,unstable solutions,instability,stability criterion,Poisson equation,Laplace equation,root finding,code robust,code try-except,code exception,Newton starting value,return None,sys.exit,Idle,Emacs,Vim,Gedit,TextWrangler,Notepad++">
+
+<title>Programming for Computations - A Gentle Introduction to Numerical Simulations with Python</title>
+
+
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+code { padding: 0px; background-color: inherit; }
+pre {
+  border: 0pt solid #93a1a1;
+  box-shadow: none;
+}
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+/* Let pre tags for code blocks have the same color as the surroundings */
+pre { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u' Preface ', 0, None, '___sec0'),
+              (u' Why learn programming? ', 3, None, '___sec1'),
+              (u' Target audience and background knowledge ',
+               3,
+               None,
+               '___sec2'),
+              (u' Numerical methods ', 3, None, '___sec3'),
+              (u' The computer language: Python ', 3, None, '___sec4'),
+              (u' How this book is different ', 3, None, '___sec5'),
+              (u' Acknowledgments ', 3, None, '___sec6'),
+              (u' The first few steps ',
+               0,
+               u'1st:TheFirstFewSteps',
+               u'1st:TheFirstFewSteps'),
+              (u' What is a program? And what is programming? ',
+               1,
+               None,
+               '___sec8'),
+              (u' A Python program with variables ',
+               1,
+               u'1st:ex1',
+               u'1st:ex1'),
+              (u' The program ', 2, None, '___sec10'),
+              (u' Dissection of the program ', 2, None, '___sec11'),
+              (u' Why not just use a pocket calculator? ',
+               2,
+               None,
+               '___sec12'),
+              (u' The importance of using a text editor to write programs ',
+               2,
+               None,
+               '___sec13'),
+              (u' Installation of Python ', 2, None, '___sec14'),
+              (u' Write and run your first program ', 2, None, '___sec15'),
+              (u'  A Python program with a library function ',
+               1,
+               u'1st:ex2',
+               u'1st:ex2'),
+              (u' A Python program with vectorization and plotting ',
+               1,
+               u'1st:ex3',
+               u'1st:ex3'),
+              (u' More basic concepts ', 1, None, '___sec18'),
+              (u' Using Python interactively ', 2, None, '___sec19'),
+              (u' Arithmetics, parentheses and round-off errors ',
+               2,
+               None,
+               '___sec20'),
+              (u' Variables and objects ', 2, None, '___sec21'),
+              (u' Integer division ', 2, None, '___sec22'),
+              (u' Formatting text and numbers ', 2, None, '___sec23'),
+              (u' Arrays ', 2, None, '___sec24'),
+              (u' Plotting ', 2, None, '___sec25'),
+              (u' Error messages and warnings ', 2, None, '___sec26'),
+              (u' Input data ', 2, None, '___sec27'),
+              (u' Symbolic computations ', 2, None, '___sec28'),
+              (u' Concluding remarks ', 2, None, '___sec29'),
+              (u' Exercises ', 1, None, '___sec30'),
+              (u' Exercise 1: Error messages ',
+               2,
+               u'1st:exer:ErrorMessages',
+               u'1st:exer:ErrorMessages'),
+              (u' Exercise 2: Volume of a cube ',
+               2,
+               u'1st:exer:cubeVolume',
+               u'1st:exer:cubeVolume'),
+              (u' Exercise 3: Area and circumference of a circle ',
+               2,
+               u'1st:exer:areaCircle',
+               u'1st:exer:areaCircle'),
+              (u' Exercise 4: Volumes of three cubes ',
+               2,
+               u'1st:exer:volumes3cubes',
+               u'1st:exer:volumes3cubes'),
+              (u' Exercise 5: Average of integers ',
+               2,
+               u'1st:exer:averageOf5Integers',
+               u'1st:exer:averageOf5Integers'),
+              (u' Exercise 6: Interactive computing of volume and area ',
+               2,
+               u'1st:exer:cubeVolInteractively',
+               u'1st:exer:cubeVolInteractively'),
+              (u' Exercise 7: Peculiar results from division ',
+               2,
+               u'1st:exer:intDivInteractively',
+               u'1st:exer:intDivInteractively'),
+              (u' Exercise 8: Update variable at command prompt ',
+               2,
+               u'1st:exer:updateVarInteractively',
+               u'1st:exer:updateVarInteractively'),
+              (u' Exercise 9: Formatted print to screen ',
+               2,
+               u'1st:exer:printfScreen',
+               u'1st:exer:printfScreen'),
+              (u' Exercise 10: Python documentation and random numbers ',
+               2,
+               u'1st:exer:PythonDocRandom',
+               u'1st:exer:PythonDocRandom'),
+              (u' Basic constructions ',
+               0,
+               u'2nd:BasicConstructins',
+               u'2nd:BasicConstructins'),
+              (u' If tests, colon and indentation ', 1, None, '___sec42'),
+              (u' Functions ', 1, u'sec:functions', u'sec:functions'),
+              (u' For loops ', 1, u'sec:for:loops', u'sec:for:loops'),
+              (u' While loops ', 1, u'sec:while:loops', u'sec:while:loops'),
+              (u' Lists and tuples - alternatives to arrays ',
+               1,
+               u'sec:lists',
+               u'sec:lists'),
+              (u' Reading from and writing to files ',
+               1,
+               u'sec:file:reading:writing',
+               u'sec:file:reading:writing'),
+              (u' Exercises ', 1, None, '___sec48'),
+              (u' Exercise 11: Errors with colon, indent, etc. ',
+               2,
+               u'2nd:exer:ErrorsColonIndent',
+               u'2nd:exer:ErrorsColonIndent'),
+              (u' Exercise 12: Compare integers a and b ',
+               2,
+               u'2nd:exer:compInt',
+               u'2nd:exer:compInt'),
+              (u' Exercise 13: Functions for circumference and area of a circle ',
+               2,
+               u'2nd:exer:funcCircArea',
+               u'2nd:exer:funcCircArea'),
+              (u' Exercise 14: Function for area of a rectangle ',
+               2,
+               u'2nd:exer:funcAreaRectangle',
+               u'2nd:exer:funcAreaRectangle'),
+              (u' Exercise 15: Area of a polygon ',
+               2,
+               u'2nd:exer:area:polygon',
+               u'2nd:exer:area:polygon'),
+              (u' Exercise 16: Average of integers ',
+               2,
+               u'2nd:exer:avNInt',
+               u'2nd:exer:avNInt'),
+              (u' Exercise 17: While loop with errors ',
+               2,
+               u'2nd:exer:whileLoopErrors',
+               u'2nd:exer:whileLoopErrors'),
+              (u' Exercise 18: Area of rectangle versus circle ',
+               2,
+               u'2nd:exer:areaRectCircle',
+               u'2nd:exer:areaRectCircle'),
+              (u' Exercise 19: Find crossing points of two graphs ',
+               2,
+               u'2nd:exer:Cross2Graphs',
+               u'2nd:exer:Cross2Graphs'),
+              (u' Exercise 20: Sort array with numbers ',
+               2,
+               u'2nd:exer:sortNumbers',
+               u'2nd:exer:sortNumbers'),
+              (u' Exercise 21: Compute $\\pi$ ',
+               2,
+               u'2nd:exer:computingPi',
+               u'2nd:exer:computingPi'),
+              (u' Exercise 22: Compute combinations of sets ',
+               2,
+               u'2nd:exer:combinatorics1',
+               u'2nd:exer:combinatorics1'),
+              (u' Exercise 23: Frequency of random numbers ',
+               2,
+               u'2nd:exer:numberOccurrence',
+               u'2nd:exer:numberOccurrence'),
+              (u' Remarks ', 3, None, '___sec62'),
+              (u' Exercise 24: Game 21 ',
+               2,
+               u'2nd:exer:Game21',
+               u'2nd:exer:Game21'),
+              (u' Exercise 25: Linear interpolation ',
+               2,
+               u'2nd:exer:linearInterpol',
+               u'2nd:exer:linearInterpol'),
+              (u' Exercise 26: Test straight line requirement ',
+               2,
+               u'2nd:exer:testStraightLine',
+               u'2nd:exer:testStraightLine'),
+              (u' Exercise 27: Fit straight line to data ',
+               2,
+               u'2nd:exer:fitLine',
+               u'2nd:exer:fitLine'),
+              (u' Remarks ', 3, None, '___sec67'),
+              (u' Exercise 28: Fit sines to straight line ',
+               2,
+               u'2nd:exer:fitSines',
+               u'2nd:exer:fitSines'),
+              (u' Remarks ', 3, None, '___sec69'),
+              (u' Exercise 29: Count occurrences of a string in a string ',
+               2,
+               u'2nd:exer:countTextString',
+               u'2nd:exer:countTextString'),
+              (u' Remarks ', 3, None, '___sec71'),
+              (u' Computing integrals ',
+               0,
+               u'sec:integrals',
+               u'sec:integrals'),
+              (u' Basic ideas of numerical integration ',
+               1,
+               u'sec:integrals:basic',
+               u'sec:integrals:basic'),
+              (u' Computational example ', 3, None, '___sec74'),
+              (u' The composite trapezoidal rule ',
+               1,
+               u'sec:integrals:trap',
+               u'sec:integrals:trap'),
+              (u' The general formula ',
+               2,
+               u'sec:integrals:formula',
+               u'sec:integrals:formula'),
+              (u' Implementation ',
+               2,
+               u'sec:integrals:trap:impl',
+               u'sec:integrals:trap:impl'),
+              (u' Specific or general implementation? ', 3, None, '___sec78'),
+              (u' Implementation with functions ', 3, None, '___sec79'),
+              (u' Solving our specific problem in a session ',
+               3,
+               None,
+               '___sec80'),
+              (u' Solving our specific problem in a program ',
+               3,
+               None,
+               '___sec81'),
+              (u' Making a module ', 2, None, '___sec82'),
+              (u' Alternative flat special-purpose implementation ',
+               2,
+               None,
+               '___sec83'),
+              (u' The composite midpoint method ',
+               1,
+               u'sec:integrals:Midpoint',
+               u'sec:integrals:Midpoint'),
+              (u' The idea ', 3, None, '___sec85'),
+              (u' The general formula ', 2, None, '___sec86'),
+              (u' Implementation ',
+               2,
+               u'sec:midpoint:code',
+               u'sec:midpoint:code'),
+              (u' Comparing the trapezoidal and the midpoint methods ',
+               2,
+               None,
+               '___sec88'),
+              (u' Testing ', 1, None, '___sec89'),
+              (u' Problems with brief testing procedures ',
+               2,
+               None,
+               '___sec90'),
+              (u' Test procedures ',
+               2,
+               u'sec:integrals:testprocs',
+               u'sec:integrals:testprocs'),
+              (u' Hand-computed results ', 3, None, '___sec92'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec93'),
+              (u' Demonstrating correct convergence rates ',
+               3,
+               None,
+               '___sec94'),
+              (u' Constructing unit tests and writing test functions ',
+               2,
+               u'sec:integrals:test:functions',
+               u'sec:integrals:test:functions'),
+              (u' Hand-computed numerical results ', 3, None, '___sec96'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec97'),
+              (u' Demonstrating correct convergence rates ',
+               3,
+               None,
+               '___sec98'),
+              (u' Vectorization ', 1, None, '___sec99'),
+              (u' Vectorizing the midpoint rule ', 3, None, '___sec100'),
+              (u' Vectorizing the trapezoidal rule ', 3, None, '___sec101'),
+              (u' Measuring computational speed ', 1, None, '___sec102'),
+              (u' Double and triple integrals ',
+               1,
+               u'sec:int:double',
+               u'sec:int:double'),
+              (u' The midpoint rule for a double integral ',
+               2,
+               u'sec:int:double:midpoint',
+               u'sec:int:double:midpoint'),
+              (u' Derivation via one-dimensional integrals ',
+               3,
+               None,
+               '___sec105'),
+              (u' Direct derivation ', 3, None, '___sec106'),
+              (u' Programming a double sum ', 3, None, '___sec107'),
+              (u' Reusing code for one-dimensional integrals ',
+               3,
+               None,
+               '___sec108'),
+              (u' Verification via test functions ', 3, None, '___sec109'),
+              (u' The midpoint rule for a triple integral ',
+               2,
+               None,
+               '___sec110'),
+              (u' Theory ', 3, None, '___sec111'),
+              (u' Implementation ', 3, None, '___sec112'),
+              (u' Monte Carlo integration for complex-shaped domains ',
+               2,
+               u'sec:int:complex:domain',
+               u'sec:int:complex:domain'),
+              (u' The Monte Carlo integration algorithm ',
+               3,
+               None,
+               '___sec114'),
+              (u' Implementation ', 3, None, '___sec115'),
+              (u' Verification ', 3, None, '___sec116'),
+              (u' Test function for function with random numbers ',
+               3,
+               None,
+               '___sec117'),
+              (u' Integral over a circle ', 3, None, '___sec118'),
+              (u' Exercises ', 1, None, '___sec119'),
+              (u' Exercise 30: Hand calculations for the trapezoidal method ',
+               2,
+               u'sec:exer:trap:hand',
+               u'sec:exer:trap:hand'),
+              (u' Exercise 31: Hand calculations for the midpoint method ',
+               2,
+               u'sec:exer:midpt:hand',
+               u'sec:exer:midpt:hand'),
+              (u' Exercise 32: Compute a simple integral ',
+               2,
+               u'sec:exer:trap:mid:parabola',
+               u'sec:exer:trap:mid:parabola'),
+              (u' Exercise 33: Hand-calculations with sine integrals ',
+               2,
+               u'sec:exer:hand:sine',
+               u'sec:exer:hand:sine'),
+              (u' Exercise 34: Make test functions for the midpoint method ',
+               2,
+               u'sec:exer:test:midpoint',
+               u'sec:exer:test:midpoint'),
+              (u' Exercise 35: Explore round-off errors with large numbers ',
+               2,
+               u'sec:exer:test:roundoff',
+               u'sec:exer:test:roundoff'),
+              (u' Exercise 36: Write test functions for $\\int_0^4\\sqrt{x}dx$ ',
+               2,
+               u'sec:exer:test:convrates:sqrt',
+               u'sec:exer:test:convrates:sqrt'),
+              (u' Remarks ', 3, None, '___sec127'),
+              (u' Exercise 37: Rectangle methods ',
+               2,
+               u'sec:exer:rectangleMethod',
+               u'sec:exer:rectangleMethod'),
+              (u' Exercise 38: Adaptive integration ',
+               2,
+               u'sec:exer:adaptive:int',
+               u'sec:exer:adaptive:int'),
+              (u' Remarks ', 3, None, '___sec130'),
+              (u' Exercise 39: Integrating x raised to x ',
+               2,
+               u'sec:exer:integrate:x2x',
+               u'sec:exer:integrate:x2x'),
+              (u' Exercise 40: Integrate products of sine functions ',
+               2,
+               u'sec:exer:sine:products',
+               u'sec:exer:sine:products'),
+              (u' Exercise 41: Revisit fit of sines to a function ',
+               2,
+               u'sec:exer:revisitFitSines',
+               u'sec:exer:revisitFitSines'),
+              (u' Exercise 42: Derive the trapezoidal rule for a double integral ',
+               2,
+               u'sec:exer:trapezoidal:2D',
+               u'sec:exer:trapezoidal:2D'),
+              (u' Exercise 43: Compute the area of a triangle by Monte Carlo integration ',
+               2,
+               u'sec:exer:MC:ellipse',
+               u'sec:exer:MC:ellipse'),
+              (u' Solving ordinary differential equations ',
+               0,
+               u'5th:SolvODEs',
+               u'5th:SolvODEs'),
+              (u' Population growth ', 1, u'sec:de:pg', u'sec:de:pg'),
+              (u' Derivation of the model ',
+               2,
+               u'sec:de:pg:model',
+               u'sec:de:pg:model'),
+              (u' Numerical solution ',
+               2,
+               u'sec:de:pg:numerics',
+               u'sec:de:pg:numerics'),
+              (u' Programming the Forward Euler scheme; the special case ',
+               2,
+               u'sec:de:pg:prog1',
+               u'sec:de:pg:prog1'),
+              (u' Understanding the Forward Euler method ',
+               2,
+               u'sec:de:pg:geom',
+               u'sec:de:pg:geom'),
+              (u' Programming the Forward Euler scheme; the general case ',
+               2,
+               u'sec:de:FE:gen',
+               u'sec:de:FE:gen'),
+              (u' Making the population growth model more realistic ',
+               2,
+               None,
+               '___sec143'),
+              (u' Verification: exact linear solution of the discrete equations ',
+               2,
+               u'sec:de:growth:test:linear',
+               u'sec:de:growth:test:linear'),
+              (u' Spreading of diseases ', 1, None, '___sec145'),
+              (u' Spreading of a flu ', 2, u'sec:de:flu', u'sec:de:flu'),
+              (u' A Forward Euler method for the differential equation system ',
+               2,
+               u'sec:de:flu:FE',
+               u'sec:de:flu:FE'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:flu:prog:spec',
+               u'sec:de:flu:prog:spec'),
+              (u' Outbreak or not ', 2, None, '___sec149'),
+              (u' Abstract problem and notation ',
+               2,
+               u'sec:de:flu:generic',
+               u'sec:de:flu:generic'),
+              (u' Programming the numerical method; the general case ',
+               2,
+               u'sec:de:flu:prog:generic',
+               u'sec:de:flu:prog:generic'),
+              (u' Time-restricted immunity ', 2, None, '___sec152'),
+              (u' Incorporating vaccination ',
+               2,
+               u'sec:de:flu:vaccine',
+               u'sec:de:flu:vaccine'),
+              (u' Discontinuous coefficients: a vaccination campaign ',
+               2,
+               u'sec:de:flu:vaccine:discont',
+               u'sec:de:flu:vaccine:discont'),
+              (u' Oscillating one-dimensional systems ',
+               1,
+               u'sec:de:vib',
+               u'sec:de:vib'),
+              (u' Derivation of a simple model ', 2, None, '___sec156'),
+              (u' Numerical solution ', 2, None, '___sec157'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:vib:special',
+               u'sec:de:vib:special'),
+              (u' A magic fix of the numerical method ',
+               2,
+               None,
+               '___sec159'),
+              (u" The 2nd-order Runge-Kutta method (or Heun's method) ",
+               2,
+               u'sec:de:osc:Heun',
+               u'sec:de:osc:Heun'),
+              (u' Odespy: software for solving ODEs ',
+               2,
+               u'sec:de:osc:odespy',
+               u'sec:de:osc:odespy'),
+              (u' The 4th-order Runge-Kutta method ', 2, None, '___sec162'),
+              (u' The algorithm ', 3, None, '___sec163'),
+              (u' Application ', 3, None, '___sec164'),
+              (u' Implementation ', 3, None, '___sec165'),
+              (u' Derivation ', 3, None, '___sec166'),
+              (u' More effects: damping, nonlinearity, and external forces ',
+               2,
+               None,
+               '___sec167'),
+              (u' The Euler-Cromer scheme ', 3, None, '___sec168'),
+              (u' The 4-th order Runge-Kutta method ', 3, None, '___sec169'),
+              (u' Illustration of linear damping ', 2, None, '___sec170'),
+              (u' Illustration of linear damping with sinusoidal excitation ',
+               2,
+               None,
+               '___sec171'),
+              (u' Spring-mass system with sliding friction ',
+               2,
+               u'sec:de:vib:ode2:sliding:friction',
+               u'sec:de:vib:ode2:sliding:friction'),
+              (u' A finite difference method; undamped, linear case ',
+               2,
+               u'sec:de:vib:2nd',
+               u'sec:de:vib:2nd'),
+              (u' A finite difference method; linear damping ',
+               2,
+               u'sec:de:vib:2nd:damped1',
+               u'sec:de:vib:2nd:damped1'),
+              (u' Exercises ', 1, None, '___sec175'),
+              (u' Exercise 44: Geometric construction of the Forward Euler method ',
+               2,
+               u'sec:de:exer:geom',
+               u'sec:de:exer:geom'),
+              (u' Exercise 45: Make test functions for the Forward Euler method ',
+               2,
+               u'sec:de:exer:FE:test1',
+               u'sec:de:exer:FE:test1'),
+              (u" Exercise 46: Implement and evaluate Heun's method ",
+               2,
+               u'sec:de:exer:Heun:pg',
+               u'sec:de:exer:Heun:pg'),
+              (u' Exercise 47: Find an appropriate time step; logistic model ',
+               2,
+               u'sec:de:exer:logistic:dtopt',
+               u'sec:de:exer:logistic:dtopt'),
+              (u' Exercise 48: Find an appropriate time step; SIR model ',
+               2,
+               u'sec:de:exer:SIR:dtopt',
+               u'sec:de:exer:SIR:dtopt'),
+              (u' Exercise 49: Model an adaptive vaccination campaign ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 50: Make a SIRV model with time-limited effect of vaccination ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 51: Refactor a flat program ',
+               2,
+               u'sec:de:exer:vib:FE:func',
+               u'sec:de:exer:vib:FE:func'),
+              (u' Exercise 52: Simulate oscillations by a general ODE solver ',
+               2,
+               u'sec:de:exer:vib:ode_FE',
+               u'sec:de:exer:vib:ode_FE'),
+              (u' Exercise 53: Compute the energy in oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Exercise 54: Use a Backward Euler scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:BE',
+               u'sec:de:exer:pg:BE'),
+              (u' Exercise 55: Use a Crank-Nicolson scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:CN',
+               u'sec:de:exer:pg:CN'),
+              (u' Exercise 56: Understand finite differences via Taylor series ',
+               2,
+               u'sec:de:exer:fd:Taylor',
+               u'sec:de:exer:fd:Taylor'),
+              (u' Exercise 57: Use a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Remarks ', 3, None, '___sec190'),
+              (u" Exercise 58: Use Heun's method for the SIR model ",
+               2,
+               u'sec:de:exer:SIR:Heun',
+               u'sec:de:exer:SIR:Heun'),
+              (u' Exercise 59: Use Odespy to solve a simple ODE ',
+               2,
+               u'sec:de:exer:odespy:decay',
+               u'sec:de:exer:odespy:decay'),
+              (u' Exercise 60: Set up a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:osc:BE',
+               u'sec:de:exer:osc:BE'),
+              (u' Exercise 61: Set up a Forward Euler scheme for nonlinear and damped oscillations ',
+               2,
+               u'sec:de:exer:osc:FE:general',
+               u'sec:de:exer:osc:FE:general'),
+              (u' Exercise 62: Discretize an initial condition ',
+               2,
+               u'sec:de:exer:osc:2nd:V0ic',
+               u'sec:de:exer:osc:2nd:V0ic'),
+              (u' Solving partial differential equations ',
+               0,
+               u'6th:SolvPDEs',
+               u'6th:SolvPDEs'),
+              (u' Finite difference methods ',
+               1,
+               u'6th:SolvPDEs:MOLandFE',
+               u'6th:SolvPDEs:MOLandFE'),
+              (u' Reduction of a PDE to a system of ODEs ',
+               2,
+               u'sec:pde:diff1D:reduce',
+               u'sec:pde:diff1D:reduce'),
+              (u' Construction of a test problem with known discrete solution ',
+               2,
+               u'sec:pde:diff1D:testproblem',
+               u'sec:pde:diff1D:testproblem'),
+              (u' Implementation: Forward Euler method ',
+               2,
+               None,
+               '___sec200'),
+              (u' Application: heat conduction in a rod ',
+               2,
+               u'sec:pde:diff1D:rod',
+               u'sec:pde:diff1D:rod'),
+              (u' Vectorization ', 2, None, '___sec202'),
+              (u' Using Odespy to solve the system of ODEs ',
+               2,
+               None,
+               '___sec203'),
+              (u' Implicit methods ', 2, None, '___sec204'),
+              (u' Exercises ', 1, None, '___sec205'),
+              (u' Exercise 63: Simulate a diffusion equation by hand ',
+               2,
+               u'sec:pde:diff1D:exer:handFE',
+               u'sec:pde:diff1D:exer:handFE'),
+              (u' Exercise 64: Compute temperature variations in the ground ',
+               2,
+               u'sec:pde:diff1D:exer:groundtemp',
+               u'sec:pde:diff1D:exer:groundtemp'),
+              (u' Exercise 65: Compare implicit methods ',
+               2,
+               u'sec:pde:diff1D:exer:compare:implicit',
+               u'sec:pde:diff1D:exer:compare:implicit'),
+              (u' Exercise 66: Explore adaptive and implicit methods ',
+               2,
+               u'sec:pde:diff1D:exer:groundtemp:adapt',
+               u'sec:pde:diff1D:exer:groundtemp:adapt'),
+              (u' Exercise 67: Investigate the $\\theta$ rule ',
+               2,
+               u'sec:pde:diff1D:exer:CN',
+               u'sec:pde:diff1D:exer:CN'),
+              (u' Remarks ', 3, None, '___sec211'),
+              (u' Exercise 68: Compute the diffusion of a Gaussian peak ',
+               2,
+               u'sec:pde:diff1D:exer:Gaussian',
+               u'sec:pde:diff1D:exer:Gaussian'),
+              (u' Exercise 69: Vectorize a function for computing the area of a polygon ',
+               2,
+               u'2nd:exer:area:polygon2',
+               u'2nd:exer:area:polygon2'),
+              (u' Exercise 70: Explore symmetry ',
+               2,
+               u'sec:pde:diff1D:exer:Gaussian:symm',
+               u'sec:pde:diff1D:exer:Gaussian:symm'),
+              (u' Remarks ', 3, None, '___sec215'),
+              (u' Exercise 71: Compute solutions as $t\\rightarrow\\infty$ ',
+               2,
+               u'sec:pde:diff1D:exer:stationary',
+               u'sec:pde:diff1D:exer:stationary'),
+              (u' Remarks ', 3, None, '___sec217'),
+              (u' Exercise 72: Solve a two-point boundary value problem ',
+               2,
+               u'sec:pde:diff1D:exer:stationary2',
+               u'sec:pde:diff1D:exer:stationary2'),
+              (u' Solving nonlinear algebraic equations ',
+               0,
+               u'4th:NonlinAlgEq',
+               u'4th:NonlinAlgEq'),
+              (u' Brute force methods ',
+               1,
+               u'4th:bruteforce',
+               u'4th:bruteforce'),
+              (u' Brute force root finding ', 2, None, '___sec221'),
+              (u' Numerical algorithm ', 3, None, '___sec222'),
+              (u' Implementation ', 3, None, '___sec223'),
+              (u' Brute force optimization ', 2, None, '___sec224'),
+              (u' Numerical algorithm ', 3, None, '___sec225'),
+              (u' Implementation ', 3, None, '___sec226'),
+              (u' Model problem for algebraic equations ',
+               2,
+               None,
+               '___sec227'),
+              (u" Newton's method ",
+               1,
+               u'4th:NonlinAlgEq:Newt',
+               u'4th:NonlinAlgEq:Newt'),
+              (u" Deriving and implementing Newton's method ",
+               2,
+               None,
+               '___sec229'),
+              (u' Making a more efficient and robust implementation ',
+               2,
+               u'4th:Newton:robust',
+               u'4th:Newton:robust'),
+              (u' The secant method ',
+               1,
+               u'4th:NonlinAlgEq:Secant',
+               u'4th:NonlinAlgEq:Secant'),
+              (u' The bisection method ',
+               1,
+               u'4th:NonlinAlgEq:Bisect',
+               u'4th:NonlinAlgEq:Bisect'),
+              (u' Rate of convergence ',
+               1,
+               u'4th:NonlinAlgEq:RateConv',
+               u'4th:NonlinAlgEq:RateConv'),
+              (u' Exercises ', 1, None, '___sec234'),
+              (u" Exercise 73: Understand why Newton's method can fail ",
+               2,
+               u'4th:exer:Newton:failure',
+               u'4th:exer:Newton:failure'),
+              (u' Exercise 74: See if the secant method fails ',
+               2,
+               u'4th:exer:Secant:failure',
+               u'4th:exer:Secant:failure'),
+              (u' Exercise 75: Understand how the bisection method cannot fail ',
+               2,
+               u'4th:exer:Bisection:failure',
+               u'4th:exer:Bisection:failure'),
+              (u" Exercise 76: Combine the bisection method with Newton's method ",
+               2,
+               u'4th:exer:Bisection:Newton',
+               u'4th:exer:Bisection:Newton'),
+              (u" Exercise 77: Write a test function for Newton's method ",
+               2,
+               u'4th:exer:NewtonHand',
+               u'4th:exer:NewtonHand'),
+              (u' Exercise 78: Solve nonlinear equation for a vibrating beam ',
+               2,
+               u'4th:exer:beam:vib',
+               u'4th:exer:beam:vib'),
+              (u' Appendix: Getting access to Python ',
+               0,
+               u'app:accesspy',
+               u'app:accesspy'),
+              (u' Required software ',
+               1,
+               u'sec:accesspy:softwarelist',
+               u'sec:accesspy:softwarelist'),
+              (u' Installing software on your laptop: Mac OS X and Windows ',
+               1,
+               u'sec:accesspy:MacWin',
+               u'sec:accesspy:MacWin'),
+              (u' Anaconda and Spyder ',
+               1,
+               u'sec:accesspy:anaconda',
+               u'sec:accesspy:anaconda'),
+              (u' Spyder on Mac ', 2, None, '___sec245'),
+              (u' Installation of additional packages ',
+               2,
+               None,
+               '___sec246'),
+              (u' Installing SciTools on Mac ', 2, None, '___sec247'),
+              (u' Installing SciTools on Windows ', 2, None, '___sec248'),
+              (u' VMWare Fusion virtual machine ',
+               1,
+               u'sec:accesspy:vmware',
+               u'sec:accesspy:vmware'),
+              (u' Installing Ubuntu ',
+               2,
+               u'sec:accesspy:vmware:fullblown:machine',
+               u'sec:accesspy:vmware:fullblown:machine'),
+              (u' Installing software on Ubuntu ', 2, None, '___sec251'),
+              (u' File sharing ', 2, None, '___sec252'),
+              (u' Dual boot on Windows ', 1, None, '___sec253'),
+              (u' Vagrant virtual machine ',
+               1,
+               u'sec:accesspy:vagrant',
+               u'sec:accesspy:vagrant'),
+              (u' How to write and run a Python program ',
+               1,
+               u'sec:accesspy:writerun',
+               u'sec:accesspy:writerun'),
+              (u' The need for a text editor ', 2, None, '___sec256'),
+              (u' Spyder ', 2, None, '___sec257'),
+              (u' Text editors ', 2, None, '___sec258'),
+              (u' Terminal windows ', 2, None, '___sec259'),
+              (u' Using a plain text editor and a terminal window ',
+               2,
+               None,
+               '___sec260'),
+              (u' The SageMathCloud and Wakari web services ',
+               1,
+               u'sec:accesspy:sagemath:wakari',
+               u'sec:accesspy:sagemath:wakari'),
+              (u' Basic intro to SageMathCloud ', 2, None, '___sec262'),
+              (u' Basic intro to Wakari ', 2, None, '___sec263'),
+              (u' Installing your own Python packages ',
+               2,
+               None,
+               '___sec264'),
+              (u' Writing IPython notebooks ',
+               1,
+               u'sec:accesspy:ipynb',
+               u'sec:accesspy:ipynb'),
+              (u' A simple program in the notebook ', 2, None, '___sec266'),
+              (u' Mixing text, mathematics, code, and graphics ',
+               2,
+               None,
+               '___sec267'),
+              (u' References ', 0, None, '___sec268')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands.tex -->
+$$
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+$$
+
+
+
+
+    
+<a name="part0015"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._p4c-solarized-Python014.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._p4c-solarized-Python016.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1 id="sec:integrals:Midpoint">The composite midpoint method</h1>
+
+<h3 id="___sec85">The idea </h3>
+
+<p>
+Rather than approximating the area under a curve by trapezoids, we can
+use plain rectangles. It may sound less accurate to use horizontal lines
+and not skew lines following the function to be integrated, but
+the integration method based on rectangles is in fact slightly more
+accurate than the one based on trapezoids!
+
+<p>
+In the <em>midpoint method</em>, we construct a rectangle for every sub-interval
+where the height equals \( f \) at the midpoint of the sub-interval.
+Let us do this for four rectangles, using the same sub-intervals as we
+had for hand calculations with the trapezoidal method:
+\( [0,0.2) \), \( [0.2,0.6) \), \( [0.6,0.8) \), and \( [0.8,1.0] \). We get
+
+$$
+\begin{align}
+\int_0^1 f(t)dt &\approx
+   h_1 f\left(\frac{0 + 0.2}{2}\right) +
+   h_2 f\left(\frac{0.2 + 0.6}{2}\right) \nonumber  \\ 
+&+ h_3 f\left(\frac{0.6 + 0.8}{2}\right) +
+   h_4 f\left(\frac{0.8 + 1.0}{2}\right),
+\tag{18}
+\end{align}
+$$
+
+where \( h_1 \), \( h_2 \), \( h_3 \), and \( h_4 \) are the widths of the sub-intervals,
+used previously with the trapezoidal method and defined in
+<a href="._p4c-solarized-Python014.html#mjx-eqn-10">(10)</a>-<a href="._p4c-solarized-Python014.html#mjx-eqn-13">(13)</a>.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 9:  Computing approximately the integral of a function as the sum of the areas of the rectangles. <div id="fig:vCarMidpoint"></div> </p></center>
+<p><img src="figs/viz_midpoint.png" align="bottom" width=400></p>
+</center>
+
+<p>
+With \( f(t) = 3t^{2}e^{t^3} \), the approximation becomes \( 1.632 \).
+Compared with the true answer (\( 1.718 \)), this is about \( 5\% \) too
+small, but it is better than what we got with the trapezoidal method
+(\( 10\% \)) with the same sub-intervals. More rectangles give a
+better approximation.
+
+<h2 id="___sec86">The general formula </h2>
+
+<p>
+Let us derive a formula for the midpoint method based on \( n \) rectangles:
+
+$$
+\begin{align}
+\int_a^b f(x)\,dx &= \int_{x_0}^{x_1} f(x)dx + \int_{x_1}^{x_2} f(x)dx +
+                     \ldots + \int_{x_{n-1}}^{x_n} f(x)dx,     \nonumber \\ 
+                  &\approx h f\left(\frac{x_0 + x_1}{2}\right) +
+                   h f\left(\frac{x_1 + x_2}{2}\right) + \ldots +
+                   h f\left(\frac{x_{n-1} + x_n}{2}\right) ,
+\tag{19}  \\ 
+                  &\approx h \left(f\left(\frac{x_0 + x_1}{2}\right) +
+                  f\left(\frac{x_1 + x_2}{2}\right) + \ldots +
+                  f\left(\frac{x_{n-1} + x_n}{2}\right)\right)\thinspace .
+\tag{20}
+\end{align}
+$$
+
+This sum may be written more compactly as
+$$
+\begin{equation}
+\int_a^b f(x) dx \approx h \sum_{i=0}^{n-1}f(x_i) ,
+\tag{21}
+\end{equation}
+$$
+
+where \( x_i = \left(a + \frac{h}{2}\right) + ih \).
+
+<h2 id="sec:midpoint:code">Implementation</h2>
+
+<p>
+We follow the advice and lessons learned from the implementation of
+the trapezoidal method and make a function <code>midpoint(f, a, b, n)</code>
+(in a file <a href="https://github.com/hplgit/prog4comp/src/py/midpoint.py" target="_self"><tt>midpoint.py</tt></a>)
+for implementing the general formula <a href="#mjx-eqn-21">(21)</a>:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def midpoint(f, a, b, n):
+    h = float(b-a)/n
+    result = 0
+    for i in range(n):
+        result += f((a + h/2.0) + i*h)
+    result *= h
+    return result
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+We can test the function as we explained for the similar <code>trapezoidal</code>
+method. The error in our particular problem \( \int_0^1 3t^2e^{t^3}dt \)
+with four intervals is now about 0.1 in contrast to 0.2 for the
+trapezoidal rule.  This is in fact not accidental: one can show
+mathematically that the error of the midpoint method is a bit smaller
+than for the trapezoidal method. The differences are seldom of any
+practical importance, and on a laptop we can easily use \( n=10^6 \) and
+get the answer with an error about \( 10^{-12} \) in a couple of seconds.
+
+<h2 id="___sec88">Comparing the trapezoidal and the midpoint methods </h2>
+
+<p>
+The next example shows how easy we can combine the <code>trapezoidal</code> and <code>midpoint</code>
+functions to make a comparison of the two methods in the
+file
+<a href="https://github.com/hplgit/prog4comp/src/py/compare_integration_methods.py" target="_self"><tt>compare_integration_methods.py</tt></a>:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>from trapezoidal import trapezoidal
+from midpoint import midpoint
+from math import exp
+
+g = lambda y: exp(-y**2)
+a = 0
+b = 2
+print '    n        midpoint          trapezoidal'
+for i in range(1, 21):
+    n = 2**i
+    m = midpoint(g, a, b, n)
+    t = trapezoidal(g, a, b, n)
+    print '%7d %.16f %.16f' % (n, m, t)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Note the efforts put into nice formatting - the output becomes
+
+<p>
+<!-- begin verbatim block -->
+<pre><code>    n        midpoint          trapezoidal
+      2 0.8842000076332692 0.8770372606158094
+      4 0.8827889485397279 0.8806186341245393
+      8 0.8822686991994210 0.8817037913321336
+     16 0.8821288703366458 0.8819862452657772
+     32 0.8820933014203766 0.8820575578012112
+     64 0.8820843709743319 0.8820754296107942
+    128 0.8820821359746071 0.8820799002925637
+    256 0.8820815770754198 0.8820810181335849
+    512 0.8820814373412922 0.8820812976045025
+   1024 0.8820814024071774 0.8820813674728968
+   2048 0.8820813936736116 0.8820813849400392
+   4096 0.8820813914902204 0.8820813893068272
+   8192 0.8820813909443684 0.8820813903985197
+  16384 0.8820813908079066 0.8820813906714446
+  32768 0.8820813907737911 0.8820813907396778
+  65536 0.8820813907652575 0.8820813907567422
+ 131072 0.8820813907631487 0.8820813907610036
+ 262144 0.8820813907625702 0.8820813907620528
+ 524288 0.8820813907624605 0.8820813907623183
+1048576 0.8820813907624268 0.8820813907623890
+</code></pre>
+<!-- end verbatim block -->
+A visual inspection of the numbers shows how fast the digits
+stabilize in both methods. It appears that 13 digits have stabilized
+in the last two rows.
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal">
+<b>Remark.</b>
+<p>
+The trapezoidal and midpoint methods are just two examples in a jungle
+of numerical integration rules. Other famous methods are
+Simpson's rule and Gauss quadrature. They all work in the same way:
+
+$$ \int_a^b f(x)dx \approx \sum_{i=0}^{n-1} w_if(x_i)\thinspace .$$
+
+That is, the integral is approximated by a sum of function
+evaluations, where each evaluation \( f(x_i) \) is given a weight \( w_i \).
+The different methods differ in the way they construct the
+evaluation points \( x_i \) and the weights \( w_i \).
+We have used equally spaced points \( x_i \), but higher accuracy can be
+obtained by optimizing the location of \( x_i \).
+</div>
+
+
+<h1 id="___sec89">Testing </h1>
+
+<h2 id="___sec90">Problems with brief testing procedures </h2>
+
+<p>
+Testing of the programs for numerical integration has so far employed
+two strategies. If we have an exact answer, we compute the error and
+see that increasing \( n \) decreases the error. When the exact answer is
+not available, we can (as in the comparison example in the previous
+section) look at the integral values and see that they stabilize as
+\( n \) grows. Unfortunately, these are very weak test procedures and not
+at all satisfactory for claiming that the software we have produced is
+correctly implemented.
+
+<p>
+To see this, we can introduce a bug in the
+<code>application</code> function that calls <code>trapezoidal</code>: instead of
+integrating \( 3t^2e^{t^3} \), we write &quot;accidentally&quot; \( 3t^3e^{t^3} \),
+but keep the same anti-derivative \( V(t)e^{t^3} \) for computing the
+error.  With the bug and \( n=4 \), the error is 0.1, but without the bug
+the error is 0.2!  It is of course completely impossible to tell if
+0.1 is the right value of the error. Fortunately, increasing \( n \) shows
+that the error stays about 0.3 in the program with the bug, so
+the test procedure with increasing \( n \) and checking that the error
+decreases points to a problem in the code.
+
+<p>
+Let us look at another bug, this time in the mathematical algorithm:
+instead of computing \( \frac{1}{2}(f(a) + f(b)) \) as we should, we
+forget the second \( \frac{1}{2} \) and write <code>0.5*f(a) + f(b)</code>.  The error for
+\( n=4,40,400 \) when computing
+\( \int_{1.1}^{1.9} 3t^2e^{t^3}dt \) goes like \( 1400 \), \( 107 \), \( 10 \),
+respectively, which looks promising.  The problem is that
+the right errors should be \( 369 \), \( 4.08 \), and
+\( 0.04 \). That is, the error should be reduced faster in the
+correct than in the buggy code. The problem, however, is that it is
+reduced in both codes, and we may stop further testing and believe
+everything is correctly implemented.
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal">
+<b>Unit testing.</b>
+<p>
+A good habit is to test small pieces of a larger code at a time.
+This is known as <em>unit testing</em>. One identifies a (small) unit of
+the code, and then one makes a separate test for this unit. The unit test
+should be stand-alone in the sense that it can be run without the
+outcome of other tests. Typically, one algorithm
+in scientific programs is considered as a unit. The challenge
+with unit tests in numerical computing is to deal with numerical
+approximation errors. A fortunate side effect of unit testing is that
+the programmer is forced to use functions to modularize the code into smaller,
+logical pieces.
+</div>
+
+
+<h2 id="sec:integrals:testprocs">Test procedures</h2>
+
+<p>
+There are three serious ways to test the implementation of
+numerical methods via unit tests:
+
+<ol>
+<li> <em>Comparing with hand-computed results</em> in a problem with
+   few arithmetic operations, i.e., small \( n \).</li>
+<li> <em>Solving a problem without numerical errors</em>. We know that the trapezoidal
+   rule must be exact for linear functions. The error produced
+   by the program must then be zero (to machine precision).</li>
+<li> <em>Demonstrating correct convergence rates</em>. A strong test when we can
+   compute exact errors, is to see how fast the error goes
+   to zero as \( n \) grows. In the trapezoidal and midpoint rules
+   it is known that the error depends on \( n \) as \( n^{-2} \) as
+   \( n\rightarrow\infty \).</li>
+</ol>
+
+<h3 id="___sec92">Hand-computed results </h3>
+
+<p>
+Let us use two trapezoids and compute the integral \( \int_0^1v(t) \),
+\( v(t)=3t^2e^{t^3} \):
+
+$$ \frac{1}{2}h(v(0) + v(0.5)) + \frac{1}{2}h(v(0.5)+v(1)) = 2.463642041244344,$$
+
+when \( h=0.5 \) is the width of the two trapezoids. Running the program
+gives exactly the same results.
+
+<h3 id="___sec93">Solving a problem without numerical errors </h3>
+
+<p>
+The best unit tests for numerical algorithms involve mathematical problems
+where we know the numerical result beforehand. Usually, numerical
+results contain unknown approximation errors, so knowing the numerical
+result implies that we have a problem where the approximation errors
+vanish. This feature may be present in very simple mathematical problems.
+For example, the trapezoidal method is exact for
+integration of linear functions \( f(x)=ax+b \). We can therefore pick
+some linear function and construct a test function that checks
+equality (within a tolerance) between the exact analytical expression
+for the integral and the number computed by the implementation
+of the trapezoidal method.
+
+<p>
+A specific test case can be \( \int_{1.2}^{4.4} (6x-4)dx \). This
+integral involves an &quot;arbitrary&quot; interval  \( [1.2, 4.4] \) and
+an &quot;arbitrary&quot; linear function \( f(x) = 6x-4 \). By &quot;arbitrary&quot;
+we mean expressions where we avoid the special numbers 0 and 1 since
+these have special properties in arithmetic operations (e.g.,
+forgetting to multiply is equivalent to multiplying by 1, and
+forgetting to add is equivalent to adding 0).
+
+<h3 id="___sec94">Demonstrating correct convergence rates </h3>
+
+<p>
+Normally, unit tests must be based on problems where the numerical approximation
+errors in our implementation remain unknown. However, we often know
+or may assume a certain <em>asymptotic</em> behavior of the error.
+We can do some experimental runs with the test problem
+\( \int_0^1 3t^2e^{t^3}dt \) where \( n \) is doubled in each run:
+\( n=4,8,16 \). The corresponding errors are then 12%, 3% and 0.77%,
+respectively. These numbers indicate that the error is
+roughly reduced by a factor of 4 when doubling \( n \). We say that
+the <em>convergence rate</em> is \( n^{-2} \). In fact, this result can also
+be shown mathematically. The idea of a unit test is to run the
+algorithm for some \( n \) values, compute the error (the absolute
+value of the difference between the exact analytical result and
+the one produced by the numerical method), and check that the error
+has <em>approximately</em> correct asymptotic behavior, i.e., that
+the error is proportional to \( n^{-2} \).
+
+<p>
+Let us develop some more precise method for such unit tests based
+on convergence rates.
+We assume that the error \( E \)
+depends on \( n \) according to
+
+$$ E = Cn^r,$$
+
+where \( C \) is an unknown constant and \( r \) is the convergence rate.
+Consider a set of experiments with various \( n \):
+\( n_0, n_1, n_2, \ldots,n_q \).
+We compute the corresponding errors
+\( E_0,\ldots,E_q \).
+For two consecutive experiments, number \( i \) and \( i-1 \),
+we have the error model
+
+$$
+\begin{align}
+E_{i} &= Cn_{i}^r,\\ 
+E_{i-1} &= Cn_{i-1}^r\thinspace .
+\end{align}
+$$
+
+These are two equations for two unknowns \( C \) and \( r \).
+We can easily eliminate \( C \) by dividing the equations by each other.
+Then solving for \( r \) gives
+
+$$
+\begin{equation}
+r_{i-1} = \frac{\ln (E_i/E_{i-1})}{\ln (n_i/n_{i-1})}\thinspace .
+\tag{22}
+\end{equation}
+$$
+
+We have introduced a subscript \( i-1 \) in \( r \)
+since the estimated
+value for \( r \) varies with \( i \). Hopefully,
+\( r_{i-1} \) approaches
+the correct convergence rate as the number of intervals increases in size
+and \( i\rightarrow q \).
+
+<h2 id="sec:integrals:test:functions">Constructing unit tests and writing test functions</h2>
+
+<p>
+Python has several frameworks for automatically running and checking a
+potentially very large number of tests for parts of your software by
+one command.
+This is an extremely useful feature during program
+development: whenever you have done some changes to one or more files,
+launch the test command and make sure nothing is broken because of
+your edits.
+
+<p>
+The test frameworks <code>nose</code> and <code>py.test</code> are particularly attractive
+as they are very easy to use.
+Tests are placed in special <em>test functions</em>
+that the frameworks can recognize and run for you. The requirements
+to a test function are simple:
+
+<ul>
+ <li> the name must start with <code>test_</code></li>
+ <li> the test function cannot have any arguments</li>
+ <li> the tests inside test functions must be boolean expressions</li>
+ <li> a boolean expression <code>b</code> must be tested with <code>assert b, msg</code>,
+   where <code>msg</code> is an optional object (string or number) to be written out
+   when <code>b</code> is false</li>
+</ul>
+
+Suppose we have written a function
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def add(a, b):
+    return a + b
+</code></pre>
+<!-- end verbatim block -->
+A corresponding test function can then be
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def test_add()
+    expected = 1 + 1
+    computed = add(1, 1)
+    assert computed == expected, '1+1=%g' % computed
+</code></pre>
+<!-- end verbatim block -->
+Test functions can be in any program file or in separate files,
+typically with names starting with <code>test</code>. You can also collect
+tests in subdirectories: running <code>py.test -s -v</code> will actually
+run all tests in all <code>test*.py</code> files in all subdirectories, while
+<code>nosetests -s -v</code> restricts the attention to subdirectories whose
+names start with <code>test</code> or end with <code>_test</code> or <code>_tests</code>.
+
+<p>
+Below we shall write test functions for each of the three test
+procedures we suggested: comparison with hand calculations,
+checking problems that can be exactly solved, and checking convergence
+rates. We stick to testing the trapezoidal integration code and collect all
+test functions in one common file by the name <code>test_trapezoidal.py</code>.
+
+<h3 id="___sec96">Hand-computed numerical results </h3>
+
+<p>
+Our previous hand calculations for two trapezoids can be checked against
+the <code>trapezoidal</code> function inside a test function
+(in a file <a href="https://github.com/hplgit/prog4comp/src/py/test_trapezoidal.py" target="_self"><tt>test_trapezoidal.py</tt></a>):
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from trapezoidal import trapezoidal
+
+def test_trapezoidal_one_exact_result():
+    &quot;&quot;&quot;Compare one hand-computed result.&quot;&quot;&quot;
+    from math import exp
+    v = lambda t: 3*(t**2)*exp(t**3)
+    n = 2
+    numerical = trapezoidal(v, 0, 1, n)
+    exact = 2.463642041244344
+    err = abs(exact - numerical)
+    tol = 1E-14
+    success = err &lt; tol
+    msg = 'error=%g &gt; tol=%g' % (err, tol)
+    assert success, msg
+</code></pre>
+<!-- end verbatim block -->
+Note the importance of checking <code>err</code> against <code>exact</code> with a tolerance:
+round-off errors from the arithmetics inside <code>trapezoidal</code> will not
+make the result exactly like the hand-computed one. The size of
+the tolerance is here set to \( 10^{-14} \), which is a kind of all-round
+value for computations with numbers not deviating much from unity.
+
+<h3 id="___sec97">Solving a problem without numerical errors </h3>
+
+<p>
+We know that the trapezoidal rule is exact for linear integrands.
+Choosing the integral \( \int_{1.2}^{4.4} (6x-4)dx \) as test case,
+the corresponding
+test function for this unit test may look like
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def test_trapezoidal_linear():
+    &quot;&quot;&quot;Check that linear functions are integrated exactly.&quot;&quot;&quot;
+    f = lambda x: 6*x - 4
+    F = lambda x: 3*x**2 - 4*x  # Anti-derivative
+    a = 1.2; b = 4.4
+    exact = F(b) - F(a)
+    tol = 1E-14
+    for n in 2, 20, 21:
+        numerical = trapezoidal(f, a, b, n)
+        err = abs(exact - numerical)
+        success = err &lt; tol
+        msg = 'n=%d, err=%g' % (n, err)
+        assert success, msg
+</code></pre>
+<!-- end verbatim block -->
+
+<h3 id="___sec98">Demonstrating correct convergence rates </h3>
+
+<p>
+In the present example with integration, it is known that the
+approximation errors in the trapezoidal rule are proportional to
+\( n^{-2} \), \( n \) being the number of subintervals used in the composite
+rule.
+
+<p>
+Computing convergence rates requires somewhat more tedious programming than
+the previous tests, but can be applied to more general integrands.
+The algorithm typically goes like
+
+<ul>
+ <li> for \( i=0,1,2,\ldots,q \)</li>
+
+<ul>
+   <li> \( n_i = 2^{i+1} \)</li>
+   <li> Compute integral with \( n_i \) intervals</li>
+   <li> Compute the error \( E_i \)</li>
+   <li> Estimate \( r_i \) from <a href="#mjx-eqn-22">(22)</a>
+     if \( i>0 \)</li>
+</ul>
+
+</ul>
+
+The corresponding code may look like
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def convergence_rates(f, F, a, b, num_experiments=14):
+    from math import log
+    from numpy import zeros
+    exact = F(b) - F(a)
+    n = zeros(num_experiments, dtype=int)
+    E = zeros(num_experiments)
+    r = zeros(num_experiments-1)
+    for i in range(num_experiments):
+        n[i] = 2**(i+1)
+        numerical = trapezoidal(f, a, b, n[i])
+        E[i] = abs(exact - numerical)
+        if i &gt; 0:
+            r_im1 = log(E[i]/E[i-1])/log(float(n[i])/n[i-1])
+            r[i-1] = float('%.2f' % r_im1)  # Truncate to two decimals
+    return r
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Making a test function is a matter of choosing <code>f</code>, <code>F</code>, <code>a</code>, and <code>b</code>,
+and then checking the value of \( r_i \) for the largest \( i \):
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def test_trapezoidal_conv_rate():
+    &quot;&quot;&quot;Check empirical convergence rates against the expected -2.&quot;&quot;&quot;
+    from math import exp
+    v = lambda t: 3*(t**2)*exp(t**3)
+    V = lambda t: exp(t**3)
+    a = 1.1; b = 1.9
+    r = convergence_rates(v, V, a, b, 14)
+    print r
+    tol = 0.01
+    assert (abs(r[-1]) - 2) &lt; tol, r[-4:]
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Running the test shows that all \( r_i \), except the first one, equal
+the target limit 2 within two decimals.
+
+<h1 id="___sec99">Vectorization </h1>
+
+<p>
+The functions <code>midpoint</code> and <code>trapezoid</code> usually run fast in Python
+and compute an integral to a satisfactory precision within a
+fraction of a second. However, long loops in Python may in more
+complicated implementations run slowly. To increase the speed, the loops
+can be replaced by vectorized code. The integration functions constitute
+a simple and good example to illustrate how to vectorize loops.
+
+<p>
+We have already seen simple examples on vectorization in
+the section <a href="._p4c-solarized-Python004.html#1st:ex3">A Python program with vectorization and plotting</a> when we could evaluate a mathematical function \( f(x) \)
+for a large number of \( x \) values stored in an array.
+Basically, we can write
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def f(x):
+    return exp(-x)*sin(x) + 5*x
+
+from numpy import exp, sin, linspace
+x = linspace(0, 4, 101)  # coordinates from 100 intervals on [0, 4]
+y = f(x)                 # all points evaluated at once
+</code></pre>
+<!-- end verbatim block -->
+The result <code>y</code> is the array that would be computed if we ran a
+<code>for</code> loop over the individual
+<code>x</code> values and called <code>f</code> for each value. Vectorization essentially
+eliminates this loop in Python (i.e., the looping over <code>x</code> and application
+of <code>f</code> to each <code>x</code> value are instead performed
+in a library with fast, compiled code).
+
+<h3 id="___sec100">Vectorizing the midpoint rule </h3>
+
+<p>
+<!-- Vectorization of algorithms with loops is a creative process and requires -->
+<!-- experience. -->
+The aim of vectorizing the <code>midpoint</code> and <code>trapezoidal</code> functions is
+also to remove the explicit loop in Python.
+We start with vectorizing the <code>midpoint</code> function since <code>trapezoid</code>
+is not equally straightforward. The fundamental ideas of the vectorized
+algorithm are to
+
+<ol>
+<li> compute all the evaluation points in one array <code>x</code></li>
+<li> call <code>f(x)</code> to produce an array of corresponding function values</li>
+<li> use the <code>sum</code> function to sum the <code>f(x)</code> values</li>
+</ol>
+
+The evaluation points in the midpoint method are
+\( x_i=a+(i+\frac{1}{2})h \), \( i=0,\ldots,n-1 \). That is, \( n \) uniformly
+distributed coordinates between \( a+h/2 \) and \( b-h/2 \). Such coordinates
+can be calculated by <code>x = linspace(a+h/2, b-h/2, n)</code>.
+Given that the
+Python implementation <code>f</code> of the mathematical function \( f \) works with
+an array argument,
+which is very often the case in Python,
+<code>f(x)</code> will produce all the function values in an
+array. The array elements are then summed up by <code>sum</code>: <code>sum(f(x))</code>. This
+sum is to be multiplied by the rectangle width \( h \) to produce
+the integral value. The complete function is listed below.
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from numpy import linspace, sum
+
+def midpoint(f, a, b, n):
+    h = float(b-a)/n
+    x = linspace(a + h/2, b - h/2, n)
+    return h*sum(f(x))
+</code></pre>
+<!-- end verbatim block -->
+The code is found in the
+file
+<a href="https://github.com/hplgit/prog4comp/src/py/integration_methods_vec.py" target="_self"><tt>integration_methods_vec.py</tt></a>.
+
+<p>
+Let us test the code interactively in a Python shell to compute
+\( \int_0^1 3t^2dt \). The file with the code above has the name
+<code>integration_methods_vec.py</code> and is a valid module from which we
+can import the vectorized function:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; from integration_methods_vec import midpoint
+&gt;&gt;&gt; from numpy import exp
+&gt;&gt;&gt; v = lambda t: 3*t**2*exp(t**3)
+&gt;&gt;&gt; midpoint(v, 0, 1, 10)
+1.7014827690091872
+</code></pre>
+<!-- end verbatim block -->
+Note the necessity to use <code>exp</code> from <code>numpy</code>: our <code>v</code> function will
+be called with <code>x</code> as an array, and the <code>exp</code> function must be
+capable of working with an array.
+
+<p>
+The vectorized code performs all loops very efficiently in compiled
+code, resulting in much faster execution. Moreover, many readers of
+the code will also say that the algorithm looks clearer than in the
+loop-based implementation.
+
+<h3 id="___sec101">Vectorizing the trapezoidal rule </h3>
+
+<p>
+We can use the same approach to vectorize the <code>trapezoid</code> function.
+However, the trapezoidal rule performs a sum where the end points
+have different weight. If we do <code>sum(f(x))</code>, we get the end points
+<code>f(a)</code> with <code>f(b)</code> weight unity instead of one half. A remedy
+is to subtract the error in <code>sum(f(x))</code>: <code>sum(f(x)) - 0.5*f(a) - 0.5*f(b)</code>.
+The vectorized version of the trapezoidal method then becomes
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def trapezoidal(f, a, b, n):
+    h = float(b-a)/n
+    x = linspace(a, b, n+1)
+    s = sum(f(x)) - 0.5*f(a) - 0.5*f(b)
+    return h*s
+</code></pre>
+<!-- end verbatim block -->
+
+<h1 id="___sec102">Measuring computational speed </h1>
+
+<p>
+Now that we have created faster, vectorized versions of functions in
+the previous section, it is interesting to measure how much faster
+they are. The purpose of the present section is therefore to
+explain how we can record the CPU time consumed by a function so
+we can answer this question.
+There are many techniques for measuring the CPU time in Python,
+and here we shall
+just explain the simplest and most convenient one: the <code>%timeit</code>
+command in IPython. The following interactive session should
+illustrate a competition where the vectorized versions of the
+functions are supposed to win:
+
+<p>
+<!-- begin verbatim block  ipy-->
+<pre><code>In [1]: from integration_methods_vec import midpoint as midpoint_vec
+
+In [3]: from midpoint import midpoint
+
+In [4]: from numpy import exp
+
+In [5]: v = lambda t: 3*t**2*exp(t**3)
+
+In [6]: %timeit midpoint_vec(v, 0, 1, 1000000)
+1 loops, best of 3: 379 ms per loop
+
+In [7]: %timeit midpoint(v, 0, 1, 1000000)
+1 loops, best of 3: 8.17 s per loop
+
+In [8]: 8.17/(379*0.001)    # efficiency factor
+Out[8]: 21.556728232189972
+</code></pre>
+<!-- end verbatim block -->
+We see that the vectorized version is about 20 times faster: 379 ms
+versus 8.17 s. The results
+for the trapezoidal method are very similar, and the factor of about 20
+is independent of the number of intervals.
+
+<h1 id="sec:int:double">Double and triple integrals</h1>
+
+<h2 id="sec:int:double:midpoint">The midpoint rule for a double integral</h2>
+
+<p>
+Given a double integral over a rectangular domain \( [a,b]\times [c,d] \),
+
+$$ \int_a^b \int_c^d f(x,y) dydx,$$
+
+how can we approximate this integral by numerical methods?
+
+<h3 id="___sec105">Derivation via one-dimensional integrals </h3>
+
+<p>
+Since we know how to
+deal with integrals in one variable, a fruitful approach is to view
+the double integral as two integrals, each in one variable, which
+can be approximated numerically by previous one-dimensional formulas.
+To this end,
+we introduce
+a help function \( g(x) \) and write
+
+$$ \int_a^b \int_c^d f(x,y) dydx = \int_a^b g(x)dx,\quad
+g(x) = \int_c^d f(x,y) dy\thinspace .$$
+
+Each of the integrals
+
+$$ \int_a^b g(x)dx,\quad
+g(x) = \int_c^d f(x,y) dy$$
+
+can be discretized by any numerical
+integration rule for an integral in one variable. Let us use the
+midpoint method
+<a href="#mjx-eqn-21">(21)</a>
+and start with \( g(x)=\int_c^d f(x,y)dy \). We introduce
+\( n_y \) intervals on \( [c,d] \) with length \( h_y \). The midpoint rule
+for this integral then becomes
+
+$$ g(x) = \int_c^d f(x,y) dy \approx  h_y \sum_{j=0}^{n_y-1} f(x,y_j),
+\quad y_j = c + \frac{1}{2}{h_y} + jh_y \thinspace . $$
+
+The expression looks somewhat different from <a href="#mjx-eqn-21">(21)</a>,
+but that is because of the notation: since we integrate in \( y \) direction
+and will have to work with both \( x \) and \( y \) as coordinates, we must
+use \( n_y \) for \( n \), \( h_y \) for \( h \), and the counter \( i \) is more naturally
+called \( j \) when integrating in \( y \). Integrals in \( x \) direction will use
+\( h_x \) and \( n_x \) for \( h \) and \( n \), and \( i \) as counter.
+
+<p>
+The double integral is \( \int_a^b g(x)dx \), which can be approximated
+by the midpoint method:
+
+$$ \int_a^b g(x)dx \approx h_x \sum_{i=0}^{n_x-1} g(x_i),\quad x_i=a + \frac{1}{2}{h_x} + ih_x\thinspace .$$
+
+Putting the formulas together, we arrive at the <em>composite midpoint method
+for a double integral</em>:
+
+$$
+\begin{align}
+\int_a^b \int_c^d f(x,y) dydx &\approx
+h_x \sum_{i=0}^{n_x-1} h_y \sum_{j=0}^{n_y-1} f(x_i,y_j)\nonumber\\ 
+&=
+h_xh_y \sum_{i=0}^{n_x-1} \sum_{j=0}^{n_y-1} f(a + \frac{h_x}{2} + ih_x, c + \frac{h_y}{2} + jh_y)\thinspace .
+\tag{23}
+\end{align}
+$$
+
+<h3 id="___sec106">Direct derivation </h3>
+
+<p>
+The formula (<a href="#sec:int:double:midpoint">The midpoint rule for a double integral</a>) can also be derived directly
+in the two-dimensional case by applying the idea of the midpoint
+method. We divide the rectangle \( [a,b]\times [c,d] \) into
+\( n_x\times n_y \) equal-sized cells. The idea of the midpoint method is
+to approximate \( f \) by a constant over each cell, and evaluate the constant
+at the midpoint. Cell \( (i,j) \) occupies the area
+
+$$ [a+ih_x,c+(i+1)h_x]\times [c+jh_y, c+ (j+1)h_y],$$
+
+and the midpoint is \( (x_i,y_j) \) with
+
+$$ x_i=a + ih_x + \frac{1}{2}{h_x} ,\quad y_j = c + jh_y + \frac{1}{2}{h_y}
+\thinspace .$$
+
+The integral over the cell is therefore \( h_xh_y f(x_i,y_j) \), and
+the total double integral is the sum over all cells, which is
+nothing but formula (<a href="#sec:int:double:midpoint">The midpoint rule for a double integral</a>).
+
+<h3 id="___sec107">Programming a double sum </h3>
+
+<p>
+The formula (<a href="#sec:int:double:midpoint">The midpoint rule for a double integral</a>) involves a double sum,
+which is normally implemented as a double for loop. A Python function
+implementing (<a href="#sec:int:double:midpoint">The midpoint rule for a double integral</a>) may look like
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def midpoint_double1(f, a, b, c, d, nx, ny):
+    hx = (b - a)/float(nx)
+    hy = (d - c)/float(ny)
+    I = 0
+    for i in range(nx):
+        for j in range(ny):
+            xi = a + hx/2 + i*hx
+            yj = c + hy/2 + j*hy
+            I += hx*hy*f(xi, yj)
+    return I
+</code></pre>
+<!-- end verbatim block -->
+If this function is stored in a module file
+<a href="https://github.com/hplgit/prog4comp/src/py/midpoint_double.py" target="_self"><tt>midpoint_double.py</tt></a>,
+we can compute some integral, e.g.,
+\( \int_2^3\int_0^2 (2x + y)dxdy=9 \) in an interactive shell
+and demonstrate that the function computes the right number:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; from midpoint_double import midpoint_double1
+&gt;&gt;&gt; def f(x, y):
+...     return 2*x + y
+...
+&gt;&gt;&gt; midpoint_double1(f, 0, 2, 2, 3, 5, 5)
+9.0
+</code></pre>
+<!-- end verbatim block -->
+
+<h3 id="___sec108">Reusing code for one-dimensional integrals </h3>
+
+<p>
+It is very natural to write a two-dimensional midpoint method as we did in
+function <code>midpoint_double</code> when we have the formula (<a href="#sec:int:double:midpoint">The midpoint rule for a double integral</a>). However, we could alternatively ask, much as we did in the mathematics,
+can we reuse a well-tested implementation for one-dimensional integrals
+to compute double integrals? That is, can we use function <code>midpoint</code>
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def midpoint(f, a, b, n):
+    h = float(b-a)/n
+    result = 0
+    for i in range(n):
+        result += f((a + h/2.0) + i*h)
+    result *= h
+    return result
+</code></pre>
+<!-- end verbatim block -->
+from the section <a href="#sec:midpoint:code">Implementation</a> &quot;twice&quot;?
+The answer is yes, if we think as we did in the mathematics: compute
+the double integral as a midpoint rule for integrating \( g(x) \) and define
+\( g(x_i) \) in terms of a midpoint
+rule over \( f \) in the \( y \) coordinate. The corresponding function has very
+short code:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def midpoint_double2(f, a, b, c, d, nx, ny):
+    def g(x):
+        return midpoint(lambda y: f(x, y), c, d, ny)
+
+    return midpoint(g, a, b, nx)
+</code></pre>
+<!-- end verbatim block -->
+The important advantage of this implementation is that we reuse a well-tested
+function for the standard one-dimensional midpoint rule and that we
+apply the one-dimensional rule exactly as in the mathematics.
+
+<h3 id="___sec109">Verification via test functions </h3>
+
+<p>
+How can we test that our functions for the double integral work?
+The best unit test is to find a problem where the numerical approximation
+error vanishes because then we know exactly what the numerical
+answer should be. The midpoint rule is exact for linear functions,
+regardless of how many subinterval we use.
+Also, any linear two-dimensional function \( f(x,y)=px+qy+r \) will be integrated
+exactly by the two-dimensional midpoint rule. We may pick
+\( f(x,y)=2x+y \) and create a proper <em>test function</em> that can automatically
+verify our two alternative implementations of the two-dimensional
+midpoint rule. To compute the integral of \( f(x,xy) \) we take advantage of
+SymPy to eliminate the possibility of errors in hand calculations.
+The test function becomes
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def test_midpoint_double():
+    &quot;&quot;&quot;Test that a linear function is integrated exactly.&quot;&quot;&quot;
+    def f(x, y):
+        return 2*x + y
+
+    a = 0;  b = 2;  c = 2;  d = 3
+    import sympy
+    x, y = sympy.symbols('x  y')
+    I_expected = sympy.integrate(f(x, y), (x, a, b), (y, c, d))
+    # Test three cases: nx &lt; ny, nx = ny, nx &gt; ny
+    for nx, ny in (3, 5), (4, 4), (5, 3):
+        I_computed1 = midpoint_double1(f, a, b, c, d, nx, ny)
+        I_computed2 = midpoint_double2(f, a, b, c, d, nx, ny)
+        tol = 1E-14
+        #print I_expected, I_computed1, I_computed2
+        assert abs(I_computed1 - I_expected) &lt; tol
+        assert abs(I_computed2 - I_expected) &lt; tol
+</code></pre>
+<!-- end verbatim block -->
+If we now call <code>test_midpoint_double</code> and nothing happens, our implementations
+are correct. However, it is somewhat annoying to have a function that
+is completely silent when it works - are we sure all things are properly
+computed? During development it is therefore highly recommended to insert
+a print statement such that we can monitor the calculations and be
+convinced that the test function does what we want. Since a test
+function should have any print statement, we simply comment it out as
+we have done in the function listed above.
+
+<p>
+The trapezoidal method can be used as alternative for the midpoint
+method.  The derivation of a formula for the double integral and the
+implementations follow exactly the same ideas as we explained with the
+midpoint method, but there are more terms to write in the
+formulas. <a href="._p4c-solarized-Python016.html#sec:exer:trapezoidal:2D">Exercise 42: Derive the trapezoidal rule for a double integral</a> asks you to carry out
+the details. That exercise is a very good test on the understanding of the
+mathematical and programming ideas in the present section.
+
+<h2 id="___sec110">The midpoint rule for a triple integral </h2>
+
+<h3 id="___sec111">Theory </h3>
+
+<p>
+Once a method that works for a one-dimensional problem is generalized
+to two dimensions, it is usually quite straightforward to extend the
+method to three dimensions. This will now be demonstrated for
+integrals. We have the triple integral
+
+$$ \int_{a}^{b} \int_c^d \int_e^f g(x,y,z) dzdydx$$
+
+and want to approximate the integral by a midpoint rule.
+Following the ideas for the double integral, we
+split this integral into one-dimensional integrals:
+
+$$
+\begin{align*}
+p(x,y) &= \int_e^f g(x,y,z) dz\\ 
+q(x) &= \int_c^d p(x,y) dy\\ 
+\int_{a}^{b} \int_c^d \int_e^f g(x,y,z) dzdydx &= \int_a^b q(x)dx
+\end{align*}
+$$
+
+For each of these one-dimensional integrals we apply the midpoint rule:
+
+$$
+\begin{align*}
+p(x,y) = \int_e^f g(x,y,z) dz
+&\approx \sum_{k=0}^{n_z-1} g(x,y,z_k),
+\quad z_k=e + \frac{1}{2}h_z + kh_z\\ 
+q(x) = \int_c^d p(x,y) dy
+&\approx \sum_{j=0}^{n_y-1} p(x,y_j),
+\quad y_j=c + \frac{1}{2}h_y + jh_y\\ 
+\int_{a}^{b} \int_c^d \int_e^f g(x,y,z) dzdydx = \int_a^b q(x)dx
+&\approx \sum_{i=0}^{n_x-1} q(x_i),
+\quad x_i=a + \frac{1}{2}h_x + ih_x\thinspace .
+\end{align*}
+$$
+
+Starting with the latter formula and inserting the other two results in
+
+$$
+\begin{align}
+\int_{a}^{b} \int_c^d \int_e^f & g(x,y,z)\, dzdydx\approx\nonumber\\ 
+& h_xh_yh_z
+\sum_{i=0}^{n_x-1}\sum_{j=0}^{n_y-1}\sum_{k=0}^{n_z-1}
+g(a + \frac{1}{2}h_x + ih_x,
+c + \frac{1}{2}h_y + jh_y,
+e + \frac{1}{2}h_z + kh_z)\thinspace .
+\tag{24}
+\end{align}
+$$
+
+Note that we may apply the ideas under <em>Direct derivation</em> at
+the end of the section <a href="#sec:int:double:midpoint">The midpoint rule for a double integral</a> to arrive
+at <a href="#mjx-eqn-24">(24)</a> directly: divide
+the domain into \( n_x\times n_y\times n_z \) cells of volumes
+\( h_xhh_yh_z \); approximate \( g \)
+by a constant, evaluated at the midpoint \( (x_i,y_j,z_k) \),
+in each cell; and
+sum the cell integrals \( h_xh_yh_zg(x_i,y_j,z_k) \).
+
+<h3 id="___sec112">Implementation </h3>
+
+<p>
+We follow the ideas for the implementations of the midpoint rule
+for a double integral. The corresponding functions are shown below
+and found in the file
+<a href="https://github.com/hplgit/prog4comp/src/py/midpoint_triple.py" target="_self"><tt>midpoint_triple.py</tt></a>.
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>def midpoint_triple1(g, a, b, c, d, e, f, nx, ny, nz):
+    hx = (b - a)/float(nx)
+    hy = (d - c)/float(ny)
+    hz = (f - e)/float(nz)
+    I = 0
+    for i in range(nx):
+        for j in range(ny):
+            for k in range(nz):
+                xi = a + hx/2 + i*hx
+                yj = c + hy/2 + j*hy
+                zk = e + hz/2 + k*hz
+                I += hx*hy*hz*g(xi, yj, zk)
+    return I
+
+def midpoint(f, a, b, n):
+    h = float(b-a)/n
+    result = 0
+    for i in range(n):
+        result += f((a + h/2.0) + i*h)
+    result *= h
+    return result
+
+def midpoint_triple2(g, a, b, c, d, e, f, nx, ny, nz):
+    def p(x, y):
+        return midpoint(lambda z: g(x, y, z), e, f, nz)
+
+    def q(x):
+        return midpoint(lambda y: p(x, y), c, d, ny)
+
+    return midpoint(q, a, b, nx)
+
+def test_midpoint_triple():
+    &quot;&quot;&quot;Test that a linear function is integrated exactly.&quot;&quot;&quot;
+    def g(x, y, z):
+        return 2*x + y - 4*z
+
+    a = 0;  b = 2;  c = 2;  d = 3;  e = -1;  f = 2
+    import sympy
+    x, y, z = sympy.symbols('x y z')
+    I_expected = sympy.integrate(
+        g(x, y, z), (x, a, b), (y, c, d), (z, e, f))
+    for nx, ny, nz in (3, 5, 2), (4, 4, 4), (5, 3, 6):
+        I_computed1 = midpoint_triple1(
+            g, a, b, c, d, e, f, nx, ny, nz)
+        I_computed2 = midpoint_triple2(
+            g, a, b, c, d, e, f, nx, ny, nz)
+        tol = 1E-14
+        print I_expected, I_computed1, I_computed2
+        assert abs(I_computed1 - I_expected) &lt; tol
+        assert abs(I_computed2 - I_expected) &lt; tol
+
+if __name__ == '__main__':
+    test_midpoint_triple()
+</code></pre>
+<!-- end verbatim block -->
+
+<h2 id="sec:int:complex:domain">Monte Carlo integration for complex-shaped domains</h2>
+
+<p>
+Repeated use of one-dimensional integration rules to handle double
+and triple integrals constitute a working strategy only if the
+integration domain is a rectangle or box. For any other shape of
+domain, completely different methods must be used. A common approach
+for two- and three-dimensional domains is to divide the domain into
+many small triangles or tetrahedra and use numerical integration
+methods for each triangle or tetrahedron. The overall algorithm and
+implementation is too complicated to be addressed in this book.
+Instead, we shall employ an alternative, very simple and general method,
+called Monte Carlo integration. It can be implemented in half a page of
+code, but requires orders of magnitude more
+function evaluations in double integrals compared to the midpoint
+rule.
+
+<p>
+However, Monte Carlo integration is very much more computationally
+efficient than the midpoint rule when computing
+higher-dimensional integrals in more than three variables over
+hypercube domains.
+Our ideas for double and triple integrals can easily be generalized
+to handle an integral in \( m \) variables. A midpoint formula
+then involves \( m \) sums. With \( n \) cells
+in each coordinate direction, the formula requires \( n^m \) function
+evaluations. That is, the computational work explodes as an exponential
+function of the number of space dimensions.
+Monte Carlo integration, on the other hand, does not suffer from this
+explosion of computational work and is the preferred method for
+computing higher-dimensional integrals. So, it makes sense in a
+chapter on numerical integration to address Monte Carlo methods, both
+for handling complex domains and for handling integrals with many variables.
+
+<h3 id="___sec114">The Monte Carlo integration algorithm </h3>
+
+<p>
+The idea of Monte Carlo integration of \( \int_a^b f(dx)dx \) is to
+use the mean-value theorem from calculus, which states that the
+integral \( \int_a^b f(dx)dx \) equals the length of the integration
+domain, here \( b-a \), times the <em>average</em> value of \( f \), \( \bar f \), in
+\( [a,b] \). The average value can be computed by sampling \( f \) at
+a set of <em>random</em> points inside the domain and take the mean of
+the function values. In higher dimensions, an integral is estimated
+as the area/volume of the domain times the average value, and again
+one can evaluate the integrand at a set of random points in the domain
+and compute the mean value of those evaluations.
+
+<p>
+Let us introduce some quantities to help us make the
+specification of the integration algorithm more precise.
+Suppose we have some two-dimensional integral
+
+$$ \int_\Omega f(x,y)dxdx, $$
+
+where \( \Omega \) is a two-dimensional domain defined via a help function
+\( g(x,y) \):
+
+$$ \Omega = \{ (x,y)\,|\, g(x,y) \geq 0\} $$
+
+That is, points \( (x,y) \) for which \( g(x,y)\geq 0 \) lie inside \( \Omega \),
+and points for which \( g(x,y) < \Omega \) are outside \( \Omega \).  The
+boundary of the domain \( \partial\Omega \) is given by the implicit curve
+\( g(x,y)=0 \). Such formulations of geometries have been very common
+during the last couple of decades, and one refers to \( g \) as a
+<em>level-set function</em> and the boundary \( g=0 \) as the zero-level contour
+of the level-set function. For simple geometries one can easily construct
+\( g \) by hand, while in more complicated industrial applications one must
+resort to mathematical models for constructing \( g \).
+
+<p>
+Let \( A(\Omega) \) be the area of a domain \( \Omega \).
+We can estimate the integral by this Monte Carlo integration method:
+
+<ol>
+<li> embed the geometry \( \Omega \) in a rectangular area \( R \)</li>
+<li> draw a large number of <em>random</em> points \( (x,y) \) in \( R \)</li>
+<li> count the fraction \( q \) of points that are inside \( \Omega \)</li>
+<li> approximate \( A(\Omega)/A(R) \) by \( q \), i.e., set \( A(\Omega) = qA(R) \)</li>
+<li> evaluate the mean of \( f \), \( \bar f \), at the points inside \( \Omega \)</li>
+<li> estimate the integral as \( A(\Omega)\bar f \)</li>
+</ol>
+
+Note that \( A(R) \) is trivial to compute since \( R \) is a rectangle,
+while \( A(\Omega) \) is unknown. However, if we assume that the fraction
+of \( A(R) \) occupied by \( A(\Omega) \) is the same as the fraction of
+random points inside \( \Omega \), we get a simple estimate for \( A(\Omega) \).
+
+<p>
+To get an idea of the method, consider a circular domain
+\( \Omega \) embedded in a rectangle as shown below. A collection of
+random points is illustrated by black dots.
+
+<p>
+<center><p><img src="figs/integral_complex_domain.png" align="bottom" width=600></p></center>
+
+<h3 id="___sec115">Implementation </h3>
+
+<p>
+A Python function implementing \( \int_\Omega f(x,y)dxdy \) can be written
+like this:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>import numpy as np
+
+def MonteCarlo_double(f, g, x0, x1, y0, y1, n):
+    &quot;&quot;&quot;
+    Monte Carlo integration of f over a domain g&gt;=0, embedded
+    in a rectangle [x0,x1]x[y0,y1]. n^2 is the number of
+    random points.
+    &quot;&quot;&quot;
+    # Draw n**2 random points in the rectangle
+    x = np.random.uniform(x0, x1, n)
+    y = np.random.uniform(y0, y1, n)
+    # Compute sum of f values inside the integration domain
+    f_mean = 0
+    num_inside = 0   # number of x,y points inside domain (g&gt;=0)
+    for i in range(len(x)):
+        for j in range(len(y)):
+            if g(x[i], y[j]) &gt;= 0:
+                num_inside += 1
+                f_mean += f(x[i], y[j])
+    f_mean = f_mean/float(num_inside)
+    area = num_inside/float(n**2)*(x1 - x0)*(y1 - y0)
+    return area*f_mean
+</code></pre>
+<!-- end verbatim block -->
+(See the file
+<a href="https://github.com/hplgit/prog4comp/src/py/MC_double.py" target="_self"><tt>MC_double.py</tt></a>.)
+
+<h3 id="___sec116">Verification </h3>
+
+<p>
+A simple test case is to check the area of a rectangle \( [0,2]\times[2,4.5] \)
+embedded in a rectangle \( [0,3]\times [2,5] \). The right answer is 3,
+but Monte Carlo integration is, unfortunately, never exact so it is
+impossible to predict the output of the algorithm. All we know is that
+the estimated integral should approach 3 as the number of random points
+goes to infinity. Also, for a fixed number of points, we can
+run the algorithm several times and get different numbers that fluctuate
+around the exact value, since different sample points are used in different
+calls to the Monte Carlo integration algorithm.
+
+<p>
+The area of the rectangle can be computed by the integral \( \int_0^2\int_2^{4.5}
+dydx \), so in this case we identify
+\( f(x,y)=1 \), and the \( g \) function can be specified as (e.g.)
+1 if \( (x,y) \) is inside \( [0,2]\times[2,4.5] \) and \( -1 \) otherwise.
+Here is an example on how we can utilize the <code>MonteCarlo_double</code>
+function to compute the area for different number of samples:
+
+<p>
+<!-- begin verbatim block  pyshell-->
+<pre><code>&gt;&gt;&gt; from MC_double import MonteCarlo_double
+&gt;&gt;&gt; def g(x, y):
+...     return (1 if (0 &lt;= x &lt;= 2 and 3 &lt;= y &lt;= 4.5) else -1)
+...
+&gt;&gt;&gt; MonteCarlo_double(lambda x, y: 1, g, 0, 3, 2, 5, 100)
+2.9484
+&gt;&gt;&gt; MonteCarlo_double(lambda x, y: 1, g, 0, 3, 2, 5, 1000)
+2.947032
+&gt;&gt;&gt; MonteCarlo_double(lambda x, y: 1, g, 0, 3, 2, 5, 1000)
+3.0234600000000005
+&gt;&gt;&gt; MonteCarlo_double(lambda x, y: 1, g, 0, 3, 2, 5, 2000)
+2.9984580000000003
+&gt;&gt;&gt; MonteCarlo_double(lambda x, y: 1, g, 0, 3, 2, 5, 2000)
+3.1903469999999996
+&gt;&gt;&gt; MonteCarlo_double(lambda x, y: 1, g, 0, 3, 2, 5, 5000)
+2.986515
+</code></pre>
+<!-- end verbatim block -->
+We see that the values fluctuate around 3, a fact that supports
+a correct implementation, but in principle, bugs could be hidden
+behind the inaccurate answers.
+
+<h3 id="___sec117">Test function for function with random numbers </h3>
+
+<p>
+To make a test function, we need a unit test that has identical
+behavior each time we run the test. This seems difficult when random
+numbers are involved, because these numbers are different every time
+we run the algorithm, and each run hence produces a (slightly)
+different result.  A standard way to test algorithms involving random
+numbers is to <em>fix the seed</em> of the random number generator. Then the
+sequence of numbers is the same every time we run the algorithm.
+Assuming that the <code>MonteCarlo_double</code> function works, we fix the seed,
+observe a certain result, and take this result as the correct
+result. Provided the test function always uses this seed, we should
+get exactly this result every time the <code>MonteCarlo_double</code> function is
+called. Our test function can then be written as shown below.
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def test_MonteCarlo_double_rectangle_area():
+    &quot;&quot;&quot;Check the area of a rectangle.&quot;&quot;&quot;
+    def g(x, y):
+        return (1 if (0 &lt;= x &lt;= 2 and 3 &lt;= y &lt;= 4.5) else -1)
+
+    x0 = 0;  x1 = 3;  y0 = 2;  y1 = 5  # embedded rectangle
+    n = 1000
+    np.random.seed(8)      # must fix the seed!
+    I_expected = 3.121092  # computed with this seed
+    I_computed = MonteCarlo_double(
+        lambda x, y: 1, g, x0, x1, y0, y1, n)
+    assert abs(I_expected - I_computed) &lt; 1E-14
+</code></pre>
+<!-- end verbatim block -->
+(See the file <a href="https://github.com/hplgit/prog4comp/src/py/MC_double.py" target="_self"><tt>MC_double.py</tt></a>.)
+
+<h3 id="___sec118">Integral over a circle </h3>
+
+<p>
+The test above involves a trivial function \( f(x,y)=1 \). We should also
+test a non-constant \( f \) function and a more complicated domain. Let
+\( \Omega \) be a circle at the origin with radius 2, and let \( f=\sqrt{x^2
++ y^2} \).  This choice makes it possible to compute an exact result: in
+polar coordinates, \( \int_\Omega f(x,y)dxdy \) simplifies to
+\( 2\pi\int_0^2 r^2dr = 16\pi/3 \).  We must be prepared for quite crude
+approximations that fluctuate around this exact result. As in the test
+case above, we experience better results with larger number of points.
+When we have such evidence for a working implementation, we can turn
+the test into a proper test function. Here is an example:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>def test_MonteCarlo_double_circle_r():
+    &quot;&quot;&quot;Check the integral of r over a circle with radius 2.&quot;&quot;&quot;
+    def g(x, y):
+        xc, yc = 0, 0  # center
+        R = 2          # radius
+        return  R**2 - ((x-xc)**2 + (y-yc)**2)
+
+    # Exact: integral of r*r*dr over circle with radius R becomes
+    # 2*pi*1/3*R**3
+    import sympy
+    r = sympy.symbols('r')
+    I_exact = sympy.integrate(2*sympy.pi*r*r, (r, 0, 2))
+    print 'Exact integral:', I_exact.evalf()
+    x0 = -2;  x1 = 2;  y0 = -2;  y1 = 2
+    n = 1000
+    np.random.seed(6)
+    I_expected = 16.7970837117376384  # Computed with this seed
+    I_computed = MonteCarlo_double(
+        lambda x, y: np.sqrt(x**2 + y**2),
+        g, x0, x1, y0, y1, n)
+    print 'MC approximation %d samples): %.16f' % (n**2, I_computed)
+    assert abs(I_expected - I_computed) &lt; 1E-15
+</code></pre>
+<!-- end verbatim block -->
+(See the file <a href="https://github.com/hplgit/prog4comp/src/py/MC_double.py" target="_self"><tt>MC_double.py</tt></a>.)
+
+<p>
+<!-- Adaptive integration as a project: use a crude discretization, -->
+<!-- refine each part uniformly until eps diff, visualize the result -->
+<!-- Differentiation: mesh function concept -->
+<!-- Symbolic integration, conversion to py func (matlab?) -->
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._p4c-solarized-Python014.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._p4c-solarized-Python016.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

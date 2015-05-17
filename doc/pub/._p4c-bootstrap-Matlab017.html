@@ -1,0 +1,1589 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Programming for Computations - A Gentle Introduction to Numerical Simulations with MATLAB/Octave">
+<meta name="keywords" content="computer program,programming,language programming,language computer,MATLAB,Octave,Fortran,C,C++,Python,Maple,Mathematica,syntax,bug,debugging,script (and scripting),implement,print,program run,program execute,code,comment,instruction,program statement,variable,assignment,semi-colon (easy print),calculator,text editor,Idle,prompt,program typing,program run,program execute,ipython,m-file,function,function call,atan,function input parameter,function output parameter,function return,function take a parameter,library,library function,from,import,math,module,package,linspace,xlabel,ylabel,plot,interactive use (of Matlab),import,keyboard arrow up/down,operator Arithmetic,parentheses,variable type,variable name,float,integer,string,type conversion,reserved words,variable integer,variable float,variable string,variable assignment,default,single (precision),double (precision),printing formatted,printf formatting,default,array,array element,zeros,allocate,array index,indexing zero based,indexing one based,Matlab one-based indexing,array slice of,graph,hold (on/off),plot figure,title,legend,axis,hardcopy,format png,matrix mat,matrix vector product,transpose,linear algebra,matrix,vector,error message,debugging,debugger,try-exception,exception handling,program crash,program testing,program verification,program input,program output,input,raw input,list,tuple,symbolic computations,symbolic operations,symbolic simplifications,Symbolic Toolbox,WolframAlpha,Mathematica,Sage (symbolic package),Python documentation,garbage collection,variable delete,if,elif,else,colon,indent,boolean,boolean expression,True,False,boolean True,boolean False,pseudo code,operator Logical,function,function definition,def,return,argument,parameter input,parameter output,function nargin,function nargout,variable local,variable global,doc string,function handle,function local,function global,function nested,loop for,for loop,range,loop iteration,loop index,loop double,loop multiple,loop nested,linear algebra,while loop,loop while,loop infinite,loop iteration,loop index,array sorting,Leibniz pi,Euler pi,programming game,linear interpolation,least squares method,Fourier series,integral analytically,integral exact,integral approximately,integration points,code re-use,unit tests,complex domains,Monte Carlo integration,seed (random generators),scheme,finite difference method,forward difference approximation,Forward Euler scheme,logistic model,carrying capacity,SIR model,scalar ODE,ODE scalar,vector ODE,ODE vector,system of ODEs,Heun's method,Runge-Kutta, 2nd-order method,2nd-order Runge-Kutta method,RK2,PDE,heat equation,diffusion equation,MOL forward Euler,method of lines,MOL,mesh points,cell,method of lines,unstable solutions,instability,stability criterion,Poisson equation,Laplace equation,root finding,code robust,code try-except,code exception,Newton starting value,return None,sys.exit">
+
+<title>Programming for Computations - A Gentle Introduction to Numerical Simulations with MATLAB/Octave</title>
+
+<!-- Bootstrap style: bootswatch_journal -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/journal/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+/* Let pre tags for code blocks have the same color as the surroundings */
+pre { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u' Preface ', 0, None, '___sec0'),
+              (u' Why learn programming? ', 3, None, '___sec1'),
+              (u' Target audience and background knowledge ',
+               3,
+               None,
+               '___sec2'),
+              (u' Numerical methods ', 3, None, '___sec3'),
+              (u' The computer language: Matlab ', 3, None, '___sec4'),
+              (u' How this book is different ', 3, None, '___sec5'),
+              (u' Acknowledgments ', 3, None, '___sec6'),
+              (u' The first few steps ',
+               0,
+               u'1st:TheFirstFewSteps',
+               u'1st:TheFirstFewSteps'),
+              (u' What is a program? And what is programming? ',
+               1,
+               None,
+               '___sec8'),
+              (u' A Matlab program with variables ',
+               1,
+               u'1st:ex1',
+               u'1st:ex1'),
+              (u' The program ', 2, None, '___sec10'),
+              (u' Dissection of the program ', 2, None, '___sec11'),
+              (u' Why not just use a pocket calculator? ',
+               2,
+               None,
+               '___sec12'),
+              (u' The importance of using a text editor to write programs ',
+               2,
+               None,
+               '___sec13'),
+              (u' Write and run your first program ', 2, None, '___sec14'),
+              (u' Write and run a program in Matlab ', 3, None, '___sec15'),
+              (u' Write a program in a text editor and run it in Octave ',
+               3,
+               None,
+               '___sec16'),
+              (u'  A Matlab program with a library function ',
+               1,
+               u'1st:ex2',
+               u'1st:ex2'),
+              (u' A Matlab program with vectorization and plotting ',
+               1,
+               u'1st:ex3',
+               u'1st:ex3'),
+              (u' More basic concepts ', 1, None, '___sec19'),
+              (u' Using Matlab interactively ', 2, None, '___sec20'),
+              (u' Arithmetics, parentheses and round-off errors ',
+               2,
+               None,
+               '___sec21'),
+              (u' Variables ', 2, None, '___sec22'),
+              (u' Formatting text and numbers ', 2, None, '___sec23'),
+              (u' Arrays ', 2, None, '___sec24'),
+              (u' Plotting ', 2, None, '___sec25'),
+              (u' Error messages and warnings ', 2, None, '___sec26'),
+              (u' Input data ', 2, None, '___sec27'),
+              (u' Symbolic computations ', 2, None, '___sec28'),
+              (u' Concluding remarks ', 2, None, '___sec29'),
+              (u' Exercises ', 1, None, '___sec30'),
+              (u' Exercise 1: Error messages ',
+               2,
+               u'1st:exer:ErrorMessages',
+               u'1st:exer:ErrorMessages'),
+              (u' Exercise 2: Volume of a cube ',
+               2,
+               u'1st:exer:cubeVolume',
+               u'1st:exer:cubeVolume'),
+              (u' Exercise 3: Area and circumference of a circle ',
+               2,
+               u'1st:exer:areaCircle',
+               u'1st:exer:areaCircle'),
+              (u' Exercise 4: Volumes of three cubes ',
+               2,
+               u'1st:exer:volumes3cubes',
+               u'1st:exer:volumes3cubes'),
+              (u' Exercise 5: Average of integers ',
+               2,
+               u'1st:exer:averageOf5Integers',
+               u'1st:exer:averageOf5Integers'),
+              (u' Exercise 6: Interactive computing of volume and area ',
+               2,
+               u'1st:exer:cubeVolInteractively',
+               u'1st:exer:cubeVolInteractively'),
+              (u' Exercise 7: Update variable at command prompt ',
+               2,
+               u'1st:exer:updateVarInteractively',
+               u'1st:exer:updateVarInteractively'),
+              (u' Exercise 8: Formatted print to screen ',
+               2,
+               u'1st:exer:printfScreen',
+               u'1st:exer:printfScreen'),
+              (u' Exercise 9: Matlab documentation and random numbers ',
+               2,
+               u'1st:exer:PythonDocRandom',
+               u'1st:exer:PythonDocRandom'),
+              (u' Basic constructions ',
+               0,
+               u'2nd:BasicConstructins',
+               u'2nd:BasicConstructins'),
+              (u' If tests, colon and indentation ', 1, None, '___sec41'),
+              (u' Functions ', 1, u'sec:functions', u'sec:functions'),
+              (u' For loops ', 1, u'sec:for:loops', u'sec:for:loops'),
+              (u' While loops ', 1, u'sec:while:loops', u'sec:while:loops'),
+              (u' Reading from and writing to files ',
+               1,
+               u'sec:file:reading:writing',
+               u'sec:file:reading:writing'),
+              (u' Exercises ', 1, None, '___sec46'),
+              (u' Exercise 10: Introducing errors ',
+               2,
+               u'2nd:exer:IntroducingErrors',
+               u'2nd:exer:IntroducingErrors'),
+              (u' Exercise 11: Compare integers a and b ',
+               2,
+               u'2nd:exer:compInt',
+               u'2nd:exer:compInt'),
+              (u' Exercise 12: Functions for circumference and area of a circle ',
+               2,
+               u'2nd:exer:funcCircArea',
+               u'2nd:exer:funcCircArea'),
+              (u' Exercise 13: Function for area of a rectangle ',
+               2,
+               u'2nd:exer:funcAreaRectangle',
+               u'2nd:exer:funcAreaRectangle'),
+              (u' Exercise 14: Area of a polygon ',
+               2,
+               u'2nd:exer:area:polygon',
+               u'2nd:exer:area:polygon'),
+              (u' Exercise 15: Average of integers ',
+               2,
+               u'2nd:exer:avNInt',
+               u'2nd:exer:avNInt'),
+              (u' Exercise 16: While loop with errors ',
+               2,
+               u'2nd:exer:whileLoopErrors',
+               u'2nd:exer:whileLoopErrors'),
+              (u' Exercise 17: Area of rectangle versus circle ',
+               2,
+               u'2nd:exer:areaRectCircle',
+               u'2nd:exer:areaRectCircle'),
+              (u' Exercise 18: Find crossing points of two graphs ',
+               2,
+               u'2nd:exer:Cross2Graphs',
+               u'2nd:exer:Cross2Graphs'),
+              (u' Exercise 19: Sort array with numbers ',
+               2,
+               u'2nd:exer:sortNumbers',
+               u'2nd:exer:sortNumbers'),
+              (u' Exercise 20: Compute $\\pi$ ',
+               2,
+               u'2nd:exer:computingPi',
+               u'2nd:exer:computingPi'),
+              (u' Exercise 21: Compute combinations of sets ',
+               2,
+               u'2nd:exer:combinatorics1',
+               u'2nd:exer:combinatorics1'),
+              (u' Exercise 22: Frequency of random numbers ',
+               2,
+               u'2nd:exer:numberOccurrence',
+               u'2nd:exer:numberOccurrence'),
+              (u' Remarks ', 3, None, '___sec60'),
+              (u' Exercise 23: Game 21 ',
+               2,
+               u'2nd:exer:Game21',
+               u'2nd:exer:Game21'),
+              (u' Exercise 24: Linear interpolation ',
+               2,
+               u'2nd:exer:linearInterpol',
+               u'2nd:exer:linearInterpol'),
+              (u' Exercise 25: Test straight line requirement ',
+               2,
+               u'2nd:exer:testStraightLine',
+               u'2nd:exer:testStraightLine'),
+              (u' Exercise 26: Fit straight line to data ',
+               2,
+               u'2nd:exer:fitLine',
+               u'2nd:exer:fitLine'),
+              (u' Remarks ', 3, None, '___sec65'),
+              (u' Exercise 27: Fit sines to straight line ',
+               2,
+               u'2nd:exer:fitSines',
+               u'2nd:exer:fitSines'),
+              (u' Remarks ', 3, None, '___sec67'),
+              (u' Exercise 28: Count occurrences of a string in a string ',
+               2,
+               u'2nd:exer:countTextString',
+               u'2nd:exer:countTextString'),
+              (u' Computing integrals ',
+               0,
+               u'sec:integrals',
+               u'sec:integrals'),
+              (u' Basic ideas of numerical integration ',
+               1,
+               u'sec:integrals:basic',
+               u'sec:integrals:basic'),
+              (u' Computational example ', 3, None, '___sec71'),
+              (u' The composite trapezoidal rule ',
+               1,
+               u'sec:integrals:trap',
+               u'sec:integrals:trap'),
+              (u' The general formula ',
+               2,
+               u'sec:integrals:formula',
+               u'sec:integrals:formula'),
+              (u' Implementation ',
+               2,
+               u'sec:integrals:trap:impl',
+               u'sec:integrals:trap:impl'),
+              (u' Specific or general implementation? ', 3, None, '___sec75'),
+              (u' Implementation with functions ', 3, None, '___sec76'),
+              (u' Solving our specific problem in a session ',
+               3,
+               None,
+               '___sec77'),
+              (u' Solving our specific problem in a program ',
+               3,
+               None,
+               '___sec78'),
+              (u' Alternative flat special-purpose implementation ',
+               2,
+               None,
+               '___sec79'),
+              (u' The composite midpoint method ',
+               1,
+               u'sec:integrals:Midpoint',
+               u'sec:integrals:Midpoint'),
+              (u' The idea ', 3, None, '___sec81'),
+              (u' The general formula ', 2, None, '___sec82'),
+              (u' Implementation ',
+               2,
+               u'sec:midpoint:code',
+               u'sec:midpoint:code'),
+              (u' Comparing the trapezoidal and the midpoint methods ',
+               2,
+               None,
+               '___sec84'),
+              (u' Testing ', 1, None, '___sec85'),
+              (u' Problems with brief testing procedures ',
+               2,
+               None,
+               '___sec86'),
+              (u' Test procedures ',
+               2,
+               u'sec:integrals:testprocs',
+               u'sec:integrals:testprocs'),
+              (u' Hand-computed results ', 3, None, '___sec88'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec89'),
+              (u' Demonstrating correct convergence rates ',
+               3,
+               None,
+               '___sec90'),
+              (u' Constructing unit tests and writing test functions ',
+               2,
+               u'sec:integrals:test:functions',
+               u'sec:integrals:test:functions'),
+              (u' Hand-computed numerical results ', 3, None, '___sec92'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec93'),
+              (u' Demonstrating correct convergence rates ',
+               3,
+               None,
+               '___sec94'),
+              (u' Vectorization ', 1, None, '___sec95'),
+              (u' Vectorizing the midpoint rule ', 3, None, '___sec96'),
+              (u' Vectorizing the trapezoidal rule ', 3, None, '___sec97'),
+              (u' Measuring computational speed ', 1, None, '___sec98'),
+              (u' Double and triple integrals ',
+               1,
+               u'sec:int:double',
+               u'sec:int:double'),
+              (u' The midpoint rule for a double integral ',
+               2,
+               u'sec:int:double:midpoint',
+               u'sec:int:double:midpoint'),
+              (u' Derivation via one-dimensional integrals ',
+               3,
+               None,
+               '___sec101'),
+              (u' Direct derivation ', 3, None, '___sec102'),
+              (u' Programming a double sum ', 3, None, '___sec103'),
+              (u' Reusing code for one-dimensional integrals ',
+               3,
+               None,
+               '___sec104'),
+              (u' Verification via test functions ', 3, None, '___sec105'),
+              (u' The midpoint rule for a triple integral ',
+               2,
+               None,
+               '___sec106'),
+              (u' Theory ', 3, None, '___sec107'),
+              (u' Implementation ', 3, None, '___sec108'),
+              (u' Monte Carlo integration for complex-shaped domains ',
+               2,
+               u'sec:int:complex:domain',
+               u'sec:int:complex:domain'),
+              (u' The Monte Carlo integration algorithm ',
+               3,
+               None,
+               '___sec110'),
+              (u' Implementation ', 3, None, '___sec111'),
+              (u' Verification ', 3, None, '___sec112'),
+              (u' Test function for function with random numbers ',
+               3,
+               None,
+               '___sec113'),
+              (u' Integral over a circle ', 3, None, '___sec114'),
+              (u' Exercises ', 1, None, '___sec115'),
+              (u' Exercise 29: Hand calculations for the trapezoidal method ',
+               2,
+               u'sec:exer:trap:hand',
+               u'sec:exer:trap:hand'),
+              (u' Exercise 30: Hand calculations for the midpoint method ',
+               2,
+               u'sec:exer:midpt:hand',
+               u'sec:exer:midpt:hand'),
+              (u' Exercise 31: Compute a simple integral ',
+               2,
+               u'sec:exer:trap:mid:parabola',
+               u'sec:exer:trap:mid:parabola'),
+              (u' Exercise 32: Hand-calculations with sine integrals ',
+               2,
+               u'sec:exer:hand:sine',
+               u'sec:exer:hand:sine'),
+              (u' Exercise 33: Make test functions for the midpoint method ',
+               2,
+               u'sec:exer:test:midpoint',
+               u'sec:exer:test:midpoint'),
+              (u' Exercise 34: Explore round-off errors with large numbers ',
+               2,
+               u'sec:exer:test:roundoff',
+               u'sec:exer:test:roundoff'),
+              (u' Exercise 35: Write test functions for $\\int_0^4\\sqrt{x}dx$ ',
+               2,
+               u'sec:exer:test:convrates:sqrt',
+               u'sec:exer:test:convrates:sqrt'),
+              (u' Remarks ', 3, None, '___sec123'),
+              (u' Exercise 36: Rectangle methods ',
+               2,
+               u'sec:exer:rectangleMethod',
+               u'sec:exer:rectangleMethod'),
+              (u' Exercise 37: Adaptive integration ',
+               2,
+               u'sec:exer:adaptive:int',
+               u'sec:exer:adaptive:int'),
+              (u' Remarks ', 3, None, '___sec126'),
+              (u' Exercise 38: Integrating x raised to x ',
+               2,
+               u'sec:exer:integrate:x2x',
+               u'sec:exer:integrate:x2x'),
+              (u' Exercise 39: Integrate products of sine functions ',
+               2,
+               u'sec:exer:sine:products',
+               u'sec:exer:sine:products'),
+              (u' Exercise 40: Revisit fit of sines to a function ',
+               2,
+               u'sec:exer:revisitFitSines',
+               u'sec:exer:revisitFitSines'),
+              (u' Exercise 41: Derive the trapezoidal rule for a double integral ',
+               2,
+               u'sec:exer:trapezoidal:2D',
+               u'sec:exer:trapezoidal:2D'),
+              (u' Exercise 42: Compute the area of a triangle by Monte Carlo integration ',
+               2,
+               u'sec:exer:MC:ellipse',
+               u'sec:exer:MC:ellipse'),
+              (u' Solving ordinary differential equations ',
+               0,
+               u'5th:SolvODEs',
+               u'5th:SolvODEs'),
+              (u' Population growth ', 1, u'sec:de:pg', u'sec:de:pg'),
+              (u' Derivation of the model ',
+               2,
+               u'sec:de:pg:model',
+               u'sec:de:pg:model'),
+              (u' Numerical solution ',
+               2,
+               u'sec:de:pg:numerics',
+               u'sec:de:pg:numerics'),
+              (u' Programming the Forward Euler scheme; the special case ',
+               2,
+               u'sec:de:pg:prog1',
+               u'sec:de:pg:prog1'),
+              (u' Understanding the Forward Euler method ',
+               2,
+               u'sec:de:pg:geom',
+               u'sec:de:pg:geom'),
+              (u' Programming the Forward Euler scheme; the general case ',
+               2,
+               u'sec:de:FE:gen',
+               u'sec:de:FE:gen'),
+              (u' Making the population growth model more realistic ',
+               2,
+               None,
+               '___sec139'),
+              (u' Verification: exact linear solution of the discrete equations ',
+               2,
+               u'sec:de:growth:test:linear',
+               u'sec:de:growth:test:linear'),
+              (u' Spreading of diseases ', 1, None, '___sec141'),
+              (u' Spreading of a flu ', 2, u'sec:de:flu', u'sec:de:flu'),
+              (u' A Forward Euler method for the differential equation system ',
+               2,
+               u'sec:de:flu:FE',
+               u'sec:de:flu:FE'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:flu:prog:spec',
+               u'sec:de:flu:prog:spec'),
+              (u' Outbreak or not ', 2, None, '___sec145'),
+              (u' Abstract problem and notation ',
+               2,
+               u'sec:de:flu:generic',
+               u'sec:de:flu:generic'),
+              (u' Programming the numerical method; the general case ',
+               2,
+               u'sec:de:flu:prog:generic',
+               u'sec:de:flu:prog:generic'),
+              (u' Time-restricted immunity ', 2, None, '___sec148'),
+              (u' Incorporating vaccination ',
+               2,
+               u'sec:de:flu:vaccine',
+               u'sec:de:flu:vaccine'),
+              (u' Discontinuous coefficients: a vaccination campaign ',
+               2,
+               u'sec:de:flu:vaccine:discont',
+               u'sec:de:flu:vaccine:discont'),
+              (u' Oscillating one-dimensional systems ',
+               1,
+               u'sec:de:vib',
+               u'sec:de:vib'),
+              (u' Derivation of a simple model ', 2, None, '___sec152'),
+              (u' Numerical solution ', 2, None, '___sec153'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:vib:special',
+               u'sec:de:vib:special'),
+              (u' A magic fix of the numerical method ',
+               2,
+               None,
+               '___sec155'),
+              (u" The 2nd-order Runge-Kutta method (or Heun's method) ",
+               2,
+               u'sec:de:osc:Heun',
+               u'sec:de:osc:Heun'),
+              (u' Odespy: software for solving ODEs ',
+               2,
+               u'sec:de:osc:odespy',
+               u'sec:de:osc:odespy'),
+              (u' The 4th-order Runge-Kutta method ', 2, None, '___sec158'),
+              (u' The algorithm ', 3, None, '___sec159'),
+              (u' Application ', 3, None, '___sec160'),
+              (u' Implementation ', 3, None, '___sec161'),
+              (u' Derivation ', 3, None, '___sec162'),
+              (u' More effects: damping, nonlinearity, and external forces ',
+               2,
+               None,
+               '___sec163'),
+              (u' The Euler-Cromer scheme ', 3, None, '___sec164'),
+              (u' The 4-th order Runge-Kutta method ', 3, None, '___sec165'),
+              (u' Illustration of linear damping ', 2, None, '___sec166'),
+              (u' Illustration of linear damping with sinusoidal excitation ',
+               2,
+               None,
+               '___sec167'),
+              (u' Spring-mass system with sliding friction ',
+               2,
+               u'sec:de:vib:ode2:sliding:friction',
+               u'sec:de:vib:ode2:sliding:friction'),
+              (u' A finite difference method; undamped, linear case ',
+               2,
+               u'sec:de:vib:2nd',
+               u'sec:de:vib:2nd'),
+              (u' A finite difference method; linear damping ',
+               2,
+               u'sec:de:vib:2nd:damped1',
+               u'sec:de:vib:2nd:damped1'),
+              (u' Exercises ', 1, None, '___sec171'),
+              (u' Exercise 43: Geometric construction of the Forward Euler method ',
+               2,
+               u'sec:de:exer:geom',
+               u'sec:de:exer:geom'),
+              (u' Exercise 44: Make test functions for the Forward Euler method ',
+               2,
+               u'sec:de:exer:FE:test1',
+               u'sec:de:exer:FE:test1'),
+              (u" Exercise 45: Implement and evaluate Heun's method ",
+               2,
+               u'sec:de:exer:Heun:pg',
+               u'sec:de:exer:Heun:pg'),
+              (u' Exercise 46: Find an appropriate time step; logistic model ',
+               2,
+               u'sec:de:exer:logistic:dtopt',
+               u'sec:de:exer:logistic:dtopt'),
+              (u' Exercise 47: Find an appropriate time step; SIR model ',
+               2,
+               u'sec:de:exer:SIR:dtopt',
+               u'sec:de:exer:SIR:dtopt'),
+              (u' Exercise 48: Model an adaptive vaccination campaign ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 49: Make a SIRV model with time-limited effect of vaccination ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 50: Refactor a flat program ',
+               2,
+               u'sec:de:exer:vib:FE:func',
+               u'sec:de:exer:vib:FE:func'),
+              (u' Exercise 51: Simulate oscillations by a general ODE solver ',
+               2,
+               u'sec:de:exer:vib:ode_FE',
+               u'sec:de:exer:vib:ode_FE'),
+              (u' Exercise 52: Compute the energy in oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Exercise 53: Use a Backward Euler scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:BE',
+               u'sec:de:exer:pg:BE'),
+              (u' Exercise 54: Use a Crank-Nicolson scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:CN',
+               u'sec:de:exer:pg:CN'),
+              (u' Exercise 55: Understand finite differences via Taylor series ',
+               2,
+               u'sec:de:exer:fd:Taylor',
+               u'sec:de:exer:fd:Taylor'),
+              (u' Exercise 56: Use a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Remarks ', 3, None, '___sec186'),
+              (u" Exercise 57: Use Heun's method for the SIR model ",
+               2,
+               u'sec:de:exer:SIR:Heun',
+               u'sec:de:exer:SIR:Heun'),
+              (u' Exercise 58: Use Odespy to solve a simple ODE ',
+               2,
+               u'sec:de:exer:odespy:decay',
+               u'sec:de:exer:odespy:decay'),
+              (u' Exercise 59: Set up a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:osc:BE',
+               u'sec:de:exer:osc:BE'),
+              (u' Exercise 60: Set up a Forward Euler scheme for nonlinear and damped oscillations ',
+               2,
+               u'sec:de:exer:osc:FE:general',
+               u'sec:de:exer:osc:FE:general'),
+              (u' Exercise 61: Discretize an initial condition ',
+               2,
+               u'sec:de:exer:osc:2nd:V0ic',
+               u'sec:de:exer:osc:2nd:V0ic'),
+              (u' Solving partial differential equations ',
+               0,
+               u'6th:SolvPDEs',
+               u'6th:SolvPDEs'),
+              (u' Finite difference methods ',
+               1,
+               u'6th:SolvPDEs:MOLandFE',
+               u'6th:SolvPDEs:MOLandFE'),
+              (u' Reduction of a PDE to a system of ODEs ',
+               2,
+               u'sec:pde:diff1D:reduce',
+               u'sec:pde:diff1D:reduce'),
+              (u' Construction of a test problem with known discrete solution ',
+               2,
+               u'sec:pde:diff1D:testproblem',
+               u'sec:pde:diff1D:testproblem'),
+              (u' Implementation: Forward Euler method ',
+               2,
+               None,
+               '___sec196'),
+              (u' Application: heat conduction in a rod ',
+               2,
+               u'sec:pde:diff1D:rod',
+               u'sec:pde:diff1D:rod'),
+              (u' Vectorization ', 2, None, '___sec198'),
+              (u' Using Odespy to solve the system of ODEs ',
+               2,
+               None,
+               '___sec199'),
+              (u' Implicit methods ', 2, None, '___sec200'),
+              (u' Exercises ', 1, None, '___sec201'),
+              (u' Exercise 62: Simulate a diffusion equation by hand ',
+               2,
+               u'sec:pde:diff1D:exer:handFE',
+               u'sec:pde:diff1D:exer:handFE'),
+              (u' Exercise 63: Compute temperature variations in the ground ',
+               2,
+               u'sec:pde:diff1D:exer:groundtemp',
+               u'sec:pde:diff1D:exer:groundtemp'),
+              (u' Exercise 64: Compare implicit methods ',
+               2,
+               u'sec:pde:diff1D:exer:compare:implicit',
+               u'sec:pde:diff1D:exer:compare:implicit'),
+              (u' Exercise 65: Explore adaptive and implicit methods ',
+               2,
+               u'sec:pde:diff1D:exer:groundtemp:adapt',
+               u'sec:pde:diff1D:exer:groundtemp:adapt'),
+              (u' Exercise 66: Investigate the $\\theta$ rule ',
+               2,
+               u'sec:pde:diff1D:exer:CN',
+               u'sec:pde:diff1D:exer:CN'),
+              (u' Remarks ', 3, None, '___sec207'),
+              (u' Exercise 67: Compute the diffusion of a Gaussian peak ',
+               2,
+               u'sec:pde:diff1D:exer:Gaussian',
+               u'sec:pde:diff1D:exer:Gaussian'),
+              (u' Exercise 68: Vectorize a function for computing the area of a polygon ',
+               2,
+               u'2nd:exer:area:polygon2',
+               u'2nd:exer:area:polygon2'),
+              (u' Exercise 69: Explore symmetry ',
+               2,
+               u'sec:pde:diff1D:exer:Gaussian:symm',
+               u'sec:pde:diff1D:exer:Gaussian:symm'),
+              (u' Remarks ', 3, None, '___sec211'),
+              (u' Exercise 70: Compute solutions as $t\\rightarrow\\infty$ ',
+               2,
+               u'sec:pde:diff1D:exer:stationary',
+               u'sec:pde:diff1D:exer:stationary'),
+              (u' Remarks ', 3, None, '___sec213'),
+              (u' Exercise 71: Solve a two-point boundary value problem ',
+               2,
+               u'sec:pde:diff1D:exer:stationary2',
+               u'sec:pde:diff1D:exer:stationary2'),
+              (u' Solving nonlinear algebraic equations ',
+               0,
+               u'4th:NonlinAlgEq',
+               u'4th:NonlinAlgEq'),
+              (u' Brute force methods ',
+               1,
+               u'4th:bruteforce',
+               u'4th:bruteforce'),
+              (u' Brute force root finding ', 2, None, '___sec217'),
+              (u' Numerical algorithm ', 3, None, '___sec218'),
+              (u' Implementation ', 3, None, '___sec219'),
+              (u' Brute force optimization ', 2, None, '___sec220'),
+              (u' Numerical algorithm ', 3, None, '___sec221'),
+              (u' Implementation ', 3, None, '___sec222'),
+              (u' Model problem for algebraic equations ',
+               2,
+               None,
+               '___sec223'),
+              (u" Newton's method ",
+               1,
+               u'4th:NonlinAlgEq:Newt',
+               u'4th:NonlinAlgEq:Newt'),
+              (u" Deriving and implementing Newton's method ",
+               2,
+               None,
+               '___sec225'),
+              (u' Making a more efficient and robust implementation ',
+               2,
+               u'4th:Newton:robust',
+               u'4th:Newton:robust'),
+              (u' The secant method ',
+               1,
+               u'4th:NonlinAlgEq:Secant',
+               u'4th:NonlinAlgEq:Secant'),
+              (u' The bisection method ',
+               1,
+               u'4th:NonlinAlgEq:Bisect',
+               u'4th:NonlinAlgEq:Bisect'),
+              (u' Rate of convergence ',
+               1,
+               u'4th:NonlinAlgEq:RateConv',
+               u'4th:NonlinAlgEq:RateConv'),
+              (u' Exercises ', 1, None, '___sec230'),
+              (u" Exercise 72: Understand why Newton's method can fail ",
+               2,
+               u'4th:exer:Newton:failure',
+               u'4th:exer:Newton:failure'),
+              (u' Exercise 73: See if the secant method fails ',
+               2,
+               u'4th:exer:Secant:failure',
+               u'4th:exer:Secant:failure'),
+              (u' Exercise 74: Understand how the bisection method cannot fail ',
+               2,
+               u'4th:exer:Bisection:failure',
+               u'4th:exer:Bisection:failure'),
+              (u" Exercise 75: Combine the bisection method with Newton's method ",
+               2,
+               u'4th:exer:Bisection:Newton',
+               u'4th:exer:Bisection:Newton'),
+              (u" Exercise 76: Write a test function for Newton's method ",
+               2,
+               u'4th:exer:NewtonHand',
+               u'4th:exer:NewtonHand'),
+              (u' Exercise 77: Solve nonlinear equation for a vibrating beam ',
+               2,
+               u'4th:exer:beam:vib',
+               u'4th:exer:beam:vib'),
+              (u' References ', 0, None, '___sec237')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands.tex -->
+$$
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="p4c-bootstrap-Matlab.html">Programming for Computations - A Gentle Introduction to Numerical Simulations with MATLAB/Octave</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Matlab000.html#___sec0" style="font-size: 80%;">Preface</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Matlab001.html#1st:TheFirstFewSteps" style="font-size: 80%;">The first few steps</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Matlab007.html#2nd:BasicConstructins" style="font-size: 80%;">Basic constructions</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Matlab012.html#sec:integrals" style="font-size: 80%;">Computing integrals</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Matlab016.html#5th:SolvODEs" style="font-size: 80%;">Solving ordinary differential equations</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Matlab021.html#6th:SolvPDEs" style="font-size: 80%;">Solving partial differential equations</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Matlab023.html#4th:NonlinAlgEq" style="font-size: 80%;">Solving nonlinear algebraic equations</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Matlab029.html#___sec237" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0017"></a>
+<!-- !split -->
+
+<h1 id="sec:de:pg">Population growth</h1>
+
+<p>
+Our first taste of differential equations regards modeling of the
+growth of some population, such as a cell culture, an animal
+population, or a human population. The ideas even extend trivially to
+growth of money in a bank. Let \( N(t) \) be the number of individuals in
+the population at time \( t \). How can we predict how \( N(t) \) evolves in
+time? Below we shall derive a differential equation whose solution is
+\( N(t) \). The equation reads
+
+$$
+\begin{equation}
+N'(t) = rN(t),
+\tag{25}
+\end{equation}
+$$
+
+where \( r \) is a number. Note that although \( N \) is an integer in real life,
+we model \( N \) as a real-valued function. We are forced to do this because
+the solution of differential equations are (normally continuous) real-valued
+functions. An integer-valued \( N(t) \) in the model would lead to a lot of
+mathematical difficulties.
+
+<p>
+With a bit of guessing, you may realize that \( N(t)=Ce^{rt} \), where \( C \)
+is any number. To make this solution unique, we need to fix \( C \), done
+by prescribing the value of \( N \) at some time, usually \( t=0 \).
+Say \( N(0) \) is given as \( N_0 \). Then \( N(t)=N_0e^{rt} \).
+
+<p>
+In general, a differential equation model consists of a <em>differential
+equation</em>, such as <a href="#mjx-eqn-25">(25)</a> <em>and</em> an <em>initial condition</em>, such
+as \( N(0)=N_0 \). With a known initial condition, the differential equation
+can be solved for the unknown function and the solution is unique.
+
+<p>
+It is, of course, very seldom that we can find the solution of a
+differential equation as easy as in this example. Normally, one has to
+apply certain mathematical methods, but these can only handle some of
+the simplest differential equations. However, we can easily deal with
+almost any differential equation by applying numerical methods and a
+bit of programming.  This is exactly the topic of the present chapter.
+
+<h2 id="sec:de:pg:model">Derivation of the model</h2>
+
+<p>
+It can be instructive to show how an equation like <a href="#mjx-eqn-25">(25)</a>
+arises. Consider some population of (say) an animal specie and let
+\( N(t) \) be the number of individuals in a certain spatial region, e.g. an island.
+We are not concerned with the spatial distribution of the animals, just
+the number of them in some spatial area where there is no exchange
+of individuals with other spatial areas.
+During a time interval \( \Delta t \), some animals will
+die and some new will be born. The number of deaths and births are
+expected to be proportional to \( N \). For example, if there are twice
+as many individuals, we expect them to get twice as many newborns.
+In a time interval \( \Delta t \), the net growth of the population
+will be
+
+$$ N(t+\Delta t) - N(t) = \hat b N(t) - \hat d N(t),$$
+
+where \( \hat bN(t) \) are the number of newborns and \( \hat d N(t) \)
+the number of deaths. If we double \( \Delta t \), we expect the proportionality
+constants \( \hat b \) and \( \hat d \) to double too, so it makes sense to
+think of \( \hat b \) and \( \hat d \) as proportional to \( \Delta t \) and
+&quot;factor out&quot; \( \Delta t \). That is, we introduce \( b=\hat b/\Delta t \) and
+\( d=\hat d/\Delta t \) to be proportionality constants for newborns and
+deaths independent of \( \Delta t \). Also, we introduce \( r=b-d \), which
+is the net rate of growth of the population per time unit.
+Our model then becomes
+
+$$
+\begin{equation}
+ N(t+\Delta t) - N(t) = \Delta t\, r N(t)\thinspace .
+\tag{26}
+\end{equation}
+$$
+
+<p>
+Equation <a href="#mjx-eqn-26">(26)</a> is actually a computational model.
+Given \( N(t) \), we can advance the population size by
+
+$$ N(t+\Delta t) = N(t) + \Delta t\, rN(t)\thinspace .$$
+
+This is called a <em>difference equation</em>.
+If we know \( N(t) \) for some \( t \), e.g., \( N(0)=N_0 \), we can compute
+
+$$
+\begin{align*}
+N(\Delta t) &= N_0 + \Delta t\, rN_0,\\ 
+N(2\Delta t) &= N(\Delta t) + \Delta t\, rN(\Delta t),\\ 
+N(3\Delta t) &= N(2\Delta t) + \Delta t\, rN(2\Delta t),\\ 
+& \vdots\\ 
+N((k+1)\Delta t) &= N(k\Delta t) + \Delta t\, rN(k\Delta t),
+\end{align*}
+$$
+
+where \( k \) is some arbitrary integer. A computer program can easily
+compute \( N((k+1)\Delta t) \) for us with the aid of a little loop.
+
+<p>
+<div class="alert alert-block alert-danger alert-text-normal"><b>Warning.</b>
+Observe that the computational formula cannot be started unless we have an
+initial condition!
+
+<p>
+The solution of \( N'=rN \) is \( N=Ce^{rt} \)
+for any constant \( C \), and the initial condition is needed to fix \( C \) so
+the solution becomes unique. However,
+from a mathematical point of view, knowing \( N(t) \) at any point \( t \) is
+sufficient as initial condition. Numerically, we more literally need an
+initial condition: we need to know a starting value at the left
+end of the interval in order to get the computational formula going.
+</div>
+
+
+<p>
+In fact, we do not need a computer since we see a repetitive pattern
+when doing hand calculations, which leads us to a mathematical
+formula for \( N((k+1)\Delta t) \), :
+
+$$
+\begin{align*}
+N((k+1)\Delta t) &= N(k\Delta t) + \Delta t\, rN(k\Delta t) = N(k\Delta t)(1+\Delta t\, r)\\ 
+&= N((k-1)\Delta t)(1+\Delta t\,r)^2\\ 
+&\vdots\\ 
+&= N_0(1+\Delta t\,r)^{k+1}\thinspace .
+\end{align*}
+$$
+
+<p>
+Rather than using <a href="#mjx-eqn-26">(26)</a> as a computational model
+directly, there is a strong tradition for deriving a differential
+equation from this difference equation. The idea is to consider a
+very small time interval \( \Delta t \) and look at the instantaneous
+growth as this time interval is shrunk to an infinitesimal small
+size. In mathematical terms, it means that we let
+\( \Delta t\rightarrow 0 \). As <a href="#mjx-eqn-26">(26)</a>
+stands, letting \( \Delta t\rightarrow 0 \) will just produce an equation
+\( 0=0 \), so we have to divide by
+\( \Delta t \) and then take the limit:
+
+$$
+\lim_{\Delta t\rightarrow 0}\frac{N(t+\Delta t)-N(t)}{\Delta t} = rN(t)\thinspace .$$
+
+The term on the left-hand side is actually the definition of the
+derivative \( N'(t) \), so we have
+
+$$ N'(t) = rN(t),$$
+
+which is the corresponding differential equation.
+
+<p>
+There is nothing in our derivation that forces the parameter \( r \) to be
+constant - it can change with time due to, e.g., seasonal changes or
+more permanent environmental changes.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Detour: Exact mathematical solution.</b>
+If you have taken a course on mathematical solution methods for
+differential equations, you may want to recap how an equation like
+\( N'=rN \) or \( N'=r(t)N \) is solved. The <em>method of separation of
+variables</em> is the most convenient solution strategy in this case:
+
+$$
+\begin{align*}
+N' &=rN\\ 
+\frac{dN}{dt} &= rN\\ 
+\frac{dN}{N} &= rdt\\ 
+\int_{N_0}^N \frac{dN}{N} &= \int_0^t rdt\\ 
+\ln N - \ln N_0 &= \int_0^t r(t)dt\\ 
+N &= N_0\exp{(\int_0^t r(t)dt)},
+\end{align*}
+$$
+
+which for constant \( r \) results in \( N=N_0e^{rt} \).
+
+<p>
+As will be described later, \( r \) must in more realistic models depend on \( N \).
+The method of separation of variables then requires to integrate
+\( \int_{N_0}^{N} N/r(N)dN \), which quickly becomes non-trivial for many choices
+of \( r(N) \). The only generally applicable solution approach is therefore
+a numerical method.
+</div>
+
+
+<h2 id="sec:de:pg:numerics">Numerical solution</h2>
+
+<p>
+There is a jungle of numerical methods for problems like
+<a href="#mjx-eqn-26">(26)</a>, and in general any equation of the form
+\( u'=f(u,t) \), where \( u(t) \) is the unknown function in the problem,
+and \( f \) is some known formula of \( u \) and optionally
+\( t \). For example, \( f(u,t)=ru \) in <a href="#mjx-eqn-26">(26)</a>.
+We will first present a simple <em>finite difference method</em> solving
+\( u'=f(u,t) \). The idea is four-fold:
+
+<ol>
+<li> Introduce a mesh in time with \( N_t+1 \) points \( t_0,t_1,\ldots,t_{N_t} \).
+   We seek the unknown \( u \) at
+   the mesh points \( t_n \), and introduce \( u^n \) as the numerical approximation
+   to \( u(t_n) \), see Figure <a href="#sec:de:fig:mesh">20</a>.</li>
+<li> Assume that the differential equation is valid at the mesh points only.</li>
+<li> Approximate derivatives by finite differences, see Figure <a href="#sec:de:fig:FE">21</a>.</li>
+<li> Formulate a computational algorithm that can compute a new
+   value \( u^n \) based on previously computed values \( u^i \), \( i < n \).</li>
+</ol>
+
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 20:  Mesh in time with corresponding discrete values (unknowns). <div id="sec:de:fig:mesh"></div> </p></center>
+<p><img src="figs/fdm_u_ue.png" align="bottom" width=500></p>
+</center>
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 21:  Illustration of a forward difference approximation to the derivative. <div id="sec:de:fig:FE"></div> </p></center>
+<p><img src="figs/fd_forward.png" align="bottom" width=500></p>
+</center>
+
+<p>
+An example will illustrate the steps. First, we introduce the mesh, and
+very often the mesh is uniform, meaning that the spacing between
+points \( t_n \) and \( t_{n+1} \) is constant. This property implies that
+
+$$  t_n = n\Delta t,\quad n=0,1,\ldots, N_t\thinspace . $$
+
+Second, the differential equation is supposed to hold at the mesh
+points only. Note that this is an approximation, because the
+differential equation is originally valid at all real values of \( t \).
+We can express this property mathematically as
+
+$$ u'(t_n)=f(u^n,t_n),\quad  n=0,1,\ldots,N_t\thinspace .$$
+
+For example, with our model equation \( u'=ru \), we have the special case
+
+$$ u'(t_n)=ru^n,\quad  n=0,1,\ldots,N_t,$$
+
+or
+
+$$ u'(t_n)=r(t_n)u^n,\quad  n=0,1,\ldots,N_t,$$
+
+if \( r \) depends explicitly on \( t \).
+
+<p>
+Third, derivatives are to be replaced by finite differences. To this end,
+we need to know specific formulas for how derivatives can be
+approximated by finite differences. One simple possibility is to use
+the definition of the derivative from any calculus book,
+
+$$ u'(t) = \lim_{\Delta t\rightarrow 0}\frac{u(t+\Delta t)-u(t)}{\Delta t}\thinspace .$$
+
+At an arbitrary mesh point \( t_n \) this definition can be written as
+
+$$ u'(t_n) = \lim_{\Delta t\rightarrow 0}\frac{u^{n+1}-u^n}{\Delta t}\thinspace .$$
+
+Instead of going to the limit \( \Delta t\rightarrow 0 \) we can use
+a small \( \Delta t \), which yields a computable approximation to \( u'(t_n) \):
+
+$$ u'(t_n) \approx \frac{u^{n+1}-u^n}{\Delta t}\thinspace .$$
+
+This is known as a <em>forward difference</em> since we go forward in time
+(\( u^{n+1} \)) to collect information in \( u \) to estimate the derivative.
+Figure <a href="#sec:de:fig:FE">21</a> illustrates the idea. The accuracy of
+the forward difference is proportional to \( \Delta t \), usually written
+as \( \Oof{\Delta t} \).
+
+<p>
+We can now plug in the forward difference in our differential equation
+sampled at the arbitrary mesh point \( t_n \):
+
+$$
+\begin{equation}
+\frac{u^{n+1}-u^n}{\Delta t} = f(u^n,t_n),
+\tag{27}
+\end{equation}
+$$
+
+or with \( f(u,t)=ru \) in our special model problem for population growth,
+
+$$
+\begin{equation}
+\frac{u^{n+1}-u^n}{\Delta t} = ru^n\thinspace .
+\tag{28}
+\end{equation}
+$$
+
+If \( r \) depends on time, we insert \( r(t_n)=r^n \) for \( r \) in this latter
+equation.
+
+<p>
+The fourth step is to derive a computational algorithm. Looking at
+<a href="#mjx-eqn-27">(27)</a>, we realize that if \( u^n \) should be known, we can
+easily solve with respect to \( u^{n+1} \) to get a formula for \( u \) at
+the next time level \( t_{n+1} \):
+
+$$
+\begin{equation}
+u^{n+1}= u^n + \Delta t f(u^n,t_n)\thinspace .
+\tag{29}
+\end{equation}
+$$
+
+Provided we have a known starting value, \( u^0=U_0 \), we can use
+<a href="#mjx-eqn-29">(29)</a> to advance the solution by first computing \( u^1 \)
+from \( u^0 \), then \( u^2 \) from \( u^1 \), \( u^3 \) from \( u^2 \), and so forth.
+
+<p>
+Such an algorithm is called a <em>numerical scheme</em> for the differential
+equation and often written compactly as
+
+$$
+\begin{equation}
+u^{n+1}= u^n + \Delta t f(u^n,t_n),\quad u^0=U_0,\quad n=0,1,\ldots,N_t-1\thinspace .
+\tag{30}
+\end{equation}
+$$
+
+This scheme is known as the <em>Forward Euler scheme</em>, also called
+<em>Euler's method</em>.
+
+<p>
+In our special population growth model, we have
+
+$$
+\begin{equation}
+u^{n+1}= u^n + \Delta t\, ru^n,\quad u^0=U_0,\quad n=0,1,\ldots,N_t-1\thinspace .
+\tag{31}
+\end{equation}
+$$
+
+We may also write this model using the problem-specific symbol \( N \) instead
+of the generic \( u \) function:
+
+$$
+\begin{equation}
+N^{n+1}= N^n + \Delta t\, rN^n,\quad N^0=N_0,\quad n=0,1,\ldots,N_t-1\thinspace .
+\tag{32}
+\end{equation}
+$$
+
+<p>
+The observant reader will realize that <a href="#mjx-eqn-32">(32)</a> is
+nothing but the computational model <a href="#mjx-eqn-26">(26)</a>
+arising directly in the model derivation. The formula
+<a href="#mjx-eqn-32">(32)</a> arises, however, from a detour via
+a differential equation and a numerical method for the differential
+equation. This looks rather unnecessary! The reason why we bother
+to derive the differential equation model and then discretize it by
+a numerical method is simply that the discretization can be done
+in many ways, and we can create (much) more accurate and more
+computationally efficient methods than <a href="#mjx-eqn-32">(32)</a>
+or <a href="#mjx-eqn-30">(30)</a>. This can be useful in many problems!
+Nevertheless, the Forward Euler scheme is intuitive and widely
+applicable, at least when \( \Delta t \) is chosen to be small.
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>The numerical solution between the mesh points.</b>
+Our numerical method computes the unknown function \( u \)
+at discrete mesh points \( t_1,t_2,\ldots,t_{N_t} \). What if we
+want to evaluate the numerical solution between the mesh points?
+The most natural choice is to <em>assume</em> a linear variation between
+the mesh points, see Figure <a href="#sec:de:fig:ui">22</a>. This is compatible
+with the fact that when we plot
+the array \( u^0,u^1,\ldots \) versus \( t_0,t_1,\ldots \), a straight
+line is drawn between the discrete points.
+</div>
+
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 22:  The numerical solution at points can be extended by linear segments between the mesh points. <div id="sec:de:fig:ui"></div> </p></center>
+<p><img src="figs/fdm_u_uei.png" align="bottom" width=500></p>
+</center>
+
+<h2 id="sec:de:pg:prog1">Programming the Forward Euler scheme; the special case</h2>
+
+<p>
+Let us compute <a href="#mjx-eqn-32">(32)</a> in a program.
+The input variables are \( N_0 \), \( \Delta t \), \( r \), and \( N_t \).
+Note that we need to compute \( N_t+1 \) new values \( N^1,\ldots,N^{N_t+1} \).
+A total of \( N_t+2 \) values are needed in an array representation of \( N^n \),
+\( n=0,\ldots,N_t+1 \).
+
+<p>
+Our first version of this program is as simple as possible:
+
+<p>
+
+<!-- code=matlab (!bc mpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">N_0 = input(<span style="color: #BA2121">&#39;Give initial population size N_0: &#39;</span>);
+r   = input(<span style="color: #BA2121">&#39;Give net growth rate r: &#39;</span>);
+dt  = input(<span style="color: #BA2121">&#39;Give time step size: &#39;</span>);
+N_t = input(<span style="color: #BA2121">&#39;Give number of steps: &#39;</span>);
+t = <span style="color: #008000">linspace</span>(<span style="color: #666666">0</span>, (N_t<span style="color: #666666">+1</span>)<span style="color: #666666">*</span>dt, N_t<span style="color: #666666">+2</span>);
+N = <span style="color: #008000">zeros</span>(N_t<span style="color: #666666">+2</span>, <span style="color: #666666">1</span>);
+
+N(<span style="color: #666666">1</span>) = N_0;
+<span style="color: #008000; font-weight: bold">for</span> n = <span style="color: #666666">1</span>:N_t
+    N(n<span style="color: #666666">+1</span>) = N(n) <span style="color: #666666">+</span> r<span style="color: #666666">*</span>dt<span style="color: #666666">*</span>N(n);
+<span style="color: #008000; font-weight: bold">end</span>
+
+<span style="color: #008000; font-weight: bold">if</span> N_t <span style="color: #666666">&lt;</span> <span style="color: #666666">70</span>
+    numerical_sol = <span style="color: #BA2121">&#39;bo&#39;</span>;
+<span style="color: #008000; font-weight: bold">else</span>
+    numerical_sol = <span style="color: #BA2121">&#39;b-&#39;</span>;
+<span style="color: #008000; font-weight: bold">end</span>
+plot(t, N, numerical_sol, t, N_0<span style="color: #666666">*</span><span style="color: #008000">exp</span>(r<span style="color: #666666">.*</span>t), <span style="color: #BA2121">&#39;r-&#39;</span>);
+xlabel(<span style="color: #BA2121">&#39;t&#39;</span>); ylabel(<span style="color: #BA2121">&#39;N(t)&#39;</span>);
+legend(<span style="color: #BA2121">&#39;numerical&#39;</span>, <span style="color: #BA2121">&#39;exact&#39;</span>, <span style="color: #BA2121">&#39;location&#39;</span>, <span style="color: #BA2121">&#39;northwest&#39;</span>);
+filestem = strcat(<span style="color: #BA2121">&#39;growth1_&#39;</span>, num2str(N_t), <span style="color: #BA2121">&#39;steps&#39;</span>);
+print(filestem, <span style="color: #BA2121">&#39;-dpng&#39;</span>);  print(filestem, <span style="color: #BA2121">&#39;-dpdf&#39;</span>);
+</pre></div>
+<p>
+The complete code above resides in the file
+<a href="https://github.com/hplgit/prog4comp/src/m/growth1.m" target="_self"><tt>growth1.m</tt></a>.
+
+<p>
+Let us demonstrate a simulation where we start with 100 animals, a net
+growth rate of 10 percent (0.1) per time unit, which can be one month,
+and \( t\in [0,20] \) months. We may first try \( \Delta t \) of half a month
+(0.5), which implies \( N_t=40 \) (or to be absolutely precise, the last
+time point to be computed according to our set-up above is
+\( t_{N_t+1}=20.5 \)).  Figure <a href="#sec:de:fig:growth1:0.5">23</a> shows the
+results. The solid line is the exact solution, while the circles are
+the computed numerical solution. The discrepancy is clearly
+visible. What if we make \( \Delta t \) 10 times smaller? The result is
+displayed in Figure <a href="#sec:de:fig:growth1:0.05">24</a>, where we now use a
+solid line also for the numerical solution (otherwise, 400 circles
+would look very cluttered, so the program has a test on how to display
+the numerical solution, either as circles or a solid line).  We can
+hardly distinguish the exact and the numerical solution.  The
+computing time is also a fraction of a second on a laptop, so it
+appears that the Forward Euler method is sufficiently accurate for
+practical purposes. (This is not always true for large, complicated
+simulation models in engineering, so more sophisticated methods may be
+needed.)
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 23:  Evolution of a population computed with time step 0.5 month. <div id="sec:de:fig:growth1:0.5"></div> </p></center>
+<p><img src="figs/growth1_40steps.png" align="bottom" width=500></p>
+</center>
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 24:  Evolution of a population computed with time step 0.05 month. <div id="sec:de:fig:growth1:0.05"></div> </p></center>
+<p><img src="figs/growth1_400steps.png" align="bottom" width=500></p>
+</center>
+
+<p>
+It is also of interest to see what happens if we increase \( \Delta t \)
+to 2 months. The results in Figure <a href="#sec:de:fig:growth1:2">25</a> indicate
+that this is an inaccurate computation.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 25:  Evolution of a population computed with time step 2 months. <div id="sec:de:fig:growth1:2"></div> </p></center>
+<p><img src="figs/growth1_10steps.png" align="bottom" width=500></p>
+</center>
+
+<h2 id="sec:de:pg:geom">Understanding the Forward Euler method</h2>
+
+<p>
+The good thing about the Forward Euler method is that it gives
+an understanding of what a differential equation is and a
+geometrical picture of how to construct the solution. The first
+idea is that we have already computed the solution up to some
+time point \( t_n \). The second idea is that we want to progress
+the solution from \( t_n \) to \( t_{n+1} \) as a straight line.
+
+<p>
+We know that the line must go through the solution at \( t_n \), i.e., the
+point \( (t_n, u^n) \). The differential equation tells us the slope of
+the line: \( u'(t_n) = f(u^n,t_n)=ru^n \). That is, the differential
+equation gives a direct formula for the further <em>direction</em> of the
+solution curve. We can say that the differential equation expresses
+how the system (\( u \)) undergoes changes at a point.
+
+<p>
+There is a general formula for a straight line \( y=ax+b \) with slope \( a \)
+that goes through the point \( (x_0,y_0) \): \( y=a(x-x_0)+y_0 \). Using this
+formula adapted to the present case, and evaluating the formula for
+\( t_{n+1} \), results in
+
+$$ u^{n+1} = ru^n(t_{n+1} - t_n) + u^n = u^n + \Delta t\,ru^n,$$
+
+which is nothing but the Forward Euler formula. You are now encouraged
+to do <a href="._p4c-bootstrap-Matlab020.html#sec:de:exer:geom">Exercise 43: Geometric construction of the Forward Euler method</a> to become more familiar with
+the geometric interpretation of the Forward Euler method.
+
+<h2 id="sec:de:FE:gen">Programming the Forward Euler scheme; the general case</h2>
+
+<p>
+Our previous program was just a flat main program tailored to a
+special differential equation.  When programming mathematics, it is
+always good to consider a (large) class of problems and making a
+Matlab function to solve any problem that fits into the class. More
+specifically, we will make software for the class of differential
+equation problems of the form
+
+$$ u'(t)=f(u,t),\quad u=U_0,\ t\in [0,T],$$
+
+for some given function \( f \), and numbers \( U_0 \) and \( T \). The Matlab function
+calculating the solution must take \( f \), \( U_0 \), \( \Delta t \), and
+\( T \) as input, find the corresponding \( N_t \), compute the solution, and return and
+array with \( u^0,u^1,\ldots,u^{N_t} \) and an array with
+\( t_0,t_1,\ldots,t_{N_t} \).  The Forward Euler scheme reads
+
+$$ u^{n+1}=u^n + \Delta t f(u^n,t_n),\quad n=0,\ldots,N_t-1\thinspace .$$
+
+The corresponding program <code>ode_FE.m</code> may now take the form
+
+<p>
+
+<!-- code=matlab (!bc mcod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">function</span><span style="color: #bbbbbb"> </span>[sol, time] =<span style="color: #bbbbbb"> </span><span style="color: #0000FF">ode_FE</span>(f, U_0, dt, T)<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span>N_t = <span style="color: #008000">floor</span>(T<span style="color: #666666">/</span>dt);
+    u = <span style="color: #008000">zeros</span>(N_t<span style="color: #666666">+1</span>, <span style="color: #666666">1</span>);
+    t = <span style="color: #008000">linspace</span>(<span style="color: #666666">0</span>, N_t<span style="color: #666666">*</span>dt, <span style="color: #008000">length</span>(u));
+    u(<span style="color: #666666">1</span>) = U_0;
+    <span style="color: #008000; font-weight: bold">for</span> n = <span style="color: #666666">1</span>:N_t
+        u(n<span style="color: #666666">+1</span>) = u(n) <span style="color: #666666">+</span> dt<span style="color: #666666">*</span>f(u(n), t(n));
+    <span style="color: #008000; font-weight: bold">end</span>
+    sol  = u;
+    time = t;
+<span style="color: #008000; font-weight: bold">end</span>
+</pre></div>
+<p>
+Note that the function <code>ode_FE</code> is general, i.e. it can
+solve any differential equation \( u'=f(u,t) \).
+
+<p>
+A proper demo function for this solver might be written as
+(file <a href="https://github.com/hplgit/prog4comp/src/m/demo_population_growth.m" target="_self"><tt>demo_population_growth.m</tt></a>):
+
+<p>
+
+<!-- code=matlab (!bc mpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">function</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">demo_population_growth</span>()<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #408080; font-style: italic">% Test case: u&#39; = r*u, u(0)=100</span>
+<span style="color: #008000; font-weight: bold">    function</span><span style="color: #bbbbbb"> </span>r =<span style="color: #bbbbbb"> </span><span style="color: #0000FF">f</span>(u, t)<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">        </span>r = <span style="color: #666666">0.1*</span>u;
+    <span style="color: #008000; font-weight: bold">end</span>
+    [u, t] = ode_FE(@f, <span style="color: #666666">100</span>, <span style="color: #666666">0.5</span>, <span style="color: #666666">20</span>);
+    plot(t, u, t, <span style="color: #666666">100*</span><span style="color: #008000">exp</span>(<span style="color: #666666">0.1*</span>t));
+<span style="color: #008000; font-weight: bold">end</span>
+</pre></div>
+<p>
+The solution should be identical to what the <code>growth1.py</code> program
+produces with the same parameter settings (\( r=0.1 \), \( N_0=100 \)).
+This feature can easily be tested by inserting print statement, but
+a much better, automated verification is suggested in
+<a href="._p4c-bootstrap-Matlab020.html#sec:de:exer:geom">Exercise 43: Geometric construction of the Forward Euler method</a>. You are strongly encouraged to take
+a &quot;break&quot; and do that exercise now.
+
+<p>
+<div class="alert alert-block alert-danger alert-text-normal"><b>Remark on the use of <code>u</code> as variable.</b>
+In the <code>ode_FE</code> program, the variable <code>u</code> is used in different
+contexts. Inside the <code>ode_FE</code> function, <code>u</code> is an array, but in
+the <code>f(u,t)</code> function, as exemplified in the <code>demo_population_growth</code>
+function, the argument <code>u</code> is
+a number. Typically, we call <code>f</code> (in <code>ode_FE</code>) with the <code>u</code> argument as
+one element of the array <code>u</code> in the <code>ode_FE</code> function:
+<code>u(n)</code>.
+</div>
+
+
+<h2 id="___sec139">Making the population growth model more realistic </h2>
+
+<p>
+Exponential growth of a population according the model \( N'=rN \), with
+exponential solution \( N=N_0e^{rt} \), is unrealistic in the long run
+because the resources needed to feed the population are finite. At
+some point there will not be enough resources and the growth will
+decline. A common model taking this effect into account assumes that
+\( r \) depends on the size of the population, \( N \):
+
+$$ N(t+\Delta t) - N(t) = r(N(t))N(t)\thinspace .$$
+
+The corresponding differential equation becomes
+
+$$ N' = r(N)N\thinspace .$$
+
+The reader is strongly encouraged to repeat the steps in the
+derivation of the Forward Euler scheme and establish that we get
+
+$$ N^{n+1} = N^n + \Delta t\, r(N^n)N^n,$$
+
+which computes as easy as for a constant \( r \), since \( r(N^n) \) is
+known when computing \( N^{n+1} \). Alternatively, one can use the Forward Euler formula for
+the general problem \( u'=f(u,t) \) and use \( f(u,t)=r(u)u \) and replace \( u \) by \( N \).
+
+<p>
+The simplest choice of \( r(N) \) is a linear function, starting with some
+growth value \( \bar r \) and declining until the population has reached
+its maximum, \( M \), according to the available resources:
+
+$$ r(N) = \bar r(1 - N/M)\thinspace .$$
+
+In the beginning, \( N\ll M \) and we will have exponential growth \( e^{\bar rt} \),
+but as \( N \) increases, \( r(N) \) decreases, and when \( N \) reaches \( M \),
+\( r(N)=0 \) so there is now more growth and the population remains at
+\( N(t)=M \). This linear choice of \( r(N) \) gives rise to a model that is called
+the <em>logistic model</em>. The parameter \( M \) is known as the <em>carrying capacity</em>
+of the population.
+
+<p>
+Let us run the logistic model with aid of the <code>ode_FE</code> function in
+the <code>ode_FE</code> module. We choose \( N(0)=100 \), \( \Delta t=0.5 \) month,
+\( T=60 \) months, \( r=0.1 \), and \( M=500 \). The complete program, called
+<a href="https://github.com/hplgit/prog4comp/src/m/logistic.m" target="_self"><tt>logistic.m</tt></a>,
+is basically a call to <code>ode_FE</code>:
+
+<p>
+
+<!-- code=matlab (!bc mpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">f = @(u, t) <span style="color: #666666">0.1*</span>(<span style="color: #666666">1</span> <span style="color: #666666">-</span> u<span style="color: #666666">/500</span>)<span style="color: #666666">*</span>u;
+U_0 = <span style="color: #666666">100</span>;  
+
+dt = <span style="color: #666666">0.5</span>;  T = <span style="color: #666666">60</span>;
+[u, t] = ode_FE(f, U_0, dt, T);
+plot(t, u, <span style="color: #BA2121">&#39;b-&#39;</span>);
+xlabel(<span style="color: #BA2121">&#39;t&#39;</span>);  ylabel(<span style="color: #BA2121">&#39;N(t)&#39;</span>);
+filestem = strcat(<span style="color: #BA2121">&#39;tmp_&#39;</span>,num2str(dt));
+<span style="color: #408080; font-style: italic">% Note: this print statement gets a problem with the decimal point</span>
+<span style="color: #408080; font-style: italic">%print(filestem,&#39;-dpng&#39;);  print(filestem,&#39;-dpdf&#39;);  </span>
+<span style="color: #408080; font-style: italic">% so we rather do it like this:</span>
+filename = strcat(filestem, <span style="color: #BA2121">&#39;.png&#39;</span>); print(filename);
+filename = strcat(filestem, <span style="color: #BA2121">&#39;.pdf&#39;</span>); print(filename);
+
+dt = <span style="color: #666666">20</span>;  T = <span style="color: #666666">100</span>;
+[u, t] = ode_FE(f, U_0, dt, T);
+plot(t, u, <span style="color: #BA2121">&#39;b-&#39;</span>);
+xlabel(<span style="color: #BA2121">&#39;t&#39;</span>);  ylabel(<span style="color: #BA2121">&#39;N(t)&#39;</span>);
+filestem = strcat(<span style="color: #BA2121">&#39;tmp_&#39;</span>,num2str(dt));
+print(filestem, <span style="color: #BA2121">&#39;-dpng&#39;</span>);  print(filestem, <span style="color: #BA2121">&#39;-dpdf&#39;</span>);
+</pre></div>
+<p>
+Figure <a href="#sec:de:fig:growth2:logistic">26</a>
+shows the resulting curve. We see that the population stabilizes around
+\( M=500 \) individuals. A corresponding exponential growth would reach
+\( N_0e^{rt}=100e^{0.1\cdot 60}\approx 40,300 \) individuals!
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 26:  Logistic growth of a population. <div id="sec:de:fig:growth2:logistic"></div> </p></center>
+<p><img src="figs/logistic.png" align="bottom" width=500></p>
+</center>
+
+<p>
+It is always interesting to see what happens with large \( \Delta t \) values.
+We may set \( \Delta t=20 \) and \( T=100 \). Now the solution, seen in
+Figure <a href="#sec:de:fig:growth2:logistic:coarse">27</a>, oscillates and is hence
+qualitatively wrong, because one can prove that the exact solution
+of the differential equation is monotone.
+(However, there is a corresponding difference
+equation model, \( N_{n+1}=rN_n(1-N_n/M) \), which allows oscillatory solutions
+and those are observed in animal populations. The problem with large
+\( \Delta t \) is that it just leads to wrong mathematics - and two wrongs
+don't make a right in terms of a relevant model.)
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 27:  Logistic growth with large time step. <div id="sec:de:fig:growth2:logistic:coarse"></div> </p></center>
+<p><img src="figs/logistic_coarse.png" align="bottom" width=500></p>
+</center>
+
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Remark on the world population.</b>
+The <a href="http://en.wikipedia.org/wiki/Population_growth" target="_self">number of people on the planet</a>
+follows the model \( N'=r(t)N \), where
+the net reproduction \( r(t) \) varies with time and has decreased since
+its top in 1990. The current world value of \( r \) is 1.2%, and it is
+difficult to <a href="http://users.rcn.com/jkimball.ma.ultranet/BiologyPages/P/Populations.html" target="_self">predict future values</a>. At
+the moment, the predictions of the world population
+point to a growth to 9.6 billion before
+declining.
+
+<p>
+This example shows the limitation of a differential equation model: we
+need to know all input parameters, including \( r(t) \), in order to
+predict the future.  It is seldom the case that we know all input
+parameters. Sometimes knowledge of the solution from measurements can
+help estimate missing input parameters.
+</div>
+
+
+<h2 id="sec:de:growth:test:linear">Verification: exact linear solution of the discrete equations</h2>
+
+<p>
+How can we verify that the programming of an ODE model is correct?
+The best method is to find a problem where there are no unknown
+numerical approximation errors, because we can then compare the
+exact solution of the problem with the result produced by our
+implementation and expect the difference to be within a very small
+tolerance. We shall base a unit test on this idea and implement a
+corresponding <em>test function</em> (see the section <a href="._p4c-bootstrap-Matlab014.html#sec:integrals:test:functions">Constructing unit tests and writing test functions</a>)
+for automatic verification of our implementation.
+
+<p>
+It appears that most numerical methods for ODEs will exactly
+reproduce a solution \( u \) that is linear in \( t \).
+We may therefore set \( u=at+b \) and choose any \( f \) whose derivative
+is \( a \). The choice \( f(u,t)=a \) is very simple, but we may add
+anything that is zero, e.g.,
+
+$$ f(u,t) = a + (u - (at+b))^m,$$
+
+This is a valid \( f(u,t) \) for any \( a \), \( b \), and \( m \).
+The corresponding
+ODE looks highly non-trivial, however:
+
+$$ u' = a + (u - (at+b))^m$$
+
+<p>
+Using the general <code>ode_FE</code> function in
+<a href="https://github.com/hplgit/prog4comp/src/m/ode_FE.m" target="_self"><tt>ode_FE.m</tt></a>,
+we may
+write a proper test function as follows
+(in file
+<a href="https://github.com/hplgit/prog4comp/src/m/test_ode_FE_exact_linear.m" target="_self"><tt>test_ode_FE_exact_linear.m</tt></a>):
+
+<p>
+
+<!-- code=matlab (!bc mpro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">function</span><span style="color: #bbbbbb"> </span><span style="color: #0000FF">test_ode_FE_exact_linear</span>()<span style="color: #bbbbbb"></span>
+<span style="color: #bbbbbb">    </span><span style="color: #408080; font-style: italic">% Test if a linear function u(t) = a*x + b is exactly reproduced.</span>
+
+    a = <span style="color: #666666">4</span>;  b = <span style="color: #666666">-1</span>;  m = <span style="color: #666666">6</span>;
+
+    exact_solution = @(t) (a<span style="color: #666666">*</span>t <span style="color: #666666">+</span> b)<span style="color: #666666">&#39;</span>;
+    f = @(u, t) a <span style="color: #666666">+</span> (u <span style="color: #666666">-</span> exact_solution(t))^m;
+
+    dt = <span style="color: #666666">0.5</span>;       T = <span style="color: #666666">20.0</span>;
+
+    [u, t] = ode_FE(f, exact_solution(<span style="color: #666666">0</span>), dt, T);
+    diff = max(<span style="color: #008000">abs</span>(exact_solution(t) <span style="color: #666666">-</span> u));
+    tol = <span style="color: #666666">1E-15</span>;           <span style="color: #408080; font-style: italic">% Tolerance for float comparison</span>
+    assert(diff <span style="color: #666666">&lt;</span> tol);
+<span style="color: #008000; font-weight: bold">end</span>
+</pre></div>
+<p>
+Observe that we cannot compare <code>diff</code> to zero, which is what we mathematically
+expect, because <code>diff</code> is a floating-point variable that most likely
+contains small round-off errors. Therefore, we must compare <code>diff</code> to
+zero with a tolerance, here \( 10^{-15} \).
+
+<p>
+You are encouraged to do <a href="._p4c-bootstrap-Matlab020.html#sec:de:exer:FE:test1">Exercise 44: Make test functions for the Forward Euler method</a> where the goal
+is to make a test function for a verification based on comparison with
+hand-calculated results for a few time steps.
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._p4c-bootstrap-Matlab016.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._p4c-bootstrap-Matlab018.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

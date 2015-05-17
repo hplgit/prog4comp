@@ -1,0 +1,1303 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Programming for Computations - A Gentle Introduction to Numerical Simulations with Python">
+<meta name="keywords" content="computer program,programming,language programming,language computer,MATLAB,Octave,Fortran,C,C++,Python,Maple,Mathematica,syntax,bug,debugging,script (and scripting),implement,print,program run,program execute,code,comment,instruction,program statement,variable,assignment,calculator,text editor,Idle,prompt,program typing,program run,program execute,ipython,function,function call,atan,function input parameter,function output parameter,function return,function take a parameter,library,library function,from,import,math,module,package,linspace,xlabel,ylabel,plot,interactive use (of Python),import,keyboard arrow up/down,Python shell,operator Arithmetic,parentheses,variable type,variable name,object,float,int,str,type conversion,reserved words,variable int,variable float,variable str,variable assignment,type conversion automatic,integer division,round-off error,printing formatted,printf formatting,default,array,array element,zeros,allocate,array index,indexing zero based,indexing one based,Python zero-based indexing,array slice of,graph,hold (on/off),plot figure,title,legend,axis,hardcopy,format png,matrix mat,matrix vector product,transpose,linear algebra,matrix,vector,error message,debugging,debugger,try-exception,exception handling,program crash,program testing,program verification,program input,program output,input,raw input,list,tuple,symbolic computations,symbolic operations,symbolic simplifications,SymPy,library SymPy,WolframAlpha,Mathematica,Sage (symbolic package),Python documentation,garbage collection,variable delete,if,elif,else,colon,indent,boolean,boolean expression,True,False,boolean True,boolean False,pseudo code,operator Logical,function,function definition,def,return,argument,parameter input,parameter output,variable local,variable global,argument keyword,argument named,argument ordinary,argument positional,doc string,function handle,function local,function global,function nested,lambda function,loop for,for loop,range,loop iteration,loop index,loop double,loop multiple,loop nested,linear algebra,while loop,loop while,loop infinite,loop iteration,loop index,list,list append,list convert to array,list delete,list create,tuple,list comprehension,array sorting,Leibniz pi,Euler pi,programming game,linear interpolation,least squares method,Fourier series,integral analytically,integral exact,integral approximately,integration points,code re-use,unit tests,complex domains,Monte Carlo integration,seed (random generators),scheme,finite difference method,forward difference approximation,Forward Euler scheme,logistic model,carrying capacity,SIR model,scalar ODE,ODE scalar,vector ODE,ODE vector,system of ODEs,Heun's method,Runge-Kutta, 2nd-order method,2nd-order Runge-Kutta method,RK2,PDE,heat equation,diffusion equation,MOL forward Euler,method of lines,MOL,mesh points,cell,method of lines,unstable solutions,instability,stability criterion,Poisson equation,Laplace equation,root finding,code robust,code try-except,code exception,Newton starting value,return None,sys.exit,Idle,Emacs,Vim,Gedit,TextWrangler,Notepad++">
+
+<title>Programming for Computations - A Gentle Introduction to Numerical Simulations with Python</title>
+
+<!-- Bootstrap style: bootswatch_journal -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/journal/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+/* Let pre tags for code blocks have the same color as the surroundings */
+pre { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u' Preface ', 0, None, '___sec0'),
+              (u' Why learn programming? ', 3, None, '___sec1'),
+              (u' Target audience and background knowledge ',
+               3,
+               None,
+               '___sec2'),
+              (u' Numerical methods ', 3, None, '___sec3'),
+              (u' The computer language: Python ', 3, None, '___sec4'),
+              (u' How this book is different ', 3, None, '___sec5'),
+              (u' Acknowledgments ', 3, None, '___sec6'),
+              (u' The first few steps ',
+               0,
+               u'1st:TheFirstFewSteps',
+               u'1st:TheFirstFewSteps'),
+              (u' What is a program? And what is programming? ',
+               1,
+               None,
+               '___sec8'),
+              (u' A Python program with variables ',
+               1,
+               u'1st:ex1',
+               u'1st:ex1'),
+              (u' The program ', 2, None, '___sec10'),
+              (u' Dissection of the program ', 2, None, '___sec11'),
+              (u' Why not just use a pocket calculator? ',
+               2,
+               None,
+               '___sec12'),
+              (u' The importance of using a text editor to write programs ',
+               2,
+               None,
+               '___sec13'),
+              (u' Installation of Python ', 2, None, '___sec14'),
+              (u' Write and run your first program ', 2, None, '___sec15'),
+              (u'  A Python program with a library function ',
+               1,
+               u'1st:ex2',
+               u'1st:ex2'),
+              (u' A Python program with vectorization and plotting ',
+               1,
+               u'1st:ex3',
+               u'1st:ex3'),
+              (u' More basic concepts ', 1, None, '___sec18'),
+              (u' Using Python interactively ', 2, None, '___sec19'),
+              (u' Arithmetics, parentheses and round-off errors ',
+               2,
+               None,
+               '___sec20'),
+              (u' Variables and objects ', 2, None, '___sec21'),
+              (u' Integer division ', 2, None, '___sec22'),
+              (u' Formatting text and numbers ', 2, None, '___sec23'),
+              (u' Arrays ', 2, None, '___sec24'),
+              (u' Plotting ', 2, None, '___sec25'),
+              (u' Error messages and warnings ', 2, None, '___sec26'),
+              (u' Input data ', 2, None, '___sec27'),
+              (u' Symbolic computations ', 2, None, '___sec28'),
+              (u' Concluding remarks ', 2, None, '___sec29'),
+              (u' Exercises ', 1, None, '___sec30'),
+              (u' Exercise 1: Error messages ',
+               2,
+               u'1st:exer:ErrorMessages',
+               u'1st:exer:ErrorMessages'),
+              (u' Exercise 2: Volume of a cube ',
+               2,
+               u'1st:exer:cubeVolume',
+               u'1st:exer:cubeVolume'),
+              (u' Exercise 3: Area and circumference of a circle ',
+               2,
+               u'1st:exer:areaCircle',
+               u'1st:exer:areaCircle'),
+              (u' Exercise 4: Volumes of three cubes ',
+               2,
+               u'1st:exer:volumes3cubes',
+               u'1st:exer:volumes3cubes'),
+              (u' Exercise 5: Average of integers ',
+               2,
+               u'1st:exer:averageOf5Integers',
+               u'1st:exer:averageOf5Integers'),
+              (u' Exercise 6: Interactive computing of volume and area ',
+               2,
+               u'1st:exer:cubeVolInteractively',
+               u'1st:exer:cubeVolInteractively'),
+              (u' Exercise 7: Peculiar results from division ',
+               2,
+               u'1st:exer:intDivInteractively',
+               u'1st:exer:intDivInteractively'),
+              (u' Exercise 8: Update variable at command prompt ',
+               2,
+               u'1st:exer:updateVarInteractively',
+               u'1st:exer:updateVarInteractively'),
+              (u' Exercise 9: Formatted print to screen ',
+               2,
+               u'1st:exer:printfScreen',
+               u'1st:exer:printfScreen'),
+              (u' Exercise 10: Python documentation and random numbers ',
+               2,
+               u'1st:exer:PythonDocRandom',
+               u'1st:exer:PythonDocRandom'),
+              (u' Basic constructions ',
+               0,
+               u'2nd:BasicConstructins',
+               u'2nd:BasicConstructins'),
+              (u' If tests, colon and indentation ', 1, None, '___sec42'),
+              (u' Functions ', 1, u'sec:functions', u'sec:functions'),
+              (u' For loops ', 1, u'sec:for:loops', u'sec:for:loops'),
+              (u' While loops ', 1, u'sec:while:loops', u'sec:while:loops'),
+              (u' Lists and tuples - alternatives to arrays ',
+               1,
+               u'sec:lists',
+               u'sec:lists'),
+              (u' Reading from and writing to files ',
+               1,
+               u'sec:file:reading:writing',
+               u'sec:file:reading:writing'),
+              (u' Exercises ', 1, None, '___sec48'),
+              (u' Exercise 11: Errors with colon, indent, etc. ',
+               2,
+               u'2nd:exer:ErrorsColonIndent',
+               u'2nd:exer:ErrorsColonIndent'),
+              (u' Exercise 12: Compare integers a and b ',
+               2,
+               u'2nd:exer:compInt',
+               u'2nd:exer:compInt'),
+              (u' Exercise 13: Functions for circumference and area of a circle ',
+               2,
+               u'2nd:exer:funcCircArea',
+               u'2nd:exer:funcCircArea'),
+              (u' Exercise 14: Function for area of a rectangle ',
+               2,
+               u'2nd:exer:funcAreaRectangle',
+               u'2nd:exer:funcAreaRectangle'),
+              (u' Exercise 15: Area of a polygon ',
+               2,
+               u'2nd:exer:area:polygon',
+               u'2nd:exer:area:polygon'),
+              (u' Exercise 16: Average of integers ',
+               2,
+               u'2nd:exer:avNInt',
+               u'2nd:exer:avNInt'),
+              (u' Exercise 17: While loop with errors ',
+               2,
+               u'2nd:exer:whileLoopErrors',
+               u'2nd:exer:whileLoopErrors'),
+              (u' Exercise 18: Area of rectangle versus circle ',
+               2,
+               u'2nd:exer:areaRectCircle',
+               u'2nd:exer:areaRectCircle'),
+              (u' Exercise 19: Find crossing points of two graphs ',
+               2,
+               u'2nd:exer:Cross2Graphs',
+               u'2nd:exer:Cross2Graphs'),
+              (u' Exercise 20: Sort array with numbers ',
+               2,
+               u'2nd:exer:sortNumbers',
+               u'2nd:exer:sortNumbers'),
+              (u' Exercise 21: Compute $\\pi$ ',
+               2,
+               u'2nd:exer:computingPi',
+               u'2nd:exer:computingPi'),
+              (u' Exercise 22: Compute combinations of sets ',
+               2,
+               u'2nd:exer:combinatorics1',
+               u'2nd:exer:combinatorics1'),
+              (u' Exercise 23: Frequency of random numbers ',
+               2,
+               u'2nd:exer:numberOccurrence',
+               u'2nd:exer:numberOccurrence'),
+              (u' Remarks ', 3, None, '___sec62'),
+              (u' Exercise 24: Game 21 ',
+               2,
+               u'2nd:exer:Game21',
+               u'2nd:exer:Game21'),
+              (u' Exercise 25: Linear interpolation ',
+               2,
+               u'2nd:exer:linearInterpol',
+               u'2nd:exer:linearInterpol'),
+              (u' Exercise 26: Test straight line requirement ',
+               2,
+               u'2nd:exer:testStraightLine',
+               u'2nd:exer:testStraightLine'),
+              (u' Exercise 27: Fit straight line to data ',
+               2,
+               u'2nd:exer:fitLine',
+               u'2nd:exer:fitLine'),
+              (u' Remarks ', 3, None, '___sec67'),
+              (u' Exercise 28: Fit sines to straight line ',
+               2,
+               u'2nd:exer:fitSines',
+               u'2nd:exer:fitSines'),
+              (u' Remarks ', 3, None, '___sec69'),
+              (u' Exercise 29: Count occurrences of a string in a string ',
+               2,
+               u'2nd:exer:countTextString',
+               u'2nd:exer:countTextString'),
+              (u' Remarks ', 3, None, '___sec71'),
+              (u' Computing integrals ',
+               0,
+               u'sec:integrals',
+               u'sec:integrals'),
+              (u' Basic ideas of numerical integration ',
+               1,
+               u'sec:integrals:basic',
+               u'sec:integrals:basic'),
+              (u' Computational example ', 3, None, '___sec74'),
+              (u' The composite trapezoidal rule ',
+               1,
+               u'sec:integrals:trap',
+               u'sec:integrals:trap'),
+              (u' The general formula ',
+               2,
+               u'sec:integrals:formula',
+               u'sec:integrals:formula'),
+              (u' Implementation ',
+               2,
+               u'sec:integrals:trap:impl',
+               u'sec:integrals:trap:impl'),
+              (u' Specific or general implementation? ', 3, None, '___sec78'),
+              (u' Implementation with functions ', 3, None, '___sec79'),
+              (u' Solving our specific problem in a session ',
+               3,
+               None,
+               '___sec80'),
+              (u' Solving our specific problem in a program ',
+               3,
+               None,
+               '___sec81'),
+              (u' Making a module ', 2, None, '___sec82'),
+              (u' Alternative flat special-purpose implementation ',
+               2,
+               None,
+               '___sec83'),
+              (u' The composite midpoint method ',
+               1,
+               u'sec:integrals:Midpoint',
+               u'sec:integrals:Midpoint'),
+              (u' The idea ', 3, None, '___sec85'),
+              (u' The general formula ', 2, None, '___sec86'),
+              (u' Implementation ',
+               2,
+               u'sec:midpoint:code',
+               u'sec:midpoint:code'),
+              (u' Comparing the trapezoidal and the midpoint methods ',
+               2,
+               None,
+               '___sec88'),
+              (u' Testing ', 1, None, '___sec89'),
+              (u' Problems with brief testing procedures ',
+               2,
+               None,
+               '___sec90'),
+              (u' Test procedures ',
+               2,
+               u'sec:integrals:testprocs',
+               u'sec:integrals:testprocs'),
+              (u' Hand-computed results ', 3, None, '___sec92'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec93'),
+              (u' Demonstrating correct convergence rates ',
+               3,
+               None,
+               '___sec94'),
+              (u' Constructing unit tests and writing test functions ',
+               2,
+               u'sec:integrals:test:functions',
+               u'sec:integrals:test:functions'),
+              (u' Hand-computed numerical results ', 3, None, '___sec96'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec97'),
+              (u' Demonstrating correct convergence rates ',
+               3,
+               None,
+               '___sec98'),
+              (u' Vectorization ', 1, None, '___sec99'),
+              (u' Vectorizing the midpoint rule ', 3, None, '___sec100'),
+              (u' Vectorizing the trapezoidal rule ', 3, None, '___sec101'),
+              (u' Measuring computational speed ', 1, None, '___sec102'),
+              (u' Double and triple integrals ',
+               1,
+               u'sec:int:double',
+               u'sec:int:double'),
+              (u' The midpoint rule for a double integral ',
+               2,
+               u'sec:int:double:midpoint',
+               u'sec:int:double:midpoint'),
+              (u' Derivation via one-dimensional integrals ',
+               3,
+               None,
+               '___sec105'),
+              (u' Direct derivation ', 3, None, '___sec106'),
+              (u' Programming a double sum ', 3, None, '___sec107'),
+              (u' Reusing code for one-dimensional integrals ',
+               3,
+               None,
+               '___sec108'),
+              (u' Verification via test functions ', 3, None, '___sec109'),
+              (u' The midpoint rule for a triple integral ',
+               2,
+               None,
+               '___sec110'),
+              (u' Theory ', 3, None, '___sec111'),
+              (u' Implementation ', 3, None, '___sec112'),
+              (u' Monte Carlo integration for complex-shaped domains ',
+               2,
+               u'sec:int:complex:domain',
+               u'sec:int:complex:domain'),
+              (u' The Monte Carlo integration algorithm ',
+               3,
+               None,
+               '___sec114'),
+              (u' Implementation ', 3, None, '___sec115'),
+              (u' Verification ', 3, None, '___sec116'),
+              (u' Test function for function with random numbers ',
+               3,
+               None,
+               '___sec117'),
+              (u' Integral over a circle ', 3, None, '___sec118'),
+              (u' Exercises ', 1, None, '___sec119'),
+              (u' Exercise 30: Hand calculations for the trapezoidal method ',
+               2,
+               u'sec:exer:trap:hand',
+               u'sec:exer:trap:hand'),
+              (u' Exercise 31: Hand calculations for the midpoint method ',
+               2,
+               u'sec:exer:midpt:hand',
+               u'sec:exer:midpt:hand'),
+              (u' Exercise 32: Compute a simple integral ',
+               2,
+               u'sec:exer:trap:mid:parabola',
+               u'sec:exer:trap:mid:parabola'),
+              (u' Exercise 33: Hand-calculations with sine integrals ',
+               2,
+               u'sec:exer:hand:sine',
+               u'sec:exer:hand:sine'),
+              (u' Exercise 34: Make test functions for the midpoint method ',
+               2,
+               u'sec:exer:test:midpoint',
+               u'sec:exer:test:midpoint'),
+              (u' Exercise 35: Explore round-off errors with large numbers ',
+               2,
+               u'sec:exer:test:roundoff',
+               u'sec:exer:test:roundoff'),
+              (u' Exercise 36: Write test functions for $\\int_0^4\\sqrt{x}dx$ ',
+               2,
+               u'sec:exer:test:convrates:sqrt',
+               u'sec:exer:test:convrates:sqrt'),
+              (u' Remarks ', 3, None, '___sec127'),
+              (u' Exercise 37: Rectangle methods ',
+               2,
+               u'sec:exer:rectangleMethod',
+               u'sec:exer:rectangleMethod'),
+              (u' Exercise 38: Adaptive integration ',
+               2,
+               u'sec:exer:adaptive:int',
+               u'sec:exer:adaptive:int'),
+              (u' Remarks ', 3, None, '___sec130'),
+              (u' Exercise 39: Integrating x raised to x ',
+               2,
+               u'sec:exer:integrate:x2x',
+               u'sec:exer:integrate:x2x'),
+              (u' Exercise 40: Integrate products of sine functions ',
+               2,
+               u'sec:exer:sine:products',
+               u'sec:exer:sine:products'),
+              (u' Exercise 41: Revisit fit of sines to a function ',
+               2,
+               u'sec:exer:revisitFitSines',
+               u'sec:exer:revisitFitSines'),
+              (u' Exercise 42: Derive the trapezoidal rule for a double integral ',
+               2,
+               u'sec:exer:trapezoidal:2D',
+               u'sec:exer:trapezoidal:2D'),
+              (u' Exercise 43: Compute the area of a triangle by Monte Carlo integration ',
+               2,
+               u'sec:exer:MC:ellipse',
+               u'sec:exer:MC:ellipse'),
+              (u' Solving ordinary differential equations ',
+               0,
+               u'5th:SolvODEs',
+               u'5th:SolvODEs'),
+              (u' Population growth ', 1, u'sec:de:pg', u'sec:de:pg'),
+              (u' Derivation of the model ',
+               2,
+               u'sec:de:pg:model',
+               u'sec:de:pg:model'),
+              (u' Numerical solution ',
+               2,
+               u'sec:de:pg:numerics',
+               u'sec:de:pg:numerics'),
+              (u' Programming the Forward Euler scheme; the special case ',
+               2,
+               u'sec:de:pg:prog1',
+               u'sec:de:pg:prog1'),
+              (u' Understanding the Forward Euler method ',
+               2,
+               u'sec:de:pg:geom',
+               u'sec:de:pg:geom'),
+              (u' Programming the Forward Euler scheme; the general case ',
+               2,
+               u'sec:de:FE:gen',
+               u'sec:de:FE:gen'),
+              (u' Making the population growth model more realistic ',
+               2,
+               None,
+               '___sec143'),
+              (u' Verification: exact linear solution of the discrete equations ',
+               2,
+               u'sec:de:growth:test:linear',
+               u'sec:de:growth:test:linear'),
+              (u' Spreading of diseases ', 1, None, '___sec145'),
+              (u' Spreading of a flu ', 2, u'sec:de:flu', u'sec:de:flu'),
+              (u' A Forward Euler method for the differential equation system ',
+               2,
+               u'sec:de:flu:FE',
+               u'sec:de:flu:FE'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:flu:prog:spec',
+               u'sec:de:flu:prog:spec'),
+              (u' Outbreak or not ', 2, None, '___sec149'),
+              (u' Abstract problem and notation ',
+               2,
+               u'sec:de:flu:generic',
+               u'sec:de:flu:generic'),
+              (u' Programming the numerical method; the general case ',
+               2,
+               u'sec:de:flu:prog:generic',
+               u'sec:de:flu:prog:generic'),
+              (u' Time-restricted immunity ', 2, None, '___sec152'),
+              (u' Incorporating vaccination ',
+               2,
+               u'sec:de:flu:vaccine',
+               u'sec:de:flu:vaccine'),
+              (u' Discontinuous coefficients: a vaccination campaign ',
+               2,
+               u'sec:de:flu:vaccine:discont',
+               u'sec:de:flu:vaccine:discont'),
+              (u' Oscillating one-dimensional systems ',
+               1,
+               u'sec:de:vib',
+               u'sec:de:vib'),
+              (u' Derivation of a simple model ', 2, None, '___sec156'),
+              (u' Numerical solution ', 2, None, '___sec157'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:vib:special',
+               u'sec:de:vib:special'),
+              (u' A magic fix of the numerical method ',
+               2,
+               None,
+               '___sec159'),
+              (u" The 2nd-order Runge-Kutta method (or Heun's method) ",
+               2,
+               u'sec:de:osc:Heun',
+               u'sec:de:osc:Heun'),
+              (u' Odespy: software for solving ODEs ',
+               2,
+               u'sec:de:osc:odespy',
+               u'sec:de:osc:odespy'),
+              (u' The 4th-order Runge-Kutta method ', 2, None, '___sec162'),
+              (u' The algorithm ', 3, None, '___sec163'),
+              (u' Application ', 3, None, '___sec164'),
+              (u' Implementation ', 3, None, '___sec165'),
+              (u' Derivation ', 3, None, '___sec166'),
+              (u' More effects: damping, nonlinearity, and external forces ',
+               2,
+               None,
+               '___sec167'),
+              (u' The Euler-Cromer scheme ', 3, None, '___sec168'),
+              (u' The 4-th order Runge-Kutta method ', 3, None, '___sec169'),
+              (u' Illustration of linear damping ', 2, None, '___sec170'),
+              (u' Illustration of linear damping with sinusoidal excitation ',
+               2,
+               None,
+               '___sec171'),
+              (u' Spring-mass system with sliding friction ',
+               2,
+               u'sec:de:vib:ode2:sliding:friction',
+               u'sec:de:vib:ode2:sliding:friction'),
+              (u' A finite difference method; undamped, linear case ',
+               2,
+               u'sec:de:vib:2nd',
+               u'sec:de:vib:2nd'),
+              (u' A finite difference method; linear damping ',
+               2,
+               u'sec:de:vib:2nd:damped1',
+               u'sec:de:vib:2nd:damped1'),
+              (u' Exercises ', 1, None, '___sec175'),
+              (u' Exercise 44: Geometric construction of the Forward Euler method ',
+               2,
+               u'sec:de:exer:geom',
+               u'sec:de:exer:geom'),
+              (u' Exercise 45: Make test functions for the Forward Euler method ',
+               2,
+               u'sec:de:exer:FE:test1',
+               u'sec:de:exer:FE:test1'),
+              (u" Exercise 46: Implement and evaluate Heun's method ",
+               2,
+               u'sec:de:exer:Heun:pg',
+               u'sec:de:exer:Heun:pg'),
+              (u' Exercise 47: Find an appropriate time step; logistic model ',
+               2,
+               u'sec:de:exer:logistic:dtopt',
+               u'sec:de:exer:logistic:dtopt'),
+              (u' Exercise 48: Find an appropriate time step; SIR model ',
+               2,
+               u'sec:de:exer:SIR:dtopt',
+               u'sec:de:exer:SIR:dtopt'),
+              (u' Exercise 49: Model an adaptive vaccination campaign ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 50: Make a SIRV model with time-limited effect of vaccination ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 51: Refactor a flat program ',
+               2,
+               u'sec:de:exer:vib:FE:func',
+               u'sec:de:exer:vib:FE:func'),
+              (u' Exercise 52: Simulate oscillations by a general ODE solver ',
+               2,
+               u'sec:de:exer:vib:ode_FE',
+               u'sec:de:exer:vib:ode_FE'),
+              (u' Exercise 53: Compute the energy in oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Exercise 54: Use a Backward Euler scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:BE',
+               u'sec:de:exer:pg:BE'),
+              (u' Exercise 55: Use a Crank-Nicolson scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:CN',
+               u'sec:de:exer:pg:CN'),
+              (u' Exercise 56: Understand finite differences via Taylor series ',
+               2,
+               u'sec:de:exer:fd:Taylor',
+               u'sec:de:exer:fd:Taylor'),
+              (u' Exercise 57: Use a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Remarks ', 3, None, '___sec190'),
+              (u" Exercise 58: Use Heun's method for the SIR model ",
+               2,
+               u'sec:de:exer:SIR:Heun',
+               u'sec:de:exer:SIR:Heun'),
+              (u' Exercise 59: Use Odespy to solve a simple ODE ',
+               2,
+               u'sec:de:exer:odespy:decay',
+               u'sec:de:exer:odespy:decay'),
+              (u' Exercise 60: Set up a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:osc:BE',
+               u'sec:de:exer:osc:BE'),
+              (u' Exercise 61: Set up a Forward Euler scheme for nonlinear and damped oscillations ',
+               2,
+               u'sec:de:exer:osc:FE:general',
+               u'sec:de:exer:osc:FE:general'),
+              (u' Exercise 62: Discretize an initial condition ',
+               2,
+               u'sec:de:exer:osc:2nd:V0ic',
+               u'sec:de:exer:osc:2nd:V0ic'),
+              (u' Solving partial differential equations ',
+               0,
+               u'6th:SolvPDEs',
+               u'6th:SolvPDEs'),
+              (u' Finite difference methods ',
+               1,
+               u'6th:SolvPDEs:MOLandFE',
+               u'6th:SolvPDEs:MOLandFE'),
+              (u' Reduction of a PDE to a system of ODEs ',
+               2,
+               u'sec:pde:diff1D:reduce',
+               u'sec:pde:diff1D:reduce'),
+              (u' Construction of a test problem with known discrete solution ',
+               2,
+               u'sec:pde:diff1D:testproblem',
+               u'sec:pde:diff1D:testproblem'),
+              (u' Implementation: Forward Euler method ',
+               2,
+               None,
+               '___sec200'),
+              (u' Application: heat conduction in a rod ',
+               2,
+               u'sec:pde:diff1D:rod',
+               u'sec:pde:diff1D:rod'),
+              (u' Vectorization ', 2, None, '___sec202'),
+              (u' Using Odespy to solve the system of ODEs ',
+               2,
+               None,
+               '___sec203'),
+              (u' Implicit methods ', 2, None, '___sec204'),
+              (u' Exercises ', 1, None, '___sec205'),
+              (u' Exercise 63: Simulate a diffusion equation by hand ',
+               2,
+               u'sec:pde:diff1D:exer:handFE',
+               u'sec:pde:diff1D:exer:handFE'),
+              (u' Exercise 64: Compute temperature variations in the ground ',
+               2,
+               u'sec:pde:diff1D:exer:groundtemp',
+               u'sec:pde:diff1D:exer:groundtemp'),
+              (u' Exercise 65: Compare implicit methods ',
+               2,
+               u'sec:pde:diff1D:exer:compare:implicit',
+               u'sec:pde:diff1D:exer:compare:implicit'),
+              (u' Exercise 66: Explore adaptive and implicit methods ',
+               2,
+               u'sec:pde:diff1D:exer:groundtemp:adapt',
+               u'sec:pde:diff1D:exer:groundtemp:adapt'),
+              (u' Exercise 67: Investigate the $\\theta$ rule ',
+               2,
+               u'sec:pde:diff1D:exer:CN',
+               u'sec:pde:diff1D:exer:CN'),
+              (u' Remarks ', 3, None, '___sec211'),
+              (u' Exercise 68: Compute the diffusion of a Gaussian peak ',
+               2,
+               u'sec:pde:diff1D:exer:Gaussian',
+               u'sec:pde:diff1D:exer:Gaussian'),
+              (u' Exercise 69: Vectorize a function for computing the area of a polygon ',
+               2,
+               u'2nd:exer:area:polygon2',
+               u'2nd:exer:area:polygon2'),
+              (u' Exercise 70: Explore symmetry ',
+               2,
+               u'sec:pde:diff1D:exer:Gaussian:symm',
+               u'sec:pde:diff1D:exer:Gaussian:symm'),
+              (u' Remarks ', 3, None, '___sec215'),
+              (u' Exercise 71: Compute solutions as $t\\rightarrow\\infty$ ',
+               2,
+               u'sec:pde:diff1D:exer:stationary',
+               u'sec:pde:diff1D:exer:stationary'),
+              (u' Remarks ', 3, None, '___sec217'),
+              (u' Exercise 72: Solve a two-point boundary value problem ',
+               2,
+               u'sec:pde:diff1D:exer:stationary2',
+               u'sec:pde:diff1D:exer:stationary2'),
+              (u' Solving nonlinear algebraic equations ',
+               0,
+               u'4th:NonlinAlgEq',
+               u'4th:NonlinAlgEq'),
+              (u' Brute force methods ',
+               1,
+               u'4th:bruteforce',
+               u'4th:bruteforce'),
+              (u' Brute force root finding ', 2, None, '___sec221'),
+              (u' Numerical algorithm ', 3, None, '___sec222'),
+              (u' Implementation ', 3, None, '___sec223'),
+              (u' Brute force optimization ', 2, None, '___sec224'),
+              (u' Numerical algorithm ', 3, None, '___sec225'),
+              (u' Implementation ', 3, None, '___sec226'),
+              (u' Model problem for algebraic equations ',
+               2,
+               None,
+               '___sec227'),
+              (u" Newton's method ",
+               1,
+               u'4th:NonlinAlgEq:Newt',
+               u'4th:NonlinAlgEq:Newt'),
+              (u" Deriving and implementing Newton's method ",
+               2,
+               None,
+               '___sec229'),
+              (u' Making a more efficient and robust implementation ',
+               2,
+               u'4th:Newton:robust',
+               u'4th:Newton:robust'),
+              (u' The secant method ',
+               1,
+               u'4th:NonlinAlgEq:Secant',
+               u'4th:NonlinAlgEq:Secant'),
+              (u' The bisection method ',
+               1,
+               u'4th:NonlinAlgEq:Bisect',
+               u'4th:NonlinAlgEq:Bisect'),
+              (u' Rate of convergence ',
+               1,
+               u'4th:NonlinAlgEq:RateConv',
+               u'4th:NonlinAlgEq:RateConv'),
+              (u' Exercises ', 1, None, '___sec234'),
+              (u" Exercise 73: Understand why Newton's method can fail ",
+               2,
+               u'4th:exer:Newton:failure',
+               u'4th:exer:Newton:failure'),
+              (u' Exercise 74: See if the secant method fails ',
+               2,
+               u'4th:exer:Secant:failure',
+               u'4th:exer:Secant:failure'),
+              (u' Exercise 75: Understand how the bisection method cannot fail ',
+               2,
+               u'4th:exer:Bisection:failure',
+               u'4th:exer:Bisection:failure'),
+              (u" Exercise 76: Combine the bisection method with Newton's method ",
+               2,
+               u'4th:exer:Bisection:Newton',
+               u'4th:exer:Bisection:Newton'),
+              (u" Exercise 77: Write a test function for Newton's method ",
+               2,
+               u'4th:exer:NewtonHand',
+               u'4th:exer:NewtonHand'),
+              (u' Exercise 78: Solve nonlinear equation for a vibrating beam ',
+               2,
+               u'4th:exer:beam:vib',
+               u'4th:exer:beam:vib'),
+              (u' Appendix: Getting access to Python ',
+               0,
+               u'app:accesspy',
+               u'app:accesspy'),
+              (u' Required software ',
+               1,
+               u'sec:accesspy:softwarelist',
+               u'sec:accesspy:softwarelist'),
+              (u' Installing software on your laptop: Mac OS X and Windows ',
+               1,
+               u'sec:accesspy:MacWin',
+               u'sec:accesspy:MacWin'),
+              (u' Anaconda and Spyder ',
+               1,
+               u'sec:accesspy:anaconda',
+               u'sec:accesspy:anaconda'),
+              (u' Spyder on Mac ', 2, None, '___sec245'),
+              (u' Installation of additional packages ',
+               2,
+               None,
+               '___sec246'),
+              (u' Installing SciTools on Mac ', 2, None, '___sec247'),
+              (u' Installing SciTools on Windows ', 2, None, '___sec248'),
+              (u' VMWare Fusion virtual machine ',
+               1,
+               u'sec:accesspy:vmware',
+               u'sec:accesspy:vmware'),
+              (u' Installing Ubuntu ',
+               2,
+               u'sec:accesspy:vmware:fullblown:machine',
+               u'sec:accesspy:vmware:fullblown:machine'),
+              (u' Installing software on Ubuntu ', 2, None, '___sec251'),
+              (u' File sharing ', 2, None, '___sec252'),
+              (u' Dual boot on Windows ', 1, None, '___sec253'),
+              (u' Vagrant virtual machine ',
+               1,
+               u'sec:accesspy:vagrant',
+               u'sec:accesspy:vagrant'),
+              (u' How to write and run a Python program ',
+               1,
+               u'sec:accesspy:writerun',
+               u'sec:accesspy:writerun'),
+              (u' The need for a text editor ', 2, None, '___sec256'),
+              (u' Spyder ', 2, None, '___sec257'),
+              (u' Text editors ', 2, None, '___sec258'),
+              (u' Terminal windows ', 2, None, '___sec259'),
+              (u' Using a plain text editor and a terminal window ',
+               2,
+               None,
+               '___sec260'),
+              (u' The SageMathCloud and Wakari web services ',
+               1,
+               u'sec:accesspy:sagemath:wakari',
+               u'sec:accesspy:sagemath:wakari'),
+              (u' Basic intro to SageMathCloud ', 2, None, '___sec262'),
+              (u' Basic intro to Wakari ', 2, None, '___sec263'),
+              (u' Installing your own Python packages ',
+               2,
+               None,
+               '___sec264'),
+              (u' Writing IPython notebooks ',
+               1,
+               u'sec:accesspy:ipynb',
+               u'sec:accesspy:ipynb'),
+              (u' A simple program in the notebook ', 2, None, '___sec266'),
+              (u' Mixing text, mathematics, code, and graphics ',
+               2,
+               None,
+               '___sec267'),
+              (u' References ', 0, None, '___sec268')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands.tex -->
+$$
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="p4c-bootstrap-Python.html">Programming for Computations - A Gentle Introduction to Numerical Simulations with Python</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Python000.html#___sec0" style="font-size: 80%;">Preface</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Python001.html#1st:TheFirstFewSteps" style="font-size: 80%;">The first few steps</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Python007.html#2nd:BasicConstructins" style="font-size: 80%;">Basic constructions</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Python013.html#sec:integrals" style="font-size: 80%;">Computing integrals</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Python017.html#5th:SolvODEs" style="font-size: 80%;">Solving ordinary differential equations</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Python022.html#6th:SolvPDEs" style="font-size: 80%;">Solving partial differential equations</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Python024.html#4th:NonlinAlgEq" style="font-size: 80%;">Solving nonlinear algebraic equations</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Python030.html#app:accesspy" style="font-size: 80%;">Appendix: Getting access to Python</a></li>
+     <!-- navigation toc: --> <li><a href="._p4c-bootstrap-Python039.html#___sec268" style="font-size: 80%;">References</a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0008"></a>
+<!-- !split -->
+
+<h1 id="sec:functions">Functions</h1>
+
+<p>
+Functions are widely used in programming and is a concept that needs to
+be mastered. In the simplest case, a function in a program is much like
+a mathematical function: some input number \( x \) is transformed to some output
+number.
+One example is the \( \tanh^{-1}(x) \) function, called <code>atan</code> in computer
+code: it takes one real number as input and returns another number.
+Functions in Python are more general and can take a series of
+variables as input and return one or more variables, or simply nothing.
+The purpose of functions is two-fold:
+
+<ol>
+<li> to <em>group statements</em> into separate units of code lines that naturally belong together (a
+   strategy which may dramatically ease the problem solving process), and/or</li>
+<li> to <em>parameterize</em> a set of statements such that they can be written only
+   once and easily be re-executed with variations.</li>
+</ol>
+
+Examples will be given to illustrate how functions can be written in various contexts.
+
+<p>
+If we modify the program <code>ball.py</code> from the chapter <a href="._p4c-bootstrap-Python002.html#1st:ex1">A Python program with variables</a>
+slightly, and include a function, we could let this be a new program
+<a href="https://github.com/hplgit/prog4comp/src/py/ball_function.py" target="_self"><tt>ball_function.py</tt></a>
+as
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">y</span>(t):
+    v0 <span style="color: #666666">=</span> <span style="color: #666666">5</span>                    <span style="color: #408080; font-style: italic"># Initial velocity</span>
+    g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>                  <span style="color: #408080; font-style: italic"># Acceleration of gravity</span>
+    <span style="color: #008000; font-weight: bold">return</span> v0<span style="color: #666666">*</span>t <span style="color: #666666">-</span> <span style="color: #666666">0.5*</span>g<span style="color: #666666">*</span>t<span style="color: #666666">**2</span>
+
+time <span style="color: #666666">=</span> <span style="color: #666666">0.6</span>       <span style="color: #408080; font-style: italic"># Just pick one point in time</span>
+<span style="color: #008000; font-weight: bold">print</span> y(time)
+time <span style="color: #666666">=</span> <span style="color: #666666">0.9</span>       <span style="color: #408080; font-style: italic"># Pick another point in time</span>
+<span style="color: #008000; font-weight: bold">print</span> y(time)
+</pre></div>
+<p>
+When Python reads and interprets this program from the top, it takes
+the code from the line with <code>def</code>, to the line with <code>return</code>, to be
+the definition of a function with the name <code>y</code> (note colon and
+indentation). The <em>return statement</em> of the function <code>y</code>, i.e.
+
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">return v0*t - 0.5*g*t**2
+</pre></div>
+<p>
+will be understood by Python as <em>first compute the expression, then
+send the result back (i.e., return) to where the function was called
+from</em>. Both <code>def</code> and <code>return</code> are reserved words. The function
+depends on one variable (or we say that it takes one <em>argument</em> or
+<em>input parameter</em>), the value of which must be provided when the
+function is called.
+
+<p>
+What actually happens when Python meets this code? The <code>def</code> line
+just tells Python that here is a function with name <code>y</code> and it
+has one argument <code>t</code>. Python does not look into the function at
+this stage (except that it checks the code for syntax errors).
+When Python later on meets the statement <code>print y(time)</code>, it
+recognizes a function call <code>y(time)</code> and recalls that there is a
+function <code>y</code> defined with one argument. The value of <code>time</code> is
+then transferred to the <code>y(t)</code> function such that <code>t = time</code>
+becomes the first action in the <code>y</code> function. Then Python
+executes one line at a time in the <code>y</code> function.
+In the final line, the arithmetic expression <code>v0*t - 0.5*g*t**2</code>
+is computed, resulting in a number, and this number (or more
+precisely, the Python object representing the number) <em>replaces</em>
+the call <code>y(time)</code> in the calling code such that we have <code>print</code>
+proceeded by a number rather than a function call.
+
+<p>
+Python proceeds with the next line and sets <code>time</code> to a new value.
+The next <code>print</code> statement triggers a new call to <code>y(t)</code>, this time
+<code>t</code> is set to <code>0.9</code>, the computations are done line by line in the
+<code>y</code> function, and the returned results replaces <code>y(time)</code>.
+Instead of writing <code>print y(time)</code>, we could
+alternatively have stored the returned result from the <code>y</code> function
+in a variable,
+
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">h = y(time)
+print h
+</pre></div>
+<p>
+Note that when a function contains <code>if-elif-else</code> constructions,
+<code>return</code> may be done from within any of the branches. This may be
+illustrated by the following function containing three <code>return</code>
+statements:
+
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">def check_sign(x):
+    if x &gt; 0:
+        return &#39;x is positive&#39;
+    elif x &lt; 0:
+        return &#39;x is negative&#39;
+    else:
+        return &#39;x is zero&#39;
+</pre></div>
+<p>
+Remember that only one of the branches is executed for a single call
+on <code>check_sign</code>, so depending on the number <code>x</code>, the return may take
+place from any of the three return alternatives.
+
+<p>
+<div class="alert alert-block alert-danger alert-text-normal"><b>To return at the end or not.</b>
+Programmers disagree whether it is a good idea to use <code>return</code>
+inside a function where you want, or if there should only be
+one single <code>return</code> statement <em>at the end of the function</em>.
+The authors of this book emphasize readable code and
+think that <code>return</code> can be useful in branches as in the example above
+when the function is short. For longer or more complicated functions,
+it might be better to have one single <code>return</code> statement.
+Be prepared for critical comments if you return wherever you want...
+</div>
+
+
+<p>
+An expression you will often encounter when dealing with programming, is <em>main
+program</em>, or that some code is <em>in main</em>. This is nothing particular
+to Python, and simply refers to that part of the program which is
+<em>outside</em> functions. However, note that the <code>def</code> line of functions is
+counted into main. So, in <code>ball_function.py</code> above, all
+statements outside the function <code>y</code> are in main, and also the line
+<code>def y(t):</code>.
+
+<p>
+A function may take no arguments, or many, in which case they are just
+listed within the parentheses (following the function name) and
+separated by a comma. Let us illustrate. Take a slight variation of the
+ball example and assume that the ball is not thrown straight up, but
+at an angle, so that two coordinates are needed to specify its
+position at any time. According to Newton's laws (when air resistance
+is negligible), the vertical position is given by \( y(t) = v_{0y}t - 0.5gt^2 \) and
+the horizontal position by \( x(t) = v_{0x}t \). We can include both these
+expressions in a new version of our program that prints the position
+of the ball for chosen times. Assume we want to evaluate these expressions at two
+points in time, \( t = 0.6s \) and \( t = 0.9s \). We can pick some numbers
+for the initial velocity components <code>v0y</code> and <code>v0x</code>, name the program
+<a href="https://github.com/hplgit/prog4comp/src/py/ball_position.py" target="_self"><tt>ball_position.py</tt></a>,
+and write it for example as
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">y</span>(v0y, t):
+    g <span style="color: #666666">=</span> <span style="color: #666666">9.81</span>                  <span style="color: #408080; font-style: italic"># Acceleration of gravity</span>
+    <span style="color: #008000; font-weight: bold">return</span> v0y<span style="color: #666666">*</span>t <span style="color: #666666">-</span> <span style="color: #666666">0.5*</span>g<span style="color: #666666">*</span>t<span style="color: #666666">**2</span>
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">x</span>(v0x, t):
+    <span style="color: #008000; font-weight: bold">return</span> v0x<span style="color: #666666">*</span>t
+
+initial_velocity_x <span style="color: #666666">=</span> <span style="color: #666666">2.0</span>
+initial_velocity_y <span style="color: #666666">=</span> <span style="color: #666666">5.0</span>
+
+time <span style="color: #666666">=</span> <span style="color: #666666">0.6</span>       <span style="color: #408080; font-style: italic"># Just pick one point in time</span>
+<span style="color: #008000; font-weight: bold">print</span> x(initial_velocity_x, time), y(initial_velocity_y, time)
+time <span style="color: #666666">=</span> <span style="color: #666666">0.9</span>       <span style="color: #408080; font-style: italic"># ... Pick another point in time</span>
+<span style="color: #008000; font-weight: bold">print</span> x(initial_velocity_x, time), y(initial_velocity_y, time)
+</pre></div>
+<p>
+Now we compute and print the two components for the position, for each
+of the two chosen points in time. Notice how each of the two functions
+now takes <em>two</em> arguments. Running the program gives the output
+
+<p>
+
+<!-- code=text (!bc dat) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">1.2  1.2342
+1.8  0.52695
+</pre></div>
+<p>
+A function may also have no return value, in which case we simply drop
+the return statement, or it may return more than one value. For
+example, the two functions we just defined could alternatively have
+been written as one:
+
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">def xy(v0x, v0y, t):
+    g = 9.81		              # acceleration of gravity
+    return v0x*t, v0y*t - 0.5*g*t**2
+</pre></div>
+<p>
+Notice the two return values which are simply separated by a
+comma. When calling the function (and printing), arguments must appear
+in the same order as in the function definition. We would then write
+
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">print xy(initial_x_velocity, initial_y_velocity, time)
+</pre></div>
+<p>
+The two returned values from the function could alternatively have
+been assigned to variables, e.g., as
+
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">x_pos, y_pos = xy(initial_x_velocity, initial_y_velocity, time)
+</pre></div>
+<p>
+The variables <code>x_pos</code> and <code>y_pos</code> could then have been printed or used
+in other ways in the code.
+
+<p>
+There are possibilities for having a variable number of function input
+and output parameters (using <code>*args</code> and <code>**kwargs</code> constructions
+for the arguments). However, we do not go further into that topic here.
+
+<p>
+Variables that are defined inside a function, e.g., <code>g</code> in the last
+<code>xy</code> function, are <em>local variables</em>. This means they are only known
+inside the function. Therefore, if you had accidentally used <code>g</code> in
+some calculation outside the function, you would have got an error
+message. The variable <code>time</code> is defined outside the function and is
+therefore a <em>global variable</em>. It is known both outside and inside the
+function(s). If you define one global and one local variable, both
+with the same name, the function only sees the local one, so the
+global variable is not affected by what happens with the local
+variable of the same name.
+
+<p>
+The arguments named in the heading of a function definition are by
+rule local variables inside the function. If you want to change the
+value of a global variable inside a function, you need to declare the
+variable as global inside the function. That is, if the global
+variable was <code>x</code>, we would need to write <code>global x</code> inside the
+function definition before we let the function change it. After function
+execution, <code>x</code> would then have a changed value. One should
+strive to define variables mostly where they are needed and not
+everywhere.
+
+<p>
+Another very useful way of handling function parameters in Python, is
+by defining parameters as <em>keyword arguments</em>. This gives default
+values to parameters and allows more freedom in function calls, since
+the order and number of parameters may vary.
+
+<p>
+Let us illustrate the use of keyword arguments with the function
+<code>xy</code>. Assume we defined <code>xy</code> as
+
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">def xy(t, v0x=0, v0y=0):
+    g = 9.81		              # acceleration of gravity
+    return v0x*t, v0y*t - 0.5*g*t**2
+</pre></div>
+<p>
+Here, <code>t</code> is an <em>ordinary</em> or <em>positional argument</em>, whereas <code>v0x</code> and
+<code>v0y</code> are <em>keyword arguments</em> or <em>named arguments</em>. Generally, there
+can be many positional arguments and many keyword arguments, but the
+positional arguments must <em>always</em> be listed before the keyword
+arguments in function definition. Keyword arguments are given default
+values, as shown here with <code>v0x</code> and <code>v0y</code>, both having zero as default
+value. In a script, the function <code>xy</code> may now be called in many
+different ways. For example,
+
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">print xy(0.6)
+</pre></div>
+<p>
+would make <code>xy</code> perform the computations with <code>t = 0.6</code> and the default
+values (i.e zero) of <code>v0x</code> and <code>v0y</code>. The two numbers returned from
+<code>xy</code> are printed to the screen. If we wanted to use another initial
+value for <code>v0y</code>, we could, e.g., write
+
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">print xy(0.6,v0y=4.0)
+</pre></div>
+<p>
+which would make <code>xy</code> perform the calculations with <code>t = 0.6</code>, <code>v0x = 0</code>
+(i.e. the default value) and <code>v0y = 4.0</code>. When there are several
+positional arguments, they have to appear in the same order as defined
+in the function definition, unless we explicitly use the names of
+these also in the function call. With explicit name specification in
+the call, any order of parameters is acceptable. To illustrate, we
+could, e.g., call <code>xy</code> as
+
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">print xy(v0y=4.0, v0x=1.0, t=0.6)
+</pre></div>
+<p>
+In any programming language, it is a good habit to include a little
+explanation of what the function is doing, unless what is done by the
+function is obvious, e.g., when having only a few simple code lines. This
+explanation is called a <em>doc string</em>, which in Python should be placed just at the top of the function.
+This explanation is meant for a human who wants
+to understand the code, so it should say something about the purpose
+of the code and possibly explain the arguments and return values if
+needed. If we do that with our <code>xy</code> function from above, we may write
+the first lines of the function as
+
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">def xy(v0x, v0y, t):
+    &quot;&quot;&quot;Compute the x and y position of the ball at time t&quot;&quot;&quot;
+</pre></div>
+<p>
+Note that other functions may be called from within other functions,
+and function input parameters are not required to be numbers. Any
+object will do, e.g., string variables or other functions.
+
+<p>
+Functions are straightforwardly passed as arguments to other functions, as illustrated by the following script
+<a href="https://github.com/hplgit/prog4comp/src/py/function_as_argument.py" target="_self"><tt>function_as_argument.py</tt></a>:
+
+<p>
+
+<!-- code=python (!bc pypro) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%"><span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">sum_xy</span>(x, y):
+    <span style="color: #008000; font-weight: bold">return</span> x <span style="color: #666666">+</span> y
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">prod_xy</span>(x, y):
+    <span style="color: #008000; font-weight: bold">return</span> x<span style="color: #666666">*</span>y
+
+<span style="color: #008000; font-weight: bold">def</span> <span style="color: #0000FF">treat_xy</span>(f, x, y):
+    <span style="color: #008000; font-weight: bold">return</span> f(x, y)
+
+x <span style="color: #666666">=</span> <span style="color: #666666">2</span>;  y <span style="color: #666666">=</span> <span style="color: #666666">3</span>
+<span style="color: #008000; font-weight: bold">print</span> treat_xy(sum_xy, x, y)
+<span style="color: #008000; font-weight: bold">print</span> treat_xy(prod_xy, x, y)
+</pre></div>
+<p>
+When run, this program first prints the sum of <code>x</code> and <code>y</code> (i.e., 5),
+and then it prints the product (i.e., 6). We see that <code>treat_xy</code> takes
+a function name as its first parameter. Inside <code>treat_xy</code>, that
+function is used to actually <em>call</em> the function that was given as
+input parameter. Therefore, as shown, we may call <code>treat_xy</code> with
+either <code>sum_xy</code> or <code>prod_xy</code>, depending on whether we want the sum or
+product of <code>x</code> and <code>y</code> to be calculated.
+
+<p>
+Functions may also be defined <em>within</em> other functions. It that case,
+they become <em>local functions</em>, or <em>nested functions</em>, known only to
+the function inside which they are defined. Functions defined in main
+are referred to as <em>global functions</em>.  A nested function has full
+access to all variables in the <em>parent function</em>, i.e. the function
+within which it is defined.
+
+<p>
+Short functions can be defined in a compact way, using what is known
+as a <em>lambda function</em>:
+
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">f = lambda x, y: x + 2*y
+
+# Equivalent
+def f(x, y):
+    return x + 2*y
+</pre></div>
+<p>
+The syntax consists of <code>lambda</code> followed by a series of arguments, colon,
+and some Python expression resulting in an object to be returned from
+the function. Lambda functions are particularly convenient as
+function arguments:
+
+<p>
+
+<!-- code=text (!bc cod) typeset with pygments style "default" -->
+<div class="highlight" style="background: #f8f8f8"><pre style="line-height: 125%">print treat_xy(lambda x, y: x*y, x, y)
+</pre></div>
+<p>
+<div class="alert alert-block alert-success alert-text-normal"><b>Overhead of function calls.</b>
+Function calls have the downside of slowing down program execution.
+Usually, it is a good thing to split a program into functions, but
+in very computing intensive parts, e.g., inside long loops, one
+must balance the convenience of calling a function and the
+computational efficiency of avoiding function calls. It is a good
+rule to develop a program using plenty of functions and then
+in a later optimization stage, when everything computes correctly,
+remove function calls that are quantified to slow down the code.
+</div>
+
+
+<p>
+<p>
+<!-- navigation buttons at the bottom of the page -->
+<ul class="pager">
+  <li class="previous">
+    <a href="._p4c-bootstrap-Python007.html">&larr; Prev</a>
+  </li>
+  <li class="next">
+    <a href="._p4c-bootstrap-Python009.html">Next &rarr;</a>
+  </li>
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

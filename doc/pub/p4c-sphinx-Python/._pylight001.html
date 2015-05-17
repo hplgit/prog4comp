@@ -1,0 +1,213 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Preface</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
+        <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+
+        <script>sagecell.makeSagecell({inputLocation: ".sage"});</script>
+
+        <style type="text/css">
+                .sagecell .CodeMirror-scroll {
+                        overflow-y: hidden;
+                        overflow-x: auto;
+                }
+                .sagecell .CodeMirror {
+                        height: auto;
+                }
+        </style>
+
+    
+    <link rel="top" title="Programming for Computations" href="index.html" />
+    <link rel="next" title="The first few steps" href="._pylight002.html" />
+    <link rel="prev" title="Programming for Computations - A Gentle Introduction to Numerical Simulations with Python" href="._pylight000.html" />
+
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  
+       <style type="text/css">
+         div.admonition {
+           background-color: whiteSmoke;
+           border: 1px solid #bababa;
+         }
+       </style>
+      </head>
+    
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="._pylight002.html" title="The first few steps"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="._pylight000.html" title="Programming for Computations - A Gentle Introduction to Numerical Simulations with Python"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Programming for Computations</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="preface">
+<h1>Preface<a class="headerlink" href="#preface" title="Permalink to this headline">¶</a></h1>
+<p>Computing, in the sense of doing mathematical calculations, is a skill that mankind has developed over thousands of years. Programming, on the other hand, is in its infancy, with a history that spans a few decades only. Both topics are vastly comprehensive and usually taught as separate subjects in educational institutions around the world, especially at the undergraduate level. This book is about
+the <em>combination</em> of the two, because computing today becomes so much more powerful when combined with programming.</p>
+<p>Most universities and colleges implicitly require students to specialize in computer science if they want to learn the craft of programming, since other student programs usually do not offer programming to an extent demanded for really mastering this craft. Common arguments claim that it is sufficient with a brief introduction, that there is not enough room for learning programming in addition to all other must-have subjects, and that there is so much software available that few really need to program themselves. A consequence is that engineering students often graduate with shallow knowledge about programming, unless they happened to choose the computer science direction.</p>
+<p>We think this is an unfortunate situation.
+There is no doubt that practicing engineers and scientists need to know their pen and paper mathematics. They must also be able to run off-the-shelf software for important standard tasks and will certainly do that a lot. Nevertheless, the benefits of mastering programming are many.</p>
+<div class="section" id="why-learn-programming">
+<h2>Why learn programming?<a class="headerlink" href="#why-learn-programming" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Ready-made software is limited to handling certain standard problems. What do you do when the problem at hand is not covered by the software you bought? Fortunately, a lot of modern software systems are extensible via programming. In fact, many systems demand parts of the problem specification (e.g., material models) to be specified by computer code.</li>
+<li>With programming skills, you may extend the flexibility of existing software packages by combining them. For example, you may integrate packages that do not speak to each other from the outset. This makes the work flow simpler, more efficient, and more reliable, and it puts you in position to attack new problems.</li>
+<li>It is easy to use excellent ready-made software the wrong way. Insight in programming and the mathematics behind is fundamental for understanding complex software, avoiding pitfalls, and become a safe user.</li>
+<li>Bugs (errors in computer code) are present in most larger computer programs (also in the ones from the shop!). What do you do when your ready-made software gives unexpected results? Is it a bug, is it wrong use, or is it the mathematically correct result? Experience with programming of mathematics gives you a good background for answering these questions. The one who can program, can also make tailored code for a simplified problem setting and use that to verify the computations done with off-the-shelf software.</li>
+<li>Lots of skilled people around the world solve computational problems by writing their own code and offer their code for free on the Internet. To take advantage of this truly great source of software in a reliable way, one must normally be able to understand and possibly modify computer code offered by others.</li>
+<li>It is recognized world wide that students struggle with mathematics and physics. Too many find such subjects difficult and boring. With programming, we can execute the good old subjects in a brand new way! According to the authors&#8217; own experience, students find it much more motivating and enlightening when programming is made an integrated part of mathematics and physical science courses. In particular, the problem being solved can be much more realistic than when the mathematics is restricted to what you can do with pen and paper.</li>
+<li>Finally, we launch our most important argument for learning computer programming: the <em>algorithmic thinking</em> that comes with the process of writing a program for a computational problem enforces a thorough understanding of both the problem and solution method. We can simply quote the famous Norwegian computer scientist Kristen Nyggaard: &#8220;Programming is understanding&#8221;.</li>
+</ol>
+<p>In the authors&#8217; experience, programming is an excellent pedagogical tool for understanding mathematics: &#8220;You think you know when you can learn, are more sure when you can write, even more when you can teach, but certain when you can program&#8221; (Alan Perlis, computer scientist, 1922-1990). Consider, for example, integration. A numerical method for integration has a much stronger focus on what the integral actually is and
+means compared to analytical methods, where much time and effort must be devoted to integration by parts, integration by substitution, etc. Moreover, when programming the numerical integration formula, it becomes evident that it works for &#8220;all&#8221; mathematical functions and that the implementation should be in terms of a <em>general</em> function applicable to &#8220;all&#8221; integrals. In this way, students learn to recognize a special problem as belonging to a class of problems (e.g., integration, differential equations, root finding), for which we have general numerical methods implemented in widely applicable software. When they write this software, as we do in this book, they learn how to generalize and increase the abstraction level of the mathematical problem. When they use this software, they learn how a special case should be attacked by general methods and software for the class of problems that comprises the special case at hand. This is the power of mathematics in a nutshell, and it is paramount that students understand this way of thinking.</p>
+</div>
+<div class="section" id="target-audience-and-background-knowledge">
+<h2>Target audience and background knowledge<a class="headerlink" href="#target-audience-and-background-knowledge" title="Permalink to this headline">¶</a></h2>
+<p>This book was written for students, teachers, engineers and scientists that know <em>nothing</em> about programming and numerical methods from before, but who seek a <em>minimum</em> of the fundamental skills required to get started with programming as a tool for solving scientific and engineering problems. Some knowledge of one- and multi-variable calculus is assumed. The basic programming concepts are presented in only 50 pages (Chapters 1 and 2), before practical applications of these concepts are demonstrated in important mathematical subjects addressed in the remaining parts of the book (Chapters 3-6). Each chapter is followed by a set of exercises that cover a wide range of application areas, e.g. biology, geology, statistics, physics and mathematics. The exercises were particularly designed to bring across important points from the text. The reader will realize that the modest content of the first 50 pages can in fact bring you quite far in powerful problem solving! All code presented in this book can be downloaded from <a class="reference external" href="http://hplgit.github.io/prog4comp">http://hplgit.github.io/prog4comp</a>.</p>
+<p>Learning the very basics of programming should not take long, but as with any other craft, mastering the skill requires continued and extensive practice. Some beginning practice is gained through Chapters 3-6, but the authors strongly emphasize that this is only a start. Students should continue to practice programming in subsequent courses, while those who exercise self-study, should keep up the learning process through continued application of the craft. The book is a good starting point when teaching computer programming as an integrated part of standard university courses in mathematics and physical sciences. In our experience, such an integration is doable and indeed rewarding.</p>
+</div>
+<div class="section" id="numerical-methods">
+<h2>Numerical methods<a class="headerlink" href="#numerical-methods" title="Permalink to this headline">¶</a></h2>
+<p>An overall goal with this book is to motivate computer programming as a very powerful tool for doing mathematics. All examples are related to mathematics and its use in engineering and science. However, to solve mathematical problems through computer programming, we need numerical methods. Explaining basic numerical methods is therefore an integral part of the book. Our choice of topics is governed by what is most needed in science and engineering, as well as in the teaching of applied physical science courses. Mathematical models are then central, with differential equations constituting the most frequent type of models. Consequently, the numerical focus in this book is on differential equations. As a soft pedagogical starter for the programming of mathematics, we have chosen the topic of numerical integration. There is also a chapter on root finding, which is important for the numerical solution on nonlinear differential equations.  We remark that the book is deliberately brief on numerical methods. This is because our focus is on <em>implementing</em> numerical algorithms, but to develop reliable, working programs, the programmer must be confident about the basic ideas of the numerical approximations involved.</p>
+</div>
+<div class="section" id="the-computer-language-python">
+<h2>The computer language: Python<a class="headerlink" href="#the-computer-language-python" title="Permalink to this headline">¶</a></h2>
+<p>We have chosen to use the programming language Python, because this language gives very compact and readable code that closely resembles the mathematical
+recipe for solving the problem at hand. Python also has a gentle learning curve. There is a
+MATLAB/Octave
+companion of this book in case that language is preferred.
+Comparing these two versions of the book provides an excellent demonstration of how similar these languages are. Other computer languages, like Fortran, C, and C++, have a strong position in science and engineering. During the last two decades, however, there has been a significant shift in popularity from these compiled languages to more
+high-level and easier-to-read languages like MATLAB, Python, R, Maple, Mathematica, and IDL, for instance. This latter class of languages is computationally less efficient, but superior with respect to overall human problem solving efficiency. This book emphasizes <em>how to think like a programmer</em>, rather than focusing on technical language details. Thus, the book should put the reader in a good position for learning other programming languages later, including the classic ones: Fortran, C, and C++.</p>
+</div>
+<div class="section" id="how-this-book-is-different">
+<h2>How this book is different<a class="headerlink" href="#how-this-book-is-different" title="Permalink to this headline">¶</a></h2>
+<p>There are numerous texts on computer programming and numerical methods, so how does the present one differ from the existing literature? Compared to books on numerical methods, our book has a much stronger emphasis on the craft of programming and on verification. We want to give students a thorough understanding of how one thinks about programming as a problem solving method and how one can be sure that programs are correct (well, you can never be completely sure, but we show how you can provide convincing evidence for correctness).</p>
+<p>Even though there are lots of books on numerical methods where many algorithms have a corresponding computer implementation (see, e.g.,
+<a class="reference internal" href="._pylight009.html#ref01" id="id1">[Ref01]</a> <a class="reference internal" href="._pylight009.html#ref02" id="id2">[Ref02]</a> <a class="reference internal" href="._pylight009.html#ref03" id="id3">[Ref03]</a> <a class="reference internal" href="._pylight009.html#ref04" id="id4">[Ref04]</a> <a class="reference internal" href="._pylight009.html#ref05" id="id5">[Ref05]</a> <a class="reference internal" href="._pylight009.html#ref06" id="id6">[Ref06]</a> <a class="reference internal" href="._pylight009.html#ref07" id="id7">[Ref07]</a> <a class="reference internal" href="._pylight009.html#ref08" id="id8">[Ref08]</a> <a class="reference internal" href="._pylight009.html#ref09" id="id9">[Ref09]</a> <a class="reference internal" href="._pylight009.html#ref10" id="id10">[Ref10]</a> <a class="reference internal" href="._pylight009.html#ref11" id="id11">[Ref11]</a> <a class="reference internal" href="._pylight009.html#ref12" id="id12">[Ref12]</a> <a class="reference internal" href="._pylight009.html#ref13" id="id13">[Ref13]</a> <a class="reference internal" href="._pylight009.html#ref14" id="id14">[Ref14]</a> <a class="reference internal" href="._pylight009.html#ref15" id="id15">[Ref15]</a> <a class="reference internal" href="._pylight009.html#ref16" id="id16">[Ref16]</a> - the latter two are the only texts we know that apply Python),
+it is assumed that the reader &#8220;can program&#8221; beforehand. The present book teaches the craft of structured programming along with the numerical methods. Furthermore, we have so far not found any other numerical methods book that has a strong emphasis on verifying implementations. In this book, unit testing and corresponding test functions are introduced early on. We also put much emphasis on coding algorithms as <em>functions</em>, as opposed to &#8220;flat programs&#8221;, which often dominate in the literature and among practitioners. Functions are reusable because they utilize the general formulation of a mathematical algorithm such that it becomes applicable to a large class of problems.</p>
+<p>There are also numerous books on computer programming, but to our knowledge only one <a class="reference internal" href="._pylight009.html#ref17" id="id17">[Ref17]</a> that aims to teach programming in the context of numerical methods and scientific applications. That book <a class="reference internal" href="._pylight009.html#ref17" id="id18">[Ref17]</a> has its primary focus on teaching Python and is a very comprehensive introduction to Python as a language and the thinking about programming as a computer scientist. Sometimes one needs a text that does not go so deep into the language-specific details,
+but instead targets the shortest path to reliable mathematical problem solving through programming. With this attitude in mind, a lot of topics were left out of the present book, simply because they were not <em>strictly</em> needed in the mathematical problem solving process.
+Examples of such topics are object-oriented programming and Python dictionaries (of which the latter omission is possibly subject to more debate). If you find the present book too shallow, <a class="reference internal" href="._pylight009.html#ref17" id="id19">[Ref17]</a> might be the right choice for you. That source should also work nicely as a more in-depth successor of the present text.</p>
+<p>Whenever the need for a <em>structured introduction to programming</em> arises in science and engineering courses, this book may be your option, either for self-study or for use in organized teaching. The thinking, habits, and practice covered in a couple of hundred pages will put readers in a firm position for utilizing and understanding the power of computers for problem solving in science and engineering.</p>
+</div>
+<div class="section" id="acknowledgments">
+<h2>Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permalink to this headline">¶</a></h2>
+<p>First of all we must thank all the classes at Telemark Engineering College that worked their way through early versions of this text and reported various kinds of problems.
+Special acknowledgement goes to Edirisinghe V. P. J. Manjula for his careful reading of the manuscript and for his constructive suggestions for improvement.
+The careful proof reading by Yapi Donatien Achou is also highly appreciated.
+Some colleagues???????????????????????
+Svein Linge is particularly thankful to Prof. Marius Lysaker
+for their fruitful collaboration on introducing programming as an integral part
+of mathematics and physics bachelor courses at Telemark Engineering College.</p>
+<p>The text was written in the <a class="reference external" href="https://github.com/hplgit/doconce">DocOnce</a> <a class="reference internal" href="._pylight009.html#ref18" id="id20">[Ref18]</a> markup language,
+which allowed us to work with a single text source for both the Python
+and the Matlab version of this book, and to produce various electronic
+versions of the book.</p>
+<span class="target" id="st-thefirstfewsteps"></span></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Preface</a><ul>
+<li><a class="reference internal" href="#why-learn-programming">Why learn programming?</a></li>
+<li><a class="reference internal" href="#target-audience-and-background-knowledge">Target audience and background knowledge</a></li>
+<li><a class="reference internal" href="#numerical-methods">Numerical methods</a></li>
+<li><a class="reference internal" href="#the-computer-language-python">The computer language: Python</a></li>
+<li><a class="reference internal" href="#how-this-book-is-different">How this book is different</a></li>
+<li><a class="reference internal" href="#acknowledgments">Acknowledgments</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="._pylight000.html"
+                        title="previous chapter">Programming for Computations - A Gentle Introduction to Numerical Simulations with Python</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="._pylight002.html"
+                        title="next chapter">The first few steps</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/._pylight001.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, S. Linge and H. P. Langtangen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.4</a>
+      
+      |
+      <a href="_sources/._pylight001.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,2371 @@
+
+
+.. |nbsp| unicode:: 0xA0
+   :trim:
+
+.. !split
+
+Basic constructions
+%%%%%%%%%%%%%%%%%%%
+
+.. figure:: opt_exec.png
+   :width: 800
+
+If tests, colon and indentation
+===============================
+
+.. index:: if
+
+.. index:: elif
+
+.. index:: else
+
+.. index:: colon
+
+.. index:: indent
+
+.. index:: boolean
+
+.. index::
+   single: boolean; expression
+
+.. index:: True
+
+.. index:: False
+
+.. index::
+   single: boolean; True
+
+.. index::
+   single: boolean; False
+
+.. index:: pseudo code
+
+Very often in life, and in computer programs, the next action depends on
+the outcome of a question starting with "if". This gives the possibility
+to branch into different types of action depending on some criterion.
+Let us as usual focus on a specific example, which is the core of
+so-called random walk algorithms used in a wide range of branches in
+science and engineering, including materials manufacturing and brain research.
+The action is to move randomly to the north
+(N), east (E), south (S), or west (W) with the same probability.
+How can we implement such an action in life and in a computer program?
+
+We need to randomly draw one out of four numbers to select the direction
+in which to move.
+A deck of cards can be
+used in practice for this purpose. Let the four suits correspond to
+the four directions: clubs to N, diamonds to E, hearts to S, and spades to W,
+for instance. We draw a card, perform the corresponding move, and repeat
+the process a large number of times. The resulting path is a typical
+realization of the path of a diffusing molecule.
+
+In a computer program, we need to draw a random number, and depending on
+the number, update the coordinates of the point to be moved.
+There are many ways to draw random numbers and translate them into
+(e.g.) four random directions, but the technical details usually depend
+on the programming language. Our technique here is universal: we draw a
+random number in the interval :math:`[0,1)` and let :math:`[0,0.25)` correspond to
+N, :math:`[0.25,0.5)` to E, :math:`[0.5,0.75)` to S, and :math:`[0.75,1)` to W.
+Let ``x`` and ``y`` hold the coordinates of a point and let ``d`` be
+the length of the move. A pseudo code (i.e., not "real" code, just
+a "sketch of the logic") then goes like
+
+.. code-block:: python
+
+        r = random number in [0,1)
+        if 0 <= r < 0.25
+           move north: y = y + d
+        else if 0.25 <= r < 0.5
+           move east:  x = x + d
+        else if 0.5 <= r < 0.75
+           move south:  y = y - d
+        else if 0.75 <= r < 1
+           move west:  x = x - d
+
+Note the need for first asking about the value of ``r`` and then performing an
+action. If the answer to the "if" question is positive (true), we are done
+and can skip the next ``else if`` questions.
+If the answer is negative (false), we
+proceed with the next question. The last test if :math:`0.75\leq r < 1`
+could also read just ``else``, since we here cover all the remaining
+possible ``r`` values.
+
+The exact code in Matlab reads
+
+.. code-block:: matlab
+
+        r = rand()          % random number in [0,1)
+        if 0 <= r < 0.25
+          %% move north
+           y = y + d;
+        elseif 0.25 <= r < 0.5
+          %% move east
+           x = x + d;
+        elseif 0.5 <= r < 0.75
+          %% move south
+           y = y - d;
+        else
+          %% move west
+           x = x - d;
+        end
+
+We use ``else`` in the last test to cover the different types of
+syntax that is allowed.
+Matlab recognizes the reserved words ``if``, ``elseif``,
+and ``else``
+and expects the code to be compatible with the rules of if tests:
+
+ * The test reads ``if condition``, ``elif condition``, or ``else``, where
+   ``condition`` is a *boolean expression* that evaluates to ``true`` (1) or ``false`` (0).
+
+ * If ``condition`` is ``true``, the following statements up to the next
+   ``elseif``, ``else``, or ``end``
+   are executed, and the remaining ``if``, ``elseif``, or ``else`` branches are
+   skipped.
+
+ * If ``condition`` is ``false``, the program flow jumps to the next
+   ``if``, ``elseif``, or ``else`` branch.
+
+The blocks after ``if``, ``elseif``, or ``else`` may contain new if tests, if desired.
+
+.. index::
+   single: operator; Logical
+
+Working with if tests requires mastering boolean expressions.
+Here are some basic boolean expressions involving the
+*logical operators* ``==``, ``~=``, ``<``, ``<=``, ``>``, and ``>=``.
+Given the assignment to ``temp``, you should go through each boolean
+expression and determine if it is true or false.
+
+.. code-block:: matlab
+
+        temp = 21       % assign value to a variable
+        temp == 20	% temp equal to 20
+        temp ~= 20	% temp not equal to 20
+        temp <  20	% temp less than 20
+        temp >  20	% temp greater than 20
+        temp <= 20	% temp less than or equal to 20
+        temp >= 20	% temp greater than or equal to 20
+
+.. _sec:functions:
+
+Functions
+=========
+
+.. index:: function
+
+.. index::
+   single: function; definition
+
+.. index:: def
+
+.. index:: return
+
+.. index:: argument
+
+.. index::
+   single: parameter; input
+
+.. index::
+   single: parameter; output
+
+Functions are widely used in programming and is a concept that needs to
+be mastered. In the simplest case, a function in a program is much like
+a mathematical function: some input number :math:`x` is transformed to some output
+number.
+One example is the :math:`\tanh^{-1}(x)` function, called ``atan`` in computer
+code: it takes one real number as input and returns another number.
+Functions in Matlab are more general and can take a series of
+variables as input and return one or more variables, or simply nothing.
+The purpose of functions is two-fold:
+
+1. to *group statements* into separate units of code lines that naturally belong together (a
+   strategy which may dramatically ease the problem solving process), and/or
+
+2. to *parameterize* a set of statements such that they can be written only
+   once and easily be re-executed with variations.
+
+Examples will be given to illustrate how functions can be written in various contexts.
+
+If we modify the program ``ball.m`` from the chapter :ref:`1st:ex1`
+slightly, and include a function, we could let this be a new program
+`ball_function.m <https://github.com/hplgit/prog4comp/src/m/ball_function.m>`__
+as
+
+.. code-block:: matlab
+
+        function ball_function()
+            % This is the main program
+            time = 0.6;                     % Just pick some time
+            vertical_position = y(time);    
+            fprintf('%f \n',vertical_position)
+            time = 0.9;                     % Pick another time
+            vertical_position = y(time);   
+            fprintf('%f \n',vertical_position)
+        end
+        
+        % The function 'y' is a _local_ function in this file
+        function result = y(t)
+            g = 9.81;      % Acceleration of gravity
+            v0 = 5;        % Initial velocity
+            result = v0*t - 0.5*g*t^2;
+        end
+
+Here, Matlab interprets this as the definition of two functions,
+recognized by the reserved word ``function`` that appears two
+places. The first function ``ball_function``, is defined by the
+statements between (and including) ``function ball_function()`` and the
+first ``end``. Note that the first function in a file should have the
+same name as the name of the file (apart from the extension ``.m``). The
+second function, i.e. ``y``, is similarly defined between ``function
+result = y(t)`` and the second ``end``.
+
+Opposed to the function ``y``, the function ``ball_function`` does *not*
+return a value. This is stated in the first line of each function
+definition. Comparing, you notice that ``y`` has an assignment there,
+whereas ``ball_function`` has not. The final statement of the function
+``y``, i.e.
+
+.. code-block:: matlab
+
+        result = v0*t - 0.5*g*t^2;
+
+will be understood by Matlab as "first compute the expression, then
+place the result in ``result`` and send it back (i.e. return) to where
+the function was called from". The function depends on one variable
+(or we say that it takes one *argument* or *input parameter*), the
+value of which must be provided when the function is called.
+
+What do these things mean? Well, the function definition itself,
+e.g. of ``y``, just tells Matlab what there is function ``y``, taking the
+specified arguments as input, and returning a specified output
+result. Matlab keeps this information ready for use in case a call to
+``y`` is performed elsewhere in the code.  In our case, a call to ``y``
+happens twice by the line ``vertical_position = y(time)``. By this
+instruction, Matlab takes ``y(time)`` as a call to the function ``y``,
+assigning the value of ``time`` to the variable ``t``. So in the first
+call, ``t`` becomes :math:`0.6`, while in the second call ``t`` becomes
+:math:`0.9`. In both cases the code lines of ``y`` are executed and the
+returned result (the *output parameter*) is stored in
+``vertical_position``, before it is next printed by Matlab.
+
+Note that the reserved word ``return`` may be used to enforce a return
+from a function before it reaches the end. For example, if a function
+contains ``if-elseif-else`` constructions, ``return`` may be done from
+within any of the branches. This may be illustrated by the following
+function containing three ``return`` statements:
+
+.. code-block:: matlab
+
+        function result = check_sign(x)
+            if x > 0
+                result = 'x is positive';
+                return;
+            elseif x < 0
+                result = 'x is negative';
+                return;
+            else
+                result = 'x is zero';
+                return;
+            end
+        end
+
+Remember that only one of the branches is executed for a single call
+on ``check_sign``, so depending on the number ``x``, the return may take
+place from any of the three return alternatives.
+
+One phrase you will meet often when dealing with programming, is *main
+program* or *main function*, or that some code is *in main*. This is
+nothing particular to Matlab, and simply means the first function that
+is defined in a file, e.g. ``ball_function`` above. You may define as
+many functions as you like in a file after the main function. These
+then become *local functions*, i.e. they are only known inside that
+file. In particular, only the main function may be called from the
+command window, whereas local functions may not.
+
+A function may take no arguments, or many, in which case they are just
+listed within the parentheses (following the function name) and
+separated by a comma. Let us illustrate. Take a slight variation of the
+ball example and assume that the ball is not thrown straight up, but
+at an angle, so that two coordinates are needed to specify its
+position at any time. According to Newton's laws (when air resistance
+is negligible), the vertical position is given by :math:`y(t) = v_{0y}t - 0.5gt^2` and
+the horizontal position by :math:`x(t) = v_{0x}t`. We can include both these
+expressions in a new version of our program that prints the position
+of the ball for chosen times. Assume we want to evaluate these expressions at two
+points in time, :math:`t = 0.6s` and :math:`t = 0.9s`. We can pick some numbers
+for the initial velocity components ``v0y`` and ``v0x``, name the program
+`ball_position.m <https://github.com/hplgit/prog4comp/src/m/ball_position.m>`__,
+and write it for example as
+
+.. code-block:: matlab
+
+        function ball_position_xy()
+            initial_velocity_x = 2.0;
+            initial_velocity_y = 5.0;
+        
+            time = 0.6;  % Just pick one point in time
+            x_pos = x(initial_velocity_x, time);
+            y_pos = y(initial_velocity_y, time);
+            fprintf('%f %f \n', x_pos, y_pos)
+            
+            time = 0.9;  % Pick another point in time
+            x_pos = x(initial_velocity_x, time);
+            y_pos = y(initial_velocity_y, time);
+            fprintf('%f %f \n', x_pos, y_pos)
+        end
+        
+        function result = y(v0y, t)
+            g = 9.81;      % Acceleration of gravity
+            result = v0y*t - 0.5*g*t^2;
+        end
+        
+        function result = x(v0x, t)
+            result = v0x*t;
+        end
+
+Now we compute and print the two components for the position, for each
+of the two chosen points in time. Notice how each of the two functions
+now takes *two* arguments. Running the program gives the output
+
+.. code-block:: text
+
+        1.2  1.2342
+        1.8  0.52695
+
+A function may also return more than one value. For example, the two
+functions we just defined could alternatively have been defined into
+one as
+
+.. code-block:: matlab
+
+        function [result1, result2] = xy(v0x, v0y, t)
+            g = 9.81;	     % acceleration of gravity
+            result1 = v0x*t;
+            result2 = v0y*t - 0.5*g*t^2;
+        end
+
+Notice the two return values ``result1`` and ``result2`` that are
+listed in the function header, i.e., the first line of the function
+definition. When calling the function, arguments must appear in the
+same order as in the function definition. We would then write
+
+.. code-block:: matlab
+
+        [x_pos,y_pos] = xy(initial_x_velocity, initial_y_velocity, time);
+
+The variables ``x_pos`` and ``y_pos`` could then have been printed or used
+in other ways in the code.
+
+.. index::
+   single: function; nargin
+
+.. index::
+   single: function; nargout
+
+There are possibilities for having a variable number of function input
+and output parameters (using ``nargin`` and ``nargout``). However, we do
+not go further into that topic here.
+
+.. index::
+   single: variable; local
+
+.. index::
+   single: variable; global
+
+Variables that are defined inside a function, e.g., ``g`` in the last
+``xy`` function, are *local variables*. This means they are only known
+inside the function. Therefore, if you had accidentally used ``g`` in
+some calculation outside the function, you would have got an error
+message. By use of the reserved word ``global``, a variable may be known
+also outside the function in which it is defined (without transferring
+it as a parameter). For example, if, in some function ``A``, we write
+
+.. code-block:: matlab
+
+        global some_variable;
+        some_variable = 2;
+
+then, in another function ``B``, we could use ``some_variable`` directly if we just specify it first as being global, e.g.
+
+.. code-block:: matlab
+
+        global some_variable;
+        some_other_variable = some_variable*2;
+
+We could even change the value of ``some_variable`` itself inside ``B`` if
+we like, so that upon return to the function ``A``, ``some_variable``
+would have a new value. If you define one global and one local
+variable, both with the same name, the function only sees the local
+one, so the global variable is not affected by what happens with its
+local companion of the same name.  The arguments named in the header of a function
+definition are by rule local variables inside the function. One should
+strive to define variables mostly where they are needed and not
+everywhere.
+
+.. index:: doc string
+
+.. index::
+   single: function; handle
+
+In any programming language, it is a good habit to include a little
+explanation of what the function is doing, unless what is done by the
+function is obvious, e.g., when having only a few simple code lines. This
+explanation (sometimes known as a *doc string*) should be placed just at the top of the function.
+This explanation is meant for a human who wants
+to understand the code, so it should say something about the purpose
+of the code and possibly explain the arguments and return values if
+needed. If we do that with our ``xy`` function from above, we may write
+the first lines of the function as
+
+.. code-block:: matlab
+
+        function xy(v0x, v0y, t)
+           %% Compute the x and y position of the ball at time t
+
+Note that a function you have written may call another function you
+have written, even if they are not defined within the same file. Such
+a call requires the called function to be located in a file with the
+same name as the function (apart from the extension ``.m``). This file
+must also be located in a folder where Matlab can find it, e.g. in the
+same folder as the calling function.
+
+Functions are straightforwardly passed as arguments to other functions, as illustrated by the following script
+`function_as_argument.m <https://github.com/hplgit/prog4comp/src/m/function_as_argument.m>`__:
+
+.. code-block:: matlab
+
+        function function_as_argument()
+            x = 2;
+            y = 3;
+            
+            % Create handles to the functions defined below
+            sum_xy_handle = @sum_xy;
+            prod_xy_handle = @prod_xy;
+            
+            sum = treat_xy(sum_xy_handle, x, y);
+            fprintf('%f \n', sum);
+            prod = treat_xy(prod_xy_handle, x, y);
+            fprintf('%f \n', prod);
+        end
+        
+        function result = treat_xy(f, x, y)
+            result = f(x, y);
+        end
+        
+        function result = sum_xy(x, y)
+            result = x + y;
+        end
+        
+        function result = prod_xy(x, y)
+            result = x*y;
+        end
+
+When run, this program first prints the sum of ``x`` and ``y`` (i.e., 5),
+and then it prints the product (i.e., 6). We see that ``treat_xy`` takes
+a function name as its first parameter. Inside ``treat_xy``, that
+function is used to actually *call* the function that was given as
+input parameter. Therefore, as shown, we may call ``treat_xy`` with
+either ``sum_xy`` or ``prod_xy``, depending on whether we want the sum or
+product of ``x`` and ``y`` to be calculated.
+
+To transfer a function to the function ``treat_xy``, we must use
+*function handles*, one for each function we want to transfer. This is
+done by the sign ``@`` combined with the function name, as illustrated
+by the lines
+
+.. code-block:: matlab
+
+        sum_xy_handle = @sum_xy;
+        prod_xy_handle = @prod_xy;
+
+Note that it is the *handle* that is used in the function call, as, e.g., in
+
+.. code-block:: matlab
+
+        sum = treat_xy(sum_xy_handle,x,y);
+
+.. index::
+   single: function; local
+
+.. index::
+   single: function; global
+
+.. index::
+   single: function; nested
+
+Functions may also be defined *within* other functions. It that case,
+they become *local functions*, or *nested functions*, known only to
+the function inside which they are defined. Functions defined in main
+are referred to as *global functions*.  A nested function has full
+access to all variables in the *parent function*, i.e. the function
+within which it is defined.
+
+One convenient way of defining one-line functions (they can *not* be more than one line!), is by use of *anonymous functions*. You may then define, e.g., a square function by the name ``my_square``, as
+
+.. code-block:: matlab
+
+        my_square = @(x) x.^2;
+
+and then use it simply as
+
+.. code-block:: matlab
+
+        y = my_sqare(2);
+
+which would have assigned the value :math:`4` to ``y``. Note that ``my_square`` here becomes a handle that may be used directly as a function parameter for example.
+
+
+.. admonition:: Overhead of function calls
+
+   Function calls have the downside of slowing down program execution.
+   Usually, it is a good thing to split a program into functions, but
+   in very computing intensive parts, e.g., inside long loops, one
+   must balance the convenience of calling a function and the
+   computational efficiency of avoiding function calls. It is a good
+   rule to develop a program using plenty of functions and then
+   in a later optimization stage, when everything computes correctly,
+   remove function calls that are quantified to slow down the code.
+
+
+
+
+.. _sec:for:loops:
+
+For loops
+=========
+
+.. index::
+   single: loop; for
+
+.. index:: for loop
+
+.. index:: range
+
+.. index::
+   single: loop; iteration
+
+.. index::
+   single: loop; index
+
+Many computations are repetitive by nature and programming languages
+have certain *loop structures* to deal with this. Here we will present
+what is referred to as a *for loop* (another kind of loop is a *while*
+loop, to be presented below). Assume you want to calculate the square
+of each integer from 3 to 7. This could be done with the following
+two-line program.
+
+.. code-block:: matlab
+
+        for i = 3:7
+            i^2
+        end
+
+What happens when Matlab interprets your code here? First of all, the
+word ``for`` is a reserved word signalling to Matlab that a ``for`` loop
+is wanted. Matlab then sticks to the rules covering such
+constructions and understands that, in the present example, the loop should
+run 5 successive times (i.e., 5 *iterations* should be done),
+letting the variable ``i`` take on the numbers :math:`3, 4, 5, 6, 7` in turn.
+During each iteration, the statement inside the loop
+(i.e. ``i^2``)
+is carried out.  After each iteration, ``i`` is automatically (behind
+the scene) updated. When the last number is reached, the last
+iteration is performed and the loop is finished. When executed, the
+program will therefore print out :math:`9, 16, 25, 36` and :math:`49`. The
+variable ``i`` is often referred to as a *loop index*, and its name
+(here ``i``) is a choice of the programmer.
+
+Note that, had there been several statements within the loop, they
+would all be executed with the same value of ``i`` (before ``i`` changed
+in the next iteration). Make sure you understand how program execution
+flows here, it is important.
+
+The specification of the values desired for the loop variable (here ``3:7``) is
+more generally given as ``start:step:stop``, meaning that the loop variable should
+take on the integers from ``start`` to ``stop``, inclusive at both ends, in steps of
+``step``. If ``step`` is skipped, the default value is 1, as in the example above.
+Note that decreasing integers may be produced by letting ``start > stop`` combined
+with a negative step. This makes it easy to, e.g., traverse
+arrays in either direction.
+
+Let us modify ``ball_plot.m`` from the chapter :ref:`1st:ex3` to illustrate how useful ``for`` loops are if you need to traverse arrays. In that example we computed the height of the ball at every milli-second during the first second of its (vertical) flight and plotted the height versus time.
+
+Assume we want to find the maximum height during that time, how can we do it with a computer program? One alternative may be to compute all the thousand heights, store them in an array, and then run through the array to pick out the maximum. The program, named
+`ball_max_height.m <https://github.com/hplgit/prog4comp/src/m/ball_ma_height.m>`__,
+may look as follows.
+
+.. code-block:: matlab
+
+        g = 9.81;
+        v0 = 5;
+        t = linspace(0, 1, 1000);
+        y = v0*t - 0.5*g*t.^2;
+        
+        % At this point, the array y with all the heights is ready.
+        % Now we need to find the largest value within y.
+        
+        largest_height = y(1);   % Preliminary value
+        for i = 2:1000
+           if y(i) > largest_height
+               largest_height = y(i);
+           end
+        end
+        
+        fprintf('The largest height achieved was %f m \n',largest_height);
+        
+        % We might also like to plot the path again just to compare
+        plot(t,y);
+        xlabel('Time (s)');
+        ylabel('Height (m)')
+
+There is nothing new here, except the ``for`` loop construction, so let us look at it in more detail. As explained above, Matlab understands that a ``for`` loop is desired when it sees the word ``for``.
+The value in ``y(1)`` is used as the *preliminary* largest height, so
+that, e.g., the very first check that is made is testing whether
+``y(2)`` is larger than this height. If so, ``y(2)`` is stored as the
+largest height. The ``for`` loop then updates ``i`` to :math:`2`, and continues
+to check ``y(3)``, and so on.
+Each time we find a larger number, we store it.
+When finished,
+``largest_height`` will contain the largest number from the array
+``y``. When you run the program, you get
+
+.. code-block:: text
+
+        The largest height achieved was 1.274210 m
+
+which compares favorably to the plot that pops up.
+
+To implement the traversing of arrays with loops and indices, is
+sometimes challenging to get right. You need to understand the start,
+stop and step length choices for an index, and also how the index
+should enter expressions inside the loop. At the same time, however,
+it is something that programmers do often, so it is important to
+develop the right skills on these matters.
+
+.. index::
+   single: loop; double
+
+.. index::
+   single: loop; multiple
+
+.. index::
+   single: loop; nested
+
+.. index:: linear algebra
+
+Having one loop inside another, referred to as a *double loop*, is
+sometimes useful, e.g., when doing linear algebra. Say we want to find
+the maximum among the numbers stored in a :math:`4 \times 4` matrix ``A``. The
+code fragment could look like
+
+.. code-block:: matlab
+
+        largest_number = A(1,1);
+        
+        for i = 1:length(A)
+            for j = 1:length(A)
+                if A(i,j) > largest_number
+                    largest_number = A(i,j);
+                end
+            end
+        end
+
+Here, all the ``j`` indices (``1 - 4``) will be covered for *each* value
+of index ``i``. First, ``i`` stays fixed at ``i = 1``, while ``j`` runs over
+all its indices. Then, ``i`` stays fixed at ``i = 2`` while ``j`` runs over
+all its indices again, and so on.
+Sketch ``A`` on a piece of paper and
+follow the first few loop iterations by hand, then you will realize
+how the double loop construction works. Using two loops is just a
+special case of using *multiple* or *nested loops*, and utilizing more
+than two loops is just a straightforward extension of what was shown
+here. Note, however, that the loop index *name* in multiple loops must
+be unique to each of the nested loops. Note also that each nested loop
+may have as many code lines as desired, both before and after the next
+inner loop.
+
+The vectorized computation of heights that we did in
+``ball_plot.m`` (the chapter :ref:`1st:ex3`) could alternatively have
+been done by traversing the time array (``t``) and, for each ``t``
+element, computing the height according to the formula :math:`y = v_0t -
+\frac{1}{2}gt^2`. However, it is important to know that vectorization goes
+much quicker. So when speed is important, vectorization is valuable.
+
+
+.. admonition:: Use loops to compute sums
+
+   
+   One important use of loops, is to calculate sums. As a simple example,
+   assume some variable :math:`x` given by the mathematical expression
+   
+   .. math::
+           
+           x = \sum_{i=1}^{N}2\cdot i  ,   \nonumber
+           
+   
+   i.e., summing up the :math:`N` first even numbers.
+   For some given :math:`N`, say :math:`N = 5`,
+   :math:`x` would typically be computed in a computer program as:
+   
+   .. code-block:: matlab
+   
+           N = 5;
+           x = 0;
+           for i = 1:N
+               x = x + 2*i;
+           end
+           x
+   
+   Executing this code will print the number 30 to the screen. Note in
+   particular how the *accumulation variable* ``x`` is initialized to
+   zero. The value of ``x`` then gets updated with each iteration of the
+   loop, and not until the loop is finished will ``x`` have the correct
+   value. This way of building up the value is very common in
+   programming, so make sure you understand it by simulating the
+   code segment above by hand. It is a technique used
+   with loops in any programming language.
+
+
+
+
+.. _sec:while:loops:
+
+While loops
+===========
+
+.. index:: while loop
+
+.. index::
+   single: loop; while
+
+.. index::
+   single: loop; infinite
+
+.. index::
+   single: loop; iteration
+
+.. index::
+   single: loop; index
+
+Matlab also has another standard loop construction, the *while loop*,
+doing iterations with a loop index very much like the ``for`` loop. To
+illustrate what such a loop may look like, we consider another
+modification of ``ball_plot.m`` in the chapter :ref:`1st:ex3`. Assume
+the ball is thrown with a slightly lower initial velocity, say
+:math:`4.5\hbox{ ms}^{-1}`, while everything else is kept unchanged. Since
+we still look at the first second of the flight, the heights at the
+end of the flight become negative. However, this only means that the
+ball has fallen below its initial starting position, i.e., the height
+where it left the hand, so there is no problem with that. In our array
+``y`` we will then have a series of heights which towards the end of ``y``
+become negative. Let us, in a program named
+`ball_time.m <https://github.com/hplgit/prog4comp/src/m/ball_time.m>`__
+find the time when heights starts to get negative, i.e., when the
+ball crosses :math:`y=0`. The program could look like this
+
+.. code-block:: matlab
+
+        g = 9.81;
+        v0 = 4.5;                  % Initial velocity
+        t = linspace(0, 1, 1000);  % Acceleration of gravity
+        y = v0*t - 0.5*g*t.^2;     % Generate all heights
+        
+        % At this point, the array y with all heights is ready
+        
+        i = 1;
+        while y(i) >= 0
+           i = i + 1; 
+        end
+        
+        % Having the index, we may look up the time in the array t
+        fprintf('The time (switch from positive to negative): %f\n', t(i));
+        
+        % We plot the path again just for comparison
+        plot(t, y);
+        xlabel('Time (s)');
+        ylabel('Height (m)');
+
+If you type and run this program you should get
+
+.. code-block:: text
+
+        y=0 at 0.917417417417
+
+The new thing here is the ``while`` loop only.
+The loop will run as long as the boolean expression ``y(i) >= 0``
+evaluates to ``true``. Note that the programmer introduced a variable
+(the loop index) by the name ``i``, initialized it (``i = 1``) before the
+loop, and updated it (``i = i + 1``) in the loop. So for each iteration,
+``i`` is *explicitly* increased by :math:`1`, allowing a check of successive
+elements in the array ``y``.
+
+Compared to a ``for`` loop, the programmer does not have to specify the
+number of iterations when coding a ``while`` loop. It simply runs until
+the boolean expression becomes ``false``.
+However, the loop index is not
+increased automatically; it must be done explicitly by the
+programmer. Of course, just as in for loops and ``if`` blocks,
+there might be (arbitrarily) many code lines in a ``while``
+loop. Any ``for`` loop may also be implemented as a ``while`` loop, but
+``while`` loops are more general so not all of them can be expressed
+as a ``for`` loop.
+
+A problem to be aware of, is what is usually referred to as an
+*infinite loop*. In those unintentional (erroneous) cases, the boolean
+expression of the ``while`` test never evaluates to ``false``, and the program can not escape the loop. This is one
+of the most frequent errors you will experience as a beginning
+programmer.  If you accidentally enter an infinite loop and the
+program just hangs forever, press ``Ctrl+c`` to stop the program.
+
+.. _sec:file:reading:writing:
+
+Reading from and writing to files
+=================================
+
+Input data for a program often come from files and the results of the
+computations are often written to file. To illustrate basic file
+handling, we consider an example where we read :math:`x` and :math:`y` coordinates
+from two columns in a file, apply a function :math:`f` to the :math:`y` coordinates,
+and write the results to a new two-column data file. The first line of
+the input file is a heading that we can just skip:
+
+.. code-block:: text
+
+        % x and y coordinates
+        1.0  3.44
+        2.0  4.8
+        3.5  6.61
+        4.0  5.0
+
+The relevant Matlab lines for reading the numbers and writing out
+a similar file are given in the file
+`file_handling.m <https://github.com/hplgit/prog4comp/src/m/file_handling.m>`__
+
+.. code-block:: matlab
+
+        filename = 'tmp.dat';
+        infileID = fopen(filename, 'r');   % Open file for reading
+        fgetl(infileID);                   % Read and skip first line
+        
+        % First read file to count number of lines with data
+        no_of_lines = 0;
+        while ~feof(infileID)
+            no_of_lines = no_of_lines + 1;
+            fgetl(infileID); 
+        end
+        fclose(infileID);
+        
+        % Can now define arrays x and y of known length
+        x = zeros(no_of_lines, 1);
+        y = zeros(no_of_lines, 1);
+        
+        % Re-open the file for reading
+        infileID = fopen(filename, 'r');   % Open file for reading
+        fgetl(infileID);                   % Read and skip first line
+        
+        % Read x and y coordinates from the file and store in arrays
+        i = 1;
+        while i <= no_of_lines
+            x(i) = fscanf(infileID, '%f', 1);
+            y(i) = fscanf(infileID, '%f', 1);    
+            i = i + 1;
+        end
+        fclose(infileID);
+        
+        % Next, we treat the y-coordinates and write to file
+        
+        F = @(y) log(y);
+        y = F(y);    % Overwrite y with new values
+        
+        filename = 'tmp_out.dat';
+        outfileID = fopen(filename, 'w');   % Open file for writing
+        i = 1;
+        while i <= no_of_lines
+            fprintf(outfileID, '%10.5f %10.5f', x(i), y(i));
+            i = i + 1;
+        end
+        fclose(outfileID);
+
+Such a file with a comment line and numbers in tabular format is very
+common so Matlab has functionality to ease reading and writing.
+Here is the same example (file
+`file_handling_easy.m <https://github.com/hplgit/prog4comp/src/m/file_handling_easy.m>`__):
+
+.. code-block:: matlab
+
+        filename = 'tmp.dat';
+        data = load(filename);
+        x = data(:,1);
+        y = data(:,2);
+        data(:,2) = log(y); % insert transformed y back in array
+        filename = 'tmp_out.dat';
+        outfile = fopen(filename, 'w'); % open file for writing
+        fprintf(outfile, '%% x and y coordinates\n');
+        fprintf(outfile, '%10.5f %10.5f\n', data);
+        fclose(outfile);
+
+Exercises  (2)
+==============
+
+.. --- begin exercise ---
+
+.. _2nd:exer:IntroducingErrors:
+
+Exercise 10: Introducing errors
+-------------------------------
+
+.. solution=`sol_errors_colon_indent_etc.pdf`
+
+Write the program ``ball_function.m`` as given in the text and
+confirm that the program runs correctly. Then save a copy of the
+program and use that program during the following error testing.
+
+You are supposed to introduce errors in the code, one by one. For each
+error introduced, save and run the program, and comment how well
+Matlab's response corresponds to the actual error. When you are
+finished with one error, re-set the program to correct behavior (and
+check that it works!) before moving on to the next error.
+
+**a)**
+Change the first line from ``function ball_function()`` to
+``ball_function()``, i.e. remove the word ``function``.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+Running the program gives an error message containing
+
+.. code-block:: text
+
+        Error: Unexpected input at line number: 9
+
+as well as the name of the file in which this problem occurred. The last
+part of the error message reads:
+
+.. code-block:: text
+
+            fprintf('%f \n',vertical_position);
+        end
+          ^
+
+Matlab reacts to the word ``end`` here. However, (as we know) ``end`` is correctly
+used and placed, the problem is rather that the word ``function`` to which ``end``
+was supposed to match, is not there! So, Matlab responds by stating that it
+does not understand the word ``end``. With such error messages, the programmer has to
+understand whether ``end`` is to be removed, or if some other keyword (here ``function``)
+lacks in the above.
+
+.. --- end solution of exercise ---
+
+**b)**
+Change the first line from ``function ball_function()``
+to ``function ball_func()``, i.e., change the name of the function.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The program runs as before, i.e. no error messages. This is because Matlab
+understands that the (main or first) function in the file ``ball_function.m``
+is supposed to be run, even if the name of that function is not the same as
+the name of the file in which the function definition is located.
+
+.. --- end solution of exercise ---
+
+**c)**
+Change the line ``function result = y(t)`` to ``function y(t)``.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+Running the program gives an error message containing the line in which Matlab
+found a problem (line 4 here), as well as a message telling us what seems to
+be wrong
+
+.. code-block:: text
+
+        Error: Too many outputs to function y
+
+Again, there is a mismatch between the function ``y(t)`` as it now (wrongly) is
+defined and the way it is used. In the erroneous definition, we have not specified
+in the header of the function that there is to be a return value from the function.
+Therefore, when we state in line 4 that we want the return value from the function
+to be stored in ``vertical_position``, Matlab gets a problem.
+
+.. --- end solution of exercise ---
+
+**d)**
+Change the line ``function result = y(t)`` to
+``function result = y()``, i.e., remove the parameter ``t``.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+Running the program gives an error message containing the line in which Matlab
+found a problem (line 4 here), as well as a message telling us what seems to
+be wrong
+
+.. code-block:: text
+
+        Error: Too many inputs to function y
+
+Again, there is a mismatch between the function ``y`` as it now (wrongly) is
+defined and the way it is used. In the erroneous definition, we have not specified
+that the function should have an input parameter. Therefore, when we (in line 4) call
+the function with a parameter, Matlab gets a problem.
+
+.. --- end solution of exercise ---
+
+**e)**
+Change the first statement that calls ``y`` from
+``vertical_position = y(time);`` to ``vertical_position = y();``.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+Running the program gives an error message containing the line in which Matlab
+found a problem (line 4 here), as well as a message telling us what seems to
+be wrong
+
+.. code-block:: text
+
+        Error: Undefined function or variable t
+
+This message tells us that the input parameter ``t`` does not get any value assigned.
+We have defined the function to take one parameter, but we call it without any parameter.
+
+.. --- end solution of exercise ---
+
+Filename: ``introducing_errors.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _2nd:exer:compInt:
+
+Exercise 11: Compare integers a and b
+-------------------------------------
+
+.. solution=`sol_compare_integers.pdf`
+
+Explain briefly, in your own words, what the following program
+does.
+
+.. code-block:: matlab
+
+        a = input('Give an integer a: ');
+        b = input('Give an integer b: ');
+        
+        if a < b
+            fprintf('a is the smallest of the two numbers\n');
+        elseif a == b
+            fprintf('a and b are equal\n');
+        else
+            fprintf('a is the largest of the two numbers\n');
+        end
+
+Proceed by writing the program, and then run it a few times with
+different values for ``a`` and ``b`` to confirm that it works as
+intended. In particular, choose combinations for ``a`` and ``b`` so that
+all three branches of the ``if`` construction get tested.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The program takes two integers as input and checks if the number ``a`` is
+smaller than ``b``, equal to ``b``, or larger than ``b``. A message is printed
+to the screen in each case.
+
+.. --- end solution of exercise ---
+
+Filename: ``compare_a_and_b.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _2nd:exer:funcCircArea:
+
+Exercise 12: Functions for circumference and area of a circle
+-------------------------------------------------------------
+
+.. solution=`sol_functions_circumference_area.pdf`
+
+Write a program that takes a circle radius ``r`` as input from the user
+and then computes the circumference ``C`` and area ``A`` of the
+circle. Implement the computations of ``C`` and ``A`` as two separate
+functions that each takes ``r`` as input parameter. Print ``C`` and ``A`` to
+the screen along with an appropriate text. Run the program with :math:`r =
+1` and confirm that you get the right answer.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The code reads:
+
+.. code-block:: matlab
+
+        circumference = @(r) 2*pi*r;
+        area = @(r) pi*r^2;
+        
+        r = input('Give the radius of a circle: ');
+        C = circumference(r);
+        A = area(r);
+        fprintf('Circumference: %g , Area: %g\n', C, A);
+
+Running the program, choosing ``r = 1``, gives the following dialog:
+
+.. code-block:: text
+
+        Give the radius of a circle: 1
+        Circumference: 6.28319 , Area: 3.14159
+
+.. --- end solution of exercise ---
+
+Filename: ``functions_circumference_area.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _2nd:exer:funcAreaRectangle:
+
+Exercise 13: Function for area of a rectangle
+---------------------------------------------
+
+.. solution=`sol_function_area_rectangle.pdf`
+
+Write a program that computes the area :math:`A = b c` of a rectangle. The
+values of :math:`b` and :math:`c` should be user input to the program. Also, write
+the area computation as a function that takes :math:`b` and :math:`c` as input
+parameters and returns the computed area. Let the program print the
+result to screen along with an appropriate text. Run the program with
+:math:`b = 2` and :math:`c = 3` to confirm correct program behavior.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The code reads:
+
+.. code-block:: matlab
+
+        area = @(s1, s2) s1*s2;
+        
+        b = input('Give the one side of the rectangle: ');
+        c = input('Give the other side of the rectangle: ');
+        A = area(b, c);
+        fprintf('Area: %g\n',A);
+
+Running the program gives the following dialog:
+
+.. code-block:: text
+
+        Give the one side of the rectangle: 2
+        Give the other side of the rectangle: 3
+        Area:
+        
+        ans =
+        
+             6
+
+.. --- end solution of exercise ---
+
+Filename: ``function_area_rectangle.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _2nd:exer:area:polygon:
+
+Exercise 14: Area of a polygon
+------------------------------
+
+One of the most important mathematical problems through all times has been
+to find the area of a polygon, especially because real estate areas often
+had the shape of polygons, and it was necessary to pay tax for the area.
+We have a polygon as depicted below.
+
+.. figure:: polygon.png
+   :width: 500
+
+The vertices ("corners")
+of the polygon have coordinates :math:`(x_1,y_1)`, :math:`(x_2,y_2)`,
+:math:`\ldots`, :math:`(x_n, y_n)`, numbered either in a clockwise or
+counter clockwise fashion.
+The area :math:`A` of the polygon can amazingly be computed by just knowing the
+boundary coordinates:
+
+.. (see `Wikipedia <http://en.wikipedia.org/wiki/Shoelace_formula>`__ for explanation):
+
+.. math::
+         A = \frac{1}{2}\left| (x_1y_2+x_2y_3 + \cdots + x_{n-1}y_n + x_ny_1)
+        - (y_1x_2 + y_2x_3 + \cdots + y_{n-1}x_n + y_nx_1)\right|\thinspace .
+
+Write a function ``polyarea(x, y)`` that takes two coordinate arrays
+with the vertices as arguments and returns the area.
+Assume that ``x`` and ``y`` are either lists or arrays.
+
+Test the function on a triangle, a quadrilateral, and a pentagon where
+you can calculate the area by alternative methods for comparison.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+Code:
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: polyarea
+
+
+The simple tests may be executed by running another function (``test_polyarea.m``) that
+calls the former:
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: test_polyarea
+
+
+.. --- end solution of exercise ---
+
+Filename: ``polyarea.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _2nd:exer:avNInt:
+
+Exercise 15: Average of integers
+--------------------------------
+
+.. solution=`sol_average_1_to_N.pdf`
+
+Write a program that gets an integer :math:`N > 1` from the user and
+computes the average of all integers :math:`i = 1,\ldots,N`. The
+computation should be done in a function that takes :math:`N` as input
+parameter. Print the result to the screen with an appropriate text. Run
+the program with :math:`N = 5` and confirm that you get the correct answer.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The code reads:
+
+.. code-block:: matlab
+
+        function average_of_N_integers()
+            N = input('Give an integer > 1: ');
+            average1toN = average(N);
+            fprintf('The average of 1,..., %d is %g\n', N, average1toN);
+        end
+        
+        function result = average(N)
+            sum = 0;
+            for i = 1:N
+                sum = sum + i;
+            end
+            result = sum/N;
+        end
+
+Running the program gives the following dialog:
+
+.. code-block:: text
+
+        Give a positive integer > 1: 5
+        The average of 1,..., 5 is: 3
+
+.. --- end solution of exercise ---
+
+Filename: ``average_1_to_N.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _2nd:exer:whileLoopErrors:
+
+Exercise 16: While loop with errors
+-----------------------------------
+
+.. solution=`sol_while_loop_with_errors.pdf`
+
+Assume some program has been written for the task of adding all
+integers :math:`i = 1,2,\ldots,10`:
+
+.. code-block:: matlab
+
+        some_number = 0;
+        i = 1;
+        while j < 11;
+            some_number += 1
+        print some_number
+
+**a)**
+Identify the errors in the program by just reading the code and
+simulating the program by hand.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+There is a semicolon at the end of the while loop header which should not be there.
+There is use of ``+=`` within the loop, which is wrong in Matlab (the correct way of
+updating the variable is shown in the corrected program below). Furthermore, 1 is added instead
+of ``i``. There is no increase of the loop variable ``i``. Finally, the word ``print`` will give
+an error in Matlab. The printing should use ``fprintf`` as shown below.
+
+.. --- end solution of exercise ---
+
+**b)**
+Write a new version of the program with errors corrected.
+Run this program and confirm that it gives the correct output.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The code reads:
+
+.. code-block:: matlab
+
+        some_number = 0;
+        i = 1;
+        while i < 11
+            some_number = some_number + i;
+            i = i + 1;
+        end
+        fprintf('The sum: %d\n', some_number)
+
+Running the program gives 55 as the answer.
+
+.. --- end solution of exercise ---
+
+Filename: ``while_loop_errors.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _2nd:exer:areaRectCircle:
+
+Exercise 17: Area of rectangle versus circle
+--------------------------------------------
+
+.. solution=`sol_area_rectangle_vs_circle.pdf`
+
+Consider one circle and one rectangle. The circle has a radius :math:`r =
+10.6`. The rectangle has sides :math:`a` and :math:`b`, but only :math:`a` is known from
+the outset. Let :math:`a = 1.3` and write a program that uses a ``while`` loop
+to find the largest possible integer :math:`b` that gives a rectangle area
+smaller than, but as close as possible to, the area of the circle. Run
+the program and confirm that it gives the right answer (which is :math:`b =
+271`).
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The code reads:
+
+.. code-block:: matlab
+
+        r = 10.6;
+        a = 1.3;
+        circle_area = pi*r^2;
+        
+        b = 0;    % chosen starting value for other side of rectangle
+        while a*b < circle_area
+            b = b + 1;
+        end
+        b = b - 1;    % must reverse the last update to the right value
+        fprintf('The largest possible value of b: %d\n', b);
+
+Running the program gives 271 as output for b.
+
+.. --- end solution of exercise ---
+
+Filename: ``area_rectangle_vs_circle.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _2nd:exer:Cross2Graphs:
+
+Exercise 18: Find crossing points of two graphs
+-----------------------------------------------
+
+.. solution=`sol_crossing_2_graphs.pdf`
+
+Consider two functions :math:`f(x) = x` and :math:`g(x) = x^2` on the interval :math:`[-4,4]`.
+
+Write a program that, by trial and error, finds approximately for
+which values of :math:`x` the two graphs cross, i.e., :math:`f(x) = g(x)`. Do this
+by considering :math:`N` equally distributed points on the interval, at each
+point checking whether :math:`|f(x) - g(x)| < \epsilon`, where :math:`\epsilon` is some
+small number. Let :math:`N` and :math:`\epsilon` be user input to the program and let
+the result be printed to screen. Run your program with :math:`N = 400` and
+:math:`\epsilon = 0.01`. Explain the output from the program. Finally, try also
+other values of :math:`N`, keeping the value of :math:`\epsilon` fixed.
+Explain your observations.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The code reads:
+
+.. code-block:: matlab
+
+        f = @(x) x;
+        g = @(x) x^2;
+        
+        N = input('Give the number of check-points N: ');
+        epsilon = input('Give the error tolerance epsilon: ');
+        x_values = linspace(-4, 4, N);
+        
+        % Next, we run over all indices in the array `x_values` and check if
+        % the difference is smaller than the chosen limit. If so, we print x
+        for i = 1:N
+            if abs(f(x_values(i)) - g(x_values(i))) < epsilon
+                x_values(i)    % i.e. print that x value to screen
+            end
+        end
+
+Running the program with 400 check-points (i.e. ``N = 400``) and
+an error tolerance of 0.01 (i.e. ``epsilon = 0.01``) gives the following dialog:
+
+.. code-block:: text
+
+        Give the number of check-points N: 400
+        Give the error tolerance: 0.01
+        
+        ans =
+        
+           0.01002506265664
+        
+        ans =
+        
+           0.99248120300752
+
+We note that we do not get exactly 0 and 1 (which we know are the answers). This
+owes to the chosen distribution of :math:`x`-values. This distribution is decided by ``N``.
+Trying other combinations of ``N`` and ``epsilon`` might give more than 2 "solutions",
+or fewer, maybe even none. All of this boils down to whether the ``if`` test becomes
+true or not. For example, if you let ``epsilon`` stay constant while increasing ``N``,
+you realize that the difference between :math:`f(x)` and :math:`g(x)` will be small for several
+values of :math:`x`, allowing more than one :math:`x` value to "be a solution". Decreasing ``N`` while
+``epsilon`` is constant will eventually give no solutions, since the difference between
+:math:`f(x)` and :math:`g(x)` at the tested :math:`x`-values gets too large.
+
+Is is important here to realize the difference between the numerical test we do and the
+exact solution. The numerical test just gives us an approximation which we may get as
+"good as we want" by the right choices of ``N`` and ``epsilon``.
+
+.. --- end solution of exercise ---
+
+Filename: ``crossing_2_graphs.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _2nd:exer:sortNumbers:
+
+Exercise 19: Sort array with numbers
+------------------------------------
+
+.. solution=`sol_sort_numbers.pdf`
+
+.. index::
+   single: array; sorting
+
+The built-in function ``rand`` may be used to draw pseudo-random numbers
+for the standard uniform distribution between :math:`0` and :math:`1` (exclusive
+at both ends). See ``help rand``.
+
+Write a script that generates an array of :math:`6` random numbers between
+:math:`0` and :math:`10`. The program should then sort the array so that numbers
+appear in increasing order. Let the program make a formatted print of
+the array to the screen both before and after sorting. The printouts
+should appear on the screen so that comparison is made easy. Confirm
+that the array has been sorted correctly.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The code may be written as follows
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: sort_numbers
+
+
+.. --- end solution of exercise ---
+
+Filename: ``sort_numbers.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _2nd:exer:computingPi:
+
+Exercise 20: Compute :math:`\pi`
+--------------------------------
+
+.. solution=`sol_compute_pi.pdf`
+
+.. index::
+   single: Leibniz; pi
+
+.. index::
+   single: Euler; pi
+
+Up through history, great minds have developed different computational
+schemes for the number :math:`\pi`. We will here consider two such schemes,
+one by Leibniz (:math:`1646-1716`), and one by Euler (:math:`1707-1783`).
+
+The scheme by Leibniz may be written
+
+.. math::
+        
+        \pi = 8\sum_{k=0}^{\infty}\frac{1}{(4k + 1)(4k + 3)} , \nonumber
+        
+
+while one form of the Euler scheme may appear as
+
+.. math::
+        
+        \pi = \sqrt[]{6\sum_{k=1}^{\infty}\frac{1}{k^2}} . \nonumber
+        
+
+If only the first :math:`N` terms of each sum are used as an approximation to
+:math:`\pi`, each modified scheme will have computed :math:`\pi` with some error.
+
+Write a program that takes :math:`N` as input from the user, and plots the
+error development with both schemes as the number of iterations
+approaches :math:`N`. Your program should also print out the final error
+achieved with both schemes, i.e. when the number of terms is ``N``.
+Run the program with :math:`N = 100` and explain briefly what the graphs show.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The code may be written as follows
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: compute_pi
+
+
+Running the program as told produces the dialog
+
+.. code-block:: text
+
+        Give number of terms in sum for pi: 100
+        Leibniz: 0.00499996875098
+        Euler: 0.00951612178069
+
+and the plot in Figure :ref:`fig:pi_comp`
+
+.. _fig:pi_comp:
+
+.. figure:: pi_Leibniz_Euler.png
+   :width: 400
+
+   *Error as a function of number of terms*
+
+We see that the scheme of Leibniz gives the least error all over the interval. However,
+the difference in the error with the two schemes becomes smaller as the number of terms increases.
+
+.. --- end solution of exercise ---
+
+Filename: ``compute_pi.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _2nd:exer:combinatorics1:
+
+Exercise 21: Compute combinations of sets
+-----------------------------------------
+
+Consider an ID number consisting of two letters and three digits, e.g.,
+RE198. How many different numbers can we have, and how can a program
+generate all these combinations?
+
+If a collection of :math:`n` things can have :math:`m_1` variations of the first thing,
+:math:`m_2` of the second and so on, the total number of variations of
+the collection equals :math:`m_1m_2\cdots m_n`. In particular, the ID number
+exemplified above can have :math:`26\cdot 26\cdot 10\cdot 10\cdot 10 =676,000`
+variations. To generate all the combinations, we must have five
+nested for loops. The first two run over all letters A, B, and so on to Z,
+while the next three run over all digits :math:`0,1,\ldots,9`.
+
+To convince yourself about this result, start out with an ID number on the
+form A3 where the first part can vary among A, B, and C, and the
+digit can be among 1, 2, or 3. We must start with A and combine
+it with 1, 2, and 3, then continue with B, combined with 1, 2, and 3,
+and finally combine C with 1, 2, and 3. A double for loop does the work.
+
+**a)**
+In a deck of cards, each card is a combination of a rank and a suit.
+There are 13 ranks: ace (A), 2, 3, 4, 5, 6, 7, 8, 9, 10, jack (J),
+queen (Q), king (K), and
+four suits: clubs (C), diamonds (D), hearts (H), and spades (S).
+A typical card may be D3. Write statements that generate a
+deck of cards, i.e., all the combinations ``CA``, ``C2``, ``C3``, and so on
+to ``SK``.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+Program:
+
+.. code-block:: matlab
+
+        pos = 1;
+        for i = 1:length(suits)
+            for j = 1:length(ranks)
+                deck_of_cards{pos} = strcat(suits(i), ranks(j));
+                pos = pos + 1;
+            end
+        end
+        deck_of_cards
+
+.. --- end solution of exercise ---
+
+**b)**
+A vehicle registration number is on the form ``DE562``, where the letters
+vary from A to Z and the digits from 0 to 9. Write statements that compute
+all the possible registration numbers and stores them in a list.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+Program:
+
+.. code-block:: matlab
+
+        pos = 1;
+        for L1 = 65:(65+25)    % First letter
+            for L2 = 65:(65+25)   % Second letter
+               for D1 = 48:57       % First digit
+                   for D2 = 48:57     % Second digit
+                       for D3 = 48:57    % Third digit
+                            reg_no{pos} = strcat(char(L1), char(L2),...
+                                              char(D1), char(D2), char(D3));
+                            pos = pos + 1;
+                       end
+                   end
+               end
+            end
+        end
+        reg_no
+
+.. --- end solution of exercise ---
+
+**c)**
+Generate all the combinations of throwing two dice (the number of eyes
+can vary from 1 to 6). Count how many combinations where the sum of
+the eyes equals 7.
+
+.. --- begin answer of exercise ---
+
+**Answer.**
+6
+
+.. --- end answer of exercise ---
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+Program:
+
+.. code-block:: matlab
+
+        % Note that both dice can be represented by a single set here
+        dice = ['1', '2', '3', '4', '5', '6'];
+        pos = 1;
+        for i = 1:6
+            for j = 1:6
+                dice_combinations{pos} = dice(i);
+                dice_combinations{pos+1} = dice(j);
+                pos = pos + 2;
+            end
+        end
+        %dice_combinations
+        
+        n = 0;
+        % convert to numbers
+        throw = cell2mat(dice_combinations) - 48;  % adjust to right inverval
+        for i = 1:2:(length(throw))
+           %%fprintf('throw(i) = %d, throw(j) = %d\n', throw(i), throw(j));
+            if (throw(i) + throw(i+1) == 7)
+                n = n + 1;
+            end
+        end
+        fprintf('No of combinations giving 7: %d\n', n);
+
+.. --- end solution of exercise ---
+
+Filename: ``combine_sets.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _2nd:exer:numberOccurrence:
+
+Exercise 22: Frequency of random numbers
+----------------------------------------
+
+.. solution=`sol_number_occurrence.pdf`
+
+Write a program that takes a positive integer :math:`N` as input and then draws
+:math:`N` random integers in the interval :math:`[1,6]` (both ends inclusive). In the program,
+count how many of the numbers, :math:`M`, that equal 6 and write out
+the fraction :math:`M/N`. Also, print all the random numbers to the screen so that
+you can check for yourself that the counting is correct. Run the program with
+a small value for ``N`` (e.g., ``N = 10``) to confirm that it works as intended.
+
+.. --- begin hint in exercise ---
+
+**Hint.**
+Use ``1+floor(6*rand())`` to draw
+a random integer between 1 and 6.
+
+.. --- end hint in exercise ---
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The code may be written as follows
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: count_random_numbers
+
+
+Running the program produces the dialog
+
+.. code-block:: text
+
+        How many random numbers should be drawn? 10
+        Draw number 1 gave: 2
+        Draw number 2 gave: 4
+        Draw number 3 gave: 3
+        Draw number 4 gave: 2
+        Draw number 5 gave: 2
+        Draw number 6 gave: 1
+        Draw number 7 gave: 2
+        Draw number 8 gave: 6
+        Draw number 9 gave: 2
+        Draw number 10 gave: 3
+        The fraction M/N became: 0.1
+
+We see that, in this case, 6 was drawn just a
+single time, so one out of ten gives a fraction
+``M/N`` of :math:`0.1`.
+
+.. --- end solution of exercise ---
+
+Filename: ``count_random_numbers.m``.
+
+.. Closing remarks for this Exercise
+
+Remarks  (1)
+~~~~~~~~~~~~
+
+For large :math:`N`, this program computes the probability :math:`M/N`
+of getting six eyes when throwing a die.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _2nd:exer:Game21:
+
+Exercise 23: Game 21
+--------------------
+
+.. solution=`sol_game_21.pdf`
+
+.. index::
+   single: programming; game
+
+Consider some game where each participant draws a series of random
+integers evenly distributed from :math:`0` and :math:`10`, with the aim of getting
+the sum as close as possible to :math:`21`, but *not larger* than :math:`21`.  You
+are out of the game if the sum passes :math:`21`.  After each draw, you are
+told the number and your total sum, and is asked whether you want
+another draw or not. The one coming closest to :math:`21` is the winner.
+
+Implement this game in a program.
+
+.. --- begin hint in exercise ---
+
+**Hint.**
+Use ``floor(11*rand())`` to draw
+random integers in :math:`[0,10]`.
+
+.. --- end hint in exercise ---
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The code may be written as follows
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: game_21
+
+
+Running the program may produce this dialog
+
+.. code-block:: text
+
+        You got: 8
+        Your score is now: 8 points!
+        
+        Another draw (y/n)? y
+        You got: 6
+        Your score is now: 14 points!
+        
+        Another draw (y/n)? y
+        You got: 8
+        Game over, you passed 21 (with your 22 points)!
+
+.. --- end solution of exercise ---
+
+Filename: ``game_21.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _2nd:exer:linearInterpol:
+
+Exercise 24: Linear interpolation
+---------------------------------
+
+.. solution=`sol_linear_interpolation.pdf`
+
+.. index:: linear interpolation
+
+Some measurements :math:`y_i`, :math:`i = 1,2,\ldots,N` (given below), of a
+quantity :math:`y` have been collected regularly, once every minute, at
+times :math:`t_i=i`, :math:`i=0,1,\ldots,N`.  We want to find the value :math:`y`
+*in between* the measurements, e.g., at :math:`t=3.2` min. Computing such
+:math:`y` values is called *interpolation*.
+
+Let your program use *linear interpolation* to compute :math:`y`
+between two consecutive measurements:
+
+  1. Find :math:`i` such that :math:`t_i\leq t \leq t_{i+1}`.
+
+  2. Find a mathematical expression for the straight line that goes through the
+     points :math:`(i,y_i)` and :math:`(i+1,y_{i+1})`.
+
+  3. Compute the :math:`y` value by inserting the user's time value in
+     the expression for the straight line.
+
+**a)**
+Implement the linear interpolation technique in a function that
+takes an array with the :math:`y_i` measurements as input, together with
+some time :math:`t`, and returns the interpolated :math:`y` value at time :math:`t`.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+See the function ``interpolate`` in the script below
+
+.. --- end solution of exercise ---
+
+**b)**
+Write another function with in a loop where the user is asked
+for a
+time on the interval :math:`[0,N]` and the corresponding (interpolated)
+:math:`y` value is written to the screen.
+The loop is terminated when the user gives a negative time.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+See the function ``find_y`` in the script below
+
+.. --- end solution of exercise ---
+
+**c)**
+Use the following measurements: :math:`4.4, 2.0, 11.0, 21.5, 7.5`, corresponding
+to times :math:`0,1,\ldots,4` (min), and compute interpolated values at
+:math:`t=2.5` and :math:`t=3.1` min.
+Perform separate hand calculations to check that the output from the
+program is correct.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The code may be written as follows
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: linear_interpolation
+
+
+Running the program may produce this dialog
+
+.. code-block:: text
+
+        For time t on the interval [0,4]...
+        Give your desired t: 2.5
+        y(t) = 16.25
+        
+        Give new time t: 0.5
+        y(t) = 3.2
+        
+        Give new time t: -1
+
+.. --- end solution of exercise ---
+
+Filename: ``linear_interpolation.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _2nd:exer:testStraightLine:
+
+Exercise 25: Test straight line requirement
+-------------------------------------------
+
+.. solution=`sol_test_straight_line.pdf`
+
+Assume the straight line function :math:`f(x) = 4x + 1`. Write a script that
+tests the "point-slope" form for this line as follows. Within a chosen
+interval on the :math:`x`-axis (for example, for :math:`x` between 0 and 10), randomly
+pick :math:`100` points on the line and check
+if the following requirement is fulfilled for each point:
+
+.. math::
+         \frac{f(x_i) - f(c)}{x_i - c} = a,\hspace{.3in}  i = 1,2,\ldots,100\thinspace , 
+
+where :math:`a` is the slope of the line and :math:`c` defines a fixed point :math:`(c,f(c))`
+on the line. Let :math:`c = 2` here.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The code may be written as follows
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: test_straight_line
+
+
+The potential problem of zero division is here simply handled by the ``if`` test, meaning
+that if the denominator is too close to zero, that particular :math:`x` is skipped.
+A more elegant procedure would be to use a ``try-catch`` construction.
+
+Running the program generates a printout of :math:`100` lines that for each :math:`x` drawn
+gives 0 as result from the test. The two last lines of the printout read:
+
+.. code-block:: text
+
+        For x = 2.67588 : 0
+        For x = 9.75893 : 0
+
+Note that since the :math:`x` values are (pseudo-)random in nature, a second run gives
+different values for :math:`x` (but still 0 for each test!).
+
+.. --- end solution of exercise ---
+
+Filename: ``test_straight_line.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _2nd:exer:fitLine:
+
+Exercise 26: Fit straight line to data
+--------------------------------------
+
+.. solution=`sol_fit_straight_line.pdf`
+
+.. index:: least squares method
+
+Assume some measurements :math:`y_i, i = 1,2,\ldots,5` have been collected,
+once every second. Your task is to write a program that
+fits a straight line to those data.
+
+**a)**
+Make a function that computes the error between the straight line
+:math:`f(x)=ax+b` and the measurements:
+
+.. math::
+         e = \sum_{i=1}^{5} \left(ax_i+b - y_i\right)^2\thinspace . 
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+See the function ``find_error`` in the script below.
+
+.. --- end solution of exercise ---
+
+**b)**
+Make a function with a loop where you give :math:`a` and :math:`b`, the
+corresponding value of :math:`e` is written to the screen, and
+a plot of the straight line :math:`f(x)=ax+b` together with the
+discrete measurements is shown.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+See the function ``interactive_line_fit`` in the script below.
+
+.. --- end solution of exercise ---
+
+**c)**
+Given the measurements :math:`0.5, 2.0, 1.0, 1.5, 7.5`, at times
+:math:`0, 1, 2, 3, 4`, use the function in b) to interactively search
+for :math:`a` and :math:`b` such that :math:`e` is minimized.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The code may be written as follows
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: fit_straight_line
+
+
+Running the program may produce this dialog
+
+.. code-block:: text
+
+        Give a: 1
+        Give b: 0
+        The error is: 16.75
+
+(followed by the plot seen in Figure :ref:`fig:fit_line_1`)
+
+.. _fig:fit_line_1:
+
+.. figure:: fit_straight_line_1.png
+   :width: 400
+
+   *Straight line fitted to data with first choice of line parameters (a and b)*
+
+.. code-block:: text
+
+        Do you want another fit (y/n)? y
+        Give a: 0.5
+        Give b: 1
+        The error is: 22.75
+
+(followed by the plot seen in Figure :ref:`fig:fit_line_2`)
+
+.. _fig:fit_line_2:
+
+.. figure:: fit_straight_line_2.png
+   :width: 400
+
+   *Straight line fitted to data with second choice of line parameters (a and b)*
+
+.. code-block:: text
+
+        Do you want another fit (y/n)? n
+
+.. --- end solution of exercise ---
+
+Filename: ``fit_straight_line.m``.
+
+.. Closing remarks for this Exercise
+
+Remarks  (2)
+~~~~~~~~~~~~
+
+Fitting a straight line to measured data points is a very common
+task. The manual search procedure in c) can be automated by using a
+mathematical method called the *method of least squares*.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _2nd:exer:fitSines:
+
+Exercise 27: Fit sines to straight line
+---------------------------------------
+
+.. solution=`sol_fit_sines.pdf`
+
+.. index:: Fourier series
+
+A lot of technology, especially most types of digital audio devices
+for processing sound, is based on representing a signal of time
+as a sum of sine functions. Say the signal is some function :math:`f(t)`
+on the interval :math:`[-\pi,\pi]` (a more general interval :math:`[a,b]`
+can easily be treated, but leads to slightly more complicated
+formulas). Instead of working with :math:`f(t)` directly,
+we approximate :math:`f` by the sum
+
+.. math::
+        
+        S_N(t) = \sum_{n=1}^{N} b_n \sin(nt),
+        
+
+where the coefficients :math:`b_n` must be adjusted such that :math:`S_N(t)` is
+a good approximation to :math:`f(t)`. We shall in this exercise adjust
+:math:`b_n` by a trial-and-error process.
+
+**a)**
+Make a function ``sinesum(t, b)`` that returns :math:`S_N(t)`, given the
+coefficients :math:`b_n` in an array ``b`` and time coordinates in an
+array ``t``. Note that if ``t`` is an array, the return value is also
+an array.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+See the script below.
+
+.. --- end solution of exercise ---
+
+**b)**
+Write a function ``test_sinesum()`` that calls ``sinesum(t, b)`` in a)
+and determines if the function computes a test case correctly.
+As test case, let ``t`` be an array with values :math:`-\pi/2` and :math:`\pi/4`,
+choose :math:`N=2`, and :math:`b_1=4` and :math:`b_2=-3`. Compute :math:`S_N(t)` by hand
+to get reference values.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+See the script below. Note that the call to ``test_sinesum`` is
+commented out, but the function will step into action if the
+leading ``#`` is removed.
+
+.. --- end solution of exercise ---
+
+**c)**
+Make a function ``plot_compare(f, N, M)`` that plots the original
+function :math:`f(t)` together with the sum of sines :math:`S_N(t)`, so that
+the quality of the approximation :math:`S_N(t)` can be examined visually.
+The argument ``f`` is a Matlab function implementing :math:`f(t)`, ``N``
+is the number of terms in the sum :math:`S_N(t)`, and ``M`` is the number
+of uniformly distributed :math:`t` coordinates used to plot :math:`f` and :math:`S_N`.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+See the script below.
+
+.. --- end solution of exercise ---
+
+**d)**
+Write a function ``error(b, f, M)`` that returns a mathematical measure
+of the error in :math:`S_N(t)` as an approximation to :math:`f(t)`:
+
+.. math::
+         E = \sqrt{\sum_{i} \left(f(t_i) - S_N(t_i)\right)^2},
+
+where the :math:`t_i` values are :math:`M` uniformly distributed coordinates on
+:math:`[-\pi, \pi]`.
+The array ``b`` holds the coefficients in :math:`S_N` and ``f`` is a Matlab
+function implementing the mathematical function :math:`f(t)`.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+See the script below.
+
+.. --- end solution of exercise ---
+
+**e)**
+Make a function ``trial(f, N)`` for interactively giving :math:`b_n`
+values and getting a plot on the screen where the resulting
+:math:`S_N(t)` is plotted together with :math:`f(t)`. The error in the
+approximation should also be computed as indicated in d).
+The argument ``f``
+is a Matlab function for :math:`f(t)` and ``N`` is the number of terms :math:`N` in
+the sum :math:`S_N(t)`. The ``trial`` function can run a loop where
+the user is asked for the :math:`b_n` values in each pass of the
+loop and the corresponding plot is shown.
+You must find a way to terminate the loop when the
+experiments are over. Use ``M=500`` in the calls to ``plot_compare``
+and ``error``.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+See the script below. Note that the call to ``trial`` is
+commented out, but the function will run if the leading ``#`` is removed.
+
+.. --- end solution of exercise ---
+
+**f)**
+Choose :math:`f(t)` to be a straight line
+:math:`f(t) = \frac{1}{\pi}t` on :math:`[-\pi,\pi]`. Call ``trial(f, 3)``
+and try to find through experimentation
+some values :math:`b_1`, :math:`b_2`, and :math:`b_3` such that
+the sum of sines :math:`S_N(t)` is a good approximation to the straight line.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+See the function ``trial`` in the script below.
+
+.. --- end solution of exercise ---
+
+**g)**
+Now we shall try to automate the procedure in f). Write a function
+that has three nested loops over values of :math:`b_1`, :math:`b_2`, and :math:`b_3`.
+Let each loop cover the interval :math:`[-1,1]` in steps of :math:`0.1`. For each
+combination of :math:`b_1`, :math:`b_2`, and :math:`b_3`, the error in the approximation :math:`S_N`
+should be computed. Use this to find, and print, the smallest error and the
+corresponding values of :math:`b_1`, :math:`b_2`, and :math:`b_3`. Let the program also plot
+:math:`f` and the approximation :math:`S_N` corresponding to the smallest error.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The code may be written as follows
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: fit_sines
+
+
+Running the program may produce this dialog
+
+.. code-block:: text
+
+        The b coefficients: [ 0.6 -0.2 0.1 ]
+        The smallest error found: 67.1213886326
+
+and the plot seen in Figure :ref:`fig:fit_sines`
+
+.. _fig:fit_sines:
+
+.. figure:: fit_sines.png
+   :width: 400
+
+   *Straight line fitted to data with first choice of line parameters (a and b)*
+
+.. --- end solution of exercise ---
+
+Filename: ``fit_sines.m``.
+
+.. Closing remarks for this Exercise
+
+Remarks  (3)
+~~~~~~~~~~~~
+
+1. The function :math:`S_N(x)` is a special case of what is called a *Fourier series*. At the beginning of the 19th century, Joseph Fourier (1768-1830) showed that any function can be approximated analytically by a sum of cosines and sines. The approximation improves as the number of terms (:math:`N`) is increased. Fourier series are very important throughout science and engineering today.
+
+1. Finding the coefficients :math:`b_n` is solved much more accurately in :ref:`sec:exer:revisitFitSines`, by a procedure that also requires much less human and computer work!
+
+2. In real applications, :math:`f(t)` is not known as a continuous function, but function values of :math:`f(t)` are provided. For example, in digital sound applications, music in a CD-quality WAV file is a signal with 44100 samples of the corresponding analog signal :math:`f(t)` per second.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _2nd:exer:countTextString:
+
+Exercise 28: Count occurrences of a string in a string
+------------------------------------------------------
+
+.. solution=`count_substrings.pdf`
+
+In the analysis of genes one encounters many problem settings
+involving searching for certain combinations of letters in a long
+string. For example, we may have a string like
+
+.. code-block:: python
+
+        gene = 'AGTCAATGGAATAGGCCAAGCGAATATTTGGGCTACCA'
+
+We may traverse this string, letter by letter,
+by the for loop ``for letter in gene``. The length of the string
+is given by ``len(gene)``, so an alternative traversal over an index ``i`` is
+``for i in range(len(gene))``. Letter number ``i`` is reached through
+``gene[i]``, and a substring from index ``i`` up to, but not including ``j``,
+is created by ``gene[i:j]``.
+
+**a)**
+Write a function ``freq(letter, text)`` that returns the frequency of the
+letter ``letter`` in the string ``text``, i.e., the number of occurrences of
+``letter`` divided by the length of ``text``.
+Call the function to determine the frequency of ``C`` and ``G`` in the
+``gene`` string above. Compute the frequency by hand too.
+
+**b)**
+Write a function ``pairs(letter, text)``
+that counts how many times a pair of the letter ``letter`` (e.g., ``GG``)
+occurs within the string ``text``. Use the function to determine
+how many times the pair ``AA`` appears in the string ``gene`` above.
+Perform a manual counting too to check the answer.
+
+**c)**
+Write a function ``mystruct(text)`` that counts the number of a certain
+structure in the string ``text``. The structure is defined as ``G`` followed by
+``A`` or ``T`` until a double ``GG``. Perform a manual search for the structure
+too to control the computations by ``mystruct``.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+Here is a program:
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: count_substrings
+
+
+.. --- end solution of exercise ---
+
+Filename: ``count_substrings.m``.
+
+.. --- end exercise ---
+
+.. _sec:integrals:
+

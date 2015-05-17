@@ -1,0 +1,29 @@
+
+.. Master file automatically created by doconce sphinx_dir
+
+Programming for Computations
+============================
+
+Contents:
+
+.. toctree::
+   :maxdepth: 3
+
+   ._pylight000
+   ._pylight001
+   ._pylight002
+   ._pylight003
+   ._pylight004
+   ._pylight005
+   ._pylight006
+   ._pylight007
+   ._pylight008
+   ._pylight009
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

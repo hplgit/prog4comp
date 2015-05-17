@@ -1,0 +1,1122 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Programming for Computations - A Gentle Introduction to Numerical Simulations with Python">
+<meta name="keywords" content="computer program,programming,language programming,language computer,MATLAB,Octave,Fortran,C,C++,Python,Maple,Mathematica,syntax,bug,debugging,script (and scripting),implement,print,program run,program execute,code,comment,instruction,program statement,variable,assignment,calculator,text editor,Idle,prompt,program typing,program run,program execute,ipython,function,function call,atan,function input parameter,function output parameter,function return,function take a parameter,library,library function,from,import,math,module,package,linspace,xlabel,ylabel,plot,interactive use (of Python),import,keyboard arrow up/down,Python shell,operator Arithmetic,parentheses,variable type,variable name,object,float,int,str,type conversion,reserved words,variable int,variable float,variable str,variable assignment,type conversion automatic,integer division,round-off error,printing formatted,printf formatting,default,array,array element,zeros,allocate,array index,indexing zero based,indexing one based,Python zero-based indexing,array slice of,graph,hold (on/off),plot figure,title,legend,axis,hardcopy,format png,matrix mat,matrix vector product,transpose,linear algebra,matrix,vector,error message,debugging,debugger,try-exception,exception handling,program crash,program testing,program verification,program input,program output,input,raw input,list,tuple,symbolic computations,symbolic operations,symbolic simplifications,SymPy,library SymPy,WolframAlpha,Mathematica,Sage (symbolic package),Python documentation,garbage collection,variable delete,if,elif,else,colon,indent,boolean,boolean expression,True,False,boolean True,boolean False,pseudo code,operator Logical,function,function definition,def,return,argument,parameter input,parameter output,variable local,variable global,argument keyword,argument named,argument ordinary,argument positional,doc string,function handle,function local,function global,function nested,lambda function,loop for,for loop,range,loop iteration,loop index,loop double,loop multiple,loop nested,linear algebra,while loop,loop while,loop infinite,loop iteration,loop index,list,list append,list convert to array,list delete,list create,tuple,list comprehension,array sorting,Leibniz pi,Euler pi,programming game,linear interpolation,least squares method,Fourier series,integral analytically,integral exact,integral approximately,integration points,code re-use,unit tests,complex domains,Monte Carlo integration,seed (random generators),scheme,finite difference method,forward difference approximation,Forward Euler scheme,logistic model,carrying capacity,SIR model,scalar ODE,ODE scalar,vector ODE,ODE vector,system of ODEs,Heun's method,Runge-Kutta, 2nd-order method,2nd-order Runge-Kutta method,RK2,PDE,heat equation,diffusion equation,MOL forward Euler,method of lines,MOL,mesh points,cell,method of lines,unstable solutions,instability,stability criterion,Poisson equation,Laplace equation,root finding,code robust,code try-except,code exception,Newton starting value,return None,sys.exit,Idle,Emacs,Vim,Gedit,TextWrangler,Notepad++">
+
+<title>Programming for Computations - A Gentle Introduction to Numerical Simulations with Python</title>
+
+
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+code { padding: 0px; background-color: inherit; }
+pre {
+  border: 0pt solid #93a1a1;
+  box-shadow: none;
+}
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+/* Let pre tags for code blocks have the same color as the surroundings */
+pre { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u' Preface ', 0, None, '___sec0'),
+              (u' Why learn programming? ', 3, None, '___sec1'),
+              (u' Target audience and background knowledge ',
+               3,
+               None,
+               '___sec2'),
+              (u' Numerical methods ', 3, None, '___sec3'),
+              (u' The computer language: Python ', 3, None, '___sec4'),
+              (u' How this book is different ', 3, None, '___sec5'),
+              (u' Acknowledgments ', 3, None, '___sec6'),
+              (u' The first few steps ',
+               0,
+               u'1st:TheFirstFewSteps',
+               u'1st:TheFirstFewSteps'),
+              (u' What is a program? And what is programming? ',
+               1,
+               None,
+               '___sec8'),
+              (u' A Python program with variables ',
+               1,
+               u'1st:ex1',
+               u'1st:ex1'),
+              (u' The program ', 2, None, '___sec10'),
+              (u' Dissection of the program ', 2, None, '___sec11'),
+              (u' Why not just use a pocket calculator? ',
+               2,
+               None,
+               '___sec12'),
+              (u' The importance of using a text editor to write programs ',
+               2,
+               None,
+               '___sec13'),
+              (u' Installation of Python ', 2, None, '___sec14'),
+              (u' Write and run your first program ', 2, None, '___sec15'),
+              (u'  A Python program with a library function ',
+               1,
+               u'1st:ex2',
+               u'1st:ex2'),
+              (u' A Python program with vectorization and plotting ',
+               1,
+               u'1st:ex3',
+               u'1st:ex3'),
+              (u' More basic concepts ', 1, None, '___sec18'),
+              (u' Using Python interactively ', 2, None, '___sec19'),
+              (u' Arithmetics, parentheses and round-off errors ',
+               2,
+               None,
+               '___sec20'),
+              (u' Variables and objects ', 2, None, '___sec21'),
+              (u' Integer division ', 2, None, '___sec22'),
+              (u' Formatting text and numbers ', 2, None, '___sec23'),
+              (u' Arrays ', 2, None, '___sec24'),
+              (u' Plotting ', 2, None, '___sec25'),
+              (u' Error messages and warnings ', 2, None, '___sec26'),
+              (u' Input data ', 2, None, '___sec27'),
+              (u' Symbolic computations ', 2, None, '___sec28'),
+              (u' Concluding remarks ', 2, None, '___sec29'),
+              (u' Exercises ', 1, None, '___sec30'),
+              (u' Exercise 1: Error messages ',
+               2,
+               u'1st:exer:ErrorMessages',
+               u'1st:exer:ErrorMessages'),
+              (u' Exercise 2: Volume of a cube ',
+               2,
+               u'1st:exer:cubeVolume',
+               u'1st:exer:cubeVolume'),
+              (u' Exercise 3: Area and circumference of a circle ',
+               2,
+               u'1st:exer:areaCircle',
+               u'1st:exer:areaCircle'),
+              (u' Exercise 4: Volumes of three cubes ',
+               2,
+               u'1st:exer:volumes3cubes',
+               u'1st:exer:volumes3cubes'),
+              (u' Exercise 5: Average of integers ',
+               2,
+               u'1st:exer:averageOf5Integers',
+               u'1st:exer:averageOf5Integers'),
+              (u' Exercise 6: Interactive computing of volume and area ',
+               2,
+               u'1st:exer:cubeVolInteractively',
+               u'1st:exer:cubeVolInteractively'),
+              (u' Exercise 7: Peculiar results from division ',
+               2,
+               u'1st:exer:intDivInteractively',
+               u'1st:exer:intDivInteractively'),
+              (u' Exercise 8: Update variable at command prompt ',
+               2,
+               u'1st:exer:updateVarInteractively',
+               u'1st:exer:updateVarInteractively'),
+              (u' Exercise 9: Formatted print to screen ',
+               2,
+               u'1st:exer:printfScreen',
+               u'1st:exer:printfScreen'),
+              (u' Exercise 10: Python documentation and random numbers ',
+               2,
+               u'1st:exer:PythonDocRandom',
+               u'1st:exer:PythonDocRandom'),
+              (u' Basic constructions ',
+               0,
+               u'2nd:BasicConstructins',
+               u'2nd:BasicConstructins'),
+              (u' If tests, colon and indentation ', 1, None, '___sec42'),
+              (u' Functions ', 1, u'sec:functions', u'sec:functions'),
+              (u' For loops ', 1, u'sec:for:loops', u'sec:for:loops'),
+              (u' While loops ', 1, u'sec:while:loops', u'sec:while:loops'),
+              (u' Lists and tuples - alternatives to arrays ',
+               1,
+               u'sec:lists',
+               u'sec:lists'),
+              (u' Reading from and writing to files ',
+               1,
+               u'sec:file:reading:writing',
+               u'sec:file:reading:writing'),
+              (u' Exercises ', 1, None, '___sec48'),
+              (u' Exercise 11: Errors with colon, indent, etc. ',
+               2,
+               u'2nd:exer:ErrorsColonIndent',
+               u'2nd:exer:ErrorsColonIndent'),
+              (u' Exercise 12: Compare integers a and b ',
+               2,
+               u'2nd:exer:compInt',
+               u'2nd:exer:compInt'),
+              (u' Exercise 13: Functions for circumference and area of a circle ',
+               2,
+               u'2nd:exer:funcCircArea',
+               u'2nd:exer:funcCircArea'),
+              (u' Exercise 14: Function for area of a rectangle ',
+               2,
+               u'2nd:exer:funcAreaRectangle',
+               u'2nd:exer:funcAreaRectangle'),
+              (u' Exercise 15: Area of a polygon ',
+               2,
+               u'2nd:exer:area:polygon',
+               u'2nd:exer:area:polygon'),
+              (u' Exercise 16: Average of integers ',
+               2,
+               u'2nd:exer:avNInt',
+               u'2nd:exer:avNInt'),
+              (u' Exercise 17: While loop with errors ',
+               2,
+               u'2nd:exer:whileLoopErrors',
+               u'2nd:exer:whileLoopErrors'),
+              (u' Exercise 18: Area of rectangle versus circle ',
+               2,
+               u'2nd:exer:areaRectCircle',
+               u'2nd:exer:areaRectCircle'),
+              (u' Exercise 19: Find crossing points of two graphs ',
+               2,
+               u'2nd:exer:Cross2Graphs',
+               u'2nd:exer:Cross2Graphs'),
+              (u' Exercise 20: Sort array with numbers ',
+               2,
+               u'2nd:exer:sortNumbers',
+               u'2nd:exer:sortNumbers'),
+              (u' Exercise 21: Compute $\\pi$ ',
+               2,
+               u'2nd:exer:computingPi',
+               u'2nd:exer:computingPi'),
+              (u' Exercise 22: Compute combinations of sets ',
+               2,
+               u'2nd:exer:combinatorics1',
+               u'2nd:exer:combinatorics1'),
+              (u' Exercise 23: Frequency of random numbers ',
+               2,
+               u'2nd:exer:numberOccurrence',
+               u'2nd:exer:numberOccurrence'),
+              (u' Remarks ', 3, None, '___sec62'),
+              (u' Exercise 24: Game 21 ',
+               2,
+               u'2nd:exer:Game21',
+               u'2nd:exer:Game21'),
+              (u' Exercise 25: Linear interpolation ',
+               2,
+               u'2nd:exer:linearInterpol',
+               u'2nd:exer:linearInterpol'),
+              (u' Exercise 26: Test straight line requirement ',
+               2,
+               u'2nd:exer:testStraightLine',
+               u'2nd:exer:testStraightLine'),
+              (u' Exercise 27: Fit straight line to data ',
+               2,
+               u'2nd:exer:fitLine',
+               u'2nd:exer:fitLine'),
+              (u' Remarks ', 3, None, '___sec67'),
+              (u' Exercise 28: Fit sines to straight line ',
+               2,
+               u'2nd:exer:fitSines',
+               u'2nd:exer:fitSines'),
+              (u' Remarks ', 3, None, '___sec69'),
+              (u' Exercise 29: Count occurrences of a string in a string ',
+               2,
+               u'2nd:exer:countTextString',
+               u'2nd:exer:countTextString'),
+              (u' Remarks ', 3, None, '___sec71'),
+              (u' Computing integrals ',
+               0,
+               u'sec:integrals',
+               u'sec:integrals'),
+              (u' Basic ideas of numerical integration ',
+               1,
+               u'sec:integrals:basic',
+               u'sec:integrals:basic'),
+              (u' Computational example ', 3, None, '___sec74'),
+              (u' The composite trapezoidal rule ',
+               1,
+               u'sec:integrals:trap',
+               u'sec:integrals:trap'),
+              (u' The general formula ',
+               2,
+               u'sec:integrals:formula',
+               u'sec:integrals:formula'),
+              (u' Implementation ',
+               2,
+               u'sec:integrals:trap:impl',
+               u'sec:integrals:trap:impl'),
+              (u' Specific or general implementation? ', 3, None, '___sec78'),
+              (u' Implementation with functions ', 3, None, '___sec79'),
+              (u' Solving our specific problem in a session ',
+               3,
+               None,
+               '___sec80'),
+              (u' Solving our specific problem in a program ',
+               3,
+               None,
+               '___sec81'),
+              (u' Making a module ', 2, None, '___sec82'),
+              (u' Alternative flat special-purpose implementation ',
+               2,
+               None,
+               '___sec83'),
+              (u' The composite midpoint method ',
+               1,
+               u'sec:integrals:Midpoint',
+               u'sec:integrals:Midpoint'),
+              (u' The idea ', 3, None, '___sec85'),
+              (u' The general formula ', 2, None, '___sec86'),
+              (u' Implementation ',
+               2,
+               u'sec:midpoint:code',
+               u'sec:midpoint:code'),
+              (u' Comparing the trapezoidal and the midpoint methods ',
+               2,
+               None,
+               '___sec88'),
+              (u' Testing ', 1, None, '___sec89'),
+              (u' Problems with brief testing procedures ',
+               2,
+               None,
+               '___sec90'),
+              (u' Test procedures ',
+               2,
+               u'sec:integrals:testprocs',
+               u'sec:integrals:testprocs'),
+              (u' Hand-computed results ', 3, None, '___sec92'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec93'),
+              (u' Demonstrating correct convergence rates ',
+               3,
+               None,
+               '___sec94'),
+              (u' Constructing unit tests and writing test functions ',
+               2,
+               u'sec:integrals:test:functions',
+               u'sec:integrals:test:functions'),
+              (u' Hand-computed numerical results ', 3, None, '___sec96'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec97'),
+              (u' Demonstrating correct convergence rates ',
+               3,
+               None,
+               '___sec98'),
+              (u' Vectorization ', 1, None, '___sec99'),
+              (u' Vectorizing the midpoint rule ', 3, None, '___sec100'),
+              (u' Vectorizing the trapezoidal rule ', 3, None, '___sec101'),
+              (u' Measuring computational speed ', 1, None, '___sec102'),
+              (u' Double and triple integrals ',
+               1,
+               u'sec:int:double',
+               u'sec:int:double'),
+              (u' The midpoint rule for a double integral ',
+               2,
+               u'sec:int:double:midpoint',
+               u'sec:int:double:midpoint'),
+              (u' Derivation via one-dimensional integrals ',
+               3,
+               None,
+               '___sec105'),
+              (u' Direct derivation ', 3, None, '___sec106'),
+              (u' Programming a double sum ', 3, None, '___sec107'),
+              (u' Reusing code for one-dimensional integrals ',
+               3,
+               None,
+               '___sec108'),
+              (u' Verification via test functions ', 3, None, '___sec109'),
+              (u' The midpoint rule for a triple integral ',
+               2,
+               None,
+               '___sec110'),
+              (u' Theory ', 3, None, '___sec111'),
+              (u' Implementation ', 3, None, '___sec112'),
+              (u' Monte Carlo integration for complex-shaped domains ',
+               2,
+               u'sec:int:complex:domain',
+               u'sec:int:complex:domain'),
+              (u' The Monte Carlo integration algorithm ',
+               3,
+               None,
+               '___sec114'),
+              (u' Implementation ', 3, None, '___sec115'),
+              (u' Verification ', 3, None, '___sec116'),
+              (u' Test function for function with random numbers ',
+               3,
+               None,
+               '___sec117'),
+              (u' Integral over a circle ', 3, None, '___sec118'),
+              (u' Exercises ', 1, None, '___sec119'),
+              (u' Exercise 30: Hand calculations for the trapezoidal method ',
+               2,
+               u'sec:exer:trap:hand',
+               u'sec:exer:trap:hand'),
+              (u' Exercise 31: Hand calculations for the midpoint method ',
+               2,
+               u'sec:exer:midpt:hand',
+               u'sec:exer:midpt:hand'),
+              (u' Exercise 32: Compute a simple integral ',
+               2,
+               u'sec:exer:trap:mid:parabola',
+               u'sec:exer:trap:mid:parabola'),
+              (u' Exercise 33: Hand-calculations with sine integrals ',
+               2,
+               u'sec:exer:hand:sine',
+               u'sec:exer:hand:sine'),
+              (u' Exercise 34: Make test functions for the midpoint method ',
+               2,
+               u'sec:exer:test:midpoint',
+               u'sec:exer:test:midpoint'),
+              (u' Exercise 35: Explore round-off errors with large numbers ',
+               2,
+               u'sec:exer:test:roundoff',
+               u'sec:exer:test:roundoff'),
+              (u' Exercise 36: Write test functions for $\\int_0^4\\sqrt{x}dx$ ',
+               2,
+               u'sec:exer:test:convrates:sqrt',
+               u'sec:exer:test:convrates:sqrt'),
+              (u' Remarks ', 3, None, '___sec127'),
+              (u' Exercise 37: Rectangle methods ',
+               2,
+               u'sec:exer:rectangleMethod',
+               u'sec:exer:rectangleMethod'),
+              (u' Exercise 38: Adaptive integration ',
+               2,
+               u'sec:exer:adaptive:int',
+               u'sec:exer:adaptive:int'),
+              (u' Remarks ', 3, None, '___sec130'),
+              (u' Exercise 39: Integrating x raised to x ',
+               2,
+               u'sec:exer:integrate:x2x',
+               u'sec:exer:integrate:x2x'),
+              (u' Exercise 40: Integrate products of sine functions ',
+               2,
+               u'sec:exer:sine:products',
+               u'sec:exer:sine:products'),
+              (u' Exercise 41: Revisit fit of sines to a function ',
+               2,
+               u'sec:exer:revisitFitSines',
+               u'sec:exer:revisitFitSines'),
+              (u' Exercise 42: Derive the trapezoidal rule for a double integral ',
+               2,
+               u'sec:exer:trapezoidal:2D',
+               u'sec:exer:trapezoidal:2D'),
+              (u' Exercise 43: Compute the area of a triangle by Monte Carlo integration ',
+               2,
+               u'sec:exer:MC:ellipse',
+               u'sec:exer:MC:ellipse'),
+              (u' Solving ordinary differential equations ',
+               0,
+               u'5th:SolvODEs',
+               u'5th:SolvODEs'),
+              (u' Population growth ', 1, u'sec:de:pg', u'sec:de:pg'),
+              (u' Derivation of the model ',
+               2,
+               u'sec:de:pg:model',
+               u'sec:de:pg:model'),
+              (u' Numerical solution ',
+               2,
+               u'sec:de:pg:numerics',
+               u'sec:de:pg:numerics'),
+              (u' Programming the Forward Euler scheme; the special case ',
+               2,
+               u'sec:de:pg:prog1',
+               u'sec:de:pg:prog1'),
+              (u' Understanding the Forward Euler method ',
+               2,
+               u'sec:de:pg:geom',
+               u'sec:de:pg:geom'),
+              (u' Programming the Forward Euler scheme; the general case ',
+               2,
+               u'sec:de:FE:gen',
+               u'sec:de:FE:gen'),
+              (u' Making the population growth model more realistic ',
+               2,
+               None,
+               '___sec143'),
+              (u' Verification: exact linear solution of the discrete equations ',
+               2,
+               u'sec:de:growth:test:linear',
+               u'sec:de:growth:test:linear'),
+              (u' Spreading of diseases ', 1, None, '___sec145'),
+              (u' Spreading of a flu ', 2, u'sec:de:flu', u'sec:de:flu'),
+              (u' A Forward Euler method for the differential equation system ',
+               2,
+               u'sec:de:flu:FE',
+               u'sec:de:flu:FE'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:flu:prog:spec',
+               u'sec:de:flu:prog:spec'),
+              (u' Outbreak or not ', 2, None, '___sec149'),
+              (u' Abstract problem and notation ',
+               2,
+               u'sec:de:flu:generic',
+               u'sec:de:flu:generic'),
+              (u' Programming the numerical method; the general case ',
+               2,
+               u'sec:de:flu:prog:generic',
+               u'sec:de:flu:prog:generic'),
+              (u' Time-restricted immunity ', 2, None, '___sec152'),
+              (u' Incorporating vaccination ',
+               2,
+               u'sec:de:flu:vaccine',
+               u'sec:de:flu:vaccine'),
+              (u' Discontinuous coefficients: a vaccination campaign ',
+               2,
+               u'sec:de:flu:vaccine:discont',
+               u'sec:de:flu:vaccine:discont'),
+              (u' Oscillating one-dimensional systems ',
+               1,
+               u'sec:de:vib',
+               u'sec:de:vib'),
+              (u' Derivation of a simple model ', 2, None, '___sec156'),
+              (u' Numerical solution ', 2, None, '___sec157'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:vib:special',
+               u'sec:de:vib:special'),
+              (u' A magic fix of the numerical method ',
+               2,
+               None,
+               '___sec159'),
+              (u" The 2nd-order Runge-Kutta method (or Heun's method) ",
+               2,
+               u'sec:de:osc:Heun',
+               u'sec:de:osc:Heun'),
+              (u' Odespy: software for solving ODEs ',
+               2,
+               u'sec:de:osc:odespy',
+               u'sec:de:osc:odespy'),
+              (u' The 4th-order Runge-Kutta method ', 2, None, '___sec162'),
+              (u' The algorithm ', 3, None, '___sec163'),
+              (u' Application ', 3, None, '___sec164'),
+              (u' Implementation ', 3, None, '___sec165'),
+              (u' Derivation ', 3, None, '___sec166'),
+              (u' More effects: damping, nonlinearity, and external forces ',
+               2,
+               None,
+               '___sec167'),
+              (u' The Euler-Cromer scheme ', 3, None, '___sec168'),
+              (u' The 4-th order Runge-Kutta method ', 3, None, '___sec169'),
+              (u' Illustration of linear damping ', 2, None, '___sec170'),
+              (u' Illustration of linear damping with sinusoidal excitation ',
+               2,
+               None,
+               '___sec171'),
+              (u' Spring-mass system with sliding friction ',
+               2,
+               u'sec:de:vib:ode2:sliding:friction',
+               u'sec:de:vib:ode2:sliding:friction'),
+              (u' A finite difference method; undamped, linear case ',
+               2,
+               u'sec:de:vib:2nd',
+               u'sec:de:vib:2nd'),
+              (u' A finite difference method; linear damping ',
+               2,
+               u'sec:de:vib:2nd:damped1',
+               u'sec:de:vib:2nd:damped1'),
+              (u' Exercises ', 1, None, '___sec175'),
+              (u' Exercise 44: Geometric construction of the Forward Euler method ',
+               2,
+               u'sec:de:exer:geom',
+               u'sec:de:exer:geom'),
+              (u' Exercise 45: Make test functions for the Forward Euler method ',
+               2,
+               u'sec:de:exer:FE:test1',
+               u'sec:de:exer:FE:test1'),
+              (u" Exercise 46: Implement and evaluate Heun's method ",
+               2,
+               u'sec:de:exer:Heun:pg',
+               u'sec:de:exer:Heun:pg'),
+              (u' Exercise 47: Find an appropriate time step; logistic model ',
+               2,
+               u'sec:de:exer:logistic:dtopt',
+               u'sec:de:exer:logistic:dtopt'),
+              (u' Exercise 48: Find an appropriate time step; SIR model ',
+               2,
+               u'sec:de:exer:SIR:dtopt',
+               u'sec:de:exer:SIR:dtopt'),
+              (u' Exercise 49: Model an adaptive vaccination campaign ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 50: Make a SIRV model with time-limited effect of vaccination ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 51: Refactor a flat program ',
+               2,
+               u'sec:de:exer:vib:FE:func',
+               u'sec:de:exer:vib:FE:func'),
+              (u' Exercise 52: Simulate oscillations by a general ODE solver ',
+               2,
+               u'sec:de:exer:vib:ode_FE',
+               u'sec:de:exer:vib:ode_FE'),
+              (u' Exercise 53: Compute the energy in oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Exercise 54: Use a Backward Euler scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:BE',
+               u'sec:de:exer:pg:BE'),
+              (u' Exercise 55: Use a Crank-Nicolson scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:CN',
+               u'sec:de:exer:pg:CN'),
+              (u' Exercise 56: Understand finite differences via Taylor series ',
+               2,
+               u'sec:de:exer:fd:Taylor',
+               u'sec:de:exer:fd:Taylor'),
+              (u' Exercise 57: Use a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Remarks ', 3, None, '___sec190'),
+              (u" Exercise 58: Use Heun's method for the SIR model ",
+               2,
+               u'sec:de:exer:SIR:Heun',
+               u'sec:de:exer:SIR:Heun'),
+              (u' Exercise 59: Use Odespy to solve a simple ODE ',
+               2,
+               u'sec:de:exer:odespy:decay',
+               u'sec:de:exer:odespy:decay'),
+              (u' Exercise 60: Set up a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:osc:BE',
+               u'sec:de:exer:osc:BE'),
+              (u' Exercise 61: Set up a Forward Euler scheme for nonlinear and damped oscillations ',
+               2,
+               u'sec:de:exer:osc:FE:general',
+               u'sec:de:exer:osc:FE:general'),
+              (u' Exercise 62: Discretize an initial condition ',
+               2,
+               u'sec:de:exer:osc:2nd:V0ic',
+               u'sec:de:exer:osc:2nd:V0ic'),
+              (u' Solving partial differential equations ',
+               0,
+               u'6th:SolvPDEs',
+               u'6th:SolvPDEs'),
+              (u' Finite difference methods ',
+               1,
+               u'6th:SolvPDEs:MOLandFE',
+               u'6th:SolvPDEs:MOLandFE'),
+              (u' Reduction of a PDE to a system of ODEs ',
+               2,
+               u'sec:pde:diff1D:reduce',
+               u'sec:pde:diff1D:reduce'),
+              (u' Construction of a test problem with known discrete solution ',
+               2,
+               u'sec:pde:diff1D:testproblem',
+               u'sec:pde:diff1D:testproblem'),
+              (u' Implementation: Forward Euler method ',
+               2,
+               None,
+               '___sec200'),
+              (u' Application: heat conduction in a rod ',
+               2,
+               u'sec:pde:diff1D:rod',
+               u'sec:pde:diff1D:rod'),
+              (u' Vectorization ', 2, None, '___sec202'),
+              (u' Using Odespy to solve the system of ODEs ',
+               2,
+               None,
+               '___sec203'),
+              (u' Implicit methods ', 2, None, '___sec204'),
+              (u' Exercises ', 1, None, '___sec205'),
+              (u' Exercise 63: Simulate a diffusion equation by hand ',
+               2,
+               u'sec:pde:diff1D:exer:handFE',
+               u'sec:pde:diff1D:exer:handFE'),
+              (u' Exercise 64: Compute temperature variations in the ground ',
+               2,
+               u'sec:pde:diff1D:exer:groundtemp',
+               u'sec:pde:diff1D:exer:groundtemp'),
+              (u' Exercise 65: Compare implicit methods ',
+               2,
+               u'sec:pde:diff1D:exer:compare:implicit',
+               u'sec:pde:diff1D:exer:compare:implicit'),
+              (u' Exercise 66: Explore adaptive and implicit methods ',
+               2,
+               u'sec:pde:diff1D:exer:groundtemp:adapt',
+               u'sec:pde:diff1D:exer:groundtemp:adapt'),
+              (u' Exercise 67: Investigate the $\\theta$ rule ',
+               2,
+               u'sec:pde:diff1D:exer:CN',
+               u'sec:pde:diff1D:exer:CN'),
+              (u' Remarks ', 3, None, '___sec211'),
+              (u' Exercise 68: Compute the diffusion of a Gaussian peak ',
+               2,
+               u'sec:pde:diff1D:exer:Gaussian',
+               u'sec:pde:diff1D:exer:Gaussian'),
+              (u' Exercise 69: Vectorize a function for computing the area of a polygon ',
+               2,
+               u'2nd:exer:area:polygon2',
+               u'2nd:exer:area:polygon2'),
+              (u' Exercise 70: Explore symmetry ',
+               2,
+               u'sec:pde:diff1D:exer:Gaussian:symm',
+               u'sec:pde:diff1D:exer:Gaussian:symm'),
+              (u' Remarks ', 3, None, '___sec215'),
+              (u' Exercise 71: Compute solutions as $t\\rightarrow\\infty$ ',
+               2,
+               u'sec:pde:diff1D:exer:stationary',
+               u'sec:pde:diff1D:exer:stationary'),
+              (u' Remarks ', 3, None, '___sec217'),
+              (u' Exercise 72: Solve a two-point boundary value problem ',
+               2,
+               u'sec:pde:diff1D:exer:stationary2',
+               u'sec:pde:diff1D:exer:stationary2'),
+              (u' Solving nonlinear algebraic equations ',
+               0,
+               u'4th:NonlinAlgEq',
+               u'4th:NonlinAlgEq'),
+              (u' Brute force methods ',
+               1,
+               u'4th:bruteforce',
+               u'4th:bruteforce'),
+              (u' Brute force root finding ', 2, None, '___sec221'),
+              (u' Numerical algorithm ', 3, None, '___sec222'),
+              (u' Implementation ', 3, None, '___sec223'),
+              (u' Brute force optimization ', 2, None, '___sec224'),
+              (u' Numerical algorithm ', 3, None, '___sec225'),
+              (u' Implementation ', 3, None, '___sec226'),
+              (u' Model problem for algebraic equations ',
+               2,
+               None,
+               '___sec227'),
+              (u" Newton's method ",
+               1,
+               u'4th:NonlinAlgEq:Newt',
+               u'4th:NonlinAlgEq:Newt'),
+              (u" Deriving and implementing Newton's method ",
+               2,
+               None,
+               '___sec229'),
+              (u' Making a more efficient and robust implementation ',
+               2,
+               u'4th:Newton:robust',
+               u'4th:Newton:robust'),
+              (u' The secant method ',
+               1,
+               u'4th:NonlinAlgEq:Secant',
+               u'4th:NonlinAlgEq:Secant'),
+              (u' The bisection method ',
+               1,
+               u'4th:NonlinAlgEq:Bisect',
+               u'4th:NonlinAlgEq:Bisect'),
+              (u' Rate of convergence ',
+               1,
+               u'4th:NonlinAlgEq:RateConv',
+               u'4th:NonlinAlgEq:RateConv'),
+              (u' Exercises ', 1, None, '___sec234'),
+              (u" Exercise 73: Understand why Newton's method can fail ",
+               2,
+               u'4th:exer:Newton:failure',
+               u'4th:exer:Newton:failure'),
+              (u' Exercise 74: See if the secant method fails ',
+               2,
+               u'4th:exer:Secant:failure',
+               u'4th:exer:Secant:failure'),
+              (u' Exercise 75: Understand how the bisection method cannot fail ',
+               2,
+               u'4th:exer:Bisection:failure',
+               u'4th:exer:Bisection:failure'),
+              (u" Exercise 76: Combine the bisection method with Newton's method ",
+               2,
+               u'4th:exer:Bisection:Newton',
+               u'4th:exer:Bisection:Newton'),
+              (u" Exercise 77: Write a test function for Newton's method ",
+               2,
+               u'4th:exer:NewtonHand',
+               u'4th:exer:NewtonHand'),
+              (u' Exercise 78: Solve nonlinear equation for a vibrating beam ',
+               2,
+               u'4th:exer:beam:vib',
+               u'4th:exer:beam:vib'),
+              (u' Appendix: Getting access to Python ',
+               0,
+               u'app:accesspy',
+               u'app:accesspy'),
+              (u' Required software ',
+               1,
+               u'sec:accesspy:softwarelist',
+               u'sec:accesspy:softwarelist'),
+              (u' Installing software on your laptop: Mac OS X and Windows ',
+               1,
+               u'sec:accesspy:MacWin',
+               u'sec:accesspy:MacWin'),
+              (u' Anaconda and Spyder ',
+               1,
+               u'sec:accesspy:anaconda',
+               u'sec:accesspy:anaconda'),
+              (u' Spyder on Mac ', 2, None, '___sec245'),
+              (u' Installation of additional packages ',
+               2,
+               None,
+               '___sec246'),
+              (u' Installing SciTools on Mac ', 2, None, '___sec247'),
+              (u' Installing SciTools on Windows ', 2, None, '___sec248'),
+              (u' VMWare Fusion virtual machine ',
+               1,
+               u'sec:accesspy:vmware',
+               u'sec:accesspy:vmware'),
+              (u' Installing Ubuntu ',
+               2,
+               u'sec:accesspy:vmware:fullblown:machine',
+               u'sec:accesspy:vmware:fullblown:machine'),
+              (u' Installing software on Ubuntu ', 2, None, '___sec251'),
+              (u' File sharing ', 2, None, '___sec252'),
+              (u' Dual boot on Windows ', 1, None, '___sec253'),
+              (u' Vagrant virtual machine ',
+               1,
+               u'sec:accesspy:vagrant',
+               u'sec:accesspy:vagrant'),
+              (u' How to write and run a Python program ',
+               1,
+               u'sec:accesspy:writerun',
+               u'sec:accesspy:writerun'),
+              (u' The need for a text editor ', 2, None, '___sec256'),
+              (u' Spyder ', 2, None, '___sec257'),
+              (u' Text editors ', 2, None, '___sec258'),
+              (u' Terminal windows ', 2, None, '___sec259'),
+              (u' Using a plain text editor and a terminal window ',
+               2,
+               None,
+               '___sec260'),
+              (u' The SageMathCloud and Wakari web services ',
+               1,
+               u'sec:accesspy:sagemath:wakari',
+               u'sec:accesspy:sagemath:wakari'),
+              (u' Basic intro to SageMathCloud ', 2, None, '___sec262'),
+              (u' Basic intro to Wakari ', 2, None, '___sec263'),
+              (u' Installing your own Python packages ',
+               2,
+               None,
+               '___sec264'),
+              (u' Writing IPython notebooks ',
+               1,
+               u'sec:accesspy:ipynb',
+               u'sec:accesspy:ipynb'),
+              (u' A simple program in the notebook ', 2, None, '___sec266'),
+              (u' Mixing text, mathematics, code, and graphics ',
+               2,
+               None,
+               '___sec267'),
+              (u' References ', 0, None, '___sec268')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands.tex -->
+$$
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+$$
+
+
+
+
+    
+<a name="part0011"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._p4c-solarized-Python010.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._p4c-solarized-Python012.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1 id="sec:lists">Lists and tuples - alternatives to arrays</h1>
+
+<p>
+We have seen that a group of numbers may be stored in an array that we
+may treat as a whole, or element by element. In Python, there is
+another way of organizing data that actually is much used, at least in
+non-numerical contexts, and that is a construction called <em>list</em>.
+
+<p>
+A list is quite similar to an array in many ways, but there are pros
+and cons to consider. For example, the number of elements in a list is
+allowed to change, whereas arrays have a fixed length that must be
+known at the time of memory allocation. Elements in a list can be of
+different type, i.e you may mix integers, floats and strings, whereas
+elements in an array must be of the same type. In general, lists
+provide more flexibility than do arrays. On the other hand, arrays
+give faster computations than lists, making arrays the prime choice
+unless the flexibility of lists is needed. Arrays also require less
+memory use and there is a lot of ready-made code for various
+mathematical operations. Vectorization requires arrays to be used.
+
+<p>
+The <code>range()</code> function that we used above in our <code>for</code> loop actually
+returns a list. If you for example write <code>range(5)</code> at the prompt in
+<code>ipython</code>, you get <code>[0, 1, 2, 3, 4]</code> in return, i.e., a list with 5
+numbers. In a for loop, the line <code>for i in range[5]</code> makes <code>i</code> take on
+each of the numbers \( 0, 1, 2, 3, 4 \) in turn, as we saw above. Writing,
+e.g., <code>x = range(5)</code>, gives a list by the name <code>x</code>, containing those
+five numbers. These numbers may now be accessed (e.g., as <code>x[2]</code>,
+which contains the number 2) and used in computations just as we saw
+for array elements. As with arrays, indices run from \( 0 \) to \( n - 1 \),
+when <code>n</code> is the number of elements in a list. You may convert a list
+to an array by <code>x = array(L)</code>.
+
+<p>
+A list may also be created by simply writing, e.g.,
+
+<p>
+<!-- begin verbatim block  cod-->
+<pre><code>x = ['hello', 4, 3.14, 6]
+</code></pre>
+<!-- end verbatim block -->
+giving a list where <code>x[0]</code> contains the string <code>hello</code>, <code>x[1]</code>
+contains the integer <code>4</code>, etc. We may add and/or delete elements
+anywhere in the list as shown in the following example.
+
+<p>
+<!-- begin verbatim block  cod-->
+<pre><code>x = ['hello', 4, 3.14, 6]
+x.insert(0, -2) # x then becomes [-2, 'hello', 4, 3.14, 6]
+del x[3]        # x then becomes [-2, 'hello', 4, 6]
+x.append(3.14)  # x then becomes [-2, 'hello', 4, 6, 3.14]
+</code></pre>
+<!-- end verbatim block -->
+Note the ways of writing the different operations here. Using
+<code>append()</code> will always increase the list at the end. If you like, you
+may create an empty list as <code>x = []</code> before you enter a loop which
+appends element by element. If you need to know the length of the
+list, you get the number of elements from <code>len(x)</code>, which in our case
+is 5, after appending <code>3.14</code> above. This function is handy if you want
+to traverse all list elements by index, since <code>range(len(x))</code> gives
+you all legal indices. Note that there are many more operations on
+lists possible than shown here.
+
+<p>
+Previously, we saw how a <code>for</code> loop may run over array elements. When
+we want to do the same with a list in Python, we may do it as this
+little example shows,
+
+<p>
+<!-- begin verbatim block  cod-->
+<pre><code>x = ['hello', 4, 3.14, 6]
+for e in x:
+    print 'x element: ', e
+print 'This was all the elements in the list x'
+</code></pre>
+<!-- end verbatim block -->
+This is how it usually is done in Python, and we see that <code>e</code> runs
+over the elements of <code>x</code> directly, avoiding the need for indexing. Be
+aware, however, that when loops are written like this, you can not
+change any element in <code>x</code> by &quot;changing&quot; e. That is, writing <code>e += 2</code>
+will not change anything in <code>x</code>, since <code>e</code> can only be used to read
+(as opposed to overwrite) the list elements.
+
+<p>
+There is a special construct in Python that allows you to run through
+all elements of a list, do the same operation on each, and store the
+new elements in another list. It is referred to as <em>list
+comprehension</em> and may be demonstrated as follows.
+
+<p>
+<!-- begin verbatim block  cod-->
+<pre><code>List_1 = [1, 2, 3, 4]
+List_2 = [e*10 for e in List_1]
+</code></pre>
+<!-- end verbatim block -->
+This will produce a new list by the name <code>List_2</code>, containing the
+elements <code>10</code>, <code>20</code>, <code>30</code> and <code>40</code>, in that order. Notice the
+syntax within the brackets for <code>List_2</code>, <code>for e in List_1</code> signals
+that <code>e</code> is to successively be each of the list elements in <code>List_1</code>,
+and for each <code>e</code>, create the next element in <code>List_2</code> by doing
+<code>e*10</code>. More generally, the syntax may be written as
+
+<p>
+<!-- begin verbatim block  cod-->
+<pre><code>List_2 = [E(e) for e in List_1]
+</code></pre>
+<!-- end verbatim block -->
+where <code>E(e)</code> means some expression involving <code>e</code>.
+
+<p>
+In some cases, it is required to run through 2 (or more) lists at the same time.
+Python has a handy function called <code>zip</code> for this purpose. An example of how to use
+<code>zip</code> is provided in the code <code>file_handling.py</code> below.
+
+<p>
+We should also briefly mention about <em>tuples</em>, which are very much like lists,
+the main difference being that tuples cannot be changed. To a freshman, it may
+seem strange that such &quot;constant lists&quot; could ever be preferable over lists.
+However, the property of being constant is a good safeguard against unintentional
+changes. Also, it is quicker for Python to handle data in a tuple than in a list, which
+contributes to faster code. With the data from above, we may create a tuple and
+print the content by writing
+
+<p>
+<!-- begin verbatim block  cod-->
+<pre><code>x = ('hello', 4, 3.14, 6)
+for e in x:
+    print 'x element: ', e
+print 'This was all the elements in the tuple x'
+</code></pre>
+<!-- end verbatim block -->
+Trying <code>insert</code> or <code>append</code> for the tuple gives an error message (because it cannot
+be changed), stating that the tuple object has no such attribute.
+
+<h1 id="sec:file:reading:writing">Reading from and writing to files</h1>
+
+<p>
+Input data for a program often come from files and the results of the
+computations are often written to file. To illustrate basic file
+handling, we consider an example where we read \( x \) and \( y \) coordinates
+from two columns in a file, apply a function \( f \) to the \( y \) coordinates,
+and write the results to a new two-column data file. The first line of
+the input file is a heading that we can just skip:
+
+<p>
+<!-- begin verbatim block  dat-->
+<pre><code># x and y coordinates
+1.0  3.44
+2.0  4.8
+3.5  6.61
+4.0  5.0
+</code></pre>
+<!-- end verbatim block -->
+The relevant Python lines for reading the numbers and writing out
+a similar file are given in the file
+<a href="https://github.com/hplgit/prog4comp/src/py/file_handling.py" target="_self"><tt>file_handling.py</tt></a>
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>filename = 'tmp.dat'
+infile = open(filename, 'r')  # Open file for reading
+line = infile.readline()      # Read first line
+# Read x and y coordinates from the file and store in lists
+x = []
+y = []
+for line in infile:
+    words = line.split()      # Split line into words
+    x.append(float(words[0]))
+    y.append(float(words[1]))
+infile.close()
+
+# Transform y coordinates
+from math import log
+
+def f(y):
+    return log(y)
+
+for i in range(len(y)):
+    y[i] = f(y[i])
+
+# Write out x and y to a two-column file
+filename = 'tmp_out.dat'
+outfile = open(filename, 'w')  # Open file for writing
+outfile.write('# x and y coordinates\n')
+for xi, yi in zip(x, y):
+    outfile.write('%10.5f %10.5f\n' % (xi, yi))
+outfile.close()
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Such a file with a comment line and numbers in tabular format is very
+common so <code>numpy</code> has functionality to ease reading and writing.
+Here is the same example using the <code>loadtxt</code> and <code>savetxt</code> functions
+in <code>numpy</code> for tabular data (file
+<a href="https://github.com/hplgit/prog4comp/src/py/file_handling_numpy.py" target="_self"><tt>file_handling_numpy.py</tt></a>):
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>filename = 'tmp.dat'
+import numpy
+data = numpy.loadtxt(filename, comments='#')
+x = data[:,0]
+y = data[:,1]
+data[:,1] = numpy.log(y)  # insert transformed y back in array
+filename = 'tmp_out.dat'
+filename = 'tmp_out.dat'
+outfile = open(filename, 'w')  # open file for writing
+outfile.write('# x and y coordinates\n')
+numpy.savetxt(outfile, data, fmt='%10.5f')
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._p4c-solarized-Python010.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._p4c-solarized-Python012.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

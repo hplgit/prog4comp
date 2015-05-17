@@ -1,0 +1,1875 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Programming for Computations - A Gentle Introduction to Numerical Simulations with Python">
+<meta name="keywords" content="computer program,programming,language programming,language computer,MATLAB,Octave,Fortran,C,C++,Python,Maple,Mathematica,syntax,bug,debugging,script (and scripting),implement,print,program run,program execute,code,comment,instruction,program statement,variable,assignment,calculator,text editor,Idle,prompt,program typing,program run,program execute,ipython,function,function call,atan,function input parameter,function output parameter,function return,function take a parameter,library,library function,from,import,math,module,package,linspace,xlabel,ylabel,plot,interactive use (of Python),import,keyboard arrow up/down,Python shell,operator Arithmetic,parentheses,variable type,variable name,object,float,int,str,type conversion,reserved words,variable int,variable float,variable str,variable assignment,type conversion automatic,integer division,round-off error,printing formatted,printf formatting,default,array,array element,zeros,allocate,array index,indexing zero based,indexing one based,Python zero-based indexing,array slice of,graph,hold (on/off),plot figure,title,legend,axis,hardcopy,format png,matrix mat,matrix vector product,transpose,linear algebra,matrix,vector,error message,debugging,debugger,try-exception,exception handling,program crash,program testing,program verification,program input,program output,input,raw input,list,tuple,symbolic computations,symbolic operations,symbolic simplifications,SymPy,library SymPy,WolframAlpha,Mathematica,Sage (symbolic package),Python documentation,garbage collection,variable delete,if,elif,else,colon,indent,boolean,boolean expression,True,False,boolean True,boolean False,pseudo code,operator Logical,function,function definition,def,return,argument,parameter input,parameter output,variable local,variable global,argument keyword,argument named,argument ordinary,argument positional,doc string,function handle,function local,function global,function nested,lambda function,loop for,for loop,range,loop iteration,loop index,loop double,loop multiple,loop nested,linear algebra,while loop,loop while,loop infinite,loop iteration,loop index,list,list append,list convert to array,list delete,list create,tuple,list comprehension,array sorting,Leibniz pi,Euler pi,programming game,linear interpolation,least squares method,Fourier series,integral analytically,integral exact,integral approximately,integration points,code re-use,unit tests,complex domains,Monte Carlo integration,seed (random generators),scheme,finite difference method,forward difference approximation,Forward Euler scheme,logistic model,carrying capacity,SIR model,scalar ODE,ODE scalar,vector ODE,ODE vector,system of ODEs,Heun's method,Runge-Kutta, 2nd-order method,2nd-order Runge-Kutta method,RK2,PDE,heat equation,diffusion equation,MOL forward Euler,method of lines,MOL,mesh points,cell,method of lines,unstable solutions,instability,stability criterion,Poisson equation,Laplace equation,root finding,code robust,code try-except,code exception,Newton starting value,return None,sys.exit,Idle,Emacs,Vim,Gedit,TextWrangler,Notepad++">
+
+<title>Programming for Computations - A Gentle Introduction to Numerical Simulations with Python</title>
+
+
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+code { padding: 0px; background-color: inherit; }
+pre {
+  border: 0pt solid #93a1a1;
+  box-shadow: none;
+}
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+/* Let pre tags for code blocks have the same color as the surroundings */
+pre { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u' Preface ', 0, None, '___sec0'),
+              (u' Why learn programming? ', 3, None, '___sec1'),
+              (u' Target audience and background knowledge ',
+               3,
+               None,
+               '___sec2'),
+              (u' Numerical methods ', 3, None, '___sec3'),
+              (u' The computer language: Python ', 3, None, '___sec4'),
+              (u' How this book is different ', 3, None, '___sec5'),
+              (u' Acknowledgments ', 3, None, '___sec6'),
+              (u' The first few steps ',
+               0,
+               u'1st:TheFirstFewSteps',
+               u'1st:TheFirstFewSteps'),
+              (u' What is a program? And what is programming? ',
+               1,
+               None,
+               '___sec8'),
+              (u' A Python program with variables ',
+               1,
+               u'1st:ex1',
+               u'1st:ex1'),
+              (u' The program ', 2, None, '___sec10'),
+              (u' Dissection of the program ', 2, None, '___sec11'),
+              (u' Why not just use a pocket calculator? ',
+               2,
+               None,
+               '___sec12'),
+              (u' The importance of using a text editor to write programs ',
+               2,
+               None,
+               '___sec13'),
+              (u' Installation of Python ', 2, None, '___sec14'),
+              (u' Write and run your first program ', 2, None, '___sec15'),
+              (u'  A Python program with a library function ',
+               1,
+               u'1st:ex2',
+               u'1st:ex2'),
+              (u' A Python program with vectorization and plotting ',
+               1,
+               u'1st:ex3',
+               u'1st:ex3'),
+              (u' More basic concepts ', 1, None, '___sec18'),
+              (u' Using Python interactively ', 2, None, '___sec19'),
+              (u' Arithmetics, parentheses and round-off errors ',
+               2,
+               None,
+               '___sec20'),
+              (u' Variables and objects ', 2, None, '___sec21'),
+              (u' Integer division ', 2, None, '___sec22'),
+              (u' Formatting text and numbers ', 2, None, '___sec23'),
+              (u' Arrays ', 2, None, '___sec24'),
+              (u' Plotting ', 2, None, '___sec25'),
+              (u' Error messages and warnings ', 2, None, '___sec26'),
+              (u' Input data ', 2, None, '___sec27'),
+              (u' Symbolic computations ', 2, None, '___sec28'),
+              (u' Concluding remarks ', 2, None, '___sec29'),
+              (u' Exercises ', 1, None, '___sec30'),
+              (u' Exercise 1: Error messages ',
+               2,
+               u'1st:exer:ErrorMessages',
+               u'1st:exer:ErrorMessages'),
+              (u' Exercise 2: Volume of a cube ',
+               2,
+               u'1st:exer:cubeVolume',
+               u'1st:exer:cubeVolume'),
+              (u' Exercise 3: Area and circumference of a circle ',
+               2,
+               u'1st:exer:areaCircle',
+               u'1st:exer:areaCircle'),
+              (u' Exercise 4: Volumes of three cubes ',
+               2,
+               u'1st:exer:volumes3cubes',
+               u'1st:exer:volumes3cubes'),
+              (u' Exercise 5: Average of integers ',
+               2,
+               u'1st:exer:averageOf5Integers',
+               u'1st:exer:averageOf5Integers'),
+              (u' Exercise 6: Interactive computing of volume and area ',
+               2,
+               u'1st:exer:cubeVolInteractively',
+               u'1st:exer:cubeVolInteractively'),
+              (u' Exercise 7: Peculiar results from division ',
+               2,
+               u'1st:exer:intDivInteractively',
+               u'1st:exer:intDivInteractively'),
+              (u' Exercise 8: Update variable at command prompt ',
+               2,
+               u'1st:exer:updateVarInteractively',
+               u'1st:exer:updateVarInteractively'),
+              (u' Exercise 9: Formatted print to screen ',
+               2,
+               u'1st:exer:printfScreen',
+               u'1st:exer:printfScreen'),
+              (u' Exercise 10: Python documentation and random numbers ',
+               2,
+               u'1st:exer:PythonDocRandom',
+               u'1st:exer:PythonDocRandom'),
+              (u' Basic constructions ',
+               0,
+               u'2nd:BasicConstructins',
+               u'2nd:BasicConstructins'),
+              (u' If tests, colon and indentation ', 1, None, '___sec42'),
+              (u' Functions ', 1, u'sec:functions', u'sec:functions'),
+              (u' For loops ', 1, u'sec:for:loops', u'sec:for:loops'),
+              (u' While loops ', 1, u'sec:while:loops', u'sec:while:loops'),
+              (u' Lists and tuples - alternatives to arrays ',
+               1,
+               u'sec:lists',
+               u'sec:lists'),
+              (u' Reading from and writing to files ',
+               1,
+               u'sec:file:reading:writing',
+               u'sec:file:reading:writing'),
+              (u' Exercises ', 1, None, '___sec48'),
+              (u' Exercise 11: Errors with colon, indent, etc. ',
+               2,
+               u'2nd:exer:ErrorsColonIndent',
+               u'2nd:exer:ErrorsColonIndent'),
+              (u' Exercise 12: Compare integers a and b ',
+               2,
+               u'2nd:exer:compInt',
+               u'2nd:exer:compInt'),
+              (u' Exercise 13: Functions for circumference and area of a circle ',
+               2,
+               u'2nd:exer:funcCircArea',
+               u'2nd:exer:funcCircArea'),
+              (u' Exercise 14: Function for area of a rectangle ',
+               2,
+               u'2nd:exer:funcAreaRectangle',
+               u'2nd:exer:funcAreaRectangle'),
+              (u' Exercise 15: Area of a polygon ',
+               2,
+               u'2nd:exer:area:polygon',
+               u'2nd:exer:area:polygon'),
+              (u' Exercise 16: Average of integers ',
+               2,
+               u'2nd:exer:avNInt',
+               u'2nd:exer:avNInt'),
+              (u' Exercise 17: While loop with errors ',
+               2,
+               u'2nd:exer:whileLoopErrors',
+               u'2nd:exer:whileLoopErrors'),
+              (u' Exercise 18: Area of rectangle versus circle ',
+               2,
+               u'2nd:exer:areaRectCircle',
+               u'2nd:exer:areaRectCircle'),
+              (u' Exercise 19: Find crossing points of two graphs ',
+               2,
+               u'2nd:exer:Cross2Graphs',
+               u'2nd:exer:Cross2Graphs'),
+              (u' Exercise 20: Sort array with numbers ',
+               2,
+               u'2nd:exer:sortNumbers',
+               u'2nd:exer:sortNumbers'),
+              (u' Exercise 21: Compute $\\pi$ ',
+               2,
+               u'2nd:exer:computingPi',
+               u'2nd:exer:computingPi'),
+              (u' Exercise 22: Compute combinations of sets ',
+               2,
+               u'2nd:exer:combinatorics1',
+               u'2nd:exer:combinatorics1'),
+              (u' Exercise 23: Frequency of random numbers ',
+               2,
+               u'2nd:exer:numberOccurrence',
+               u'2nd:exer:numberOccurrence'),
+              (u' Remarks ', 3, None, '___sec62'),
+              (u' Exercise 24: Game 21 ',
+               2,
+               u'2nd:exer:Game21',
+               u'2nd:exer:Game21'),
+              (u' Exercise 25: Linear interpolation ',
+               2,
+               u'2nd:exer:linearInterpol',
+               u'2nd:exer:linearInterpol'),
+              (u' Exercise 26: Test straight line requirement ',
+               2,
+               u'2nd:exer:testStraightLine',
+               u'2nd:exer:testStraightLine'),
+              (u' Exercise 27: Fit straight line to data ',
+               2,
+               u'2nd:exer:fitLine',
+               u'2nd:exer:fitLine'),
+              (u' Remarks ', 3, None, '___sec67'),
+              (u' Exercise 28: Fit sines to straight line ',
+               2,
+               u'2nd:exer:fitSines',
+               u'2nd:exer:fitSines'),
+              (u' Remarks ', 3, None, '___sec69'),
+              (u' Exercise 29: Count occurrences of a string in a string ',
+               2,
+               u'2nd:exer:countTextString',
+               u'2nd:exer:countTextString'),
+              (u' Remarks ', 3, None, '___sec71'),
+              (u' Computing integrals ',
+               0,
+               u'sec:integrals',
+               u'sec:integrals'),
+              (u' Basic ideas of numerical integration ',
+               1,
+               u'sec:integrals:basic',
+               u'sec:integrals:basic'),
+              (u' Computational example ', 3, None, '___sec74'),
+              (u' The composite trapezoidal rule ',
+               1,
+               u'sec:integrals:trap',
+               u'sec:integrals:trap'),
+              (u' The general formula ',
+               2,
+               u'sec:integrals:formula',
+               u'sec:integrals:formula'),
+              (u' Implementation ',
+               2,
+               u'sec:integrals:trap:impl',
+               u'sec:integrals:trap:impl'),
+              (u' Specific or general implementation? ', 3, None, '___sec78'),
+              (u' Implementation with functions ', 3, None, '___sec79'),
+              (u' Solving our specific problem in a session ',
+               3,
+               None,
+               '___sec80'),
+              (u' Solving our specific problem in a program ',
+               3,
+               None,
+               '___sec81'),
+              (u' Making a module ', 2, None, '___sec82'),
+              (u' Alternative flat special-purpose implementation ',
+               2,
+               None,
+               '___sec83'),
+              (u' The composite midpoint method ',
+               1,
+               u'sec:integrals:Midpoint',
+               u'sec:integrals:Midpoint'),
+              (u' The idea ', 3, None, '___sec85'),
+              (u' The general formula ', 2, None, '___sec86'),
+              (u' Implementation ',
+               2,
+               u'sec:midpoint:code',
+               u'sec:midpoint:code'),
+              (u' Comparing the trapezoidal and the midpoint methods ',
+               2,
+               None,
+               '___sec88'),
+              (u' Testing ', 1, None, '___sec89'),
+              (u' Problems with brief testing procedures ',
+               2,
+               None,
+               '___sec90'),
+              (u' Test procedures ',
+               2,
+               u'sec:integrals:testprocs',
+               u'sec:integrals:testprocs'),
+              (u' Hand-computed results ', 3, None, '___sec92'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec93'),
+              (u' Demonstrating correct convergence rates ',
+               3,
+               None,
+               '___sec94'),
+              (u' Constructing unit tests and writing test functions ',
+               2,
+               u'sec:integrals:test:functions',
+               u'sec:integrals:test:functions'),
+              (u' Hand-computed numerical results ', 3, None, '___sec96'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec97'),
+              (u' Demonstrating correct convergence rates ',
+               3,
+               None,
+               '___sec98'),
+              (u' Vectorization ', 1, None, '___sec99'),
+              (u' Vectorizing the midpoint rule ', 3, None, '___sec100'),
+              (u' Vectorizing the trapezoidal rule ', 3, None, '___sec101'),
+              (u' Measuring computational speed ', 1, None, '___sec102'),
+              (u' Double and triple integrals ',
+               1,
+               u'sec:int:double',
+               u'sec:int:double'),
+              (u' The midpoint rule for a double integral ',
+               2,
+               u'sec:int:double:midpoint',
+               u'sec:int:double:midpoint'),
+              (u' Derivation via one-dimensional integrals ',
+               3,
+               None,
+               '___sec105'),
+              (u' Direct derivation ', 3, None, '___sec106'),
+              (u' Programming a double sum ', 3, None, '___sec107'),
+              (u' Reusing code for one-dimensional integrals ',
+               3,
+               None,
+               '___sec108'),
+              (u' Verification via test functions ', 3, None, '___sec109'),
+              (u' The midpoint rule for a triple integral ',
+               2,
+               None,
+               '___sec110'),
+              (u' Theory ', 3, None, '___sec111'),
+              (u' Implementation ', 3, None, '___sec112'),
+              (u' Monte Carlo integration for complex-shaped domains ',
+               2,
+               u'sec:int:complex:domain',
+               u'sec:int:complex:domain'),
+              (u' The Monte Carlo integration algorithm ',
+               3,
+               None,
+               '___sec114'),
+              (u' Implementation ', 3, None, '___sec115'),
+              (u' Verification ', 3, None, '___sec116'),
+              (u' Test function for function with random numbers ',
+               3,
+               None,
+               '___sec117'),
+              (u' Integral over a circle ', 3, None, '___sec118'),
+              (u' Exercises ', 1, None, '___sec119'),
+              (u' Exercise 30: Hand calculations for the trapezoidal method ',
+               2,
+               u'sec:exer:trap:hand',
+               u'sec:exer:trap:hand'),
+              (u' Exercise 31: Hand calculations for the midpoint method ',
+               2,
+               u'sec:exer:midpt:hand',
+               u'sec:exer:midpt:hand'),
+              (u' Exercise 32: Compute a simple integral ',
+               2,
+               u'sec:exer:trap:mid:parabola',
+               u'sec:exer:trap:mid:parabola'),
+              (u' Exercise 33: Hand-calculations with sine integrals ',
+               2,
+               u'sec:exer:hand:sine',
+               u'sec:exer:hand:sine'),
+              (u' Exercise 34: Make test functions for the midpoint method ',
+               2,
+               u'sec:exer:test:midpoint',
+               u'sec:exer:test:midpoint'),
+              (u' Exercise 35: Explore round-off errors with large numbers ',
+               2,
+               u'sec:exer:test:roundoff',
+               u'sec:exer:test:roundoff'),
+              (u' Exercise 36: Write test functions for $\\int_0^4\\sqrt{x}dx$ ',
+               2,
+               u'sec:exer:test:convrates:sqrt',
+               u'sec:exer:test:convrates:sqrt'),
+              (u' Remarks ', 3, None, '___sec127'),
+              (u' Exercise 37: Rectangle methods ',
+               2,
+               u'sec:exer:rectangleMethod',
+               u'sec:exer:rectangleMethod'),
+              (u' Exercise 38: Adaptive integration ',
+               2,
+               u'sec:exer:adaptive:int',
+               u'sec:exer:adaptive:int'),
+              (u' Remarks ', 3, None, '___sec130'),
+              (u' Exercise 39: Integrating x raised to x ',
+               2,
+               u'sec:exer:integrate:x2x',
+               u'sec:exer:integrate:x2x'),
+              (u' Exercise 40: Integrate products of sine functions ',
+               2,
+               u'sec:exer:sine:products',
+               u'sec:exer:sine:products'),
+              (u' Exercise 41: Revisit fit of sines to a function ',
+               2,
+               u'sec:exer:revisitFitSines',
+               u'sec:exer:revisitFitSines'),
+              (u' Exercise 42: Derive the trapezoidal rule for a double integral ',
+               2,
+               u'sec:exer:trapezoidal:2D',
+               u'sec:exer:trapezoidal:2D'),
+              (u' Exercise 43: Compute the area of a triangle by Monte Carlo integration ',
+               2,
+               u'sec:exer:MC:ellipse',
+               u'sec:exer:MC:ellipse'),
+              (u' Solving ordinary differential equations ',
+               0,
+               u'5th:SolvODEs',
+               u'5th:SolvODEs'),
+              (u' Population growth ', 1, u'sec:de:pg', u'sec:de:pg'),
+              (u' Derivation of the model ',
+               2,
+               u'sec:de:pg:model',
+               u'sec:de:pg:model'),
+              (u' Numerical solution ',
+               2,
+               u'sec:de:pg:numerics',
+               u'sec:de:pg:numerics'),
+              (u' Programming the Forward Euler scheme; the special case ',
+               2,
+               u'sec:de:pg:prog1',
+               u'sec:de:pg:prog1'),
+              (u' Understanding the Forward Euler method ',
+               2,
+               u'sec:de:pg:geom',
+               u'sec:de:pg:geom'),
+              (u' Programming the Forward Euler scheme; the general case ',
+               2,
+               u'sec:de:FE:gen',
+               u'sec:de:FE:gen'),
+              (u' Making the population growth model more realistic ',
+               2,
+               None,
+               '___sec143'),
+              (u' Verification: exact linear solution of the discrete equations ',
+               2,
+               u'sec:de:growth:test:linear',
+               u'sec:de:growth:test:linear'),
+              (u' Spreading of diseases ', 1, None, '___sec145'),
+              (u' Spreading of a flu ', 2, u'sec:de:flu', u'sec:de:flu'),
+              (u' A Forward Euler method for the differential equation system ',
+               2,
+               u'sec:de:flu:FE',
+               u'sec:de:flu:FE'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:flu:prog:spec',
+               u'sec:de:flu:prog:spec'),
+              (u' Outbreak or not ', 2, None, '___sec149'),
+              (u' Abstract problem and notation ',
+               2,
+               u'sec:de:flu:generic',
+               u'sec:de:flu:generic'),
+              (u' Programming the numerical method; the general case ',
+               2,
+               u'sec:de:flu:prog:generic',
+               u'sec:de:flu:prog:generic'),
+              (u' Time-restricted immunity ', 2, None, '___sec152'),
+              (u' Incorporating vaccination ',
+               2,
+               u'sec:de:flu:vaccine',
+               u'sec:de:flu:vaccine'),
+              (u' Discontinuous coefficients: a vaccination campaign ',
+               2,
+               u'sec:de:flu:vaccine:discont',
+               u'sec:de:flu:vaccine:discont'),
+              (u' Oscillating one-dimensional systems ',
+               1,
+               u'sec:de:vib',
+               u'sec:de:vib'),
+              (u' Derivation of a simple model ', 2, None, '___sec156'),
+              (u' Numerical solution ', 2, None, '___sec157'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:vib:special',
+               u'sec:de:vib:special'),
+              (u' A magic fix of the numerical method ',
+               2,
+               None,
+               '___sec159'),
+              (u" The 2nd-order Runge-Kutta method (or Heun's method) ",
+               2,
+               u'sec:de:osc:Heun',
+               u'sec:de:osc:Heun'),
+              (u' Odespy: software for solving ODEs ',
+               2,
+               u'sec:de:osc:odespy',
+               u'sec:de:osc:odespy'),
+              (u' The 4th-order Runge-Kutta method ', 2, None, '___sec162'),
+              (u' The algorithm ', 3, None, '___sec163'),
+              (u' Application ', 3, None, '___sec164'),
+              (u' Implementation ', 3, None, '___sec165'),
+              (u' Derivation ', 3, None, '___sec166'),
+              (u' More effects: damping, nonlinearity, and external forces ',
+               2,
+               None,
+               '___sec167'),
+              (u' The Euler-Cromer scheme ', 3, None, '___sec168'),
+              (u' The 4-th order Runge-Kutta method ', 3, None, '___sec169'),
+              (u' Illustration of linear damping ', 2, None, '___sec170'),
+              (u' Illustration of linear damping with sinusoidal excitation ',
+               2,
+               None,
+               '___sec171'),
+              (u' Spring-mass system with sliding friction ',
+               2,
+               u'sec:de:vib:ode2:sliding:friction',
+               u'sec:de:vib:ode2:sliding:friction'),
+              (u' A finite difference method; undamped, linear case ',
+               2,
+               u'sec:de:vib:2nd',
+               u'sec:de:vib:2nd'),
+              (u' A finite difference method; linear damping ',
+               2,
+               u'sec:de:vib:2nd:damped1',
+               u'sec:de:vib:2nd:damped1'),
+              (u' Exercises ', 1, None, '___sec175'),
+              (u' Exercise 44: Geometric construction of the Forward Euler method ',
+               2,
+               u'sec:de:exer:geom',
+               u'sec:de:exer:geom'),
+              (u' Exercise 45: Make test functions for the Forward Euler method ',
+               2,
+               u'sec:de:exer:FE:test1',
+               u'sec:de:exer:FE:test1'),
+              (u" Exercise 46: Implement and evaluate Heun's method ",
+               2,
+               u'sec:de:exer:Heun:pg',
+               u'sec:de:exer:Heun:pg'),
+              (u' Exercise 47: Find an appropriate time step; logistic model ',
+               2,
+               u'sec:de:exer:logistic:dtopt',
+               u'sec:de:exer:logistic:dtopt'),
+              (u' Exercise 48: Find an appropriate time step; SIR model ',
+               2,
+               u'sec:de:exer:SIR:dtopt',
+               u'sec:de:exer:SIR:dtopt'),
+              (u' Exercise 49: Model an adaptive vaccination campaign ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 50: Make a SIRV model with time-limited effect of vaccination ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 51: Refactor a flat program ',
+               2,
+               u'sec:de:exer:vib:FE:func',
+               u'sec:de:exer:vib:FE:func'),
+              (u' Exercise 52: Simulate oscillations by a general ODE solver ',
+               2,
+               u'sec:de:exer:vib:ode_FE',
+               u'sec:de:exer:vib:ode_FE'),
+              (u' Exercise 53: Compute the energy in oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Exercise 54: Use a Backward Euler scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:BE',
+               u'sec:de:exer:pg:BE'),
+              (u' Exercise 55: Use a Crank-Nicolson scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:CN',
+               u'sec:de:exer:pg:CN'),
+              (u' Exercise 56: Understand finite differences via Taylor series ',
+               2,
+               u'sec:de:exer:fd:Taylor',
+               u'sec:de:exer:fd:Taylor'),
+              (u' Exercise 57: Use a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Remarks ', 3, None, '___sec190'),
+              (u" Exercise 58: Use Heun's method for the SIR model ",
+               2,
+               u'sec:de:exer:SIR:Heun',
+               u'sec:de:exer:SIR:Heun'),
+              (u' Exercise 59: Use Odespy to solve a simple ODE ',
+               2,
+               u'sec:de:exer:odespy:decay',
+               u'sec:de:exer:odespy:decay'),
+              (u' Exercise 60: Set up a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:osc:BE',
+               u'sec:de:exer:osc:BE'),
+              (u' Exercise 61: Set up a Forward Euler scheme for nonlinear and damped oscillations ',
+               2,
+               u'sec:de:exer:osc:FE:general',
+               u'sec:de:exer:osc:FE:general'),
+              (u' Exercise 62: Discretize an initial condition ',
+               2,
+               u'sec:de:exer:osc:2nd:V0ic',
+               u'sec:de:exer:osc:2nd:V0ic'),
+              (u' Solving partial differential equations ',
+               0,
+               u'6th:SolvPDEs',
+               u'6th:SolvPDEs'),
+              (u' Finite difference methods ',
+               1,
+               u'6th:SolvPDEs:MOLandFE',
+               u'6th:SolvPDEs:MOLandFE'),
+              (u' Reduction of a PDE to a system of ODEs ',
+               2,
+               u'sec:pde:diff1D:reduce',
+               u'sec:pde:diff1D:reduce'),
+              (u' Construction of a test problem with known discrete solution ',
+               2,
+               u'sec:pde:diff1D:testproblem',
+               u'sec:pde:diff1D:testproblem'),
+              (u' Implementation: Forward Euler method ',
+               2,
+               None,
+               '___sec200'),
+              (u' Application: heat conduction in a rod ',
+               2,
+               u'sec:pde:diff1D:rod',
+               u'sec:pde:diff1D:rod'),
+              (u' Vectorization ', 2, None, '___sec202'),
+              (u' Using Odespy to solve the system of ODEs ',
+               2,
+               None,
+               '___sec203'),
+              (u' Implicit methods ', 2, None, '___sec204'),
+              (u' Exercises ', 1, None, '___sec205'),
+              (u' Exercise 63: Simulate a diffusion equation by hand ',
+               2,
+               u'sec:pde:diff1D:exer:handFE',
+               u'sec:pde:diff1D:exer:handFE'),
+              (u' Exercise 64: Compute temperature variations in the ground ',
+               2,
+               u'sec:pde:diff1D:exer:groundtemp',
+               u'sec:pde:diff1D:exer:groundtemp'),
+              (u' Exercise 65: Compare implicit methods ',
+               2,
+               u'sec:pde:diff1D:exer:compare:implicit',
+               u'sec:pde:diff1D:exer:compare:implicit'),
+              (u' Exercise 66: Explore adaptive and implicit methods ',
+               2,
+               u'sec:pde:diff1D:exer:groundtemp:adapt',
+               u'sec:pde:diff1D:exer:groundtemp:adapt'),
+              (u' Exercise 67: Investigate the $\\theta$ rule ',
+               2,
+               u'sec:pde:diff1D:exer:CN',
+               u'sec:pde:diff1D:exer:CN'),
+              (u' Remarks ', 3, None, '___sec211'),
+              (u' Exercise 68: Compute the diffusion of a Gaussian peak ',
+               2,
+               u'sec:pde:diff1D:exer:Gaussian',
+               u'sec:pde:diff1D:exer:Gaussian'),
+              (u' Exercise 69: Vectorize a function for computing the area of a polygon ',
+               2,
+               u'2nd:exer:area:polygon2',
+               u'2nd:exer:area:polygon2'),
+              (u' Exercise 70: Explore symmetry ',
+               2,
+               u'sec:pde:diff1D:exer:Gaussian:symm',
+               u'sec:pde:diff1D:exer:Gaussian:symm'),
+              (u' Remarks ', 3, None, '___sec215'),
+              (u' Exercise 71: Compute solutions as $t\\rightarrow\\infty$ ',
+               2,
+               u'sec:pde:diff1D:exer:stationary',
+               u'sec:pde:diff1D:exer:stationary'),
+              (u' Remarks ', 3, None, '___sec217'),
+              (u' Exercise 72: Solve a two-point boundary value problem ',
+               2,
+               u'sec:pde:diff1D:exer:stationary2',
+               u'sec:pde:diff1D:exer:stationary2'),
+              (u' Solving nonlinear algebraic equations ',
+               0,
+               u'4th:NonlinAlgEq',
+               u'4th:NonlinAlgEq'),
+              (u' Brute force methods ',
+               1,
+               u'4th:bruteforce',
+               u'4th:bruteforce'),
+              (u' Brute force root finding ', 2, None, '___sec221'),
+              (u' Numerical algorithm ', 3, None, '___sec222'),
+              (u' Implementation ', 3, None, '___sec223'),
+              (u' Brute force optimization ', 2, None, '___sec224'),
+              (u' Numerical algorithm ', 3, None, '___sec225'),
+              (u' Implementation ', 3, None, '___sec226'),
+              (u' Model problem for algebraic equations ',
+               2,
+               None,
+               '___sec227'),
+              (u" Newton's method ",
+               1,
+               u'4th:NonlinAlgEq:Newt',
+               u'4th:NonlinAlgEq:Newt'),
+              (u" Deriving and implementing Newton's method ",
+               2,
+               None,
+               '___sec229'),
+              (u' Making a more efficient and robust implementation ',
+               2,
+               u'4th:Newton:robust',
+               u'4th:Newton:robust'),
+              (u' The secant method ',
+               1,
+               u'4th:NonlinAlgEq:Secant',
+               u'4th:NonlinAlgEq:Secant'),
+              (u' The bisection method ',
+               1,
+               u'4th:NonlinAlgEq:Bisect',
+               u'4th:NonlinAlgEq:Bisect'),
+              (u' Rate of convergence ',
+               1,
+               u'4th:NonlinAlgEq:RateConv',
+               u'4th:NonlinAlgEq:RateConv'),
+              (u' Exercises ', 1, None, '___sec234'),
+              (u" Exercise 73: Understand why Newton's method can fail ",
+               2,
+               u'4th:exer:Newton:failure',
+               u'4th:exer:Newton:failure'),
+              (u' Exercise 74: See if the secant method fails ',
+               2,
+               u'4th:exer:Secant:failure',
+               u'4th:exer:Secant:failure'),
+              (u' Exercise 75: Understand how the bisection method cannot fail ',
+               2,
+               u'4th:exer:Bisection:failure',
+               u'4th:exer:Bisection:failure'),
+              (u" Exercise 76: Combine the bisection method with Newton's method ",
+               2,
+               u'4th:exer:Bisection:Newton',
+               u'4th:exer:Bisection:Newton'),
+              (u" Exercise 77: Write a test function for Newton's method ",
+               2,
+               u'4th:exer:NewtonHand',
+               u'4th:exer:NewtonHand'),
+              (u' Exercise 78: Solve nonlinear equation for a vibrating beam ',
+               2,
+               u'4th:exer:beam:vib',
+               u'4th:exer:beam:vib'),
+              (u' Appendix: Getting access to Python ',
+               0,
+               u'app:accesspy',
+               u'app:accesspy'),
+              (u' Required software ',
+               1,
+               u'sec:accesspy:softwarelist',
+               u'sec:accesspy:softwarelist'),
+              (u' Installing software on your laptop: Mac OS X and Windows ',
+               1,
+               u'sec:accesspy:MacWin',
+               u'sec:accesspy:MacWin'),
+              (u' Anaconda and Spyder ',
+               1,
+               u'sec:accesspy:anaconda',
+               u'sec:accesspy:anaconda'),
+              (u' Spyder on Mac ', 2, None, '___sec245'),
+              (u' Installation of additional packages ',
+               2,
+               None,
+               '___sec246'),
+              (u' Installing SciTools on Mac ', 2, None, '___sec247'),
+              (u' Installing SciTools on Windows ', 2, None, '___sec248'),
+              (u' VMWare Fusion virtual machine ',
+               1,
+               u'sec:accesspy:vmware',
+               u'sec:accesspy:vmware'),
+              (u' Installing Ubuntu ',
+               2,
+               u'sec:accesspy:vmware:fullblown:machine',
+               u'sec:accesspy:vmware:fullblown:machine'),
+              (u' Installing software on Ubuntu ', 2, None, '___sec251'),
+              (u' File sharing ', 2, None, '___sec252'),
+              (u' Dual boot on Windows ', 1, None, '___sec253'),
+              (u' Vagrant virtual machine ',
+               1,
+               u'sec:accesspy:vagrant',
+               u'sec:accesspy:vagrant'),
+              (u' How to write and run a Python program ',
+               1,
+               u'sec:accesspy:writerun',
+               u'sec:accesspy:writerun'),
+              (u' The need for a text editor ', 2, None, '___sec256'),
+              (u' Spyder ', 2, None, '___sec257'),
+              (u' Text editors ', 2, None, '___sec258'),
+              (u' Terminal windows ', 2, None, '___sec259'),
+              (u' Using a plain text editor and a terminal window ',
+               2,
+               None,
+               '___sec260'),
+              (u' The SageMathCloud and Wakari web services ',
+               1,
+               u'sec:accesspy:sagemath:wakari',
+               u'sec:accesspy:sagemath:wakari'),
+              (u' Basic intro to SageMathCloud ', 2, None, '___sec262'),
+              (u' Basic intro to Wakari ', 2, None, '___sec263'),
+              (u' Installing your own Python packages ',
+               2,
+               None,
+               '___sec264'),
+              (u' Writing IPython notebooks ',
+               1,
+               u'sec:accesspy:ipynb',
+               u'sec:accesspy:ipynb'),
+              (u' A simple program in the notebook ', 2, None, '___sec266'),
+              (u' Mixing text, mathematics, code, and graphics ',
+               2,
+               None,
+               '___sec267'),
+              (u' References ', 0, None, '___sec268')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands.tex -->
+$$
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+$$
+
+
+
+
+    
+<a name="part0005"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._p4c-solarized-Python004.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._p4c-solarized-Python006.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1 id="___sec18">More basic concepts </h1>
+
+<p>
+So far we have seen a few basic examples on how to apply Python
+programming to solve mathematical problems. Before we can go on with
+other and more realistic examples, we need to briefly treat some
+topics that will be frequently required in later chapters. These
+topics include computer science concepts like variables, objects,
+error messages, and warnings; more numerical concepts like round-off
+errors, arithmetic operator precedence, and integer division; in
+addition to more Python functionality when working with arrays,
+plotting, and printing.
+
+<h2 id="___sec19">Using Python interactively </h2>
+
+<p>
+Python can also be used interactively. That is, we do not first write
+a program in a file and execute it, but we give statements and
+expressions to what is known as a Python <em>shell</em>.  We recommend to use
+IPython as shell (because it is superior to alternative Python
+shells). With <code>Spyder</code>, <code>Ipython</code> is available at startup, appearing
+as the lower right window.  Following the IPython prompt <code>In [1]:</code> (a
+<em>prompt</em> means a &quot;ready sign&quot;, i.e. the programs allows you to enter
+a command, and different programs often have different looking
+prompts), you may do calculations:
+
+<p>
+<!-- begin verbatim block  ipy-->
+<pre><code>In  [1]: 2+2
+Out [1]: 4
+
+In  [2]: 2*3
+Out [2]: 6
+
+In  [3]: 10/2
+Out [3]: 5
+
+In  [4]: 2**3
+Out [4]: 8
+</code></pre>
+<!-- end verbatim block -->
+The response from <code>ipython</code> is preceded by <code>Out [q]:</code>,
+where <code>q</code> equals <code>p</code> when the response is to input &quot;number&quot; <code>p</code>.
+
+<p>
+Note that, as in a program, you may have to use <code>import</code> before using
+<code>pi</code> or functions like <code>sin</code>, <code>cos</code>, etc. That is, at the prompt, do
+the command <code>from math import *</code> before you use <code>pi</code> or <code>sin</code>,
+etc. Importing other modules than <code>math</code> may be relevant, depending on
+what your aim is with the computations.
+
+<p>
+You may also define variables and use formulas interactively as
+<!-- begin verbatim block  ipy-->
+<pre><code>In [1]: v0 = 5
+
+In [2]: g = 9.81
+
+In [3]: t = 0.6
+
+In [4]: y = v0*t - 0.5*g*t**2
+
+In [5]: print y
+------&gt; print(y)
+1.2342
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Sometimes you would like to repeat a command you have given earlier, or perhaps give a command that is almost the same as an earlier one. Then you can use the up-arrow key. Pressing this one time gives you the previous command, pressing two times gives you the command before that, and so on. With
+the down-arrow key you can go forward again.
+When you have the relevant command at the prompt, you may edit it before
+pressing enter (which lets Python read it and take action).
+
+<h2 id="___sec20">Arithmetics, parentheses and round-off errors </h2>
+
+<p>
+When the arithmetic operators <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> and
+<code>**</code> appear in an expression, Python gives them a certain
+precedence. Python interprets the expression from left to right,
+taking one term (part of expression between two successive <code>+</code> or <code>-</code>)
+at a time. Within each term, <code>**</code>
+is done before <code>*</code> and <code>/</code>. Consider
+the expression
+<code>x = 1*5**2 + 10*3 - 1.0/4</code>.
+There are three terms here
+and interpreting this, Python starts from the left. In the first term,
+<code>1*5**2</code>,
+it first does <code>5**2</code> which equals 25. This is then
+multiplied by 1 to give 25 again. The second term is <code>10*3</code>, i.e.,
+30. So the first two terms add up to 55. The last term gives 0.25, so
+the final result is 54.75 which becomes the value of <code>x</code>.
+
+<p>
+Note that parentheses are often very important to group parts of
+expressions together in the intended way. Let us say <code>x = 4</code> and that
+you want to divide 1.0 by <code>x + 1</code>. We know the answer is 0.2, but the
+way we present the task to Python is critical, as shown by the
+following example.
+
+<p>
+<!-- begin verbatim block  ipy-->
+<pre><code>In [1]: x = 4
+
+In  [2]: 1.0/x+1
+Out [2]: 1.25
+
+In  [3]: 1.0/(x+1)
+Out [3]: 0.20000000000000001
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+In the first try, we see that 1.0 is divided by <code>x</code> (i.e., 4), giving
+0.25, which is then added to 1. Python did not understand that our
+complete denominator was <code>x+1</code>. In our second try, we used parentheses
+to &quot;group&quot; the denominator, and we got what we wanted. That is,
+<em>almost</em> what we wanted! Since most numbers can be represented only
+approximately on the computer, this gives rise to what is called
+<em>round-off</em> errors. We should have got 0.2 as our answer, but the
+inexact number representation gave a small error. Usually, such errors
+are so small compared to the other numbers of the calculation that we
+do not need to bother with them. Still, keep it in mind, since you
+will encounter this issue from time to time.
+
+<h2 id="___sec21">Variables and objects </h2>
+
+<p>
+Variables in Python will be of a certain <em>type</em>. If you have an
+integer, say you have written <code>x = 2</code> in some Python program, then <code>x</code>
+becomes an integer variable, i.e., a variable of type
+<em>int</em>. Similarly, with the statement <code>x = 2.0</code>, <code>x</code> becomes a <em>float</em>
+variable (the word float is just computer language for a real
+number). In any case, Python thinks of <code>x</code> as an <em>object</em>, of type int
+or float. Another common type of variable is <em>str</em>, i.e. a string,
+needed when you want to store text. When Python interprets <code>x = &quot;This
+is a string&quot;</code>, it stores the text (in between the quotes) in the
+variable <code>x</code>. This variable is then an object of type str. You may
+convert between variable types if it makes sense. If, e.g., <code>x</code> is an
+int object, writing <code>y = float(x)</code> will make <code>y</code> a floating point
+representation of <code>x</code>. Similarly, you may write <code>int(x)</code> to produce an
+int if <code>x</code> is originally of type float. Type conversion may also occur
+automatically, as shown just below.
+
+<p>
+Names of variables should be chosen so that they are descriptive. When
+computing a mathematical quantity that has some standard symbol,
+e.g. \( \alpha \), this should be reflected in the name by letting the
+word <code>alpha</code> be part of the name for the corresponding variable in the
+program. If you, e.g., have a variable for counting the number of
+sheep, then one appropriate name could be <code>no_of_sheep</code>. Such naming
+makes it much easier for a human to understand the written
+code. Variable names may also contain any digit from 0 to 9, or
+underscores, but can not start with a digit. Letters may be lower or
+upper case, which to Python is different. Note that certain names in
+Python are <em>reserved</em>, meaning that you can not use these as names for
+variables. Some examples are <code>for</code>, <code>while</code>, <code>if</code>, <code>else</code>, <code>global</code>,
+<code>return</code> and <code>elif</code>. If you accidentally use a reserved word as a
+variable name you get an error message.
+
+<p>
+We have seen that, e.g., <code>x = 2</code> will assign the value 2 to the
+variable <code>x</code>. But how do we write it if we want to increase <code>x</code> by 4?
+We may write an assignment like <code>x = x + 4</code>, or (giving a faster
+computation) <code>x += 4</code>. Now Python interprets this as: take whatever
+value that is in <code>x</code>, add 4, and let the result become the new value
+of <code>x</code>. In other words, the <em>old</em> value of <code>x</code> is used on the right
+hand side of <code>=</code>, no matter how messy the expression might be, and the
+result becomes the new value of <code>x</code>. In a similar way, <code>x -= 4</code>
+reduces the value of <code>x</code> by 4, <code>x *= 4</code> multiplies <code>x</code> by 4, and <code>x /=
+4</code> divides <code>x</code> by 4, updating the value of <code>x</code> accordingly.
+
+<p>
+What if <code>x = 2</code>, i.e., an object of type int, and we add 4.0, i.e., a
+float? Then <em>automatic type conversion</em> takes place, and the new <code>x</code>
+will have the value 6.0, i.e., an object of type float as seen here,
+
+<p>
+<!-- begin verbatim block  ipy-->
+<pre><code>In  [1]: x = 2
+
+In  [2]: x = x + 4.0
+
+In  [3]: x
+Out [3]: 6.0
+</code></pre>
+<!-- end verbatim block -->
+Note that Python programmers, and Python (in printouts), often write,
+e.g., \( 2. \) which by definition is the integer \( 2 \) represented as a
+float.
+
+<h2 id="___sec22">Integer division </h2>
+
+<p>
+Another issue that is important to be aware of is <em>integer division</em>. Let us look at a small example, assuming we want to divide one by four.
+
+<p>
+<!-- begin verbatim block  ipy-->
+<pre><code>In  [1]: 1/4
+Out [1]: 0
+
+In  [2]: 1.0/4
+Out [2]: 0.25
+</code></pre>
+<!-- end verbatim block -->
+We see two alternative ways of writing it, but only the last way of writing it gave the correct result! Why?
+
+<p>
+The first alternative gives what is called <em>integer division</em>, i.e.,
+all decimals in the answer are disregarded, so the result is rounded
+down to the nearest integer. To avoid it, we may introduce an
+explicit decimal point in either the numerator, the denominator, or in
+both. If you are new to programming, this is certainly strange
+behavior. However, you will find the same thing in many programming
+languages, not only Python. If your numerator or denominator is a
+variable, say you have <code>1/x</code>, you may write <code>1/float(x)</code> to be on safe
+grounds.
+
+<p>
+<b>Remark.</b>
+In version 3, Python will interpret an integer divided by
+an integer (e.g., <code>1/4</code>) as a float division.
+
+<h2 id="___sec23">Formatting text and numbers </h2>
+
+<p>
+Results from scientific computations are often to be reported
+as a mixture of text and numbers. Usually, we want to control
+how numbers are formatted. For example, we may want to write 1/3
+as <code>0.33</code> or <code>3.3333e-01</code> (\( 3.3333\cdot 10^{-1} \)).
+The <code>print</code> command is the key
+tool to write out text and numbers with full control of
+the formatting. The first argument to <code>print</code>
+is a string with a particular syntax to specify the formatting, the
+so-called <em>printf syntax</em>. (The peculiar name stems from the <code>printf</code>
+function in the programming language C where the syntax was first
+introduced.)
+
+<p>
+Suppose we have a real number 12.89643, an integer 42, and
+a text <code>'some message'</code> that we want to write out in
+the following two alternative ways:
+
+<p>
+<!-- begin verbatim block -->
+<pre><code>real=12.896, integer=42, string=some message
+real=1.290e+01, integer=   42, string=some message
+</code></pre>
+<!-- end verbatim block -->
+The real number is first written in <em>decimal notation</em> with three
+decimals, as <code>12.896</code>, but afterwards in <em>scientific notation</em>
+as <code>1.290e+01</code>. The integer is first written as compactly as
+possible, while on the second line, <code>42</code> is formatted in a
+text field of width equal to five characters.
+
+<p>
+The following program,
+<a href="https://github.com/hplgit/prog4comp/src/py/formatted_print.py" target="_self"><tt>formatted_print.py</tt></a>,
+applies the printf syntax to control
+the formatting displayed above:
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>real = 12.89643
+integer = 42
+string = 'some message'
+print 'real=%.3f, integer=%d, string=%s' % (real, integer, string)
+print 'real=%9.3e, integer=%5d, string=%s' % (real, integer, string)
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The output of <code>print</code> is a string,
+specified in terms of text and a set of variables to be inserted in the text.
+Variables are inserted in the text at places indicated by <code>%</code>.
+After <code>%</code> comes a specification of the formatting, e.g, <code>%f</code>
+(real number with six decimals), <code>%d</code> (integer), or <code>%s</code> (string).
+The format <code>%9.3f</code> means a real number in decimal notation, with
+3 decimals, written in a field of width equal to 9 characters.
+The variant <code>%.3f</code> means that the number is written as compactly as
+possible, in decimal notation, with three decimals. Switching
+<code>f</code> with <code>e</code> or <code>E</code> results in the scientific notation, here
+<code>1.290e+01</code> or <code>1.290E+01</code>. Writing <code>%5d</code> means that an integer
+is to be written in a field of width equal to 5 characters.
+Real numbers can also be specified with <code>%g</code>, which is used
+to automatically choose between decimal or scientific
+notation, from what gives the most compact output
+(typically scientific notation for very small and very large numbers
+and decimal notation for the intermediate range).
+
+<p>
+A typical example when printf formatting is required arises when
+printing nicely aligned column of numbers. Suppose we want to
+print a column of \( t \) values together with associated function
+values \( g(t)=t\sin(t) \) in a second column. The simplest approach
+would be
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>from math import sin
+
+n = 6
+t0 = 2
+dt = 0.55
+
+# Unformatted print
+for i in range(n):
+    t = t0 + i*dt
+    g = t*sin(t)
+    print t, g
+</code></pre>
+<!-- end verbatim block -->
+with output
+
+<p>
+<!-- begin verbatim block -->
+<pre><code>2.0 1.81859485365
+2.55 1.42209347935
+3.1 0.128900053543
+3.65 -1.77677126759
+4.2 -3.66061824414
+4.75 -4.74664074763
+</code></pre>
+<!-- end verbatim block -->
+The numbers are not nicely aligned. Using the printf syntax
+<code>'%6.2f  %8.3f'</code> for <code>t</code> and <code>g</code>, we can control how wide each
+column is and also the number of decimals such that the numbers
+in a column are written with the same precision. The output
+then becomes
+
+<p>
+<!-- begin verbatim block -->
+<pre><code>  2.00     1.819
+  2.55     1.422
+  3.10     0.129
+  3.65    -1.777
+  4.20    -3.661
+  4.75    -4.747
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+We shall frequently use the printf syntax throughout the book so there
+will be plenty of further examples.
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal">
+<b>The modern alternative to printf syntax.</b>
+<p>
+Modern Python favors the new <em>format string syntax</em> over printf:
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>print 'At t={t:g} s, y={y:.2f} m'.format(t=t, y=y)
+</code></pre>
+<!-- end verbatim block -->
+which corresponds to the printf syntax
+
+<p>
+<!-- begin verbatim block  pycod-->
+<pre><code>print 'At t=%g s, y=%.2f m' % (t, y)
+</code></pre>
+<!-- end verbatim block -->
+The slots where variables are inserted are now recognized by curly
+braces, and in <code>format</code> we list the variable names inside curly
+braces and their equivalent variables in the program.
+
+<p>
+Since the printf syntax is so widely used in many programming languages,
+we stick to that in the present book, but Python programmers will
+frequently also meet the newer format string syntax, so it is important
+to be aware its existence.
+</div>
+
+
+<h2 id="___sec24">Arrays </h2>
+
+<p>
+In the program <code>ball_plot.py</code> from the chapter <a href="._p4c-solarized-Python004.html#1st:ex3">A Python program with vectorization and plotting</a> we saw how
+1001 height computations were executed and stored in the variable <code>y</code>,
+and then displayed in a plot showing <code>y</code> versus <code>t</code>, i.e., height
+versus time. The collection of numbers in <code>y</code> (or <code>t</code>, respectively)
+was stored in what is called an <em>array</em>, a construction also found in
+most other programming languages. Such arrays are created and
+treated according to certain rules, and as a programmer, you may
+direct Python to compute and handle arrays as a whole, or as
+individual <em>array elements</em>. Let us briefly look at a smaller such
+collection of numbers.
+
+<p>
+Assume that the heights of four family members have been collected. These heights may be generated and stored in an array, e.g., named <code>h</code>, by writing
+
+<p>
+<!-- begin verbatim block  cod-->
+<pre><code>h = zeros(4)
+h[0] = 1.60
+h[1] = 1.85
+h[2] = 1.75
+h[3] = 1.80
+</code></pre>
+<!-- end verbatim block -->
+where the array elements appear as <code>h[0]</code>, <code>h[1]</code>, etc. Generally,
+when we read or talk about the array elements of some array <code>a</code>, we
+refer to them by reading or saying &quot;a of zero&quot; (i.e., <code>a[0]</code>), &quot;a of
+one&quot; (i.e., <code>a[1]</code>), and so on.  The very first line in the example
+above, i.e.
+
+<p>
+<!-- begin verbatim block  cod-->
+<pre><code>h = zeros(4)
+</code></pre>
+<!-- end verbatim block -->
+instructs Python to reserve, or <em>allocate</em>, space in memory for an
+array <code>h</code> with four elements and initial values set to 0.
+The next four lines overwrite the zeros
+with the desired numbers (measured heights), one number for each
+element. Elements are, by rule, <em>indexed</em> (numbers within brackets)
+from 0 to the last element, in this case 3. We say that Python has
+<em>zero based indexing</em>. This differs from <em>one based indexing</em> (e.g.,
+found in Matlab) where the array index starts with 1.
+
+<p>
+As illustrated in the code, you may refer to the array as a whole by
+the name <code>h</code>, but also to each individual element by use of the
+index. The array elements may enter in computations as individual
+variables, e.g., writing
+<code>z = h[0] + h[1] + h[2] + h[3]</code> will compute
+the sum of all the elements in <code>h</code>, while the result is assigned to
+the variable <code>z</code>. Note that this way of creating an array is a bit
+different from the one with <code>linspace</code>, where the filling in of
+numbers occurred automatically &quot;behind the scene&quot;.
+
+<p>
+By the use of a colon, you may pick out a <em>slice</em> of an array. For
+example, to create a new array from the two elements <code>h[1]</code> and
+<code>h[2]</code>, we could write <code>slice_h = h[1:3]</code>. Note that the index
+specification <code>1:3</code> means indices <code>1</code> and <code>2</code>, i.e., the last index is
+not included. For the generated <code>slice_h</code> array, indices are as usual,
+i.e., <code>0</code> and <code>1</code> in this case. The very last entry in an array may be
+addressed as, e.g., <code>h[-1]</code>.
+
+<p>
+Copying arrays requires some care since simply writing <code>new_h = h</code>
+will, when you afterwards change elements of <code>new_h</code>, also change the
+corresponding elements in <code>h</code>! That is, <code>h[1]</code> is also changed when
+writing
+
+<p>
+<!-- begin verbatim block  cod-->
+<pre><code>new_h = h
+new_h[1] = 5.0
+print h[1]
+</code></pre>
+<!-- end verbatim block -->
+In this case we do not get \( 1.85 \) out on the screen, but \( 5.0 \). To
+really get a copy that is decoupled from the original array, you may
+write <code>new_h = copy(h)</code>. However, copying a slice works straight
+forwardly (as shown above), i.e. an explicit use of <code>copy</code> is not
+required.
+
+<h2 id="___sec25">Plotting </h2>
+
+<p>
+Sometimes you would like to have two or more curves or <em>graphs</em> in
+the same plot. Assume we have <code>h</code> as above, and also an array <code>H</code> with
+the heights \( 0.50 \) m, \( 0.70 \) m, \( 1.90 \) m,
+and \( 1.75 \) m from a family next door. This may be done with the
+program
+<a href="https://github.com/hplgit/prog4comp/src/py/plot_heights.py" target="_self"><tt>plot_heights.py</tt></a>
+given as
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>from numpy import zeros
+import matplotlib.pyplot as plt
+
+h = zeros(4)
+h[0] = 1.60; h[1] = 1.85; h[2] = 1.75; h[3] = 1.80
+H = zeros(4)
+H[0] = 0.50; H[1] = 0.70; H[2] = 1.90; H[3] = 1.75
+
+family_member_no = zeros(4)
+family_member_no[0] = 0; family_member_no[1] = 1
+family_member_no[2] = 2; family_member_no[3] = 3
+
+plt.plot(family_member_no, h, family_member_no, H)
+plt.xlabel('Family member number')
+plt.ylabel('Height (m)')
+plt.show()
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Running the program gives the plot shown in Figure <a href="#fig:plotHeights">2</a>.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 2:  Generated plot for the heights of family members from two families. <div id="fig:plotHeights"></div> </p></center>
+<p><img src="figs/fig1_18.png" align="bottom" width=400></p>
+</center>
+
+<p>
+Alternatively, the two curves could have been plotted in the same plot
+by use of two plot commands, which gives more freedom as to how the
+curves appear. To do this, you could plot the first curve by
+
+<p>
+<!-- begin verbatim block  cod-->
+<pre><code>plot(family_member_no, h)
+hold('on')
+</code></pre>
+<!-- end verbatim block -->
+Then you could (in principle) do a lot of other things in your code, before you plot the second curve by
+
+<p>
+<!-- begin verbatim block  cod-->
+<pre><code>plot(family_member_no, H)
+hold('off')
+</code></pre>
+<!-- end verbatim block -->
+Notice the use of <code>hold</code> here. <code>hold('on')</code> tells Python
+to plot also the following curve(s) in the same window.
+Python does so until it reads <code>hold('off')</code>. If you do not use the
+<code>hold('on')</code> or <code>hold('off')</code> command,
+the second plot command will overwrite the first one, i.e.,
+you get only the second curve.
+
+<p>
+In case you would like the two curves plotted in two separate plots, you can do this by plotting the first curve straightforwardly with
+
+<p>
+<!-- begin verbatim block  cod-->
+<pre><code>plot(family_member_no, h)
+</code></pre>
+<!-- end verbatim block -->
+then do other things in your code, before you do
+
+<p>
+<!-- begin verbatim block  cod-->
+<pre><code>figure()
+plot(family_member_no, H)
+</code></pre>
+<!-- end verbatim block -->
+Note how the graphs are made continuous by Python, drawing straight
+lines between the four data points of each family. This is the
+standard way of doing it and was also done when plotting our 1001
+height computations with <code>ball_plot.py</code> in the chapter <a href="._p4c-solarized-Python004.html#1st:ex3">A Python program with vectorization and plotting</a>. However, since there were so many data points then, the
+curve looked nice and smooth. If preferred, one may also plot only the
+data points. For example, writing
+
+<p>
+<!-- begin verbatim block  cod-->
+<pre><code>plot(h, '*')
+</code></pre>
+<!-- end verbatim block -->
+will mark only the data points with the star symbol.
+Other symbols like circles etc. may be used as well.
+
+<p>
+There are many possibilities in Python for adding information to a
+plot or for changing its appearance. For example, you may add a legend
+by the instruction
+
+<p>
+<!-- begin verbatim block  cod-->
+<pre><code>legend('This is some legend')
+</code></pre>
+<!-- end verbatim block -->
+or you may add a title by
+
+<p>
+<!-- begin verbatim block  cod-->
+<pre><code>title('This is some title')
+</code></pre>
+<!-- end verbatim block -->
+The command
+
+<p>
+<!-- begin verbatim block  cod-->
+<pre><code>axis([xmin, xmax, ymin, ymax])
+</code></pre>
+<!-- end verbatim block -->
+will define the plotting range for the \( x \) axis to stretch from
+<code>xmin</code> to <code>xmax</code> and, similarly, the plotting range for the
+\( y \) axis from <code>ymin</code> to <code>ymax</code>.
+Saving the figure to file is achieved by the command
+<!-- begin verbatim block  cod-->
+<pre><code>savefig('some_plot.png')   # PNG format
+savefig('some_plot.pdf')   # PDF format
+savefig('some_plot.gif')   # GIF format
+savefig('some_plot.eps')   # Encanspulated PostScript format
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+For the reader who is into linear algebra, it may be useful to know
+that standard matrix/vector operations are straightforward with
+arrays, e.g., matrix-vector multiplication. What is needed though, is
+to create the right variable types (after having imported an
+appropriate module). For example, assume you would like to calculate
+the vector \( \bf{y} \) (note that boldface is used for vectors and
+matrices) as \( \bf{y} = \bf{Ax} \), where \( \bf{A} \) is a \( 2 \times 2 \)
+matrix and \( \bf{x} \) is a vector. We may do this as illustrated by
+the program <a href="https://github.com/hplgit/prog4comp/src/py/matrix_vector_product.py" target="_self"><tt>matrix_vector_product.py</tt></a> reading
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>from numpy import zeros, mat, transpose
+
+x = zeros(2)
+x = mat(x)
+x = transpose(x)
+x[0] = 3;   x[1] = 2   # Pick some values
+
+A = zeros((2,2))
+A = mat(A)
+A[0,0] = 1;  A[0,1] = 0
+A[1,0] = 0;  A[1,1] = 1
+
+# The following gives y = x since A = I, the identity matrix
+y = A*x
+print y
+</code></pre>
+<!-- end verbatim block -->
+Here, <code>x</code> is first created as an array, just as we did above. Then
+the variable type of <code>x</code> is changed to <code>mat</code>, i.e., matrix, by the
+line <code>x = mat(x)</code>. This is followed by a transpose of <code>x</code> from
+dimension \( 1 \times 2 \) (the default dimension) to \( 2 \times 1 \) with
+the statement <code>x = transpose(x)</code>, before some test values are plugged
+in. The matrix <code>A</code> is first created as a two dimensional array with <code>A
+= zeros((2,2))</code> before conversion and filling in values takes
+place. Finally, the multiplication is performed as <code>y = A*x</code>. Note the
+number of parentheses when creating the two dimensional array
+<code>A</code>. Running the program gives the following output on the screen:
+
+<p>
+<!-- begin verbatim block  dat-->
+<pre><code>[[3.]
+ [2.]]
+</code></pre>
+<!-- end verbatim block -->
+
+<h2 id="___sec26">Error messages and warnings </h2>
+
+<p>
+All programmers experience error messages, and usually to a large
+extent during the early learning process. Sometimes error messages
+are understandable, sometimes they are not. Anyway, it is important
+to get used to them. One idea is to start with a program that
+initially is working, and then deliberately introduce errors in
+it, one by one. (But remember to take a copy of the original working
+code!)
+For each error you try to run the program to
+see what Python's response is. Then you know what the problem is
+and understand what the error message is about. This will greatly
+help you when you get a similar error message or warning later.
+
+<p>
+Very often, you will experience that there are errors in the program
+you have written. This is normal, but frustrating in the
+beginning. You then have to find the problem, try to fix it, and then
+run the program again. Typically, you fix one error just to experience
+that another error is waiting around the corner. However, after some
+time you start to avoid the most common beginner's errors, and things
+run more smoothly. The process of finding and fixing errors, called
+<em>debugging</em>, is very important to learn. There are different ways of
+doing it too.
+
+<p>
+A special program (<em>debugger</em>) may be used to help you check (and
+do) different things in the program you need to fix. A simpler
+procedure, that often brings you a long way, is to print information
+to the screen from different places in the program. First of all, this
+is something you should do (several times) during program development
+anyway, so that things get checked as you go along. However, if the
+final program still ends up with error messages, you might save a copy
+of it, and do some testing on the copy. Useful testing may then be to
+remove, e.g., the latter half of the program (by inserting comment
+signs <code>#</code>), and insert print commands at clever places to see what is
+the case. When the first half looks ok, insert parts of what was
+removed and repeat the process with the new code. Using simple numbers
+and doing this in parallel with hand calculations on a piece of paper
+(for comparison) is often a very good idea.
+
+<p>
+Python also offers means to detect and handle errors by the program
+itself! The programmer must then foresee (when writing the code) that
+there is a potential for error at some particular point. If, for
+example, some user of the program is asked (by the running program) to
+provide a number, and intends to give the number 5, but instead writes
+the word <em>five</em>, the program could run into trouble. A
+<code>*try-exception*.py</code> construction may be used by
+the programmer to check for such errors and act appropriately (see
+the chapter <a href="._p4c-solarized-Python025.html#4th:NonlinAlgEq:Newt">Newton's method</a> for an example), avoiding a program
+crash. This procedure of trying an action and then recovering from
+trouble, if necessary, is referred to as <em>exception handling</em> and
+is the modern way of dealing with errors in a program.
+
+<p>
+When a program finally runs without error messages, it might be
+tempting to think that <em>Ah..., I am finished!</em>. But no! Then comes
+program <em>testing</em>, you need to <em>verify</em> that the program does the
+computations as planned. This is almost an art and usually takes
+much more time than to develop the program, but the program is
+useless unless you have much evidence showing that the computations
+are correct.
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal">
+<b>Verification versus validation.</b>
+<p>
+Verification is important, but <em>validation</em> is equally
+important. It is great if your program can do the calculations
+according to the plan, <em>but</em> is it the right plan? Put otherwise, you
+need to check that the computations run correctly according to the
+<em>formula you have chosen/derived</em>. This is <em>verification</em>: doing the
+things right.  Thereafter, you must also check whether the formula you
+have chosen/derived is <em>the right</em> formula for the case you are
+investigating. This is <em>validation</em>: doing the right things.  In the
+present book, it is beyond scope to question how well the mathematical
+models describe a given phenomenon in nature or engineering, as the
+answer usually involves extensive knowledge of the application area.
+We will therefore limit our testing to the verification part.
+</div>
+
+
+<h2 id="___sec27">Input data </h2>
+
+<p>
+Computer programs need a set of input data and the purpose is to
+use these data to compute output data, i.e., results.
+In the previous program we have specified input data in terms
+of variables. However, one often wants to get the input through
+some dialog with the user. Here is one example where the
+program asks a question, and the user provides an answer by
+typing on the keyboard:
+
+<p>
+<!-- begin verbatim block  cod-->
+<pre><code>age = input('What is your age? ')
+print &quot;Ok, so you're half way to %d, wow!&quot; % (age*2)
+</code></pre>
+<!-- end verbatim block -->
+So, after having interpreted and run the first line, Python has
+established the variable <code>age</code> and assigned your input to it. The
+second line combines the calculation of twice the age with a message
+printed on the screen. Try these two lines in a little test program to
+see for yourself how it works.
+
+<p>
+The <code>input</code> function is useful for numbers, lists (the chapter <a href="._p4c-solarized-Python007.html#2nd:BasicConstructins">Basic constructions</a>),
+and tuples (the chapter <a href="._p4c-solarized-Python007.html#2nd:BasicConstructins">Basic constructions</a>).
+For pure text, the user must either enclose the input in quotes, or the program must use
+the <code>raw_input</code> function instead:
+<!-- begin verbatim block  cod-->
+<pre><code>name = raw_input('What is your name? ')
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+There are other ways of providing input to a program as well, e.g.,
+via a graphical interface (as many readers will be used to) or at the
+command line (i.e., as parameters succeeding, on the same line, the
+command that starts the program). Reading data from a file is yet
+another way. Logically, what the program produces when run, e.g. a
+plot or printout to the screen or a file, is referred to as <em>program
+output</em>.
+
+<h2 id="___sec28">Symbolic computations </h2>
+
+<p>
+Even though the main focus in this book is programming of <em>numerical</em>
+methods, there are occasions where <em>symbolic</em> (also called <em>exact</em> or <em>analytical</em>)
+operations are useful.
+Doing symbolic computations means, as the name suggests, that we do
+computations with the symbols themselves rather than with the
+numerical values they could represent. Let us illustrate the
+difference between symbolic and numerical computations with a little
+example. A numerical computation could be
+
+<p>
+<!-- begin verbatim block  cod-->
+<pre><code>x = 2
+y = 3
+z = x*y
+print z
+</code></pre>
+<!-- end verbatim block -->
+which will make the number 6 appear on the screen.
+A symbolic counterpart of this code could be
+
+<p>
+<!-- begin verbatim block  cod-->
+<pre><code>from sympy import *
+x, y = symbols('x y')
+z = x*y
+print z
+</code></pre>
+<!-- end verbatim block -->
+which causes the <em>symbolic</em> result <code>x*y</code> to appear on the screen.
+Note that no numerical value was assigned to any of the variables
+in the symbolic computation. Only the symbols were used, as when
+you do symbolic mathematics by hand on a piece of paper.
+
+<p>
+Symbolic computations in Python make use of the
+<em>SymPy package</em>.
+Each symbol is represented
+by a standard variable, but the name of the symbol must be
+declared with <code>Symbol(name)</code> for a single symbol, or <code>symbols(name1 name2 ...)</code> for multiple symbols..
+The following script
+<a href="https://github.com/hplgit/prog4comp/src/py/example_symbolic.py" target="_self"><tt>example_symbolic.py</tt></a>
+is a quick demonstration
+of some of the basic symbolic operations that are supported in Python.
+
+<p>
+<!-- begin verbatim block  pypro-->
+<pre><code>from sympy import *
+
+x = Symbol('x')
+y = Symbol('y')
+
+print 2*x + 3*x - y                # Algebraic computation
+print diff(x**2, x)                # Differentiates x**2 wrt. x
+print integrate(cos(x), x)         # Integrates cos(x) wrt. x
+print simplify((x**2 + x**3)/x**2) # Simplifies expression
+print limit(sin(x)/x, x, 0)        # Finds limit of sin(x)/x as x-&gt;0
+print solve(5*x - 15, x)           # Solves 5*x = 15
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+Other symbolic calculations like Taylor series expansion, linear algebra (with matrix and vector operations), and (some) differential equation solving are also possible.
+
+<p>
+Symbolic computations are also readily accessible through the free
+online tool <a href="http://www.wolframalpha.com" target="_self">WolframAlpha</a>, which
+applies the very advanced <a href="http://en.wikipedia.org/wiki/Mathematica" target="_self">Mathematica</a> package as symbolic engine.
+The disadvantage with WolframAlpha compared to the
+SymPy package is that the results cannot
+automatically be imported into your code and used for further
+analysis. On the other hand, WolframAlpha has the advantage that it
+displays many additional mathematical results related to the given
+problem. For example, if we type <code>2x + 3x - y</code> in WolframAlpha, it
+not only reduced the expression to <code>5x - y</code>, but it also makes plots
+of the function \( f(x,y)=5x-y \), solves the equation \( 5x - y = 0 \), and
+calculates the integral \( \int\int(5x+y)dxdy \). The commercial Pro
+version can also show a step-by-step of the analytical computations in
+the problem. You are strongly encouraged to try out these commands in
+WolframAlpha:
+
+<ul>
+ <li> <code>diff(x^2, x)</code> or <code>diff(x**2, x)</code></li>
+ <li> <code>integrate(cos(x), x)</code></li>
+ <li> <code>simplify((x**2 + x**3)/x**2)</code></li>
+ <li> <code>limit(sin(x)/x, x, 0)</code></li>
+ <li> <code>solve(5*x - 15, x)</code></li>
+</ul>
+
+WolframAlpha is very flexible with respect to syntax.
+
+<p>
+Another impressive tool for symbolic computations is <a href="http://sagemath.org/" target="_self">Sage</a>, which is a very comprehensive package with the
+aim of &quot;creating a viable free open source alternative to Magma,
+Maple, Mathematica and Matlab&quot;. Sage is implemented in Python.
+Projects with extensive symbolic computations will certainly
+benefit from exploring Sage.
+
+<h2 id="___sec29">Concluding remarks </h2>
+
+<p>
+<div class="alert alert-block alert-warning alert-text-normal">
+<b>Programming demands you to be accurate!</b>
+<p>
+
+<p>
+In this chapter, you have seen some examples of how simple things may
+be done in Python. Hopefully, you have tried to do the examples on
+your own. If you have, most certainly you have discovered that what
+you write in the code has to be <em>very accurate</em>. For example, with our
+previous example of four heights collected in an array <code>h</code>, writing
+<code>h(0)</code> instead of <code>h[0]</code>
+gives an error, even if you and I know
+perfectly well what you mean! Remember that it is not a human that
+runs your code, it is a machine. Therefore, even if the meaning of
+your code looks fine to a human eye, it still has to comply in detail
+to the rules of the programming language. If not, you get warnings and
+error messages. This also goes for lower and upper case letters.
+If you do <code>from math import *</code> and give the command <code>pi</code>, you get
+\( 3.1415\ldots \). However, if you write <code>Pi</code>, you get an error
+message.
+Pay attention to such details also when they are given in later chapters.
+</div>
+
+
+<p>
+<div class="alert alert-block alert-warning alert-text-normal">
+<b>Remember to insert comments to explain your code.</b>
+<p>
+When you write a computer program, you have two very
+different kinds of readers. One is Python, which will interpret and
+run your program according to the rules. The other is some
+human, for example, yourself or a peer. It is very
+important to organize and comment the code so that you can go back to
+your own code after, e.g., a year and still understand what clever
+constructions you put in there. This is relevant when you need to change or
+extend your code (which usually happens often in reality). Organized
+coding and good commenting is even more critical if other people are
+supposed to understand code that you have written.
+
+
+</div>
+
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal">
+<b>Fast code versus readable and correct code.</b>
+<p>
+Numerical computing has a strong tradition in paying much attention to
+creating <em>fast code</em>. Real industrial applications of numerical computing
+often involves simulations that run for hours, days, and even weeks.
+Fast code is tremendously important in those cases. The problem with
+a strong focus on fast code, unfortunately, is sometimes that clear
+and easily understandable constructions are replaced by clever and
+less readable, but faster code. However, for beginners it is most
+important to learn to write readable and correct code. We will
+make some comments on constructions that are fast or slow, but the
+main focus of this book is to teach how to write correct programs,
+not the fastest possible programs.
+</div>
+
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal">
+<b>Deleting data no longer in use.</b>
+<p>
+Python has <em>automatic garbage collection</em>, meaning that there is no
+need to delete variables (or objects) that are no longer in
+use. Python takes care of this by itself. This is opposed to, e.g.,
+Matlab, where explicit deleting sometimes may be required.
+</div>
+
+
+<p>
+<div class="alert alert-block alert-notice alert-text-normal">
+<b>Tip: how to deal with long lines.</b>
+<p>
+If a statement in a program gets too long, it may be continued on
+the next line by inserting a back-slash at the end of the line before
+proceeding on the next line. However, <em>no blanks</em> must occur after
+the back-slash!
+</div>
+
+
+<p>
+The present introductory book just provides a tiny bit of all the
+functionality that Python has to offer. An important source of
+information is the
+official Python documentation website
+(<a href="http://docs.python.org/" target="_self"><tt>http://docs.python.org/</tt></a>), which provides a Python tutorial, the
+<em>Python Library Reference</em>, a <em>Language Reference</em>, and more. Several
+excellent books are also available
+(<a href="http://wiki.python.org/moin/PythonBooks" target="_self"><tt>http://wiki.python.org/moin/PythonBooks</tt></a>), e.g., Hans Petter
+Langtangen's comprehensive book <em>A Primer on Scientific Programming
+with Python</em>, Springer, 2014.
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._p4c-solarized-Python004.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._p4c-solarized-Python006.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

@@ -1,0 +1,5099 @@
+
+
+.. |nbsp| unicode:: 0xA0
+   :trim:
+
+.. !split
+
+Solving ordinary differential equations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+.. figure:: FE_comic_strip.png
+   :width: 800
+
+| 
+| 
+
+Differential equations constitute one of the most powerful mathematical
+tools to understand and predict the behavior of dynamical systems in
+nature, engineering, and society. A dynamical system is some system with
+some state, usually expressed by a set of variables, that evolves in time.
+For example, an oscillating pendulum, the spreading of a disease,
+and the weather are examples of dynamical systems.
+We can use basic laws of physics, or plain intuition, to express mathematical
+rules that govern the evolution of the system in time.
+These rules take the form of
+*differential equations*. You are probably well experienced with
+equations, at least equations like :math:`ax+b=0` or :math:`ax^2 + bx + c=0`.
+Such equations are known as *algebraic equations*, and the unknown
+is a number. The unknown in a differential equation is a function,
+and a differential equation will almost always involve this function
+and one or more derivatives of the function.
+For example, :math:`f'(x)=f(x)` is a simple
+differential equation (asking if there is any function :math:`f` such that
+it equals its derivative - you might remember that :math:`e^x` is a
+candidate).
+
+The present chapter starts with explaining how easy it is to solve
+both single (scalar) first-order ordinary differential equations and
+systems of first-order differential equations by the Forward Euler
+method. We demonstrate all the mathematical and programming details
+through two specific applications: population growth and spreading of
+diseases.
+
+Then we turn to a physical application: oscillating mechanical
+systems, which arise in a wide range of engineering situations. The
+differential equation is now of second order, and the Forward Euler
+method does not perform well. This observation motivates the need for
+other solution methods, and we derive the Euler-Cromer scheme [#scheme]_, the
+2nd- and 4th-order Runge-Kutta schemes, as well as a finite difference
+scheme (the latter to handle the second-order differential equation
+directly without reformulating it as a first-order system). The
+presentation starts with undamped free oscillations and then treats
+general oscillatory systems with possibly nonlinear damping, nonlinear
+spring forces, and arbitrary external excitation.  Besides developing
+programs from scratch, we also demonstrate how to access ready-made
+implementations of more advanced differential equation solvers in
+Matlab.
+
+.. index:: scheme
+
+.. [#scheme] The term *scheme* is used as synonym for method or
+   computational recipe, especially in the context of numerical
+   methods for differential equations.
+
+As we progress with more advanced methods, we develop more
+sophisticated and reusable programs, and in particular, we incorporate
+good testing strategies so that we bring solid evidence to correct
+computations. Consequently, the beginning with population growth and
+disease modeling examples have a very gentle learning curve, while
+that curve gets significantly steeper towards the end of the treatment
+of differential equations for oscillatory systems.
+
+.. _sec:de:pg:
+
+Population growth
+=================
+
+Our first taste of differential equations regards modeling of the
+growth of some population, such as a cell culture, an animal
+population, or a human population. The ideas even extend trivially to
+growth of money in a bank. Let :math:`N(t)` be the number of individuals in
+the population at time :math:`t`. How can we predict how :math:`N(t)` evolves in
+time? Below we shall derive a differential equation whose solution is
+:math:`N(t)`. The equation reads
+
+.. _Eq:sec:de:eq:N:
+
+.. math::
+   :label: sec:de:eq:N
+        
+        N'(t) = rN(t),
+        
+        
+
+where :math:`r` is a number. Note that although :math:`N` is an integer in real life,
+we model :math:`N` as a real-valued function. We are forced to do this because
+the solution of differential equations are (normally continuous) real-valued
+functions. An integer-valued :math:`N(t)` in the model would lead to a lot of
+mathematical difficulties.
+
+With a bit of guessing, you may realize that :math:`N(t)=Ce^{rt}`, where :math:`C`
+is any number. To make this solution unique, we need to fix :math:`C`, done
+by prescribing the value of :math:`N` at some time, usually :math:`t=0`.
+Say :math:`N(0)` is given as :math:`N_0`. Then :math:`N(t)=N_0e^{rt}`.
+
+In general, a differential equation model consists of a *differential
+equation*, such as :eq:`sec:de:eq:N` *and* an *initial condition*, such
+as :math:`N(0)=N_0`. With a known initial condition, the differential equation
+can be solved for the unknown function and the solution is unique.
+
+It is, of course, very seldom that we can find the solution of a
+differential equation as easy as in this example. Normally, one has to
+apply certain mathematical methods, but these can only handle some of
+the simplest differential equations. However, we can easily deal with
+almost any differential equation by applying numerical methods and a
+bit of programming.  This is exactly the topic of the present chapter.
+
+.. _sec:de:pg:model:
+
+Derivation of the model
+-----------------------
+
+It can be instructive to show how an equation like :eq:`sec:de:eq:N`
+arises. Consider some population of (say) an animal specie and let
+:math:`N(t)` be the number of individuals in a certain spatial region, e.g. an island.
+We are not concerned with the spatial distribution of the animals, just
+the number of them in some spatial area where there is no exchange
+of individuals with other spatial areas.
+During a time interval :math:`\Delta t`, some animals will
+die and some new will be born. The number of deaths and births are
+expected to be proportional to :math:`N`. For example, if there are twice
+as many individuals, we expect them to get twice as many newborns.
+In a time interval :math:`\Delta t`, the net growth of the population
+will be
+
+.. math::
+         N(t+\Delta t) - N(t) = \hat b N(t) - \hat d N(t),
+
+where :math:`\hat bN(t)` are the number of newborns and :math:`\hat d N(t)`
+the number of deaths. If we double :math:`\Delta t`, we expect the proportionality
+constants :math:`\hat b` and :math:`\hat d` to double too, so it makes sense to
+think of :math:`\hat b` and :math:`\hat d` as proportional to :math:`\Delta t` and
+"factor out" :math:`\Delta t`. That is, we introduce :math:`b=\hat b/\Delta t` and
+:math:`d=\hat d/\Delta t` to be proportionality constants for newborns and
+deaths independent of :math:`\Delta t`. Also, we introduce :math:`r=b-d`, which
+is the net rate of growth of the population per time unit.
+Our model then becomes
+
+.. _Eq:sec:de:eq:N:discrete:
+
+.. math::
+   :label: sec:de:eq:N:discrete
+        
+         N(t+\Delta t) - N(t) = \Delta t\, r N(t)\thinspace .
+        
+        
+
+Equation :eq:`sec:de:eq:N:discrete` is actually a computational model.
+Given :math:`N(t)`, we can advance the population size by
+
+.. math::
+         N(t+\Delta t) = N(t) + \Delta t\, rN(t)\thinspace .
+
+This is called a *difference equation*.
+If we know :math:`N(t)` for some :math:`t`, e.g., :math:`N(0)=N_0`, we can compute
+
+.. math::
+        
+        N(\Delta t) &= N_0 + \Delta t\, rN_0,\\ 
+        N(2\Delta t) &= N(\Delta t) + \Delta t\, rN(\Delta t),\\ 
+        N(3\Delta t) &= N(2\Delta t) + \Delta t\, rN(2\Delta t),\\ 
+        & \vdots\\ 
+        N((k+1)\Delta t) &= N(k\Delta t) + \Delta t\, rN(k\Delta t),
+        
+
+where :math:`k` is some arbitrary integer. A computer program can easily
+compute :math:`N((k+1)\Delta t)` for us with the aid of a little loop.
+
+
+.. warning::
+    Observe that the computational formula cannot be started unless we have an
+    initial condition!
+    
+    The solution of :math:`N'=rN` is :math:`N=Ce^{rt}`
+    for any constant :math:`C`, and the initial condition is needed to fix :math:`C` so
+    the solution becomes unique. However,
+    from a mathematical point of view, knowing :math:`N(t)` at any point :math:`t` is
+    sufficient as initial condition. Numerically, we more literally need an
+    initial condition: we need to know a starting value at the left
+    end of the interval in order to get the computational formula going.
+
+
+
+
+In fact, we do not need a computer since we see a repetitive pattern
+when doing hand calculations, which leads us to a mathematical
+formula for :math:`N((k+1)\Delta t)`, :
+
+.. math::
+        
+        N((k+1)\Delta t) &= N(k\Delta t) + \Delta t\, rN(k\Delta t) = N(k\Delta t)(1+\Delta t\, r)\\ 
+        &= N((k-1)\Delta t)(1+\Delta t\,r)^2\\ 
+        &\vdots\\ 
+        &= N_0(1+\Delta t\,r)^{k+1}\thinspace .
+        
+
+Rather than using :eq:`sec:de:eq:N:discrete` as a computational model
+directly, there is a strong tradition for deriving a differential
+equation from this difference equation. The idea is to consider a
+very small time interval :math:`\Delta t` and look at the instantaneous
+growth as this time interval is shrunk to an infinitesimal small
+size. In mathematical terms, it means that we let
+:math:`\Delta t\rightarrow 0`. As :eq:`sec:de:eq:N:discrete`
+stands, letting :math:`\Delta t\rightarrow 0` will just produce an equation
+:math:`0=0`, so we have to divide by
+:math:`\Delta t` and then take the limit:
+
+.. math::
+        
+        \lim_{\Delta t\rightarrow 0}\frac{N(t+\Delta t)-N(t)}{\Delta t} = rN(t)\thinspace .
+
+The term on the left-hand side is actually the definition of the
+derivative :math:`N'(t)`, so we have
+
+.. math::
+         N'(t) = rN(t),
+
+which is the corresponding differential equation.
+
+There is nothing in our derivation that forces the parameter :math:`r` to be
+constant - it can change with time due to, e.g., seasonal changes or
+more permanent environmental changes.
+
+
+.. admonition:: Detour: Exact mathematical solution
+
+   If you have taken a course on mathematical solution methods for
+   differential equations, you may want to recap how an equation like
+   :math:`N'=rN` or :math:`N'=r(t)N` is solved. The *method of separation of
+   variables* is the most convenient solution strategy in this case:
+   
+   .. math::
+           
+           N' &=rN\\ 
+           \frac{dN}{dt} &= rN\\ 
+           \frac{dN}{N} &= rdt\\ 
+           \int_{N_0}^N \frac{dN}{N} &= \int_0^t rdt\\ 
+           \ln N - \ln N_0 &= \int_0^t r(t)dt\\ 
+           N &= N_0\exp{(\int_0^t r(t)dt)},
+           
+   
+   which for constant :math:`r` results in :math:`N=N_0e^{rt}`.
+   
+   As will be described later, :math:`r` must in more realistic models depend on :math:`N`.
+   The method of separation of variables then requires to integrate
+   :math:`\int_{N_0}^{N} N/r(N)dN`, which quickly becomes non-trivial for many choices
+   of :math:`r(N)`. The only generally applicable solution approach is therefore
+   a numerical method.
+
+
+
+
+.. _sec:de:pg:numerics:
+
+Numerical solution  (1)
+-----------------------
+
+.. index:: finite difference method
+
+There is a jungle of numerical methods for problems like
+:eq:`sec:de:eq:N:discrete`, and in general any equation of the form
+:math:`u'=f(u,t)`, where :math:`u(t)` is the unknown function in the problem,
+and :math:`f` is some known formula of :math:`u` and optionally
+:math:`t`. For example, :math:`f(u,t)=ru` in :eq:`sec:de:eq:N:discrete`.
+We will first present a simple *finite difference method* solving
+:math:`u'=f(u,t)`. The idea is four-fold:
+
+1. Introduce a mesh in time with :math:`N_t+1` points :math:`t_0,t_1,\ldots,t_{N_t}`.
+   We seek the unknown :math:`u` at
+   the mesh points :math:`t_n`, and introduce :math:`u^n` as the numerical approximation
+   to :math:`u(t_n)`, see Figure :ref:`sec:de:fig:mesh`.
+
+2. Assume that the differential equation is valid at the mesh points only.
+
+3. Approximate derivatives by finite differences, see Figure :ref:`sec:de:fig:FE`.
+
+4. Formulate a computational algorithm that can compute a new
+   value :math:`u^n` based on previously computed values :math:`u^i`, :math:`i<n`.
+
+.. _sec:de:fig:mesh:
+
+.. figure:: fdm_u_ue.png
+   :width: 500
+
+   *Mesh in time with corresponding discrete values (unknowns)*
+
+.. _sec:de:fig:FE:
+
+.. figure:: fd_forward.png
+   :width: 500
+
+   *Illustration of a forward difference approximation to the derivative*
+
+An example will illustrate the steps. First, we introduce the mesh, and
+very often the mesh is uniform, meaning that the spacing between
+points :math:`t_n` and :math:`t_{n+1}` is constant. This property implies that
+
+.. math::
+          t_n = n\Delta t,\quad n=0,1,\ldots, N_t\thinspace . 
+
+Second, the differential equation is supposed to hold at the mesh
+points only. Note that this is an approximation, because the
+differential equation is originally valid at all real values of :math:`t`.
+We can express this property mathematically as
+
+.. math::
+         u'(t_n)=f(u^n,t_n),\quad  n=0,1,\ldots,N_t\thinspace .
+
+For example, with our model equation :math:`u'=ru`, we have the special case
+
+.. math::
+         u'(t_n)=ru^n,\quad  n=0,1,\ldots,N_t,
+
+or
+
+.. math::
+         u'(t_n)=r(t_n)u^n,\quad  n=0,1,\ldots,N_t,
+
+if :math:`r` depends explicitly on :math:`t`.
+
+.. index:: forward difference approximation
+
+Third, derivatives are to be replaced by finite differences. To this end,
+we need to know specific formulas for how derivatives can be
+approximated by finite differences. One simple possibility is to use
+the definition of the derivative from any calculus book,
+
+.. math::
+         u'(t) = \lim_{\Delta t\rightarrow 0}\frac{u(t+\Delta t)-u(t)}{\Delta t}\thinspace .
+
+At an arbitrary mesh point :math:`t_n` this definition can be written as
+
+.. math::
+         u'(t_n) = \lim_{\Delta t\rightarrow 0}\frac{u^{n+1}-u^n}{\Delta t}\thinspace .
+
+Instead of going to the limit :math:`\Delta t\rightarrow 0` we can use
+a small :math:`\Delta t`, which yields a computable approximation to :math:`u'(t_n)`:
+
+.. math::
+         u'(t_n) \approx \frac{u^{n+1}-u^n}{\Delta t}\thinspace .
+
+This is known as a *forward difference* since we go forward in time
+(:math:`u^{n+1}`) to collect information in :math:`u` to estimate the derivative.
+Figure :ref:`sec:de:fig:FE` illustrates the idea. The accuracy of
+the forward difference is proportional to :math:`\Delta t`, usually written
+as :math:`{\mathcal{O}(\Delta t)}`.
+
+We can now plug in the forward difference in our differential equation
+sampled at the arbitrary mesh point :math:`t_n`:
+
+.. _Eq:sec:de:FE:
+
+.. math::
+   :label: sec:de:FE
+        
+        \frac{u^{n+1}-u^n}{\Delta t} = f(u^n,t_n),
+        
+        
+
+or with :math:`f(u,t)=ru` in our special model problem for population growth,
+
+.. _Eq:sec:de:FE:pop:growth:
+
+.. math::
+   :label: sec:de:FE:pop:growth
+        
+        \frac{u^{n+1}-u^n}{\Delta t} = ru^n\thinspace .
+        
+        
+
+If :math:`r` depends on time, we insert :math:`r(t_n)=r^n` for :math:`r` in this latter
+equation.
+
+The fourth step is to derive a computational algorithm. Looking at
+:eq:`sec:de:FE`, we realize that if :math:`u^n` should be known, we can
+easily solve with respect to :math:`u^{n+1}` to get a formula for :math:`u` at
+the next time level :math:`t_{n+1}`:
+
+.. _Eq:sec:de:FE2:
+
+.. math::
+   :label: sec:de:FE2
+        
+        u^{n+1}= u^n + \Delta t f(u^n,t_n)\thinspace .
+        
+        
+
+Provided we have a known starting value, :math:`u^0=U_0`, we can use
+:eq:`sec:de:FE2` to advance the solution by first computing :math:`u^1`
+from :math:`u^0`, then :math:`u^2` from :math:`u^1`, :math:`u^3` from :math:`u^2`, and so forth.
+
+.. index:: Forward Euler scheme
+
+Such an algorithm is called a *numerical scheme* for the differential
+equation and often written compactly as
+
+.. _Eq:sec:de:FE3:
+
+.. math::
+   :label: sec:de:FE3
+        
+        u^{n+1}= u^n + \Delta t f(u^n,t_n),\quad u^0=U_0,\quad n=0,1,\ldots,N_t-1\thinspace .
+        
+        
+
+This scheme is known as the *Forward Euler scheme*, also called
+*Euler's method*.
+
+In our special population growth model, we have
+
+.. _Eq:sec:de:FE3:pop:growth:
+
+.. math::
+   :label: sec:de:FE3:pop:growth
+        
+        u^{n+1}= u^n + \Delta t\, ru^n,\quad u^0=U_0,\quad n=0,1,\ldots,N_t-1\thinspace .
+        
+        
+
+We may also write this model using the problem-specific symbol :math:`N` instead
+of the generic :math:`u` function:
+
+.. _Eq:sec:de:FE3:pop:growth:N:
+
+.. math::
+   :label: sec:de:FE3:pop:growth:N
+        
+        N^{n+1}= N^n + \Delta t\, rN^n,\quad N^0=N_0,\quad n=0,1,\ldots,N_t-1\thinspace .
+        
+        
+
+The observant reader will realize that :eq:`sec:de:FE3:pop:growth:N` is
+nothing but the computational model :eq:`sec:de:eq:N:discrete`
+arising directly in the model derivation. The formula
+:eq:`sec:de:FE3:pop:growth:N` arises, however, from a detour via
+a differential equation and a numerical method for the differential
+equation. This looks rather unnecessary! The reason why we bother
+to derive the differential equation model and then discretize it by
+a numerical method is simply that the discretization can be done
+in many ways, and we can create (much) more accurate and more
+computationally efficient methods than :eq:`sec:de:FE3:pop:growth:N`
+or :eq:`sec:de:FE3`. This can be useful in many problems!
+Nevertheless, the Forward Euler scheme is intuitive and widely
+applicable, at least when :math:`\Delta t` is chosen to be small.
+
+
+.. admonition:: The numerical solution between the mesh points
+
+   Our numerical method computes the unknown function :math:`u`
+   at discrete mesh points :math:`t_1,t_2,\ldots,t_{N_t}`. What if we
+   want to evaluate the numerical solution between the mesh points?
+   The most natural choice is to *assume* a linear variation between
+   the mesh points, see Figure :ref:`sec:de:fig:ui`. This is compatible
+   with the fact that when we plot
+   the array :math:`u^0,u^1,\ldots` versus :math:`t_0,t_1,\ldots`, a straight
+   line is drawn between the discrete points.
+
+
+
+
+.. _sec:de:fig:ui:
+
+.. figure:: fdm_u_uei.png
+   :width: 500
+
+   *The numerical solution at points can be extended by linear segments between the mesh points*
+
+.. _sec:de:pg:prog1:
+
+Programming the Forward Euler scheme; the special case
+------------------------------------------------------
+
+Let us compute :eq:`sec:de:FE3:pop:growth:N` in a program.
+The input variables are :math:`N_0`, :math:`\Delta t`, :math:`r`, and :math:`N_t`.
+Note that we need to compute :math:`N_t+1` new values :math:`N^1,\ldots,N^{N_t+1}`.
+A total of :math:`N_t+2` values are needed in an array representation of :math:`N^n`,
+:math:`n=0,\ldots,N_t+1`.
+
+Our first version of this program is as simple as possible:
+
+.. code-block:: matlab
+
+        N_0 = input('Give initial population size N_0: ');
+        r   = input('Give net growth rate r: ');
+        dt  = input('Give time step size: ');
+        N_t = input('Give number of steps: ');
+        t = linspace(0, (N_t+1)*dt, N_t+2);
+        N = zeros(N_t+2, 1);
+        
+        N(1) = N_0;
+        for n = 1:N_t
+            N(n+1) = N(n) + r*dt*N(n);
+        end
+        
+        if N_t < 70
+            numerical_sol = 'bo';
+        else
+            numerical_sol = 'b-';
+        end
+        plot(t, N, numerical_sol, t, N_0*exp(r.*t), 'r-');
+        xlabel('t'); ylabel('N(t)');
+        legend('numerical', 'exact', 'location', 'northwest');
+        filestem = strcat('growth1_', num2str(N_t), 'steps');
+        print(filestem, '-dpng');  print(filestem, '-dpdf');
+
+The complete code above resides in the file
+`growth1.m <https://github.com/hplgit/prog4comp/src/m/growth1.m>`__.
+
+Let us demonstrate a simulation where we start with 100 animals, a net
+growth rate of 10 percent (0.1) per time unit, which can be one month,
+and :math:`t\in [0,20]` months. We may first try :math:`\Delta t` of half a month
+(0.5), which implies :math:`N_t=40` (or to be absolutely precise, the last
+time point to be computed according to our set-up above is
+:math:`t_{N_t+1}=20.5`).  Figure :ref:`sec:de:fig:growth1:0.5` shows the
+results. The solid line is the exact solution, while the circles are
+the computed numerical solution. The discrepancy is clearly
+visible. What if we make :math:`\Delta t` 10 times smaller? The result is
+displayed in Figure :ref:`sec:de:fig:growth1:0.05`, where we now use a
+solid line also for the numerical solution (otherwise, 400 circles
+would look very cluttered, so the program has a test on how to display
+the numerical solution, either as circles or a solid line).  We can
+hardly distinguish the exact and the numerical solution.  The
+computing time is also a fraction of a second on a laptop, so it
+appears that the Forward Euler method is sufficiently accurate for
+practical purposes. (This is not always true for large, complicated
+simulation models in engineering, so more sophisticated methods may be
+needed.)
+
+.. _sec:de:fig:growth1:0.5:
+
+.. figure:: growth1_40steps.png
+   :width: 500
+
+   *Evolution of a population computed with time step 0.5 month*
+
+.. _sec:de:fig:growth1:0.05:
+
+.. figure:: growth1_400steps.png
+   :width: 500
+
+   *Evolution of a population computed with time step 0.05 month*
+
+It is also of interest to see what happens if we increase :math:`\Delta t`
+to 2 months. The results in Figure :ref:`sec:de:fig:growth1:2` indicate
+that this is an inaccurate computation.
+
+.. _sec:de:fig:growth1:2:
+
+.. figure:: growth1_10steps.png
+   :width: 500
+
+   *Evolution of a population computed with time step 2 months*
+
+.. _sec:de:pg:geom:
+
+Understanding the Forward Euler method
+--------------------------------------
+
+The good thing about the Forward Euler method is that it gives
+an understanding of what a differential equation is and a
+geometrical picture of how to construct the solution. The first
+idea is that we have already computed the solution up to some
+time point :math:`t_n`. The second idea is that we want to progress
+the solution from :math:`t_n` to :math:`t_{n+1}` as a straight line.
+
+We know that the line must go through the solution at :math:`t_n`, i.e., the
+point :math:`(t_n, u^n)`. The differential equation tells us the slope of
+the line: :math:`u'(t_n) = f(u^n,t_n)=ru^n`. That is, the differential
+equation gives a direct formula for the further *direction* of the
+solution curve. We can say that the differential equation expresses
+how the system (:math:`u`) undergoes changes at a point.
+
+There is a general formula for a straight line :math:`y=ax+b` with slope :math:`a`
+that goes through the point :math:`(x_0,y_0)`: :math:`y=a(x-x_0)+y_0`. Using this
+formula adapted to the present case, and evaluating the formula for
+:math:`t_{n+1}`, results in
+
+.. math::
+         u^{n+1} = ru^n(t_{n+1} - t_n) + u^n = u^n + \Delta t\,ru^n,
+
+which is nothing but the Forward Euler formula. You are now encouraged
+to do :ref:`sec:de:exer:geom` to become more familiar with
+the geometric interpretation of the Forward Euler method.
+
+.. _sec:de:FE:gen:
+
+Programming the Forward Euler scheme; the general case
+------------------------------------------------------
+
+Our previous program was just a flat main program tailored to a
+special differential equation.  When programming mathematics, it is
+always good to consider a (large) class of problems and making a
+Matlab function to solve any problem that fits into the class. More
+specifically, we will make software for the class of differential
+equation problems of the form
+
+.. math::
+         u'(t)=f(u,t),\quad u=U_0,\ t\in [0,T],
+
+for some given function :math:`f`, and numbers :math:`U_0` and :math:`T`. The Matlab function
+calculating the solution must take :math:`f`, :math:`U_0`, :math:`\Delta t`, and
+:math:`T` as input, find the corresponding :math:`N_t`, compute the solution, and return and
+array with :math:`u^0,u^1,\ldots,u^{N_t}` and an array with
+:math:`t_0,t_1,\ldots,t_{N_t}`.  The Forward Euler scheme reads
+
+.. math::
+         u^{n+1}=u^n + \Delta t f(u^n,t_n),\quad n=0,\ldots,N_t-1\thinspace .
+
+The corresponding program ``ode_FE.m`` may now take the form
+
+.. code-block:: matlab
+
+        function [sol, time] = ode_FE(f, U_0, dt, T)
+            N_t = floor(T/dt);
+            u = zeros(N_t+1, 1);
+            t = linspace(0, N_t*dt, length(u));
+            u(1) = U_0;
+            for n = 1:N_t
+                u(n+1) = u(n) + dt*f(u(n), t(n));
+            end
+            sol  = u;
+            time = t;
+        end
+
+Note that the function ``ode_FE`` is general, i.e. it can
+solve any differential equation :math:`u'=f(u,t)`.
+
+A proper demo function for this solver might be written as
+(file `demo_population_growth.m <https://github.com/hplgit/prog4comp/src/m/demo_population_growth.m>`__):
+
+.. code-block:: matlab
+
+        function demo_population_growth()
+            % Test case: u' = r*u, u(0)=100
+            function r = f(u, t)
+                r = 0.1*u;
+            end
+            [u, t] = ode_FE(@f, 100, 0.5, 20);
+            plot(t, u, t, 100*exp(0.1*t));
+        end
+
+The solution should be identical to what the ``growth1.py`` program
+produces with the same parameter settings (:math:`r=0.1`, :math:`N_0=100`).
+This feature can easily be tested by inserting print statement, but
+a much better, automated verification is suggested in
+:ref:`sec:de:exer:geom`. You are strongly encouraged to take
+a "break" and do that exercise now.
+
+
+.. admonition:: Remark on the use of ``u`` as variable
+
+   In the ``ode_FE`` program, the variable ``u`` is used in different
+   contexts. Inside the ``ode_FE`` function, ``u`` is an array, but in
+   the ``f(u,t)`` function, as exemplified in the ``demo_population_growth``
+   function, the argument ``u`` is
+   a number. Typically, we call ``f`` (in ``ode_FE``) with the ``u`` argument as
+   one element of the array ``u`` in the ``ode_FE`` function:
+   ``u(n)``.
+
+
+
+
+Making the population growth model more realistic
+-------------------------------------------------
+
+Exponential growth of a population according the model :math:`N'=rN`, with
+exponential solution :math:`N=N_0e^{rt}`, is unrealistic in the long run
+because the resources needed to feed the population are finite. At
+some point there will not be enough resources and the growth will
+decline. A common model taking this effect into account assumes that
+:math:`r` depends on the size of the population, :math:`N`:
+
+.. math::
+         N(t+\Delta t) - N(t) = r(N(t))N(t)\thinspace .
+
+The corresponding differential equation becomes
+
+.. math::
+         N' = r(N)N\thinspace .
+
+The reader is strongly encouraged to repeat the steps in the
+derivation of the Forward Euler scheme and establish that we get
+
+.. math::
+         N^{n+1} = N^n + \Delta t\, r(N^n)N^n,
+
+which computes as easy as for a constant :math:`r`, since :math:`r(N^n)` is
+known when computing :math:`N^{n+1}`. Alternatively, one can use the Forward Euler formula for
+the general problem :math:`u'=f(u,t)` and use :math:`f(u,t)=r(u)u` and replace :math:`u` by :math:`N`.
+
+.. index:: logistic model
+
+.. index:: carrying capacity
+
+The simplest choice of :math:`r(N)` is a linear function, starting with some
+growth value :math:`\bar r` and declining until the population has reached
+its maximum, :math:`M`, according to the available resources:
+
+.. math::
+         r(N) = \bar r(1 - N/M)\thinspace .
+
+In the beginning, :math:`N\ll M` and we will have exponential growth :math:`e^{\bar rt}`,
+but as :math:`N` increases, :math:`r(N)` decreases, and when :math:`N` reaches :math:`M`,
+:math:`r(N)=0` so there is now more growth and the population remains at
+:math:`N(t)=M`. This linear choice of :math:`r(N)` gives rise to a model that is called
+the *logistic model*. The parameter :math:`M` is known as the *carrying capacity*
+of the population.
+
+Let us run the logistic model with aid of the ``ode_FE`` function in
+the ``ode_FE`` module. We choose :math:`N(0)=100`, :math:`\Delta t=0.5` month,
+:math:`T=60` months, :math:`r=0.1`, and :math:`M=500`. The complete program, called
+`logistic.m <https://github.com/hplgit/prog4comp/src/m/logistic.m>`__,
+is basically a call to ``ode_FE``:
+
+.. code-block:: matlab
+
+        f = @(u, t) 0.1*(1 - u/500)*u;
+        U_0 = 100;  
+        
+        dt = 0.5;  T = 60;
+        [u, t] = ode_FE(f, U_0, dt, T);
+        plot(t, u, 'b-');
+        xlabel('t');  ylabel('N(t)');
+        filestem = strcat('tmp_',num2str(dt));
+        % Note: this print statement gets a problem with the decimal point
+        %print(filestem,'-dpng');  print(filestem,'-dpdf');  
+        % so we rather do it like this:
+        filename = strcat(filestem, '.png'); print(filename);
+        filename = strcat(filestem, '.pdf'); print(filename);
+        
+        dt = 20;  T = 100;
+        [u, t] = ode_FE(f, U_0, dt, T);
+        plot(t, u, 'b-');
+        xlabel('t');  ylabel('N(t)');
+        filestem = strcat('tmp_',num2str(dt));
+        print(filestem, '-dpng');  print(filestem, '-dpdf');
+
+Figure :ref:`sec:de:fig:growth2:logistic`
+shows the resulting curve. We see that the population stabilizes around
+:math:`M=500` individuals. A corresponding exponential growth would reach
+:math:`N_0e^{rt}=100e^{0.1\cdot 60}\approx 40,300` individuals!
+
+.. _sec:de:fig:growth2:logistic:
+
+.. figure:: logistic.png
+   :width: 500
+
+   *Logistic growth of a population*
+
+It is always interesting to see what happens with large :math:`\Delta t` values.
+We may set :math:`\Delta t=20` and :math:`T=100`. Now the solution, seen in
+Figure :ref:`sec:de:fig:growth2:logistic:coarse`, oscillates and is hence
+qualitatively wrong, because one can prove that the exact solution
+of the differential equation is monotone.
+(However, there is a corresponding difference
+equation model, :math:`N_{n+1}=rN_n(1-N_n/M)`, which allows oscillatory solutions
+and those are observed in animal populations. The problem with large
+:math:`\Delta t` is that it just leads to wrong mathematics - and two wrongs
+don't make a right in terms of a relevant model.)
+
+.. _sec:de:fig:growth2:logistic:coarse:
+
+.. figure:: logistic_coarse.png
+   :width: 500
+
+   *Logistic growth with large time step*
+
+
+.. admonition:: Remark on the world population
+
+   The `number of people on the planet <http://en.wikipedia.org/wiki/Population_growth>`__
+   follows the model :math:`N'=r(t)N`, where
+   the net reproduction :math:`r(t)` varies with time and has decreased since
+   its top in 1990. The current world value of :math:`r` is 1.2%, and it is
+   difficult to `predict future values <http://users.rcn.com/jkimball.ma.ultranet/BiologyPages/P/Populations.html>`__. At
+   the moment, the predictions of the world population
+   point to a growth to 9.6 billion before
+   declining.
+   
+   This example shows the limitation of a differential equation model: we
+   need to know all input parameters, including :math:`r(t)`, in order to
+   predict the future.  It is seldom the case that we know all input
+   parameters. Sometimes knowledge of the solution from measurements can
+   help estimate missing input parameters.
+
+
+
+
+.. _sec:de:growth:test:linear:
+
+Verification: exact linear solution of the discrete equations
+-------------------------------------------------------------
+
+How can we verify that the programming of an ODE model is correct?
+The best method is to find a problem where there are no unknown
+numerical approximation errors, because we can then compare the
+exact solution of the problem with the result produced by our
+implementation and expect the difference to be within a very small
+tolerance. We shall base a unit test on this idea and implement a
+corresponding *test function* (see the section :ref:`sec:integrals:test:functions`)
+for automatic verification of our implementation.
+
+It appears that most numerical methods for ODEs will exactly
+reproduce a solution :math:`u` that is linear in :math:`t`.
+We may therefore set :math:`u=at+b` and choose any :math:`f` whose derivative
+is :math:`a`. The choice :math:`f(u,t)=a` is very simple, but we may add
+anything that is zero, e.g.,
+
+.. math::
+         f(u,t) = a + (u - (at+b))^m,
+
+This is a valid :math:`f(u,t)` for any :math:`a`, :math:`b`, and :math:`m`.
+The corresponding
+ODE looks highly non-trivial, however:
+
+.. math::
+         u' = a + (u - (at+b))^m
+
+Using the general ``ode_FE`` function in
+`ode_FE.m <https://github.com/hplgit/prog4comp/src/m/ode_FE.m>`__,
+we may
+write a proper test function as follows
+(in file
+`test_ode_FE_exact_linear.m <https://github.com/hplgit/prog4comp/src/m/test_ode_FE_exact_linear.m>`__):
+
+.. code-block:: matlab
+
+        function test_ode_FE_exact_linear()
+            % Test if a linear function u(t) = a*x + b is exactly reproduced.
+        
+            a = 4;  b = -1;  m = 6;
+        
+            exact_solution = @(t) (a*t + b)';
+            f = @(u, t) a + (u - exact_solution(t))^m;
+        
+            dt = 0.5;       T = 20.0;
+        
+            [u, t] = ode_FE(f, exact_solution(0), dt, T);
+            diff = max(abs(exact_solution(t) - u));
+            tol = 1E-15;           % Tolerance for float comparison
+            assert(diff < tol);
+        end
+
+Observe that we cannot compare ``diff`` to zero, which is what we mathematically
+expect, because ``diff`` is a floating-point variable that most likely
+contains small round-off errors. Therefore, we must compare ``diff`` to
+zero with a tolerance, here :math:`10^{-15}`.
+
+You are encouraged to do :ref:`sec:de:exer:FE:test1` where the goal
+is to make a test function for a verification based on comparison with
+hand-calculated results for a few time steps.
+
+Spreading of diseases
+=====================
+
+Our aim with this section is to show in detail how one can apply mathematics
+and programming to investigate spreading of diseases. The mathematical
+model is now a system of three differential equations with three unknown
+functions. To derive such a model, we can use mainly intuition, so
+no specific background knowledge of diseases is required.
+
+.. _sec:de:flu:
+
+Spreading of a flu
+------------------
+
+.. index:: SIR model
+
+Imagine a boarding school out in the country side.  This school is a
+small and closed society. Suddenly, one or more of the pupils get a
+flu. We expect that the flu may spread quite effectively or die
+out. The question is how many of the pupils and the school's staff
+will be affected. Some quite simple mathematics can help us to
+achieve insight into the dynamics of how the disease spreads.
+
+Let the mathematical function :math:`S(t)` count how many individuals, at
+time :math:`t`, that have the possibility to get infected. Here, :math:`t` may
+count hours or days, for instance.  These individuals make up a
+category called susceptibles, labeled as S. Another category, I,
+consists of the individuals that are infected. Let :math:`I(t)` count how
+many there are in category I at time :math:`t`. An individual having
+recovered from the disease is assumed to gain immunity. There is also
+a small possibility that an infected will die. In either case, the
+individual is moved from the I category to a category we call the
+removed category, labeled with R.  We let :math:`R(t)` count the number of
+individuals in the :math:`R` category at time :math:`t`. Those who enter the :math:`R`
+category, cannot leave this category.
+
+To summarize, the spreading of this disease is essentially the dynamics
+of moving individuals from the S to the I and then to the R
+category:
+
+| 
+| 
+
+.. figure:: categories_SIR.png
+   :width: 400
+
+| 
+| 
+
+We can use mathematics to more precisely describe the
+exchange between the categories. The fundamental idea is to describe
+the changes that take place during a small
+time interval, denoted by :math:`\Delta t`.
+
+Our disease model is often referred to as a *compartment model*, where
+quantities are shuffled between compartments (here a synonym for
+categories) according to some rules. The rules express *changes* in
+a small time interval :math:`\Delta t`, and
+from these changes we can let :math:`\Delta t` go to zero and obtain
+derivatives. The resulting equations then go from difference equations
+(with finite :math:`\Delta t`) to differential equations (:math:`\Delta t\rightarrow 0`).
+
+We introduce a uniform mesh in time, :math:`t_n=n\Delta t`,
+:math:`n=0,\ldots,N_t`, and seek :math:`S` at the mesh points. The numerical
+approximation to :math:`S` at time :math:`t_n` is denoted by :math:`S^n`. Similarly,
+:math:`I(t)` and :math:`R(t)` are considered unknown at the mesh points only, and
+we introduce a similar notation :math:`I^n` and :math:`R^n` for the approximations
+to the exact values :math:`I(t_n)` and :math:`R(t_n)`.
+
+In the time interval :math:`\Delta t` we know that some people will be
+infected, so :math:`S` will decrease. We shall soon argue by mathematics
+that there will be :math:`\beta\Delta tSI` new infected individuals in this
+time interval, where :math:`\beta` is a parameter reflecting how easy people
+get infected during a time interval of unit length. If the loss in :math:`S`
+is :math:`\beta\Delta tSI`, we have that the change in :math:`S` is
+
+.. _Eq:sec:de:SIR:eq1:
+
+.. math::
+   :label: sec:de:SIR:eq1
+        
+        S^{n+1} - S^n = -\beta\Delta tS^nI^n\thinspace .
+        
+        
+
+Dividing by :math:`\Delta t` and letting :math:`\Delta t\rightarrow 0`, makes
+the left-hand side approach :math:`S'(t_n)` such that we obtain a
+differential equation
+
+.. _Eq:sec:de:SIR:eq1:de:
+
+.. math::
+   :label: sec:de:SIR:eq1:de
+        
+        S' = -\beta SI\thinspace .
+        
+        
+
+The reasoning in going from the difference equation :eq:`sec:de:SIR:eq1`
+to the differential equation :eq:`sec:de:SIR:eq1:de` follows exactly
+the steps explained in the section :ref:`sec:de:pg:model`.
+
+Before proceeding with how :math:`I` and :math:`R` develops in time,
+let us explain the formula :math:`\beta\Delta tSI`.  We
+have :math:`S` susceptibles and :math:`I` infected people. These can make up :math:`SI`
+pairs. Now, suppose that during a time interval :math:`T` we measure that
+:math:`m` actual pairwise meetings do occur among :math:`n` theoretically possible
+pairings of people from the S and I categories. The probability
+that people meet in pairs during a time :math:`T` is
+(by the empirical frequency definition
+of probability) equal to
+:math:`m/n`, i.e., the number of successes divided by the number of possible
+outcomes. From such statistics we normally derive quantities
+expressed per unit time, i.e., here we want the
+probability per unit time, :math:`\mu`,
+which is found from dividing by :math:`T`: :math:`\mu = m/(nT)`.
+
+.. The value of :math:`\mu`
+
+.. can be found by observing an experiment over some hours
+
+.. where people meet and talk, where we count the number of such meetings (:math:`m`).
+
+Given the probability :math:`\mu`, the expected number of meetings per
+time interval of :math:`SI` possible pairs of people is (from basic statistics)
+:math:`\mu SI`. During a time interval :math:`\Delta t`, there will be
+:math:`\mu SI\Delta t` expected number of meetings between susceptibles and infected
+people such that
+the virus may spread.  Only a fraction of the :math:`\mu\Delta t SI` meetings are
+effective in the sense that the susceptible actually becomes infected.
+Counting that :math:`m` people get infected in :math:`n` such pairwise meetings
+(say 5 are infected from 1000 meetings), we can estimate the
+probability of being infected as :math:`p=m/n`. The expected number of
+individuals in the S category that in a time interval :math:`\Delta t`
+catch the virus and get infected
+is then :math:`p\mu\Delta t SI`. Introducing a new constant :math:`\beta =p\mu`
+to save some writing, we arrive at the formula :math:`\beta\Delta tSI`.
+
+The value of :math:`\beta` must be known in order to predict the future
+with the disease model. One possibility is to
+estimate :math:`p` and :math:`\mu` from their meanings in the derivation
+above. Alternatively, we can observe an "experiment" where there
+are :math:`S_0` susceptibles and :math:`I_0` infected at some point in time.
+During a time interval :math:`T` we count that :math:`N` susceptibles have become
+infected. Using :eq:`sec:de:SIR:eq1` as a rough approximation of how
+:math:`S` has developed during time :math:`T` (and now :math:`T` is not necessarily small,
+but we use :eq:`sec:de:SIR:eq1` anyway), we get
+
+.. _Eq:sec:de:beta:estimate:
+
+.. math::
+   :label: sec:de:beta:estimate
+        
+        N = \beta T S_0I_0\quad\Rightarrow\quad\beta = {N\over TS_0I_0}\thinspace .
+        
+        
+
+We need an additional equation to describe the evolution of :math:`I(t)`.
+Such an equation is easy to establish by noting that
+the loss in the S category is a corresponding gain in the I category.
+More precisely,
+
+.. _Eq:sec:de:SIR:eq2a:
+
+.. math::
+   :label: sec:de:SIR:eq2a
+        
+        I^{n+1} - I^n = \beta\Delta tS^nI^n\thinspace .
+        
+        
+
+However, there is also a loss in the I category because people recover
+from the disease. Suppose that we can measure that :math:`m` out of :math:`n`
+individuals recover in a time period :math:`T` (say 10 of 40 sick
+people recover during a day: :math:`m=10`, :math:`n=40`, :math:`T=24` h). Now,
+:math:`\gamma =m/(nT)` is the probability that one individual recover in
+a unit time interval. Then (on average) :math:`\gamma\Delta t I` infected
+will recover in a time interval :math:`\Delta t`. This quantity represents
+a loss in the I category and a gain in the R category. We can therefore
+write the total change in the I category as
+
+.. _Eq:sec:de:SIR:eq2:
+
+.. math::
+   :label: sec:de:SIR:eq2
+        
+        I^{n+1} - I^n = \beta\Delta tS^nI^n - \gamma\Delta t I^n\thinspace .
+        
+        
+
+The change in the R category is simple: there is always an increase
+from the I category:
+
+.. _Eq:sec:de:SIR:eq3:
+
+.. math::
+   :label: sec:de:SIR:eq3
+        
+        R^{n+1} - R^n = \gamma\Delta t I^n\thinspace .
+        
+        
+
+Since there is no loss in the R category (people are either recovered
+and immune, or dead), we are done with the modeling of this category.
+In fact, we do not strictly need the equation :eq:`sec:de:SIR:eq3` for :math:`R`,
+but extensions of the model later will need an equation for :math:`R`.
+
+Dividing by :math:`\Delta t` in :eq:`sec:de:SIR:eq2` and :eq:`sec:de:SIR:eq2`
+and letting :math:`\Delta t\rightarrow 0`, results in the corresponding
+differential equations
+
+.. _Eq:sec:de:SIR:eq2:de:
+
+.. math::
+   :label: sec:de:SIR:eq2:de
+        
+        I' = \beta\Delta tSI - \gamma\Delta t I,
+        
+        
+
+and
+
+.. _Eq:sec:de:SIR:eq3:de:
+
+.. math::
+   :label: sec:de:SIR:eq3:de
+        
+        R' = \gamma I\thinspace .
+        
+        
+
+To summarize, we have derived difference equations
+:eq:`sec:de:SIR:eq1`-:eq:`sec:de:SIR:eq3`, and alternative
+differential equations :eq:`sec:de:SIR:eq2:de`-:eq:`sec:de:SIR:eq3:de`.
+For reference, we list the complete set of the three difference
+equations:
+
+.. math::
+        
+        S^{n+1} = S^n -\beta\Delta tS^nI^n,
+        
+
+.. math::
+          
+        I^{n+1} = I^n + \beta\Delta tS^nI^n - \gamma\Delta t I^n,
+        
+
+.. math::
+          
+        R^{n+1} = R^n + \gamma\Delta t I^n\thinspace .
+        
+
+Note that we have isolated the new unknown quantities :math:`S^{n+1}`, :math:`I^{n+1}`,
+and :math:`R^{n+1}` on the left-hand side, such that these can readily be
+computed if :math:`S^n`, :math:`I^n`, and :math:`R^n` are known. To get such a procedure
+started, we need to know :math:`S^0`, :math:`I^0`, :math:`R^0`. Obviously, we also need
+to have values for the parameters :math:`\beta` and :math:`\gamma`.
+
+We also list the system of three differential equations:
+
+.. math::
+        
+        S' = \beta SI,
+        
+
+.. math::
+          
+        I' = \beta SI - \gamma I,
+        
+
+.. math::
+          
+        R' = \gamma I\thinspace .
+        
+
+This differential equation model (and also its discrete counterpart above)
+is known as a *SIR model*. The input data to the differential equation
+model consist of the parameters :math:`\beta` and :math:`\gamma` as well
+as the initial conditions :math:`S(0)=S_0`, :math:`I(0)=I_0`, and :math:`R(0)=R_0`.
+
+.. _sec:de:flu:FE:
+
+A Forward Euler method for the differential equation system
+-----------------------------------------------------------
+
+Let us apply the same principles as we did in the section :ref:`sec:de:pg:numerics`
+to discretize the differential equation system by the Forward Euler
+method.
+We already have a time mesh and time-discrete quantities :math:`S^n`, :math:`I^n`,
+:math:`R^n`, :math:`n=0,\ldots,N_t`. The three differential equations are
+assumed to be valid at the mesh points. At the point :math:`t_n` we then
+have
+
+.. math::
+        
+        S'(t_n) = \beta S(t_n)I(t_n),
+        
+
+.. math::
+          
+        I'(t_n) = \beta S(t_n)I(t_n) - \gamma I(t_n),
+        
+
+.. math::
+          
+        R'(t_n) = \gamma I(t_n),
+        
+
+for :math:`n=0,1,\ldots,N_t`.
+This is an approximation since the differential equations are originally
+valid at all times :math:`t` (usually in some finite interval :math:`[0,T]`).
+Using forward finite differences for the derivatives results in
+an additional approximation,
+
+.. _Eq:sec:de:flu:S:
+
+.. math::
+   :label: sec:de:flu:S
+        
+        \frac{S^{n+1}- S^n}{\Delta t} = \beta S^nI^n,
+        
+        
+
+.. _Eq:sec:de:flu:I:
+
+.. math::
+   :label: sec:de:flu:I
+          
+        \frac{I^{n+1}- I^n}{\Delta t} = \beta S^nI^n - \gamma I^n,
+        
+        
+
+.. _Eq:sec:de:flu:R:
+
+.. math::
+   :label: sec:de:flu:R
+          
+        \frac{R^{n+1}- R^n}{\Delta t} = \gamma I^n\thinspace .
+        
+        
+
+As we see, these equations are identical to the difference equations that
+naturally arise in the derivation of the model. However, other numerical
+methods than the Forward Euler scheme
+will result in slightly different difference equations.
+
+.. _sec:de:flu:prog:spec:
+
+Programming the numerical method; the special case  (1)
+-------------------------------------------------------
+
+The computation of :eq:`sec:de:flu:S`-:eq:`sec:de:flu:R` can be
+readily made in a computer program
+`SIR1.m <https://github.com/hplgit/prog4comp/src/m/SIR1.m>`__:
+
+.. code-block:: matlab
+
+        % Time unit: 1 h
+        beta = 10/(40*8*24);
+        gamma = 3/(15*24);
+        dt = 0.1;               % 6 min
+        D = 30;                 % Simulate for D days
+        N_t = floor(D*24/dt);   % Corresponding no of hours
+        
+        t = linspace(0, N_t*dt, N_t+1);
+        S = zeros(N_t+1, 1);
+        I = zeros(N_t+1, 1);
+        R = zeros(N_t+1, 1);
+        
+        % Initial condition
+        S(1) = 50;
+        I(1) = 1;
+        R(1) = 0;
+        
+        % Step equations forward in time
+        for n = 1:N_t
+           S(n+1) = S(n) - dt*beta*S(n)*I(n); 
+           I(n+1) = I(n) + dt*beta*S(n)*I(n) - dt*gamma*I(n);
+           R(n+1) = R(n) + dt*gamma*I(n);
+        end
+        
+        plot(t, S, t, I, t, R);
+        legend('S', 'I', 'R', 'Location','northwest');
+        xlabel('hours');
+        print('tmp', '-dpdf');  print('tmp', '-dpng');
+
+This program was written to investigate the spreading of a flu at the
+mentioned boarding school, and the reasoning for the specific choices
+:math:`\beta` and :math:`\gamma` goes as follows. At some other school where the
+disease has already spread, it was observed that in the beginning of a
+day there were 40 susceptibles and 8 infected, while the numbers were
+30 and 18, respectively, 24 hours later. Using 1 h as time unit, we
+then have from :eq:`sec:de:beta:estimate` that :math:`\beta = 10/(40\cdot
+8\cdot 24)`.  Among 15 infected, it was observed that 3 recovered
+during a day, giving :math:`\gamma = 3/(15\cdot 24)`. Applying these
+parameters to a new case where there is one infected initially and 50
+susceptibles, gives the graphs in Figure :ref:`sec:de:flu:fig1`. These
+graphs are just straight lines between the values at times
+:math:`t_i=i\Delta t` as computed by the program. We observe that :math:`S`
+reduces as :math:`I` and :math:`R` grows. After about 30 days everyone has become
+ill and recovered again.
+
+.. _sec:de:flu:fig1:
+
+.. figure:: SIR1.png
+   :width: 600
+
+   *Natural evolution of a flu at a boarding school*
+
+We can experiment with :math:`\beta` and :math:`\gamma` to see whether we get an
+outbreak of the disease or not. Imagine that a "wash your hands"
+campaign was successful and that the other school in this case
+experienced a reduction of :math:`\beta` by a factor of 5. With this lower
+:math:`\beta` the disease spreads very slowly so we simulate for 60
+days. The curves appear in Figure :ref:`sec:de:flu:fig2`.
+
+.. _sec:de:flu:fig2:
+
+.. figure:: SIR1b.png
+   :width: 600
+
+   *Small outbreak of a flu at a boarding school (:math:`\beta` is much smaller than in Figure :ref:`sec:de:flu:fig2`)*
+
+Outbreak or not
+---------------
+
+Looking at the equation for :math:`I`, it is clear that we must have :math:`\beta
+SI - \gamma I>0` for :math:`I` to increase. When we start the simulation it
+means that
+
+.. math::
+         \beta S(0)I(0) - \gamma I(0)>0,
+        
+
+or simpler
+
+.. _Eq:sec:de:SIR:criticalpoint:
+
+.. math::
+   :label: sec:de:SIR:criticalpoint
+        
+        \frac{\beta S(0)}{\gamma} > 1
+        
+        
+
+to increase the number of infected people and accelerate the spreading
+of the disease. You can run the ``SIR1.m`` program with a smaller :math:`\beta`
+such that :eq:`sec:de:SIR:criticalpoint` is violated and observe that there is
+no outbreak.
+
+
+.. admonition:: The power of mathematical modeling
+
+   The reader should notice our careful use of words in the previous
+   paragraphs. We started out with modeling a very specific case, namely
+   the spreading of a flu among pupils and staff at a boarding school.
+   With purpose we exchanged words like pupils and flu with more neutral
+   and general words like *individuals* and *disease*,
+   respectively. Phrased equivalently, we raised the abstraction level by
+   moving from a specific case (flu at a boarding school) to a more
+   general case (disease in a closed society).  Very often, when
+   developing mathematical models, we start with a specific example and
+   see, through the modeling, that what is going on of essence in this
+   example also will take place in many similar problem settings.  We try
+   to incorporate this generalization in the model so that the model has
+   a much wider application area than what we aimed at in the
+   beginning. This is the very power of mathematical modeling: by solving
+   one specific case we have often developed more generic tools that can
+   readily be applied to solve seemingly different problems.  The next
+   sections will give substance to this assertion.
+
+
+
+
+.. _sec:de:flu:generic:
+
+Abstract problem and notation
+-----------------------------
+
+.. index:: scalar ODE
+
+.. index::
+   single: ODE; scalar
+
+.. index:: vector ODE
+
+.. index::
+   single: ODE; vector
+
+.. index:: system of ODEs
+
+When we had a specific differential equation with one unknown, we quickly
+turned to an abstract differential equation written in the generic
+form :math:`u'=f(u,t)`. We refer to such a problem as a *scalar ODE*.
+A specific equation corresponds to a specific
+choice of the formula :math:`f(u,t)` involving :math:`u` and (optionally) :math:`t`.
+
+It is advantageous to also write a system of differential equations
+in the same abstract notation,
+
+.. math::
+         u'=f(u,t),
+
+but this time it is understood
+that :math:`u` is a vector of functions and :math:`f` is also vector.
+We say that :math:`u'=f(u,t)` is a *vector ODE* or *system of ODEs* in this case.
+For the SIR model we introduce the two 3-vectors, one for the unknowns,
+
+.. math::
+         u = (S(t), I(t), R(t)),
+
+and one for the right-hand side functions,
+
+.. math::
+         f(u,t) = (-\beta SI, \beta SI -\gamma I, \gamma I)\thinspace .
+
+The equation :math:`u'=f(u,t)` means setting the two vectors equal, i.e.,
+each component must be equal. Since :math:`u'=(S', I', R')`, we get that
+:math:`u'=f` implies
+
+.. math::
+        
+        S' &= -\beta SI,\\ 
+        I' &= \beta SI - \gamma I,\\ 
+        R' &= \gamma I\thinspace .
+        
+
+The generalized short notation :math:`u'=f(u,t)` is very handy since we can
+derive numerical methods and implement software for this abstract system
+and in a particular application just identify the formulas in the :math:`f` vector,
+implement these, and call functionality that solves the differential
+equation system.
+
+.. _sec:de:flu:prog:generic:
+
+Programming the numerical method; the general case
+--------------------------------------------------
+
+In Matlab code, the Forward Euler step
+
+.. math::
+         u^{n+1} = u^n + \Delta t f(u^n, t_n),
+
+being a scalar or a vector equation,
+can be coded as
+
+.. code-block:: python
+
+        u(n+1,:) = u(n,:) + dt*f(u(n,:), t(n))
+
+both in the scalar and vector case. In the vector case,
+``u(n,:)`` is a one-dimensional array of length :math:`m+1`
+holding the mathematical quantity
+:math:`u^n`, and the Matlab function ``f`` must return an array
+of length :math:`m+1`. Then the expression ``u(n,:) + dt*f(u(n,:), t(n))``
+is an array plus a scalar times an array.
+
+For all this to work, the complete numerical solution must be represented by a
+two-dimensional array, created by ``u = zeros(N_t+1, m+1)``.
+The first index counts the time points and the second the components
+of the solution vector at one time point.
+That is, ``u(n,i)`` corresponds
+to the mathematical quantity :math:`u^n_i`. Writing ``u(n,:)`` picks out all the
+components in the solution at the time point with index ``n``.
+The nice feature of these facts is that the same piece of
+Matlab code works for both a scalar ODE and a system of ODEs!
+
+The ``ode_FE`` function for the vector ODE is placed in the file
+`ode_system_FE.m <https://github.com/hplgit/prog4comp/src/m/ode_system_FE.m>`__
+and was written as follows:
+
+.. code-block:: matlab
+
+        function [u, t] = ode_FE(f, U_0, dt, T)
+            N_t = floor(T/dt);
+            u = zeros(N_t+1, length(U_0));
+            t = linspace(0, N_t*dt, length(u));
+            u(1,:) = U_0;      % Initial values
+            t(1) = 0;
+            for n = 1:N_t
+                u(n+1,:)  = u(n,:) + dt*f(u(n,:), t(n));
+            end
+        end
+
+Let us show how the previous SIR model can be solved using the new
+general ``ode_FE`` that can solve *any* vector ODE. The user's ``f(u, t)``
+function takes a vector ``u``, with three components corresponding to
+:math:`S`, :math:`I`, and :math:`R` as argument, along with the current time point ``t(n)``,
+and must return the values of the formulas of the right-hand sides
+in the vector ODE. An appropriate implementation is
+
+.. code-block:: python
+
+        function result = f(u, t)
+            S = u(1); I = u(2); R = u(3);
+            result = [-beta*S*I beta*S*I - gamma*I gamma*I]
+        end
+
+where ``beta`` and ``gamma`` are problem specific parameters set outside of that function.
+Note that the ``S``, ``I``, and ``R`` values correspond to :math:`S^n`, :math:`I^n`, and :math:`R^n`.
+These values are then just inserted in the various formulas
+in the vector ODE.
+
+We can now show a function
+(in file
+`demo_SIR.m <https://github.com/hplgit/prog4comp/src/m/demo_SIR.m>`__)
+that runs the previous SIR example,
+but which applies the generic ``ode_FE`` function:
+
+.. code-block:: matlab
+
+        function demo_SIR()
+            % Test case using an SIR model
+            
+            dt = 0.1;               % 6 min
+            D = 30;                 % Simulate for D days
+            N_t = floor(D*24/dt);   % Corresponding no of hours
+            T = dt*N_t;             % End time
+            U_0 = [50 1 0];
+            
+            f_handle = @f;
+            
+            [u, t] = ode_FE(f_handle, U_0, dt, T);
+            
+            S = u(:,1);
+            I = u(:,2);
+            R = u(:,3);
+            plot(t, S, 'b-', t, I, 'r-', t, R, 'g-');
+            legend('S', 'I', 'R');
+            xlabel('hours');
+            % Consistency check:
+            N = S(1) + I(1) + R(1);
+            eps = 1E-12;           % Tolerance for comparing real numbers
+            for n = 1:length(S)
+                err = abs(S(n) + I(n) + R(n) - N);
+                if (err > eps)
+                    error('demo_SIR: error=%g', err);                        
+                end
+            end
+        end
+        
+        function result = f(u,t)
+            beta = 10/(40*8*24);   
+            gamma = 3/(15*24);        
+        
+            S = u(1); I = u(2); R = u(3);
+            result = [-beta*S*I beta*S*I - gamma*I gamma*I];
+        end
+
+Recall that the ``u`` returned from ``ode_FE`` contains all components
+(:math:`S`, :math:`I`, :math:`R`) in the solution vector at all time points. We
+therefore need to extract the :math:`S`, :math:`I`, and :math:`R` values in separate
+arrays for further analysis and easy plotting.
+
+Another key feature of this higher-quality code is the consistency
+check. By adding the three differential equations in the SIR
+model, we realize that :math:`S' + I' + R'=0`, which means that
+:math:`S+I+R=\mbox{const}`. We can check that this relation holds
+by comparing :math:`S^n+I^n+R^n` to the sum of the initial conditions.
+The check is not a full-fledged
+verification, but it is a much better than doing nothing and hoping
+that the computation is correct.
+:ref:`sec:de:exer:SIR:dtopt` suggests another method for
+controlling the quality of the numerical solution.
+
+Time-restricted immunity
+------------------------
+
+Let us now assume that immunity after the disease
+only lasts for some certain time period. This means that there is
+transport from the R state to the S state:
+
+| 
+| 
+
+.. figure:: categories_SIR_feedback.png
+   :width: 400
+
+| 
+| 
+
+Modeling the loss of immunity
+is very similar to modeling recovering from the disease: the
+amount of people losing immunity is proportional to the amount
+of recovered patients and the length of the time interval :math:`\Delta t`.
+We can therefore write the loss in the R category as
+:math:`-\nu\Delta t R` in time :math:`\Delta t`, where :math:`\nu^{-1}` is the
+typical time it takes to lose immunity. The loss in :math:`R(t)`
+is a gain in :math:`S(t)`. The "budgets" for the categories
+therefore become
+
+.. math::
+        
+        S^{n+1} = S^n -\beta\Delta tS^nI^n + \nu\Delta t R,
+        
+
+.. math::
+          
+        I^{n+1} = I^n + \beta\Delta tS^nI^n - \gamma\Delta t I^n,
+        
+
+.. math::
+          
+        R^{n+1} = R^n + \gamma\Delta t I^n - \nu\Delta t R\thinspace .
+        
+
+Dividing by :math:`\Delta t` and letting :math:`\Delta t\rightarrow 0` gives
+the differential equation system
+
+.. math::
+        
+        S' = \beta SI + \nu R,
+        
+
+.. math::
+          
+        I' = \beta SI - \gamma I,
+        
+
+.. math::
+          
+        R' = \gamma I - \nu R\thinspace .
+        
+
+This system can be solved by the same methods as we demonstrated for
+the original SIR model. Only one modification in the program is
+necessary: adding ``nu*R[n]`` to the ``S[n+1]`` update and subtracting
+the same quantity in the ``R[n+1]`` update:
+
+.. code-block:: matlab
+
+        for n = 1:N_t
+            S(n+1) = S(n) - dt*beta*S(n)*I(n) + dt*nu*R(n)
+            I(n+1) = I(n) + dt*beta*S(n)*I(n) - dt*gamma*I(n)
+            R(n+1) = R(n) + dt*gamma*I(n) - dt*nu*R(n)
+        end
+
+The modified code is found in the file ``SIR2.m``.
+
+Setting :math:`\nu^{-1}` to 50 days, reducing :math:`\beta` by a factor of 4 compared
+to the previous example (:math:`\beta=0.00033`),
+and simulating for 300 days gives an oscillatory
+behavior in the categories, as depicted in Figure :ref:`sec:de:flu:fig3`.
+It is easy now to play around and study how the parameters affect the
+spreading of the disease.
+For example,
+making the disease slightly more effective (increase :math:`\beta` to 0.00043)
+and increasing the average time to loss of immunity to 90 days lead
+to other oscillations in Figure :ref:`sec:de:flu:fig4`.
+
+.. _sec:de:flu:fig3:
+
+.. figure:: SIR2.png
+   :width: 600
+
+   *Including loss of immunity*
+
+.. _sec:de:flu:fig4:
+
+.. figure:: SIR2b.png
+   :width: 600
+
+   *Increasing :math:`\beta` and reducing :math:`\nu` compared to Figure :ref:`sec:de:flu:fig3`*
+
+.. _sec:de:flu:vaccine:
+
+Incorporating vaccination
+-------------------------
+
+We can extend the model to also include vaccination. To this end, it can
+be useful to track those who are vaccinated and not, so we introduce
+a fourth category, V, for the those who have taken a successful
+vaccination. Furthermore, we assume that in a time interval :math:`\Delta t`,
+a fraction :math:`p\Delta t` of the S category is subject to a successful
+vaccination. This means that in time :math:`\Delta t`, :math:`p\Delta t S` people
+leave from the S to the V category. Since the vaccinated ones cannot
+get the disease, there is no impact on the I or R categories. We can
+visualize the categories and the movement between them as
+
+| 
+| 
+
+.. figure:: categories_SIRV2.png
+   :width: 400
+
+| 
+| 
+
+The new, extended differential equations with the :math:`V` quantity become
+
+.. math::
+        
+        S' = \beta SI + \nu R -pS,
+        
+
+.. math::
+          
+        V' = pS,
+        
+
+.. math::
+          
+        I' = \beta SI - \gamma I,
+        
+
+.. math::
+          
+        R' = \gamma I - \nu R\thinspace .
+        
+
+We shall refer to this model as the SIRV model.
+
+The new equation for :math:`V'` poses no difficulties when it comes to the
+numerical method. In a Forward Euler scheme we simply add an update
+
+.. math::
+         V^{n+1} = V^n + \Delta t p V^n\thinspace .
+
+The program needs to store :math:`V(t)` in an additional array ``V``,
+and the plotting command must be extended with more arguments to
+plot ``V`` versus ``t`` as well. The complete code is found in
+the file ``SIRV1.m``.
+
+Using :math:`p=0.0005` and :math:`p=0.0001` as vaccine efficiency parameter,
+Figure :ref:`sec:de:flu:fig5`
+shows the effect of vaccination (other parameters are
+as in Figure :ref:`sec:de:flu:fig3`).
+
+.. _sec:de:flu:fig5:
+
+.. figure:: SIRV1.png
+   :width: 600
+
+   *The effect of vaccination: :math:`p=0005` (left) and :math:`p=0.0001` (right)*
+
+.. _sec:de:flu:vaccine:discont:
+
+Discontinuous coefficients: a vaccination campaign
+--------------------------------------------------
+
+What about modeling a vaccination campaign? Imagine that six days
+after the outbreak of the disease, the local
+health station launches a vaccination campaign. The reach out
+to many people, say 10 times as efficiently as in the previous
+(constant vaccination) case. If the campaign lasts for 10 days
+we can write
+
+.. math::
+         p(t) = \left\lbrace\begin{array}{ll}
+        0.005,& 6\cdot 24\leq t\leq 15\cdot 24,\\ 
+        0,& \hbox{otherwise} \end{array}\right.
+
+Note that we must multiply the :math:`t` value by 24 because :math:`t` is measured
+in hours, not days.
+In the differential equation system, :math:`pS(t)` must be replaced by
+:math:`p(t)S(t)`, and in this case we get a differential equation system
+with a term that is *discontinuous*. This is usually quite a challenge
+in mathematics, but as long as we solve the equations numerically
+in a program, a discontinuous coefficient is easy to treat.
+
+There are two ways to implement the discontinuous coefficient :math:`p(t)`:
+through a function and through an array. The function approach is
+perhaps the easiest:
+
+.. code-block:: matlab
+
+        function value = p(t)
+            if (6*24 <= t <= 15*24)
+                value = 0.005;
+            else
+                value = 0;
+            end
+        end
+
+In the code for updating the arrays ``S`` and ``V`` we get a term
+``p(t(n))*S(n)``.
+
+We can also let :math:`p(t)` be an array filled with correct values prior
+to the simulation. Then we need to allocate an array ``p`` of length ``N_t+1``
+and find the indices corresponding to the time period between 6 and 15
+days. These indices are found from the time point divided by
+:math:`\Delta t`. That is,
+
+.. code-block:: matlab
+
+        p = zeros(N_t+1,1);
+        start_index = 6*24/dt + 1;
+        stop_index = 15*24/dt + 1;
+        p(start_index:stop_index) = 0.005;
+
+The :math:`p(t)S(t)` term in the updating formulas for :math:`S` and :math:`V` simply becomes
+``p(n)*S(n)``. The file ``SIRV2.m``
+contains a program based on filling an array ``p``.
+
+The effect of a vaccination campaign is illustrated in Figure
+:ref:`sec:de:flu:fig6`. All the data are as in Figure :ref:`sec:de:flu:fig5`,
+except that :math:`p` is ten times stronger for a period of 10 days and
+:math:`p=0` elsewhere.
+
+.. _sec:de:flu:fig6:
+
+.. figure:: SIRV2.png
+   :width: 600
+
+   *The effect of a vaccination campaign*
+
+.. _sec:de:vib:
+
+Oscillating one-dimensional systems
+===================================
+
+Numerous engineering constructions and devices contain materials
+that act like springs. Such springs give rise to oscillations, and
+controlling oscillations is a key engineering task. We shall now
+learn to simulate oscillating systems.
+
+As always, we start with the simplest meaningful mathematical
+model, which for oscillations is a second-order differential equation:
+
+.. _Eq:sec:de:vib:ode1:
+
+.. math::
+   :label: sec:de:vib:ode1
+        
+        u''(t) + \omega^2 u(t) = 0,
+        
+        
+
+where :math:`\omega` is a given physical parameter. Equation :eq:`sec:de:vib:ode1`
+models a one-dimensional system oscillating without damping
+(i.e., with negligible damping). One-dimensional here means that some
+motion takes place along one dimension only in some coordinate system.
+Along with :eq:`sec:de:vib:ode1` we need the two *initial conditions*
+:math:`u(0)` and :math:`u'(0)`.
+
+Derivation of a simple model
+----------------------------
+
+.. _sec:de:vib:ode1:fig1:
+
+.. figure:: oscillator_spring.png
+   :width: 600
+
+   *Sketch of a one-dimensional, oscillating dynamic system (without friction)*
+
+Many engineering systems undergo oscillations, and differential
+equations constitute the key tool to understand, predict, and control the
+oscillations.  We start with the simplest possible model that
+captures the essential dynamics of an oscillating system. Some body
+with mass :math:`m` is attached to a spring and moves along a line
+without friction, see Figure :ref:`sec:de:vib:ode1:fig1`
+for a sketch (rolling wheels
+indicate "no friction").
+When the spring is stretched (or compressed), the spring force pulls (or pushes) the body back and work
+"against" the motion. More precisely, let :math:`x(t)` be the position of
+the body on the :math:`x` axis, along which the body moves. The spring is
+not stretched when :math:`x=0`, so the force is zero, and :math:`x=0` is hence
+the equilibrium position of the body. The spring force is :math:`-kx`,
+where :math:`k` is a constant to be measured. We assume that there are no
+other forces (e.g., no friction). Newton's 2nd law of motion :math:`F=ma`
+then has :math:`F=-kx` and :math:`a=\ddot x`,
+
+.. _Eq:sec:de:model:osc1a:
+
+.. math::
+   :label: sec:de:model:osc1a
+        
+        -kx = m\ddot x,
+        
+        
+
+which can be rewritten as
+
+.. _Eq:sec:de:model:osc1b:
+
+.. math::
+   :label: sec:de:model:osc1b
+        
+        x'' + \omega^2x = 0,
+        
+        
+
+by introducing :math:`\omega = \sqrt{k/m}` (which is very common).
+
+Equation :eq:`sec:de:model:osc1b`
+is a *second-order* differential equation, and therefore we need
+*two* initial conditions, one on the position :math:`x(0)` and one on the
+velocity :math:`x'(0)`. Here we choose the body to be at rest, but
+moved away from its equilibrium position:
+
+.. math::
+         x(0)=X_0,\quad x'(0)=0\thinspace . 
+
+The exact solution of :eq:`sec:de:model:osc1b` with these initial
+conditions is :math:`x(t)=X_0\cos\omega t`. This can easily be verified by
+substituting into :eq:`sec:de:model:osc1b` and checking the initial
+conditions. The solution tells that such a spring-mass system
+oscillates back and forth as described by a cosine curve.
+
+The differential equation :eq:`sec:de:model:osc1b` appears in numerous
+other contexts. A classical example is a simple pendulum that
+oscillates back and forth. Physics books derive, from Newton's second law
+of motion, that
+
+.. math::
+         mL\theta'' + mg\sin \theta = 0,
+
+where :math:`m` is the mass of the body at the end of a pendulum with length :math:`L`,
+:math:`g` is the acceleration of gravity, and :math:`\theta` is the angle the pendulum makes
+with the vertical. Considering small angles :math:`\theta`, :math:`\sin \theta\approx \theta`,
+and we get :eq:`sec:de:model:osc1b` with :math:`x=\theta`, :math:`\omega = \sqrt{g/L}`,
+:math:`x(0)=\Theta`, and :math:`x'(0)=0`, if :math:`\Theta` is the initial angle and the
+pendulum is at rest at :math:`t=0`.
+
+Numerical solution  (2)
+-----------------------
+
+We have not looked at numerical methods for handling second-order
+derivatives, and such methods are an option, but we know how to solve
+first-order differential equations and even systems of first-order
+equations. With a little, yet very common, trick we can rewrite
+:eq:`sec:de:model:osc1b` as a first-order system of two differential
+equations. We introduce :math:`u=x` and :math:`v=x'=u'` as *two* new unknown functions.
+The two corresponding equations arise from the definition :math:`v=u'` and
+the original equation :eq:`sec:de:model:osc1b`:
+
+.. _Eq:sec:de:model:osc2:u:
+
+.. math::
+   :label: sec:de:model:osc2:u
+        
+        u' = v,
+         
+        
+
+.. _Eq:sec:de:model:osc2:v:
+
+.. math::
+   :label: sec:de:model:osc2:v
+          
+        v' = -\omega^2 u\thinspace .
+        
+        
+
+(Notice that we can use :math:`u''=v'` to remove the second-order derivative from
+Newton's 2nd law.)
+
+We can now apply the Forward Euler method to
+:eq:`sec:de:model:osc2:u`-:eq:`sec:de:model:osc2:v`,
+exactly as we did in the section :ref:`sec:de:flu:FE`:
+
+.. _Eq:sec:de:model:osc2:ud0:
+
+.. math::
+   :label: sec:de:model:osc2:ud0
+        
+        \frac{u^{n+1}-u^n}{\Delta t} = v^n,
+         
+        
+
+.. _Eq:sec:de:model:osc2:vd0:
+
+.. math::
+   :label: sec:de:model:osc2:vd0
+          
+        \frac{v^{n+1}-v^n}{\Delta t}  = -\omega^2 u^n,
+        
+        
+
+resulting in the computational scheme
+
+.. _Eq:sec:de:model:osc2:ud:
+
+.. math::
+   :label: sec:de:model:osc2:ud
+        
+        u^{n+1} = u^n + \Delta t\,v^n,
+         
+        
+
+.. _Eq:sec:de:model:osc2:vd:
+
+.. math::
+   :label: sec:de:model:osc2:vd
+          
+        v^{n+1} = v^n -\Delta t\,\omega^2 u^n\thinspace .
+        
+        
+
+.. _sec:de:vib:special:
+
+Programming the numerical method; the special case  (2)
+-------------------------------------------------------
+
+A simple program for :eq:`sec:de:model:osc2:ud`-:eq:`sec:de:model:osc2:vd`
+follows the same ideas as in the section :ref:`sec:de:flu:prog:spec`:
+
+.. code-block:: matlab
+
+        omega = 2;
+        P = 2*pi/omega;
+        dt = P/20;
+        T = 3*P;
+        N_t = floor(T/dt);
+        t = linspace(0, N_t*dt, N_t+1);
+        
+        u = zeros(N_t+1, 1);
+        v = zeros(N_t+1, 1);
+        
+        % Initial condition
+        X_0 = 2;
+        u(1) = X_0;
+        v(1) = 0;
+        
+        % Step equations forward in time
+        for n = 1:N_t
+            u(n+1) = u(n) + dt*v(n);
+            v(n+1) = v(n) - dt*omega^2*u(n);
+        end
+        
+        plot(t, u, 'b-', t, X_0*cos(omega*t), 'r--');
+        legend('numerical', 'exact', 'Location','northwest');
+        xlabel('t');
+        print('tmp', '-dpdf');  print('tmp', '-dpng');
+
+(See file `osc_FE_special_case.m <https://github.com/hplgit/prog4comp/src/m/osc_FE_special_case.m>`__.)
+
+Since we already know the exact solution as :math:`u(t)=X_0\cos\omega
+t`, we have reasoned as follows to find an appropriate simulation interval
+:math:`[0,T]` and also how many points we should choose.  The
+solution has a period :math:`P=2\pi/\omega`. (The period :math:`P` is the time difference
+between two peaks of the :math:`u(t)\sim\cos\omega t` curve.)
+Simulating for three periods of
+the cosine function, :math:`T=3P`, and choosing :math:`\Delta t` such that there
+are 20 intervals per period gives :math:`\Delta t=P/20` and a total of
+:math:`N_t=T/\Delta t` intervals. The rest of the program is a
+straightforward coding of the Forward Euler scheme.
+
+Figure :ref:`sec:de:osc:fig1` shows a comparison between the numerical
+solution and the exact solution of the differential equation.
+To our surprise, the numerical solution looks wrong. Is this
+discrepancy due to a programming error or a problem with the Forward
+Euler method?
+
+.. _sec:de:osc:fig1:
+
+.. figure:: osc_FE_20pp.png
+   :width: 600
+
+   *Simulation of an oscillating system*
+
+First of all, even before trying to run the program, you should sit down and
+compute two steps in the time loop with a calculator so you have some
+intermediate results to compare with. Using :math:`X_0=2`, :math:`dt=0.157079632679`,
+and :math:`\omega=2`, we get :math:`u^1=2`, :math:`v^1=-1.25663706`, :math:`u^2=1.80260791`,
+and :math:`v^2=-2.51327412`. Such calculations show that
+the program is seemingly correct. (Later, we can use such values to
+construct a unit test and a corresponding test function.)
+
+The next step is to reduce the discretization parameter
+:math:`\Delta t` and see if the results become more accurate.
+Figure :ref:`sec:de:osc:fig2` shows the numerical and exact solution for
+the cases :math:`\Delta t = P/40, P/160, P/2000`. The results clearly become
+better, and the finest resolution gives graphs that cannot be visually
+distinguished. Nevertheless, the finest resolution involves 6000
+computational intervals in total, which is considered quite much.
+This is no problem on a modern laptop, however, as the computations take just
+a fraction of a second.
+
+.. _sec:de:osc:fig2:
+
+.. figure:: osc_FE_3dt.png
+   :width: 800
+
+   *Simulation of an oscillating system with different time steps. Upper left: 40 steps per oscillation period. Upper right: 160 steps per period. Lower left: 2000 steps per period. Lower right: 2000 steps per period, but longer simulation*
+
+Although 2000 intervals per oscillation period seem sufficient for an
+accurate numerical solution, the lower right graph in Figure :ref:`sec:de:osc:fig2` shows that if we increase the simulation time, here to 20 periods, there is
+a little growth of the amplitude, which becomes significant over time.
+The conclusion is that the Forward Euler method has a fundamental problem with
+its growing amplitudes, and that very small :math:`\Delta t` is required to
+achieve satisfactory results. The longer the simulation is, the smaller
+:math:`\Delta t` has to be. It is certainly time to look for more effective
+numerical methods!
+
+A magic fix of the numerical method
+-----------------------------------
+
+In the Forward Euler scheme,
+
+.. math::
+        
+        u^{n+1} &= u^n + \Delta t\,v^n,\\ 
+        v^{n+1} &= v^n -\Delta t\,\omega^2 u^n,
+        
+
+we can replace :math:`u^n` in the last equation by the recently computed value
+:math:`u^{n+1}` from the first equation:
+
+.. _Eq:sec:de:model:osc2:fb:ud:
+
+.. math::
+   :label: sec:de:model:osc2:fb:ud
+        
+        u^{n+1} = u^n + \Delta t\,v^n,
+         
+        
+
+.. _Eq:sec:de:model:osc2:fb:vd:
+
+.. math::
+   :label: sec:de:model:osc2:fb:vd
+          
+        v^{n+1} = v^n -\Delta t\,\omega^2 u^{n+1}\thinspace .
+        
+        
+
+Before justifying this fix more mathematically, let us try it on the
+previous example. The results appear in Figure :ref:`sec:de:osc:fig3`.
+We see that the amplitude *does not grow*, but the phase is not
+entirely correct. After 40 periods (Figure :ref:`sec:de:osc:fig3` right)
+we see a significant difference between the numerical and the exact solution.
+Decreasing :math:`\Delta t` decreases the error. For example, with 2000 intervals per
+period, we only see a small phase error even after 50,000 periods (!).
+We can safely conclude that the fix results in an excellent numerical method!
+
+.. _sec:de:osc:fig3:
+
+.. figure:: osc2.png
+   :width: 800
+
+   *Adjusted method: first four periods (left) and period 36-40 (right)*
+
+Let us interpret the adjusted scheme mathematically. First we order
+:eq:`sec:de:model:osc2:fb:ud`-:eq:`sec:de:model:osc2:fb:vd`
+such that the difference approximations to derivatives become
+transparent:
+
+.. _Eq:sec:de:model:osc2:fb:ud2:
+
+.. math::
+   :label: sec:de:model:osc2:fb:ud2
+        
+        \frac{u^{n+1} - u^n}{\Delta t} = v^n,
+         
+        
+
+.. _Eq:sec:de:model:osc2:fb:vd2:
+
+.. math::
+   :label: sec:de:model:osc2:fb:vd2
+          
+        \frac{v^{n+1} - v^n}{\Delta t} = -\omega^2 u^{n+1}\thinspace .
+        
+        
+
+We interpret :eq:`sec:de:model:osc2:fb:ud2` as the
+differential equation sampled at mesh point :math:`t_n`, because
+we have :math:`v^n` on the right-hand side.
+The left-hand side is then a *forward difference* or Forward Euler
+approximation to the derivative :math:`u'`, see Figure :ref:`sec:de:fig:FE`.
+On the other hand, we interpret :eq:`sec:de:model:osc2:fb:vd2`
+as the differential equation sampled at mesh point :math:`t_{n+1}`,
+since we have :math:`u^{n+1}` on the right-hand side. In this case,
+the difference approximation on the left-hand side is
+a *backward difference*,
+
+.. math::
+         v'(t_{n+1}) \approx \frac{v^{n+1} - v^n}{\Delta t}\quad\hbox{ or }\quad
+        v'(t_{n}) \approx \frac{v^{n} - v^{n-1}}{\Delta t}\thinspace . 
+
+Figure :ref:`sec:de:fig:BE` illustrates the backward difference.
+The accuracy of the backward difference is :math:`{\mathcal{O}(\Delta t)}`, the
+same as for the forward difference (but the proportionality constant
+in the error term has different sign).
+The resulting discretization method for :eq:`sec:de:model:osc2:fb:vd2`
+is often referred to as a Backward Euler scheme.
+
+.. _sec:de:fig:BE:
+
+.. figure:: fd_backward.png
+   :width: 500
+
+   *Illustration of a backward difference approximation to the derivative*
+
+To summarize, using a forward difference for the first equation and a
+backward difference for the second equation results in a much
+better method than just using forward differences in both equations.
+
+The standard way of expressing this scheme in physics is to
+change the order of the equations,
+
+.. _Eq:sec:de:model:osc2:v2:
+
+.. math::
+   :label: sec:de:model:osc2:v2
+        
+        v' = -\omega^2 u,
+        
+        
+
+.. _Eq:sec:de:model:osc2:u2:
+
+.. math::
+   :label: sec:de:model:osc2:u2
+          
+        u' = v,
+        
+        
+
+and apply a forward difference to :eq:`sec:de:model:osc2:v2`
+and a backward difference to :eq:`sec:de:model:osc2:u2`:
+
+.. _Eq:sec:de:model:osc2:fb:vd3:
+
+.. math::
+   :label: sec:de:model:osc2:fb:vd3
+        
+        v^{n+1} = v^n -\Delta t\,\omega^2 u^{n},
+        
+        
+
+.. _Eq:sec:de:model:osc2:fb:ud3:
+
+.. math::
+   :label: sec:de:model:osc2:fb:ud3
+          
+        u^{n+1} = u^n + \Delta t\,v^{n+1}\thinspace .
+        
+        
+
+That is, first the velocity :math:`v` is updated and then the position :math:`u`,
+using the most recently computed velocity.
+There is no difference between
+:eq:`sec:de:model:osc2:fb:vd3`-:eq:`sec:de:model:osc2:fb:ud3`
+and
+:eq:`sec:de:model:osc2:fb:ud`-:eq:`sec:de:model:osc2:fb:vd`
+with respect to accuracy, so the order of the original differential
+equations does not matter.
+The scheme :eq:`sec:de:model:osc2:fb:vd3`-:eq:`sec:de:model:osc2:fb:ud3`
+goes under the names `Semi-implicit Euler <http://en.wikipedia.org/wiki/Semi-implicit_Euler_method>`__ or Euler-Cromer.
+The implementation of
+:eq:`sec:de:model:osc2:fb:vd3`-:eq:`sec:de:model:osc2:fb:ud3`
+is found in the file ``osc_EC.m``. The core of the code goes like
+
+.. code-block:: matlab
+
+        u = zeros(N_t+1,1);
+        v = zeros(N_t+1,1);
+        
+        % Initial condition
+        u(1) = 2;
+        v(1) = 0;
+        
+        % Step equations forward in time
+        for n = 1:N_t
+            v(n+1) = v(n) - dt*omega^2*u(n);
+            u(n+1) = u(n) + dt*v(n+1);
+        end
+
+.. _sec:de:osc:Heun:
+
+The 2nd-order Runge-Kutta method (or Heun's method)
+---------------------------------------------------
+
+.. index:: Heun's method
+
+.. index::
+   single: Runge-Kutta, 2nd-order method
+
+.. index:: 2nd-order Runge-Kutta method
+
+.. index:: RK2
+
+A very popular method for solving scalar and vector ODEs of first
+order is the 2nd-order Runge-Kutta method (RK2), also known as Heun's method.
+The idea, first thinking of a scalar ODE, is to form a *centered difference*
+approximation to the derivative between two time steps:
+
+.. math::
+         u'(t_n+\frac{1}{2}\Delta t)\approx \frac{u^{n+1}-u^n}{\Delta t}\thinspace .
+
+The centered difference formula is visualized in Figure :ref:`sec:de:fig:CN`.
+The accuracy of the centered difference is :math:`{\mathcal{O}(\Delta t^2)}`, one order
+higher than the forward and backward differences.
+
+.. _sec:de:fig:CN:
+
+.. figure:: fd_centered_CN.png
+   :width: 500
+
+   *Illustration of a centered difference approximation to the derivative*
+
+The problem with such a centered scheme for the general ODE :math:`u'=f(u,t)` is
+that we get
+
+.. math::
+         \frac{u^{n+1}-u^n}{\Delta t} = f(u^{n+\frac{1}{2}},t_{n+\frac{1}{2}}),
+
+which leads to difficulties since we do not know what :math:`u^{n+\frac{1}{2}}`
+is. However, we can approximate the value of :math:`f` between two time
+levels by the arithmetic average of the values at :math:`t_n` and :math:`t_{n+1}`:
+
+.. math::
+         f(u^{n+\frac{1}{2}},t_{n+\frac{1}{2}}) \approx
+        \frac{1}{2}(f(u^n, t_n) + f(u^{n+1}, t_{n+1}))\thinspace .
+
+This results in
+
+.. math::
+         \frac{u^{n+1}-u^n}{\Delta t} =
+        \frac{1}{2}(f(u^n, t_n) + f(u^{n+1}, t_{n+1})),
+
+which in general is a *nonlinear algebraic equation* for :math:`u^{n+1}`
+if :math:`f(u,t)` is not a linear function of :math:`u`. To deal with the unknown term
+:math:`f(u^{n+1}, t_{n+1})`, without solving nonlinear equations,
+we can approximate or predict :math:`u^{n+1}`
+using a Forward Euler step:
+
+.. math::
+         u^{n+1} = u^n + \Delta tf(u^n,t_n)\thinspace .
+
+This reasoning gives rise to the method
+
+.. math::
+        
+        u^* = u^n + \Delta tf(u^n,t_n),
+        
+
+.. math::
+          
+        u^{n+1} = u^n + \frac{\Delta t}{2}(
+        f(u^n,t_n) + f(u^{*},t_{n+1})\thinspace .
+        
+
+The scheme applies to both scalar and vector ODEs.
+
+For an oscillating system with :math:`f=(v,-\omega^2u)` the file
+``osc_Heun.m`` implements this method. 
+The demo script ``demo_osc_Heun.m`` runs the simulation for 10 periods
+with 20 time steps per period.
+The corresponding numerical and exact solution are shown
+in Figure :ref:`sec:de:osc:fig:Heun`. We see that the amplitude grows,
+but not as much as for the Forward Euler method. However, the
+Euler-Cromer method is much better!
+
+.. _sec:de:osc:fig:Heun:
+
+.. figure:: osc_Heun.png
+   :width: 600
+
+   *Simulation of 10 periods of oscillations by Heun's method*
+
+We should add that in problems where the Forward Euler method gives
+satisfactory approximations, such as growth/decay problems or
+the SIR model, the 2nd-order Runge-Kutta method or
+Heun's method, usually works considerably better and produces
+greater accuracy for the same computational cost. It is therefore
+a very valuable method to be aware of, although it cannot compete
+with the Euler-Cromer scheme for oscillation problems.
+The derivation of the RK2/Heun scheme is also good general training in
+"numerical thinking".
+
+.. _sec:de:osc:odespy:
+
+Odespy: software for solving ODEs
+---------------------------------
+
+There is a jungle of methods for solving ODEs, and it would be nice to
+have easy access to implementations of a wide range of methods,
+especially the sophisticated
+and complicated *adaptive* methods that adjusts :math:`\Delta t` automatically
+to obtain a prescribed accuracy. The Python package
+`Odespy <https://github.com/hplgit/odespy>`__ gives easy access to a lot
+of numerical methods for ODEs.
+
+The simplest possible example on
+using Odespy is to
+solve :math:`u'=u`, :math:`u(0)=2`, for 100 time steps until :math:`t=4`:
+
+.. code-block:: python
+
+        import odespy
+        
+        def f(u, t):
+            return u
+        
+        method = odespy.Heun   # or, e.g., odespy.ForwardEuler
+        solver = method(f)
+        solver.set_initial_condition(2)
+        time_points = np.linspace(0, 4, 101)
+        u, t = solver.solve(time_points)
+
+In other words, you define your right-hand side function ``f(u, t)``,
+initialize an Odespy ``solver`` object, set the initial condition,
+compute a collection of time points where you want the solution,
+and ask for the solution. The returned arrays ``u`` and ``t`` can be
+plotted directly: ``plot(t, u``).
+
+
+.. warning::
+    Note that Odespy *must* be operated from Python, so you need to
+    learn some basic Python to make use of this software.
+    The type of Python programming you need to learn has a syntax very
+    close to that of Matlab.
+
+
+
+
+A nice feature of Odespy is that problem parameters can be
+arguments to the user's ``f(u, t)`` function. For example,
+if our ODE problem is :math:`u'=-au+b`, with two problem parameters
+:math:`a` and :math:`b`, we may write our ``f`` function as
+
+.. code-block:: python
+
+        def f(u, t, a, b):
+            return -a*u + b
+
+The extra, problem-dependent arguments ``a`` and ``b`` can be transferred
+to this function
+if we collect their values in a list or tuple
+when creating the Odespy solver and use the ``f_args`` argument:
+
+.. code-block:: python
+
+        a = 2
+        b = 1
+        solver = method(f, f_args=[a, b])
+
+This is a good feature because problem parameters must otherwise be
+global variables - now they can be arguments in our right-hand side
+function in a natural way. :ref:`sec:de:exer:odespy:decay` asks
+you to make a complete implementation of this problem and plot the
+solution.
+
+Using Odespy to solve oscillation ODEs like :math:`u''+\omega^2u=0`,
+reformulated as a system :math:`u'=v` and :math:`v'=-\omega^2u`, is done
+as follows. We specify
+a given number of time steps per period and compute the
+associated time steps and end time of the simulation (``T``),
+given a number of periods to simulate:
+
+.. code-block:: python
+
+        import odespy
+        
+        # Define the ODE system
+        # u' = v
+        # v' = -omega**2*u
+        
+        def f(sol, t, omega=2):
+            u, v = sol
+            return [v, -omega**2*u]
+        
+        # Set and compute problem dependent parameters
+        omega = 2
+        X_0 = 1
+        number_of_periods = 40
+        time_intervals_per_period = 20
+        from numpy import pi, linspace, cos
+        P = 2*pi/omega                      # length of one period
+        dt = P/time_intervals_per_period    # time step
+        T = number_of_periods*P             # final simulation time
+        
+        # Create Odespy solver object
+        odespy_method = odespy.RK2
+        solver = odespy_method(f, f_args=[omega])
+        
+        # The initial condition for the system is collected in a list
+        solver.set_initial_condition([X_0, 0])
+        
+        # Compute the desired time points where we want the solution
+        N_t = int(round(T/dt))              # no of time intervals
+        time_points = linspace(0, T, N_t+1)
+        
+        # Solve the ODE problem
+        sol, t = solver.solve(time_points)
+        
+        # Note: sol contains both displacement and velocity
+        # Extract original variables
+        u = sol[:,0]
+        v = sol[:,1]
+
+The last two statements are important since our two functions :math:`u` and :math:`v`
+in the ODE system are packed together in one array inside the Odespy solver.
+The solution of the ODE system
+is returned as a two-dimensional array where the first
+column (``sol[:,0]``) stores :math:`u` and the second (``sol[:,1]``) stores :math:`v`.
+Plotting :math:`u` and :math:`v` is a matter of running ``plot(t, u, t, v)``.
+
+
+.. admonition:: Remark
+
+   In the right-hand side function we write ``f(sol, t, omega)`` instead
+   of ``f(u, t, omega)`` to indicate that the solution sent to ``f``
+   is a solution at time ``t`` where the values of :math:`u` and :math:`v` are
+   packed together: ``sol = [u, v]``. We might well use ``u`` as argument:
+   
+   .. code-block:: python
+   
+           def f(u, t, omega=2):
+               u, v = u
+               return [v, -omega**2*u]
+   
+   This just means that we redefine the name ``u`` inside the function
+   to mean the solution at time ``t`` for the first component of
+   the ODE system.
+
+
+
+
+To switch to another numerical method, just substitute ``RK2`` by
+the proper name of the desired method.
+Typing ``pydoc odespy`` in the terminal window brings up a list
+of all the implemented methods.
+This very simple way of choosing a method suggests an obvious extension
+of the code above: we can define a list of methods, run all
+methods, and compare their :math:`u` curves in a plot.
+As Odespy also contains the Euler-Cromer scheme, we rewrite
+the system with :math:`v'=-\omega^2u` as the first ODE and :math:`u'=v`
+as the second ODE, because this is the standard choice when
+using the Euler-Cromer method (also in Odespy):
+
+.. code-block:: python
+
+        def f(u, t, omega=2):
+            v, u = u
+            return [-omega**2*u, v]
+
+This change of equations also affects the initial condition:
+the first component is zero and second is ``X_0`` so we need
+to pass the list ``[0, X_0]`` to ``solver.set_initial_condition``.
+
+The code
+`ode_odespy.m <https://github.com/hplgit/prog4comp/src/m/ode_odespy.m>`__
+contains the details:
+
+.. code-block:: python
+
+        def compare(odespy_methods,
+                    omega,
+                    X_0,
+                    number_of_periods,
+                    time_intervals_per_period=20):
+        
+            from numpy import pi, linspace, cos
+            P = 2*pi/omega                      # length of one period
+            dt = P/time_intervals_per_period
+            T = number_of_periods*P
+        
+            # If odespy_methods is not a list, but just the name of
+            # a single Odespy solver, we wrap that name in a list
+            # so we always have odespy_methods as a list
+            if type(odespy_methods) != type([]):
+                odespy_methods = [odespy_methods]
+        
+            # Make a list of solver objects
+            solvers = [method(f, f_args=[omega]) for method in
+                       odespy_methods]
+            for solver in solvers:
+                solver.set_initial_condition([0, X_0])
+        
+            # Compute the time points where we want the solution
+            dt = float(dt)  # avoid integer division
+            N_t = int(round(T/dt))
+            time_points = linspace(0, N_t*dt, N_t+1)
+        
+            legends = []
+            for solver in solvers:
+                sol, t = solver.solve(time_points)
+                v = sol[:,0]
+                u = sol[:,1]
+        
+                # Plot only the last p periods
+                p = 6
+                m = p*time_intervals_per_period  # no time steps to plot
+                plot(t[-m:], u[-m:])
+                hold('on')
+                legends.append(solver.name())
+                xlabel('t')
+            # Plot exact solution too
+            plot(t[-m:], X_0*cos(omega*t)[-m:], 'k--')
+            legends.append('exact')
+            legend(legends, loc='lower left')
+            axis([t[-m], t[-1], -2*X_0, 2*X_0])
+            title('Simulation of %d periods with %d intervals per period'
+                  % (number_of_periods, time_intervals_per_period))
+            savefig('tmp.pdf'); savefig('tmp.png')
+            show()
+
+A new feature in this code is the ability to plot only the last ``p``
+periods, which allows us to perform long time simulations and
+watch the end results without a cluttered plot with too many
+periods. The syntax ``t[-m:]`` plots the last ``m`` elements in ``t`` (a
+negative index in Python arrays/lists counts from the end).
+
+We may compare Heun's method (or equivalently the RK2
+method) with the Euler-Cromer scheme:
+
+.. code-block:: python
+
+        compare(odespy_methods=[odespy.Heun, odespy.EulerCromer],
+                omega=2, X_0=2, number_of_periods=20,
+                time_intervals_per_period=20)
+
+Figure :ref:`sec:de:osc:fig:Heun:vs:EC` shows how Heun's method
+(the blue line with small disks)
+has considerable error in both amplitude and phase already
+after 14-20 periods (upper left), but using three times as
+many time steps makes the curves almost equal (upper right).
+However, after 194-200 periods the errors have grown (lower left),
+but can be sufficiently reduced by halving the time step (lower right).
+
+.. _sec:de:osc:fig:Heun:vs:EC:
+
+.. figure:: osc_odespy_Heun_vs_EC.png
+   :width: 800
+
+   *Illustration of the impact of resolution (time steps per period) and length of simulation*
+
+With all the methods in Odespy at hand, it is now easy to start
+exploring other methods, such as backward differences
+instead of the forward differences used in the Forward Euler scheme.
+:ref:`sec:de:exer:osc:BE` addresses that problem.
+
+Odespy contains quite sophisticated adaptive methods where the user is
+"guaranteed" to get a solution with prescribed accuracy. There is
+no mathematical guarantee, but the error will for most cases not
+deviate significantly from the user's tolerance that reflects the
+accuracy. A very popular method of this type is the Runge-Kutta-Fehlberg method,
+which runs a 4th-order Runge-Kutta method and uses a 5th-order
+Runge-Kutta method to estimate the error so that :math:`\Delta t` can
+be adjusted to keep the error below a tolerance. This method is
+also widely known as ``ode45``, because that is the name of the function
+implementing the method in Matlab.
+We can easily test the Runge-Kutta-Fehlberg method as soon as we
+know the corresponding Odespy name, which is ``RKFehlberg``:
+
+.. code-block:: python
+
+        compare(odespy_methods=[odespy.EulerCromer, odespy.RKFehlberg],
+                omega=2, X_0=2, number_of_periods=200,
+                time_intervals_per_period=40)
+
+Note that the ``time_intervals_per_period`` argument refers to the
+time points where we want the solution. These points are also the ones
+used for numerical computations in the
+``odespy.EulerCromer`` solver,
+while the ``odespy.RKFehlberg`` solver will use an unknown set of
+time points since the time intervals are adjusted as the method runs.
+One can easily look at the points actually used by the method
+as these are available as an array ``solver.t_all`` (but plotting or
+examining the points requires modifications inside the ``compare`` method).
+
+Figure :ref:`sec:de:osc:fig:RKF:vs:EC` shows a computational example
+where the Runge-Kutta-Fehlberg method is clearly superior to the
+Euler-Cromer scheme in long time simulations, but the comparison is
+not really fair because the Runge-Kutta-Fehlberg method applies about
+twice as many time steps in this computation and performs much more
+work per time step. It is quite a complicated task to compare two so
+different methods in a fair way so that the computational work versus
+accuracy is scientifically well reported.
+
+.. _sec:de:osc:fig:RKF:vs:EC:
+
+.. figure:: osc_odespy_RKF_vs_EC.png
+   :width: 600
+
+   *Comparison of the Runge-Kutta-Fehlberg adaptive method against the Euler-Cromer scheme for a long time simulation (200 periods)*
+
+The 4th-order Runge-Kutta method
+--------------------------------
+
+The 4th-order Runge-Kutta method (RK4) is clearly the most widely used method
+to solve ODEs. Its power comes from high accuracy even with not so small
+time steps.
+
+The algorithm
+~~~~~~~~~~~~~
+
+We first just state the four-stage algorithm:
+
+.. math::
+        
+        u^{n+1} = u^n +
+        \frac{\Delta t}{6}\left( f^n + 2\hat{f}^{n+\frac{1}{2}}
+        + 2\tilde{f}^{n+\frac{1}{2}} + \bar{f}^{n+1}\right),
+        
+
+where
+
+.. math::
+        
+        \hat{f}^{n+\frac{1}{2}} =
+        f(u^n + \frac{1}{2}{\Delta t} f^n, t_{n+\frac{1}{2}}),
+        
+
+.. math::
+          
+        \tilde{f}^{n+\frac{1}{2}} =
+        f(u^n + \frac{1}{2}\Delta t\hat{f}^{n+\frac{1}{2}}, t_{n+\frac{1}{2}}),
+        
+
+.. math::
+          
+        \bar{f}^{n+1} =
+        f(u^n + \Delta t \hat{f}^{n+\frac{1}{2}}, t_{n+1})\thinspace .
+        
+
+Application
+~~~~~~~~~~~
+
+We can run the same simulation as in Figures :ref:`sec:de:osc:fig1`,
+:ref:`sec:de:osc:fig3`, and :ref:`sec:de:osc:fig:Heun`,
+for 40 periods. The 10 last periods are shown in Figure :ref:`sec:de:osc:fig:RK4`. The results look as impressive as those of the Euler-Cromer method.
+
+.. _sec:de:osc:fig:RK4:
+
+.. figure:: osc_RK4b.png
+   :width: 600
+
+   *The last 10 of 40 periods of oscillations by the 4th-order Runge-Kutta method*
+
+Implementation  (5)
+~~~~~~~~~~~~~~~~~~~
+
+The stages in the 4th-order Runge-Kutta method can easily be implemented
+as a modification of the ``osc_Heun.m`` code.
+Alternatively, one can use the ``osc_odespy.py`` code by just providing
+the argument ``odespy_methods=[odespy.RK4]`` to the ``compare`` function.
+
+Derivation
+~~~~~~~~~~
+
+The derivation of the 4th-order Runge-Kutta method can be presented in
+a pedagogical way that brings many fundamental elements of
+numerical discretization techniques together and that illustrates
+many aspects of "numerical thinking" when constructing approximate
+solution methods.
+
+We start with integrating the general ODE
+:math:`u'=f(u,t)` over a time step, from :math:`t_n` to :math:`t_{n+1}`,
+
+.. math::
+         u(t_{n+1}) - u(t_n) = \int\limits_{t_{n}}^{t_{n+1}} f(u(t),t)dt\thinspace . 
+
+The goal of the computation is :math:`u(t_{n+1})` (:math:`u^{n+1}`),
+while :math:`u(t_n)` (:math:`u^n`) is the
+most recently known value of :math:`u`.
+The challenge with the integral is that the
+integrand involves the unknown :math:`u` between :math:`t_n` and :math:`t_{n+1}`.
+
+The integral can be approximated by the famous
+`Simpson's rule <http://en.wikipedia.org/wiki/Simpson's_rule>`__:
+
+.. math::
+         \int\limits_{t_{n}}^{t_{n+1}} f(u(t),t)dt
+        \approx \frac{\Delta t}{6}\left( f^n + 4f^{n+\frac{1}{2}} + f^{n+1}\right)\thinspace .
+
+The problem with this formula
+is that we do not know :math:`f^{n+\frac{1}{2}}=f(u^{n+\frac{1}{2}},t_{n+\frac{1}{2}})`
+and :math:`f^{n+1}=(u^{n+1},t_{n+1})` as only :math:`u^n` is available and
+only :math:`f^n` can then readily be computed.
+
+To proceed, the idea is to use various approximations for :math:`f^{n+\frac{1}{2}}` and
+:math:`f^{n+1}` based on using well-known schemes for the ODE in the
+intervals :math:`[t_n,t_{n+\frac{1}{2}}]` and :math:`[t_n, t_{n+1}]`.
+Let us split the integral into four terms:
+
+.. math::
+         \int\limits_{t_{n}}^{t_{n+1}} f(u(t),t)dt
+        \approx \frac{\Delta t}{6}\left( f^n + 2\hat{f}^{n+\frac{1}{2}}
+        + 2\tilde{f}^{n+\frac{1}{2}} + \bar{f}^{n+1}\right),
+
+where :math:`\hat{f}^{n+\frac{1}{2}}`, :math:`\tilde{f}^{n+\frac{1}{2}}`, and :math:`\bar{f}^{n+1}`
+are approximations to :math:`f^{n+\frac{1}{2}}` and
+:math:`f^{n+1}` that can utilize already computed quantities.
+For :math:`\hat{f}^{n+\frac{1}{2}}` we can simply apply
+an approximation to :math:`u^{n+\frac{1}{2}}` based on a Forward Euler
+step of size :math:`\frac{1}{2}\Delta t`:
+
+.. _Eq:sec:de:vib:RK4:hatf:
+
+.. math::
+   :label: sec:de:vib:RK4:hatf
+        
+        \hat{f}^{n+\frac{1}{2}} = f(u^n + \frac{1}{2}{\Delta t} f^n, t_{n+\frac{1}{2}})
+        
+        
+
+This formula provides a prediction of :math:`f^{n+\frac{1}{2}}`, so we can for
+:math:`\tilde{f}^{n+\frac{1}{2}}` try a Backward Euler method to approximate :math:`u^{n+\frac{1}{2}}`:
+
+.. _Eq:sec:de:vib:RK4:tildef:
+
+.. math::
+   :label: sec:de:vib:RK4:tildef
+        
+        \tilde{f}^{n+\frac{1}{2}} = f(u^n + \frac{1}{2}\Delta t\hat{f}^{n+\frac{1}{2}}, t_{n+\frac{1}{2}})\thinspace .
+        
+        
+
+With :math:`\tilde{f}^{n+\frac{1}{2}}` as an approximation to
+:math:`f^{n+\frac{1}{2}}`, we can for the final term :math:`\bar{f}^{n+1}` use
+a midpoint method (or central difference, also called
+a Crank-Nicolson method) to approximate :math:`u^{n+1}`:
+
+.. _Eq:sec:de:vib:RK4:barf:
+
+.. math::
+   :label: sec:de:vib:RK4:barf
+        
+        \bar{f}^{n+1} = f(u^n + \Delta t \hat{f}^{n+\frac{1}{2}}, t_{n+1})\thinspace .
+        
+        
+
+We have now used the Forward and Backward Euler methods as well as the
+centered difference approximation in the context of Simpson's rule. The hope is
+that the combination of these methods yields an overall time-stepping
+scheme from :math:`t_n` to :math:`t_n{+1}` that is much more accurate than the
+:math:`\mathcal{O}(\Delta t)` and :math:`\mathcal{O}(\Delta t^2)` of the individual steps.
+This is indeed true: the numerical error goes like
+:math:`C\Delta t^4` for a constant :math:`C`, which means that the error
+goes very quickly to zero as we reduce the time step size,
+compared to the Forward Euler method (error :math:`\sim\Delta t^2`),
+the Euler-Cromer method (error :math:`\sim\Delta t^2`) or
+the 2nd-order Runge-Kutta, or Heun's, method (error :math:`\sim\Delta t^2`).
+
+Note that the 4th-order Runge-Kutta method is fully explicit so there
+is never any need to solve linear or nonlinear algebraic equations,
+regardless of what :math:`f` looks like.  However, the stability is
+conditional and depends on :math:`f`.  There is a large family of *implicit*
+Runge-Kutta methods that are unconditionally stable, but require
+solution of algebraic equations involving :math:`f` at each time step.
+The Odespy package has support for a lot of sophisticated *explicit*
+Runge-Kutta methods, but not yet implicit Runge-Kutta methods.
+
+More effects: damping, nonlinearity, and external forces
+--------------------------------------------------------
+
+Our model problem :math:`u''+\omega^2u=0` is the simplest possible mathematical model
+for oscillating systems. Nevertheless, this model makes strong demands
+to numerical methods, as we have seen, and is very useful as a benchmark
+for evaluating the performance of numerical methods.
+
+Real-life applications involve more physical effects, which lead to a
+differential equation with more terms and also more complicated
+terms. Typically, one has a
+damping force :math:`f(u')` and a spring
+force :math:`s(u)`. Both these forces may depend nonlinearly on their
+argument, :math:`u'` or :math:`u`. In addition, environmental forces :math:`F(t)` may
+act on the system. For example, the classical pendulum has
+a nonlinear "spring" or restoring force :math:`s(u)\sim \sin(u)`, and
+air resistance on the pendulum leads to a damping force
+:math:`f(u')\sim |u'|u'`. Examples on environmental forces include
+shaking of the ground (e.g., due to an earthquake) as well as forces
+from waves and wind.
+
+With three types of forces on the system: :math:`F`, :math:`f`, and :math:`s`,
+the sum of forces is written :math:`F(t) - f(u') - s(u)`. Note
+the minus sign in
+front of :math:`f` and :math:`s`, which indicates that these functions are defined such that
+they represent forces acting *against* the motion.  For example,
+springs attached to the wheels in a car are combined with effective
+dampers, each providing a damping force :math:`f(u')=bu'` that acts against the spring
+velocity :math:`u'`. The corresponding physical force is then :math:`-f`:
+:math:`-bu'` points downwards when the spring is being stretched and :math:`u'` points
+upwards, and :math:`-f` acts upwards when the spring is being compressed and
+:math:`u'` points downwards.
+
+Figure :ref:`sec:de:ode2:fig1` shows an example of a mass :math:`m` attached to
+a potentially nonlinear spring and dashpot, and subject to an environmental
+force :math:`F(t)`. Nevertheless, our general model can equally well be
+a pendulum as in Figure :ref:`sec:de:ode2:fig2` with :math:`s(u)=mg\sin\theta` and
+:math:`f(\dot u) =\frac{1}{2}C_D A\varrho \dot\theta |\dot\theta|` (where
+:math:`C_D=0.4`, :math:`A` is the cross sectional area of the body, and :math:`\varrho` is
+the density of air).
+
+.. _sec:de:ode2:fig1:
+
+.. figure:: oscillator_general.png
+   :width: 600
+
+   *General oscillating system*
+
+.. _sec:de:ode2:fig2:
+
+.. figure:: pendulum_body_diagram3.png
+   :width: 300
+
+   *A pendulum with forces*
+
+Newton's second law for the system can be written with the mass times
+acceleration on the left-hand side and the forces on the right-hand side:
+
+.. math::
+         mu'' = F(t) - f(u') - s(u)\thinspace .
+
+This equation is, however, more commonly reordered to
+
+.. _Eq:sec:de:vib:ode2:
+
+.. math::
+   :label: sec:de:vib:ode2
+        
+        mu'' + f(u') + s(u) = F(t)\thinspace .
+        
+        
+
+Because the differential equation is of second order, due to the term :math:`u''`,
+we need two initial conditions:
+
+.. math::
+        
+        u(0)=U_0,\quad u'(0)=V_0\thinspace .
+        
+
+Note that with the choices :math:`f(u')=0`, :math:`s(u)=ku`, and :math:`F(t)=0`
+we recover the original
+ODE :math:`u'' +\omega^2u=0` with :math:`\omega=\sqrt{k/m}`.
+
+How can we solve :eq:`sec:de:vib:ode2`?
+As for the simple ODE :math:`u''+\omega^2u=0`, we
+start by rewriting the second-order ODE as a system of two
+first-order ODEs:
+
+.. _Eq:sec:de:vib:ode2:v:
+
+.. math::
+   :label: sec:de:vib:ode2:v
+        
+        v' = \frac{1}{m}\left(F(t) - s(u) - f(v)\right),
+        
+        
+
+.. _Eq:sec:de:vib:ode2:u:
+
+.. math::
+   :label: sec:de:vib:ode2:u
+          
+        u' = v\thinspace .
+        
+        
+
+The initial conditions become :math:`u(0)=U_0` and :math:`v(0)=V_0`.
+
+Any method for a system of first-order ODEs can be used to solve for
+:math:`u(t)` and :math:`v(t)`.
+
+The Euler-Cromer scheme
+~~~~~~~~~~~~~~~~~~~~~~~
+
+An attractive choice from an implementational, accuracy, and
+efficiency point of view is the Euler-Cromer scheme where we
+take a forward difference in :eq:`sec:de:vib:ode2:v` and
+a backward difference in :eq:`sec:de:vib:ode2:u`:
+
+.. _Eq:sec:de:vib:ode2:v:EC1:
+
+.. math::
+   :label: sec:de:vib:ode2:v:EC1
+        
+        \frac{v^{n+1}-v^n}{\Delta t} = \frac{1}{m}\left(F(t_n) - s(u^n) - f(v^n)\right),
+        
+        
+
+.. _Eq:sec:de:vib:ode2:u:EC1:
+
+.. math::
+   :label: sec:de:vib:ode2:u:EC1
+          
+        \frac{u^{n+1}-u^n}{\Delta t} = v^{n+1},
+        
+        
+
+We can easily solve for the new unknowns :math:`v^{n+1}` and :math:`u^{n+1}`:
+
+.. _Eq:sec:de:vib:ode2:v:EC2:
+
+.. math::
+   :label: sec:de:vib:ode2:v:EC2
+        
+        v^{n+1} = v^n + \frac{\Delta t}{m}\left(F(t_n) - s(u^n) - f(v^n)\right),
+        
+        
+
+.. _Eq:sec:de:vib:ode2:u:EC2:
+
+.. math::
+   :label: sec:de:vib:ode2:u:EC2
+          
+        u^{n+1} = u^n + \Delta t v^{n+1}\thinspace .
+        
+        
+
+
+.. admonition:: Remark on the ordering of the ODEs
+
+   The ordering of the ODEs in the ODE system is important for the
+   extended model :eq:`sec:de:vib:ode2:v`-:eq:`sec:de:vib:ode2:u`.
+   Imagine that we write the equation for :math:`u'` first and
+   then the one for :math:`v'`. The Euler-Cromer method would then
+   first use a forward difference for :math:`u^{n+1}`
+   and then a backward difference for :math:`v^{n+1}`. The latter would
+   lead to a *nonlinear* algebraic equation for :math:`v^{n+1}`,
+   
+   .. math::
+            v^{n+1} + \frac{\Delta t}{m}f(v^{n+1})
+           = v^n + \frac{\Delta t}{m}\left(F(t_{n+1}) - s(u^{n+1})\right),
+           
+   
+   if :math:`f(v)` is a nonlinear function of :math:`v`. This would require a
+   numerical method for nonlinear algebraic equations to find
+   :math:`v^{n+1}`, while updating :math:`v^{n+1}` through a forward
+   difference gives an equation for :math:`v^{n+1}` that is linear and
+   trivial to solve by hand.
+
+
+
+
+The file
+`osc_EC_general.m <https://github.com/hplgit/prog4comp/src/m/osc_EC_general.m>`__
+has a function ``EulerCromer``
+that implements this method:
+
+.. code-block:: matlab
+
+        function [u_values, v_values, t_values] =...
+                           EulerCromer(f, s, F, m, T, U_0, V_0, dt)
+            N_t = floor(round(T/dt));
+            fprintf('N_t: %d', N_t);
+            t = linspace(0, N_t*dt, T_t+1);
+        
+            u = zeros(N_t+1,1);
+            v = zeros(N_t+1,1);
+        
+           %% Initial conditions
+            u(1) = U_0;
+            v(1) = V_0;
+        
+           %% Step equations forward in time
+            for n = 1:N_t
+                v(n+1) = v(n) + dt*(1/m)*(F(t(n)) - f(v(n)) - s(u(n)));
+                u(n+1) = u(n) + dt*v(n+1);
+            end
+            u_values = u;
+            v_values = v;
+            t_values = t;
+        end
+
+The 4-th order Runge-Kutta method
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The RK4 method just evaluates the right-hand side of the ODE
+system,
+
+.. math::
+         (\frac{1}{m}\left(F(t) - s(u) - f(v)\right), v)
+        
+
+for known values of :math:`u`, :math:`v`, and :math:`t`, so the method is
+very simple to use regardless of how the functions :math:`s(u)` and
+:math:`f(v)` are chosen.
+
+Illustration of linear damping
+------------------------------
+
+.. _sec:de:vib:ode2:fig2:
+
+.. figure:: oscillator.png
+   :width: 600
+
+   *Sketch of a one-dimensional, oscillating dynamic system subject to spring and viscous forces*
+
+We consider an engineering system with a linear spring,
+:math:`s(u)=kx`, and a viscous damper, where the damping force is
+proportional to :math:`u'`, :math:`f(u')=bu'`, for some constant :math:`b>0`.
+This choice may model the spring system in a car.
+However, engineers often like to illustrate such a system by
+a moving mass as depicted in Figure :ref:`sec:de:vib:ode2:fig2`.
+We may choose simple values for the constants to illustrate
+basic effects of damping (and later excitations). Choosing
+the oscillations to be the simple
+:math:`u(t)=\cos t` function in the undamped case, we
+may set :math:`m=1`, :math:`k=1`, :math:`b=0.3`, :math:`U_0=1`,
+:math:`V_0=0`. The following function implements this case:
+
+.. code-block:: matlab
+
+        function linear_damping()
+            b = 0.3;
+            f = @(v) b*v;
+            s = @(u) k*u;
+            F = @(t) 0;
+        
+            m = 1;
+            k = 1;
+            U_0 = 1;
+            V_0 = 0;
+        
+            T = 12*pi;
+            dt = T/5000;
+        
+            [u, v, t] = EulerCromer(f, s, F, m, T, U_0, V_0, dt);
+        
+            plot_u(u, t);
+        end
+
+The ``plot_u`` function is a collection of plot statements for
+plotting :math:`u(t)`, or a part of it. Figure :ref:`sec:de:vib:ode2:fig:linear:damping`
+shows the effect of the :math:`bu'` term: we have oscillations with
+(an approximate) period :math:`2\pi`, as expected, but the amplitude is
+efficiently damped.
+
+.. _sec:de:vib:ode2:fig:linear:damping:
+
+.. figure:: osc_EC_linear_damping0.png
+   :width: 600
+
+   *Effect of linear damping*
+
+
+.. admonition:: Remark about working with a scaled problem
+
+   Instead of setting :math:`b=0.3` and :math:`m=k=U_0=1` as fairly "unlikely"
+   physical values,
+   it would be better to *scale* the equation :math:`u'' +bu' + ku = 0`.
+   This means that we introduce dimensionless independent and dependent
+   variables:
+   
+   .. math::
+            \bar t = \frac{t}{t_c},\quad \bar u = \frac{u}{u_c},
+   
+   where :math:`t_c` and :math:`u_c` are characteristic sizes of time and displacement,
+   respectively, such that :math:`\bar t` and :math:`\bar u` have their typical size
+   around unity. In the present problem, we can choose :math:`u_c=U_0` and
+   :math:`t_c = \sqrt{m/k}`. This gives the following scaled (or dimensionless)
+   problem for the dimensionless quantity :math:`\bar u(\bar t)`:
+   
+   .. math::
+            \frac{d^2\bar u}{d\bar t^2} + \beta\frac{d\bar u}{d\bar t} +
+           \bar u = 0,\quad \bar u(0)=1,\ \bar u'(0)=0,\quad \beta = \frac{b}{\sqrt{mk}}
+           \thinspace .
+   
+   The striking fact is that there is only *one* physical parameter in this
+   problem: the dimensionless number :math:`\beta`. Solving this problem corresponds
+   to solving the original problem (with dimensions) with the parameters
+   :math:`m=k=U_0=1` and :math:`b=\beta`. However, solving the dimensionless
+   problem is more general: if we have a solution :math:`\bar u(\bar t;\beta)`,
+   we can find the physical solution of a range of problems since
+   
+   .. math::
+            u(t) = U_0\bar u(t\sqrt{k/m}; \beta)\thinspace .
+   
+   As long as :math:`\beta` is fixed, we can find :math:`u` for any :math:`U_0`, :math:`k`, and :math:`m`
+   from the above formula! In this way, a time consuming simulation can be done only once,
+   but still provide many solutions. This demonstrates the power of working with
+   scaled or dimensionless problems.
+
+
+
+
+Illustration of linear damping with sinusoidal excitation
+---------------------------------------------------------
+
+We now extend the previous example to also involve some external
+oscillating force on the system: :math:`F(t)=A\sin (wt)`. Driving a
+car on a road with sinusoidal bumps might give such an external
+excitation on the spring system in the car (:math:`w` is related to
+the velocity of the car).
+
+With :math:`A=0.5` and
+:math:`w=3`,
+
+.. code-block:: matlab
+
+        w = 3;
+        A = 0.5;
+        F = @(t) A*sin(w*t);
+
+we get the graph in Figure :ref:`sec:de:vib:ode2:fig:linear:damping:sinwt`.
+The striking difference from Figure :ref:`sec:de:vib:ode2:fig:linear:damping`
+is that the oscillations start out as a damped :math:`\cos t` signal
+without much influence of the external force, but then the free oscillations
+of the undamped system (:math:`\cos t`) :math:`u'' + u = 0` die out and
+the external force :math:`0.5\sin(3t)` induces oscillations with a shorter period
+:math:`2\pi/3`. You are encouraged to play around with a larger :math:`A` and switch
+from a sine to a cosine in :math:`F` and observe the effects. If you look this up in
+a physics book, you can find exact analytical solutions to the differential
+equation problem in these cases.
+
+.. _sec:de:vib:ode2:fig:linear:damping:sinwt:
+
+.. figure:: osc_EC_linear_damping1.png
+   :width: 600
+
+   *Effect of linear damping in combination with a sinusoidal external force*
+
+A particularly interesting case arises when the excitation force has
+the same frequency as the free oscillations of the undamped system, i.e.,
+:math:`F(t)=A\sin t`. With the same amplitude :math:`A=0.5`, but a smaller damping
+:math:`b=0.1`, the oscillations in
+Figure :ref:`sec:de:vib:ode2:fig:linear:damping:sinwt` becomes qualitatively
+very different as the amplitude grows significantly larger over
+some periods. This phenomenon is called resonance and is exemplified
+in Figure :ref:`sec:de:vib:ode2:fig:linear:damping:sint`. Removing the
+damping results in an amplitude that grows linearly in time.
+
+.. _sec:de:vib:ode2:fig:linear:damping:sint:
+
+.. figure:: osc_EC_linear_damping2.png
+   :width: 600
+
+   *Excitation force that causes resonance*
+
+.. _sec:de:vib:ode2:sliding:friction:
+
+Spring-mass system with sliding friction
+----------------------------------------
+
+.. _sec:de:vib:ode2:fig3:
+
+.. figure:: oscillator_sliding.png
+   :width: 600
+
+   *Sketch of a one-dimensional, oscillating dynamic system subject to sliding friction and a spring force*
+
+A body with mass :math:`m` is attached to a spring with stiffness :math:`k` while sliding
+on a plane surface. The body is also subject
+to a friction force :math:`f(u')` due to the contact between the body and
+the plane. Figure :ref:`sec:de:vib:ode2:fig3` depicts the situation.
+The friction force :math:`f(u')` can be
+modeled by Coulomb friction:
+
+.. math::
+         f(u') = \left\lbrace\begin{array}{ll}
+        -\mu mg,& u' < 0,\\ 
+        \mu mg, & u' > 0,\\ 
+        0,      & u'=0
+        \end{array}\right.
+
+where :math:`\mu` is the friction coefficient, and :math:`mg` is the normal force
+on the surface where the body slides. This formula can also be
+written as :math:`f(u')=mg\,\mbox{sign}(u')`, provided the signum function
+:math:`\mbox{sign}(x)` is defined to be zero for :math:`x=0`
+(the ``sign`` function in Matlab` has
+this property). To check that the signs in the definition of
+:math:`f` are right, recall that the actual
+physical force is :math:`-f` and this is positive (i.e., :math:`f<0`) when it
+works against the body moving with velocity :math:`u'<0`.
+
+The nonlinear spring force is taken as
+
+.. math::
+         s(u) = -k\alpha^{-1}\tanh (\alpha u),
+
+which is approximately :math:`-ku` for small :math:`u`, but stabilizes at :math:`\pm k/\alpha`
+for large :math:`\pm \alpha u`. Here is a plot with :math:`k=1000` and :math:`u\in [-0.1,0.1]`
+for three :math:`\alpha` values:
+
+.. figure:: spring_tanh.png
+   :width: 600
+
+If there are no external
+forces acting on the body, we have the equation of motion
+
+.. math::
+         mu'' + \mu mg\,\mbox{sign}(u') + k\tanh u = 0\thinspace .
+
+Let us simulate a situation where a body of mass 1 kg slides on a surface
+with :math:`\mu =0.4`, while attached to a spring with stiffness
+:math:`k=1000` $\hbox{kg}/\hbox{s}^2$. The initial displacement of the
+body is 10 cm, and the :math:`\alpha` parameter in :math:`s(u)` is set to 60 1/m.
+Using the ``EulerCromer`` function from the ``EulerCromer`` code, we can write a function ``sliding_friction`` for solving this problem:
+
+.. code-block:: matlab
+
+        function sliding_friction()
+            f = @(v) mu*m*g*sign(v);
+            alpha = 60.0;
+            s = @(u) k/alpha*tanh(alpha*u);
+            F = @(t) 0;
+        
+            g = 9.81;
+            mu = 0.4;
+            m = 1;
+            k = 1000;
+        
+            U_0 = 0.1;
+            V_0 = 0;
+        
+            T = 2;
+            dt = T/5000;
+        
+            [u, v, t] = EulerCromer(f, s, F, m, T, U_0, V_0, dt);
+        
+            plot_u(u, t);
+        end
+
+Running the ``sliding_friction`` function gives us the
+results in Figure :ref:`sec:de:vib:ode2:fig:friction`
+with :math:`s(u)=k\alpha^{-1}\tanh (\alpha u)` (left) and
+the linearized version :math:`s(u)=ku` (right):
+
+.. _sec:de:vib:ode2:fig:friction:
+
+.. figure:: sliding_friction.png
+   :width: 800
+
+   *Effect of nonlinear (left) and linear (right) spring on sliding friction*
+
+.. _sec:de:vib:2nd:
+
+A finite difference method; undamped, linear case
+-------------------------------------------------
+
+We shall now address numerical methods for the second-order ODE
+
+.. math::
+        
+        u'' + \omega^2u = 0,\quad u(0)=U_0,\ u'(0)=0,\ t\in (0,T],
+        
+
+*without* rewriting the ODE as a system of first-order ODEs. The primary
+motivation for "yet another solution method" is that the
+discretization principles result in a very good scheme, and more
+importantly, the thinking around the discretization can be reused when
+solving partial differential equations.
+
+The main idea of this numerical method
+is to approximate the second-order derivative :math:`u''`
+by a finite difference. While there are several choices of difference
+approximations to
+first-order derivatives, there is one dominating formula for
+the second-order derivative:
+
+.. _Eq:sec:de:vib:2nd:utt:
+
+.. math::
+   :label: sec:de:vib:2nd:utt
+        
+        u''(t_n) \approx \frac{u^{n+1}-2u^n + u^{n-1}}{\Delta t^2}
+        \thinspace .
+        
+        
+
+The accuracy of this approximation is :math:`{\mathcal{O}(\Delta t^2)}`.
+Letting the ODE be valid at some arbitrary time point :math:`t_n`,
+
+.. math::
+         u''(t_n) + \omega^2 u(t_n) = 0,
+
+we just insert the approximation :eq:`sec:de:vib:2nd:utt` to get
+
+.. math::
+        
+        \frac{u^{n+1}-2u^n + u^{n-1}}{\Delta t^2} = -\omega^2 u^n
+        \thinspace .
+        
+
+We now assume that :math:`u^{n-1}` and :math:`u^n` are already computed and
+that :math:`u^{n+1}` is the new unknown. Solving with respect to
+:math:`u^{n+1}` gives
+
+.. _Eq:sec:de:vib:2nd:scheme:
+
+.. math::
+   :label: sec:de:vib:2nd:scheme
+        
+        u^{n+1} = 2u^n - u^{n-1} - \Delta t^2\omega^2 u^n
+        \thinspace .
+        
+        
+
+A major problem arises when we want to start the scheme.
+We know that :math:`u^0=U_0`, but applying :eq:`sec:de:vib:2nd:scheme` for
+:math:`n=0` to compute :math:`u^1` leads to
+
+.. _Eq:sec:de:vib:2nd:scheme0:
+
+.. math::
+   :label: sec:de:vib:2nd:scheme0
+        
+        u^1 = 2u^0 - u^{-1} - \Delta t^2\omega^2 u^0,
+        
+        
+
+where we do not know :math:`u^{-1}`. The initial condition :math:`u'(0)=0` can help
+us to eliminate :math:`u^{-1}` -
+and this condition must anyway be incorporated in some way.
+To this end, we discretize :math:`u'(0)=0` by a *centered difference*,
+
+.. math::
+         u'(0) \approx \frac{u^1 - u^{-1}}{2\Delta t} = 0\thinspace .
+
+It follows that :math:`u^{-1}=u^1`, and we can use this relation to
+eliminate :math:`u^{-1}` in :eq:`sec:de:vib:2nd:scheme0`:
+
+.. _Eq:sec:de:vib:2nd:scheme1:
+
+.. math::
+   :label: sec:de:vib:2nd:scheme1
+        
+        u^1 = u^0 - \frac{1}{2}\Delta t^2\omega^2 u^0\thinspace .
+        
+        
+
+With :math:`u^0=U_0` and :math:`u^1` computed from :eq:`sec:de:vib:2nd:scheme1`,
+we can compute :math:`u^2`, :math:`u^3`, and so forth from :eq:`sec:de:vib:2nd:scheme`.
+:ref:`sec:de:exer:osc:2nd:V0ic` asks you to explore how the
+steps above are modified in case we have a nonzero initial condition
+:math:`u'(0)=V_0`.
+
+
+.. admonition:: Remark on a simpler method for computing :math:`u^1`
+
+   We could approximate the initial condition :math:`u'(0)` by a forward difference:
+   
+   .. math::
+            u'(0) \approx \frac{u^1-u^0}{\Delta t} = 0,
+   
+   leading to :math:`u^1=u^0`. Then we can use :eq:`sec:de:vib:2nd:scheme` for
+   the coming time steps. However, this forward difference has accuracy
+   :math:`{\mathcal{O}(\Delta t)}`, while the centered difference we used has
+   accuracy :math:`{\mathcal{O}(\Delta t^2)}`, which is compatible with the
+   accuracy :math:`{\mathcal{O}(\Delta t^2)}` used in the discretization of the
+   differential equation.
+
+
+
+
+The method for the second-order
+ODE described above goes under the name
+Stormer's
+method or `Verlet integration <http://en.wikipedia.org/wiki/Verlet_integration>`__.
+It turns out that this method
+is mathematically equivalent with the Euler-Cromer scheme (!).
+Or more precisely, the general formula :eq:`sec:de:vib:2nd:scheme`
+is equivalent with the Euler-Cromer formula, but the scheme for
+the first time level :eq:`sec:de:vib:2nd:scheme1`
+implements the initial condition :math:`u'(0)` slightly more accurately
+than what is naturally done in the Euler-Cromer scheme. The latter
+will do
+
+.. math::
+         v^1 = v^0 - \Delta t\omega^2 u^0,\quad u^1 = u^0 + \Delta t v^1
+        = u^0 - \Delta t^2\omega^2 u^0,
+
+which differs from :math:`u^1` in :eq:`sec:de:vib:2nd:scheme1` by
+an amount :math:`\frac{1}{2}\Delta t^2\omega^2 u^0`.
+
+Because of the equivalence of :eq:`sec:de:vib:2nd:scheme` with
+the Euler-Cromer scheme, the numerical results will have the same
+nice properties such as a constant amplitude. There will be a phase
+error as in the Euler-Cromer scheme, but this error is effectively
+reduced by reducing :math:`\Delta t`, as already demonstrated.
+
+Another implication of the equivalence between :eq:`sec:de:vib:2nd:scheme`
+and the Euler-Cromer scheme, is that the latter must also have
+accuracy of order :math:`\Delta t^2`. One would intuitively think that
+using a forward and a backward difference in the Euler-Cromer
+scheme implies an :math:`{\mathcal{O}(\Delta t)}` scheme, but the differences are
+used in a symmetric way so together they form an
+:math:`{\mathcal{O}(\Delta t^2)}` scheme.
+
+The implementation of :eq:`sec:de:vib:2nd:scheme1` and
+:eq:`sec:de:vib:2nd:scheme` is straightforward in a function
+(file `osc_2nd_order.m <https://github.com/hplgit/prog4comp/src/m/osc_2nd_order.m>`__):
+
+.. code-block:: matlab
+
+        function [u, t] = osc_2nd_order(U_0, omega, dt, T)
+            % Solve u'' + omega**2*u = 0 for t in (0,T], u(0)=U_0 
+            % and u'(0)=0, by a central finite difference method with 
+            % time step dt.
+            N_t = floor(round(T/dt));
+            u = zeros(N_t+1, 1);
+            t = linspace(0, N_t*dt, N_t+1);
+        
+            u(1) = U_0;
+            u(2) = u(1) - 0.5*dt^2*omega^2*u(1);
+            for n = 2:N_t
+                u(n+1) = 2*u(n) - u(n-1) - dt^2*omega^2*u(n);
+            end
+        end
+
+.. _sec:de:vib:2nd:damped1:
+
+A finite difference method; linear damping
+------------------------------------------
+
+A key issue is how to generalize the scheme from the section :ref:`sec:de:vib:2nd`
+to a differential equation with more terms. We start with
+the case of a linear damping term :math:`f(u')=bu'`, a possibly nonlinear
+spring force :math:`s(u)`, and an excitation force :math:`F(t)`:
+
+.. math::
+        
+        mu'' + bu' + s(u) = F(t),\quad u(0)=U_0,\ u'(0)=0,\ t\in (0,T]
+        \thinspace .
+        
+
+We need to find the appropriate difference approximation to :math:`u'`
+in the :math:`bu'` term.
+A good choice is the *centered difference*
+
+.. _Eq:sec:de:vib:D2tu:
+
+.. math::
+   :label: sec:de:vib:D2tu
+        
+        u'(t_n) \approx \frac{u^{n+1}-u^{n-1}}{2\Delta t}\thinspace .
+        
+        
+
+Sampling the equation at a time point :math:`t_n`,
+
+.. math::
+         mu''(t_n) + bu'(t_n) + s(u^n) = F(t_n),
+
+and inserting the finite difference approximations to :math:`u''` and :math:`u'`
+results in
+
+.. _Eq:sec:de:vib:2nd:lin:damping:
+
+.. math::
+   :label: sec:de:vib:2nd:lin:damping
+        
+        m\frac{u^{n+1}-2u^n + u^{n-1}}{\Delta t^2}
+        + b\frac{u^{n+1}-u^{n-1}}{2\Delta t} + s(u^n) = F^n,
+        
+        
+
+where :math:`F^n` is a short notation for :math:`F(t_n)`.
+Equation :eq:`sec:de:vib:2nd:lin:damping` is linear in the unknown :math:`u^{n+1}`,
+so we can easily solve for this quantity:
+
+.. _Eq:sec:de:vib:2nd:lin:damping:unp1:
+
+.. math::
+   :label: sec:de:vib:2nd:lin:damping:unp1
+        
+        u^{n+1} = (2mu^n + (\frac{b}{2}\Delta t - m)u^{n-1} +
+        \Delta t^2(F^n - s(u^n)))(m + \frac{b}{2}\Delta t)^{-1}
+        
+        \thinspace .
+        
+
+As in the case without damping, we need to derive a special
+formula for :math:`u^1`. The initial condition :math:`u'(0)=0` implies
+also now that :math:`u^{-1}=u^1`, and with :eq:`sec:de:vib:2nd:lin:damping:unp1` for
+:math:`n=0`, we get
+
+.. _Eq:sec:de:vib:2nd:lin:damping:u1:
+
+.. math::
+   :label: sec:de:vib:2nd:lin:damping:u1
+        
+        u^1 = u^0 + \frac{\Delta t^2}{2m}(-bV - s(u^0) + F^0)
+        \thinspace .
+        
+        
+
+In the more general case with a nonlinear damping term :math:`f(u')`,
+
+.. math::
+        
+        mu'' + f(u') + s(u) = F(t),
+        
+
+we get
+
+.. math::
+        
+        m\frac{u^{n+1}-2u^n + u^{n-1}}{\Delta t^2}
+        + f(\frac{u^{n+1}-u^{n-1}}{2\Delta t}) + s(u^n) = F^n,
+        
+
+which is a *nonlinear algebraic equation* for :math:`u^{n+1}` that
+must be solved by numerical methods. A much more convenient
+scheme arises from using a backward difference for :math:`u'`,
+
+.. math::
+         u'(t_n)\approx \frac{u^n-u^{n-1}}{\Delta t},
+
+because the damping term will then be known,
+involving only :math:`u^n` and :math:`u^{n-1}`, and we can easily solve
+for :math:`u^{n+1}`.
+
+The downside of the backward difference compared to the centered
+difference :eq:`sec:de:vib:D2tu` is that it reduces the accuracy in
+the overall scheme from :math:`{\mathcal{O}(\Delta t^2)}` to :math:`{\mathcal{O}(\Delta t)}`.  In
+fact, the Euler-Cromer scheme evaluates a nonlinear damping term as
+:math:`f(v^n)` when computing :math:`v^{n+1}`, and this is equivalent to
+using the backward difference above. Consequently, the convenience of
+the Euler-Cromer scheme for nonlinear damping comes at a cost of
+lowering the overall accuracy of the scheme from second to first
+order in :math:`\Delta t`. Using the same trick in the finite difference scheme for
+the second-order differential equation, i.e., using the backward
+difference in :math:`f(u')`, makes this scheme
+equally convenient and accurate as the Euler-Cromer scheme
+in the general nonlinear case :math:`mu''+f(u')+s(u)=F`.
+
+Exercises  (4)
+==============
+
+.. --- begin exercise ---
+
+.. _sec:de:exer:geom:
+
+Exercise 43: Geometric construction of the Forward Euler method
+---------------------------------------------------------------
+
+The section :ref:`sec:de:pg:geom` describes a geometric interpretation of
+the Forward Euler method. This exercise will demonstrate the geometric
+construction of the solution in detail. Consider the differential
+equation :math:`u'=u` with :math:`u(0)=1`. We use time steps :math:`\Delta t = 1`.
+
+**a)**
+Start at :math:`t=0` and draw a straight line with slope :math:`u'(0)=u(0)=1`.
+Go one time step forward to :math:`t=\Delta t` and mark the solution point
+on the line.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+See plot and comments given below.
+
+.. --- end solution of exercise ---
+
+**b)**
+Draw a straight line through the solution point :math:`(\Delta t, u^1)`
+with slope :math:`u'(\Delta t)=u^1`. Go one time step forward to
+:math:`t=2\Delta t` and mark the solution point on the line.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+See plot and comments given below.
+
+.. --- end solution of exercise ---
+
+**c)**
+Draw a straight line through the solution point :math:`(2\Delta t, u^2)`
+with slope :math:`u'(2\Delta t)=u^2`. Go one time step forward to
+:math:`t=3\Delta t` and mark the solution point on the line.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+See plot and comments given below.
+
+.. --- end solution of exercise ---
+
+**d)**
+Set up the Forward Euler scheme for the problem :math:`u'=u`.
+Calculate :math:`u^1`, :math:`u^2`, and :math:`u^3`. Check that the numbers are
+the same as obtained in a)-c).
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The code may be written as
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: ForwardEuler_geometric_solution
+
+
+Running the program will print the numbers 1, 2, 4 and 8, as well as produce the plot seen in
+Figure :ref:`fig:FEgeom`. We see the values computed in a)-c) as circles
+(which in a)-c) are connected by straight line segments). For comparison, the true solution
+is also given. The very large timestep gives a rather poor numerical solution.
+
+.. _fig:FEgeom:
+
+.. figure:: fE_geom_sol.png
+   :width: 800
+
+   *Forward Euler method (red filled circles) applied to the ode :math:`u' = u`. For easy comparison, the true solution :math:`u(t) = e^t` is also shown (blue continuous line)*
+
+.. --- end solution of exercise ---
+
+Filename: ``ForwardEuler_geometric_solution.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _sec:de:exer:FE:test1:
+
+Exercise 44: Make test functions for the Forward Euler method
+-------------------------------------------------------------
+
+The purpose of this exercise is to
+make a file ``test_ode_FE.m`` that makes use of the ``ode_FE``
+function in the file ``ode_FE.m`` and automatically verifies the
+implementation of ``ode_FE``.
+
+**a)**
+The solution computed by hand in :ref:`sec:de:exer:geom` can be
+used as a reference solution. Make a function ``test_ode_FE_1()``
+that calls ``ode_FE`` to compute
+three time steps in the problem :math:`u'=u`, :math:`u(0)=1`, and compare the
+three values :math:`u^1`, :math:`u^2`, and :math:`u^3` with the values obtained in
+:ref:`sec:de:exer:geom`.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+See code presented below.
+
+.. --- end solution of exercise ---
+
+**b)**
+The test in a) can be made more general using the fact
+that if :math:`f` is linear in :math:`u` and does not depend on :math:`t`, i.e., we
+have :math:`u'=ru`, for
+some constant :math:`r`, the Forward Euler method has a closed form solution
+as outlined in the section :ref:`sec:de:pg:model`: :math:`u^n=U_0(1+r\Delta t)^n`.
+Use this result to construct a test function ``test_ode_FE_2()`` that
+runs a number of steps in ``ode_FE`` and compares the computed
+solution with the listed formula for :math:`u^n`.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The code may be written as:
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: growth2_test
+
+
+.. --- end solution of exercise ---
+
+Filename: ``test_ode_FE.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _sec:de:exer:Heun:pg:
+
+Exercise 45: Implement and evaluate Heun's method
+-------------------------------------------------
+
+**a)**
+A 2nd-order Runge-Kutta method, also known has Heun's method,
+is derived in the section :ref:`sec:de:osc:Heun`. Make a function
+``ode_Heun(f, U_0, dt, T)`` (as a counterpart to ``ode_FE(f, U_0, dt, T)``
+in ``ode_FE.m``) for solving  a scalar ODE problem :math:`u'=f(u,t)`,
+:math:`u(0)=U_0`, :math:`t\in (0,T]`, with
+this method using a time step size :math:`\Delta t`.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The code may be written as:
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: ode_Heun
+
+
+.. --- end solution of exercise ---
+
+**b)**
+Solve the simple ODE problem :math:`u'=u`, :math:`u(0)=1`, by the ``ode_Heun`` and
+the ``ode_FE`` function. Make
+a plot that compares Heun's method and the Forward Euler method
+with the exact solution :math:`u(t)=e^t` for :math:`t\in [0,6]`. Use a
+time step :math:`\Delta t = 0.5`.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The given ODE may be solved by the function ``demo_ode_Heun``:
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: demo_ode_Heun
+
+
+Running the code with :math:`\Delta t = 0.5` (seen in the code) gives the plot seen in Figure :ref:`H_FE_comp`.
+
+.. _H_FE_comp:
+
+.. figure:: H_FE_comp.png
+   :width: 800
+
+   Heun and Forward Euler with timestep :math:`\Delta t = 0.5`
+
+.. --- end solution of exercise ---
+
+**c)**
+For the case in b),
+find through experimentation the largest value of :math:`\Delta t` where the
+exact solution and the numerical solution by Heun's method
+cannot be distinguished visually. It is of interest to see how far
+off the curve the Forward Euler method is when Heun's method can
+be regarded as "exact" (for visual purposes).
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+A timestep of :math:`\Delta t = 0.1` was found to be the largest reasonable timestep
+that still made the solution from Heun's method come on top of the exact solution
+(from graphical inspection only), see Figure :ref:`H_exact_FE_comp`.
+
+.. _H_exact_FE_comp:
+
+.. figure:: H_exact_FE_comp.png
+   :width: 800
+
+   *Heun and Forward Euler with timestep :math:`\Delta t = 0.1`. A larger timestep makes Heun's method deviate from the true solution (only judged graphically)*
+
+.. --- end solution of exercise ---
+
+Filename: ``ode_Heun.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _sec:de:exer:logistic:dtopt:
+
+Exercise 46: Find an appropriate time step; logistic model
+----------------------------------------------------------
+
+Compute the numerical solution of the logistic equation for a set of
+repeatedly halved time steps: :math:`\Delta t_k = 2^{-k}\Delta t`,
+:math:`k=0,1,\ldots`.  Plot the solutions corresponding to the last two time
+steps :math:`\Delta t_{k}` and :math:`\Delta t_{k-1}` in the same plot.  Continue
+doing this until you cannot visually distinguish the two curves in the
+plot. Then one has found a sufficiently small time step.
+
+.. --- begin hint in exercise ---
+
+**Hint.**
+Extend the ``logistic.py`` file. Introduce a loop over :math:`k`, write out
+:math:`\Delta t_k`, and ask the
+user if the loop is to be continued.
+
+.. --- end hint in exercise ---
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+This may be implemented as:
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: logistic_dt
+
+
+.. --- end solution of exercise ---
+
+Filename: ``logistic_dt.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _sec:de:exer:SIR:dtopt:
+
+Exercise 47: Find an appropriate time step; SIR model
+-----------------------------------------------------
+
+Repeat :ref:`sec:de:exer:logistic:dtopt` for the SIR model.
+
+.. --- begin hint in exercise ---
+
+**Hint.**
+Import the ``ode_FE`` function from the ``ode_system_FE`` module
+and make a modified ``demo_SIR`` function that has a loop
+over repeatedly halved time steps. Plot :math:`S`, :math:`I`, and :math:`R`
+versus time for the two last time step sizes in the same plot.
+
+.. --- end hint in exercise ---
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+This may be implemented as:
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: SIR_dt
+
+
+.. --- end solution of exercise ---
+
+Filename: ``SIR_dt.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _sec:de:exer:SIRV:padapt:
+
+Exercise 48: Model an adaptive vaccination campaign
+---------------------------------------------------
+
+In the SIRV model with time-dependent vaccination from
+the section :ref:`sec:de:flu:vaccine:discont`, we want to test the effect
+of an adaptive vaccination campaign where vaccination is offered as
+long as half of the population is not vaccinated. The campaign starts
+after :math:`\Delta` days. That is,
+:math:`p=p_0` if :math:`V<\frac{1}{2}(S^0+I^0)` and :math:`t>\Delta` days,
+otherwise :math:`p=0`.
+
+Demonstrate the effect of this vaccination policy: choose :math:`\beta`,
+:math:`\gamma`, and :math:`\nu` as in the section :ref:`sec:de:flu:vaccine:discont`,
+set :math:`p=0.001`, :math:`\Delta =10` days, and simulate for 200 days.
+
+.. --- begin hint in exercise ---
+
+**Hint.**
+This discontinuous :math:`p(t)` function is easiest implemented as a
+Matlab function containing the indicated ``if`` test.
+You may use the file ``SIRV1.m``
+as starting point, but note that it implements a time-dependent
+:math:`p(t)` via an array.
+
+.. --- end hint in exercise ---
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+An appropriate program is
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: SIRV_p_adapt
+
+
+The result looks like
+
+.. figure:: SIRV_p_adapt.png
+   :width: 600
+
+.. --- end solution of exercise ---
+
+Filename: ``SIRV_p_adapt.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _sec:de:exer:SIRV:padapt:
+
+Exercise 49: Make a SIRV model with time-limited effect of vaccination
+----------------------------------------------------------------------
+
+We consider the SIRV model from
+the section :ref:`sec:de:flu:vaccine`, but now the effect of vaccination is
+time-limited. After a characteristic period of time, :math:`\pi`, the
+vaccination is no more effective and individuals are
+consequently moved from the V
+to the S category and can be infected again. Mathematically, this
+can be modeled as an average leakage :math:`-\pi^{-1}V` from the V category to the S
+category (i.e., a gain :math:`\pi^{-1}V` in the latter). Write up the
+complete model, implement it, and rerun the case from
+the section :ref:`sec:de:flu:vaccine` with various choices of parameters to
+illustrate various effects.
+Filename: ``SIRV1_V2S.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _sec:de:exer:vib:FE:func:
+
+Exercise 50: Refactor a flat program
+------------------------------------
+
+Consider the file ``osc_FE.m`` implementing the Forward Euler
+method for the oscillating system model
+:eq:`sec:de:model:osc2:u`-:eq:`sec:de:model:osc2:v`.
+The ``osc_FE.m`` is what we often refer to as a flat program,
+meaning that it is just one main program with no functions.
+To easily reuse the numerical computations in other contexts,
+place the part that produces the numerical solution (allocation of arrays,
+initializing the arrays at time zero, and the time loop) in
+a function ``osc_FE(X_0, omega, dt, T)``, which returns ``u, v, t``.
+Place the particular
+computational example in ``osc_FE.m`` in a function
+``demo()``.
+Construct the file ``osc_FE_func.m`` such that the
+``osc_FE`` function can easily be reused
+in other programs.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+Here is the file
+``osc_FE.m``:
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: osc_FE
+
+
+which is run from the demo file:
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: demo_osc_FE
+
+
+.. --- end solution of exercise ---
+
+Filename: ``osc_FE_func.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _sec:de:exer:vib:ode_FE:
+
+Exercise 51: Simulate oscillations by a general ODE solver
+----------------------------------------------------------
+
+Solve the system :eq:`sec:de:model:osc2:u`-:eq:`sec:de:model:osc2:v`
+using the general solver ``ode_FE`` in the file ``ode_system_FE.m``
+described in the section :ref:`sec:de:flu:prog:generic`. Program the ODE system
+and the call to the ``ode_FE`` function in a separate file
+``osc_ode_FE.m``.
+
+Equip this file with a test function that reads a file with correct
+:math:`u` values and compares these with those computed by the ``ode_FE``
+function. To find correct :math:`u` values, modify the program
+``osc_FE.m`` to dump the ``u`` array to file, run ``osc_FE.m``, and
+let the test function read the reference results from that file.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The program may be implemented as:
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: osc_ode_FE
+
+
+.. --- end solution of exercise ---
+
+Filename: ``osc_ode_FE.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _sec:de:exer:vib:BE:
+
+Exercise 52: Compute the energy in oscillations
+-----------------------------------------------
+
+**a)**
+Make a function ``osc_energy(u, v, omega)`` for returning the potential and
+kinetic energy of an oscillating system described by
+:eq:`sec:de:model:osc2:u`-:eq:`sec:de:model:osc2:v`.
+The potential energy is taken as :math:`\frac{1}{2}\omega^2u^2` while
+the kinetic energy is :math:`\frac{1}{2}v^2`. (Note that these expressions
+are not exactly the *physical* potential and kinetic energy, since
+these would be :math:`\frac{1}{2}mv^2` and :math:`\frac{1}{2}ku^2` for a model
+:math:`mx'' + kx=0`.)
+
+Place the ``osc_energy`` in a separate file ``osc_energy.m``
+such that the function can be called from other functions.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The function may be implemented as:
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: osc_energy
+
+
+.. --- end solution of exercise ---
+
+**b)**
+Add a call to ``osc_energy`` in the programs ``osc_FE.m`` and
+``osc_EC.m`` and plot the *sum* of the kinetic and potential energy.
+How does the total energy develop for the Forward Euler and the
+Euler-Cromer schemes?
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The Forward Euler code reads
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: osc_FE_energy
+
+
+The program generates the following plot showing how the energy increases with time.
+
+.. figure:: osc_FE_energy.png
+   :width: 600
+
+The Euler-Cromer code might be implemented as
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: osc_EC_energy
+
+
+In this case, as illustrated by the plot produced, the energy does not increase.
+
+.. figure:: osc_EC_energy.png
+   :width: 600
+
+.. --- end solution of exercise ---
+
+Filenames: ``osc_energy.m``, ``osc_FE_energy.m``, ``osc_EC_energy.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _sec:de:exer:pg:BE:
+
+Exercise 53: Use a Backward Euler scheme for population growth
+--------------------------------------------------------------
+
+We consider the ODE problem :math:`N'(t)=rN(t)`,
+:math:`N(0)=N_0`. At some time, :math:`t_n=n\Delta t`,
+we can approximate the derivative :math:`N'(t_n)` by a *backward difference*,
+see Figure :ref:`sec:de:fig:BE`:
+
+.. math::
+         N'(t_n)\approx \frac{N(t_n) - N(t_n-\Delta t)}{\Delta t} = \frac{N^n - N^{n-1}}{\Delta t},
+
+which leads to
+
+.. math::
+         \frac{N^n - N^{n-1}}{\Delta t} = rN^n\thinspace,
+
+called the *Backward Euler scheme*.
+
+**a)**
+Find an expression for the :math:`N^n` in terms of :math:`N^{n-1}` and formulate
+an algorithm for computing :math:`N^n`, :math:`n=1,2,\ldots,N_t`.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+Re-arranging the given expression leads to:
+
+.. math::
+        
+        N^n = \frac{N^{n-1}}{1-r\Delta t}.
+        
+
+Noting that the right hand side may be expressed by use of :math:`N^0`, we
+may formulate the following algorithm:
+
+For :math:`n = 1,2,...,N` compute
+
+.. math::
+        
+        N^n = \left(1-r\Delta t\right)^{-n} N^0.
+        
+
+.. --- end solution of exercise ---
+
+**b)**
+Implement the algorithm in a) in a function ``growth_BE(N_0, dt, T)``
+for solving :math:`N'=rN`, :math:`N(0)=N_0`, :math:`t\in (0,T]`, with time step :math:`\Delta t` (``dt``).
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+Here is the code:
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: growth_BE
+
+
+.. --- end solution of exercise ---
+
+**c)**
+Implement the Forward Euler scheme in a function ``growth_FE(N_0, dt, T)``
+as described in b).
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The FE function reads:
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: growth_FE
+
+
+To use the two functions and produce the requested results, we
+implemented the following function:
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: apply_growth_BE_and_FE
+
+
+The two plots generated are seen below.
+
+.. --- end solution of exercise ---
+
+**d)**
+Compare visually the solution produced by the Forward and Backward
+Euler schemes with the exact solution when :math:`r=1` and :math:`T=6`. Make
+two plots, one with
+:math:`\Delta t = 0.5` and one with :math:`\Delta t=0.05`.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+With a time step of 0.5, the BE approach deviates substantially more
+from the true solution than the FE. This is a consequence of the very large
+time step used.
+
+.. figure:: growth_BE_FE_dt05.png
+   :width: 600
+
+Reducing the time step to 0.05 improves the situation for BE, so that
+FE and BE now give approximately the same error at each time step, but
+with opposite signs.
+
+.. figure:: growth_BE_FE_dt005.png
+   :width: 600
+
+With both time steps and both methods, the error grows with time. It should
+be noted that the graph produced with FE is *below* the true solution, while
+the one from BE is *above*. This should be expected because of the following.
+The slope of the true graph (or solution) increases with time. The FE does, at
+each time step, use the derivative from the *beginning* of the time step. This
+derivative is the smallest on the time interval covered by that time step. Therefore,
+the corresponding graph ends up below the true one. With BE, it is the other
+way around, since it uses the derivative at the *end* of each timestep, which
+then is the largest derivative on the time interval covered by that time step.
+
+.. --- end solution of exercise ---
+
+Filename: ``growth_BE.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _sec:de:exer:pg:CN:
+
+Exercise 54: Use a Crank-Nicolson scheme for population growth
+--------------------------------------------------------------
+
+It is recommended to do :ref:`sec:de:exer:pg:BE` prior to the
+present one.
+Here we look at the same population growth model :math:`N'(t)=rN(t)`, :math:`N(0)=N_0`.
+The time derivative :math:`N'(t)` can be approximated by various types of
+finite differences. :ref:`sec:de:exer:pg:BE` considers
+a backward difference (Figure :ref:`sec:de:fig:BE`), while the section :ref:`sec:de:pg:numerics` explained the forward difference (Figure :ref:`sec:de:fig:FE`).
+A *centered difference* is more accurate than a backward or forward
+difference:
+
+.. math::
+         N'(t_n+\frac{1}{2}\Delta t)\approx\frac{N(t_n+\Delta t)-N(t_n)}{\Delta t}=
+        \frac{N^{n+1}-N^n}{\Delta t}\thinspace .
+
+This type of difference, applied at the point :math:`t_{n+\frac{1}{2}}=t_n +
+\frac{1}{2}\Delta t`, is illustrated geometrically in Figure
+:ref:`sec:de:fig:CN`.
+
+**a)**
+Insert the finite difference approximation in the ODE :math:`N'=rN` and
+solve for the unknown :math:`N^{n+1}`, assuming :math:`N^n` is already computed and
+hence known. The resulting computational scheme is often referred
+to as a *Crank-Nicolson* scheme.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+With a central difference approximation used for the derivative, we also
+need to reformulate the function (expressing the derivative) on the right
+hand side to include the unknowns that we want only. For the right hand
+side we use the average of the derivative from :math:`n` and :math:`n+1`, i.e. at
+each end of the time step. We then get
+
+.. math::
+         \frac{N^{n+1} - N^n}{\Delta t} = \frac{1}{2}(rN^n + rN^{n+1})\thinspace,
+
+which means that
+
+.. math::
+         N^{n+1} - \frac{\Delta t}{2}rN^{n+1} = N^n + \frac{\Delta t}{2}(rN^n)\thinspace.
+
+Isolating :math:`N^{n+1}`, we get the Crank-Nicolson scheme as
+
+.. math::
+         N^{n+1} =  \frac{1+\frac{\Delta t}{2}r}{1-\frac{\Delta t}{2}r} N^n\thinspace.
+
+.. --- end solution of exercise ---
+
+**b)**
+Implement the algorithm in a) in a function ``growth_CN(N_0, dt, T)``
+for solving :math:`N'=rN`, :math:`N(0)=N_0`, :math:`t\in (0,T]`, with time step :math:`\Delta t` (``dt``).
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The function was implemented as
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: growth_CN
+
+
+.. --- end solution of exercise ---
+
+**c)**
+Make plots for comparing
+the Crank-Nicolson scheme with the Forward and Backward Euler
+schemes in the same test problem as in
+:ref:`sec:de:exer:pg:BE`.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+To use the CN function and produce the requested results, we
+implemented the following function:
+
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: apply_growth_CN
+
+
+With a time step of 0.5, we get the following plot:
+
+.. figure:: growth_CN_dt05.png
+   :width: 600
+
+Reducing the time step to 0.05, it changes into:
+
+.. figure:: growth_CN_dt005.png
+   :width: 600
+
+We observe that CN produces the best solution of the three alternatives.
+This should be expected, since it is the most accurate one (second order
+accuracy compared to first order with FE and BE).
+
+.. --- end solution of exercise ---
+
+Filename: ``growth_CN.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _sec:de:exer:fd:Taylor:
+
+Exercise 55: Understand finite differences via Taylor series
+------------------------------------------------------------
+
+The Taylor series around a point :math:`x=a` can for a function :math:`f(x)` be
+written
+
+.. math::
+        
+        f(x) &= f(a) + \frac{d}{dx}f(a)(x-a) + \frac{1}{2!}\frac{d^2}{dx^2}f(a)(x-a)^2
+         + \frac{1}{3!}\frac{d^3}{dx^3}f(a)(x-a)^3 + \ldots\\ 
+        & =
+        \sum_{i=0}^\infty \frac{1}{i!}\frac{d^i}{dx^i}f(a)(x-a)^i\thinspace .
+        
+
+For a function of time, as addressed in our ODE problems, we would
+use :math:`u` instead of :math:`f`, :math:`t` instead of :math:`x`, and a time point :math:`t_n` instead
+of :math:`a`:
+
+.. math::
+        
+        u(t) &= u(t_n) + \frac{d}{dt}u(t_n)(t-t_n) +
+        \frac{1}{2!}\frac{d^2}{dt^2}u(t_n)(t-t_n)^2
+         + \frac{1}{3!}\frac{d^3}{dt^3}u(t_n)(t-t_n)^3 + \ldots\\ 
+        & =
+        \sum_{i=0}^\infty \frac{1}{i!}\frac{d^i}{dt^i}u(t_n)(t-t_n)^i\thinspace .
+        
+
+**a)**
+A forward finite difference approximation to the derivative :math:`f'(a)` reads
+
+.. math::
+         u'(t_n) \approx \frac{u(t_n+\Delta t)- u(t_n)}{\Delta t}\thinspace .
+
+We can justify this formula mathematically through Taylor series.
+Write up the Taylor series for :math:`u(t_n+\Delta t)` (around :math:`t=t_n`, as
+given above), and then solve the expression with respect to :math:`u'(t_n)`.
+Identify, on the right-hand side, the finite difference approximation *and*
+an infinite series. This series is then the error in the finite difference
+approximation. If :math:`\Delta t` is assumed small (i.e. :math:`\Delta t << 1`),
+:math:`\Delta t` will be much larger than :math:`\Delta t^2`, which will be much
+larger than :math:`\Delta t^3`, and so on. The *leading order term* in the
+series for the error, i.e., the error with the least power of :math:`\Delta t`
+is a good approximation of the error. Identify this term.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+We get
+
+.. math::
+        
+        u(t_n+\Delta t) &= u(t_n) + \frac{d}{dt}u(t_n)\Delta t +
+        \frac{1}{2!}\frac{d^2}{dt^2}u(t_n)\Delta t^2
+         + \frac{1}{3!}\frac{d^3}{dt^3}u(t_n)\Delta t^3 + \ldots\\ 
+        \frac{d}{dt}u(t_n) & = \frac{u(t_n+\Delta t) - u(t_n)}{\Delta t} -
+        \frac{1}{2!}\frac{d^2}{dt^2}u(t_n)\Delta t -
+         \frac{1}{3!}\frac{d^3}{dt^3}u(t_n)\Delta t^2 + \ldots\\ 
+        \thinspace .
+        
+
+The finite difference approximation is found as the first term on the right
+hand side, while the remaining terms make up the infinite series that represents
+the error of the finite difference approximation.
+
+The leading order error term is therefore :math:`-\frac{1}{2!}\frac{d^2}{dt^2}u(t_n)\Delta t`.
+
+.. --- end solution of exercise ---
+
+**b)**
+Repeat a) for a backward difference:
+
+.. math::
+         u'(t_n) \approx \frac{u(t_n)- u(t_n-\Delta t)}{\Delta t}\thinspace .
+
+This time, write up the Taylor series for :math:`u(t_n-\Delta t)` around
+:math:`t_n`. Solve with respect to :math:`u'(t_n)`, and identify the leading order
+term in the error. How is the error compared to the forward difference?
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+We get
+
+.. math::
+        
+        u(t_n-\Delta t) &= u(t_n) - \frac{d}{dt}u(t_n)\Delta t +
+        \frac{1}{2!}\frac{d^2}{dt^2}u(t_n)\Delta t^2
+         - \frac{1}{3!}\frac{d^3}{dt^3}u(t_n)\Delta t^3 + \ldots\\ 
+        \frac{d}{dt}u(t_n) & = \frac{u(t_n) - u(t_n-\Delta t)}{\Delta t} +
+        \frac{1}{2!}\frac{d^2}{dt^2}u(t_n)\Delta t -
+         \frac{1}{3!}\frac{d^3}{dt^3}u(t_n)\Delta t^2 + \ldots\\ 
+        \thinspace .
+        
+
+The finite difference approximation is found as the first term on the right
+hand side, while the remaining terms make up the infinite series that represents
+the error of the finite difference approximation.
+
+The leading order error term is therefore :math:`+\frac{1}{2!}\frac{d^2}{dt^2}u(t_n)\Delta t`,
+which is of the same magnitude as the corresponding error in a), but with opposite sign.
+
+.. --- end solution of exercise ---
+
+**c)**
+A centered difference approximation to the derivative,
+as explored in :ref:`sec:de:exer:pg:CN`,
+can be written
+
+.. math::
+         u'(t_n+\frac{1}{2}\Delta t) \approx \frac{u(t_n+\Delta t)- u(t_n)}{\Delta t}\thinspace .
+
+Write up the Taylor series for :math:`u(t_n)` around :math:`t_n+\frac{1}{2}\Delta t`
+and the Taylor series for :math:`u(t_n+\Delta t)` around :math:`t_n+\frac{1}{2}\Delta t`.
+Subtract the two series, solve with respect to
+:math:`u'(t_n+\frac{1}{2}\Delta t)`, identify the finite difference approximation
+and the error terms on the right-hand side, and write up the leading order
+error term. How is this term compared to the ones for the forward and
+backward differences?
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+We write
+
+.. math::
+        
+        u(t_n) &= u(t_n+\frac{\Delta t}{2}) - \frac{d}{dt}u(t_n+\frac{\Delta t}{2})\frac{\Delta t}{2} +
+        \frac{1}{2!}\frac{d^2}{dt^2}u(t_n+\frac{\Delta t}{2})\left(\frac{\Delta t}{2}\right)^2 -
+         \frac{1}{3!}\frac{d^3}{dt^3}u(t_n+\frac{\Delta t}{2})\left(\frac{\Delta t}{2}\right)^3 + \ldots\\ 
+        u(t_n+\Delta t) &= u(t_n+\frac{\Delta t}{2}) + \frac{d}{dt}u(t_n+\frac{\Delta t}{2})\frac{\Delta t}{2} +
+        \frac{1}{2!}\frac{d^2}{dt^2}u(t_n+\frac{\Delta t}{2})\left(\frac{\Delta t}{2}\right)^2 +
+         \frac{1}{3!}\frac{d^3}{dt^3}u(t_n+\frac{\Delta t}{2})\left(\frac{\Delta t}{2}\right)^3 + \ldots\\ 
+        \thinspace .
+        
+
+If we next subtract the first of these two equations from the last one, we may proceed as
+
+.. math::
+        
+        u(t_n+\Delta t) - u(t_n) &= 2\frac{d}{dt}u(t_n+\frac{\Delta t}{2})\frac{\Delta t}{2} +
+          2\frac{1}{3!}\frac{d^3}{dt^3}u(t_n+\frac{\Delta t}{2})\left(\frac{\Delta t}{2}\right)^3 + \ldots\\ 
+        \frac{d}{dt}u(t_n+\frac{\Delta t}{2}) &= \frac{u(t_n+\Delta t) - u(t_n)}{\Delta t} -
+         \frac{1}{3!}\frac{d^3}{dt^3}u(t_n+\frac{\Delta t}{2})\left(\frac{\Delta t}{2}\right)^2 - \ldots\\ 
+        \thinspace .
+        
+
+The finite difference approximation is found as the first term on the right
+hand side, while the remaining terms make up the infinite series that represents
+the error of the finite difference approximation.
+
+The leading order error term is
+:math:`-\frac{1}{3!}\frac{d^3}{dt^3}u(t_n+\frac{\Delta t}{2})\left(\frac{\Delta t}{2}\right)^2`.
+This term will be smaller than the corresponding error terms from the previous approximations
+since :math:`\frac{\Delta t}{2}^2 << \Delta t`.
+
+.. --- end solution of exercise ---
+
+**d)**
+Can you use the leading order error terms in a)-c) to explain the
+visual observations in the numerical experiment in
+:ref:`sec:de:exer:pg:CN`?
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The error term for the centered difference is :math:`\Delta t^2` and hence
+smaller than the error terms for the forward and backward differences.
+Therefore, the Crank-Nicolson curve is closer to the analytical solution.
+Also, the error terms of the forward and backward differences are
+the same, except for the sign, which explains why the corresponding curves
+lie on each side of the analytical solution, with approximately the
+same distance. Note: the leading order error term is only a good
+approximation to the true error as :math:`\Delta t\rightarrow 0`, so for
+small :math:`\Delta t`, the forward and backward schemes will deviate
+an equal amount from the analytical solution in the center, but for
+large :math:`\Delta t` errors will deviate from this observation (and,
+in particular, the backward scheme may give oscillatory solutions for
+large :math:`\Delta t` in this problem).
+
+.. --- end solution of exercise ---
+
+**e)**
+Find the leading order error term in the following standard
+finite difference approximation
+to the second-order derivative:
+
+.. math::
+         u''(t_n) \approx \frac{u(t_n+\Delta t)- 2u(t_n) + u(t_n-\Delta t)}{\Delta t}\thinspace .
+
+.. --- begin hint in exercise ---
+
+**Hint.**
+Express :math:`u(t_n\pm \Delta t)` via Taylor series and insert them in
+the difference formula.
+
+.. --- end hint in exercise ---
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+We write
+
+.. math::
+        
+        u(t_n+\Delta t) &= u(t_n) + \frac{d}{dt}u(t_n)\Delta t +
+        \frac{1}{2!}\frac{d^2}{dt^2}u(t_n)\Delta t^2 +
+         \frac{1}{3!}\frac{d^3}{dt^3}u(t_n)\Delta t^3 + \ldots\\ 
+        u(t_n-\Delta t) &= u(t_n) - \frac{d}{dt}u(t_n)\Delta t +
+        \frac{1}{2!}\frac{d^2}{dt^2}u(t_n)\Delta t^2 -
+         \frac{1}{3!}\frac{d^3}{dt^3}u(t_n)\Delta t^3 + \ldots\\ 
+        \thinspace .
+        
+
+If we now add the two equations, it gives us
+
+.. math::
+         u(t_n+\Delta t) + u(t_n-\Delta t) = 2 u(t_n) +
+        2\frac{1}{2!}\frac{d^2}{dt^2}u(t_n)\Delta t^2 +
+        2\frac{1}{4!}\frac{d^4}{dt^4}u(t_n)\Delta t^4 + \ldots\thinspace .
+
+This allows us to isolate :math:`u''(t_n)` on the left hand side as
+
+.. math::
+         \frac{d^2}{dt^2}u(t_n) = \frac{u(t_n+\Delta t) - 2 u(t_n) + u(t_n-\Delta t)}{\Delta t^2} -
+        2\frac{1}{4!}\frac{d^4}{dt^4}u(t_n)\Delta t^2 - \ldots\thinspace .
+
+The leading error term therefore appears as :math:`-2\frac{1}{4!}\frac{d^4}{dt^4}u(t_n)\Delta t^2`.
+
+.. --- end solution of exercise ---
+
+Filename: ``Taylor_differences.pdf``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _sec:de:exer:vib:BE:
+
+Exercise 56: Use a Backward Euler scheme for oscillations
+---------------------------------------------------------
+
+Consider :eq:`sec:de:model:osc2:u`-:eq:`sec:de:model:osc2:v`
+modeling an oscillating engineering system. This :math:`2\times 2` ODE system
+can be solved by the *Backward Euler scheme*, which is based on
+discretizing derivatives by collecting information backward
+in time. More specifically, :math:`u'(t)` is approximated as
+
+.. math::
+         u'(t) \approx \frac{u(t) - u(t-\Delta t)}{\Delta t}\thinspace .
+
+A general vector ODE :math:`u'=f(u,t)`, where :math:`u` and :math:`f` are vectors,
+can use this approximation as follows:
+
+.. math::
+         \frac{u^{n} - u^{n-1}}{\Delta t} = f(u^n,t_n),
+
+which leads to an equation for the new value :math:`u^n`:
+
+.. math::
+         u^n -\Delta tf(u^n,t_n) = u^{n-1}\thinspace .
+
+For a general :math:`f`, this is a system of *nonlinear algebraic equations*.
+
+However, the ODE :eq:`sec:de:model:osc2:u`-:eq:`sec:de:model:osc2:v`
+is *linear*, so a Backward Euler scheme leads to a system of two
+algebraic equations for two unknowns:
+
+.. _Eq:vib:undamped:BE1:
+
+.. math::
+   :label: vib:undamped:BE1
+        
+        u^{n} - \Delta t v^{n} = u^{n-1},
+        
+        
+
+.. _Eq:vib:undamped:BE2:
+
+.. math::
+   :label: vib:undamped:BE2
+          
+        v^{n} + \Delta t \omega^2 u^{n} = v^{n-1}
+        
+        \thinspace .
+        
+
+**a)**
+Solve the system for :math:`u^n` and :math:`v^n`.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+In the first of these equations, we may isolate :math:`u^n` on the left hand side.
+This gives
+
+.. math::
+         u^n = \Delta t v^n + u^{n-1}\thinspace .
+
+Inserting this for :math:`u^n` in the second equation, we can solve for :math:`v^n`. That is,
+
+.. math::
+         v^n + \Delta t \omega^2 (\Delta t v^n + u^{n-1}) = v^{n-1}\thinspace ,
+
+so that
+
+.. math::
+         v^n = \frac{1}{1 + (\Delta t \omega)^2}(-\Delta t \omega^2 u^{n-1} + v^{n-1})\thinspace .
+
+Finally, we may insert this expression for :math:`v^n` into the one for :math:`u^n`, which gives
+
+.. math::
+         u^n = \Delta t (\frac{1}{1 + (\Delta t \omega)^2}(-\Delta t \omega^2 u^{n-1} + v^{n-1})) + u^{n-1}\thinspace .
+
+Simplifying, we arrive at
+
+.. math::
+         u^n = \frac{\Delta t v^{n-1} + u^{n-1}}{1 + (\Delta t \omega)^2}\thinspace .
+
+Thus, we have an explicit scheme for advancing the solution :math:`v^n` and :math:`u^n` in time.
+
+.. --- end solution of exercise ---
+
+**b)**
+Implement the found formulas for :math:`u^n` and :math:`v^n`
+in a program for computing the entire numerical solution of
+:eq:`sec:de:model:osc2:u`-:eq:`sec:de:model:osc2:v`.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: osc_BE
+
+
+.. --- end solution of exercise ---
+
+**c)**
+Run the program with a :math:`\Delta t` corresponding to 20 time steps per
+period of the oscillations (see the section :ref:`sec:de:vib:special`
+for how to find such a :math:`\Delta t`). What do you observe?
+Increase to 2000 time steps per period. How much does this improve
+the solution?
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+With 20 time steps per period, the oscillations develop as
+
+.. figure:: osc_BE_20.png
+   :width: 600
+
+Changing to 2000 time steps per period, the solution improves dramatically into
+
+.. figure:: osc_BE_2000.png
+   :width: 600
+
+.. --- end solution of exercise ---
+
+Filename: ``osc_BE.m``.
+
+.. Closing remarks for this Exercise
+
+Remarks  (6)
+~~~~~~~~~~~~
+
+While the Forward Euler method applied to oscillation problems
+:math:`u''+\omega^2u=0` gives growing amplitudes, the Backward Euler
+method leads to significantly damped amplitudes.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _sec:de:exer:SIR:Heun:
+
+Exercise 57: Use Heun's method for the SIR model
+------------------------------------------------
+
+Make a program that computes the solution of the SIR model from
+the section :ref:`sec:de:flu` both by the Forward Euler method and by Heun's method
+(or equivalently: the 2nd-order Runge-Kutta method) from
+the section :ref:`sec:de:osc:Heun`. Compare the two methods in
+the simulation case from the section :ref:`sec:de:flu:prog:spec`.
+Make two comparison plots, one for a large and one for a
+small time step. Experiment to find what "large" and "small"
+should be: the large one gives significant differences, while
+the small one lead to very similar curves.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+
+.. The below box could be typeset as .. admonition: Attention
+   but we have decided not to do so since the admon needs a title
+   (the box formatting is therefore just ignored)
+
+Here is a missing file: SIR_Heun
+
+
+With a (large) time step of :math:`24 h`, we get the following behavior,
+
+.. figure:: SIR_H_large_dt_eq_24.png
+   :width: 600
+
+Reducing the time step to :math:`4 h`, the curves get very similar.
+
+.. figure:: SIR_H_small_dt_eq_4.png
+   :width: 600
+
+.. --- end solution of exercise ---
+
+Filename: ``SIR_Heun.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _sec:de:exer:odespy:decay:
+
+Exercise 58: Use Odespy to solve a simple ODE
+---------------------------------------------
+
+Solve
+
+.. math::
+         u' = -au + b,\quad u(0)=U_0,\quad t\in (0,T]
+
+by the Odespy software. Let the problem parameters :math:`a` and :math:`b`
+be arguments to the right-hand side function that specifies the
+ODE to be solved. Plot the solution for the case when
+:math:`a=2`, :math:`b=1`, :math:`T=6/a`, and we use 100 time intervals in :math:`[0,T]`.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+
+.. code-block:: python
+
+        import odespy
+        import numpy as np
+        import matplotlib.pyplot as plt
+        
+        def f(u, t, a, b):
+            return -a*u + b
+        
+        # Problem parameters
+        a = 2
+        b = 1
+        U0 = 2
+        method = odespy.RK2
+        
+        # Run Odespy solver
+        solver = method(f, f_args=[a, b])
+        solver.set_initial_condition(U0)
+        T = 6.0/a  # final simulation time
+        N_t = 100  # no of intervals
+        time_points = np.linspace(0, T, N_t+1)
+        u, t = solver.solve(time_points)
+        
+        plt.plot(t, u)
+        plt.show
+
+.. --- end solution of exercise ---
+
+Filename: ``odespy_demo.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _sec:de:exer:osc:BE:
+
+Exercise 59: Set up a Backward Euler scheme for oscillations
+------------------------------------------------------------
+
+Write the ODE :math:`u'' + \omega^2u=0` as a system of two first-order
+ODEs and discretize these with backward differences as illustrated
+in Figure :ref:`sec:de:fig:BE`. The resulting method is referred to as
+a Backward Euler scheme. Identify the matrix and right-hand side
+of the linear system that has to be solved at each time level.
+Implement the method, either from scratch yourself or using
+Odespy (the name is ``odespy.BackwardEuler``).
+Demonstrate that contrary to a Forward Euler scheme, the Backward
+Euler scheme leads to significant non-physical damping. The figure
+below shows that even with 60 time steps per period, the results
+after a few periods are useless:
+
+.. figure:: osc_odespy_BE.png
+   :width: 600
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+The first-order system is
+
+.. math::
+        
+        v' &= -\omega^2 u\\ 
+        u' &= v
+        
+
+Backward differences mean
+
+.. math::
+        
+        \frac{v^{n}-v^{n-1}}{\Delta t} &= -\omega^2 u^n\\ 
+        \frac{u^{n}-u^{n-1}}{\Delta t} &= v^n
+        
+
+Collecting the unknowns :math:`u^n` and :math:`v^n` on the left-hand side,
+
+.. math::
+        
+        v^{n} + \Delta t\omega^2 u^n &= v^{n-1} \\ 
+        u^{n} - \Delta t v^n &= u^{n-1}
+        
+
+shows that this is a coupled :math:`2\times 2` system for :math:`u^n` and :math:`v^n`:
+
+.. math::
+         \left(\begin{array}{cc}
+        1 & \Delta t\omega^2\\ 
+        -\Delta t & 1
+        \end{array}\right)
+        \left(\begin{array}{c}
+        v^n\\ 
+        u^n
+        \end{array}\right)
+        =
+        \left(\begin{array}{c}
+        v^{n-1}\\ 
+        u^{n-1}
+        \end{array}\right)
+        
+
+The simplest way of implementing the scheme is to use the
+``osc_odespy.py`` code explained in the section :ref:`sec:de:osc:odespy`
+and make a call
+
+.. code-block:: python
+
+        compare(odespy_methods=[odespy.EulerCromer, odespy.BackwardEuler],
+                omega=2, X_0=2,number_of_periods=6,
+                time_intervals_per_period=60)
+
+.. --- end solution of exercise ---
+
+Filename: ``osc_BE.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _sec:de:exer:osc:FE:general:
+
+Exercise 60: Set up a Forward Euler scheme for nonlinear and damped oscillations
+--------------------------------------------------------------------------------
+
+Derive a Forward Euler method for the ODE system
+:eq:`sec:de:vib:ode2:v`-:eq:`sec:de:vib:ode2:u`.
+Compare the method with the Euler-Cromer scheme for
+the sliding friction problem
+from the section :ref:`sec:de:vib:ode2:sliding:friction`:
+
+1. Does the Forward Euler scheme give growing amplitudes?
+
+2. Is the period of oscillation accurate?
+
+3. What is the required time step size for the two methods to
+   have visually coinciding curves?
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+A Forward Euler scheme is easy to derive:
+
+.. _Eq:sec:de:vib:ode2:v:FE1:
+
+.. math::
+   :label: sec:de:vib:ode2:v:FE1
+        
+        \frac{v^{n+1}-v^n}{\Delta t} = \frac{1}{m}\left(F(t_n) - s(u^n) - f(v^n)\right),
+        
+        
+
+.. _Eq:sec:de:vib:ode2:u:FE1:
+
+.. math::
+   :label: sec:de:vib:ode2:u:FE1
+          
+        \frac{u^{n+1}-u^n}{\Delta t} = v^n,
+        
+        
+
+which is, as usual, reordered to the algorithmic form
+
+.. _Eq:sec:de:vib:ode2:v:FE2:
+
+.. math::
+   :label: sec:de:vib:ode2:v:FE2
+        
+        v^{n+1} = v^n + \frac{\Delta t}{m}\left(F(t_n) - s(u^n) - f(v^n)\right),
+        
+        
+
+.. _Eq:sec:de:vib:ode2:u:FE2:
+
+.. math::
+   :label: sec:de:vib:ode2:u:FE2
+          
+        u^{n+1} = u^n + \Delta t v^n\thinspace .
+        
+        
+
+However, we have already seen that the Forward Euler method is not
+well suited for simulating oscillations as the scheme gives rise
+to a non-physical, growing amplitude. It remains to see how
+damped systems are treated.
+
+An implementation can be done utilizing Odespy and the ``compare``
+function in ``osc_odespy_general.py``:
+
+.. code-block:: python
+
+        def sliding_friction():
+            from numpy import tanh, sign
+        
+            f = lambda v: mu*m*g*sign(v)
+            alpha = 60.0
+            s = lambda u: k/alpha*tanh(alpha*u)
+            #s = lambda u: k*u
+            F = lambda t: 0
+        
+            g = 9.81
+            mu = 0.4
+            m = 1
+            k = 1000
+        
+            U_0 = 0.1
+            V_0 = 0
+        
+            T = 1
+            dt = T/100.
+        
+            methods = [odespy.EulerCromer, odespy.ForwardEuler]
+            compare(methods, f=f, s=s, F=F, m=1, U_0=U_0, V_0=V_0,
+                    T=T, dt=dt, start_of_plot=0)
+
+With :math:`\Delta t =10^{-2}` we get the plot below.
+
+.. figure:: osc_FE_general_dt100.png
+   :width: 600
+
+We observe that 1) the amplitude is not growing, it is decaying, but
+not at all at the rate it should, compared to the Euler-Cromer
+scheme (which we anticipate is fairly accurate, also for this fairly
+coarse time resolution), and 2) there is a significant phase error.
+
+Reducing :math:`\Delta t` by a factor of 10 increases the accuracy
+incredibly:
+
+.. figure:: osc_FE_general_dt1000.png
+   :width: 600
+
+Experimenting a bit, we arrive at :math:`\Delta t=5\cdot 10^{-3}` as
+a time step size where the two methods gives approximately equal
+results:
+
+.. figure:: osc_FE_general_dt5000.png
+   :width: 600
+
+.. --- end solution of exercise ---
+
+Filename: ``osc_FE_general.m``.
+
+.. --- end exercise ---
+
+.. --- begin exercise ---
+
+.. _sec:de:exer:osc:2nd:V0ic:
+
+Exercise 61: Discretize an initial condition
+--------------------------------------------
+
+Assume that the initial condition on :math:`u'` is nonzero in
+the finite difference method from the section :ref:`sec:de:vib:2nd`:
+:math:`u'(0)=V_0`. Derive the special formula for :math:`u^1` in this case.
+
+.. --- begin solution of exercise ---
+
+**Solution.**
+We use the same centered finite difference approximation,
+
+.. math::
+         u'(0)\approx = \frac{u^1 - u^{-1}}{2\Delta t}=V_0,
+
+which leads to
+
+.. math::
+         u^{-1} = u^1 - 2\Delta t\,V_0\thinspace .
+
+Using this expression to eliminate :math:`u^{-1}` in :eq:`sec:de:vib:2nd:scheme0`
+leads to
+
+.. math::
+         u^1 = u^0 + \Delta t\,V_0 - \frac{1}{2}\Delta t^2\omega^2 u^0\thinspace .
+
+.. --- end solution of exercise ---
+
+Filename: ``ic_with_V_0.pdf``.
+
+.. --- end exercise ---
+
+.. _6th:SolvPDEs:
+

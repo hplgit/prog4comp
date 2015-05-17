@@ -1,0 +1,1334 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Solving nonlinear algebraic equations</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
+        <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+
+        <script>sagecell.makeSagecell({inputLocation: ".sage"});</script>
+
+        <style type="text/css">
+                .sagecell .CodeMirror-scroll {
+                        overflow-y: hidden;
+                        overflow-x: auto;
+                }
+                .sagecell .CodeMirror {
+                        height: auto;
+                }
+        </style>
+
+    
+    <link rel="top" title="Programming for Computations" href="index.html" />
+    <link rel="next" title="References" href="._pylight008.html" />
+    <link rel="prev" title="Solving partial differential equations" href="._pylight006.html" />
+
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  
+       <style type="text/css">
+         div.admonition {
+           background-color: whiteSmoke;
+           border: 1px solid #bababa;
+         }
+       </style>
+      </head>
+    
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="._pylight008.html" title="References"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="._pylight006.html" title="Solving partial differential equations"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Programming for Computations</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="solving-nonlinear-algebraic-equations">
+<h1>Solving nonlinear algebraic equations<a class="headerlink" href="#solving-nonlinear-algebraic-equations" title="Permalink to this headline">¶</a></h1>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/comic_root.png"><img alt="_images/comic_root.png" src="_images/comic_root.png" style="width: 800px;" /></a>
+</div>
+<p>As a reader of this book you are probably well into mathematics and
+often &#8220;accused&#8221; of being particularly good at &#8220;solving equations&#8221; (typically
+at family dinners!). However, is it <em>really</em> true that you, with pen and paper, can
+solve <em>many</em> equations? How many kinds of equations can you actually solve?
+If we restrict our attention to <em>algebraic equations in one unknown</em> <span class="math">\(x\)</span>,
+you can certainly do linear equations: <span class="math">\(ax+b=0\)</span> and quadratic
+ones: <span class="math">\(ax^2 + bx + c = 0\)</span>. You may also know that there
+are formulas for the roots of cubic and quartic equations too.
+Maybe you can do the special trigonometric equation
+<span class="math">\(\sin x + \cos x = 1\)</span> as well, but there it (probably) stops. Equations that are
+not reducible to one of the mentioned cannot be solved, which
+means that most algebraic equations arising in applications cannot
+be treated with pen and paper!</p>
+<p>If we exchange the traditional idea of finding <em>exact</em> solutions to equations with
+the idea of rather finding <em>approximate</em> solutions, a whole new world of possibilities
+opens up! With such an approach, we can in principle solve <em>any</em> algebraic equation.</p>
+<p>Let us start by introducing a common generic form for any algebraic equation:</p>
+<div class="math">
+\[f(x) = 0\thinspace .\]</div>
+<p>Here, <span class="math">\(f(x)\)</span> is some prescribed formula involving <span class="math">\(x\)</span>. For example,
+the equation</p>
+<div class="math">
+\[e^{-x}\sin x = \cos x\]</div>
+<p>has</p>
+<div class="math">
+\[f(x)= e^{-x}\sin x - \cos x\thinspace .\]</div>
+<p>Just move all terms to the left-hand side and then the formula
+to the left of the equality sign is <span class="math">\(f(x)\)</span>.</p>
+<p>So, when do we really need to solve algebraic equations beyond the
+simplest types we can treat with pen and paper?  There are two major
+application areas. One is when using <em>implicit</em> numerical methods for
+ordinary differential equations.  These give rise to one or a system of
+algebraic equations.  The other major application type is
+optimization, i.e., finding the maxima or minima of a function.  These
+maxima and minima are normally found by solving the algebraic equation
+<span class="math">\(F'(x)=0\)</span> if <span class="math">\(F(x)\)</span> is the function to be optimized.  Differential
+equations are very much used throughout science and engineering, and
+actually most engineering problems are optimization problems in the
+end because one wants a design that maximizes performance and
+minimizes cost.</p>
+<p>We restrict the attention here to one algebraic equation in one variable,
+with our usual emphasis how to program the algorithms.
+<em>Systems</em> of nonlinear algebraic equations with <em>many variables</em>
+arise from implicit methods for ordinary and partial differential
+equations as well as in multivariate optimization. However,
+we consider this topic beyond the scope of the current text.</p>
+<div class="admonition-terminology admonition" id="index-0">
+<p class="first admonition-title">Terminology</p>
+<p class="last">When solving algebraic equations <span class="math">\(f(x)=0\)</span>, we often say that the
+solution <span class="math">\(x\)</span> is a <em>root</em> of the equation. The solution process itself
+is thus often called <em>root finding</em>.</p>
+</div>
+<div class="section" id="brute-force-methods">
+<span id="th-bruteforce"></span><h2>Brute force methods<a class="headerlink" href="#brute-force-methods" title="Permalink to this headline">¶</a></h2>
+<p>The representation of a mathematical function <span class="math">\(f(x)\)</span> on a computer
+takes two forms.  One is a Matlab function returning the function
+value given the argument, while the other is a collection of points <span class="math">\((x,
+f(x))\)</span> along the function curve. The latter is the representation we
+use for plotting, together with an assumption of linear variation
+between the points. This representation is also very suited for
+equation solving and optimization: we simply go through all points and
+see if the function crosses the <span class="math">\(x\)</span> axis, or for optimization, test
+for a local maximum or minimum point. Because there is a lot of work to
+examine a huge number of points, and also because the idea is extremely
+simple, such approaches are often referred to as <em>brute force</em>
+methods. However, we are not embarrassed of explaining the methods
+in detail and implementing them.</p>
+<div class="section" id="brute-force-root-finding">
+<h3>Brute force root finding<a class="headerlink" href="#brute-force-root-finding" title="Permalink to this headline">¶</a></h3>
+<p>Assume that we have a set of points along the curve of a function <span class="math">\(f(x)\)</span>:</p>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/brute_force_roots.png"><img alt="_images/brute_force_roots.png" src="_images/brute_force_roots.png" style="width: 600px;" /></a>
+</div>
+<p>We want to solve <span class="math">\(f(x)=0\)</span>, i.e., find the points <span class="math">\(x\)</span>
+where <span class="math">\(f\)</span> crosses the <span class="math">\(x\)</span> axis.
+A brute force algorithm is to run through all points on the
+curve and check if one point is below the <span class="math">\(x\)</span> axis and if the next
+point is above the <span class="math">\(x\)</span> axis, or the other way around.
+If this is found to be the case, we know that <span class="math">\(f\)</span> must be zero
+in between these two <span class="math">\(x\)</span> points.</p>
+<div class="section" id="numerical-algorithm-1">
+<h4>Numerical algorithm  (1)<a class="headerlink" href="#numerical-algorithm-1" title="Permalink to this headline">¶</a></h4>
+<p>More precisely, we have a set of <span class="math">\(n+1\)</span> points <span class="math">\((x_i, y_i))\)</span>,
+<span class="math">\(y_i=f(x_i)\)</span>, <span class="math">\(i=0,\ldots,n\)</span>, where
+<span class="math">\(x_0 &lt; \ldots &lt; x_n\)</span>.
+We check if <span class="math">\(y_i &lt; 0\)</span> and <span class="math">\(y_{i+1} &gt; 0\)</span> (or the other way around). A compact expression
+for this check is to perform the test <span class="math">\(y_i y_{i+1} &lt; 0\)</span>.
+If so, the root of <span class="math">\(f(x)=0\)</span>
+is in <span class="math">\([x_i, x_{i+1}]\)</span>. Assuming a linear variation of <span class="math">\(f\)</span>
+between <span class="math">\(x_i\)</span> and <span class="math">\(x_{i+1}\)</span>, we have the approximation</p>
+<div class="math">
+\[f(x)\approx \frac{f(x_{i+1})-f(x_i)}{x_{i+1}-x_i}(x-x_i) + f(x_i)
+= \frac{y_{i+1}-y_i}{x_{i+1}-x_i}(x-x_i) + y_i,\]</div>
+<p>which, when set equal to zero, gives the root</p>
+<div class="math">
+\[x = x_i - \frac{x_{i+1}-x_i}{y_{i+1}-y_i}y_i\thinspace .\]</div>
+</div>
+<div class="section" id="implementation-6">
+<h4>Implementation  (6)<a class="headerlink" href="#implementation-6" title="Permalink to this headline">¶</a></h4>
+<p>Given some Matlab implementation <code class="docutils literal"><span class="pre">f(x)</span></code> of our mathematical
+function, straightforward programming of the above numerical
+algorithm leads to</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="n">x</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10001</span><span class="p">);</span>
+<span class="n">y</span> <span class="p">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+
+<span class="n">root</span> <span class="p">=</span> <span class="n">NaN</span><span class="p">;</span>  <span class="c">% Initialization</span>
+<span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:(</span><span class="nb">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="o">*</span><span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span>
+         <span class="n">root</span> <span class="p">=</span> <span class="n">x</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="nb">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="p">(</span><span class="nb">i</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="p">))</span><span class="o">*</span><span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="p">);</span>
+         <span class="k">break</span><span class="p">;</span>  <span class="c">% Jump out of loop</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+<span class="k">if</span> <span class="nb">isnan</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Could not find any root in [%g, %g]\n&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">x</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+<span class="k">else</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Find (the first) root as x=%g\n&#39;</span><span class="p">,</span> <span class="n">root</span><span class="p">);</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>(See the file
+<a class="reference external" href="https://github.com/hplgit/prog4comp/src/m/brute_force_root_finder_flat.m">brute_force_root_finder_flat.m</a>.)</p>
+<p>Note the nice use of setting <code class="docutils literal"><span class="pre">root</span></code> to <code class="docutils literal"><span class="pre">NaN</span></code>: we can simply test
+<code class="docutils literal"><span class="pre">if</span> <span class="pre">isnan(root)</span></code> to see if we found a root and overwrote the <code class="docutils literal"><span class="pre">NaN</span></code>
+value, or if we did not find any root among the tested points.</p>
+<p>Running this program with some function, say <span class="math">\(f(x)=e^{-x^2}\cos(4x)\)</span>
+(which has a solution at <span class="math">\(x = \frac{\pi}{8}\)</span>),
+gives the root 0.392699, which has an error of <span class="math">\(8.2\cdot 10^{-8}\)</span>.
+Increasing the number of points with a factor of ten gives a root
+with an error of <span class="math">\(3.1\cdot 10^{-10}\)</span>.</p>
+<p>After such a quick &#8220;flat&#8221; implementation of an algorithm, we should
+always try to offer the algorithm as a Matlab function, applicable to as
+wide a problem domain as possible. The function should take <span class="math">\(f\)</span> and
+an associated interval
+<span class="math">\([a,b]\)</span> as input, as well as a number of points (<span class="math">\(n\)</span>), and return
+a list of all the roots in <span class="math">\([a,b]\)</span>. Here is our candidate
+for a good implementation of the brute force rooting finding algorithm:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span>all_roots <span class="p">=</span><span class="w"> </span><span class="nf">brute_force_root_finder</span><span class="p">(</span>f, a, b, n<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">x</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+    <span class="n">y</span> <span class="p">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="n">roots</span> <span class="p">=</span> <span class="p">[];</span>
+    <span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="o">*</span><span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span>
+            <span class="n">root</span> <span class="p">=</span> <span class="n">x</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="nb">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="p">(</span><span class="nb">i</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="p">))</span><span class="o">*</span><span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="p">);</span>
+            <span class="n">roots</span> <span class="p">=</span> <span class="p">[</span><span class="n">roots</span><span class="p">;</span> <span class="n">root</span><span class="p">];</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="n">all_roots</span> <span class="p">=</span> <span class="n">roots</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>This function is found in the file
+<a class="reference external" href="https://github.com/hplgit/prog4comp/src/m/brute_force_foot_finder.m">brute_force_root_finder.m</a>.</p>
+<p>This time we use another elegant technique to indicate if roots were found
+or not: <code class="docutils literal"><span class="pre">roots</span></code> is empty (an array of length zero) if the root finding was unsuccessful,
+otherwise it contains all the roots. Application of the function to
+the previous example can be coded as
+(<a class="reference external" href="https://github.com/hplgit/prog4comp/src/m/demo_brute_force_foot_finder.m">demo_brute_force_root_finder.m</a>):</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span><span class="nf">demo_brute_force_root_finder</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="n">roots</span> <span class="p">=</span> <span class="n">brute_force_root_finder</span><span class="p">(</span>
+        <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="nb">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">.^</span><span class="mi">2</span><span class="p">)</span><span class="o">.*</span><span class="nb">cos</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1001</span><span class="p">);</span>
+    <span class="k">if</span> <span class="nb">length</span><span class="p">(</span><span class="n">roots</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="n">roots</span>
+    <span class="k">else</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Could not find any roots&#39;</span><span class="p">);</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="brute-force-optimization">
+<h3>Brute force optimization<a class="headerlink" href="#brute-force-optimization" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="numerical-algorithm-2">
+<h4>Numerical algorithm  (2)<a class="headerlink" href="#numerical-algorithm-2" title="Permalink to this headline">¶</a></h4>
+<p>We realize that <span class="math">\(x_i\)</span>
+corresponds to a maximum point if <span class="math">\(y_{i-1} &lt; y_i &gt; y_{i+1}\)</span>.
+Similarly, <span class="math">\(x_i\)</span> corresponds to a minimum if
+<span class="math">\(y_{i-1} &gt; y_i &lt; y_{i+1}\)</span>. We can do this test for all &#8220;inner&#8221;
+points <span class="math">\(i=1,\ldots,n-1\)</span> to find all local minima and maxima.
+In addition, we need to add an end
+point, <span class="math">\(i=0\)</span> or <span class="math">\(i=n\)</span>, if the corresponding <span class="math">\(y_i\)</span> is a global
+maximum or minimum.</p>
+</div>
+<div class="section" id="implementation-7">
+<h4>Implementation  (7)<a class="headerlink" href="#implementation-7" title="Permalink to this headline">¶</a></h4>
+<p>The algorithm above can be translated to the following Matlab function
+(file <a class="reference external" href="https://github.com/hplgit/prog4comp/src/m/brute_force_optimizer.m">brute_force_optimizer.m</a>):</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span>[xy_minima, xy_maxima] <span class="p">=</span><span class="w"> </span><span class="nf">brute_force_optimizer</span><span class="p">(</span>f, a, b, n<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">x</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+    <span class="n">y</span> <span class="p">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="c">% Let maxima and minima hold the indices corresponding</span>
+    <span class="c">% to (local) maxima and minima points</span>
+    <span class="n">minima</span> <span class="p">=</span> <span class="p">[];</span>
+    <span class="n">maxima</span> <span class="p">=</span> <span class="p">[];</span>
+    <span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">2</span><span class="p">:(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">maxima</span> <span class="p">=</span> <span class="p">[</span><span class="n">maxima</span><span class="p">;</span> <span class="nb">i</span><span class="p">];</span>
+        <span class="k">end</span>
+        <span class="k">if</span> <span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">minima</span> <span class="p">=</span> <span class="p">[</span><span class="n">minima</span><span class="p">;</span> <span class="nb">i</span><span class="p">];</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="c">% What about the end points?</span>
+    <span class="n">y_min_inner</span> <span class="p">=</span> <span class="n">y</span><span class="p">(</span><span class="n">minima</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>   <span class="c">% Initialize</span>
+    <span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">minima</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">y</span><span class="p">(</span><span class="n">minima</span><span class="p">(</span><span class="nb">i</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">y_min_inner</span>
+            <span class="n">y_min_inner</span> <span class="p">=</span> <span class="n">y</span><span class="p">(</span><span class="n">minima</span><span class="p">(</span><span class="nb">i</span><span class="p">));</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="n">y_max_inner</span> <span class="p">=</span> <span class="n">y</span><span class="p">(</span><span class="n">maxima</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>   <span class="c">% Initialize</span>
+    <span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">maxima</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">y</span><span class="p">(</span><span class="n">maxima</span><span class="p">(</span><span class="nb">i</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">y_max_inner</span>
+            <span class="n">y_max_inner</span> <span class="p">=</span> <span class="n">y</span><span class="p">(</span><span class="n">maxima</span><span class="p">(</span><span class="nb">i</span><span class="p">));</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="k">if</span> <span class="n">y</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">y_max_inner</span>
+        <span class="n">maxima</span> <span class="p">=</span> <span class="p">[</span><span class="n">maxima</span><span class="p">;</span> <span class="mi">1</span><span class="p">];</span>
+    <span class="k">end</span>
+    <span class="k">if</span> <span class="n">y</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">y_max_inner</span>
+       <span class="n">maxima</span> <span class="p">=</span> <span class="p">[</span><span class="n">maxima</span><span class="p">;</span> <span class="nb">length</span><span class="p">(</span><span class="n">x</span><span class="p">)];</span>
+    <span class="k">end</span>
+    <span class="k">if</span> <span class="n">y</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">y_min_inner</span>
+        <span class="n">minima</span> <span class="p">=</span> <span class="p">[</span><span class="n">minima</span><span class="p">;</span> <span class="mi">1</span><span class="p">];</span>
+    <span class="k">end</span>
+    <span class="k">if</span> <span class="n">y</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">y_min_inner</span>
+        <span class="n">minima</span> <span class="p">=</span> <span class="p">[</span><span class="n">minima</span><span class="p">;</span> <span class="nb">length</span><span class="p">(</span><span class="n">x</span><span class="p">)];</span>
+    <span class="k">end</span>
+
+    <span class="c">% Compose return values</span>
+    <span class="n">xy_minima</span> <span class="p">=</span> <span class="p">[];</span>
+    <span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">minima</span><span class="p">)</span>
+        <span class="n">xy_minima</span> <span class="p">=</span> <span class="p">[</span><span class="n">xy_minima</span><span class="p">;</span> <span class="p">[</span><span class="n">x</span><span class="p">(</span><span class="n">minima</span><span class="p">(</span><span class="nb">i</span><span class="p">))</span> <span class="n">y</span><span class="p">(</span><span class="n">minima</span><span class="p">(</span><span class="nb">i</span><span class="p">))]];</span>
+    <span class="k">end</span>
+    <span class="n">xy_maxima</span> <span class="p">=</span> <span class="p">[];</span>
+    <span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">maxima</span><span class="p">)</span>
+        <span class="n">xy_maxima</span> <span class="p">=</span> <span class="p">[</span><span class="n">xy_maxima</span><span class="p">;</span> <span class="p">[</span><span class="n">x</span><span class="p">(</span><span class="n">maxima</span><span class="p">(</span><span class="nb">i</span><span class="p">))</span> <span class="n">y</span><span class="p">(</span><span class="n">maxima</span><span class="p">(</span><span class="nb">i</span><span class="p">))]];</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>An application to <span class="math">\(f(x)=e^{-x^2}\cos(4x)\)</span> looks like</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span> <span class="nf">demo_brute_force_optimizer</span>
+    <span class="p">[</span><span class="n">xy_minima</span><span class="p">,</span> <span class="n">xy_maxima</span><span class="p">]</span> <span class="p">=</span> <span class="n">brute_force_optimizer</span><span class="p">(</span>
+        <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="nb">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">.^</span><span class="mi">2</span><span class="p">)</span><span class="o">.*</span><span class="nb">cos</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1001</span><span class="p">);</span>
+    <span class="n">xy_minima</span>
+    <span class="n">xy_maxima</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="model-problem-for-algebraic-equations">
+<h3>Model problem for algebraic equations<a class="headerlink" href="#model-problem-for-algebraic-equations" title="Permalink to this headline">¶</a></h3>
+<p>We shall consider the
+very simple problem of finding the square root of 9, which is the
+positive solution of <span class="math">\(x^2=9\)</span>. The nice feature of solving an equation
+whose solution is known beforehand is that we can easier investigate
+how the numerical method and the implementation perform in the search
+for the solution. The <span class="math">\(f(x)\)</span> function corresponding to the equation
+<span class="math">\(x^2=9\)</span> is</p>
+<div class="math">
+\[f(x) = x^2 - 9\thinspace .\]</div>
+<p>Our interval of interest for solutions will be <span class="math">\([0,1000]\)</span> (the upper
+limit here is chosen somewhat arbitrarily).</p>
+<p>In the following, we will present several efficient and
+accurate methods for solving nonlinear algebraic equations, both
+single equations and systems of equations. The methods all have in
+common that they search for <em>approximate</em> solutions.
+The methods differ, however, in the
+way they perform the search for solutions. The idea for the search
+influences the efficiency of the search and the reliability of
+actually finding a solution. For example, Newton&#8217;s method is very
+fast, but not reliable, while the bisection method is the slowest,
+but absolutely reliable. No method is best at all problems, so we
+need different methods for different problems.</p>
+<div class="admonition-what-is-the-difference-between-linear-and-nonlinear-equations admonition">
+<p class="first admonition-title">What is the difference between linear and nonlinear equations</p>
+<p class="last">You know how to solve linear equations <span class="math">\(ax+b=0\)</span>: <span class="math">\(x=-b/a\)</span>.
+All other types of equations <span class="math">\(f(x)\)</span>, i.e., when <span class="math">\(f(x)\)</span> is not a linear
+function of <span class="math">\(x\)</span>, are called nonlinear.
+A typical way of recognizing a nonlinear equation is to observe
+that <span class="math">\(x\)</span> is &#8220;not alone&#8221; as in <span class="math">\(ax\)</span>,
+but involved in a product with itself, such as in <span class="math">\(x^3 + 2x^2 -9=0\)</span>.
+We say that <span class="math">\(x^3\)</span> and <span class="math">\(2x^2\)</span> are nonlinear terms. An equation like
+<span class="math">\(\sin x + e^x\cos x=0\)</span> is also nonlinear although <span class="math">\(x\)</span> is not explicitly
+multiplied by itself, but the Taylor series of <span class="math">\(\sin x\)</span>, <span class="math">\(e^x\)</span>, and
+<span class="math">\(\cos x\)</span> all involve polynomials of <span class="math">\(x\)</span> where <span class="math">\(x\)</span> is multiplied by itself.</p>
+</div>
+</div>
+</div>
+<div class="section" id="newton-s-method">
+<span id="th-nonlinalgeq-newt"></span><h2>Newton&#8217;s method<a class="headerlink" href="#newton-s-method" title="Permalink to this headline">¶</a></h2>
+<p><em>Newton&#8217;s method</em>, also known as <em>Newton-Raphson&#8217;s method</em>, is a very
+famous and widely used method for solving nonlinear algebraic
+equations. Compared to the other methods we will consider, it is
+generally the fastest one (usually by far). It does not guarantee
+that an existing solution will be found, however.</p>
+<p>A fundamental idea of numerical methods for nonlinear
+equations have been to construct a series of linear equations, since we
+can solve linear equations, such that solving the linear equations brings
+us closer and closer to the solution of the nonlinear equation.
+The idea will be clearer when we present Newton&#8217;s method and the secant method.</p>
+<div class="section" id="deriving-and-implementing-newton-s-method">
+<h3>Deriving and implementing Newton&#8217;s method<a class="headerlink" href="#deriving-and-implementing-newton-s-method" title="Permalink to this headline">¶</a></h3>
+<p>Figure <a class="reference internal" href="#fig-illustrnewton"><span>Illustrates the idea of Newton&#8217;s method with  \( f(x) = x^2 - 9 \) , repeatedly solving for crossing of tangent lines with the  \( x \)  axis</span></a> shows the <span class="math">\(f(x)\)</span> function in
+our model equation <span class="math">\(x^2-9=0\)</span>. Numerical methods for algebraic equations
+require us to guess at a solution first. Here, this guess is called
+<span class="math">\(x_0\)</span>. The fundamental idea of Newton&#8217;s method is to approximate
+the original function <span class="math">\(f(x)\)</span> by a straight line, i.e., a linear
+function, since it is straightforward to solve linear equations.
+There are infinitely many choices of how to approximate <span class="math">\(f(x)\)</span> by
+a straight line. Newton&#8217;s method applies the tangent of <span class="math">\(f(x)\)</span> at
+<span class="math">\(x_0\)</span>, see the rightmost tangent in Figure <a class="reference internal" href="#fig-illustrnewton"><span>Illustrates the idea of Newton&#8217;s method with  \( f(x) = x^2 - 9 \) , repeatedly solving for crossing of tangent lines with the  \( x \)  axis</span></a>.
+This linear tangent function crosses the <span class="math">\(x\)</span> axis at a point we
+call <span class="math">\(x_1\)</span>. This is (hopefully) a better approximation to the solution
+of <span class="math">\(f(x)=0\)</span> than <span class="math">\(x_0\)</span>. The next fundamental idea is to repeat
+this process. We find the tangent of <span class="math">\(f\)</span> at <span class="math">\(x_1\)</span>, compute where it
+crosses the <span class="math">\(x\)</span> axis, at a point called <span class="math">\(x_2\)</span>, and repeat the process
+again. Figure <a class="reference internal" href="#fig-illustrnewton"><span>Illustrates the idea of Newton&#8217;s method with  \( f(x) = x^2 - 9 \) , repeatedly solving for crossing of tangent lines with the  \( x \)  axis</span></a> shows that the process brings
+us closer and closer to the left. It remains, however, to see if
+we hit <span class="math">\(x=3\)</span> or come sufficiently close to this solution.</p>
+<div class="figure" id="id1">
+<span id="fig-illustrnewton"></span><a class="reference internal image-reference" href="_images/fig4_4.png"><img alt="_images/fig4_4.png" src="_images/fig4_4.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text"><em>Illustrates the idea of Newton&#8217;s method with  \( f(x) = x^2 - 9 \) , repeatedly solving for crossing of tangent lines with the  \( x \)  axis</em></span></p>
+</div>
+<p>How do we compute the tangent of a function <span class="math">\(f(x)\)</span> at a point <span class="math">\(x_0\)</span>?
+The tangent function, here called <span class="math">\(\tilde f(x)\)</span>, is linear and has two
+properties:</p>
+<ol class="arabic simple">
+<li>the slope equals to <span class="math">\(f'(x_0)\)</span></li>
+<li>the tangent touches the <span class="math">\(f(x)\)</span> curve at <span class="math">\(x_0\)</span></li>
+</ol>
+<p>So, if we write the tangent function as <span class="math">\(\tilde f(x)=ax+b\)</span>, we must
+require <span class="math">\(\tilde f'(x_0)=f'(x_0)\)</span> and <span class="math">\(\tilde f(x_0)=f(x_0)\)</span>, resulting in</p>
+<div class="math">
+\[\tilde f(x) = f(x_0) + f'(x_0)(x - x_0)\thinspace .\]</div>
+<p>The key step in Newton&#8217;s method is to find where the tangent crosses
+the <span class="math">\(x\)</span> axis, which means solving <span class="math">\(\tilde f(x)=0\)</span>:</p>
+<div class="math">
+\[\tilde f(x)=0\quad\Rightarrow\quad x = x_0 - \frac{f(x_0)}{f'(x_0)}
+\thinspace .\]</div>
+<p>This is our new candidate point, which we call <span class="math">\(x_1\)</span>:</p>
+<div class="math">
+\[x_1 = x_0 - \frac{f(x_0)}{f'(x_0)}\thinspace .\]</div>
+<p>With <span class="math">\(x_0 = 1000\)</span>, we get <span class="math">\(x_1 \approx 500\)</span>, which is in accordance
+with the graph in Figure <a class="reference internal" href="#fig-illustrnewton"><span>Illustrates the idea of Newton&#8217;s method with  \( f(x) = x^2 - 9 \) , repeatedly solving for crossing of tangent lines with the  \( x \)  axis</span></a>. Repeating the
+process, we get</p>
+<div class="math">
+\[x_2 = x_1 - \frac{f(x_1)}{f'(x_1)}\approx 250\thinspace .\]</div>
+<p>The general scheme of Newton&#8217;s method may be written as</p>
+<div class="math" id="equation-eFourEleven">
+<span id="eq-efoureleven"></span><span class="eqno">(1)</span>\[     x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)},\quad n=0,1,2,\ldots\]</div>
+<p>The computation in <a href="#equation-eFourEleven">(1)</a> is repeated until
+<span class="math">\(f\left(x_n\right)\)</span> is close enough to zero. More precisely,
+we test if <span class="math">\(|f(x_n)|&lt;\epsilon\)</span>, with <span class="math">\(\epsilon\)</span> being a small
+number.</p>
+<p>We moved from 1000 to 250 in two iterations, so it is exciting to see
+how fast we can approach the solution <span class="math">\(x=3\)</span>.
+A computer program can automate the calculations. Our first
+try at implementing Newton&#8217;s method is in a function <code class="docutils literal"><span class="pre">naive_Newton</span></code>:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span>result <span class="p">=</span><span class="w"> </span><span class="nf">naive_Newton</span><span class="p">(</span>f,dfdx,starting_value,eps<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">x</span> <span class="p">=</span> <span class="n">starting_value</span><span class="p">;</span>
+    <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">&gt;</span> <span class="nb">eps</span>
+        <span class="n">x</span> <span class="p">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">dfdx</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="k">end</span>
+    <span class="n">result</span> <span class="p">=</span> <span class="n">x</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>The argument <code class="docutils literal"><span class="pre">x</span></code> is the starting value, called <span class="math">\(x_0\)</span> in our previous
+description.
+To solve the problem <span class="math">\(x^2=9\)</span> we also need to implement</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span>result <span class="p">=</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span>x<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">result</span> <span class="p">=</span> <span class="n">x</span>^<span class="mi">2</span> <span class="o">-</span> <span class="mi">9</span><span class="p">;</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span>result <span class="p">=</span><span class="w"> </span><span class="nf">dfdx</span><span class="p">(</span>x<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">result</span> <span class="p">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<div class="admonition-why-not-use-an-array-for-the-math-x-approximations admonition">
+<p class="first admonition-title">Why not use an array for the <span class="math">\(x\)</span> approximations</p>
+<p>Newton&#8217;s method is normally formulated with an <em>iteration index</em> <span class="math">\(n\)</span>,</p>
+<div class="math">
+\[x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}\thinspace .\]</div>
+<p>Seeing such an index, many would implement this as</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="n">x</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">=</span> <span class="n">x</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="o">/</span><span class="n">dfdx</span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">n</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Such an array is fine, but requires storage of all the approximations.
+In large industrial applications, where Newton&#8217;s method solves
+millions of equations at once, one cannot afford to store all the
+intermediate approximations in memory, so then it is important to
+understand that the algorithm in Newton&#8217;s method has no more need
+for <span class="math">\(x_n\)</span> when <span class="math">\(x_{n+1}\)</span> is computed. Therefore, we can work with
+one variable <code class="docutils literal"><span class="pre">x</span></code> and overwrite the previous value:</p>
+<div class="last highlight-python"><div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">dfdx</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Running <code class="docutils literal"><span class="pre">naive_Newton(f,</span> <span class="pre">dfdx,</span> <span class="pre">1000,</span> <span class="pre">eps=0.001)</span></code> results in the approximate
+solution 3.000027639. A smaller value of <code class="docutils literal"><span class="pre">eps</span></code> will produce a more
+accurate solution. Unfortunately, the plain <code class="docutils literal"><span class="pre">naive_Newton</span></code> function
+does not return how many iterations it used, nor does it print out
+all the approximations <span class="math">\(x_0,x_1,x_2,\ldots\)</span>, which would indeed be a nice
+feature. If we insert such a printout, a rerun results in</p>
+<div class="highlight-text"><div class="highlight"><pre>500.0045
+250.011249919
+125.02362415
+62.5478052723
+31.3458476066
+15.816483488
+8.1927550496
+4.64564330569
+3.2914711388
+3.01290538807
+3.00002763928
+</pre></div>
+</div>
+<p>We clearly see that the iterations approach the solution quickly.
+This speed of the search for the solution is the primary strength of
+Newton&#8217;s method compared to other methods.</p>
+</div>
+<div class="section" id="making-a-more-efficient-and-robust-implementation">
+<span id="th-newton-robust"></span><h3>Making a more efficient and robust implementation<a class="headerlink" href="#making-a-more-efficient-and-robust-implementation" title="Permalink to this headline">¶</a></h3>
+<p id="index-1">The <code class="docutils literal"><span class="pre">naive_Newton</span></code> function works fine for the example we are considering
+here. However, for more general use, there are some pitfalls that
+should be fixed in an improved version of the code. An example
+may illustrate what the problem is: let us solve <span class="math">\(\tanh(x)=0\)</span>, which
+has solution <span class="math">\(x=0\)</span>. With <span class="math">\(|x_0|\leq 1.08\)</span> everything works fine. For
+example, <span class="math">\(x_0\)</span> leads to six iterations if <span class="math">\(\epsilon=0.001\)</span>:</p>
+<div class="highlight-text"><div class="highlight"><pre>-1.05895313436
+0.989404207298
+-0.784566773086
+0.36399816111
+-0.0330146961372
+2.3995252668e-05
+</pre></div>
+</div>
+<p>Adjusting <span class="math">\(x_0\)</span> slightly to 1.09 gives division by zero! The
+approximations computed by Newton&#8217;s method become</p>
+<div class="highlight-text"><div class="highlight"><pre>-1.09331618202
+1.10490354324
+-1.14615550788
+1.30303261823
+-2.06492300238
+13.4731428006
+-1.26055913647e+11
+</pre></div>
+</div>
+<p>The division by zero is caused by <span class="math">\(x_7=-1.26055913647\cdot 10^{11}\)</span>,
+because <span class="math">\(\tanh(x_7)\)</span> is 1.0 to machine precision, and then
+<span class="math">\(f'(x)=1 - \tanh(x)^2\)</span> becomes zero in the denominator in Newton&#8217;s
+method.</p>
+<p>The underlying problem, leading to the division by zero in the above
+example, is that Newton&#8217;s method <em>diverges</em>: the approximations move
+further and further away from <span class="math">\(x=0\)</span>. If it had not been for the
+division by zero, the condition in the <code class="docutils literal"><span class="pre">while</span></code> loop would always
+be true and the loop would run forever. Divergence of Newton&#8217;s method
+occasionally happens, and the remedy
+is to abort the method when a maximum number of iterations is reached.</p>
+<p>Another disadvantage of the <code class="docutils literal"><span class="pre">naive_Newton</span></code> function is that it
+calls the <span class="math">\(f(x)\)</span> function twice as many times as necessary. This extra
+work is of no concern when <span class="math">\(f(x)\)</span> is fast to evaluate, but in
+large-scale industrial software, one call to <span class="math">\(f(x)\)</span> might take hours or days, and then removing unnecessary calls is important. The solution
+in our function is to store the call <code class="docutils literal"><span class="pre">f(x)</span></code> in a variable (<code class="docutils literal"><span class="pre">f_value</span></code>)
+and reuse the value instead of making a new call <code class="docutils literal"><span class="pre">f(x)</span></code>.</p>
+<p>To summarize, we want to write an improved function for implementing
+Newton&#8217;s method where we</p>
+<blockquote>
+<div><ul class="simple">
+<li>avoid division by zero</li>
+<li>allow a maximum number of iterations</li>
+<li>avoid the extra evaluation to <span class="math">\(f(x)\)</span></li>
+</ul>
+</div></blockquote>
+<p>A more robust and efficient version of the function, inserted in a
+complete program
+<a class="reference external" href="https://github.com/hplgit/prog4comp/src/m/Newtons_method.m">Newtons_method.m</a>
+for solving <span class="math">\(x^2 - 9 = 0\)</span>,
+is listed below.</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span><span class="nf">Newtons_method</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="n">f</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span>^<span class="mi">2</span> <span class="o">-</span> <span class="mi">9</span><span class="p">;</span>
+    <span class="n">dfdx</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">;</span>
+    <span class="nb">eps</span> <span class="p">=</span> <span class="mf">1e-6</span><span class="p">;</span>
+    <span class="n">x0</span> <span class="p">=</span> <span class="mi">1000</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">solution</span><span class="p">,</span><span class="n">no_iterations</span><span class="p">]</span> <span class="p">=</span> <span class="n">Newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">dfdx</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="nb">eps</span><span class="p">);</span>
+    <span class="k">if</span> <span class="n">no_iterations</span> <span class="o">&gt;</span> <span class="mi">0</span>   <span class="c">% Solution found</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Number of function calls: %d\n&#39;</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">no_iterations</span><span class="p">);</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;A solution is: %f\n&#39;</span><span class="p">,</span> <span class="n">solution</span><span class="p">)</span>
+    <span class="k">else</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Abort execution.\n&#39;</span><span class="p">)</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span>[solution, no_iterations] <span class="p">=</span><span class="w"> </span><span class="nf">Newton</span><span class="p">(</span>f, dfdx, x0, eps<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">x</span> <span class="p">=</span> <span class="n">x0</span><span class="p">;</span>
+    <span class="n">f_value</span> <span class="p">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="n">iteration_counter</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f_value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">eps</span> <span class="o">&amp;&amp;</span> <span class="n">iteration_counter</span> <span class="o">&lt;</span> <span class="mi">100</span>
+        <span class="k">try</span>
+            <span class="n">x</span> <span class="p">=</span> <span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="n">f_value</span><span class="p">)</span><span class="o">/</span><span class="n">dfdx</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+        <span class="k">catch</span>
+            <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Error! - derivative zero for x = \n&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">end</span>
+        <span class="n">f_value</span> <span class="p">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+        <span class="n">iteration_counter</span> <span class="p">=</span> <span class="n">iteration_counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">end</span>
+    <span class="c">% Here, either a solution is found, or too many iterations</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f_value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">eps</span>
+        <span class="n">iteration_counter</span> <span class="p">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">end</span>
+    <span class="n">solution</span> <span class="p">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="n">no_iterations</span> <span class="p">=</span> <span class="n">iteration_counter</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<span class="target" id="index-2"></span><p id="index-3">Handling of the potential division by zero is done by a
+<code class="docutils literal"><span class="pre">try-catch</span></code> construction, which works as follows. First, Matlab tries to execute the code in the <code class="docutils literal"><span class="pre">try</span></code> block, but if something goes wrong there, the <code class="docutils literal"><span class="pre">catch</span></code> block is executed instead and the execution is terminated by <code class="docutils literal"><span class="pre">exit</span></code>.</p>
+<p>The division by zero will always be detected and the program will be
+stopped. The main purpose of our way of treating the division by zero is
+to give the user a more informative error message and stop the program
+in a gentler way.</p>
+<p>Calling
+<code class="docutils literal"><span class="pre">exit</span></code>
+with an argument different from zero (here <code class="docutils literal"><span class="pre">1</span></code>)
+signifies that the program stopped because of an error.
+It is a good habit to supply the value <code class="docutils literal"><span class="pre">1</span></code>, because tools in
+the operating system can then be used by other programs to detect
+that our program failed.</p>
+<p>To prevent an infinite loop because of divergent iterations, we have
+introduced the integer variable <code class="docutils literal"><span class="pre">iteration_counter</span></code> to count the
+number of iterations in Newton&#8217;s method.
+With <code class="docutils literal"><span class="pre">iteration_counter</span></code> we can easily extend the condition in the
+<code class="docutils literal"><span class="pre">while</span></code> such that no more iterations take place when the number of
+iterations reaches 100. We could easily let this limit be an argument
+to the function rather than a fixed constant.</p>
+<p>The <code class="docutils literal"><span class="pre">Newton</span></code> function returns the approximate solution and the number
+of iterations. The latter equals <span class="math">\(-1\)</span> if the convergence criterion
+<span class="math">\(|f(x)|&lt;\epsilon\)</span> was not reached within the maximum number of
+iterations. In the calling code, we print out the solution and
+the number of function calls. The main cost of a method for
+solving <span class="math">\(f(x)=0\)</span> equations is usually the evaluation of <span class="math">\(f(x)\)</span> and <span class="math">\(f'(x)\)</span>,
+so the total number of calls to these functions is an interesting
+measure of the computational work. Note that in function <code class="docutils literal"><span class="pre">Newton</span></code>
+there is an initial call to <span class="math">\(f(x)\)</span> and then one call to <span class="math">\(f\)</span> and one
+to <span class="math">\(f'\)</span> in each iteration.</p>
+<p>Running <code class="docutils literal"><span class="pre">Newtons_method.m</span></code>, we get the following printout on the screen:</p>
+<div class="highlight-text"><div class="highlight"><pre>Number of function calls: 25
+A solution is: 3.000000
+</pre></div>
+</div>
+<p>As we did with the integration methods in the chapter <span class="xref std std-ref">sec:integrals</span>, we will
+place our solvers for nonlinear algebraic equations in separate files for easy use by other programs. So, we place <code class="docutils literal"><span class="pre">Newton</span></code> in the file <code class="docutils literal"><span class="pre">Newton.m</span></code></p>
+<p id="index-4">The Newton scheme will work better if the starting value is close to
+the solution. A good starting value may often make the difference as
+to whether the code actually <em>finds</em> a solution or not.  Because of
+its speed, Newton&#8217;s method is often the method of first choice for
+solving nonlinear algebraic equations, even if the scheme is not
+guaranteed to work. In cases where the initial guess may be far from
+the solution, a good strategy is to run a few iterations with the
+bisection method (see the chapter <a class="reference internal" href="#th-nonlinalgeq-bisect"><span>The bisection method</span></a>) to narrow
+down the region where <span class="math">\(f\)</span> is close to zero and then switch to Newton&#8217;s
+method for fast convergence to the solution.</p>
+<p>Newton&#8217;s method requires the analytical expression for the
+derivative <span class="math">\(f'(x)\)</span>. Derivation of <span class="math">\(f'(x)\)</span> is not always a reliable
+process by hand if <span class="math">\(f(x)\)</span> is a complicated function.
+However, Matlab has the Symbolic Math Toolbox, which we may use
+to create the required <code class="docutils literal"><span class="pre">dfdx</span></code> function (Octave does not (yet) offer
+the same possibilities for symbolic computations as Matlab. However,
+there is work in progress, e.g. on using SymPy (from Python) from
+Octave). In our sample problem, the recipe goes as follows:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="n">syms</span> <span class="n">x</span><span class="p">;</span>                   <span class="c">% define x as a mathematical symbol</span>
+<span class="n">f_expr</span> <span class="p">=</span> <span class="n">x</span>^<span class="mi">2</span> <span class="o">-</span> <span class="mi">9</span><span class="p">;</span>         <span class="c">% symbolic expression for f(x)</span>
+<span class="n">dfdx_expr</span> <span class="p">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">f_expr</span><span class="p">)</span>  <span class="c">% compute f&#39;(x) symbolically</span>
+<span class="c">% Turn f_expr and dfdx_expr into plain Matlab functions</span>
+<span class="n">f</span> <span class="p">=</span> <span class="n">matlabFunction</span><span class="p">(</span><span class="n">f_expr</span><span class="p">);</span>
+<span class="n">dfdx</span> <span class="p">=</span> <span class="n">matlabFunction</span><span class="p">(</span><span class="n">dfdx_expr</span><span class="p">);</span>
+<span class="n">dfdx</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>                   <span class="c">% will print 10</span>
+</pre></div>
+</div>
+<p>The nice feature of this code snippet is that <code class="docutils literal"><span class="pre">dfdx_expr</span></code> is the
+exact analytical expression for the derivative, <code class="docutils literal"><span class="pre">2*x</span></code>, if you
+print it out. This is a symbolic expression so we cannot do
+numerical computing with it, but the <code class="docutils literal"><span class="pre">matlabFunction</span></code>
+turns symbolic expressions into callable Matlab functions.</p>
+<p>The next method is the secant method, which is usually slower than
+Newton&#8217;s method, but it does not require an expression for
+<span class="math">\(f'(x)\)</span>, and it has only one function call per iteration.</p>
+</div>
+</div>
+<div class="section" id="the-secant-method">
+<span id="th-nonlinalgeq-secant"></span><h2>The secant method<a class="headerlink" href="#the-secant-method" title="Permalink to this headline">¶</a></h2>
+<p>When finding the derivative <span class="math">\(f'(x)\)</span> in Newton&#8217;s method is problematic,
+or when function evaluations take too long; we may adjust the method
+slightly. Instead of using tangent lines to the graph we may use
+secants. The approach is referred to as the <em>secant method</em>, and the
+idea is illustrated graphically in Figure <a class="reference internal" href="#fig-illustrsecant"><span>Illustrates the use of secants in the secant method when solving . From two chosen starting values,  and  the crossing  of the corresponding secant with the  axis is computed, followed by a similar computation of  from  and </span></a> for
+our example problem <span class="math">\(x^2 - 9 = 0\)</span>.</p>
+<div class="figure" id="id2">
+<span id="fig-illustrsecant"></span><a class="reference internal image-reference" href="_images/fig4_6.png"><img alt="_images/fig4_6.png" src="_images/fig4_6.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text">Illustrates the use of secants in the secant method when solving <span class="math">\(x^2 - 9 = 0, x \in [0, 1000]\)</span>. From two chosen starting values, <span class="math">\(x_0 = 1000\)</span> and <span class="math">\(x_1 = 700\)</span> the crossing <span class="math">\(x_2\)</span> of the corresponding secant with the <span class="math">\(x\)</span> axis is computed, followed by a similar computation of <span class="math">\(x_3\)</span> from <span class="math">\(x_1\)</span> and <span class="math">\(x_2\)</span></span></p>
+</div>
+<p>The idea of the secant method is to think as in Newton&#8217;s method, but
+instead of using <span class="math">\(f'(x_n)\)</span>, we approximate this derivative by a
+finite difference or the <em>secant</em>, i.e., the slope of the straight
+line that goes through the two most recent approximations <span class="math">\(x_n\)</span> and
+<span class="math">\(x_{n-1}\)</span>. This slope reads</p>
+<div class="math" id="equation-eFourTwelve">
+<span id="eq-efourtwelve"></span><span class="eqno">(2)</span>\[     \frac{f(x_n)-f(x_{n-1})}{x_n - x_{n-1}}\thinspace .\]</div>
+<p>Inserting this expression for <span class="math">\(f'(x_n)\)</span> in Newton&#8217;s method simply gives
+us the secant method:</p>
+<div class="math">
+\[x_{n+1} = x_n - \frac{f(x_n)}{\frac{f(x_n)-f(x_{n-1})}{x_n - x_{n-1}}},\]</div>
+<p>or</p>
+<div class="math" id="equation-eFourFourteen">
+<span id="eq-efourfourteen"></span><span class="eqno">(3)</span>\[     x_{n+1} = x_n - f(x_n) \frac{x_n - x_{n-1}}{f(x_n)-f(x_{n-1})}
+     \thinspace .\]</div>
+<p>Comparing <a href="#equation-eFourFourteen">(3)</a> to the graph in Figure
+<a class="reference internal" href="#fig-illustrsecant"><span>Illustrates the use of secants in the secant method when solving . From two chosen starting values,  and  the crossing  of the corresponding secant with the  axis is computed, followed by a similar computation of  from  and </span></a>, we see how <em>two</em> chosen starting points (<span class="math">\(x_0
+= 1000\)</span>, <span class="math">\(x_1= 700\)</span>, and corresponding function values) are used to
+compute <span class="math">\(x_2\)</span>. Once we have <span class="math">\(x_2\)</span>, we similarly use <span class="math">\(x_1\)</span> and <span class="math">\(x_2\)</span> to
+compute <span class="math">\(x_3\)</span>. As with Newton&#8217;s method, the procedure is repeated
+until <span class="math">\(f(x_n)\)</span> is below some chosen limit value, or some limit on the
+number of iterations has been reached. We use an iteration counter
+here too, based on the same thinking as in the implementation of
+Newton&#8217;s method.</p>
+<p>We can store the approximations <span class="math">\(x_n\)</span> in an array, but as in Newton&#8217;s
+method, we notice that the computation of <span class="math">\(x_{n+1}\)</span> only needs
+knowledge of <span class="math">\(x_n\)</span> and <span class="math">\(x_{n-1}\)</span>, not &#8220;older&#8221;
+approximations. Therefore, we can make use of only three variables:
+<code class="docutils literal"><span class="pre">x</span></code> for <span class="math">\(x_{n+1}\)</span>, <code class="docutils literal"><span class="pre">x1</span></code> for <span class="math">\(x_n\)</span>, and <code class="docutils literal"><span class="pre">x0</span></code> for <span class="math">\(x_{n-1}\)</span>. Note that
+<code class="docutils literal"><span class="pre">x0</span></code> and <code class="docutils literal"><span class="pre">x1</span></code> must be given (guessed) for the algorithm to start.</p>
+<p>A program
+<a class="reference external" href="https://github.com/hplgit/prog4comp/src/m/secant_method.m">secant_method.m</a>
+that solves our example problem may be written as:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span><span class="nf">secant_method</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="n">f</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span>^<span class="mi">2</span> <span class="o">-</span> <span class="mi">9</span><span class="p">;</span>
+    <span class="nb">eps</span> <span class="p">=</span> <span class="mf">1e-6</span><span class="p">;</span>
+    <span class="n">x0</span> <span class="p">=</span> <span class="mi">1000</span><span class="p">;</span>  <span class="n">x1</span> <span class="p">=</span> <span class="n">x0</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">solution</span><span class="p">,</span><span class="n">no_iterations</span><span class="p">]</span> <span class="p">=</span> <span class="n">secant</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="nb">eps</span><span class="p">);</span>
+    <span class="k">if</span> <span class="n">no_iterations</span> <span class="o">&gt;</span> <span class="mi">0</span>   <span class="c">% Solution found</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Number of function calls: %d\n&#39;</span><span class="p">,</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">no_iterations</span><span class="p">);</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;A solution is: %f\n&#39;</span><span class="p">,</span> <span class="n">solution</span><span class="p">)</span>
+    <span class="k">else</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Abort execution.\n&#39;</span><span class="p">)</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span>[solution,no_iterations] <span class="p">=</span><span class="w"> </span><span class="nf">secant</span><span class="p">(</span>f, x0, x1, eps<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">f_x0</span> <span class="p">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">);</span>
+    <span class="n">f_x1</span> <span class="p">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">);</span>
+    <span class="n">iteration_counter</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f_x1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">eps</span> <span class="o">&amp;&amp;</span> <span class="n">iteration_counter</span> <span class="o">&lt;</span> <span class="mi">100</span>
+        <span class="k">try</span>
+            <span class="n">denominator</span> <span class="p">=</span> <span class="p">(</span><span class="n">f_x1</span> <span class="o">-</span> <span class="n">f_x0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">x1</span> <span class="o">-</span> <span class="n">x0</span><span class="p">);</span>
+            <span class="n">x</span> <span class="p">=</span> <span class="n">x1</span> <span class="o">-</span> <span class="p">(</span><span class="n">f_x1</span><span class="p">)</span><span class="o">/</span><span class="n">denominator</span><span class="p">;</span>
+        <span class="k">catch</span>
+            <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Error! - denominator zero for x = \n&#39;</span><span class="p">,</span> <span class="n">x1</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="k">end</span>
+        <span class="n">x0</span> <span class="p">=</span> <span class="n">x1</span><span class="p">;</span>
+        <span class="n">x1</span> <span class="p">=</span> <span class="n">x</span><span class="p">;</span>
+        <span class="n">f_x0</span> <span class="p">=</span> <span class="n">f_x1</span><span class="p">;</span>
+        <span class="n">f_x1</span> <span class="p">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x1</span><span class="p">);</span>
+        <span class="n">iteration_counter</span> <span class="p">=</span> <span class="n">iteration_counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">end</span>
+    <span class="c">% Here, either a solution is found, or too many iterations</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f_x1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">eps</span>
+        <span class="n">iteration_counter</span> <span class="p">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">end</span>
+    <span class="n">solution</span> <span class="p">=</span> <span class="n">x1</span><span class="p">;</span>
+    <span class="n">no_iterations</span> <span class="p">=</span> <span class="n">iteration_counter</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>The number of function calls is now related to <code class="docutils literal"><span class="pre">no_iterations</span></code>,
+i.e., the number of iterations, as <code class="docutils literal"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">no_iterations</span></code>, since we need
+two function calls before entering the <code class="docutils literal"><span class="pre">while</span></code> loop, and then one
+function call per loop iteration. Note that, even though we need two
+points on the graph to compute each updated estimate, only a <em>single</em>
+function call (<code class="docutils literal"><span class="pre">f(x1)</span></code>) is required in each iteration since
+<code class="docutils literal"><span class="pre">f(x0)</span></code> becomes the &#8220;old&#8221; <code class="docutils literal"><span class="pre">f(x1)</span></code> and may simply be copied as
+<code class="docutils literal"><span class="pre">f_x0</span> <span class="pre">=</span> <span class="pre">f_x1</span></code> (the exception is the very first iteration where two function
+evaluations are needed).</p>
+<p>Running <code class="docutils literal"><span class="pre">secant_method.m</span></code>, gives the following printout on the screen:</p>
+<div class="highlight-text"><div class="highlight"><pre>Number of function calls: 19
+A solution is: 3.000000
+</pre></div>
+</div>
+<p>As with the function <code class="docutils literal"><span class="pre">Newton</span></code>, we place <code class="docutils literal"><span class="pre">secant</span></code> in
+a separate file <code class="docutils literal"><span class="pre">secant.m</span></code> for easy use later.</p>
+</div>
+<div class="section" id="the-bisection-method">
+<span id="th-nonlinalgeq-bisect"></span><h2>The bisection method<a class="headerlink" href="#the-bisection-method" title="Permalink to this headline">¶</a></h2>
+<p>Neither Newton&#8217;s method nor the secant method can guarantee that an
+existing solution will be found (see <a class="reference internal" href="#th-exer-newton-failure"><span>Exercise 72: Understand why Newton&#8217;s method can fail</span></a> and <a class="reference internal" href="#th-exer-secant-failure"><span>Exercise 73: See if the secant method fails</span></a>). The
+bisection method, however, does that. However, if there are several
+solutions present, it finds only one of them, just as Newton&#8217;s method
+and the secant method.  The bisection method is slower than the other
+two methods, so reliability comes with a cost of speed.</p>
+<p>To solve <span class="math">\(x^2 - 9 = 0\)</span>, <span class="math">\(x \in \left[0, 1000\right]\)</span> with the
+bisection method, we reason as follows.  The first key idea is that if <span class="math">\(f(x)
+= x^2 - 9\)</span> is <em>continuous</em> on the interval and the function values for
+the interval endpoints (<span class="math">\(x_L = 0\)</span>, <span class="math">\(x_R =1000\)</span>) have <em>opposite signs</em>,
+<span class="math">\(f(x)\)</span> <em>must</em> cross the <span class="math">\(x\)</span> axis at least once on the interval. That
+is, we know there is at least one solution.</p>
+<p>The second key idea comes from dividing the interval in two equal
+parts, one to the left and one to the right of the midpoint <span class="math">\(x_M =
+500\)</span>. By evaluating the sign of <span class="math">\(f(x_M)\)</span>, we will immediately know
+whether a solution must exist to the left or right of <span class="math">\(x_M\)</span>. This is
+so, since if <span class="math">\(f(x_M) \ge 0\)</span>, we know that <span class="math">\(f(x)\)</span> has to cross the <span class="math">\(x\)</span>
+axis between <span class="math">\(x_L\)</span> and <span class="math">\(x_M\)</span> at least once (using the same
+argument as for the original interval). Likewise, if instead <span class="math">\(f(x_M)
+\le 0\)</span>, we know that <span class="math">\(f(x)\)</span> has to cross the <span class="math">\(x\)</span> axis between <span class="math">\(x_M\)</span>
+and <span class="math">\(x_R\)</span> at least once.</p>
+<p>In any case, we may proceed with half the interval only. The exception
+is if <span class="math">\(f(x_M) \approx 0\)</span>, in which case a solution is found. Such
+interval halving can be continued until a solution is found. A
+&#8220;solution&#8221; in this case, is when <span class="math">\(|f(x_M)|\)</span> is sufficiently close to
+zero, more precisely (as before): <span class="math">\(|f(x_M)|&lt;\epsilon\)</span>, where
+<span class="math">\(\epsilon\)</span> is a small number specified by the user.</p>
+<p>The sketched strategy seems reasonable, so let us write a
+reusable function that can
+solve a general algebraic equation <span class="math">\(f(x)=0\)</span>
+(<a class="reference external" href="https://github.com/hplgit/prog4comp/src/m/bisection_method.m">bisection_method.m</a>):</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span><span class="nf">bisection_method</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="n">f</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span>^<span class="mi">2</span> <span class="o">-</span> <span class="mi">9</span><span class="p">;</span>
+    <span class="nb">eps</span> <span class="p">=</span> <span class="mf">1e-6</span><span class="p">;</span>
+    <span class="n">a</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>   <span class="n">b</span> <span class="p">=</span> <span class="mi">1000</span><span class="p">;</span>
+    <span class="p">[</span><span class="n">solution</span><span class="p">,</span> <span class="n">no_iterations</span><span class="p">]</span> <span class="p">=</span> <span class="n">bisection</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="nb">eps</span><span class="p">);</span>
+    <span class="k">if</span> <span class="n">solution</span> <span class="o">&lt;</span><span class="p">=</span> <span class="n">b</span>   <span class="c">% Solution found</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Number of function calls: %d\n&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">no_iterations</span><span class="p">);</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;A solution is: %f\n&#39;</span><span class="p">,</span> <span class="n">solution</span><span class="p">);</span>
+    <span class="k">else</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Abort execution.\n&#39;</span><span class="p">);</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span>[result1, result2] <span class="p">=</span><span class="w"> </span><span class="nf">bisection</span><span class="p">(</span>f, x_L, x_R, eps<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span> <span class="n">f</span><span class="p">(</span><span class="n">x_L</span><span class="p">)</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x_R</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Error! Function does not have opposite\n&#39;</span><span class="p">);</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;signs at interval endpoints!&#39;</span><span class="p">)</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">end</span>
+    <span class="n">x_M</span> <span class="p">=</span> <span class="p">(</span><span class="n">x_L</span> <span class="o">+</span> <span class="n">x_R</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span><span class="p">;</span>
+    <span class="n">f_M</span> <span class="p">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_M</span><span class="p">);</span>
+    <span class="n">iteration_counter</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f_M</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">eps</span>
+        <span class="n">left_f</span> <span class="p">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_L</span><span class="p">);</span>
+        <span class="n">right_f</span> <span class="p">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_R</span><span class="p">);</span>
+        <span class="k">if</span> <span class="n">left_f</span><span class="o">*</span><span class="n">f_M</span> <span class="o">&gt;</span> <span class="mi">0</span>   <span class="c">% i.e., same sign</span>
+            <span class="n">x_L</span> <span class="p">=</span> <span class="n">x_M</span><span class="p">;</span>
+        <span class="k">else</span>
+            <span class="n">x_R</span> <span class="p">=</span> <span class="n">x_M</span><span class="p">;</span>
+        <span class="k">end</span>
+        <span class="n">x_M</span> <span class="p">=</span> <span class="p">(</span><span class="n">x_L</span> <span class="o">+</span> <span class="n">x_R</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+        <span class="n">f_M</span> <span class="p">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_M</span><span class="p">);</span>
+        <span class="n">iteration_counter</span> <span class="p">=</span> <span class="n">iteration_counter</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">end</span>
+    <span class="n">result1</span> <span class="p">=</span> <span class="n">x_M</span><span class="p">;</span>
+    <span class="n">result2</span> <span class="p">=</span> <span class="n">iteration_counter</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<span class="target" id="index-5"></span><p id="index-6">Note that we first check if <span class="math">\(f\)</span> changes sign in <span class="math">\([a,b]\)</span>, because that
+is a requirement for the algorithm to work. The algorithm also relies
+on a continuous <span class="math">\(f(x)\)</span> function, but this is very challenging
+for a computer code to check.</p>
+<p>We get the following printout to the screen when <code class="docutils literal"><span class="pre">bisection_method.m</span></code> is run:</p>
+<div class="highlight-text"><div class="highlight"><pre>Number of function calls: 61
+A solution is: 3.000000
+</pre></div>
+</div>
+<p>We notice that
+the number of function calls is much higher than with the previous methods.</p>
+<div class="admonition-required-work-in-the-bisection-method admonition">
+<p class="first admonition-title">Required work in the bisection method</p>
+<p class="last">If the starting interval of the bisection method is bounded by <span class="math">\(a\)</span> and
+<span class="math">\(b\)</span>, and the solution at step <span class="math">\(n\)</span> is taken to be the middle value, the
+error is bounded as</p>
+</div>
+<div class="math" id="equation-eFourSeven">
+<span id="eq-efourseven"></span><span class="eqno">(4)</span>\[        \frac{|b-a|}{2^n},\]\[because the initial interval has been halved  \( n \)  times.
+Therefore, to meet a tolerance  \( \epsilon \) , we need  \( n \)  iterations such that
+the length of the current interval equals  \( \epsilon \) :\]\[.. math::
+         \frac{|b-a|}{2^n}=\epsilon\quad\Rightarrow\quad
+        n = \frac{\ln ((b-a)/\epsilon)}{\ln 2}\thinspace .\]\[
+This is a great advantage of the bisection method: we know beforehand
+how many iterations  \( n \)  it takes to meet a certain accuracy
+ \( \epsilon \)  in the solution.\]</div>
+<p>As with the two previous methods, the function <code class="docutils literal"><span class="pre">bisection</span></code> is
+stored as a separate file <code class="docutils literal"><span class="pre">bisection.m</span></code> for easy use by other programs.</p>
+</div>
+<div class="section" id="rate-of-convergence">
+<span id="th-nonlinalgeq-rateconv"></span><h2>Rate of convergence<a class="headerlink" href="#rate-of-convergence" title="Permalink to this headline">¶</a></h2>
+<p>With the methods above, we noticed that the number of iterations or
+function calls could differ quite substantially.
+The number of iterations needed
+to find a solution is closely related to the <em>rate of convergence</em>,
+which is the speed of the error as we approach the root.
+More precisely, we introduce the error in iteration <span class="math">\(n\)</span> as
+<span class="math">\(e_n=|x-x_n|\)</span>, and define the <em>convergence rate</em> <span class="math">\(q\)</span> as</p>
+<div class="math" id="equation-eFourFifteen">
+<span id="eq-efourfifteen"></span><span class="eqno">(5)</span>\[     e_{n+1} = Ce_n^q,\]</div>
+<p>where <span class="math">\(C\)</span> is a constant. The exponent <span class="math">\(q\)</span> measures how fast the error
+is reduced from one iteration to the next. The larger <span class="math">\(q\)</span> is,
+the faster the error goes to zero, and the fewer iterations we
+need to meet the stopping criterion <span class="math">\(|f(x)|&lt;\epsilon\)</span>.</p>
+<p>A single <span class="math">\(q\)</span> in <a href="#equation-eFourFifteen">(5)</a> is defined in the limit
+<span class="math">\(n\rightarrow\infty\)</span>. For finite <span class="math">\(n\)</span>, and especially smaller <span class="math">\(n\)</span>,
+<span class="math">\(q\)</span> will vary with <span class="math">\(n\)</span>. To estimate <span class="math">\(q\)</span>, we can compute
+all the errors <span class="math">\(e_n\)</span> and set up
+<a href="#equation-eFourFifteen">(5)</a> for three consecutive experiments <span class="math">\(n-1\)</span>, <span class="math">\(n\)</span>, and
+<span class="math">\(n+1\)</span>:</p>
+<div class="math">
+\[\begin{split}e_{n} &amp;= Ce_{n-1}^q,\\
+e_{n+1} &amp;= Ce_n^q\thinspace .\end{split}\]</div>
+<p>Dividing these two equations by each other and solving with respect to
+<span class="math">\(q\)</span> gives</p>
+<div class="math">
+\[q = \frac{\ln (e_{n+1}/e_n)}{\ln(e_n/e_{n-1})}\thinspace .\]</div>
+<p>Since this <span class="math">\(q\)</span> will vary somewhat with <span class="math">\(n\)</span>, we call it <span class="math">\(q_n\)</span>.
+As <span class="math">\(n\)</span> grows, we expect <span class="math">\(q_n\)</span> to approach a limit (<span class="math">\(q_n\rightarrow q\)</span>).
+To compute all the <span class="math">\(q_n\)</span> values, we need all the <span class="math">\(x_n\)</span> approximations.
+However, our previous implementations of Newton&#8217;s method, the secant
+method, and the bisection method returned just the final approximation.</p>
+<p>Therefore, we have extended those previous implementations such that
+the user can choose whether the final value or the whole history of solutions is
+to be returned. The extended implementations are named <code class="docutils literal"><span class="pre">Newton_solver</span></code>, <code class="docutils literal"><span class="pre">secant_solver</span></code>
+and <code class="docutils literal"><span class="pre">bisection_solver</span></code>. Compared to the previous implementations, each of these now takes
+an extra parameter <code class="docutils literal"><span class="pre">return_x_list</span></code>. This parameter is a boolean, set to <code class="docutils literal"><span class="pre">true</span></code> if the
+function is supposed to return all the root approximations, or <code class="docutils literal"><span class="pre">false</span></code>, if the function
+should only return the final approximation. As an example, let us take a closer look
+at <code class="docutils literal"><span class="pre">Newton_solver</span></code>:</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span>[sol, no_it] <span class="p">=</span><span class="w"> </span><span class="nf">Newton_solver</span><span class="p">(</span>f, dfdx, x, eps, return_x_list<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">f_value</span> <span class="p">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="n">iteration_counter</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">if</span> <span class="n">return_x_list</span>
+        <span class="n">x_list</span> <span class="p">=</span> <span class="p">[];</span>
+    <span class="k">end</span>
+    <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f_value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">eps</span> <span class="o">&amp;&amp;</span> <span class="n">iteration_counter</span> <span class="o">&lt;</span> <span class="mi">100</span>
+        <span class="k">try</span>
+            <span class="n">x</span> <span class="p">=</span> <span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="n">f_value</span><span class="p">)</span><span class="o">/</span><span class="n">dfdx</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+        <span class="k">catch</span>
+            <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Error! - derivative zero for x = \n&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="k">end</span>
+        <span class="n">f_value</span> <span class="p">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+        <span class="n">iteration_counter</span> <span class="p">=</span> <span class="n">iteration_counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">if</span> <span class="n">return_x_list</span>
+            <span class="n">x_list</span> <span class="p">=</span> <span class="p">[</span><span class="n">x_list</span> <span class="n">x</span><span class="p">];</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="c">% Here, either a solution is found, or too many iterations</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f_value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">eps</span>
+        <span class="n">iteration_counter</span> <span class="p">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>   <span class="c">% i.e., lack of convergence</span>
+    <span class="k">end</span>
+
+    <span class="k">if</span> <span class="n">return_x_list</span>
+        <span class="n">sol</span> <span class="p">=</span> <span class="n">x_list</span><span class="p">;</span>
+        <span class="n">no_it</span> <span class="p">=</span> <span class="n">iteration_counter</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="n">sol</span> <span class="p">=</span> <span class="n">x</span><span class="p">;</span>
+        <span class="n">no_it</span> <span class="p">=</span> <span class="n">iteration_counter</span><span class="p">;</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>The function is found in the file
+<a class="reference external" href="https://github.com/hplgit/prog4comp/src/m/Newton_solver.m">Newton_solver.m</a>.</p>
+<p>We can now make a call</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">iter</span><span class="p">]</span> <span class="p">=</span> <span class="n">Newton_solver</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">dfdx</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="n">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>and get an array <code class="docutils literal"><span class="pre">x</span></code> returned. With knowledge of the exact
+solution <span class="math">\(x\)</span> of <span class="math">\(f(x)=0\)</span>, we can compute all the errors <span class="math">\(e_n\)</span>
+and associated <span class="math">\(q_n\)</span> values with the compact function</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span>q <span class="p">=</span><span class="w"> </span><span class="nf">rate</span><span class="p">(</span>x, x_exact<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">e</span> <span class="p">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x_exact</span><span class="p">);</span>
+    <span class="n">q</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="p">=</span> <span class="mi">2</span><span class="p">:(</span><span class="nb">length</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">q</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">=</span> <span class="nb">log</span><span class="p">(</span><span class="n">e</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">e</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="o">/</span><span class="nb">log</span><span class="p">(</span><span class="n">e</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">e</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>The error model <a href="#equation-eFourFifteen">(5)</a> works well for Newton&#8217;s method and
+the secant method. For the bisection method, however, it works well
+in the beginning, but not when the solution is approached.</p>
+<p>We can compute the rates <span class="math">\(q_n\)</span> and print them nicely,</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span><span class="nf">print_rates</span><span class="p">(</span>method, x, x_exact<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">q</span> <span class="p">=</span> <span class="n">rate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_exact</span><span class="p">);</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;%s:\n&#39;</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>
+    <span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;%.2f &#39;</span><span class="p">,</span> <span class="n">q</span><span class="p">(</span><span class="nb">i</span><span class="p">));</span>
+    <span class="k">end</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;\n&#39;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>The result for <code class="docutils literal"><span class="pre">print_rates('Newton',</span> <span class="pre">x,</span> <span class="pre">3)</span></code> is</p>
+<div class="highlight-text"><div class="highlight"><pre>Newton:
+1.01 1.02 1.03 1.07 1.14 1.27 1.51 1.80 1.97 2.00
+</pre></div>
+</div>
+<p>indicating that <span class="math">\(q=2\)</span> is the rate for Newton&#8217;s method.
+A similar computation using the secant method, gives the rates</p>
+<div class="highlight-text"><div class="highlight"><pre>secant:
+1.26 0.93 1.05 1.01 1.04 1.05 1.08 1.13 1.20 1.30 1.43
+1.54 1.60 1.62 1.62
+</pre></div>
+</div>
+<p>Here it seems that <span class="math">\(q\approx 1.6\)</span> is the limit.</p>
+<p><strong>Remark.</strong>
+If we in the bisection method think of the length of the current
+interval containing the solution as the error <span class="math">\(e_n\)</span>, then
+<a href="#equation-eFourFifteen">(5)</a> works perfectly since <span class="math">\(e_{n+1}=\frac{1}{2}e_n\)</span>,
+i.e., <span class="math">\(q=1\)</span> and <span class="math">\(C=\frac{1}{2}\)</span>, but if <span class="math">\(e_n\)</span> is the true error
+<span class="math">\(|x-x_n|\)</span>, it is easily seen from a sketch that this error can
+oscillate between the current interval length and a potentially very small
+value as we approach the exact solution. The corresponding rates <span class="math">\(q_n\)</span>
+fluctuate widely and are of no interest.</p>
+</div>
+<div class="section" id="exercises-6">
+<h2>Exercises  (6)<a class="headerlink" href="#exercises-6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="exercise-72-understand-why-newton-s-method-can-fail">
+<span id="th-exer-newton-failure"></span><h3>Exercise 72: Understand why Newton&#8217;s method can fail<a class="headerlink" href="#exercise-72-understand-why-newton-s-method-can-fail" title="Permalink to this headline">¶</a></h3>
+<p>The purpose of this exercise is to understand when Newton&#8217;s method works
+and fails. To this end, solve <span class="math">\(\tanh x=0\)</span> by Newton&#8217;s method
+and study the intermediate details of the algorithm. Start with <span class="math">\(x_0=1.08\)</span>.
+Plot the tangent in each iteration of Newton&#8217;s method. Then repeat the calculations
+and the plotting when <span class="math">\(x_0=1.09\)</span>. Explain what you observe.</p>
+<p><strong>Solution.</strong>
+The program may be written as:</p>
+<p>Here is a missing file: Newton_failure</p>
+<p>which may be called from the script <code class="docutils literal"><span class="pre">use_my_Newton_failure.m</span></code>:</p>
+<p>Here is a missing file: use_my_Newton_failure</p>
+<p>Note that <code class="docutils literal"><span class="pre">Newton_failure.m</span></code> calls the function <code class="docutils literal"><span class="pre">plot_line</span></code> (located in <code class="docutils literal"><span class="pre">plot_line.m</span></code>),
+reading:</p>
+<p>Here is a missing file: plot_line</p>
+<p>(The function <code class="docutils literal"><span class="pre">plot_line</span></code> is placed as a separate m-file so that it may be used also
+by the function <code class="docutils literal"><span class="pre">secant_failure</span></code>, which is to be written in another exercise.)</p>
+<p>Running the program with <code class="docutils literal"><span class="pre">x</span></code> set to <span class="math">\(1.08\)</span> produces a series of plots (and prints) showing
+the graph and the tangent for the present value of <code class="docutils literal"><span class="pre">x</span></code>. There are quite many
+plots, so we do not show them here. However, the tangent line &#8220;jumps&#8221; around
+a few times before it settles. In the final plot the tangent line goes through
+the solution at <span class="math">\(x = 0\)</span>. The final printout brings the information:</p>
+<div class="highlight-text"><div class="highlight"><pre>Number of function calls: 13
+A solution is: 0.000024
+</pre></div>
+</div>
+<p>When we run the program anew, this time with <code class="docutils literal"><span class="pre">x</span></code> set to <span class="math">\(1.09\)</span>, we get another series of
+plots (and prints), but this time the tangent moves away from the (known) solution.
+The final printout we get states that:</p>
+<div class="highlight-text"><div class="highlight"><pre>Number of function calls: 19
+A solution is: nan
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal"><span class="pre">nan</span></code> stands for &#8220;not a number&#8221;, meaning that we got no solution value for <code class="docutils literal"><span class="pre">x</span></code>.
+That is, Newton&#8217;s method diverged.</p>
+<p>Filename: <code class="docutils literal"><span class="pre">Newton_failure.*</span></code>.</p>
+</div>
+<div class="section" id="exercise-73-see-if-the-secant-method-fails">
+<span id="th-exer-secant-failure"></span><h3>Exercise 73: See if the secant method fails<a class="headerlink" href="#exercise-73-see-if-the-secant-method-fails" title="Permalink to this headline">¶</a></h3>
+<p>Does the secant method behave better than Newton&#8217;s method in
+the problem described in <a class="reference internal" href="#th-exer-newton-failure"><span>Exercise 72: Understand why Newton&#8217;s method can fail</span></a>?
+Try the initial guesses</p>
+<ol class="arabic simple">
+<li><span class="math">\(x_0=1.08\)</span> and <span class="math">\(x_1=1.09\)</span></li>
+<li><span class="math">\(x_0=1.09\)</span> and <span class="math">\(x_1=1.1\)</span></li>
+<li><span class="math">\(x_0=1\)</span> and <span class="math">\(x_1=2.3\)</span></li>
+<li><span class="math">\(x_0=1\)</span> and <span class="math">\(x_1=2.4\)</span></li>
+</ol>
+<p><strong>Solution.</strong>
+The program may be written as:</p>
+<p>Here is a missing file: secant_failure</p>
+<p>which may be called from the script <code class="docutils literal"><span class="pre">use_my_secant_failure.m</span></code>:</p>
+<p>Here is a missing file: use_my_secant_failure</p>
+<p>Note that, as with <code class="docutils literal"><span class="pre">Newton_failure.m</span></code>, the script <code class="docutils literal"><span class="pre">plot_line.m</span></code> is called for
+plotting each tangent.</p>
+<p>The script converges with the three first-mentioned alternatives for <span class="math">\(x_0\)</span> and <span class="math">\(x_1\)</span>.
+With the final set of parameter values, the method diverges with a printout:</p>
+<div class="highlight-text"><div class="highlight"><pre>Error! - denominator zero for x = 360.600893792
+</pre></div>
+</div>
+<p>and a few more lines stating that an exception error has occurred.</p>
+<p>Filename: <code class="docutils literal"><span class="pre">secant_failure.*</span></code>.</p>
+</div>
+<div class="section" id="exercise-74-understand-how-the-bisection-method-cannot-fail">
+<span id="th-exer-bisection-failure"></span><h3>Exercise 74: Understand how the bisection method cannot fail<a class="headerlink" href="#exercise-74-understand-how-the-bisection-method-cannot-fail" title="Permalink to this headline">¶</a></h3>
+<p>Solve the same problem as in <a class="reference internal" href="#th-exer-newton-failure"><span>Exercise 72: Understand why Newton&#8217;s method can fail</span></a>,
+using the bisection method, but let the initial interval be
+<span class="math">\([-5,3]\)</span>. Report how the interval containing the solution evolves
+during the iterations.</p>
+<p><strong>Solution.</strong>
+The code may be written as:</p>
+<p>Here is a missing file: bisection_nonfailure</p>
+<p>which may be called from the script <code class="docutils literal"><span class="pre">use_my_bisection_nonfailure.m</span></code>:</p>
+<p>Here is a missing file: use_my_bisection_nonfailure</p>
+<p>Running the program produces the following printout:</p>
+<div class="highlight-text"><div class="highlight"><pre>interval: [-1.000000, 3.000000]
+interval: [-1.000000, 1.000000]
+Number of function calls: 7
+A solution is: 0.000000
+</pre></div>
+</div>
+<p>Filename: <code class="docutils literal"><span class="pre">bisection_nonfailure.*</span></code>.</p>
+</div>
+<div class="section" id="exercise-75-combine-the-bisection-method-with-newton-s-method">
+<span id="th-exer-bisection-newton"></span><h3>Exercise 75: Combine the bisection method with Newton&#8217;s method<a class="headerlink" href="#exercise-75-combine-the-bisection-method-with-newton-s-method" title="Permalink to this headline">¶</a></h3>
+<p>An attractive idea is to combine the reliability of the bisection method
+with the speed of Newton&#8217;s method, even if the potential divergence with
+Newton&#8217;s method then still is an issue. Such a combination is implemented
+by running the bisection method until we have a narrow interval, and then switch
+to Newton&#8217;s method for speed.</p>
+<p>Write a function that implements this idea.
+Start with an interval <span class="math">\([a,b]\)</span> and switch to Newton&#8217;s method when
+the current interval in the bisection method is a fraction <span class="math">\(s\)</span>
+of the initial interval (i.e., when the interval has length <span class="math">\(s(b-a)\)</span>).
+The value of <span class="math">\(s\)</span> must be given as an argument to the function, but
+it may have a default value of 0.1.</p>
+<p>Try the new method on <span class="math">\(\tanh(x)=0\)</span> with an initial interval <span class="math">\([-10,15]\)</span>.</p>
+<p><strong>Solution.</strong>
+The code may be written as:</p>
+<p>Here is a missing file: bisection_Newton</p>
+<p>which may be called from the script <code class="docutils literal"><span class="pre">use_my_bisection_Newton.m</span></code>:</p>
+<p>Here is a missing file: use_my_bisection_Newton</p>
+<p>Running the program produces the following printout:</p>
+<div class="highlight-text"><div class="highlight"><pre>A solution x = 0.000000 was reached in 7 iterations
+</pre></div>
+</div>
+<p>Filename: <code class="docutils literal"><span class="pre">bisection_Newton.m</span></code>.</p>
+</div>
+<div class="section" id="exercise-76-write-a-test-function-for-newton-s-method">
+<span id="th-exer-newtonhand"></span><h3>Exercise 76: Write a test function for Newton&#8217;s method<a class="headerlink" href="#exercise-76-write-a-test-function-for-newton-s-method" title="Permalink to this headline">¶</a></h3>
+<p>The purpose of this function is to verify the implementation of Newton&#8217;s
+method in the <code class="docutils literal"><span class="pre">Newton</span></code> function in the file <code class="docutils literal"><span class="pre">nonlinear_solvers.py</span></code>.
+Construct an algebraic equation and perform two iterations of Newton&#8217;s
+method by
+hand.
+Find the corresponding size of <span class="math">\(|f(x)|\)</span> and use this
+as value for <code class="docutils literal"><span class="pre">eps</span></code> when calling <code class="docutils literal"><span class="pre">Newton</span></code>. The function should then
+also perform two iterations and return the same approximation to
+the root as you calculated manually. Implement this idea for a unit test
+as a test function <code class="docutils literal"><span class="pre">test_Newton()</span></code>.</p>
+<p><strong>Solution.</strong>
+Here is the complete module with the test function.</p>
+<p>Here is a missing file: test_Newton</p>
+<p>Filename: <code class="docutils literal"><span class="pre">test_Newton.m</span></code>.</p>
+</div>
+<div class="section" id="exercise-77-solve-nonlinear-equation-for-a-vibrating-beam">
+<span id="th-exer-beam-vib"></span><h3>Exercise 77: Solve nonlinear equation for a vibrating beam<a class="headerlink" href="#exercise-77-solve-nonlinear-equation-for-a-vibrating-beam" title="Permalink to this headline">¶</a></h3>
+<p>An important engineering problem that arises in a lot of applications
+is the vibrations of a clamped beam where the other end is free.
+This problem can be analyzed
+analytically, but the calculations boil down to solving the
+following nonlinear algebraic equation:</p>
+<div class="math">
+\[\cosh\beta \cos\beta = -1,\]</div>
+<p>where <span class="math">\(\beta\)</span> is related to important beam parameters through</p>
+<div class="math">
+\[\beta^4 = \omega^2 \frac{\varrho A}{EI},\]</div>
+<p>where <span class="math">\(\varrho\)</span> is the density of the beam, <span class="math">\(A\)</span> is the area of
+the cross section, <span class="math">\(E\)</span> is Young&#8217;s modulus,
+and <span class="math">\(I\)</span> is the moment of the inertia of the cross section. The most
+important parameter of interest is <span class="math">\(\omega\)</span>, which is the frequency
+of the beam. We want to compute the frequencies of a
+vibrating steel beam with a rectangular cross section having
+width <span class="math">\(b=25\)</span> mm and height <span class="math">\(h=8\)</span> mm.
+The density of steel is <span class="math">\(7850 \mbox{ kg/m}^3\)</span>,
+and <span class="math">\(E= 2\cdot 10^{11}\)</span> Pa. The moment of inertia of a rectangular cross section
+is <span class="math">\(I=bh^3/12\)</span>.</p>
+<p><strong>a)</strong>
+Plot the equation to be solved so that one can inspect where the zero
+crossings occur.</p>
+<p><strong>Hint.</strong>
+When writing the equation as <span class="math">\(f(\beta)=0\)</span>, the <span class="math">\(f\)</span> function increases
+its amplitude dramatically with <span class="math">\(\beta\)</span>. It is therefore wise to
+look at an equation with damped amplitude, <span class="math">\(g(\beta) = e^{-\beta}f(\beta) = 0\)</span>.
+Plot <span class="math">\(g\)</span> instead.</p>
+<p><strong>Solution.</strong></p>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/beam_vib_expmxf.png"><img alt="_images/beam_vib_expmxf.png" src="_images/beam_vib_expmxf.png" style="width: 600px;" /></a>
+</div>
+<p><strong>b)</strong>
+Compute the first three frequencies.</p>
+<p><strong>Solution.</strong>
+Here is a complete program, using the Bisection method for root
+finding, based on intervals found from the plot above.</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span><span class="nf">beam_vib</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">plot_f</span><span class="p">()</span>
+
+    <span class="n">f_handle</span> <span class="p">=</span> <span class="p">@</span><span class="n">f</span><span class="p">;</span>
+    <span class="c">% Set up suitable intervals</span>
+    <span class="n">intervals</span> <span class="p">=</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">3</span><span class="p">;</span> <span class="mi">4</span> <span class="mi">6</span><span class="p">;</span> <span class="mi">7</span> <span class="mi">9</span><span class="p">];</span>
+    <span class="n">betas</span> <span class="p">=</span> <span class="p">[];</span>  <span class="c">% roots</span>
+    <span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">intervals</span><span class="p">)</span>
+        <span class="n">beta_L</span> <span class="p">=</span> <span class="n">intervals</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>  <span class="n">beta_R</span> <span class="p">=</span> <span class="n">intervals</span><span class="p">(</span><span class="nb">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+        <span class="p">[</span><span class="nb">beta</span><span class="p">,</span> <span class="n">it</span><span class="p">]</span> <span class="p">=</span> <span class="n">bisection</span><span class="p">(</span><span class="n">f_handle</span><span class="p">,</span> <span class="n">beta_L</span><span class="p">,</span> <span class="n">beta_R</span><span class="p">,</span> <span class="nb">eps</span><span class="p">=</span><span class="mf">1E-6</span><span class="p">);</span>
+        <span class="n">betas</span> <span class="p">=</span> <span class="p">[</span><span class="n">betas</span> <span class="nb">beta</span><span class="p">];</span>
+        <span class="n">f</span><span class="p">(</span><span class="nb">beta</span><span class="p">)</span>
+    <span class="k">end</span>
+    <span class="n">betas</span>
+
+    <span class="c">% Find corresponding frequencies</span>
+
+<span class="k">    function</span><span class="w"> </span>value <span class="p">=</span><span class="w"> </span><span class="nf">omega</span><span class="p">(</span>beta, rho, A, E, I<span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">value</span> <span class="p">=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="nb">beta</span>^<span class="mi">4</span><span class="o">/</span><span class="p">(</span><span class="n">rho</span><span class="o">*</span><span class="n">A</span><span class="o">/</span><span class="p">(</span><span class="n">E</span><span class="o">*</span><span class="n">I</span><span class="p">)));</span>
+    <span class="k">end</span>
+
+    <span class="n">rho</span> <span class="p">=</span> <span class="mi">7850</span><span class="p">;</span>  <span class="c">% kg/m^3</span>
+    <span class="n">E</span> <span class="p">=</span> <span class="mf">1.0E+11</span><span class="p">;</span> <span class="c">% Pa</span>
+    <span class="n">b</span> <span class="p">=</span> <span class="mf">0.025</span><span class="p">;</span>   <span class="c">% m</span>
+    <span class="n">h</span> <span class="p">=</span> <span class="mf">0.008</span><span class="p">;</span>   <span class="c">% m</span>
+    <span class="n">A</span> <span class="p">=</span> <span class="n">b</span><span class="o">*</span><span class="n">h</span><span class="p">;</span>
+    <span class="n">I</span> <span class="p">=</span> <span class="n">b</span><span class="o">*</span><span class="n">h</span>^<span class="mi">3</span><span class="o">/</span><span class="mi">12</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">betas</span><span class="p">)</span>
+        <span class="n">omega</span><span class="p">(</span><span class="n">betas</span><span class="p">(</span><span class="nb">i</span><span class="p">),</span> <span class="n">rho</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
+    <span class="k">end</span>
+
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span>value <span class="p">=</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span>beta<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">value</span> <span class="p">=</span> <span class="nb">cosh</span><span class="p">(</span><span class="nb">beta</span><span class="p">)</span><span class="o">.*</span><span class="nb">cos</span><span class="p">(</span><span class="nb">beta</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span>value <span class="p">=</span><span class="w"> </span><span class="nf">damped</span><span class="p">(</span>beta<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">% Damp the amplitude of f. It grows like cosh, i.e. exp.</span>
+    <span class="n">value</span> <span class="p">=</span> <span class="nb">exp</span><span class="p">(</span><span class="o">-</span><span class="nb">beta</span><span class="p">)</span><span class="o">.*</span><span class="n">f</span><span class="p">(</span><span class="nb">beta</span><span class="p">);</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="nf">plot_f</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="nb">beta</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">501</span><span class="p">);</span>
+    <span class="c">%y = f(x)</span>
+    <span class="n">y</span> <span class="p">=</span> <span class="n">damped</span><span class="p">(</span><span class="nb">beta</span><span class="p">);</span>
+    <span class="n">plot</span><span class="p">(</span><span class="nb">beta</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nb">beta</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="nb">beta</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="nb">beta</span><span class="p">))],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s">&#39;b--&#39;</span><span class="p">)</span>
+    <span class="n">grid</span><span class="p">(</span><span class="s">&#39;on&#39;</span><span class="p">);</span>
+    <span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;beta&#39;</span><span class="p">);</span>
+    <span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;exp(-beta) (cosh(beta) cos(beta) +1)&#39;</span><span class="p">)</span>
+    <span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp1.png&#39;</span><span class="p">);</span> <span class="n">savefig</span><span class="p">(</span><span class="s">&#39;tmp1.pdf&#39;</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>The output of <span class="math">\(\beta\)</span> reads <span class="math">\(1.875\)</span>, <span class="math">\(4.494\)</span>, <span class="math">\(7.855\)</span>, and corresponding
+<span class="math">\(\omega\)</span> values are <span class="math">\(29\)</span>, <span class="math">\(182\)</span>, and <span class="math">\(509\)</span> Hz.</p>
+<p>Filename: <code class="docutils literal"><span class="pre">beam_vib.m</span></code>.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Solving nonlinear algebraic equations</a><ul>
+<li><a class="reference internal" href="#brute-force-methods">Brute force methods</a><ul>
+<li><a class="reference internal" href="#brute-force-root-finding">Brute force root finding</a><ul>
+<li><a class="reference internal" href="#numerical-algorithm-1">Numerical algorithm  (1)</a></li>
+<li><a class="reference internal" href="#implementation-6">Implementation  (6)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#brute-force-optimization">Brute force optimization</a><ul>
+<li><a class="reference internal" href="#numerical-algorithm-2">Numerical algorithm  (2)</a></li>
+<li><a class="reference internal" href="#implementation-7">Implementation  (7)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#model-problem-for-algebraic-equations">Model problem for algebraic equations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#newton-s-method">Newton&#8217;s method</a><ul>
+<li><a class="reference internal" href="#deriving-and-implementing-newton-s-method">Deriving and implementing Newton&#8217;s method</a></li>
+<li><a class="reference internal" href="#making-a-more-efficient-and-robust-implementation">Making a more efficient and robust implementation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-secant-method">The secant method</a></li>
+<li><a class="reference internal" href="#the-bisection-method">The bisection method</a></li>
+<li><a class="reference internal" href="#rate-of-convergence">Rate of convergence</a></li>
+<li><a class="reference internal" href="#exercises-6">Exercises  (6)</a><ul>
+<li><a class="reference internal" href="#exercise-72-understand-why-newton-s-method-can-fail">Exercise 72: Understand why Newton&#8217;s method can fail</a></li>
+<li><a class="reference internal" href="#exercise-73-see-if-the-secant-method-fails">Exercise 73: See if the secant method fails</a></li>
+<li><a class="reference internal" href="#exercise-74-understand-how-the-bisection-method-cannot-fail">Exercise 74: Understand how the bisection method cannot fail</a></li>
+<li><a class="reference internal" href="#exercise-75-combine-the-bisection-method-with-newton-s-method">Exercise 75: Combine the bisection method with Newton&#8217;s method</a></li>
+<li><a class="reference internal" href="#exercise-76-write-a-test-function-for-newton-s-method">Exercise 76: Write a test function for Newton&#8217;s method</a></li>
+<li><a class="reference internal" href="#exercise-77-solve-nonlinear-equation-for-a-vibrating-beam">Exercise 77: Solve nonlinear equation for a vibrating beam</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="._pylight006.html"
+                        title="previous chapter">Solving partial differential equations</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="._pylight008.html"
+                        title="next chapter">References</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/._pylight007.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, S. Linge and H. P. Langtangen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.4</a>
+      
+      |
+      <a href="_sources/._pylight007.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>

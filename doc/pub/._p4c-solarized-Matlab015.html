@@ -1,0 +1,1913 @@
+<!--
+Automatically generated HTML file from DocOnce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="DocOnce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="Programming for Computations - A Gentle Introduction to Numerical Simulations with MATLAB/Octave">
+<meta name="keywords" content="computer program,programming,language programming,language computer,MATLAB,Octave,Fortran,C,C++,Python,Maple,Mathematica,syntax,bug,debugging,script (and scripting),implement,print,program run,program execute,code,comment,instruction,program statement,variable,assignment,semi-colon (easy print),calculator,text editor,Idle,prompt,program typing,program run,program execute,ipython,m-file,function,function call,atan,function input parameter,function output parameter,function return,function take a parameter,library,library function,from,import,math,module,package,linspace,xlabel,ylabel,plot,interactive use (of Matlab),import,keyboard arrow up/down,operator Arithmetic,parentheses,variable type,variable name,float,integer,string,type conversion,reserved words,variable integer,variable float,variable string,variable assignment,default,single (precision),double (precision),printing formatted,printf formatting,default,array,array element,zeros,allocate,array index,indexing zero based,indexing one based,Matlab one-based indexing,array slice of,graph,hold (on/off),plot figure,title,legend,axis,hardcopy,format png,matrix mat,matrix vector product,transpose,linear algebra,matrix,vector,error message,debugging,debugger,try-exception,exception handling,program crash,program testing,program verification,program input,program output,input,raw input,list,tuple,symbolic computations,symbolic operations,symbolic simplifications,Symbolic Toolbox,WolframAlpha,Mathematica,Sage (symbolic package),Python documentation,garbage collection,variable delete,if,elif,else,colon,indent,boolean,boolean expression,True,False,boolean True,boolean False,pseudo code,operator Logical,function,function definition,def,return,argument,parameter input,parameter output,function nargin,function nargout,variable local,variable global,doc string,function handle,function local,function global,function nested,loop for,for loop,range,loop iteration,loop index,loop double,loop multiple,loop nested,linear algebra,while loop,loop while,loop infinite,loop iteration,loop index,array sorting,Leibniz pi,Euler pi,programming game,linear interpolation,least squares method,Fourier series,integral analytically,integral exact,integral approximately,integration points,code re-use,unit tests,complex domains,Monte Carlo integration,seed (random generators),scheme,finite difference method,forward difference approximation,Forward Euler scheme,logistic model,carrying capacity,SIR model,scalar ODE,ODE scalar,vector ODE,ODE vector,system of ODEs,Heun's method,Runge-Kutta, 2nd-order method,2nd-order Runge-Kutta method,RK2,PDE,heat equation,diffusion equation,MOL forward Euler,method of lines,MOL,mesh points,cell,method of lines,unstable solutions,instability,stability criterion,Poisson equation,Laplace equation,root finding,code robust,code try-except,code exception,Newton starting value,return None,sys.exit">
+
+<title>Programming for Computations - A Gentle Introduction to Numerical Simulations with MATLAB/Octave</title>
+
+
+<link href="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/css/solarized_light_code.css" rel="stylesheet" type="text/css" title="light"/>
+<script src="https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_styles/style_solarized_box/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<link href="http://thomasf.github.io/solarized-css/solarized-light.min.css" rel="stylesheet">
+<style type="text/css">
+h1 {color: #b58900;}  /* yellow */
+/* h1 {color: #cb4b16;}  orange */
+/* h1 {color: #d33682;}  magenta, the original choice of thomasf */
+code { padding: 0px; background-color: inherit; }
+pre {
+  border: 0pt solid #93a1a1;
+  box-shadow: none;
+}
+.alert-text-small   { font-size: 80%;  }
+.alert-text-large   { font-size: 130%; }
+.alert-text-normal  { font-size: 90%;  }
+.alert {
+  padding:8px 35px 8px 14px; margin-bottom:18px;
+  text-shadow:0 1px 0 rgba(255,255,255,0.5);
+  border:1px solid #93a1a1;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  color: #555;
+  background-color: #eee8d5;
+  background-position: 10px 5px;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  padding-left: 55px;
+  width: 75%;
+ }
+.alert-block {padding-top:14px; padding-bottom:14px}
+.alert-block > p, .alert-block > ul {margin-bottom:1em}
+.alert li {margin-top: 1em}
+.alert-block p+p {margin-top:5px}
+.alert-notice { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+.alert-summary  { background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+.alert-warning { background-image: url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+.alert-question {background-image:url(https://cdn.rawgit.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+div { text-align: justify; text-justify: inter-word; }
+</style>
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+/* Let pre tags for code blocks have the same color as the surroundings */
+pre { color: inherit; background-color: transparent; }
+</style>
+
+
+</head>
+
+<!-- tocinfo
+{'highest level': 0,
+ 'sections': [(u' Preface ', 0, None, '___sec0'),
+              (u' Why learn programming? ', 3, None, '___sec1'),
+              (u' Target audience and background knowledge ',
+               3,
+               None,
+               '___sec2'),
+              (u' Numerical methods ', 3, None, '___sec3'),
+              (u' The computer language: Matlab ', 3, None, '___sec4'),
+              (u' How this book is different ', 3, None, '___sec5'),
+              (u' Acknowledgments ', 3, None, '___sec6'),
+              (u' The first few steps ',
+               0,
+               u'1st:TheFirstFewSteps',
+               u'1st:TheFirstFewSteps'),
+              (u' What is a program? And what is programming? ',
+               1,
+               None,
+               '___sec8'),
+              (u' A Matlab program with variables ',
+               1,
+               u'1st:ex1',
+               u'1st:ex1'),
+              (u' The program ', 2, None, '___sec10'),
+              (u' Dissection of the program ', 2, None, '___sec11'),
+              (u' Why not just use a pocket calculator? ',
+               2,
+               None,
+               '___sec12'),
+              (u' The importance of using a text editor to write programs ',
+               2,
+               None,
+               '___sec13'),
+              (u' Write and run your first program ', 2, None, '___sec14'),
+              (u' Write and run a program in Matlab ', 3, None, '___sec15'),
+              (u' Write a program in a text editor and run it in Octave ',
+               3,
+               None,
+               '___sec16'),
+              (u'  A Matlab program with a library function ',
+               1,
+               u'1st:ex2',
+               u'1st:ex2'),
+              (u' A Matlab program with vectorization and plotting ',
+               1,
+               u'1st:ex3',
+               u'1st:ex3'),
+              (u' More basic concepts ', 1, None, '___sec19'),
+              (u' Using Matlab interactively ', 2, None, '___sec20'),
+              (u' Arithmetics, parentheses and round-off errors ',
+               2,
+               None,
+               '___sec21'),
+              (u' Variables ', 2, None, '___sec22'),
+              (u' Formatting text and numbers ', 2, None, '___sec23'),
+              (u' Arrays ', 2, None, '___sec24'),
+              (u' Plotting ', 2, None, '___sec25'),
+              (u' Error messages and warnings ', 2, None, '___sec26'),
+              (u' Input data ', 2, None, '___sec27'),
+              (u' Symbolic computations ', 2, None, '___sec28'),
+              (u' Concluding remarks ', 2, None, '___sec29'),
+              (u' Exercises ', 1, None, '___sec30'),
+              (u' Exercise 1: Error messages ',
+               2,
+               u'1st:exer:ErrorMessages',
+               u'1st:exer:ErrorMessages'),
+              (u' Exercise 2: Volume of a cube ',
+               2,
+               u'1st:exer:cubeVolume',
+               u'1st:exer:cubeVolume'),
+              (u' Exercise 3: Area and circumference of a circle ',
+               2,
+               u'1st:exer:areaCircle',
+               u'1st:exer:areaCircle'),
+              (u' Exercise 4: Volumes of three cubes ',
+               2,
+               u'1st:exer:volumes3cubes',
+               u'1st:exer:volumes3cubes'),
+              (u' Exercise 5: Average of integers ',
+               2,
+               u'1st:exer:averageOf5Integers',
+               u'1st:exer:averageOf5Integers'),
+              (u' Exercise 6: Interactive computing of volume and area ',
+               2,
+               u'1st:exer:cubeVolInteractively',
+               u'1st:exer:cubeVolInteractively'),
+              (u' Exercise 7: Update variable at command prompt ',
+               2,
+               u'1st:exer:updateVarInteractively',
+               u'1st:exer:updateVarInteractively'),
+              (u' Exercise 8: Formatted print to screen ',
+               2,
+               u'1st:exer:printfScreen',
+               u'1st:exer:printfScreen'),
+              (u' Exercise 9: Matlab documentation and random numbers ',
+               2,
+               u'1st:exer:PythonDocRandom',
+               u'1st:exer:PythonDocRandom'),
+              (u' Basic constructions ',
+               0,
+               u'2nd:BasicConstructins',
+               u'2nd:BasicConstructins'),
+              (u' If tests, colon and indentation ', 1, None, '___sec41'),
+              (u' Functions ', 1, u'sec:functions', u'sec:functions'),
+              (u' For loops ', 1, u'sec:for:loops', u'sec:for:loops'),
+              (u' While loops ', 1, u'sec:while:loops', u'sec:while:loops'),
+              (u' Reading from and writing to files ',
+               1,
+               u'sec:file:reading:writing',
+               u'sec:file:reading:writing'),
+              (u' Exercises ', 1, None, '___sec46'),
+              (u' Exercise 10: Introducing errors ',
+               2,
+               u'2nd:exer:IntroducingErrors',
+               u'2nd:exer:IntroducingErrors'),
+              (u' Exercise 11: Compare integers a and b ',
+               2,
+               u'2nd:exer:compInt',
+               u'2nd:exer:compInt'),
+              (u' Exercise 12: Functions for circumference and area of a circle ',
+               2,
+               u'2nd:exer:funcCircArea',
+               u'2nd:exer:funcCircArea'),
+              (u' Exercise 13: Function for area of a rectangle ',
+               2,
+               u'2nd:exer:funcAreaRectangle',
+               u'2nd:exer:funcAreaRectangle'),
+              (u' Exercise 14: Area of a polygon ',
+               2,
+               u'2nd:exer:area:polygon',
+               u'2nd:exer:area:polygon'),
+              (u' Exercise 15: Average of integers ',
+               2,
+               u'2nd:exer:avNInt',
+               u'2nd:exer:avNInt'),
+              (u' Exercise 16: While loop with errors ',
+               2,
+               u'2nd:exer:whileLoopErrors',
+               u'2nd:exer:whileLoopErrors'),
+              (u' Exercise 17: Area of rectangle versus circle ',
+               2,
+               u'2nd:exer:areaRectCircle',
+               u'2nd:exer:areaRectCircle'),
+              (u' Exercise 18: Find crossing points of two graphs ',
+               2,
+               u'2nd:exer:Cross2Graphs',
+               u'2nd:exer:Cross2Graphs'),
+              (u' Exercise 19: Sort array with numbers ',
+               2,
+               u'2nd:exer:sortNumbers',
+               u'2nd:exer:sortNumbers'),
+              (u' Exercise 20: Compute $\\pi$ ',
+               2,
+               u'2nd:exer:computingPi',
+               u'2nd:exer:computingPi'),
+              (u' Exercise 21: Compute combinations of sets ',
+               2,
+               u'2nd:exer:combinatorics1',
+               u'2nd:exer:combinatorics1'),
+              (u' Exercise 22: Frequency of random numbers ',
+               2,
+               u'2nd:exer:numberOccurrence',
+               u'2nd:exer:numberOccurrence'),
+              (u' Remarks ', 3, None, '___sec60'),
+              (u' Exercise 23: Game 21 ',
+               2,
+               u'2nd:exer:Game21',
+               u'2nd:exer:Game21'),
+              (u' Exercise 24: Linear interpolation ',
+               2,
+               u'2nd:exer:linearInterpol',
+               u'2nd:exer:linearInterpol'),
+              (u' Exercise 25: Test straight line requirement ',
+               2,
+               u'2nd:exer:testStraightLine',
+               u'2nd:exer:testStraightLine'),
+              (u' Exercise 26: Fit straight line to data ',
+               2,
+               u'2nd:exer:fitLine',
+               u'2nd:exer:fitLine'),
+              (u' Remarks ', 3, None, '___sec65'),
+              (u' Exercise 27: Fit sines to straight line ',
+               2,
+               u'2nd:exer:fitSines',
+               u'2nd:exer:fitSines'),
+              (u' Remarks ', 3, None, '___sec67'),
+              (u' Exercise 28: Count occurrences of a string in a string ',
+               2,
+               u'2nd:exer:countTextString',
+               u'2nd:exer:countTextString'),
+              (u' Computing integrals ',
+               0,
+               u'sec:integrals',
+               u'sec:integrals'),
+              (u' Basic ideas of numerical integration ',
+               1,
+               u'sec:integrals:basic',
+               u'sec:integrals:basic'),
+              (u' Computational example ', 3, None, '___sec71'),
+              (u' The composite trapezoidal rule ',
+               1,
+               u'sec:integrals:trap',
+               u'sec:integrals:trap'),
+              (u' The general formula ',
+               2,
+               u'sec:integrals:formula',
+               u'sec:integrals:formula'),
+              (u' Implementation ',
+               2,
+               u'sec:integrals:trap:impl',
+               u'sec:integrals:trap:impl'),
+              (u' Specific or general implementation? ', 3, None, '___sec75'),
+              (u' Implementation with functions ', 3, None, '___sec76'),
+              (u' Solving our specific problem in a session ',
+               3,
+               None,
+               '___sec77'),
+              (u' Solving our specific problem in a program ',
+               3,
+               None,
+               '___sec78'),
+              (u' Alternative flat special-purpose implementation ',
+               2,
+               None,
+               '___sec79'),
+              (u' The composite midpoint method ',
+               1,
+               u'sec:integrals:Midpoint',
+               u'sec:integrals:Midpoint'),
+              (u' The idea ', 3, None, '___sec81'),
+              (u' The general formula ', 2, None, '___sec82'),
+              (u' Implementation ',
+               2,
+               u'sec:midpoint:code',
+               u'sec:midpoint:code'),
+              (u' Comparing the trapezoidal and the midpoint methods ',
+               2,
+               None,
+               '___sec84'),
+              (u' Testing ', 1, None, '___sec85'),
+              (u' Problems with brief testing procedures ',
+               2,
+               None,
+               '___sec86'),
+              (u' Test procedures ',
+               2,
+               u'sec:integrals:testprocs',
+               u'sec:integrals:testprocs'),
+              (u' Hand-computed results ', 3, None, '___sec88'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec89'),
+              (u' Demonstrating correct convergence rates ',
+               3,
+               None,
+               '___sec90'),
+              (u' Constructing unit tests and writing test functions ',
+               2,
+               u'sec:integrals:test:functions',
+               u'sec:integrals:test:functions'),
+              (u' Hand-computed numerical results ', 3, None, '___sec92'),
+              (u' Solving a problem without numerical errors ',
+               3,
+               None,
+               '___sec93'),
+              (u' Demonstrating correct convergence rates ',
+               3,
+               None,
+               '___sec94'),
+              (u' Vectorization ', 1, None, '___sec95'),
+              (u' Vectorizing the midpoint rule ', 3, None, '___sec96'),
+              (u' Vectorizing the trapezoidal rule ', 3, None, '___sec97'),
+              (u' Measuring computational speed ', 1, None, '___sec98'),
+              (u' Double and triple integrals ',
+               1,
+               u'sec:int:double',
+               u'sec:int:double'),
+              (u' The midpoint rule for a double integral ',
+               2,
+               u'sec:int:double:midpoint',
+               u'sec:int:double:midpoint'),
+              (u' Derivation via one-dimensional integrals ',
+               3,
+               None,
+               '___sec101'),
+              (u' Direct derivation ', 3, None, '___sec102'),
+              (u' Programming a double sum ', 3, None, '___sec103'),
+              (u' Reusing code for one-dimensional integrals ',
+               3,
+               None,
+               '___sec104'),
+              (u' Verification via test functions ', 3, None, '___sec105'),
+              (u' The midpoint rule for a triple integral ',
+               2,
+               None,
+               '___sec106'),
+              (u' Theory ', 3, None, '___sec107'),
+              (u' Implementation ', 3, None, '___sec108'),
+              (u' Monte Carlo integration for complex-shaped domains ',
+               2,
+               u'sec:int:complex:domain',
+               u'sec:int:complex:domain'),
+              (u' The Monte Carlo integration algorithm ',
+               3,
+               None,
+               '___sec110'),
+              (u' Implementation ', 3, None, '___sec111'),
+              (u' Verification ', 3, None, '___sec112'),
+              (u' Test function for function with random numbers ',
+               3,
+               None,
+               '___sec113'),
+              (u' Integral over a circle ', 3, None, '___sec114'),
+              (u' Exercises ', 1, None, '___sec115'),
+              (u' Exercise 29: Hand calculations for the trapezoidal method ',
+               2,
+               u'sec:exer:trap:hand',
+               u'sec:exer:trap:hand'),
+              (u' Exercise 30: Hand calculations for the midpoint method ',
+               2,
+               u'sec:exer:midpt:hand',
+               u'sec:exer:midpt:hand'),
+              (u' Exercise 31: Compute a simple integral ',
+               2,
+               u'sec:exer:trap:mid:parabola',
+               u'sec:exer:trap:mid:parabola'),
+              (u' Exercise 32: Hand-calculations with sine integrals ',
+               2,
+               u'sec:exer:hand:sine',
+               u'sec:exer:hand:sine'),
+              (u' Exercise 33: Make test functions for the midpoint method ',
+               2,
+               u'sec:exer:test:midpoint',
+               u'sec:exer:test:midpoint'),
+              (u' Exercise 34: Explore round-off errors with large numbers ',
+               2,
+               u'sec:exer:test:roundoff',
+               u'sec:exer:test:roundoff'),
+              (u' Exercise 35: Write test functions for $\\int_0^4\\sqrt{x}dx$ ',
+               2,
+               u'sec:exer:test:convrates:sqrt',
+               u'sec:exer:test:convrates:sqrt'),
+              (u' Remarks ', 3, None, '___sec123'),
+              (u' Exercise 36: Rectangle methods ',
+               2,
+               u'sec:exer:rectangleMethod',
+               u'sec:exer:rectangleMethod'),
+              (u' Exercise 37: Adaptive integration ',
+               2,
+               u'sec:exer:adaptive:int',
+               u'sec:exer:adaptive:int'),
+              (u' Remarks ', 3, None, '___sec126'),
+              (u' Exercise 38: Integrating x raised to x ',
+               2,
+               u'sec:exer:integrate:x2x',
+               u'sec:exer:integrate:x2x'),
+              (u' Exercise 39: Integrate products of sine functions ',
+               2,
+               u'sec:exer:sine:products',
+               u'sec:exer:sine:products'),
+              (u' Exercise 40: Revisit fit of sines to a function ',
+               2,
+               u'sec:exer:revisitFitSines',
+               u'sec:exer:revisitFitSines'),
+              (u' Exercise 41: Derive the trapezoidal rule for a double integral ',
+               2,
+               u'sec:exer:trapezoidal:2D',
+               u'sec:exer:trapezoidal:2D'),
+              (u' Exercise 42: Compute the area of a triangle by Monte Carlo integration ',
+               2,
+               u'sec:exer:MC:ellipse',
+               u'sec:exer:MC:ellipse'),
+              (u' Solving ordinary differential equations ',
+               0,
+               u'5th:SolvODEs',
+               u'5th:SolvODEs'),
+              (u' Population growth ', 1, u'sec:de:pg', u'sec:de:pg'),
+              (u' Derivation of the model ',
+               2,
+               u'sec:de:pg:model',
+               u'sec:de:pg:model'),
+              (u' Numerical solution ',
+               2,
+               u'sec:de:pg:numerics',
+               u'sec:de:pg:numerics'),
+              (u' Programming the Forward Euler scheme; the special case ',
+               2,
+               u'sec:de:pg:prog1',
+               u'sec:de:pg:prog1'),
+              (u' Understanding the Forward Euler method ',
+               2,
+               u'sec:de:pg:geom',
+               u'sec:de:pg:geom'),
+              (u' Programming the Forward Euler scheme; the general case ',
+               2,
+               u'sec:de:FE:gen',
+               u'sec:de:FE:gen'),
+              (u' Making the population growth model more realistic ',
+               2,
+               None,
+               '___sec139'),
+              (u' Verification: exact linear solution of the discrete equations ',
+               2,
+               u'sec:de:growth:test:linear',
+               u'sec:de:growth:test:linear'),
+              (u' Spreading of diseases ', 1, None, '___sec141'),
+              (u' Spreading of a flu ', 2, u'sec:de:flu', u'sec:de:flu'),
+              (u' A Forward Euler method for the differential equation system ',
+               2,
+               u'sec:de:flu:FE',
+               u'sec:de:flu:FE'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:flu:prog:spec',
+               u'sec:de:flu:prog:spec'),
+              (u' Outbreak or not ', 2, None, '___sec145'),
+              (u' Abstract problem and notation ',
+               2,
+               u'sec:de:flu:generic',
+               u'sec:de:flu:generic'),
+              (u' Programming the numerical method; the general case ',
+               2,
+               u'sec:de:flu:prog:generic',
+               u'sec:de:flu:prog:generic'),
+              (u' Time-restricted immunity ', 2, None, '___sec148'),
+              (u' Incorporating vaccination ',
+               2,
+               u'sec:de:flu:vaccine',
+               u'sec:de:flu:vaccine'),
+              (u' Discontinuous coefficients: a vaccination campaign ',
+               2,
+               u'sec:de:flu:vaccine:discont',
+               u'sec:de:flu:vaccine:discont'),
+              (u' Oscillating one-dimensional systems ',
+               1,
+               u'sec:de:vib',
+               u'sec:de:vib'),
+              (u' Derivation of a simple model ', 2, None, '___sec152'),
+              (u' Numerical solution ', 2, None, '___sec153'),
+              (u' Programming the numerical method; the special case ',
+               2,
+               u'sec:de:vib:special',
+               u'sec:de:vib:special'),
+              (u' A magic fix of the numerical method ',
+               2,
+               None,
+               '___sec155'),
+              (u" The 2nd-order Runge-Kutta method (or Heun's method) ",
+               2,
+               u'sec:de:osc:Heun',
+               u'sec:de:osc:Heun'),
+              (u' Odespy: software for solving ODEs ',
+               2,
+               u'sec:de:osc:odespy',
+               u'sec:de:osc:odespy'),
+              (u' The 4th-order Runge-Kutta method ', 2, None, '___sec158'),
+              (u' The algorithm ', 3, None, '___sec159'),
+              (u' Application ', 3, None, '___sec160'),
+              (u' Implementation ', 3, None, '___sec161'),
+              (u' Derivation ', 3, None, '___sec162'),
+              (u' More effects: damping, nonlinearity, and external forces ',
+               2,
+               None,
+               '___sec163'),
+              (u' The Euler-Cromer scheme ', 3, None, '___sec164'),
+              (u' The 4-th order Runge-Kutta method ', 3, None, '___sec165'),
+              (u' Illustration of linear damping ', 2, None, '___sec166'),
+              (u' Illustration of linear damping with sinusoidal excitation ',
+               2,
+               None,
+               '___sec167'),
+              (u' Spring-mass system with sliding friction ',
+               2,
+               u'sec:de:vib:ode2:sliding:friction',
+               u'sec:de:vib:ode2:sliding:friction'),
+              (u' A finite difference method; undamped, linear case ',
+               2,
+               u'sec:de:vib:2nd',
+               u'sec:de:vib:2nd'),
+              (u' A finite difference method; linear damping ',
+               2,
+               u'sec:de:vib:2nd:damped1',
+               u'sec:de:vib:2nd:damped1'),
+              (u' Exercises ', 1, None, '___sec171'),
+              (u' Exercise 43: Geometric construction of the Forward Euler method ',
+               2,
+               u'sec:de:exer:geom',
+               u'sec:de:exer:geom'),
+              (u' Exercise 44: Make test functions for the Forward Euler method ',
+               2,
+               u'sec:de:exer:FE:test1',
+               u'sec:de:exer:FE:test1'),
+              (u" Exercise 45: Implement and evaluate Heun's method ",
+               2,
+               u'sec:de:exer:Heun:pg',
+               u'sec:de:exer:Heun:pg'),
+              (u' Exercise 46: Find an appropriate time step; logistic model ',
+               2,
+               u'sec:de:exer:logistic:dtopt',
+               u'sec:de:exer:logistic:dtopt'),
+              (u' Exercise 47: Find an appropriate time step; SIR model ',
+               2,
+               u'sec:de:exer:SIR:dtopt',
+               u'sec:de:exer:SIR:dtopt'),
+              (u' Exercise 48: Model an adaptive vaccination campaign ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 49: Make a SIRV model with time-limited effect of vaccination ',
+               2,
+               u'sec:de:exer:SIRV:padapt',
+               u'sec:de:exer:SIRV:padapt'),
+              (u' Exercise 50: Refactor a flat program ',
+               2,
+               u'sec:de:exer:vib:FE:func',
+               u'sec:de:exer:vib:FE:func'),
+              (u' Exercise 51: Simulate oscillations by a general ODE solver ',
+               2,
+               u'sec:de:exer:vib:ode_FE',
+               u'sec:de:exer:vib:ode_FE'),
+              (u' Exercise 52: Compute the energy in oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Exercise 53: Use a Backward Euler scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:BE',
+               u'sec:de:exer:pg:BE'),
+              (u' Exercise 54: Use a Crank-Nicolson scheme for population growth ',
+               2,
+               u'sec:de:exer:pg:CN',
+               u'sec:de:exer:pg:CN'),
+              (u' Exercise 55: Understand finite differences via Taylor series ',
+               2,
+               u'sec:de:exer:fd:Taylor',
+               u'sec:de:exer:fd:Taylor'),
+              (u' Exercise 56: Use a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:vib:BE',
+               u'sec:de:exer:vib:BE'),
+              (u' Remarks ', 3, None, '___sec186'),
+              (u" Exercise 57: Use Heun's method for the SIR model ",
+               2,
+               u'sec:de:exer:SIR:Heun',
+               u'sec:de:exer:SIR:Heun'),
+              (u' Exercise 58: Use Odespy to solve a simple ODE ',
+               2,
+               u'sec:de:exer:odespy:decay',
+               u'sec:de:exer:odespy:decay'),
+              (u' Exercise 59: Set up a Backward Euler scheme for oscillations ',
+               2,
+               u'sec:de:exer:osc:BE',
+               u'sec:de:exer:osc:BE'),
+              (u' Exercise 60: Set up a Forward Euler scheme for nonlinear and damped oscillations ',
+               2,
+               u'sec:de:exer:osc:FE:general',
+               u'sec:de:exer:osc:FE:general'),
+              (u' Exercise 61: Discretize an initial condition ',
+               2,
+               u'sec:de:exer:osc:2nd:V0ic',
+               u'sec:de:exer:osc:2nd:V0ic'),
+              (u' Solving partial differential equations ',
+               0,
+               u'6th:SolvPDEs',
+               u'6th:SolvPDEs'),
+              (u' Finite difference methods ',
+               1,
+               u'6th:SolvPDEs:MOLandFE',
+               u'6th:SolvPDEs:MOLandFE'),
+              (u' Reduction of a PDE to a system of ODEs ',
+               2,
+               u'sec:pde:diff1D:reduce',
+               u'sec:pde:diff1D:reduce'),
+              (u' Construction of a test problem with known discrete solution ',
+               2,
+               u'sec:pde:diff1D:testproblem',
+               u'sec:pde:diff1D:testproblem'),
+              (u' Implementation: Forward Euler method ',
+               2,
+               None,
+               '___sec196'),
+              (u' Application: heat conduction in a rod ',
+               2,
+               u'sec:pde:diff1D:rod',
+               u'sec:pde:diff1D:rod'),
+              (u' Vectorization ', 2, None, '___sec198'),
+              (u' Using Odespy to solve the system of ODEs ',
+               2,
+               None,
+               '___sec199'),
+              (u' Implicit methods ', 2, None, '___sec200'),
+              (u' Exercises ', 1, None, '___sec201'),
+              (u' Exercise 62: Simulate a diffusion equation by hand ',
+               2,
+               u'sec:pde:diff1D:exer:handFE',
+               u'sec:pde:diff1D:exer:handFE'),
+              (u' Exercise 63: Compute temperature variations in the ground ',
+               2,
+               u'sec:pde:diff1D:exer:groundtemp',
+               u'sec:pde:diff1D:exer:groundtemp'),
+              (u' Exercise 64: Compare implicit methods ',
+               2,
+               u'sec:pde:diff1D:exer:compare:implicit',
+               u'sec:pde:diff1D:exer:compare:implicit'),
+              (u' Exercise 65: Explore adaptive and implicit methods ',
+               2,
+               u'sec:pde:diff1D:exer:groundtemp:adapt',
+               u'sec:pde:diff1D:exer:groundtemp:adapt'),
+              (u' Exercise 66: Investigate the $\\theta$ rule ',
+               2,
+               u'sec:pde:diff1D:exer:CN',
+               u'sec:pde:diff1D:exer:CN'),
+              (u' Remarks ', 3, None, '___sec207'),
+              (u' Exercise 67: Compute the diffusion of a Gaussian peak ',
+               2,
+               u'sec:pde:diff1D:exer:Gaussian',
+               u'sec:pde:diff1D:exer:Gaussian'),
+              (u' Exercise 68: Vectorize a function for computing the area of a polygon ',
+               2,
+               u'2nd:exer:area:polygon2',
+               u'2nd:exer:area:polygon2'),
+              (u' Exercise 69: Explore symmetry ',
+               2,
+               u'sec:pde:diff1D:exer:Gaussian:symm',
+               u'sec:pde:diff1D:exer:Gaussian:symm'),
+              (u' Remarks ', 3, None, '___sec211'),
+              (u' Exercise 70: Compute solutions as $t\\rightarrow\\infty$ ',
+               2,
+               u'sec:pde:diff1D:exer:stationary',
+               u'sec:pde:diff1D:exer:stationary'),
+              (u' Remarks ', 3, None, '___sec213'),
+              (u' Exercise 71: Solve a two-point boundary value problem ',
+               2,
+               u'sec:pde:diff1D:exer:stationary2',
+               u'sec:pde:diff1D:exer:stationary2'),
+              (u' Solving nonlinear algebraic equations ',
+               0,
+               u'4th:NonlinAlgEq',
+               u'4th:NonlinAlgEq'),
+              (u' Brute force methods ',
+               1,
+               u'4th:bruteforce',
+               u'4th:bruteforce'),
+              (u' Brute force root finding ', 2, None, '___sec217'),
+              (u' Numerical algorithm ', 3, None, '___sec218'),
+              (u' Implementation ', 3, None, '___sec219'),
+              (u' Brute force optimization ', 2, None, '___sec220'),
+              (u' Numerical algorithm ', 3, None, '___sec221'),
+              (u' Implementation ', 3, None, '___sec222'),
+              (u' Model problem for algebraic equations ',
+               2,
+               None,
+               '___sec223'),
+              (u" Newton's method ",
+               1,
+               u'4th:NonlinAlgEq:Newt',
+               u'4th:NonlinAlgEq:Newt'),
+              (u" Deriving and implementing Newton's method ",
+               2,
+               None,
+               '___sec225'),
+              (u' Making a more efficient and robust implementation ',
+               2,
+               u'4th:Newton:robust',
+               u'4th:Newton:robust'),
+              (u' The secant method ',
+               1,
+               u'4th:NonlinAlgEq:Secant',
+               u'4th:NonlinAlgEq:Secant'),
+              (u' The bisection method ',
+               1,
+               u'4th:NonlinAlgEq:Bisect',
+               u'4th:NonlinAlgEq:Bisect'),
+              (u' Rate of convergence ',
+               1,
+               u'4th:NonlinAlgEq:RateConv',
+               u'4th:NonlinAlgEq:RateConv'),
+              (u' Exercises ', 1, None, '___sec230'),
+              (u" Exercise 72: Understand why Newton's method can fail ",
+               2,
+               u'4th:exer:Newton:failure',
+               u'4th:exer:Newton:failure'),
+              (u' Exercise 73: See if the secant method fails ',
+               2,
+               u'4th:exer:Secant:failure',
+               u'4th:exer:Secant:failure'),
+              (u' Exercise 74: Understand how the bisection method cannot fail ',
+               2,
+               u'4th:exer:Bisection:failure',
+               u'4th:exer:Bisection:failure'),
+              (u" Exercise 75: Combine the bisection method with Newton's method ",
+               2,
+               u'4th:exer:Bisection:Newton',
+               u'4th:exer:Bisection:Newton'),
+              (u" Exercise 76: Write a test function for Newton's method ",
+               2,
+               u'4th:exer:NewtonHand',
+               u'4th:exer:NewtonHand'),
+              (u' Exercise 77: Solve nonlinear equation for a vibrating beam ',
+               2,
+               u'4th:exer:beam:vib',
+               u'4th:exer:beam:vib'),
+              (u' References ', 0, None, '___sec237')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<!-- newcommands.tex -->
+$$
+\newcommand{\Oof}[1]{\mathcal{O}(#1)}
+$$
+
+
+
+
+    
+<a name="part0015"></a>
+<p>
+<!-- begin top navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._p4c-solarized-Matlab014.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._p4c-solarized-Matlab016.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end top navigation -->
+</p>
+
+<p>
+<!-- !split -->
+
+<h1 id="___sec115">Exercises </h1>
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:exer:trap:hand">Exercise 29: Hand calculations for the trapezoidal method</h2>
+
+<p>
+<!-- solution=`sol_trapezoidal_test_func.pdf` -->
+
+<p>
+Compute by hand the area composed of two trapezoids (of equal width) that
+approximates the integral \( \int_1^3 2x^3dx \). Make a test function
+that calls the <code>trapezoidal</code> function in <code>trapezoidal.m</code>
+and compares the return value with the hand-calculated value.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+The code may be written as follows
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: trapezoidal_test_func
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>trapezoidal_test_func.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:exer:midpt:hand">Exercise 30: Hand calculations for the midpoint method</h2>
+
+<p>
+<!-- solution=`sol_midpoint_test_func.pdf` -->
+
+<p>
+Compute by hand the area composed of two rectangles (of equal width) that
+approximates the integral \( \int_1^3 2x^3dx \). Make a test function
+that calls the <code>midpoint</code> function in <code>midpoint.m</code>
+and compares the return value with the hand-calculated value.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+The code may be written as follows
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: midpoint_test_func
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>midpoint_test_func.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:exer:trap:mid:parabola">Exercise 31: Compute a simple integral</h2>
+
+<p>
+<!-- solution=`sol_integrate_parabola.pdf` -->
+
+<p>
+Apply the <code>trapezoidal</code> and <code>midpoint</code> functions to compute
+the integral \( \int_2^6 x(x -1)dx \) with 2 and 100 subintervals.
+Compute the error too.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+The code may be written as follows
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: integrate_parabola
+</div>
+<!-- end box -->
+
+
+<p>
+In the code, we have taken the opportunity to show
+how commenting often is used to switch between two
+code fragments, typically single statements. The
+alternatives <code>n = 2</code> and <code>n = 100</code> are switched by
+removing/adding the comment sign <code>#</code>, before running
+the code anew. Another alternative would of course be
+to ask the user for the value of <code>n</code>.
+Running the program with <code>n = 2</code>, produces the following printout:
+<!-- begin verbatim block  dat-->
+<pre><code>For n = 2, we get:
+Numerical trapezoid: 56 , Error: 2.667
+Numerical midpoint: 52 , Error: 1.333
+</code></pre>
+<!-- end verbatim block -->
+while running it with <code>n = 100</code> gives:
+<!-- begin verbatim block  dat-->
+<pre><code>For n = 100, we get:
+Numerical trapezoid: 53.3344 , Error: 0.0014
+Numerical midpoint: 53.3328 , Error: 0.0002
+</code></pre>
+<!-- end verbatim block -->
+The analytical value of the integral is 53.333 (rounded).
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>integrate_parabola.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:exer:hand:sine">Exercise 32: Hand-calculations with sine integrals</h2>
+
+<p>
+<!-- solution=`sol_integrate_sine.pdf` -->
+
+<p>
+We consider integrating the sine function: \( \int_0^b \sin (x)dx \).
+
+<p>
+<b>a)</b>
+Let \( b=\pi \) and use two intervals in the trapezoidal and midpoint method.
+Compute the integral by hand and illustrate how the two numerical
+methods approximates the integral. Compare with the exact value.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+Analytically, the integral computes to 2. By hand, with the trapezoidal method,
+we get 1.570. Graphically (Figure <a href="#fig:intgr_sine_a_trap">10</a>), it is clear that
+the numerical approach will have to under-estimate the true result.
+
+<p>
+The area under the blue graph in Figure <a href="#fig:intgr_sine_a_trap">10</a>
+corresponds to the "true" area under the graph of the integrand. The area
+under the red graph corresponds to what you get with the trapezoidal method and
+two intervals.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 10:  The integral computed with the trapezoidal method (n = 2). <div id="fig:intgr_sine_a_trap"></div> </p></center>
+<p><img src="figs/integrate_sine_a_trap.png" align="bottom" width=400></p>
+</center>
+
+<p>
+By hand, with the midpoint method, we get 2.221. Graphically (Figure <a href="#fig:intgr_sine_a_mid">11</a>),
+we might see that the numerical approach will have to over-estimate the true result.
+Again, the area under the blue graph in Figure <a href="#fig:intgr_sine_a_mid">11</a>
+corresponds to the "true" area under the graph of the integrand. The area
+under the red graph corresponds to what you get with the midpoint method and
+two intervals.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 11:  The integral computed with the midpoint method (n = 2). <div id="fig:intgr_sine_a_mid"></div> </p></center>
+<p><img src="figs/integrate_sine_a_mid.png" align="bottom" width=400></p>
+</center>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>b)</b>
+Do a) when \( b=2\pi \).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+Analytically, the integral computes to zero. In this case, both numerical methods will correctly calculate the integral to zero even with just two intervals! Graphically, we see that they arrive at zero for "different reasons". The trapezoidal method constructs both its trapezoids by use of the function (integrand) value at the midpoint of the whole interval. However, there the integrand crosses the x-axis, i.e. it evaluates to zero. The "area" computed by the trapezoidal method becomes the zero area located "between" the green graph and the x-axis in Figure <a href="#fig:intgr_sine_b_trap_mid">12</a>. The midpoint method computes the areas of two rectangles (red graph in Figure <a href="#fig:intgr_sine_b_trap_mid">12</a>), but since the signs of these equal areas differ, they add to zero.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 12:  The integral computed with the trapezoidal and midpoint method (n = 2). <div id="fig:intgr_sine_b_trap_mid"></div> </p></center>
+<p><img src="figs/integrate_sine_b_trap_mid.png" align="bottom" width=400></p>
+</center>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>integrate_sine.pdf</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:exer:test:midpoint">Exercise 33: Make test functions for the midpoint method</h2>
+
+<p>
+<!-- solution=`sol_test_midpoint.pdf` -->
+
+<p>
+Modify the file <code>test_trapezoidal.m</code> such that the
+three tests are applied to the function <code>midpoint</code> implementing
+the midpoint method for integration.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+Note that also the midpoint method will do an exact (to within machine precision)
+integration when the integrand is a straight line. This is so, since the errors
+from each rectangle will cancel. The code reads:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: test_midpoint
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>test_midpoint.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:exer:test:roundoff">Exercise 34: Explore round-off errors with large numbers</h2>
+
+<p>
+<!-- solution=`sol_test_trapezoidal2.pdf` -->
+
+<p>
+The trapezoidal method integrates linear functions exactly, and this
+property was used in the test function <code>test_trapezoidal_linear</code> in the file
+<code>test_trapezoidal.m</code>. Change the function used in
+the section <a href="._p4c-solarized-Matlab014.html#sec:integrals:testprocs">Test procedures</a> to \( f(x)=6\cdot 10^8 x - 4\cdot 10^6 \)
+and rerun the test. What happens? How must you change the test
+to make it useful? How does the convergence rate test behave? Any need
+for adjustment?
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+With the new function given, we get the error message that includes:
+<!-- begin verbatim block  dat-->
+<pre><code>AssertionError: n = 2, err = 9.53674e-07
+</code></pre>
+<!-- end verbatim block -->
+The numerical calculation then obviously differs from the exact value by
+more than what is specified in the tolerance <code>tol</code>. We may understand this
+by considering the new function, i.e., \( f(x)=6\cdot 10^8 x - 4\cdot 10^6 \).
+Any round-off error in \( x \) will get magnified big time by the factor \( 6\cdot 10^8 \) in front,
+i.e. the slope of the line. This makes the numerical calculation more inaccurate than previously.
+To fix this problem, we have several options. One possibility is to relax the tolerance, but
+this is not very satisfactory. After all, the calculation is supposed to be "exact" for a straight
+line. Another alternative is to scale the interval \( [a,b] \) into, e.g., \( [\frac{a}{6\cdot 10^8},\frac{b}{6\cdot 10^8}] \).
+This will neutralize the huge factor in front of \( x \), bringing the accuracy back to where it was previously. This
+alternative is implemented in
+<a href="https://github.com/hplgit/prog4comp/src/m/test_trapezoidal2.m" target="_self"><tt>test_trapezoidal2.m</tt></a>.
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: test_trapezoidal2
+</div>
+<!-- end box -->
+
+
+<p>
+Regarding the convergence test, the convergence rates all become zero. This should be expected,
+since the integrand is a straight line function, which should give zero error at each step.
+However, the huge slope of the straight line integrand gives round-off errors that lift the
+error to about \( 1\cdot 10^{-7} \) at each step. The ratio of every two consecutive errors then becomes 1,
+the logarithm of which is zero. This causes the zero convergence rates (see the computation of <code>r_im1</code> in the code).
+Scaling the interval as we did previously, will reduce the error, but since the error for each step is the same,
+their ratio still becomes 1. Therefore, there is no point in changing the test.
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>test_trapezoidal2.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:exer:test:convrates:sqrt">Exercise 35: Write test functions for \( \int_0^4\sqrt{x}dx \)</h2>
+
+<p>
+<!-- solution=`sol_test_trapezoidal3.pdf` -->
+
+<p>
+We want to test how the <code>trapezoidal</code> function works for the integral
+\( \int_0^4\sqrt{x}dx \). Two of the tests in <code>test_trapezoidal.m</code>
+are meaningful for this integral. Compute by hand the result of
+using 2 or 3 trapezoids and modify the <code>test_trapezoidal_one_exact_result</code>
+function accordingly. Then modify <code>test_trapezoidal_conv_rate</code>
+to handle the square root integral.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+Adjustments to the code are made according to the remark below and
+hand calculations are written into the code. The code then reads:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: test_trapezoidal3
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>test_trapezoidal3.m</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec123">Remarks </h3>
+
+<p>
+The convergence rate test fails. Printing out <code>r</code> shows that the
+actual convergence rate for this integral is \( -1.5 \) and not \( -2 \).
+The reason is that the <a href="http://en.wikipedia.org/wiki/Trapezoidal_rule#Error_analysis" target="_self">error in the trapezoidal method</a>
+is \( -(b-a)^3n^{-2}f''(\xi) \) for some (unknown) \( \xi\in [a,b] \).
+With \( f(x)=\sqrt{x} \), \( f''(\xi)\rightarrow -\infty \) as \( \xi\rightarrow 0 \),
+pointing to a potential problem in the size of the error.
+Running a test with \( a>0 \), say \( \int_{0.1}^4\sqrt{x}dx \) shows that
+the convergence rate is indeed restored to -2.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:exer:rectangleMethod">Exercise 36: Rectangle methods</h2>
+
+<p>
+<!-- solution=`sol_rectangle_methods.pdf` -->
+
+<p>
+The midpoint method divides the interval of integration into equal-sized
+subintervals and approximates the integral in each subinterval by
+a rectangle whose height equals the function value at the midpoint of
+the subinterval. Instead, one might use either the left or right end of
+the subinterval as illustrated in Figure <a href="#fig:vCarRectangle">13</a>.
+This defines a <em>rectangle method</em> of integration. The height of the
+rectangle can be based on the left or right end or the midpoint.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 13:  Illustration of the rectangle method with evaluating the rectangle height by either the left or right point. <div id="fig:vCarRectangle"></div> </p></center>
+<p><img src="figs/viz_rectangle.png" align="bottom" width=800></p>
+</center>
+
+<p>
+<b>a)</b>
+Write a function <code>rectangle(f, a, b, n, height='left')</code> for
+computing an integral \( \int_a^bf(x)dx \) by the rectangle method
+with height computed based on the value of <code>height</code>, which is either
+ <code>left</code>, <code>right</code>, or <code>mid</code>.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+Placing the code for both <em>a</em> and <em>b</em> into one file, the code may read:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: rectangle_methods
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>b)</b>
+Write three test functions for the three unit test procedures
+described in the section <a href="._p4c-solarized-Matlab014.html#sec:integrals:testprocs">Test procedures</a>. Make sure you
+test for <code>height</code> equal to <code>left</code>, <code>right</code>, and <code>mid</code>. You may
+call the <code>midpoint</code> function for checking the result when <code>height=mid</code>.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Edit <code>test_trapezoidal.m</code>.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+See code above.
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>rectangle_methods.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:exer:adaptive:int">Exercise 37: Adaptive integration</h2>
+
+<p>
+<!-- solution=`sol_adaptive_integration.pdf` -->
+
+<p>
+Suppose we want to use the trapezoidal or midpoint method to
+compute an integral \( \int_a^b f(x)dx \) with an error less than
+a prescribed tolerance \( \epsilon \). What is the appropriate
+size of \( n \)?
+
+<p>
+To answer this question, we may enter an iterative procedure where
+we compare the results produced by \( n \) and \( 2n \) intervals,
+and if the difference is smaller than \( \epsilon \), the value corresponding
+to \( 2n \) is returned. Otherwise, we halve \( n \) and repeat the procedure.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+It may be a good idea to organize your code so that the function <code>adaptive_integration</code> can be used
+easily in future programs you write.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<b>a)</b>
+Write a function <code>adaptive_integration(f, a, b, eps, method=midpoint)</code>
+that implements the idea above (<code>eps</code> corresponds to the tolerance
+\( \epsilon \), and <code>method</code> can be <code>midpoint</code> or <code>trapezoidal</code>).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+To ease future use of adaptive integration, we save the function <code>adaptive_integration</code>
+in a separate file <code>adaptive_integration.m</code>:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: adaptive_integration
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>b)</b>
+Test the method on \( \int_0^2x^2dx \) and \( \int_0^2\sqrt{x}dx \)
+for \( \epsilon = 10^{-1}, 10^{-10} \) and write out the exact error.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+The function <code>adaptive_integration</code> may be applied (as required in <em>b</em> and <em>c</em>)
+by the statements in <code>use_my_adaptive_integration.m</code>:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: use_my_adaptive_integration
+</div>
+<!-- end box -->
+
+
+<p>
+Note that, in our suggested code, it is foreseen that the programmer switches between the
+two epsilon values by use of commenting, i.e.
+adding/removing <code>%</code>. This may of course be avoided, if desirable, by asking the user for epsilon.
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>c)</b>
+Make a plot of \( n \) versus \( \epsilon \in [10^{-1}, 10^{-10}] \) for
+\( \int_0^2\sqrt{x}dx \). Use logarithmic scale for \( \epsilon \).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+From Figure <a href="#fig:adaptIntegr">14</a>, we see that the stricter the value of epsilon, the larger the
+difference between the midpoint and the trapezoidal methods. For a given value for epsilon, the
+midpoint method comes within the tolerance with fewer intervals (lower value of <code>n</code>) than does
+the trapezoidal method. This should be expected, since the midpoint method is somewhat more accurate
+than the trapezoidal method.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 14:  Showing <code>n</code> as a function of <code>log(eps)</code> when \( \int_0^2\sqrt{x}dx \) is computed by the midpoint (blue) and the trapezoidal (red) method. <div id="fig:adaptIntegr"></div> </p></center>
+<p><img src="figs/adaptive_integration.png" align="bottom" width=800></p>
+</center>
+
+<p>
+One way of producing this plot, is by using the code lines included at the end of
+<code>use_my_adaptive_integration.m</code> (see the above).
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+Filename: <code>adaptive_integration.m</code>.
+
+<p>
+<!-- Closing remarks for this Exercise -->
+
+<h3 id="___sec126">Remarks </h3>
+
+<p>
+The type of method explored in this exercise is called <em>adaptive</em>,
+because it tries to adapt the value of \( n \) to meet a given
+error criterion. The true error can very seldom be computed
+(since we do not know the exact answer to the computational
+problem), so one has to find other indicators of the error, such
+as the one here where the changes in the integral value, as
+the number of intervals is doubled, is taken to reflect the error.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:exer:integrate:x2x">Exercise 38: Integrating x raised to x</h2>
+
+<p>
+<!-- solution=`sol_integrate_x2x.pdf` -->
+
+<p>
+Consider the integral
+
+$$ I = \int_0^4 x^x\,dx\thinspace .$$
+
+The integrand \( x^x \) does not have an anti-derivative that can be expressed in terms of standard functions (visit <a href="http://wolframalpha.com" target="_self"><tt>http://wolframalpha.com</tt></a> and type
+<code>integral(x^x,x)</code> to convince yourself that
+our claim is right. Note that Wolfram alpha does give you an answer, but that answer is an approximation, it is <em>not</em> exact. This is because
+Wolfram alpha too uses numerical methods to arrive at the answer, just as you will in this exercise). Therefore, we are forced to compute the integral by numerical methods. Compute a result that is right to four digits.
+
+<p>
+<!-- --- begin hint in exercise --- -->
+
+<p>
+<b>Hint.</b>
+Use ideas from <a href="#sec:exer:adaptive:int">Exercise 37: Adaptive integration</a>.
+
+<p>
+<!-- --- end hint in exercise --- -->
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+When the function <code>adaptive_integration</code> is available, the code may be written as:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: integrate_x2x
+</div>
+<!-- end box -->
+
+
+<p>
+Remember that <code>adaptive_integration</code> prints out the computed integral, so no effort
+in that respect is required here.
+
+<p>
+Running the program, gives a printout to the screen showing how <code>diff</code> gets smaller and
+smaller each time. The final two lines of the printout read:
+
+<p>
+<!-- begin verbatim block  dat-->
+<pre><code>The integral computes to: 2.83384395958
+Sufficient n is: 256
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+The computed value may be compared to what Wolfram alpha gives. Remember that since we
+have not computed the exact error, we can <em>not</em> guarantee that the
+"result is right to four digits". However, we have reason to believe that we "are close".
+Typically, when it is known that the error measure used is not precise, the tolerance is
+made stricter.
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>integrate_x2x.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:exer:sine:products">Exercise 39: Integrate products of sine functions</h2>
+
+<p>
+In this exercise we shall integrate
+
+$$ I_{j,k} = \int_{-\pi}^{\pi} \sin(jx)\sin(kx)dx,$$
+
+where \( j \) and \( k \) are integers.
+
+<p>
+<b>a)</b>
+Plot \( \sin(x)\sin(2x) \) and \( \sin(2x)\sin(3x) \) for \( x\in ]-\pi,\pi] \)
+in separate plots.
+Explain why you expect
+\( \int_{-\pi}^{\pi}\sin x\sin 2x\,dx=0 \) and
+\( \int_{-\pi}^{\pi}\sin 2x\sin 3x\,dx=0 \).
+
+<p>
+<b>b)</b>
+Use the trapezoidal rule to compute \( I_{j,k} \) for \( j=1,\ldots,10 \) and
+\( k=1,\ldots,10 \).
+
+<p>
+Filename: <code>products_sines.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:exer:revisitFitSines">Exercise 40: Revisit fit of sines to a function</h2>
+
+<p>
+<!-- solution=`sol_autofit_sines.pdf` -->
+
+<p>
+This is a continuation of <a href="._p4c-solarized-Matlab011.html#2nd:exer:fitSines">Exercise 27: Fit sines to straight line</a>. The task is to
+approximate a given function \( f(t) \) on \( [-\pi,\pi] \) by a sum of sines,
+
+$$
+\begin{equation}
+S_N(t) = \sum_{n=1}^{N} b_n \sin(nt)\thinspace .
+\end{equation}
+$$
+
+We are now interested in computing the unknown coefficients \( b_n \)
+such that \( S_N(t) \) is in some sense the <em>best approximation</em> to \( f(t) \).
+One common way of doing this is to first set up a general expression
+for the <em>approximation error</em>, measured by &quot;summing up&quot; the
+squared deviation of \( S_N \) from \( f \):
+
+$$ E = \int_{-\pi}^{\pi}(S_N(t)-f(t))^2dt\thinspace .$$
+
+We may view \( E \) as a function of \( b_1,\ldots,b_N \). Minimizing \( E \)
+with respect to \( b_1,\ldots,b_N \) will give us a <em>best approximation</em>,
+in the sense that we adjust \( b_1,\ldots,b_N \) such that \( S_N \) deviates
+as little as possible from \( f \).
+
+<p>
+Minimization of a function of \( N \) variables, \( E(b_1,\ldots,b_N) \) is
+mathematically performed by requiring all the partial derivatives
+to be zero:
+
+$$
+\begin{align*}
+\frac{\partial E}{\partial b_1} & = 0,\\ 
+\frac{\partial E}{\partial b_2} & = 0,\\ 
+&\vdots\\ 
+\frac{\partial E}{\partial b_N} & = 0\thinspace .
+\end{align*}
+$$
+
+<p>
+<b>a)</b>
+Compute the partial derivative \( \partial E/\partial b_1 \) and
+generalize to the arbitrary case \( \partial E/\partial b_n \), \( 1\leq n\leq N \).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+$$
+\begin{align}
+\frac{\partial E}{\partial b_1} & = \frac{\partial}{\partial b_1} (\int_{-\pi}^{\pi}(S_N(t)-f(t))^2dt),                 \nonumber \\ 
+                                & = \int_{-\pi}^{\pi} \frac{\partial}{\partial b_1}((S_N(t)-f(t))^2dt),                 \nonumber \\ 
+                                & = 2\int_{-\pi}^{\pi} (S_N(t)-f(t))\sin(t)dt,                                           \nonumber
+\end{align}
+$$
+
+where it has been assumed that the integrand is such that the partial derivative can be moved inside the integration.
+
+<p>
+We see that the partial derivative of \( E \) with respect to any one of the \( b \) coefficients will take on the same form, meaning that
+
+$$
+\begin{equation}
+\frac{\partial E}{\partial b_n} = 2\int_{-\pi}^{\pi} (S_N(t)-f(t))\sin(nt)dt,              \nonumber
+\end{equation}
+$$
+
+where \( 1\leq n\leq N \).
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>b)</b>
+Show that
+
+$$ b_n = \frac{1}{\pi}\int_{-\pi}^{\pi}f(t)\sin(nt)\,dt\thinspace .$$
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+Requiring
+$$
+\begin{equation}
+\frac{\partial E}{\partial b_n} = 0,              \nonumber
+\end{equation}
+$$
+
+means that the following must apply,
+$$
+\begin{equation}
+2\int_{-\pi}^{\pi} (S_N(t)-f(t))\sin(nt)dt = 0.              \nonumber
+\end{equation}
+$$
+
+This may be rewritten as
+$$
+\begin{equation}
+\int_{-\pi}^{\pi} S_N(t)\sin(nt)dt = \int_{-\pi}^{\pi} f(t)\sin(nt)dt              \nonumber
+\end{equation}
+$$
+
+or, if we insert the expression for \( S_N \), we get
+$$
+\begin{equation}
+\int_{-\pi}^{\pi} (\sum_{i=1}^{N} b_i \sin(it))\sin(nt)dt = \int_{-\pi}^{\pi} f(t)\sin(nt)dt,              \nonumber
+\end{equation}
+$$
+
+where the summation variable in \( S_N \) has been changed from \( n \) to \( i \), avoiding conflict with the \( n \) already present in \( \sin(nt) \).
+
+<p>
+Now, since
+$$
+\begin{equation}
+\int_{-\pi}^{\pi} \sin^2(nt)dt = \pi,              \nonumber
+\end{equation}
+$$
+
+while
+$$
+\begin{equation}
+\int_{-\pi}^{\pi} \sin(it)\sin(nt)dt = 0,              \nonumber
+\end{equation}
+$$
+
+when \( i \neq n \), we arrive at
+$$ b_n = \frac{1}{\pi}\int_{-\pi}^{\pi}f(t)\sin(nt)\,dt\thinspace .$$
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>c)</b>
+Write a function <code>integrate_coeffs(f, N, M)</code> that computes \( b_1,\ldots,b_N \)
+by numerical integration, using \( M \) intervals in the trapezoidal rule.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+Answers to all (programming) questions in this exercise are collected in one script
+which reads:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: autofit_sines
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>d)</b>
+A remarkable property of the trapezoidal rule is that it is exact for integrals
+\( \int_{-\pi}^{\pi}\sin nt\,dt \) (when subintervals are of equal size). Use this
+property to create a function <code>test_integrate_coeff</code> to verify the
+implementation of <code>integrate_coeffs</code>.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+See code given above.
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>e)</b>
+Implement the choice \( f(t) = \frac{1}{\pi}t \) as a Matlab function
+<code>f(t)</code> and call <code>integrate_coeffs(f, 3, 100)</code> to see what the
+optimal choice of \( b_1, b_2, b_3 \) is.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+See code given above. Running the script produces a printout of the following values
+for the \( b \) coefficients:
+
+<p>
+<!-- begin verbatim block  dat-->
+<pre><code> 0.63641032
+-0.3178909
+ 0.2115779
+</code></pre>
+<!-- end verbatim block -->
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>f)</b>
+Make a function <code>plot_approx(f, N, M, filename)</code> where you plot <code>f(t)</code>
+together with the best approximation \( S_N \) as computed above,
+using \( M \) intervals for numerical integration. Save the plot to a file
+with name <code>filename</code>.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+See code given above.
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<!-- !bsubex -->
+<!-- Run <code>plot_approx(f, N, M, 'frame_%04d.png')</code> for \( f(t) = \frac{1}{\pi}t \) -->
+<!-- for \( N=1,\ldots,100 \). Make an animation of the plot files to illustrate -->
+<!-- how the approximation improves as \( N \) is increased. -->
+<!-- !esubex -->
+
+<p>
+<b>g)</b>
+Run <code>plot_approx(f, N, M, filename)</code> for \( f(t) = \frac{1}{\pi}t \)
+for \( N=3,6,12,24 \). Observe how the approximation improves.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+See code given above. Running the program will produce one plot (Figure <a href="#fig:S_N3">15</a>, Figure <a href="#fig:S_N6">16</a>, Figure <a href="#fig:S_N12">17</a> and Figure <a href="#fig:S_N24">18</a>) for each value of \( N \). We see from the plots that the larger the \( N \), the better the approximation.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 15:  The function \( f(t) \) and its approximation \( S_N(t) \) when \( N = 3 \). <div id="fig:S_N3"></div> </p></center>
+<p><img src="figs/S_whenNis3.png" align="bottom" width=800></p>
+</center>
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 16:  The function \( f(t) \) and its approximation \( S_N(t) \) when \( N = 6 \). <div id="fig:S_N6"></div> </p></center>
+<p><img src="figs/S_whenNis6.png" align="bottom" width=800></p>
+</center>
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 17:  The function \( f(t) \) and its approximation \( S_N(t) \) when \( N = 12 \). <div id="fig:S_N12"></div> </p></center>
+<p><img src="figs/S_whenNis12.png" align="bottom" width=800></p>
+</center>
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 18:  The function \( f(t) \) and its approximation \( S_N(t) \) when \( N = 24 \). <div id="fig:S_N24"></div> </p></center>
+<p><img src="figs/S_whenNis24.png" align="bottom" width=800></p>
+</center>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<b>h)</b>
+Run <code>plot_approx</code> for \( f(t) = e^{-(t-\pi)} \) and \( N=100 \).
+Observe a fundamental problem: regardless of \( N \), \( S_N(-\pi)=0 \), not
+\( e^{2\pi}\approx 535 \). (There are ways to fix this issue.)
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+See code given above. Running the program (also) produces the plot seen in Figure <a href="#fig:new_f_S_N100">19</a>. Clearly, the approximation is no good at the endpoints of the interval.
+
+<p>
+<center> <!-- figure -->
+<hr class="figure">
+<center><p class="caption">Figure 19:  The new function \( f(t) \) and its approximation \( S_N(t) \) when \( N = 100 \). <div id="fig:new_f_S_N100"></div> </p></center>
+<p><img src="figs/S_whenNis3.png" align="bottom" width=800></p>
+</center>
+
+<p>
+<!-- --- end solution of exercise --- -->
+
+<p>
+<!-- More real applications of integrals, arc etc -->
+<!-- More: Monte Carlo? -->
+<!-- Unequal intervals -->
+
+<p>
+Filename: <code>autofit_sines.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:exer:trapezoidal:2D">Exercise 41: Derive the trapezoidal rule for a double integral</h2>
+
+<p>
+Use ideas in the section <a href="._p4c-solarized-Matlab014.html#sec:int:double:midpoint">The midpoint rule for a double integral</a> to derive a formula
+for computing a double integral \( \int_a^b\int_c^d f(x,y)dydx \) by the
+trapezoidal rule.  Implement and test this rule.
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+We introduce a help function \( g(x) \) and write
+
+$$ \int_a^b \int_c^d f(x,y) dydx = \int_a^b g(x)dx,\quad
+g(x) = \int_c^d f(x,y) dy\thinspace .$$
+
+Next, we apply the trapezoidal rule (<a href="._p4c-solarized-Matlab013.html#sec:integrals:trap">The composite trapezoidal rule</a>) to each of the integrals
+
+$$ \int_a^b g(x)dx,\quad
+g(x) = \int_c^d f(x,y) dy\thinspace .$$
+
+<p>
+Starting with \( g(x)=\int_c^d f(x,y)dy \), we introduce
+\( n_y \) intervals on \( [c,d] \) with length \( h_y \). The trapezoidal rule
+for this integral then becomes
+
+$$ g(x) = \int_c^d f(x,y) dy \approx  h_y \left[\frac{1}{2}f(x,c) + \sum_{j=1}^{n_y-1}f(x,y_j) + \frac{1}{2}f(x,d) \right],
+\quad y_j = c + jh_y \thinspace . $$
+
+<p>
+For the outer integral \( \int_a^b g(x)dx \), we get:
+
+$$ \int_a^b g(x)dx \approx h_x \left[\frac{1}{2}g(a) + \sum_{i=1}^{n_x-1}g(x_i) + \frac{1}{2}g(b) \right],
+\quad x_i=a + ih_x\thinspace .$$
+
+Combining the formulas, we get the <em>composite trapezoidal method
+for a double integral</em>:
+
+$$
+\begin{align}
+\int_a^b \int_c^d f(x,y) dydx &\approx
+h_x \left[\frac{1}{2}\left(h_y \left[\frac{1}{2}f(a,c) + \sum_{j=1}^{n_y-1}f(a,y_j) + \frac{1}{2}f(a,d) \right]\right)
++ \sum_{i=1}^{n_x-1}\left(h_y \left[\frac{1}{2}f(x_i,c) + \sum_{j=1}^{n_y-1}f(x_i,y_j) + \frac{1}{2}f(x_i,d) \right]\right)
++ \frac{1}{2}\left(h_y \left[\frac{1}{2}f(b,c) + \sum_{j=1}^{n_y-1}f(b,y_j) + \frac{1}{2}f(b,d) \right]\right) \right]\nonumber\\ 
+&=
+h_xh_y \left[\frac{1}{4}\left(f(a,c) + f(a,d) + f(b,c) + f(b,d) \right) +
+\frac{1}{2}\sum_{i=1}^{n_x-1}\left(f(a + ih_x,c) + f(a + ih_x,d)\right) +
+\frac{1}{2}\sum_{j=1}^{n_y-1}\left(f(a,c + jh_y) + f(b,c + jh_y)\right) +
+\sum_{i=1}^{n_x-1} \sum_{j=1}^{n_y-1} f(a + ih_x, c + jh_y)\right]\thinspace .
+\nonumber
+\end{align}
+$$
+
+<p>
+The formula may be implemented and tested as shown in <code>trapezoidal_double.m</code> and
+<code>test_trapezoidal_double.m</code>, respectively:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: trapezoidal_double
+</div>
+<!-- end box -->
+
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: test_trapezoidal_double
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>trapezoidal_double.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<!-- --- begin exercise --- -->
+
+<h2 id="sec:exer:MC:ellipse">Exercise 42: Compute the area of a triangle by Monte Carlo integration</h2>
+
+<p>
+Use the Monte Carlo method from the section <a href="._p4c-solarized-Matlab014.html#sec:int:complex:domain">Monte Carlo integration for complex-shaped domains</a> to
+compute the area of a triangle with vertices at \( (-1,0) \), \( (1,0) \),
+and \( (3,0) \).
+
+<p>
+<!-- --- begin solution of exercise --- -->
+<b>Solution.</b>
+The program <code>MC_triangle.m</code> may be written as:
+
+<p>
+
+<!-- begin box -->
+<div style="width: 95%; padding: 10px; border: 1px solid #000; border-radius: 4px;">
+Here is a missing file: MC_triangle
+</div>
+<!-- end box -->
+
+
+<p>
+<!-- --- end solution of exercise --- -->
+Filename: <code>MC_triangle.m</code>.
+
+<p>
+<!-- --- end exercise --- -->
+
+<p>
+<p>
+<!-- begin bottom navigation -->
+<table style="width: 100%"><tr><td>
+<div style="text-align: left;"><a href="._p4c-solarized-Matlab014.html">&laquo; Previous</a></div>
+</td><td>
+<div style="text-align: right;"><a href="._p4c-solarized-Matlab016.html">Next &raquo;</a></div>
+</td></tr></table>
+<!-- end bottom navigation -->
+</p>
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+
