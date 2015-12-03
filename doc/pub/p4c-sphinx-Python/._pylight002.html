@@ -9,7 +9,7 @@
     
     <title>The first few steps</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -25,6 +25,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
 
         <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
         <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
@@ -42,14 +43,10 @@
         </style>
 
     
-    <link rel="top" title="Programming for Computations" href="index.html" />
+    <link rel="top" title="Programming for Computations (Python version)" href="index.html" />
     <link rel="next" title="Basic constructions" href="._pylight003.html" />
     <link rel="prev" title="Preface" href="._pylight001.html" />
-
-   
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
-
+ 
   
        <style type="text/css">
          div.admonition {
@@ -59,8 +56,8 @@
        </style>
       </head>
     
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -72,17 +69,17 @@
         <li class="right" >
           <a href="._pylight001.html" title="Preface"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Programming for Computations</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Programming for Computations (Python version)</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="the-first-few-steps">
-<h1>The first few steps<a class="headerlink" href="#the-first-few-steps" title="Permalink to this headline">¶</a></h1>
+<span id="st-thefirstfewsteps"></span><h1>The first few steps<a class="headerlink" href="#the-first-few-steps" title="Permalink to this headline">¶</a></h1>
 <div class="figure">
 <a class="reference internal image-reference" href="_images/comic_plot.png"><img alt="_images/comic_plot.png" src="_images/comic_plot.png" style="width: 700px;" /></a>
 </div>
@@ -131,7 +128,7 @@ differs between the languages. Let us use an analogy.</p>
 <p>Assume you are an international kind of person, having friends abroad
 in England, Russia and China. They want to try your favorite
 cake. What can you do? Well, you may write down the recipe in those
-three languages and send them over. Now, if you have be able to think
+three languages and send them over. Now, if you have been able to think
 correctly when writing down the recipe, and you have written the
 explanations according to the rules in each language, each of your
 friends will produce the same cake. Your recipe is the &#8220;computer
@@ -148,13 +145,13 @@ messages. However, the response you get depends on the error and the
 programming language. You may even get no response, but simply the
 wrong &#8220;cake&#8221;. Note that the rules of a programming language have to be
 followed very strictly. This differs from languages like English etc.,
-where the meaning might be understood even if with spelling errors and
+where the meaning might be understood even with spelling errors and
 &#8220;slang&#8221; included.</p>
 <p>This book comes in two versions, one that is based on Python, and one
 based on Matlab. Both Python and Matlab represent excellent
 programming environments for scientific and engineering tasks. The
 version you are reading now, is the Python version.</p>
-<p>Some of the strong properties of Python deserve mention here: Many
+<p>Some of Python&#8217;s strong properties deserve mention here: Many
 global functions can be placed in only <em>one</em> file, functions are
 straightforwardly transferred as arguments to other functions, there
 is good support for interfacing C, C++ and Fortran code (i.e., a
@@ -165,23 +162,22 @@ Python is available for <em>free</em>. It can be downloaded from the Internet
 and will run on most platforms.</p>
 <p>Readers who want to expand their scientific programming skills beyond
 the introductory level of the present exposition, are encouraged to
-study the book <em>A Primer on Scientific Programming with Python</em> <a class="reference internal" href="._pylight009.html#ref17" id="id1">[Ref17]</a>.
+study the book <em>A Primer on Scientific Programming with Python</em> <a class="reference internal" href="._pylight009.html#ref18" id="id1">[Ref18]</a>.
 This comprehensive book is
 as suitable for beginners as for professional programmers, and teaches
 the art of programming through a huge collection of dedicated
 examples. This book is considered the primary reference, and a
 natural extension, of the programming matters in the present book.</p>
-<span class="target" id="index-15"></span><div class="admonition-some-computer-science-terms admonition" id="index-16">
+<div class="admonition-some-computer-science-terms admonition" id="index-15">
 <p class="first admonition-title">Some computer science terms</p>
 <p>Note that, quite often, the terms <em>script</em> and <em>scripting</em> are used as
-synonyms for program and programming, respectively, especially
-when using Python and a few lines of code can do much.</p>
+synonyms for program and programming, respectively.</p>
 <p>The inventor of the Perl programming language, Larry Wall, tried
 to explain the difference between script and program in a humorous way
 (from <a class="reference external" href="http://www.perl.com/pub/2007/12/06/soto-11.html">perl.com</a>):
 <em>Suppose you went back to `Ada Lovelace &lt;http://en.wikipedia.org/wiki/Ada_Lovelace&gt;`__ and asked her the difference between a script and a program. She&#8217;d probably look at you funny, then say something like: Well, a script is what you give the actors, but a program is what you give the audience. That Ada was one sharp lady...
 Since her time, we seem to have gotten a bit more confused about what we mean when we say scripting. It confuses even me, and I&#8217;m supposed to be one of the experts.</em></p>
-<p>There are many other widely used computer science terms to pick up. Writing
+<span class="target" id="index-16"></span><span class="target" id="index-17"></span><span class="target" id="index-18"></span><span class="target" id="index-19"></span><span class="target" id="index-20"></span><p id="index-21">There are many other widely used computer science terms to pick up. Writing
 a program (or script or code) is often expressed as
 <em>implementing</em> the program. <em>Executing</em> a program means running the program.
 An <em>algorithm</em> is a recipe for how to construct a program. A <em>bug</em> is
@@ -194,8 +190,8 @@ govern the physics of the processes.</p>
 </div>
 <div class="section" id="a-python-program-with-variables">
 <span id="st-ex1"></span><h2>A Python program with variables<a class="headerlink" href="#a-python-program-with-variables" title="Permalink to this headline">¶</a></h2>
-<p>Our first example regards programming the mathematical model for
-throwing a ball up in the air. From Newton&#8217;s 2nd
+<p id="index-22">Our first example regards programming a mathematical model that predicts the position of a
+ball thrown up in the air. From Newton&#8217;s 2nd
 law, and by assuming negligible air resistance, one can derive a
 mathematical model that predicts the vertical position <span class="math">\(y\)</span> of the ball
 at time <span class="math">\(t\)</span>. From the model one gets the formula</p>
@@ -208,10 +204,10 @@ earth). With this formula at hand, and when <span class="math">\(v_0\)</span> is
 plug in a value for time and get out the corresponding height.</p>
 <div class="section" id="the-program">
 <h3>The program<a class="headerlink" href="#the-program" title="Permalink to this headline">¶</a></h3>
-<p id="index-17">Let us next look at a Python program for evaluating this simple formula.
+<p id="index-23">Let us next look at a Python program for evaluating this simple formula.
 Assume the program is contained as text in a file named
 <code class="docutils literal"><span class="pre">ball.py</span></code>. The text looks as follows (file
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/ball.py">ball.py</a>):</p>
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/ball.py">ball.py</a>):</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># Program for computing the height of a ball in vertical motion</span>
 
 <span class="n">v0</span> <span class="o">=</span> <span class="mi">5</span>             <span class="c"># Initial velocity</span>
@@ -226,28 +222,28 @@ Assume the program is contained as text in a file named
 </div>
 <div class="section" id="dissection-of-the-program">
 <h3>Dissection of the program<a class="headerlink" href="#dissection-of-the-program" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="index-18"></span><span class="target" id="index-19"></span><span class="target" id="index-20"></span><span class="target" id="index-21"></span><span class="target" id="index-22"></span><p id="index-23">A computer program is plain text, as here in the file <code class="docutils literal"><span class="pre">ball.py</span></code>, which
+<span class="target" id="index-24"></span><span class="target" id="index-25"></span><span class="target" id="index-26"></span><span class="target" id="index-27"></span><span class="target" id="index-28"></span><p id="index-29">A computer program is plain text, as here in the file <code class="docutils literal"><span class="pre">ball.py</span></code>, which
 contains instructions to the computer. Humans can read the code
 and understand what the program is capable of doing,
 but the program itself does not
 trigger any actions on a computer before another program, the Python
 interpreter, reads the program text and translates this text into
 specific actions.</p>
-<div class="admonition-you-must-learn-to-play-a-computer admonition">
-<p class="first admonition-title">You must learn to play a computer</p>
+<div class="admonition-you-must-learn-to-play-the-role-of-a-computer admonition">
+<p class="first admonition-title">You must learn to play the role of a computer</p>
 <p class="last">Although Python is responsible for reading and understanding your
 program, it is of fundamental importance that you fully understand the
 program yourself. You have to know the implication of every
 instruction in the program and be able to figure out the consequences
-of the instructions.  In other words, you must be able to play a
+of the instructions.  In other words, you must be able to play the role of a
 computer. The reason for this strong demand of knowledge
-is that you very often commit errors in the program text, and to
-track down these errors, you have to simulate what the computer
+is that errors unavoidably, and quite often, will be committed in the
+program text, and to track down these errors, you have to simulate what the computer
 does with the program. Next, we shall explain all the text in
 <code class="docutils literal"><span class="pre">ball.py</span></code> in full detail.</p>
 </div>
-<p>Python will next start to read your file, line by line, from the
-top. The first line it reads is</p>
+<p>When you run your program in Python, it will interpret the text in your file line by line, from the
+top, reading each line from left to right. The first line it reads is</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># Program for computing the height of a ball in vertical motion.</span>
 </pre></div>
 </div>
@@ -259,13 +255,13 @@ it takes the rest of the line as a comment. Python then simply skips
 reading the rest of the line and jumps to the next line. In the code,
 you see several such comments and probably realize that they make it
 easier for you to understand (or guess) what is meant with the
-code. In this simple cases, comments are probably not much needed, but
+code. In simple cases, comments are probably not much needed, but
 will soon be justified as the level of complexity steps up.</p>
 <p>The next line read by Python is</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">v0</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c"># Initial velocity</span>
 </pre></div>
 </div>
-<span class="target" id="index-24"></span><p id="index-25">According to its rules, Python will now create a <em>variable</em> with the
+<span class="target" id="index-30"></span><p id="index-31">According to its rules, Python will now create a <em>variable</em> with the
 name <code class="docutils literal"><span class="pre">v0</span></code> and set (the value of) that variable equal to 5. We say that
 5 is <em>assigned</em> to <code class="docutils literal"><span class="pre">v0</span></code>. This means that whenever Python reads <code class="docutils literal"><span class="pre">v0</span></code>
 hereafter, it plugs in 5 instead of the name <code class="docutils literal"><span class="pre">v0</span></code>, since it knows that
@@ -303,7 +299,7 @@ and readable layout of the code.</p>
 </div>
 <div class="section" id="why-not-just-use-a-pocket-calculator">
 <h3>Why not just use a pocket calculator?<a class="headerlink" href="#why-not-just-use-a-pocket-calculator" title="Permalink to this headline">¶</a></h3>
-<p id="index-26">Certainly, finding the answer as done by the program above could
+<p id="index-32">Certainly, finding the answer as done by the program above could
 easily have been done with a pocket calculator. No objections to that
 and no programming would have been needed. However, what if you would
 like to have the position of the ball for every milli-second of the
@@ -315,31 +311,31 @@ second.  A much stronger argument, however, is that mathematical
 models from real life are often complicated and comprehensive.  The
 pocket calculator cannot cope with such problems, even not the
 programmable ones, because their computational power and their
-programming tools are far too weak compared to a real computer.</p>
+programming tools are far too weak compared to what a real computer can offer.</p>
 </div>
 <div class="section" id="the-importance-of-using-a-text-editor-to-write-programs">
 <h3>The importance of using a text editor to write programs<a class="headerlink" href="#the-importance-of-using-a-text-editor-to-write-programs" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="index-27"></span><p id="index-28">When Python interprets some code in a file, it is concerned with
+<span class="target" id="index-33"></span><span class="target" id="index-34"></span><span class="target" id="index-35"></span><span class="target" id="index-36"></span><span class="target" id="index-37"></span><p id="index-38">When Python interprets some code in a file, it is concerned with
 every character in the file, exactly as it was typed in.
 This makes it troublesome to write
 the code into a file with word processors like, e.g., Microsoft Word,
 since such a program will insert extra characters, invisible to us, with
 information on how to format the text (e.g., the font size and type).
 Such extra information is necessary for the text to be nicely
-formatted for the human eye. Python will be much annoyed by
+formatted for the human eye. Python, however, will be much annoyed by
 the extra characters in the file inserted by a word processor.
 Therefore, it is fundamental that you write your program in a
 <em>text editor</em> where what you type on the keyboard is <em>exactly</em> the
 characters that appear in the file and that Python will later read.
 There are many text editors around. Some are stand-alone programs like
-Emacs, Vim, Gedit, Notepad++, and TextWrangler.
-Others are integrated in graphical development environments for
+Emacs, Vim, Gedit, Notepad++, and TextWrangler.</p>
+<p id="index-39">Others are integrated in graphical development environments for
 Python, such as Spyder. This book will primarily refer to Spyder
 and its text editor.</p>
 </div>
 <div class="section" id="installation-of-python">
 <h3>Installation of Python<a class="headerlink" href="#installation-of-python" title="Permalink to this headline">¶</a></h3>
-<p>You will need access  to Python and several add-on
+<p id="index-40">You will need access  to Python and several add-on
 packages for doing mathematical computations and display graphics.
 An obvious choice is to install
 a Python environment for scientific computing on your machine.
@@ -347,20 +343,21 @@ Alternatively, you can use cloud services for running Python,
 or you can remote login on a computer system at a school or university.
 Available and recommended techniques for getting access to Python
 and the needed packages are documented in
-Appendix <span class="xref std std-ref">app:accesspy</span>.</p>
+Appendix <a class="reference internal" href="._pylight008.html#app-accesspy"><span class="std std-ref">Appendix: Getting access to Python</span></a>.</p>
 <p>The quickest way to get started with a rich Python installation for
 this book on your Windows or Mac computer, is to
-install <a class="reference external" href="http://continuum.io/downloads">Anaconda</a>.</p>
+install <a class="reference external" href="http://continuum.io/downloads">Anaconda</a> (both Python
+(we recommend version 2.7) and Spyder come with it).</p>
 </div>
 <div class="section" id="write-and-run-your-first-program">
 <h3>Write and run your first program<a class="headerlink" href="#write-and-run-your-first-program" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="index-29"></span><span class="target" id="index-30"></span><span class="target" id="index-31"></span><span class="target" id="index-32"></span><p id="index-33">Reading <em>only</em> does not teach you computer programming: you have to
+<span class="target" id="index-41"></span><span class="target" id="index-42"></span><span class="target" id="index-43"></span><span class="target" id="index-44"></span><p id="index-45">Reading <em>only</em> does not teach you computer programming: you have to
 program yourself and practice heavily before you master mathematical
 problem solving via programming. Therefore, it is crucial at this stage that you
 write and run a Python program. We just went through the program <code class="docutils literal"><span class="pre">ball.py</span></code>
 above, so let us next write and run that code.</p>
-<p>But first a warning: there are many things at that must play
-together correctly for <code class="docutils literal"><span class="pre">ball.py</span></code> to run correctly on
+<p>But first a warning: there are many things that must come
+together in the right way for <code class="docutils literal"><span class="pre">ball.py</span></code> to run correctly on
 your computer. There might
 be problems with your Python installation, with your writing of the
 program (it is very easy to introduce errors!),
@@ -378,7 +375,7 @@ running the program.
 Start up Spyder and type in each line
 of the program <code class="docutils literal"><span class="pre">ball.py</span></code> shown earlier. Then run the program.
 More detailed descriptions of operating Spyder are found in
-Appendix <a class="reference internal" href="._pylight008.html#sec-accesspy-writerun"><span>How to write and run a Python program</span></a>.</p>
+Appendix <a class="reference internal" href="._pylight008.html#sec-accesspy-writerun"><span class="std std-ref">How to write and run a Python program</span></a>.</p>
 <p>If you have had the necessary luck to get everything right,
 you should now get the number <span class="math">\(1.2342\)</span> out in the
 rightmost lower window in the Spyder GUI.
@@ -406,7 +403,7 @@ the ground, where <span class="math">\(\tan\theta = y/x\)</span>. The angle is t
 variables <code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code> for the position data <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, and the
 descriptive name <code class="docutils literal"><span class="pre">angle</span></code> for the angle <span class="math">\(\theta\)</span>.
 The program is stored in a file
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/ball_angle_first_try.py">ball_angle_first_try.py</a>:</p>
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/ball_angle_first_try.py">ball_angle_first_try.py</a>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>             <span class="c"># Horizontal position</span>
 <span class="n">y</span> <span class="o">=</span> <span class="mi">10</span>             <span class="c"># Vertical position</span>
 
@@ -415,7 +412,7 @@ The program is stored in a file
 <span class="k">print</span> <span class="p">(</span><span class="n">angle</span><span class="o">/</span><span class="n">pi</span><span class="p">)</span><span class="o">*</span><span class="mi">180</span>
 </pre></div>
 </div>
-<span class="target" id="index-34"></span><span class="target" id="index-35"></span><span class="target" id="index-36"></span><span class="target" id="index-37"></span><span class="target" id="index-38"></span><span class="target" id="index-39"></span><p id="index-40">Before we turn our attention to the running of this program, let us
+<span class="target" id="index-46"></span><span class="target" id="index-47"></span><span class="target" id="index-48"></span><span class="target" id="index-49"></span><span class="target" id="index-50"></span><span class="target" id="index-51"></span><p id="index-52">Before we turn our attention to the running of this program, let us
 take a look at one new thing in the code. The line <code class="docutils literal"><span class="pre">angle</span> <span class="pre">=</span> <span class="pre">atan(y/x)</span></code>,
 illustrates how the <em>function</em> <code class="docutils literal"><span class="pre">atan</span></code>, corresponding to <span class="math">\(\tan^{-1}\)</span>
 in mathematics, is <em>called</em> with the
@@ -430,15 +427,15 @@ Thereafter, the result is assigned to the variable <code class="docutils literal
 on the left-hand side of <code class="docutils literal"><span class="pre">=</span></code>.</p>
 <p>Note that the trigonometric functions, such as <code class="docutils literal"><span class="pre">atan</span></code>, work with
 angles in radians. The return value of <code class="docutils literal"><span class="pre">atan</span></code> must hence be converted
-to degrees, and that is why we perform the computation <code class="docutils literal"><span class="pre">(angle/pi)*180</span></code>.
-Two things happen in the <code class="docutils literal"><span class="pre">print</span></code> statement: first, the computation
+to degrees, and that is why we perform the computation <code class="docutils literal"><span class="pre">(angle/pi)*180</span></code>.</p>
+<span class="target" id="index-53"></span><span class="target" id="index-54"></span><span class="target" id="index-55"></span><span class="target" id="index-56"></span><p id="index-57">Two things happen in the <code class="docutils literal"><span class="pre">print</span></code> statement: first, the computation
 of <code class="docutils literal"><span class="pre">(angle/pi)*180</span></code> is performed, resulting in a real number, and second,
 <code class="docutils literal"><span class="pre">print</span></code> prints that real number. Again, we may think that the
 arithmetic expression is replaced by its results and then <code class="docutils literal"><span class="pre">print</span></code>
 starts working with that result.</p>
-<span class="target" id="index-41"></span><span class="target" id="index-42"></span><span class="target" id="index-43"></span><span class="target" id="index-44"></span><span class="target" id="index-45"></span><span class="target" id="index-46"></span><p id="index-47">If we next execute <code class="docutils literal"><span class="pre">ball_angle_first_try.py</span></code>, we get an error message on
+<p>If we next execute <code class="docutils literal"><span class="pre">ball_angle_first_try.py</span></code>, we get an error message on
 the screen saying</p>
-<div class="highlight-text"><div class="highlight"><pre>NameError: name &#39;atan&#39; is not defined
+<span class="target" id="index-58"></span><div class="highlight-text" id="index-59"><div class="highlight"><pre>NameError: name &#39;atan&#39; is not defined
 WARNING: Failure executing file: &lt;ball_angle_first_try.py&gt;
 </pre></div>
 </div>
@@ -457,7 +454,7 @@ In Python, the <code class="docutils literal"><span class="pre">atan</span></cod
 other mathematical functions in the library called <code class="docutils literal"><span class="pre">math</span></code>.
 Such a library is referred to as a <em>module</em> in correct Python language.
 To get access to <code class="docutils literal"><span class="pre">atan</span></code> in our program we have to write</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">atan</span>
+<span class="target" id="index-60"></span><div class="highlight-python" id="index-61"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">atan</span>
 </pre></div>
 </div>
 <p>Inserting this statement at the top of the program and rerunning it,
@@ -476,7 +473,7 @@ A quick way of importing everything in <code class="docutils literal"><span clas
 <p>We will often use this import statement and then get access to all
 common mathematical functions. This latter statement is inserted
 in a program named
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/ball_angle.py">ball_angle.py</a>:</p>
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/ball_angle.py">ball_angle.py</a>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>             <span class="c"># Horizontal position</span>
@@ -503,16 +500,17 @@ have a formula for the vertical position <span class="math">\(y\)</span> of the 
 interested in <span class="math">\(y\)</span> at every milli-second for the first second of the
 flight. This requires repeating the calculation of <span class="math">\(y=v_0t-0.5gt^2\)</span>
 one thousand times.</p>
-<p>We will also draw a graph of <span class="math">\(y\)</span> versus <span class="math">\(t\)</span> for <span class="math">\(t\in [0,1]\)</span>. Drawing
+<p id="index-62">We will also draw a graph of <span class="math">\(y\)</span> versus <span class="math">\(t\)</span> for <span class="math">\(t\in [0,1]\)</span>. Drawing
 such graphs on a computer essentially means drawing straight lines
 between points on the curve, so we need many points to make the visual
 impression of a smooth curve. With one thousand points, as we aim to
 compute here, the curve looks indeed very smooth.</p>
 <p>In Python, the calculations and the visualization of the curve
 may be done with the program
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/ball_plot.py">ball_plot.py</a>,
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/ball_plot.py">ball_plot.py</a>,
 reading</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">linspace</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
 <span class="n">v0</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span>
@@ -520,7 +518,6 @@ reading</p>
 
 <span class="n">y</span> <span class="o">=</span> <span class="n">v0</span><span class="o">*</span><span class="n">t</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="n">t</span><span class="o">**</span><span class="mi">2</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;t (s)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;y (m)&#39;</span><span class="p">)</span>
@@ -528,13 +525,13 @@ reading</p>
 </pre></div>
 </div>
 <p>This program produces a plot of the vertical position with time,
-as seen in Figure <a class="reference internal" href="#fig-vertposplot"><span>Plot generated by the script ``ball_plot.py`` showing the vertical position of the ball at a thousand points in time</span></a>.
+as seen in Figure <a class="reference internal" href="#fig-vertposplot"><span class="std std-ref">Plot generated by the script ball_plot.py showing the vertical position of the ball at a thousand points in time</span></a>.
 As you notice, the code lines from the <code class="docutils literal"><span class="pre">ball.py</span></code> program
-in the chapter <a class="reference internal" href="#st-ex1"><span>A Python program with variables</span></a> have not changed much, but
+in the chapter <a class="reference internal" href="#st-ex1"><span class="std std-ref">A Python program with variables</span></a> have not changed much, but
 the height is now computed and plotted for a thousand points in time!</p>
-<p>Let us look at the differences the new program and our previous program.
+<p>Let us take a look at the differences between the new program and our previous program.
 From the top, the first difference we notice are the lines</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="target" id="index-63"></span><span class="target" id="index-64"></span><span class="target" id="index-65"></span><div class="highlight-python" id="index-66"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 </div>
@@ -555,7 +552,7 @@ explicitly import what we need and not everything (the star <code class="docutil
 </pre></div>
 </div>
 <p>Others will claim that we should do a slightly different import
-and prefix and functions from libraries by the library name:</p>
+and prefix library functions by the library name:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="o">...</span>
@@ -575,7 +572,7 @@ for the most part in this book we shall do</p>
 </div>
 <p>for convenience and for making Python programs that look very similar to
 their Matlab counterparts.</p>
-<p id="index-48">The function <code class="docutils literal"><span class="pre">linspace</span></code> takes <span class="math">\(3\)</span> parameters, and is generally called as</p>
+<p id="index-67">The function <code class="docutils literal"><span class="pre">linspace</span></code> takes <span class="math">\(3\)</span> parameters, and is generally called as</p>
 <div class="highlight-matlab"><div class="highlight"><pre><span class="nb">linspace</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -584,30 +581,29 @@ arguments.  The <code class="docutils literal"><span class="pre">linspace</span>
 coordinates, starting with <code class="docutils literal"><span class="pre">start</span></code> and ending with <code class="docutils literal"><span class="pre">stop</span></code>. The
 expression <code class="docutils literal"><span class="pre">linspace(0,</span> <span class="pre">1,</span> <span class="pre">1001)</span></code> creates 1001 coordinates between 0
 and 1 (including both 0 and 1). The mathematically inclined reader
-will notice that 1001 coordinates corresponds to 1000 equal-sized
+will notice that 1001 coordinates correspond to 1000 equal-sized
 intervals in <span class="math">\([0,1]\)</span> and that the coordinates are then given by <span class="math">\(t_i =
 i/1000\)</span> (<span class="math">\(i = 0, 1, ..., 1000\)</span>).</p>
 <div class="figure" id="id3">
 <span id="fig-vertposplot"></span><a class="reference internal image-reference" href="_images/fig1_9.png"><img alt="_images/fig1_9.png" src="_images/fig1_9.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-text"><em>Plot generated by the script ``ball_plot.py`` showing the vertical position of the ball at a thousand points in time</em></span></p>
+<p class="caption"><span class="caption-text">Plot generated by the script <code class="docutils literal"><span class="pre">ball_plot.py</span></code> showing the vertical position of the ball at a thousand points in time</span></p>
 </div>
-<p>The value returned from <code class="docutils literal"><span class="pre">linspace</span></code> and stored in <code class="docutils literal"><span class="pre">t</span></code> is an <em>array</em>,
+<p>The value returned from <code class="docutils literal"><span class="pre">linspace</span></code> (being stored in <code class="docutils literal"><span class="pre">t</span></code>) is an <em>array</em>,
 i.e., a collection of numbers. When we start computing with this
 collection of numbers in the arithmetic expression
-<code class="docutils literal"><span class="pre">v0*t</span> <span class="pre">-</span> <span class="pre">0.5*g*t**2</span></code>
-the expression is calculated for
+<code class="docutils literal"><span class="pre">v0*t</span> <span class="pre">-</span> <span class="pre">0.5*g*t**2</span></code>, the expression is calculated for
 every number in <code class="docutils literal"><span class="pre">t</span></code> (i.e., every <span class="math">\(t_i\)</span> for <span class="math">\(i = 0, 1,..., 1000\)</span>), yielding a similar collection of 1001 numbers in the result <code class="docutils literal"><span class="pre">y</span></code>. That is, <code class="docutils literal"><span class="pre">y</span></code> is also an array.</p>
 <p>This technique of computing all numbers &#8220;in one chunk&#8221; is referred to
 as <em>vectorization</em>. When it can be used, it is very handy, since both
 the amount of code and computation time is reduced compared to writing
-a corresponding <code class="docutils literal"><span class="pre">for</span></code> or <code class="docutils literal"><span class="pre">while</span></code> loop (the chapter <span class="xref std std-ref">2nd:BasicConstructins</span>) for doing the same thing.</p>
-<span class="target" id="index-49"></span><span class="target" id="index-50"></span><p id="index-51">The plotting commands are simple:</p>
+a corresponding <code class="docutils literal"><span class="pre">for</span></code> or <code class="docutils literal"><span class="pre">while</span></code> loop (the chapter <a class="reference internal" href="._pylight003.html#nd-basicconstructins"><span class="std std-ref">Basic constructions</span></a>) for doing the same thing.</p>
+<span class="target" id="index-68"></span><span class="target" id="index-69"></span><span class="target" id="index-70"></span><p id="index-71">The plotting commands are simple:</p>
 <ol class="arabic simple">
 <li><code class="docutils literal"><span class="pre">plot(t,</span> <span class="pre">y)</span></code> means plotting all the <code class="docutils literal"><span class="pre">y</span></code> coordinates versus all the <code class="docutils literal"><span class="pre">t</span></code> coordinates</li>
-<li><code class="docutils literal"><span class="pre">xlabel('t</span> <span class="pre">(s)')</span></code> places a text <code class="docutils literal"><span class="pre">t</span> <span class="pre">(s)</span></code> on the <span class="math">\(x\)</span> axis</li>
-<li><code class="docutils literal"><span class="pre">xlabel('y</span> <span class="pre">(m)')</span></code> places a text <code class="docutils literal"><span class="pre">y</span> <span class="pre">(m)</span></code> on the <span class="math">\(y\)</span> axis</li>
+<li><code class="docutils literal"><span class="pre">xlabel('t</span> <span class="pre">(s)')</span></code> places the text <code class="docutils literal"><span class="pre">t</span> <span class="pre">(s)</span></code> on the <span class="math">\(x\)</span> axis</li>
+<li><code class="docutils literal"><span class="pre">ylabel('y</span> <span class="pre">(m)')</span></code> places the text <code class="docutils literal"><span class="pre">y</span> <span class="pre">(m)</span></code> on the <span class="math">\(y\)</span> axis</li>
 </ol>
-<p>At this stage, you are strongly encouraged to do <a class="reference internal" href="#st-exer-volumes3cubes"><span>Exercise 4: Volumes of three cubes</span></a>. It builds on the example above, but is
+<p>At this stage, you are strongly encouraged to do <a class="reference internal" href="#st-exer-volumes3cubes"><span class="std std-ref">Exercise 4: Volumes of three cubes</span></a>. It builds on the example above, but is
 much simpler both with respect to the mathematics and the amount of
 numbers involved.</p>
 </div>
@@ -618,19 +614,19 @@ programming to solve mathematical problems. Before we can go on with
 other and more realistic examples, we need to briefly treat some
 topics that will be frequently required in later chapters. These
 topics include computer science concepts like variables, objects,
-error messages, and warnings; more numerical concepts like round-off
+error messages, and warnings; more numerical concepts like rounding
 errors, arithmetic operator precedence, and integer division; in
 addition to more Python functionality when working with arrays,
 plotting, and printing.</p>
 <div class="section" id="using-python-interactively">
 <h3>Using Python interactively<a class="headerlink" href="#using-python-interactively" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="index-52"></span><span class="target" id="index-53"></span><span class="target" id="index-54"></span><p id="index-55">Python can also be used interactively. That is, we do not first write
+<span class="target" id="index-72"></span><span class="target" id="index-73"></span><span class="target" id="index-74"></span><span class="target" id="index-75"></span><span class="target" id="index-76"></span><p id="index-77">Python can also be used interactively. That is, we do not first write
 a program in a file and execute it, but we give statements and
 expressions to what is known as a Python <em>shell</em>.  We recommend to use
 IPython as shell (because it is superior to alternative Python
 shells). With <code class="docutils literal"><span class="pre">Spyder</span></code>, <code class="docutils literal"><span class="pre">Ipython</span></code> is available at startup, appearing
 as the lower right window.  Following the IPython prompt <code class="docutils literal"><span class="pre">In</span> <span class="pre">[1]:</span></code> (a
-<em>prompt</em> means a &#8220;ready sign&#8221;, i.e. the programs allows you to enter
+<em>prompt</em> means a &#8220;ready sign&#8221;, i.e. the program allows you to enter
 a command, and different programs often have different looking
 prompts), you may do calculations:</p>
 <div class="highlight-ipy"><div class="highlight"><pre><span class="n">In</span>  <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="mi">2</span><span class="o">+</span><span class="mi">2</span>
@@ -646,7 +642,7 @@ prompts), you may do calculations:</p>
 <span class="n">Out</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="mi">8</span>
 </pre></div>
 </div>
-<p>The response from <code class="docutils literal"><span class="pre">ipython</span></code> is preceded by <code class="docutils literal"><span class="pre">Out</span> <span class="pre">[q]:</span></code>,
+<p>The response from <code class="docutils literal"><span class="pre">IPython</span></code> is preceded by <code class="docutils literal"><span class="pre">Out</span> <span class="pre">[q]:</span></code>,
 where <code class="docutils literal"><span class="pre">q</span></code> equals <code class="docutils literal"><span class="pre">p</span></code> when the response is to input &#8220;number&#8221; <code class="docutils literal"><span class="pre">p</span></code>.</p>
 <p>Note that, as in a program, you may have to use <code class="docutils literal"><span class="pre">import</span></code> before using
 <code class="docutils literal"><span class="pre">pi</span></code> or functions like <code class="docutils literal"><span class="pre">sin</span></code>, <code class="docutils literal"><span class="pre">cos</span></code>, etc. That is, at the prompt, do
@@ -672,9 +668,9 @@ the down-arrow key you can go forward again.
 When you have the relevant command at the prompt, you may edit it before
 pressing enter (which lets Python read it and take action).</p>
 </div>
-<div class="section" id="arithmetics-parentheses-and-round-off-errors">
-<h3>Arithmetics, parentheses and round-off errors<a class="headerlink" href="#arithmetics-parentheses-and-round-off-errors" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="index-56"></span><p id="index-57">When the arithmetic operators <code class="docutils literal"><span class="pre">+</span></code>, <code class="docutils literal"><span class="pre">-</span></code>, <code class="docutils literal"><span class="pre">*</span></code>, <code class="docutils literal"><span class="pre">/</span></code> and
+<div class="section" id="arithmetics-parentheses-and-rounding-errors">
+<h3>Arithmetics, parentheses and rounding errors<a class="headerlink" href="#arithmetics-parentheses-and-rounding-errors" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="index-78"></span><p id="index-79">When the arithmetic operators <code class="docutils literal"><span class="pre">+</span></code>, <code class="docutils literal"><span class="pre">-</span></code>, <code class="docutils literal"><span class="pre">*</span></code>, <code class="docutils literal"><span class="pre">/</span></code> and
 <code class="docutils literal"><span class="pre">**</span></code> appear in an expression, Python gives them a certain
 precedence. Python interprets the expression from left to right,
 taking one term (part of expression between two successive <code class="docutils literal"><span class="pre">+</span></code> or <code class="docutils literal"><span class="pre">-</span></code>)
@@ -689,7 +685,7 @@ it first does <code class="docutils literal"><span class="pre">5**2</span></code
 multiplied by 1 to give 25 again. The second term is <code class="docutils literal"><span class="pre">10*3</span></code>, i.e.,
 30. So the first two terms add up to 55. The last term gives 0.25, so
 the final result is 54.75 which becomes the value of <code class="docutils literal"><span class="pre">x</span></code>.</p>
-<p>Note that parentheses are often very important to group parts of
+<p id="index-80">Note that parentheses are often very important to group parts of
 expressions together in the intended way. Let us say <code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">4</span></code> and that
 you want to divide 1.0 by <code class="docutils literal"><span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code>. We know the answer is 0.2, but the
 way we present the task to Python is critical, as shown by the
@@ -709,15 +705,16 @@ complete denominator was <code class="docutils literal"><span class="pre">x+1</s
 to &#8220;group&#8221; the denominator, and we got what we wanted. That is,
 <em>almost</em> what we wanted! Since most numbers can be represented only
 approximately on the computer, this gives rise to what is called
-<em>round-off</em> errors. We should have got 0.2 as our answer, but the
+<em>rounding</em> errors. We should have got 0.2 as our answer, but the
 inexact number representation gave a small error. Usually, such errors
-are so small compared to the other numbers of the calculation that we
+are so small compared to the other numbers of the calculation, that we
 do not need to bother with them. Still, keep it in mind, since you
-will encounter this issue from time to time.</p>
+will encounter this issue from time to time. More details regarding number
+representations on a computer is given in the section <a class="reference internal" href="._pylight004.html#sec-integrals-finite-prec"><span class="std std-ref">Finite precision of floating-point numbers</span></a>.</p>
 </div>
 <div class="section" id="variables-and-objects">
 <h3>Variables and objects<a class="headerlink" href="#variables-and-objects" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="index-58"></span><span class="target" id="index-59"></span><span class="target" id="index-60"></span><span class="target" id="index-61"></span><span class="target" id="index-62"></span><span class="target" id="index-63"></span><span class="target" id="index-64"></span><span class="target" id="index-65"></span><span class="target" id="index-66"></span><span class="target" id="index-67"></span><span class="target" id="index-68"></span><p id="index-69">Variables in Python will be of a certain <em>type</em>. If you have an
+<span class="target" id="index-81"></span><span class="target" id="index-82"></span><span class="target" id="index-83"></span><span class="target" id="index-84"></span><span class="target" id="index-85"></span><span class="target" id="index-86"></span><span class="target" id="index-87"></span><span class="target" id="index-88"></span><span class="target" id="index-89"></span><span class="target" id="index-90"></span><span class="target" id="index-91"></span><p id="index-92">Variables in Python will be of a certain <em>type</em>. If you have an
 integer, say you have written <code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">2</span></code> in some Python program, then <code class="docutils literal"><span class="pre">x</span></code>
 becomes an integer variable, i.e., a variable of type
 <em>int</em>. Similarly, with the statement <code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">2.0</span></code>, <code class="docutils literal"><span class="pre">x</span></code> becomes a <em>float</em>
@@ -756,7 +753,7 @@ hand side of <code class="docutils literal"><span class="pre">=</span></code>, n
 result becomes the new value of <code class="docutils literal"><span class="pre">x</span></code>. In a similar way, <code class="docutils literal"><span class="pre">x</span> <span class="pre">-=</span> <span class="pre">4</span></code>
 reduces the value of <code class="docutils literal"><span class="pre">x</span></code> by 4, <code class="docutils literal"><span class="pre">x</span> <span class="pre">*=</span> <span class="pre">4</span></code> multiplies <code class="docutils literal"><span class="pre">x</span></code> by 4, and <code class="docutils literal"><span class="pre">x</span> <span class="pre">/=</span>
 <span class="pre">4</span></code> divides <code class="docutils literal"><span class="pre">x</span></code> by 4, updating the value of <code class="docutils literal"><span class="pre">x</span></code> accordingly.</p>
-<p id="index-70">What if <code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">2</span></code>, i.e., an object of type int, and we add 4.0, i.e., a
+<p id="index-93">What if <code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">2</span></code>, i.e., an object of type int, and we add 4.0, i.e., a
 float? Then <em>automatic type conversion</em> takes place, and the new <code class="docutils literal"><span class="pre">x</span></code>
 will have the value 6.0, i.e., an object of type float as seen here,</p>
 <div class="highlight-ipy"><div class="highlight"><pre><span class="n">In</span>  <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
@@ -773,7 +770,7 @@ float.</p>
 </div>
 <div class="section" id="integer-division">
 <h3>Integer division<a class="headerlink" href="#integer-division" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="index-71"></span><p id="index-72">Another issue that is important to be aware of is <em>integer division</em>. Let us look at a small example, assuming we want to divide one by four.</p>
+<span class="target" id="index-94"></span><p id="index-95">Another issue that is important to be aware of is <em>integer division</em>. Let us look at a small example, assuming we want to divide one by four.</p>
 <div class="highlight-ipy"><div class="highlight"><pre><span class="n">In</span>  <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span>
 <span class="n">Out</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="mi">0</span>
 
@@ -797,7 +794,7 @@ an integer (e.g., <code class="docutils literal"><span class="pre">1/4</span></c
 </div>
 <div class="section" id="formatting-text-and-numbers">
 <h3>Formatting text and numbers<a class="headerlink" href="#formatting-text-and-numbers" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="index-73"></span><span class="target" id="index-74"></span><p id="index-75">Results from scientific computations are often to be reported
+<span class="target" id="index-96"></span><span class="target" id="index-97"></span><p id="index-98">Results from scientific computations are often to be reported
 as a mixture of text and numbers. Usually, we want to control
 how numbers are formatted. For example, we may want to write 1/3
 as <code class="docutils literal"><span class="pre">0.33</span></code> or <code class="docutils literal"><span class="pre">3.3333e-01</span></code> (<span class="math">\(3.3333\cdot 10^{-1}\)</span>).
@@ -821,7 +818,7 @@ as <code class="docutils literal"><span class="pre">1.290e+01</span></code>. The
 possible, while on the second line, <code class="docutils literal"><span class="pre">42</span></code> is formatted in a
 text field of width equal to five characters.</p>
 <p>The following program,
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/formatted_print.py">formatted_print.py</a>,
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/formatted_print.py">formatted_print.py</a>,
 applies the printf syntax to control
 the formatting displayed above:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">real</span> <span class="o">=</span> <span class="mf">12.89643</span>
@@ -835,7 +832,7 @@ the formatting displayed above:</p>
 specified in terms of text and a set of variables to be inserted in the text.
 Variables are inserted in the text at places indicated by <code class="docutils literal"><span class="pre">%</span></code>.
 After <code class="docutils literal"><span class="pre">%</span></code> comes a specification of the formatting, e.g, <code class="docutils literal"><span class="pre">%f</span></code>
-(real number with six decimals), <code class="docutils literal"><span class="pre">%d</span></code> (integer), or <code class="docutils literal"><span class="pre">%s</span></code> (string).
+(real number), <code class="docutils literal"><span class="pre">%d</span></code> (integer), or <code class="docutils literal"><span class="pre">%s</span></code> (string).
 The format <code class="docutils literal"><span class="pre">%9.3f</span></code> means a real number in decimal notation, with
 3 decimals, written in a field of width equal to 9 characters.
 The variant <code class="docutils literal"><span class="pre">%.3f</span></code> means that the number is written as compactly as
@@ -846,46 +843,49 @@ is to be written in a field of width equal to 5 characters.
 Real numbers can also be specified with <code class="docutils literal"><span class="pre">%g</span></code>, which is used
 to automatically choose between decimal or scientific
 notation, from what gives the most compact output
-(typically scientific notation for very small and very large numbers
+(typically, scientific notation is appropriate for very small and very large numbers
 and decimal notation for the intermediate range).</p>
-<p>A typical example when printf formatting is required arises when
-printing nicely aligned column of numbers. Suppose we want to
+<p>A typical example of when printf formatting is required, arises when
+nicely aligned columns of numbers are to be printed. Suppose we want to
 print a column of <span class="math">\(t\)</span> values together with associated function
 values <span class="math">\(g(t)=t\sin(t)\)</span> in a second column. The simplest approach
 would be</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sin</span>
 
-<span class="n">n</span> <span class="o">=</span> <span class="mi">6</span>
 <span class="n">t0</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">dt</span> <span class="o">=</span> <span class="mf">0.55</span>
 
 <span class="c"># Unformatted print</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">t0</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="n">dt</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">t</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-    <span class="k">print</span> <span class="n">t</span><span class="p">,</span> <span class="n">g</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">t0</span> <span class="o">+</span> <span class="mi">0</span><span class="o">*</span><span class="n">dt</span><span class="p">;</span> <span class="n">g</span> <span class="o">=</span> <span class="n">t</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">t</span><span class="p">,</span> <span class="n">g</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">t0</span> <span class="o">+</span> <span class="mi">1</span><span class="o">*</span><span class="n">dt</span><span class="p">;</span> <span class="n">g</span> <span class="o">=</span> <span class="n">t</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">t</span><span class="p">,</span> <span class="n">g</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">t0</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">dt</span><span class="p">;</span> <span class="n">g</span> <span class="o">=</span> <span class="n">t</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">t</span><span class="p">,</span> <span class="n">g</span>
 </pre></div>
 </div>
 <p>with output</p>
 <div class="highlight-text"><div class="highlight"><pre>2.0 1.81859485365
 2.55 1.42209347935
 3.1 0.128900053543
-3.65 -1.77677126759
-4.2 -3.66061824414
-4.75 -4.74664074763
 </pre></div>
 </div>
-<p>The numbers are not nicely aligned. Using the printf syntax
-<code class="docutils literal"><span class="pre">'%6.2f</span>&nbsp; <span class="pre">%8.3f'</span></code> for <code class="docutils literal"><span class="pre">t</span></code> and <code class="docutils literal"><span class="pre">g</span></code>, we can control how wide each
-column is and also the number of decimals such that the numbers
-in a column are written with the same precision. The output
+<p>(Repeating the same set of statements multiple times, as done above,
+is not good programming practice - one should use a for loop, as
+explained later in the section <a class="reference internal" href="._pylight003.html#sec-for-loops"><span class="std std-ref">For loops</span></a>.)
+Observe that the numbers in the columns
+are not nicely aligned. Using the printf syntax
+<code class="docutils literal"><span class="pre">'%6.2f</span>&nbsp; <span class="pre">%8.3f'</span> <span class="pre">%</span> <span class="pre">(t,</span> <span class="pre">g)</span></code> for <code class="docutils literal"><span class="pre">t</span></code> and <code class="docutils literal"><span class="pre">g</span></code>, we can control the width of each
+column and also the number of decimals, such that the numbers
+in a column are aligned under each other and
+written with the same precision. The output
 then becomes</p>
-<div class="highlight-text"><div class="highlight"><pre>2.00     1.819
-2.55     1.422
-3.10     0.129
-3.65    -1.777
-4.20    -3.661
-4.75    -4.747
+<div class="highlight-text"><div class="highlight"><pre>Formatting via printf syntax
+  2.00     1.819
+  2.55     1.422
+  3.10     0.129
 </pre></div>
 </div>
 <p>We shall frequently use the printf syntax throughout the book so there
@@ -911,7 +911,7 @@ to be aware its existence.</p>
 </div>
 <div class="section" id="arrays">
 <h3>Arrays<a class="headerlink" href="#arrays" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="index-76"></span><span class="target" id="index-77"></span><span class="target" id="index-78"></span><span class="target" id="index-79"></span><span class="target" id="index-80"></span><span class="target" id="index-81"></span><p id="index-82">In the program <code class="docutils literal"><span class="pre">ball_plot.py</span></code> from the chapter <a class="reference internal" href="#st-ex3"><span>A Python program with vectorization and plotting</span></a> we saw how
+<span class="target" id="index-99"></span><span class="target" id="index-100"></span><span class="target" id="index-101"></span><span class="target" id="index-102"></span><span class="target" id="index-103"></span><span class="target" id="index-104"></span><p id="index-105">In the program <code class="docutils literal"><span class="pre">ball_plot.py</span></code> from the chapter <a class="reference internal" href="#st-ex3"><span class="std std-ref">A Python program with vectorization and plotting</span></a> we saw how
 1001 height computations were executed and stored in the variable <code class="docutils literal"><span class="pre">y</span></code>,
 and then displayed in a plot showing <code class="docutils literal"><span class="pre">y</span></code> versus <code class="docutils literal"><span class="pre">t</span></code>, i.e., height
 versus time. The collection of numbers in <code class="docutils literal"><span class="pre">y</span></code> (or <code class="docutils literal"><span class="pre">t</span></code>, respectively)
@@ -945,7 +945,7 @@ element. Elements are, by rule, <em>indexed</em> (numbers within brackets)
 from 0 to the last element, in this case 3. We say that Python has
 <em>zero based indexing</em>. This differs from <em>one based indexing</em> (e.g.,
 found in Matlab) where the array index starts with 1.</p>
-<p id="index-83">As illustrated in the code, you may refer to the array as a whole by
+<p id="index-106">As illustrated in the code, you may refer to the array as a whole by
 the name <code class="docutils literal"><span class="pre">h</span></code>, but also to each individual element by use of the
 index. The array elements may enter in computations as individual
 variables, e.g., writing
@@ -954,7 +954,7 @@ the sum of all the elements in <code class="docutils literal"><span class="pre">
 the variable <code class="docutils literal"><span class="pre">z</span></code>. Note that this way of creating an array is a bit
 different from the one with <code class="docutils literal"><span class="pre">linspace</span></code>, where the filling in of
 numbers occurred automatically &#8220;behind the scene&#8221;.</p>
-<p id="index-84">By the use of a colon, you may pick out a <em>slice</em> of an array. For
+<span class="target" id="index-107"></span><p id="index-108">By the use of a colon, you may pick out a <em>slice</em> of an array. For
 example, to create a new array from the two elements <code class="docutils literal"><span class="pre">h[1]</span></code> and
 <code class="docutils literal"><span class="pre">h[2]</span></code>, we could write <code class="docutils literal"><span class="pre">slice_h</span> <span class="pre">=</span> <span class="pre">h[1:3]</span></code>. Note that the index
 specification <code class="docutils literal"><span class="pre">1:3</span></code> means indices <code class="docutils literal"><span class="pre">1</span></code> and <code class="docutils literal"><span class="pre">2</span></code>, i.e., the last index is
@@ -978,12 +978,12 @@ required.</p>
 </div>
 <div class="section" id="plotting">
 <h3>Plotting<a class="headerlink" href="#plotting" title="Permalink to this headline">¶</a></h3>
-<p id="index-85">Sometimes you would like to have two or more curves or <em>graphs</em> in
+<p id="index-109">Sometimes you would like to have two or more curves or <em>graphs</em> in
 the same plot. Assume we have <code class="docutils literal"><span class="pre">h</span></code> as above, and also an array <code class="docutils literal"><span class="pre">H</span></code> with
 the heights <span class="math">\(0.50\)</span> m, <span class="math">\(0.70\)</span> m, <span class="math">\(1.90\)</span> m,
 and <span class="math">\(1.75\)</span> m from a family next door. This may be done with the
 program
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/plot_heights.py">plot_heights.py</a>
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/plot_heights.py">plot_heights.py</a>
 given as</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">zeros</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
@@ -1003,12 +1003,12 @@ given as</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Running the program gives the plot shown in Figure <a class="reference internal" href="#fig-plotheights"><span>Generated plot for the heights of family members from two families</span></a>.</p>
+<p>Running the program gives the plot shown in Figure <a class="reference internal" href="#fig-plotheights"><span class="std std-ref">Generated plot for the heights of family members from two families</span></a>.</p>
 <div class="figure" id="id4">
 <span id="fig-plotheights"></span><a class="reference internal image-reference" href="_images/fig1_18.png"><img alt="_images/fig1_18.png" src="_images/fig1_18.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Generated plot for the heights of family members from two families</em></span></p>
 </div>
-<p id="index-86">Alternatively, the two curves could have been plotted in the same plot
+<p id="index-110">Alternatively, the two curves could have been plotted in the same plot
 by use of two plot commands, which gives more freedom as to how the
 curves appear. To do this, you could plot the first curve by</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">plot</span><span class="p">(</span><span class="n">family_member_no</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
@@ -1026,7 +1026,7 @@ Python does so until it reads <code class="docutils literal"><span class="pre">h
 <code class="docutils literal"><span class="pre">hold('on')</span></code> or <code class="docutils literal"><span class="pre">hold('off')</span></code> command,
 the second plot command will overwrite the first one, i.e.,
 you get only the second curve.</p>
-<p id="index-87">In case you would like the two curves plotted in two separate plots, you can do this by plotting the first curve straightforwardly with</p>
+<p id="index-111">In case you would like the two curves plotted in two separate plots, you can do this by plotting the first curve straightforwardly with</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">plot</span><span class="p">(</span><span class="n">family_member_no</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1038,7 +1038,7 @@ you get only the second curve.</p>
 <p>Note how the graphs are made continuous by Python, drawing straight
 lines between the four data points of each family. This is the
 standard way of doing it and was also done when plotting our 1001
-height computations with <code class="docutils literal"><span class="pre">ball_plot.py</span></code> in the chapter <a class="reference internal" href="#st-ex3"><span>A Python program with vectorization and plotting</span></a>. However, since there were so many data points then, the
+height computations with <code class="docutils literal"><span class="pre">ball_plot.py</span></code> in the chapter <a class="reference internal" href="#st-ex3"><span class="std std-ref">A Python program with vectorization and plotting</span></a>. However, since there were so many data points then, the
 curve looked nice and smooth. If preferred, one may also plot only the
 data points. For example, writing</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="s">&#39;*&#39;</span><span class="p">)</span>
@@ -1046,7 +1046,7 @@ data points. For example, writing</p>
 </div>
 <p>will mark only the data points with the star symbol.
 Other symbols like circles etc. may be used as well.</p>
-<span class="target" id="index-88"></span><span class="target" id="index-89"></span><span class="target" id="index-90"></span><span class="target" id="index-91"></span><p id="index-92">There are many possibilities in Python for adding information to a
+<span class="target" id="index-112"></span><span class="target" id="index-113"></span><span class="target" id="index-114"></span><span class="target" id="index-115"></span><p id="index-116">There are many possibilities in Python for adding information to a
 plot or for changing its appearance. For example, you may add a legend
 by the instruction</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">legend</span><span class="p">(</span><span class="s">&#39;This is some legend&#39;</span><span class="p">)</span>
@@ -1070,15 +1070,18 @@ Saving the figure to file is achieved by the command</p>
 <span class="n">savefig</span><span class="p">(</span><span class="s">&#39;some_plot.eps&#39;</span><span class="p">)</span>   <span class="c"># Encanspulated PostScript format</span>
 </pre></div>
 </div>
-<span class="target" id="index-93"></span><span class="target" id="index-94"></span><span class="target" id="index-95"></span><span class="target" id="index-96"></span><span class="target" id="index-97"></span><p id="index-98">For the reader who is into linear algebra, it may be useful to know
+<span class="target" id="index-117"></span><span class="target" id="index-118"></span><span class="target" id="index-119"></span><span class="target" id="index-120"></span><span class="target" id="index-121"></span><p id="index-122">For the reader who is into linear algebra, it may be useful to know
 that standard matrix/vector operations are straightforward with
-arrays, e.g., matrix-vector multiplication. What is needed though, is
-to create the right variable types (after having imported an
-appropriate module). For example, assume you would like to calculate
+arrays, e.g., matrix-vector multiplication.</p>
+<blockquote>
+<div>What is needed though, is</div></blockquote>
+<p>to create the right variable types (after having imported an
+appropriate module).
+For example, assume you would like to calculate
 the vector <span class="math">\(\bf{y}\)</span> (note that boldface is used for vectors and
 matrices) as <span class="math">\(\bf{y} = \bf{Ax}\)</span>, where <span class="math">\(\bf{A}\)</span> is a <span class="math">\(2 \times 2\)</span>
 matrix and <span class="math">\(\bf{x}\)</span> is a vector. We may do this as illustrated by
-the program <a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/matrix_vector_product.py">matrix_vector_product.py</a> reading</p>
+the program <a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/matrix_vector_product.py">matrix_vector_product.py</a> reading</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">zeros</span><span class="p">,</span> <span class="n">mat</span><span class="p">,</span> <span class="n">transpose</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -1102,7 +1105,7 @@ line <code class="docutils literal"><span class="pre">x</span> <span class="pre"
 dimension <span class="math">\(1 \times 2\)</span> (the default dimension) to <span class="math">\(2 \times 1\)</span> with
 the statement <code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">transpose(x)</span></code>, before some test values are plugged
 in. The matrix <code class="docutils literal"><span class="pre">A</span></code> is first created as a two dimensional array with <code class="docutils literal"><span class="pre">A</span>
-<span class="pre">=</span> <span class="pre">zeros((2,2))</span></code> before conversion and filling in values takes
+<span class="pre">=</span> <span class="pre">zeros((2,2))</span></code> before conversion and filling in values take
 place. Finally, the multiplication is performed as <code class="docutils literal"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">A*x</span></code>. Note the
 number of parentheses when creating the two dimensional array
 <code class="docutils literal"><span class="pre">A</span></code>. Running the program gives the following output on the screen:</p>
@@ -1113,18 +1116,18 @@ number of parentheses when creating the two dimensional array
 </div>
 <div class="section" id="error-messages-and-warnings">
 <h3>Error messages and warnings<a class="headerlink" href="#error-messages-and-warnings" title="Permalink to this headline">¶</a></h3>
-<p id="index-99">All programmers experience error messages, and usually to a large
+<p id="index-123">All programmers experience error messages, and usually to a large
 extent during the early learning process. Sometimes error messages
 are understandable, sometimes they are not. Anyway, it is important
 to get used to them. One idea is to start with a program that
 initially is working, and then deliberately introduce errors in
 it, one by one. (But remember to take a copy of the original working
 code!)
-For each error you try to run the program to
+For each error, you try to run the program to
 see what Python&#8217;s response is. Then you know what the problem is
 and understand what the error message is about. This will greatly
 help you when you get a similar error message or warning later.</p>
-<span class="target" id="index-100"></span><p id="index-101">Very often, you will experience that there are errors in the program
+<span class="target" id="index-124"></span><p id="index-125">Very often, you will experience that there are errors in the program
 you have written. This is normal, but frustrating in the
 beginning. You then have to find the problem, try to fix it, and then
 run the program again. Typically, you fix one error just to experience
@@ -1147,19 +1150,19 @@ the case. When the first half looks ok, insert parts of what was
 removed and repeat the process with the new code. Using simple numbers
 and doing this in parallel with hand calculations on a piece of paper
 (for comparison) is often a very good idea.</p>
-<span class="target" id="index-102"></span><span class="target" id="index-103"></span><p id="index-104">Python also offers means to detect and handle errors by the program
+<span class="target" id="index-126"></span><span class="target" id="index-127"></span><p id="index-128">Python also offers means to detect and handle errors by the program
 itself! The programmer must then foresee (when writing the code) that
 there is a potential for error at some particular point. If, for
 example, some user of the program is asked (by the running program) to
 provide a number, and intends to give the number 5, but instead writes
 the word <em>five</em>, the program could run into trouble. A
-<code class="docutils literal"><span class="pre">*try-exception*.py</span></code> construction may be used by
+<code class="docutils literal"><span class="pre">try-exception</span></code> construction may be used by
 the programmer to check for such errors and act appropriately (see
-the chapter <a class="reference internal" href="._pylight007.html#th-nonlinalgeq-newt"><span>Newton&#8217;s method</span></a> for an example), avoiding a program
+the chapter <a class="reference internal" href="._pylight007.html#th-nonlinalgeq-newt"><span class="std std-ref">Newton&#8217;s method</span></a> for an example), avoiding a program
 crash. This procedure of trying an action and then recovering from
 trouble, if necessary, is referred to as <em>exception handling</em> and
 is the modern way of dealing with errors in a program.</p>
-<span class="target" id="index-105"></span><p id="index-106">When a program finally runs without error messages, it might be
+<span class="target" id="index-129"></span><span class="target" id="index-130"></span><span class="target" id="index-131"></span><span class="target" id="index-132"></span><p id="index-133">When a program finally runs without error messages, it might be
 tempting to think that <em>Ah..., I am finished!</em>. But no! Then comes
 program <em>testing</em>, you need to <em>verify</em> that the program does the
 computations as planned. This is almost an art and usually takes
@@ -1184,7 +1187,7 @@ We will therefore limit our testing to the verification part.</p>
 </div>
 <div class="section" id="input-data">
 <h3>Input data<a class="headerlink" href="#input-data" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="index-107"></span><span class="target" id="index-108"></span><span class="target" id="index-109"></span><span class="target" id="index-110"></span><span class="target" id="index-111"></span><p id="index-112">Computer programs need a set of input data and the purpose is to
+<span class="target" id="index-134"></span><span class="target" id="index-135"></span><span class="target" id="index-136"></span><span class="target" id="index-137"></span><span class="target" id="index-138"></span><p id="index-139">Computer programs need a set of input data and the purpose is to
 use these data to compute output data, i.e., results.
 In the previous program we have specified input data in terms
 of variables. However, one often wants to get the input through
@@ -1200,8 +1203,8 @@ established the variable <code class="docutils literal"><span class="pre">age</s
 second line combines the calculation of twice the age with a message
 printed on the screen. Try these two lines in a little test program to
 see for yourself how it works.</p>
-<p>The <code class="docutils literal"><span class="pre">input</span></code> function is useful for numbers, lists (the chapter <span class="xref std std-ref">2nd:BasicConstructins</span>),
-and tuples (the chapter <span class="xref std std-ref">2nd:BasicConstructins</span>).
+<p>The <code class="docutils literal"><span class="pre">input</span></code> function is useful for numbers, lists (the chapter <a class="reference internal" href="._pylight003.html#nd-basicconstructins"><span class="std std-ref">Basic constructions</span></a>),
+and tuples (the chapter <a class="reference internal" href="._pylight003.html#nd-basicconstructins"><span class="std std-ref">Basic constructions</span></a>).
 For pure text, the user must either enclose the input in quotes, or the program must use
 the <code class="docutils literal"><span class="pre">raw_input</span></code> function instead:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">name</span> <span class="o">=</span> <span class="nb">raw_input</span><span class="p">(</span><span class="s">&#39;What is your name? &#39;</span><span class="p">)</span>
@@ -1217,7 +1220,7 @@ output</em>.</p>
 </div>
 <div class="section" id="symbolic-computations">
 <h3>Symbolic computations<a class="headerlink" href="#symbolic-computations" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="index-113"></span><span class="target" id="index-114"></span><span class="target" id="index-115"></span><span class="target" id="index-116"></span><p id="index-117">Even though the main focus in this book is programming of <em>numerical</em>
+<span class="target" id="index-140"></span><span class="target" id="index-141"></span><span class="target" id="index-142"></span><span class="target" id="index-143"></span><p id="index-144">Even though the main focus in this book is programming of <em>numerical</em>
 methods, there are occasions where <em>symbolic</em> (also called <em>exact</em> or <em>analytical</em>)
 operations are useful.
 Doing symbolic computations means, as the name suggests, that we do
@@ -1249,7 +1252,7 @@ Each symbol is represented
 by a standard variable, but the name of the symbol must be
 declared with <code class="docutils literal"><span class="pre">Symbol(name)</span></code> for a single symbol, or <code class="docutils literal"><span class="pre">symbols(name1</span> <span class="pre">name2</span> <span class="pre">...)</span></code> for multiple symbols..
 The following script
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/example_symbolic.py">example_symbolic.py</a>
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/example_symbolic.py">example_symbolic.py</a>
 is a quick demonstration
 of some of the basic symbolic operations that are supported in Python.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="o">*</span>
@@ -1266,7 +1269,7 @@ of some of the basic symbolic operations that are supported in Python.</p>
 </pre></div>
 </div>
 <p>Other symbolic calculations like Taylor series expansion, linear algebra (with matrix and vector operations), and (some) differential equation solving are also possible.</p>
-<span class="target" id="index-118"></span><p id="index-119">Symbolic computations are also readily accessible through the free
+<span class="target" id="index-145"></span><p id="index-146">Symbolic computations are also readily accessible through the (partly) free
 online tool <a class="reference external" href="http://www.wolframalpha.com">WolframAlpha</a>, which
 applies the very advanced <a class="reference external" href="http://en.wikipedia.org/wiki/Mathematica">Mathematica</a> package as symbolic engine.
 The disadvantage with WolframAlpha compared to the
@@ -1275,7 +1278,7 @@ automatically be imported into your code and used for further
 analysis. On the other hand, WolframAlpha has the advantage that it
 displays many additional mathematical results related to the given
 problem. For example, if we type <code class="docutils literal"><span class="pre">2x</span> <span class="pre">+</span> <span class="pre">3x</span> <span class="pre">-</span> <span class="pre">y</span></code> in WolframAlpha, it
-not only reduced the expression to <code class="docutils literal"><span class="pre">5x</span> <span class="pre">-</span> <span class="pre">y</span></code>, but it also makes plots
+not only simplifies the expression to <code class="docutils literal"><span class="pre">5x</span> <span class="pre">-</span> <span class="pre">y</span></code>, but it also makes plots
 of the function <span class="math">\(f(x,y)=5x-y\)</span>, solves the equation <span class="math">\(5x - y = 0\)</span>, and
 calculates the integral <span class="math">\(\int\int(5x+y)dxdy\)</span>. The commercial Pro
 version can also show a step-by-step of the analytical computations in
@@ -1291,7 +1294,7 @@ WolframAlpha:</p>
 </ul>
 </div></blockquote>
 <p>WolframAlpha is very flexible with respect to syntax.</p>
-<p id="index-120">Another impressive tool for symbolic computations is <a class="reference external" href="http://sagemath.org/">Sage</a>, which is a very comprehensive package with the
+<p id="index-147">Another impressive tool for symbolic computations is <a class="reference external" href="http://sagemath.org/">Sage</a>, which is a very comprehensive package with the
 aim of &#8220;creating a viable free open source alternative to Magma,
 Maple, Mathematica and Matlab&#8221;. Sage is implemented in Python.
 Projects with extensive symbolic computations will certainly
@@ -1299,7 +1302,7 @@ benefit from exploring Sage.</p>
 </div>
 <div class="section" id="concluding-remarks">
 <h3>Concluding remarks<a class="headerlink" href="#concluding-remarks" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="index-121"></span><span class="target" id="index-122"></span><div class="admonition-programming-demands-you-to-be-accurate admonition" id="index-123">
+<span class="target" id="index-148"></span><span class="target" id="index-149"></span><span class="target" id="index-150"></span><span class="target" id="index-151"></span><span class="target" id="index-152"></span><div class="admonition-programming-demands-you-to-be-accurate admonition" id="index-153">
 <p class="first admonition-title">Programming demands you to be accurate</p>
 <p class="last">In this chapter, you have seen some examples of how simple things may
 be done in Python. Hopefully, you have tried to do the examples on
@@ -1372,7 +1375,7 @@ with Python</em>, Springer, 2014.</p>
 </div>
 </div>
 <div class="section" id="exercises-1">
-<h2>Exercises  (1)<a class="headerlink" href="#exercises-1" title="Permalink to this headline">¶</a></h2>
+<h2>Exercises<a class="headerlink" href="#exercises-1" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="exercise-1-error-messages">
 <span id="st-exer-errormessages"></span><h3>Exercise 1: Error messages<a class="headerlink" href="#exercise-1-error-messages" title="Permalink to this headline">¶</a></h3>
 <p>Save a copy of the program <code class="docutils literal"><span class="pre">ball.py</span></code> and confirm that the copy runs as the
@@ -1585,7 +1588,7 @@ The code reads:</p>
 <div class="section" id="exercise-6-interactive-computing-of-volume-and-area">
 <span id="st-exer-cubevolinteractively"></span><h3>Exercise 6: Interactive computing of volume and area<a class="headerlink" href="#exercise-6-interactive-computing-of-volume-and-area" title="Permalink to this headline">¶</a></h3>
 <p><strong>a)</strong>
-Compute the volume in <a class="reference internal" href="#st-exer-cubevolume"><span>Exercise 2: Volume of a cube</span></a> by using
+Compute the volume in <a class="reference internal" href="#st-exer-cubevolume"><span class="std std-ref">Exercise 2: Volume of a cube</span></a> by using
 Python interactively, i.e., do the computations at the command
 prompt (in a Python shell as we also say).
 Compare with what you got previously from the written program.</p>
@@ -1597,7 +1600,7 @@ Compare with what you got previously from the written program.</p>
 </pre></div>
 </div>
 <p><strong>b)</strong>
-Do the same also for <a class="reference internal" href="#st-exer-areacircle"><span>Exercise 3: Area and circumference of a circle</span></a>.</p>
+Do the same also for <a class="reference internal" href="#st-exer-areacircle"><span class="std std-ref">Exercise 3: Area and circumference of a circle</span></a>.</p>
 <p><strong>Solution.</strong></p>
 <div class="highlight-ipy"><div class="highlight"><pre><span class="go">from math import *</span>
 <span class="gp">In [1]: </span><span class="n">r</span> <span class="o">=</span> <span class="mi">2</span>
@@ -1701,7 +1704,7 @@ change when you run the program again)</p>
 </pre></div>
 </div>
 <p>Filename: <code class="docutils literal"><span class="pre">drawing_random_numbers.py</span></code>.</p>
-<span class="target" id="nd-basicconstructins"></span></div>
+</div>
 </div>
 </div>
 
@@ -1709,8 +1712,13 @@ change when you run the program again)</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+            <center>
+            <p class="logo"><a href="http://cbc.simula.no/" title="Go to Center for Biomedical Computing">
+              <img class="logo" src="_static/cbc_logo.png" alt="Logo"/>
+            </a></p>
+            </center>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">The first few steps</a><ul>
@@ -1728,7 +1736,7 @@ change when you run the program again)</p>
 <li><a class="reference internal" href="#a-python-program-with-vectorization-and-plotting">A Python program with vectorization and plotting</a></li>
 <li><a class="reference internal" href="#more-basic-concepts">More basic concepts</a><ul>
 <li><a class="reference internal" href="#using-python-interactively">Using Python interactively</a></li>
-<li><a class="reference internal" href="#arithmetics-parentheses-and-round-off-errors">Arithmetics, parentheses and round-off errors</a></li>
+<li><a class="reference internal" href="#arithmetics-parentheses-and-rounding-errors">Arithmetics, parentheses and rounding errors</a></li>
 <li><a class="reference internal" href="#variables-and-objects">Variables and objects</a></li>
 <li><a class="reference internal" href="#integer-division">Integer division</a></li>
 <li><a class="reference internal" href="#formatting-text-and-numbers">Formatting text and numbers</a></li>
@@ -1740,7 +1748,7 @@ change when you run the program again)</p>
 <li><a class="reference internal" href="#concluding-remarks">Concluding remarks</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#exercises-1">Exercises  (1)</a><ul>
+<li><a class="reference internal" href="#exercises-1">Exercises</a><ul>
 <li><a class="reference internal" href="#exercise-1-error-messages">Exercise 1: Error messages</a></li>
 <li><a class="reference internal" href="#exercise-2-volume-of-a-cube">Exercise 2: Volume of a cube</a></li>
 <li><a class="reference internal" href="#exercise-3-area-and-circumference-of-a-circle">Exercise 3: Area and circumference of a circle</a></li>
@@ -1763,15 +1771,17 @@ change when you run the program again)</p>
   <h4>Next topic</h4>
   <p class="topless"><a href="._pylight003.html"
                         title="next chapter">Basic constructions</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/._pylight002.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/._pylight002.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -1785,20 +1795,29 @@ change when you run the program again)</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2015, S. Linge and H. P. Langtangen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.4</a>
-      
-      |
-      <a href="_sources/._pylight002.txt"
-          rel="nofollow">Page source</a></li>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="._pylight003.html" title="Basic constructions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="._pylight001.html" title="Preface"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Programming for Computations (Python version)</a> &raquo;</li> 
+      </ul>
     </div>
+<div class="wrapper">
+  <div class="footer">
+    <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <br />
+    <br />
+      &copy;2015, Svein Linge and Hans Petter Langtangen.
+  </div>
+</div>
 
-    
-
-    
   </body>
 </html>

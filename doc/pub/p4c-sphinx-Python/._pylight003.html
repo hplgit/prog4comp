@@ -9,7 +9,7 @@
     
     <title>Basic constructions</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -25,6 +25,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
 
         <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
         <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
@@ -42,14 +43,10 @@
         </style>
 
     
-    <link rel="top" title="Programming for Computations" href="index.html" />
+    <link rel="top" title="Programming for Computations (Python version)" href="index.html" />
     <link rel="next" title="Computing integrals" href="._pylight004.html" />
     <link rel="prev" title="The first few steps" href="._pylight002.html" />
-
-   
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
-
+ 
   
        <style type="text/css">
          div.admonition {
@@ -59,8 +56,8 @@
        </style>
       </head>
     
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -72,17 +69,17 @@
         <li class="right" >
           <a href="._pylight002.html" title="The first few steps"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Programming for Computations</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Programming for Computations (Python version)</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="basic-constructions">
-<h1>Basic constructions<a class="headerlink" href="#basic-constructions" title="Permalink to this headline">¶</a></h1>
+<span id="nd-basicconstructins"></span><h1>Basic constructions<a class="headerlink" href="#basic-constructions" title="Permalink to this headline">¶</a></h1>
 <div class="figure">
 <a class="reference internal image-reference" href="_images/opt_exec.png"><img alt="_images/opt_exec.png" src="_images/opt_exec.png" style="width: 800px;" /></a>
 </div>
@@ -97,7 +94,7 @@ science and engineering, including materials manufacturing and brain research.
 The action is to move randomly to the north
 (N), east (E), south (S), or west (W) with the same probability.
 How can we implement such an action in life and in a computer program?</p>
-<p>We need to randomly draw one out of four numbers to select the direction
+<p id="index-12">We need to randomly draw one out of four numbers to select the direction
 in which to move.
 A deck of cards can be
 used in practice for this purpose. Let the four suits correspond to
@@ -134,7 +131,7 @@ proceed with the next question. The last test if <span class="math">\(0.75\leq r
 could also read just <code class="docutils literal"><span class="pre">else</span></code>, since we here cover all the remaining
 possible <code class="docutils literal"><span class="pre">r</span></code> values.</p>
 <p>The exact code in Python reads</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">random</span>
+<span class="target" id="index-13"></span><div class="highlight-python" id="index-14"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">random</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>        <span class="c"># random number in [0,1)</span>
 <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="mf">0.25</span><span class="p">:</span>
    <span class="c"># move north</span>
@@ -170,11 +167,11 @@ skipped.</li>
 <p>The blocks after <code class="docutils literal"><span class="pre">if</span></code>, <code class="docutils literal"><span class="pre">elif</span></code>, or <code class="docutils literal"><span class="pre">else</span></code> may contain new if tests, if desired.
 Regarding colon and indent, you will see below that these are
 required in several other programming constructions as well.</p>
-<p id="index-12">Working with if tests requires mastering boolean expressions.
+<p id="index-15">Working with if tests requires mastering boolean expressions.
 Here are some basic boolean expressions involving the
 <em>logical operators</em> <code class="docutils literal"><span class="pre">==</span></code>, <code class="docutils literal"><span class="pre">!=</span></code>, <code class="docutils literal"><span class="pre">&lt;</span></code>, <code class="docutils literal"><span class="pre">&lt;=</span></code>, <code class="docutils literal"><span class="pre">&gt;</span></code>, and <code class="docutils literal"><span class="pre">&gt;=</span></code>.
 Given the assignment to <code class="docutils literal"><span class="pre">temp</span></code>, you should go through each boolean
-expression and determine if it is true or false.</p>
+expression below and determine if it is true or false.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">temp</span> <span class="o">=</span> <span class="mi">21</span>       <span class="c"># assign value to a variable</span>
 <span class="n">temp</span> <span class="o">==</span> <span class="mi">20</span>      <span class="c"># temp equal to 20</span>
 <span class="n">temp</span> <span class="o">!=</span> <span class="mi">20</span>      <span class="c"># temp not equal to 20</span>
@@ -187,7 +184,7 @@ expression and determine if it is true or false.</p>
 </div>
 <div class="section" id="functions">
 <span id="sec-functions"></span><h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-13"></span><span class="target" id="index-14"></span><span class="target" id="index-15"></span><span class="target" id="index-16"></span><span class="target" id="index-17"></span><span class="target" id="index-18"></span><p id="index-19">Functions are widely used in programming and is a concept that needs to
+<span class="target" id="index-16"></span><span class="target" id="index-17"></span><span class="target" id="index-18"></span><span class="target" id="index-19"></span><span class="target" id="index-20"></span><span class="target" id="index-21"></span><p id="index-22">Functions are widely used in programming and is a concept that needs to
 be mastered. In the simplest case, a function in a program is much like
 a mathematical function: some input number <span class="math">\(x\)</span> is transformed to some output
 number.
@@ -203,9 +200,9 @@ strategy which may dramatically ease the problem solving process), and/or</li>
 once and easily be re-executed with variations.</li>
 </ol>
 <p>Examples will be given to illustrate how functions can be written in various contexts.</p>
-<p>If we modify the program <code class="docutils literal"><span class="pre">ball.py</span></code> from the chapter <a class="reference internal" href="._pylight002.html#st-ex1"><span>A Python program with variables</span></a>
+<p>If we modify the program <code class="docutils literal"><span class="pre">ball.py</span></code> from the chapter <a class="reference internal" href="._pylight002.html#st-ex1"><span class="std std-ref">A Python program with variables</span></a>
 slightly, and include a function, we could let this be a new program
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/ball_function.py">ball_function.py</a>
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/ball_function.py">ball_function.py</a>
 as</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">y</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
     <span class="n">v0</span> <span class="o">=</span> <span class="mi">5</span>                    <span class="c"># Initial velocity</span>
@@ -228,7 +225,7 @@ indentation). The <em>return statement</em> of the function <code class="docutil
 <p>will be understood by Python as <em>first compute the expression, then
 send the result back (i.e., return) to where the function was called
 from</em>. Both <code class="docutils literal"><span class="pre">def</span></code> and <code class="docutils literal"><span class="pre">return</span></code> are reserved words. The function
-depends on one variable (or we say that it takes one <em>argument</em> or
+depends on <code class="docutils literal"><span class="pre">t</span></code>, i.e., one variable (or we say that it takes one <em>argument</em> or
 <em>input parameter</em>), the value of which must be provided when the
 function is called.</p>
 <p>What actually happens when Python meets this code? The <code class="docutils literal"><span class="pre">def</span></code> line
@@ -244,12 +241,12 @@ executes one line at a time in the <code class="docutils literal"><span class="p
 In the final line, the arithmetic expression <code class="docutils literal"><span class="pre">v0*t</span> <span class="pre">-</span> <span class="pre">0.5*g*t**2</span></code>
 is computed, resulting in a number, and this number (or more
 precisely, the Python object representing the number) <em>replaces</em>
-the call <code class="docutils literal"><span class="pre">y(time)</span></code> in the calling code such that we have <code class="docutils literal"><span class="pre">print</span></code>
-proceeded by a number rather than a function call.</p>
+the call <code class="docutils literal"><span class="pre">y(time)</span></code> in the calling code such that the word <code class="docutils literal"><span class="pre">print</span></code> now
+precedes a number rather than a function call.</p>
 <p>Python proceeds with the next line and sets <code class="docutils literal"><span class="pre">time</span></code> to a new value.
 The next <code class="docutils literal"><span class="pre">print</span></code> statement triggers a new call to <code class="docutils literal"><span class="pre">y(t)</span></code>, this time
 <code class="docutils literal"><span class="pre">t</span></code> is set to <code class="docutils literal"><span class="pre">0.9</span></code>, the computations are done line by line in the
-<code class="docutils literal"><span class="pre">y</span></code> function, and the returned results replaces <code class="docutils literal"><span class="pre">y(time)</span></code>.
+<code class="docutils literal"><span class="pre">y</span></code> function, and the returned result replaces <code class="docutils literal"><span class="pre">y(time)</span></code>.
 Instead of writing <code class="docutils literal"><span class="pre">print</span> <span class="pre">y(time)</span></code>, we could
 alternatively have stored the returned result from the <code class="docutils literal"><span class="pre">y</span></code> function
 in a variable,</p>
@@ -284,7 +281,7 @@ when the function is short. For longer or more complicated functions,
 it might be better to have one single <code class="docutils literal"><span class="pre">return</span></code> statement.
 Be prepared for critical comments if you return wherever you want...</p>
 </div>
-<p>An expression you will often encounter when dealing with programming, is <em>main
+<p id="index-23">An expression you will often encounter when dealing with programming, is <em>main
 program</em>, or that some code is <em>in main</em>. This is nothing particular
 to Python, and simply refers to that part of the program which is
 <em>outside</em> functions. However, note that the <code class="docutils literal"><span class="pre">def</span></code> line of functions is
@@ -303,7 +300,7 @@ expressions in a new version of our program that prints the position
 of the ball for chosen times. Assume we want to evaluate these expressions at two
 points in time, <span class="math">\(t = 0.6s\)</span> and <span class="math">\(t = 0.9s\)</span>. We can pick some numbers
 for the initial velocity components <code class="docutils literal"><span class="pre">v0y</span></code> and <code class="docutils literal"><span class="pre">v0x</span></code>, name the program
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/ball_position.py">ball_position.py</a>,
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/ball_position.py">ball_position.py</a>,
 and write it for example as</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">y</span><span class="p">(</span><span class="n">v0y</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
     <span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span>                  <span class="c"># Acceleration of gravity</span>
@@ -328,7 +325,7 @@ now takes <em>two</em> arguments. Running the program gives the output</p>
 1.8  0.52695
 </pre></div>
 </div>
-<p>A function may also have no return value, in which case we simply drop
+<p id="index-24">A function may also have no return value, in which case we simply drop
 the return statement, or it may return more than one value. For
 example, the two functions we just defined could alternatively have
 been written as one:</p>
@@ -353,7 +350,7 @@ in other ways in the code.</p>
 <p>There are possibilities for having a variable number of function input
 and output parameters (using <code class="docutils literal"><span class="pre">*args</span></code> and <code class="docutils literal"><span class="pre">**kwargs</span></code> constructions
 for the arguments). However, we do not go further into that topic here.</p>
-<span class="target" id="index-20"></span><p id="index-21">Variables that are defined inside a function, e.g., <code class="docutils literal"><span class="pre">g</span></code> in the last
+<span class="target" id="index-25"></span><p id="index-26">Variables that are defined inside a function, e.g., <code class="docutils literal"><span class="pre">g</span></code> in the last
 <code class="docutils literal"><span class="pre">xy</span></code> function, are <em>local variables</em>. This means they are only known
 inside the function. Therefore, if you had accidentally used <code class="docutils literal"><span class="pre">g</span></code> in
 some calculation outside the function, you would have got an error
@@ -372,7 +369,7 @@ function definition before we let the function change it. After function
 execution, <code class="docutils literal"><span class="pre">x</span></code> would then have a changed value. One should
 strive to define variables mostly where they are needed and not
 everywhere.</p>
-<span class="target" id="index-22"></span><span class="target" id="index-23"></span><span class="target" id="index-24"></span><p id="index-25">Another very useful way of handling function parameters in Python, is
+<span class="target" id="index-27"></span><span class="target" id="index-28"></span><span class="target" id="index-29"></span><p id="index-30">Another very useful way of handling function parameters in Python, is
 by defining parameters as <em>keyword arguments</em>. This gives default
 values to parameters and allows more freedom in function calls, since
 the order and number of parameters may vary.</p>
@@ -411,7 +408,7 @@ could, e.g., call <code class="docutils literal"><span class="pre">xy</span></co
 <div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">xy</span><span class="p">(</span><span class="n">v0y</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">v0x</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
 </pre></div>
 </div>
-<span class="target" id="index-26"></span><p id="index-27">In any programming language, it is a good habit to include a little
+<p id="index-31">In any programming language, it is a good habit to include a little
 explanation of what the function is doing, unless what is done by the
 function is obvious, e.g., when having only a few simple code lines. This
 explanation is called a <em>doc string</em>, which in Python should be placed just at the top of the function.
@@ -427,8 +424,8 @@ the first lines of the function as</p>
 <p>Note that other functions may be called from within other functions,
 and function input parameters are not required to be numbers. Any
 object will do, e.g., string variables or other functions.</p>
-<p>Functions are straightforwardly passed as arguments to other functions, as illustrated by the following script
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/function_as_argument.py">function_as_argument.py</a>:</p>
+<p id="index-32">Functions are straightforwardly passed as arguments to other functions, as illustrated by the following script
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/function_as_argument.py">function_as_argument.py</a>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">sum_xy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 
@@ -450,13 +447,13 @@ function is used to actually <em>call</em> the function that was given as
 input parameter. Therefore, as shown, we may call <code class="docutils literal"><span class="pre">treat_xy</span></code> with
 either <code class="docutils literal"><span class="pre">sum_xy</span></code> or <code class="docutils literal"><span class="pre">prod_xy</span></code>, depending on whether we want the sum or
 product of <code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code> to be calculated.</p>
-<span class="target" id="index-28"></span><span class="target" id="index-29"></span><p id="index-30">Functions may also be defined <em>within</em> other functions. It that case,
+<span class="target" id="index-33"></span><span class="target" id="index-34"></span><p id="index-35">Functions may also be defined <em>within</em> other functions. It that case,
 they become <em>local functions</em>, or <em>nested functions</em>, known only to
 the function inside which they are defined. Functions defined in main
 are referred to as <em>global functions</em>.  A nested function has full
 access to all variables in the <em>parent function</em>, i.e. the function
 within which it is defined.</p>
-<p id="index-31">Short functions can be defined in a compact way, using what is known
+<p id="index-36">Short functions can be defined in a compact way, using what is known
 as a <em>lambda function</em>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">y</span>
 
@@ -486,10 +483,10 @@ remove function calls that are quantified to slow down the code.</p>
 </div>
 <div class="section" id="for-loops">
 <span id="sec-for-loops"></span><h2>For loops<a class="headerlink" href="#for-loops" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-32"></span><span class="target" id="index-33"></span><span class="target" id="index-34"></span><span class="target" id="index-35"></span><p id="index-36">Many computations are repetitive by nature and programming languages
+<span class="target" id="index-37"></span><span class="target" id="index-38"></span><span class="target" id="index-39"></span><span class="target" id="index-40"></span><p id="index-41">Many computations are repetitive by nature and programming languages
 have certain <em>loop structures</em> to deal with this. Here we will present
 what is referred to as a <em>for loop</em> (another kind of loop is a <em>while</em>
-loop, to be presented below). Assume you want to calculate the square
+loop, to be presented afterwards). Assume you want to calculate the square
 of each integer from 3 to 7. This could be done with the following
 two-line program.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]:</span>
@@ -531,7 +528,7 @@ rather read</p>
 </pre></div>
 </div>
 <p>By default, if <code class="docutils literal"><span class="pre">range</span></code> is called with only two parameters, these are taken
-to be <code class="docutils literal"><span class="pre">stop</span></code> and <code class="docutils literal"><span class="pre">step</span></code>, in which case a start at 0 is understood.
+to be <code class="docutils literal"><span class="pre">start</span></code> and <code class="docutils literal"><span class="pre">stop</span></code>, in which case a step of 1 is understood.
 If only a single parameter is used in the call to <code class="docutils literal"><span class="pre">range</span></code>, this parameter is
 taken to be <code class="docutils literal"><span class="pre">stop</span></code>. The default step of 1 is then used (combined with the
 starting at 0). Thus, calling <code class="docutils literal"><span class="pre">range</span></code>, for example, as</p>
@@ -542,9 +539,9 @@ starting at 0). Thus, calling <code class="docutils literal"><span class="pre">r
 <p>Note that decreasing integers may be produced by letting <code class="docutils literal"><span class="pre">start</span> <span class="pre">&gt;</span> <span class="pre">stop</span></code> combined
 with a negative step. This makes it easy to, e.g., traverse
 arrays in either direction.</p>
-<p>Let us modify <code class="docutils literal"><span class="pre">ball_plot.py</span></code> from the chapter <a class="reference internal" href="._pylight002.html#st-ex3"><span>A Python program with vectorization and plotting</span></a> to illustrate how useful <code class="docutils literal"><span class="pre">for</span></code> loops are if you need to traverse arrays. In that example we computed the height of the ball at every milli-second during the first second of its (vertical) flight and plotted the height versus time.</p>
+<p>Let us modify <code class="docutils literal"><span class="pre">ball_plot.py</span></code> from the chapter <a class="reference internal" href="._pylight002.html#st-ex3"><span class="std std-ref">A Python program with vectorization and plotting</span></a> to illustrate how useful <code class="docutils literal"><span class="pre">for</span></code> loops are if you need to traverse arrays. In that example we computed the height of the ball at every milli-second during the first second of its (vertical) flight and plotted the height versus time.</p>
 <p>Assume we want to find the maximum height during that time, how can we do it with a computer program? One alternative may be to compute all the thousand heights, store them in an array, and then run through the array to pick out the maximum. The program, named
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/ball_ma_height.py">ball_max_height.py</a>,
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/ball_ma_height.py">ball_max_height.py</a>,
 may look as follows.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
@@ -567,6 +564,7 @@ may look as follows.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Time (s)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Height (m)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>There is nothing new here, except the <code class="docutils literal"><span class="pre">for</span></code> loop construction, so let us look at it in more detail. As explained above, Python understands that a <code class="docutils literal"><span class="pre">for</span></code> loop is desired when it sees the word <code class="docutils literal"><span class="pre">for</span></code>.
@@ -590,7 +588,7 @@ stop and step length choices for an index, and also how the index
 should enter expressions inside the loop. At the same time, however,
 it is something that programmers do often, so it is important to
 develop the right skills on these matters.</p>
-<span class="target" id="index-37"></span><span class="target" id="index-38"></span><span class="target" id="index-39"></span><p id="index-40">Having one loop inside another, referred to as a <em>double loop</em>, is
+<span class="target" id="index-42"></span><span class="target" id="index-43"></span><span class="target" id="index-44"></span><p id="index-45">Having one loop inside another, referred to as a <em>double loop</em>, is
 sometimes useful, e.g., when doing linear algebra. Say we want to find
 the maximum among the numbers stored in a <span class="math">\(4 \times 4\)</span> matrix <code class="docutils literal"><span class="pre">A</span></code>. The
 code fragment could look like</p>
@@ -616,7 +614,7 @@ be unique to each of the nested loops. Note also that each nested loop
 may have as many code lines as desired, both before and after the next
 inner loop.</p>
 <p>The vectorized computation of heights that we did in
-<code class="docutils literal"><span class="pre">ball_plot.py</span></code> (the chapter <a class="reference internal" href="._pylight002.html#st-ex3"><span>A Python program with vectorization and plotting</span></a>) could alternatively have
+<code class="docutils literal"><span class="pre">ball_plot.py</span></code> (the chapter <a class="reference internal" href="._pylight002.html#st-ex3"><span class="std std-ref">A Python program with vectorization and plotting</span></a>) could alternatively have
 been done by traversing the time array (<code class="docutils literal"><span class="pre">t</span></code>) and, for each <code class="docutils literal"><span class="pre">t</span></code>
 element, computing the height according to the formula <span class="math">\(y = v_0t -
 \frac{1}{2}gt^2\)</span>. However, it is important to know that vectorization goes
@@ -649,10 +647,11 @@ with loops in any programming language.</p>
 </div>
 <div class="section" id="while-loops">
 <span id="sec-while-loops"></span><h2>While loops<a class="headerlink" href="#while-loops" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-41"></span><span class="target" id="index-42"></span><span class="target" id="index-43"></span><span class="target" id="index-44"></span><p id="index-45">Python also has another standard loop construction, the <em>while loop</em>,
+<span class="target" id="index-46"></span><span class="target" id="index-47"></span><span class="target" id="index-48"></span><span class="target" id="index-49"></span><p id="index-50">Python also has another standard loop construction, the <em>while loop</em>,
 doing iterations with a loop index very much like the <code class="docutils literal"><span class="pre">for</span></code> loop. To
 illustrate what such a loop may look like, we consider another
-modification of <code class="docutils literal"><span class="pre">ball_plot.py</span></code> in the chapter <a class="reference internal" href="._pylight002.html#st-ex3"><span>A Python program with vectorization and plotting</span></a>. Assume
+modification of <code class="docutils literal"><span class="pre">ball_plot.py</span></code> in the chapter <a class="reference internal" href="._pylight002.html#st-ex3"><span class="std std-ref">A Python program with vectorization and plotting</span></a>. We will now
+change it so that it finds the time of flight for the ball. Assume
 the ball is thrown with a slightly lower initial velocity, say
 <span class="math">\(4.5\hbox{ ms}^{-1}\)</span>, while everything else is kept unchanged. Since
 we still look at the first second of the flight, the heights at the
@@ -661,8 +660,8 @@ ball has fallen below its initial starting position, i.e., the height
 where it left the hand, so there is no problem with that. In our array
 <code class="docutils literal"><span class="pre">y</span></code> we will then have a series of heights which towards the end of <code class="docutils literal"><span class="pre">y</span></code>
 become negative. Let us, in a program named
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/ball_time.py">ball_time.py</a>
-find the time when heights starts to get negative, i.e., when the
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/ball_time.py">ball_time.py</a>
+find the time when heights start to get negative, i.e., when the
 ball crosses <span class="math">\(y=0\)</span>. The program could look like this</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">linspace</span>
 
@@ -702,10 +701,10 @@ for each iteration, <code class="docutils literal"><span class="pre">i</span></c
 check of successive elements in the array <code class="docutils literal"><span class="pre">y</span></code>.</p>
 <p>Compared to a <code class="docutils literal"><span class="pre">for</span></code> loop, the programmer does not have to specify the
 number of iterations when coding a <code class="docutils literal"><span class="pre">while</span></code> loop. It simply runs until
-the boolean expression becomes <code class="docutils literal"><span class="pre">False</span></code>.
-However, the loop index is not
-increased automatically; it must be done explicitly by the
-programmer. Of course, just as in for loops and <code class="docutils literal"><span class="pre">if</span></code> blocks,
+the boolean expression becomes <code class="docutils literal"><span class="pre">False</span></code>. Thus, a loop index
+(as we have in a <code class="docutils literal"><span class="pre">for</span></code> loop) is not required. Furthermore, if a loop index is used in a
+<code class="docutils literal"><span class="pre">while</span></code> loop, it is not increased automatically; it must be done explicitly by the
+programmer. Of course, just as in <code class="docutils literal"><span class="pre">for</span></code> loops and <code class="docutils literal"><span class="pre">if</span></code> blocks,
 there might be (arbitrarily) many code lines in a <code class="docutils literal"><span class="pre">while</span></code>
 loop. Any <code class="docutils literal"><span class="pre">for</span></code> loop may also be implemented as a <code class="docutils literal"><span class="pre">while</span></code> loop, but
 <code class="docutils literal"><span class="pre">while</span></code> loops are more general so not all of them can be expressed
@@ -718,8 +717,8 @@ programmer.  If you accidentally enter an infinite loop and the
 program just hangs forever, press <code class="docutils literal"><span class="pre">Ctrl+c</span></code> to stop the program.</p>
 </div>
 <div class="section" id="lists-and-tuples-alternatives-to-arrays">
-<span id="sec-lists"></span><h2>Lists and tuples - alternatives to arrays<a class="headerlink" href="#lists-and-tuples-alternatives-to-arrays" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-46"></span><span class="target" id="index-47"></span><span class="target" id="index-48"></span><span class="target" id="index-49"></span><span class="target" id="index-50"></span><p id="index-51">We have seen that a group of numbers may be stored in an array that we
+<span id="sec-lists"></span><span id="index-51"></span><h2>Lists and tuples - alternatives to arrays<a class="headerlink" href="#lists-and-tuples-alternatives-to-arrays" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="index-52"></span><span class="target" id="index-53"></span><span class="target" id="index-54"></span><span class="target" id="index-55"></span><span class="target" id="index-56"></span><p id="index-57">We have seen that a group of numbers may be stored in an array that we
 may treat as a whole, or element by element. In Python, there is
 another way of organizing data that actually is much used, at least in
 non-numerical contexts, and that is a construction called <em>list</em>.</p>
@@ -782,7 +781,7 @@ aware, however, that when loops are written like this, you can not
 change any element in <code class="docutils literal"><span class="pre">x</span></code> by &#8220;changing&#8221; e. That is, writing <code class="docutils literal"><span class="pre">e</span> <span class="pre">+=</span> <span class="pre">2</span></code>
 will not change anything in <code class="docutils literal"><span class="pre">x</span></code>, since <code class="docutils literal"><span class="pre">e</span></code> can only be used to read
 (as opposed to overwrite) the list elements.</p>
-<p id="index-52">There is a special construct in Python that allows you to run through
+<p id="index-58">There is a special construct in Python that allows you to run through
 all elements of a list, do the same operation on each, and store the
 new elements in another list. It is referred to as <em>list
 comprehension</em> and may be demonstrated as follows.</p>
@@ -821,7 +820,7 @@ be changed), stating that the tuple object has no such attribute.</p>
 </div>
 <div class="section" id="reading-from-and-writing-to-files">
 <span id="sec-file-reading-writing"></span><h2>Reading from and writing to files<a class="headerlink" href="#reading-from-and-writing-to-files" title="Permalink to this headline">¶</a></h2>
-<p>Input data for a program often come from files and the results of the
+<span class="target" id="index-59"></span><p id="index-60">Input data for a program often come from files and the results of the
 computations are often written to file. To illustrate basic file
 handling, we consider an example where we read <span class="math">\(x\)</span> and <span class="math">\(y\)</span> coordinates
 from two columns in a file, apply a function <span class="math">\(f\)</span> to the <span class="math">\(y\)</span> coordinates,
@@ -836,7 +835,7 @@ the input file is a heading that we can just skip:</p>
 </div>
 <p>The relevant Python lines for reading the numbers and writing out
 a similar file are given in the file
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/file_handling.py">file_handling.py</a></p>
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/file_handling.py">file_handling.py</a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">filename</span> <span class="o">=</span> <span class="s">&#39;tmp.dat&#39;</span>
 <span class="n">infile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>  <span class="c"># Open file for reading</span>
 <span class="n">line</span> <span class="o">=</span> <span class="n">infile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>      <span class="c"># Read first line</span>
@@ -867,11 +866,11 @@ a similar file are given in the file
 <span class="n">outfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Such a file with a comment line and numbers in tabular format is very
+<span class="target" id="index-61"></span><p id="index-62">Such a file with a comment line and numbers in tabular format is very
 common so <code class="docutils literal"><span class="pre">numpy</span></code> has functionality to ease reading and writing.
 Here is the same example using the <code class="docutils literal"><span class="pre">loadtxt</span></code> and <code class="docutils literal"><span class="pre">savetxt</span></code> functions
 in <code class="docutils literal"><span class="pre">numpy</span></code> for tabular data (file
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/file_handling_numpy.py">file_handling_numpy.py</a>):</p>
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/file_handling_numpy.py">file_handling_numpy.py</a>):</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">filename</span> <span class="o">=</span> <span class="s">&#39;tmp.dat&#39;</span>
 <span class="kn">import</span> <span class="nn">numpy</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s">&#39;#&#39;</span><span class="p">)</span>
@@ -887,7 +886,7 @@ in <code class="docutils literal"><span class="pre">numpy</span></code> for tabu
 </div>
 </div>
 <div class="section" id="exercises-2">
-<h2>Exercises  (2)<a class="headerlink" href="#exercises-2" title="Permalink to this headline">¶</a></h2>
+<h2>Exercises<a class="headerlink" href="#exercises-2" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="exercise-11-errors-with-colon-indent-etc">
 <span id="nd-exer-errorscolonindent"></span><h3>Exercise 11: Errors with colon, indent, etc.<a class="headerlink" href="#exercise-11-errors-with-colon-indent-etc" title="Permalink to this headline">¶</a></h3>
 <p>Write the program <code class="docutils literal"><span class="pre">ball_function.py</span></code> as given in the text and
@@ -1279,7 +1278,7 @@ exact solution. The numerical test just gives us an approximation which we may g
 </div>
 <div class="section" id="exercise-20-sort-array-with-numbers">
 <span id="nd-exer-sortnumbers"></span><h3>Exercise 20: Sort array with numbers<a class="headerlink" href="#exercise-20-sort-array-with-numbers" title="Permalink to this headline">¶</a></h3>
-<p id="index-53">The import statement <code class="docutils literal"><span class="pre">from</span> <span class="pre">random</span> <span class="pre">import</span> <span class="pre">*</span></code> will give access to a
+<p id="index-63">The import statement <code class="docutils literal"><span class="pre">from</span> <span class="pre">random</span> <span class="pre">import</span> <span class="pre">*</span></code> will give access to a
 function <code class="docutils literal"><span class="pre">uniform</span></code> that may be used to draw (pseudo-)random numbers
 from a uniform distribution between two numbers <span class="math">\(a\)</span> (inclusive) and
 <span class="math">\(b\)</span> (inclusive). For example, writing <code class="docutils literal"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">uniform(0,10)</span></code> makes <code class="docutils literal"><span class="pre">x</span></code> a
@@ -1328,7 +1327,7 @@ The code may be written as follows</p>
 </div>
 <div class="section" id="exercise-21-compute">
 <span id="nd-exer-computingpi"></span><h3>Exercise 21: Compute <span class="math">\(\pi\)</span><a class="headerlink" href="#exercise-21-compute" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="index-54"></span><p id="index-55">Up through history, great minds have developed different computational
+<span class="target" id="index-64"></span><p id="index-65">Up through history, great minds have developed different computational
 schemes for the number <span class="math">\(\pi\)</span>. We will here consider two such schemes,
 one by Leibniz (<span class="math">\(1646-1716\)</span>), and one by Euler (<span class="math">\(1707-1783\)</span>).</p>
 <p>The scheme by Leibniz may be written</p>
@@ -1385,7 +1384,7 @@ Leibniz: 0.00499996875098
 Euler: 0.00951612178069
 </pre></div>
 </div>
-<p>and the plot in Figure <a class="reference internal" href="#fig-pi-comp"><span>Error as a function of number of terms</span></a></p>
+<p>and the plot in Figure <a class="reference internal" href="#fig-pi-comp"><span class="std std-ref">Error as a function of number of terms</span></a></p>
 <div class="figure" id="id1">
 <span id="fig-pi-comp"></span><a class="reference internal image-reference" href="_images/pi_Leibniz_Euler.png"><img alt="_images/pi_Leibniz_Euler.png" src="_images/pi_Leibniz_Euler.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Error as a function of number of terms</em></span></p>
@@ -1522,14 +1521,14 @@ single time, so one out of ten gives a fraction
 <code class="docutils literal"><span class="pre">M/N</span></code> of <span class="math">\(0.1\)</span>.</p>
 <p>Filename: <code class="docutils literal"><span class="pre">count_random_numbers.py</span></code>.</p>
 <div class="section" id="remarks-1">
-<h4>Remarks  (1)<a class="headerlink" href="#remarks-1" title="Permalink to this headline">¶</a></h4>
+<h4>Remarks<a class="headerlink" href="#remarks-1" title="Permalink to this headline">¶</a></h4>
 <p>For large <span class="math">\(N\)</span>, this program computes the probability <span class="math">\(M/N\)</span>
 of getting six eyes when throwing a die.</p>
 </div>
 </div>
 <div class="section" id="exercise-24-game-21">
 <span id="nd-exer-game21"></span><h3>Exercise 24: Game 21<a class="headerlink" href="#exercise-24-game-21" title="Permalink to this headline">¶</a></h3>
-<p id="index-56">Consider some game where each participant draws a series of random
+<p id="index-66">Consider some game where each participant draws a series of random
 integers evenly distributed from <span class="math">\(0\)</span> and <span class="math">\(10\)</span>, with the aim of getting
 the sum as close as possible to <span class="math">\(21\)</span>, but <em>not larger</em> than <span class="math">\(21\)</span>.  You
 are out of the game if the sum passes <span class="math">\(21\)</span>.  After each draw, you are
@@ -1579,7 +1578,7 @@ Game over, you passed 21 (with your 22 points)!
 </div>
 <div class="section" id="exercise-25-linear-interpolation">
 <span id="nd-exer-linearinterpol"></span><h3>Exercise 25: Linear interpolation<a class="headerlink" href="#exercise-25-linear-interpolation" title="Permalink to this headline">¶</a></h3>
-<p id="index-57">Some measurements <span class="math">\(y_i\)</span>, <span class="math">\(i = 1,2,\ldots,N\)</span> (given below), of a
+<p id="index-67">Some measurements <span class="math">\(y_i\)</span>, <span class="math">\(i = 1,2,\ldots,N\)</span> (given below), of a
 quantity <span class="math">\(y\)</span> have been collected regularly, once every minute, at
 times <span class="math">\(t_i=i\)</span>, <span class="math">\(i=0,1,\ldots,N\)</span>.  We want to find the value <span class="math">\(y\)</span>
 <em>in between</em> the measurements, e.g., at <span class="math">\(t=3.2\)</span> min. Computing such
@@ -1711,7 +1710,7 @@ different values for <span class="math">\(x\)</span> (but still 0 for each test!
 </div>
 <div class="section" id="exercise-27-fit-straight-line-to-data">
 <span id="nd-exer-fitline"></span><h3>Exercise 27: Fit straight line to data<a class="headerlink" href="#exercise-27-fit-straight-line-to-data" title="Permalink to this headline">¶</a></h3>
-<p id="index-58">Assume some measurements <span class="math">\(y_i, i = 1,2,\ldots,5\)</span> have been collected,
+<p id="index-68">Assume some measurements <span class="math">\(y_i, i = 1,2,\ldots,5\)</span> have been collected,
 once every second. Your task is to write a program that
 fits a straight line to those data.</p>
 <p><strong>Hint.</strong>
@@ -1781,7 +1780,7 @@ Give b: 0
 The error is: 16.75
 </pre></div>
 </div>
-<p>(followed by the plot seen in Figure <a class="reference internal" href="#fig-fit-line-1"><span>Straight line fitted to data with first choice of line parameters (a and b)</span></a>)</p>
+<p>(followed by the plot seen in Figure <a class="reference internal" href="#fig-fit-line-1"><span class="std std-ref">Straight line fitted to data with first choice of line parameters (a and b)</span></a>)</p>
 <div class="figure" id="id2">
 <span id="fig-fit-line-1"></span><a class="reference internal image-reference" href="_images/fit_straight_line_1.png"><img alt="_images/fit_straight_line_1.png" src="_images/fit_straight_line_1.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Straight line fitted to data with first choice of line parameters (a and b)</em></span></p>
@@ -1792,7 +1791,7 @@ Give b: 1
 The error is: 22.75
 </pre></div>
 </div>
-<p>(followed by the plot seen in Figure <a class="reference internal" href="#fig-fit-line-2"><span>Straight line fitted to data with second choice of line parameters (a and b)</span></a>)</p>
+<p>(followed by the plot seen in Figure <a class="reference internal" href="#fig-fit-line-2"><span class="std std-ref">Straight line fitted to data with second choice of line parameters (a and b)</span></a>)</p>
 <div class="figure" id="id3">
 <span id="fig-fit-line-2"></span><a class="reference internal image-reference" href="_images/fit_straight_line_2.png"><img alt="_images/fit_straight_line_2.png" src="_images/fit_straight_line_2.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Straight line fitted to data with second choice of line parameters (a and b)</em></span></p>
@@ -1802,7 +1801,7 @@ The error is: 22.75
 </div>
 <p>Filename: <code class="docutils literal"><span class="pre">fit_straight_line.py</span></code>.</p>
 <div class="section" id="remarks-2">
-<h4>Remarks  (2)<a class="headerlink" href="#remarks-2" title="Permalink to this headline">¶</a></h4>
+<h4>Remarks<a class="headerlink" href="#remarks-2" title="Permalink to this headline">¶</a></h4>
 <p>Fitting a straight line to measured data points is a very common
 task. The manual search procedure in c) can be automated by using a
 mathematical method called the <em>method of least squares</em>.</p>
@@ -1810,15 +1809,16 @@ mathematical method called the <em>method of least squares</em>.</p>
 </div>
 <div class="section" id="exercise-28-fit-sines-to-straight-line">
 <span id="nd-exer-fitsines"></span><h3>Exercise 28: Fit sines to straight line<a class="headerlink" href="#exercise-28-fit-sines-to-straight-line" title="Permalink to this headline">¶</a></h3>
-<p id="index-59">A lot of technology, especially most types of digital audio devices
+<p id="index-69">A lot of technology, especially most types of digital audio devices
 for processing sound, is based on representing a signal of time
 as a sum of sine functions. Say the signal is some function <span class="math">\(f(t)\)</span>
 on the interval <span class="math">\([-\pi,\pi]\)</span> (a more general interval <span class="math">\([a,b]\)</span>
 can easily be treated, but leads to slightly more complicated
 formulas). Instead of working with <span class="math">\(f(t)\)</span> directly,
 we approximate <span class="math">\(f\)</span> by the sum</p>
-<div class="math">
-\[S_N(t) = \sum_{n=1}^{N} b_n \sin(nt),\]</div>
+<div class="math" id="eq-auto1">
+\[\tag{1}
+S_N(t) = \sum_{n=1}^{N} b_n \sin(nt),\]</div>
 <p>where the coefficients <span class="math">\(b_n\)</span> must be adjusted such that <span class="math">\(S_N(t)\)</span> is
 a good approximation to <span class="math">\(f(t)\)</span>. We shall in this exercise adjust
 <span class="math">\(b_n\)</span> by a trial-and-error process.</p>
@@ -1987,19 +1987,19 @@ The code may be written as follows</p>
 The smallest error found: 67.1213886326
 </pre></div>
 </div>
-<p>and the plot seen in Figure <a class="reference internal" href="#fig-fit-sines"><span>Straight line fitted to data with first choice of line parameters (a and b)</span></a></p>
+<p>and the plot seen in Figure <a class="reference internal" href="#fig-fit-sines"><span class="std std-ref">Straight line fitted to data with first choice of line parameters (a and b)</span></a></p>
 <div class="figure" id="id4">
 <span id="fig-fit-sines"></span><a class="reference internal image-reference" href="_images/fit_sines.png"><img alt="_images/fit_sines.png" src="_images/fit_sines.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Straight line fitted to data with first choice of line parameters (a and b)</em></span></p>
 </div>
 <p>Filename: <code class="docutils literal"><span class="pre">fit_sines.py</span></code>.</p>
 <div class="section" id="remarks-3">
-<h4>Remarks  (3)<a class="headerlink" href="#remarks-3" title="Permalink to this headline">¶</a></h4>
+<h4>Remarks<a class="headerlink" href="#remarks-3" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic simple">
 <li>The function <span class="math">\(S_N(x)\)</span> is a special case of what is called a <em>Fourier series</em>. At the beginning of the 19th century, Joseph Fourier (1768-1830) showed that any function can be approximated analytically by a sum of cosines and sines. The approximation improves as the number of terms (<span class="math">\(N\)</span>) is increased. Fourier series are very important throughout science and engineering today.</li>
 </ol>
-<ol class="arabic simple">
-<li>Finding the coefficients <span class="math">\(b_n\)</span> is solved much more accurately in <a class="reference internal" href="._pylight004.html#sec-exer-revisitfitsines"><span>Exercise 41: Revisit fit of sines to a function</span></a>, by a procedure that also requires much less human and computer work!</li>
+<ol class="loweralpha simple">
+<li>Finding the coefficients <span class="math">\(b_n\)</span> is solved much more accurately in <a class="reference internal" href="._pylight004.html#sec-exer-revisitfitsines"><span class="std std-ref">Exercise 41: Revisit fit of sines to a function</span></a>, by a procedure that also requires much less human and computer work!</li>
 <li>In real applications, <span class="math">\(f(t)\)</span> is not known as a continuous function, but function values of <span class="math">\(f(t)\)</span> are provided. For example, in digital sound applications, music in a CD-quality WAV file is a signal with 44100 samples of the corresponding analog signal <span class="math">\(f(t)\)</span> per second.</li>
 </ol>
 </div>
@@ -2080,7 +2080,7 @@ Here is a program:</p>
 </div>
 <p>Filename: <code class="docutils literal"><span class="pre">count_substrings.py</span></code>.</p>
 <div class="section" id="remarks-4">
-<h4>Remarks  (4)<a class="headerlink" href="#remarks-4" title="Permalink to this headline">¶</a></h4>
+<h4>Remarks<a class="headerlink" href="#remarks-4" title="Permalink to this headline">¶</a></h4>
 <p>You are supposed to solve the tasks using simple programming with loops
 and variables. While a) and b) are quite straightforward, c) quickly
 involves demanding logic.
@@ -2090,7 +2090,7 @@ can solve the tasks efficiently in very compact code: a)
 c) <code class="docutils literal"><span class="pre">len(re.findall('G[AT]+?GG',</span> <span class="pre">text))</span></code>. That is, there is rich
 functionality for analysis of text in Python and this is particularly
 useful in analysis of gene sequences.</p>
-<span class="target" id="sec-integrals"></span></div>
+</div>
 </div>
 </div>
 </div>
@@ -2099,8 +2099,13 @@ useful in analysis of gene sequences.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+            <center>
+            <p class="logo"><a href="http://cbc.simula.no/" title="Go to Center for Biomedical Computing">
+              <img class="logo" src="_static/cbc_logo.png" alt="Logo"/>
+            </a></p>
+            </center>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Basic constructions</a><ul>
@@ -2110,7 +2115,7 @@ useful in analysis of gene sequences.</p>
 <li><a class="reference internal" href="#while-loops">While loops</a></li>
 <li><a class="reference internal" href="#lists-and-tuples-alternatives-to-arrays">Lists and tuples - alternatives to arrays</a></li>
 <li><a class="reference internal" href="#reading-from-and-writing-to-files">Reading from and writing to files</a></li>
-<li><a class="reference internal" href="#exercises-2">Exercises  (2)</a><ul>
+<li><a class="reference internal" href="#exercises-2">Exercises</a><ul>
 <li><a class="reference internal" href="#exercise-11-errors-with-colon-indent-etc">Exercise 11: Errors with colon, indent, etc.</a></li>
 <li><a class="reference internal" href="#exercise-12-compare-integers-a-and-b">Exercise 12: Compare integers a and b</a></li>
 <li><a class="reference internal" href="#exercise-13-functions-for-circumference-and-area-of-a-circle">Exercise 13: Functions for circumference and area of a circle</a></li>
@@ -2124,22 +2129,22 @@ useful in analysis of gene sequences.</p>
 <li><a class="reference internal" href="#exercise-21-compute">Exercise 21: Compute <span class="math">\(\pi\)</span></a></li>
 <li><a class="reference internal" href="#exercise-22-compute-combinations-of-sets">Exercise 22: Compute combinations of sets</a></li>
 <li><a class="reference internal" href="#exercise-23-frequency-of-random-numbers">Exercise 23: Frequency of random numbers</a><ul>
-<li><a class="reference internal" href="#remarks-1">Remarks  (1)</a></li>
+<li><a class="reference internal" href="#remarks-1">Remarks</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#exercise-24-game-21">Exercise 24: Game 21</a></li>
 <li><a class="reference internal" href="#exercise-25-linear-interpolation">Exercise 25: Linear interpolation</a></li>
 <li><a class="reference internal" href="#exercise-26-test-straight-line-requirement">Exercise 26: Test straight line requirement</a></li>
 <li><a class="reference internal" href="#exercise-27-fit-straight-line-to-data">Exercise 27: Fit straight line to data</a><ul>
-<li><a class="reference internal" href="#remarks-2">Remarks  (2)</a></li>
+<li><a class="reference internal" href="#remarks-2">Remarks</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#exercise-28-fit-sines-to-straight-line">Exercise 28: Fit sines to straight line</a><ul>
-<li><a class="reference internal" href="#remarks-3">Remarks  (3)</a></li>
+<li><a class="reference internal" href="#remarks-3">Remarks</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#exercise-29-count-occurrences-of-a-string-in-a-string">Exercise 29: Count occurrences of a string in a string</a><ul>
-<li><a class="reference internal" href="#remarks-4">Remarks  (4)</a></li>
+<li><a class="reference internal" href="#remarks-4">Remarks</a></li>
 </ul>
 </li>
 </ul>
@@ -2154,15 +2159,17 @@ useful in analysis of gene sequences.</p>
   <h4>Next topic</h4>
   <p class="topless"><a href="._pylight004.html"
                         title="next chapter">Computing integrals</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/._pylight003.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/._pylight003.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -2176,20 +2183,29 @@ useful in analysis of gene sequences.</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2015, S. Linge and H. P. Langtangen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.4</a>
-      
-      |
-      <a href="_sources/._pylight003.txt"
-          rel="nofollow">Page source</a></li>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="._pylight004.html" title="Computing integrals"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="._pylight002.html" title="The first few steps"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Programming for Computations (Python version)</a> &raquo;</li> 
+      </ul>
     </div>
+<div class="wrapper">
+  <div class="footer">
+    <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <br />
+    <br />
+      &copy;2015, Svein Linge and Hans Petter Langtangen.
+  </div>
+</div>
 
-    
-
-    
   </body>
 </html>

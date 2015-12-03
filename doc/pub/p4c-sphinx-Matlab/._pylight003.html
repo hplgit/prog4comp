@@ -9,7 +9,7 @@
     
     <title>Basic constructions</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -25,6 +25,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
 
         <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
         <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
@@ -42,14 +43,10 @@
         </style>
 
     
-    <link rel="top" title="Programming for Computations" href="index.html" />
+    <link rel="top" title="Programming for Computations (MATLAB/Octave version)" href="index.html" />
     <link rel="next" title="Computing integrals" href="._pylight004.html" />
     <link rel="prev" title="The first few steps" href="._pylight002.html" />
-
-   
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
-
+ 
   
        <style type="text/css">
          div.admonition {
@@ -59,8 +56,8 @@
        </style>
       </head>
     
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -72,23 +69,23 @@
         <li class="right" >
           <a href="._pylight002.html" title="The first few steps"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Programming for Computations</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Programming for Computations (MATLAB/Octave version)</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="basic-constructions">
-<h1>Basic constructions<a class="headerlink" href="#basic-constructions" title="Permalink to this headline">¶</a></h1>
+<span id="nd-basicconstructins"></span><h1>Basic constructions<a class="headerlink" href="#basic-constructions" title="Permalink to this headline">¶</a></h1>
 <div class="figure">
 <a class="reference internal image-reference" href="_images/opt_exec.png"><img alt="_images/opt_exec.png" src="_images/opt_exec.png" style="width: 800px;" /></a>
 </div>
-<div class="section" id="if-tests-colon-and-indentation">
-<h2>If tests, colon and indentation<a class="headerlink" href="#if-tests-colon-and-indentation" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><span class="target" id="index-4"></span><span class="target" id="index-5"></span><span class="target" id="index-6"></span><span class="target" id="index-7"></span><span class="target" id="index-8"></span><span class="target" id="index-9"></span><span class="target" id="index-10"></span><p id="index-11">Very often in life, and in computer programs, the next action depends on
+<div class="section" id="if-tests">
+<h2>If tests<a class="headerlink" href="#if-tests" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><span class="target" id="index-4"></span><span class="target" id="index-5"></span><span class="target" id="index-6"></span><span class="target" id="index-7"></span><span class="target" id="index-8"></span><span class="target" id="index-9"></span><p id="index-10">Very often in life, and in computer programs, the next action depends on
 the outcome of a question starting with &#8220;if&#8221;. This gives the possibility
 to branch into different types of action depending on some criterion.
 Let us as usual focus on a specific example, which is the core of
@@ -97,7 +94,7 @@ science and engineering, including materials manufacturing and brain research.
 The action is to move randomly to the north
 (N), east (E), south (S), or west (W) with the same probability.
 How can we implement such an action in life and in a computer program?</p>
-<p>We need to randomly draw one out of four numbers to select the direction
+<p id="index-11">We need to randomly draw one out of four numbers to select the direction
 in which to move.
 A deck of cards can be
 used in practice for this purpose. Let the four suits correspond to
@@ -134,18 +131,18 @@ proceed with the next question. The last test if <span class="math">\(0.75\leq r
 could also read just <code class="docutils literal"><span class="pre">else</span></code>, since we here cover all the remaining
 possible <code class="docutils literal"><span class="pre">r</span></code> values.</p>
 <p>The exact code in Matlab reads</p>
-<div class="highlight-matlab"><div class="highlight"><pre><span class="n">r</span> <span class="p">=</span> <span class="nb">rand</span><span class="p">()</span>          <span class="c">% random number in [0,1)</span>
+<div class="highlight-matlab" id="index-12"><div class="highlight"><pre><span class="n">r</span> <span class="p">=</span> <span class="nb">rand</span><span class="p">()</span>          <span class="c">% random number in [0,1)</span>
 <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span><span class="p">=</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="mf">0.25</span>
-  <span class="c">%% move north</span>
+   <span class="c">% move north</span>
    <span class="n">y</span> <span class="p">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">d</span><span class="p">;</span>
 <span class="k">elseif</span> <span class="mf">0.25</span> <span class="o">&lt;</span><span class="p">=</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="mf">0.5</span>
-  <span class="c">%% move east</span>
+   <span class="c">% move east</span>
    <span class="n">x</span> <span class="p">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">d</span><span class="p">;</span>
 <span class="k">elseif</span> <span class="mf">0.5</span> <span class="o">&lt;</span><span class="p">=</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="mf">0.75</span>
-  <span class="c">%% move south</span>
+   <span class="c">% move south</span>
    <span class="n">y</span> <span class="p">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">d</span><span class="p">;</span>
 <span class="k">else</span>
-  <span class="c">%% move west</span>
+   <span class="c">% move west</span>
    <span class="n">x</span> <span class="p">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">d</span><span class="p">;</span>
 <span class="k">end</span>
 </pre></div>
@@ -157,7 +154,7 @@ and <code class="docutils literal"><span class="pre">else</span></code>
 and expects the code to be compatible with the rules of if tests:</p>
 <blockquote>
 <div><ul class="simple">
-<li>The test reads <code class="docutils literal"><span class="pre">if</span> <span class="pre">condition</span></code>, <code class="docutils literal"><span class="pre">elif</span> <span class="pre">condition</span></code>, or <code class="docutils literal"><span class="pre">else</span></code>, where
+<li>The test reads <code class="docutils literal"><span class="pre">if</span> <span class="pre">condition</span></code>, <code class="docutils literal"><span class="pre">elseif</span> <span class="pre">condition</span></code>, or <code class="docutils literal"><span class="pre">else</span></code>, where
 <code class="docutils literal"><span class="pre">condition</span></code> is a <em>boolean expression</em> that evaluates to <code class="docutils literal"><span class="pre">true</span></code> (1) or <code class="docutils literal"><span class="pre">false</span></code> (0).</li>
 <li>If <code class="docutils literal"><span class="pre">condition</span></code> is <code class="docutils literal"><span class="pre">true</span></code>, the following statements up to the next
 <code class="docutils literal"><span class="pre">elseif</span></code>, <code class="docutils literal"><span class="pre">else</span></code>, or <code class="docutils literal"><span class="pre">end</span></code>
@@ -168,11 +165,11 @@ skipped.</li>
 </ul>
 </div></blockquote>
 <p>The blocks after <code class="docutils literal"><span class="pre">if</span></code>, <code class="docutils literal"><span class="pre">elseif</span></code>, or <code class="docutils literal"><span class="pre">else</span></code> may contain new if tests, if desired.</p>
-<p id="index-12">Working with if tests requires mastering boolean expressions.
+<p id="index-13">Working with if tests requires mastering boolean expressions.
 Here are some basic boolean expressions involving the
 <em>logical operators</em> <code class="docutils literal"><span class="pre">==</span></code>, <code class="docutils literal"><span class="pre">~=</span></code>, <code class="docutils literal"><span class="pre">&lt;</span></code>, <code class="docutils literal"><span class="pre">&lt;=</span></code>, <code class="docutils literal"><span class="pre">&gt;</span></code>, and <code class="docutils literal"><span class="pre">&gt;=</span></code>.
 Given the assignment to <code class="docutils literal"><span class="pre">temp</span></code>, you should go through each boolean
-expression and determine if it is true or false.</p>
+expression below and determine if it is true or false.</p>
 <div class="highlight-matlab"><div class="highlight"><pre><span class="n">temp</span> <span class="p">=</span> <span class="mi">21</span>       <span class="c">% assign value to a variable</span>
 <span class="n">temp</span> <span class="o">==</span> <span class="mi">20</span>      <span class="c">% temp equal to 20</span>
 <span class="n">temp</span> <span class="o">~=</span> <span class="mi">20</span>      <span class="c">% temp not equal to 20</span>
@@ -185,7 +182,7 @@ expression and determine if it is true or false.</p>
 </div>
 <div class="section" id="functions">
 <span id="sec-functions"></span><h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-13"></span><span class="target" id="index-14"></span><span class="target" id="index-15"></span><span class="target" id="index-16"></span><span class="target" id="index-17"></span><span class="target" id="index-18"></span><p id="index-19">Functions are widely used in programming and is a concept that needs to
+<span class="target" id="index-14"></span><span class="target" id="index-15"></span><span class="target" id="index-16"></span><span class="target" id="index-17"></span><span class="target" id="index-18"></span><p id="index-19">Functions are widely used in programming and is a concept that needs to
 be mastered. In the simplest case, a function in a program is much like
 a mathematical function: some input number <span class="math">\(x\)</span> is transformed to some output
 number.
@@ -201,9 +198,9 @@ strategy which may dramatically ease the problem solving process), and/or</li>
 once and easily be re-executed with variations.</li>
 </ol>
 <p>Examples will be given to illustrate how functions can be written in various contexts.</p>
-<p>If we modify the program <code class="docutils literal"><span class="pre">ball.m</span></code> from the chapter <a class="reference internal" href="._pylight002.html#st-ex1"><span>A Matlab program with variables</span></a>
+<p>If we modify the program <code class="docutils literal"><span class="pre">ball.m</span></code> from the chapter <a class="reference internal" href="._pylight002.html#st-ex1"><span class="std std-ref">A Matlab program with variables</span></a>
 slightly, and include a function, we could let this be a new program
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/m/ball_function.m">ball_function.m</a>
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/m/ball_function.m">ball_function.m</a>
 as</p>
 <div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span><span class="nf">ball_function</span><span class="p">()</span><span class="w"></span>
 <span class="w">    </span><span class="c">% This is the main program</span>
@@ -245,7 +242,7 @@ the function was called from&#8221;. The function depends on one variable
 (or we say that it takes one <em>argument</em> or <em>input parameter</em>), the
 value of which must be provided when the function is called.</p>
 <p>What do these things mean? Well, the function definition itself,
-e.g. of <code class="docutils literal"><span class="pre">y</span></code>, just tells Matlab what there is function <code class="docutils literal"><span class="pre">y</span></code>, taking the
+e.g. of <code class="docutils literal"><span class="pre">y</span></code>, just tells Matlab that there is a function <code class="docutils literal"><span class="pre">y</span></code>, taking the
 specified arguments as input, and returning a specified output
 result. Matlab keeps this information ready for use in case a call to
 <code class="docutils literal"><span class="pre">y</span></code> is performed elsewhere in the code.  In our case, a call to <code class="docutils literal"><span class="pre">y</span></code>
@@ -278,7 +275,7 @@ function containing three <code class="docutils literal"><span class="pre">retur
 <p>Remember that only one of the branches is executed for a single call
 on <code class="docutils literal"><span class="pre">check_sign</span></code>, so depending on the number <code class="docutils literal"><span class="pre">x</span></code>, the return may take
 place from any of the three return alternatives.</p>
-<p>One phrase you will meet often when dealing with programming, is <em>main
+<p id="index-20">One phrase you will meet often when dealing with programming, is <em>main
 program</em> or <em>main function</em>, or that some code is <em>in main</em>. This is
 nothing particular to Matlab, and simply means the first function that
 is defined in a file, e.g. <code class="docutils literal"><span class="pre">ball_function</span></code> above. You may define as
@@ -298,7 +295,7 @@ expressions in a new version of our program that prints the position
 of the ball for chosen times. Assume we want to evaluate these expressions at two
 points in time, <span class="math">\(t = 0.6s\)</span> and <span class="math">\(t = 0.9s\)</span>. We can pick some numbers
 for the initial velocity components <code class="docutils literal"><span class="pre">v0y</span></code> and <code class="docutils literal"><span class="pre">v0x</span></code>, name the program
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/m/ball_position.m">ball_position.m</a>,
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/m/ball_position.m">ball_position.m</a>,
 and write it for example as</p>
 <div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span><span class="nf">ball_position_xy</span><span class="p">()</span><span class="w"></span>
 <span class="w">    </span><span class="n">initial_velocity_x</span> <span class="p">=</span> <span class="mf">2.0</span><span class="p">;</span>
@@ -332,7 +329,7 @@ now takes <em>two</em> arguments. Running the program gives the output</p>
 1.8  0.52695
 </pre></div>
 </div>
-<p>A function may also return more than one value. For example, the two
+<p id="index-21">A function may also return more than one value. For example, the two
 functions we just defined could alternatively have been defined into
 one as</p>
 <div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span>[result1, result2] <span class="p">=</span><span class="w"> </span><span class="nf">xy</span><span class="p">(</span>v0x, v0y, t<span class="p">)</span><span class="w"></span>
@@ -351,10 +348,10 @@ same order as in the function definition. We would then write</p>
 </div>
 <p>The variables <code class="docutils literal"><span class="pre">x_pos</span></code> and <code class="docutils literal"><span class="pre">y_pos</span></code> could then have been printed or used
 in other ways in the code.</p>
-<span class="target" id="index-20"></span><p id="index-21">There are possibilities for having a variable number of function input
+<span class="target" id="index-22"></span><p id="index-23">There are possibilities for having a variable number of function input
 and output parameters (using <code class="docutils literal"><span class="pre">nargin</span></code> and <code class="docutils literal"><span class="pre">nargout</span></code>). However, we do
 not go further into that topic here.</p>
-<span class="target" id="index-22"></span><p id="index-23">Variables that are defined inside a function, e.g., <code class="docutils literal"><span class="pre">g</span></code> in the last
+<span class="target" id="index-24"></span><p id="index-25">Variables that are defined inside a function, e.g., <code class="docutils literal"><span class="pre">g</span></code> in the last
 <code class="docutils literal"><span class="pre">xy</span></code> function, are <em>local variables</em>. This means they are only known
 inside the function. Therefore, if you had accidentally used <code class="docutils literal"><span class="pre">g</span></code> in
 some calculation outside the function, you would have got an error
@@ -375,11 +372,11 @@ we like, so that upon return to the function <code class="docutils literal"><spa
 would have a new value. If you define one global and one local
 variable, both with the same name, the function only sees the local
 one, so the global variable is not affected by what happens with its
-local companion of the same name.  The arguments named in the header of a function
+local companion of the same name. The arguments named in the header of a function
 definition are by rule local variables inside the function. One should
 strive to define variables mostly where they are needed and not
 everywhere.</p>
-<span class="target" id="index-24"></span><p id="index-25">In any programming language, it is a good habit to include a little
+<p id="index-26">In any programming language, it is a good habit to include a little
 explanation of what the function is doing, unless what is done by the
 function is obvious, e.g., when having only a few simple code lines. This
 explanation (sometimes known as a <em>doc string</em>) should be placed just at the top of the function.
@@ -389,7 +386,7 @@ of the code and possibly explain the arguments and return values if
 needed. If we do that with our <code class="docutils literal"><span class="pre">xy</span></code> function from above, we may write
 the first lines of the function as</p>
 <div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span><span class="nf">xy</span><span class="p">(</span>v0x, v0y, t<span class="p">)</span><span class="w"></span>
-<span class="w">   </span><span class="c">%% Compute the x and y position of the ball at time t</span>
+<span class="w">    </span><span class="c">% Compute the x and y position of the ball at time t</span>
 </pre></div>
 </div>
 <p>Note that a function you have written may call another function you
@@ -398,8 +395,8 @@ a call requires the called function to be located in a file with the
 same name as the function (apart from the extension <code class="docutils literal"><span class="pre">.m</span></code>). This file
 must also be located in a folder where Matlab can find it, e.g. in the
 same folder as the calling function.</p>
-<p>Functions are straightforwardly passed as arguments to other functions, as illustrated by the following script
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/m/function_as_argument.m">function_as_argument.m</a>:</p>
+<p id="index-27">Functions are straightforwardly passed as arguments to other functions, as illustrated by the following script
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/m/function_as_argument.m">function_as_argument.m</a>:</p>
 <div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span><span class="nf">function_as_argument</span><span class="p">()</span><span class="w"></span>
 <span class="w">    </span><span class="n">x</span> <span class="p">=</span> <span class="mi">2</span><span class="p">;</span>
     <span class="n">y</span> <span class="p">=</span> <span class="mi">3</span><span class="p">;</span>
@@ -446,14 +443,14 @@ by the lines</p>
 <div class="highlight-matlab"><div class="highlight"><pre><span class="n">sum</span> <span class="p">=</span> <span class="n">treat_xy</span><span class="p">(</span><span class="n">sum_xy_handle</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
 </pre></div>
 </div>
-<span class="target" id="index-26"></span><span class="target" id="index-27"></span><p id="index-28">Functions may also be defined <em>within</em> other functions. It that case,
+<span class="target" id="index-28"></span><span class="target" id="index-29"></span><p id="index-30">Functions may also be defined <em>within</em> other functions. It that case,
 they become <em>local functions</em>, or <em>nested functions</em>, known only to
 the function inside which they are defined. Functions defined in main
 are referred to as <em>global functions</em>.  A nested function has full
 access to all variables in the <em>parent function</em>, i.e. the function
 within which it is defined.</p>
-<p>One convenient way of defining one-line functions (they can <em>not</em> be more than one line!), is by use of <em>anonymous functions</em>. You may then define, e.g., a square function by the name <code class="docutils literal"><span class="pre">my_square</span></code>, as</p>
-<div class="highlight-matlab"><div class="highlight"><pre><span class="n">my_square</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span><span class="o">.^</span><span class="mi">2</span><span class="p">;</span>
+<span class="target" id="index-31"></span><p id="index-32">One convenient way of defining one-line functions (they can <em>not</em> be more than one line!), is by use of <em>anonymous functions</em>. You may then define, e.g., a square function by the name <code class="docutils literal"><span class="pre">my_square</span></code>, as</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="n">my_square</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span>^<span class="mi">2</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>and then use it simply as</p>
@@ -475,10 +472,10 @@ remove function calls that are quantified to slow down the code.</p>
 </div>
 <div class="section" id="for-loops">
 <span id="sec-for-loops"></span><h2>For loops<a class="headerlink" href="#for-loops" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-29"></span><span class="target" id="index-30"></span><span class="target" id="index-31"></span><span class="target" id="index-32"></span><p id="index-33">Many computations are repetitive by nature and programming languages
+<span class="target" id="index-33"></span><span class="target" id="index-34"></span><span class="target" id="index-35"></span><p id="index-36">Many computations are repetitive by nature and programming languages
 have certain <em>loop structures</em> to deal with this. Here we will present
 what is referred to as a <em>for loop</em> (another kind of loop is a <em>while</em>
-loop, to be presented below). Assume you want to calculate the square
+loop, to be presented afterwards). Assume you want to calculate the square
 of each integer from 3 to 7. This could be done with the following
 two-line program.</p>
 <div class="highlight-matlab"><div class="highlight"><pre><span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">3</span><span class="p">:</span><span class="mi">7</span>
@@ -511,9 +508,9 @@ take on the integers from <code class="docutils literal"><span class="pre">start
 Note that decreasing integers may be produced by letting <code class="docutils literal"><span class="pre">start</span> <span class="pre">&gt;</span> <span class="pre">stop</span></code> combined
 with a negative step. This makes it easy to, e.g., traverse
 arrays in either direction.</p>
-<p>Let us modify <code class="docutils literal"><span class="pre">ball_plot.m</span></code> from the chapter <a class="reference internal" href="._pylight002.html#st-ex3"><span>A Matlab program with vectorization and plotting</span></a> to illustrate how useful <code class="docutils literal"><span class="pre">for</span></code> loops are if you need to traverse arrays. In that example we computed the height of the ball at every milli-second during the first second of its (vertical) flight and plotted the height versus time.</p>
+<p>Let us modify <code class="docutils literal"><span class="pre">ball_plot.m</span></code> from the chapter <a class="reference internal" href="._pylight002.html#st-ex3"><span class="std std-ref">A Matlab program with vectorization and plotting</span></a> to illustrate how useful <code class="docutils literal"><span class="pre">for</span></code> loops are if you need to traverse arrays. In that example we computed the height of the ball at every milli-second during the first second of its (vertical) flight and plotted the height versus time.</p>
 <p>Assume we want to find the maximum height during that time, how can we do it with a computer program? One alternative may be to compute all the thousand heights, store them in an array, and then run through the array to pick out the maximum. The program, named
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/m/ball_ma_height.m">ball_max_height.m</a>,
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/m/ball_ma_height.m">ball_max_height.m</a>,
 may look as follows.</p>
 <div class="highlight-matlab"><div class="highlight"><pre><span class="n">g</span> <span class="p">=</span> <span class="mf">9.81</span><span class="p">;</span>
 <span class="n">v0</span> <span class="p">=</span> <span class="mi">5</span><span class="p">;</span>
@@ -558,7 +555,7 @@ stop and step length choices for an index, and also how the index
 should enter expressions inside the loop. At the same time, however,
 it is something that programmers do often, so it is important to
 develop the right skills on these matters.</p>
-<span class="target" id="index-34"></span><span class="target" id="index-35"></span><span class="target" id="index-36"></span><p id="index-37">Having one loop inside another, referred to as a <em>double loop</em>, is
+<span class="target" id="index-37"></span><span class="target" id="index-38"></span><span class="target" id="index-39"></span><p id="index-40">Having one loop inside another, referred to as a <em>double loop</em>, is
 sometimes useful, e.g., when doing linear algebra. Say we want to find
 the maximum among the numbers stored in a <span class="math">\(4 \times 4\)</span> matrix <code class="docutils literal"><span class="pre">A</span></code>. The
 code fragment could look like</p>
@@ -587,7 +584,7 @@ be unique to each of the nested loops. Note also that each nested loop
 may have as many code lines as desired, both before and after the next
 inner loop.</p>
 <p>The vectorized computation of heights that we did in
-<code class="docutils literal"><span class="pre">ball_plot.m</span></code> (the chapter <a class="reference internal" href="._pylight002.html#st-ex3"><span>A Matlab program with vectorization and plotting</span></a>) could alternatively have
+<code class="docutils literal"><span class="pre">ball_plot.m</span></code> (the chapter <a class="reference internal" href="._pylight002.html#st-ex3"><span class="std std-ref">A Matlab program with vectorization and plotting</span></a>) could alternatively have
 been done by traversing the time array (<code class="docutils literal"><span class="pre">t</span></code>) and, for each <code class="docutils literal"><span class="pre">t</span></code>
 element, computing the height according to the formula <span class="math">\(y = v_0t -
 \frac{1}{2}gt^2\)</span>. However, it is important to know that vectorization goes
@@ -621,10 +618,11 @@ with loops in any programming language.</p>
 </div>
 <div class="section" id="while-loops">
 <span id="sec-while-loops"></span><h2>While loops<a class="headerlink" href="#while-loops" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-38"></span><span class="target" id="index-39"></span><span class="target" id="index-40"></span><span class="target" id="index-41"></span><p id="index-42">Matlab also has another standard loop construction, the <em>while loop</em>,
+<span class="target" id="index-41"></span><span class="target" id="index-42"></span><span class="target" id="index-43"></span><span class="target" id="index-44"></span><p id="index-45">Matlab also has another standard loop construction, the <em>while loop</em>,
 doing iterations with a loop index very much like the <code class="docutils literal"><span class="pre">for</span></code> loop. To
 illustrate what such a loop may look like, we consider another
-modification of <code class="docutils literal"><span class="pre">ball_plot.m</span></code> in the chapter <a class="reference internal" href="._pylight002.html#st-ex3"><span>A Matlab program with vectorization and plotting</span></a>. Assume
+modification of <code class="docutils literal"><span class="pre">ball_plot.m</span></code> in the chapter <a class="reference internal" href="._pylight002.html#st-ex3"><span class="std std-ref">A Matlab program with vectorization and plotting</span></a>. We will now
+change it so that it finds the time of flight for the ball. Assume
 the ball is thrown with a slightly lower initial velocity, say
 <span class="math">\(4.5\hbox{ ms}^{-1}\)</span>, while everything else is kept unchanged. Since
 we still look at the first second of the flight, the heights at the
@@ -633,8 +631,8 @@ ball has fallen below its initial starting position, i.e., the height
 where it left the hand, so there is no problem with that. In our array
 <code class="docutils literal"><span class="pre">y</span></code> we will then have a series of heights which towards the end of <code class="docutils literal"><span class="pre">y</span></code>
 become negative. Let us, in a program named
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/m/ball_time.m">ball_time.m</a>
-find the time when heights starts to get negative, i.e., when the
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/m/ball_time.m">ball_time.m</a>
+find the time when heights start to get negative, i.e., when the
 ball crosses <span class="math">\(y=0\)</span>. The program could look like this</p>
 <div class="highlight-matlab"><div class="highlight"><pre><span class="n">g</span> <span class="p">=</span> <span class="mf">9.81</span><span class="p">;</span>
 <span class="n">v0</span> <span class="p">=</span> <span class="mf">4.5</span><span class="p">;</span>                  <span class="c">% Initial velocity</span>
@@ -670,10 +668,10 @@ loop, and updated it (<code class="docutils literal"><span class="pre">i</span> 
 elements in the array <code class="docutils literal"><span class="pre">y</span></code>.</p>
 <p>Compared to a <code class="docutils literal"><span class="pre">for</span></code> loop, the programmer does not have to specify the
 number of iterations when coding a <code class="docutils literal"><span class="pre">while</span></code> loop. It simply runs until
-the boolean expression becomes <code class="docutils literal"><span class="pre">false</span></code>.
-However, the loop index is not
-increased automatically; it must be done explicitly by the
-programmer. Of course, just as in for loops and <code class="docutils literal"><span class="pre">if</span></code> blocks,
+the boolean expression becomes <code class="docutils literal"><span class="pre">false</span></code>. Thus, a loop index
+(as we have in a <code class="docutils literal"><span class="pre">for</span></code> loop) is not required. Furthermore, if a loop index is used in a
+<code class="docutils literal"><span class="pre">while</span></code> loop, it is not increased automatically; it must be done explicitly by the
+programmer. Of course, just as in <code class="docutils literal"><span class="pre">for</span></code> loops and <code class="docutils literal"><span class="pre">if</span></code> blocks,
 there might be (arbitrarily) many code lines in a <code class="docutils literal"><span class="pre">while</span></code>
 loop. Any <code class="docutils literal"><span class="pre">for</span></code> loop may also be implemented as a <code class="docutils literal"><span class="pre">while</span></code> loop, but
 <code class="docutils literal"><span class="pre">while</span></code> loops are more general so not all of them can be expressed
@@ -686,8 +684,8 @@ programmer.  If you accidentally enter an infinite loop and the
 program just hangs forever, press <code class="docutils literal"><span class="pre">Ctrl+c</span></code> to stop the program.</p>
 </div>
 <div class="section" id="reading-from-and-writing-to-files">
-<span id="sec-file-reading-writing"></span><h2>Reading from and writing to files<a class="headerlink" href="#reading-from-and-writing-to-files" title="Permalink to this headline">¶</a></h2>
-<p>Input data for a program often come from files and the results of the
+<span id="sec-file-reading-writing"></span><span id="index-46"></span><h2>Reading from and writing to files<a class="headerlink" href="#reading-from-and-writing-to-files" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="index-47"></span><p id="index-48">Input data for a program often come from files and the results of the
 computations are often written to file. To illustrate basic file
 handling, we consider an example where we read <span class="math">\(x\)</span> and <span class="math">\(y\)</span> coordinates
 from two columns in a file, apply a function <span class="math">\(f\)</span> to the <span class="math">\(y\)</span> coordinates,
@@ -702,7 +700,7 @@ the input file is a heading that we can just skip:</p>
 </div>
 <p>The relevant Matlab lines for reading the numbers and writing out
 a similar file are given in the file
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/m/file_handling.m">file_handling.m</a></p>
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/m/file_handling.m">file_handling.m</a></p>
 <div class="highlight-matlab"><div class="highlight"><pre><span class="n">filename</span> <span class="p">=</span> <span class="s">&#39;tmp.dat&#39;</span><span class="p">;</span>
 <span class="n">infileID</span> <span class="p">=</span> <span class="n">fopen</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">);</span>   <span class="c">% Open file for reading</span>
 <span class="n">fgetl</span><span class="p">(</span><span class="n">infileID</span><span class="p">);</span>                   <span class="c">% Read and skip first line</span>
@@ -750,7 +748,7 @@ a similar file are given in the file
 <p>Such a file with a comment line and numbers in tabular format is very
 common so Matlab has functionality to ease reading and writing.
 Here is the same example (file
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/m/file_handling_easy.m">file_handling_easy.m</a>):</p>
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/m/file_handling_easy.m">file_handling_easy.m</a>):</p>
 <div class="highlight-matlab"><div class="highlight"><pre><span class="n">filename</span> <span class="p">=</span> <span class="s">&#39;tmp.dat&#39;</span><span class="p">;</span>
 <span class="n">data</span> <span class="p">=</span> <span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span>
 <span class="n">x</span> <span class="p">=</span> <span class="n">data</span><span class="p">(:,</span><span class="mi">1</span><span class="p">);</span>
@@ -765,7 +763,7 @@ Here is the same example (file
 </div>
 </div>
 <div class="section" id="exercises-2">
-<h2>Exercises  (2)<a class="headerlink" href="#exercises-2" title="Permalink to this headline">¶</a></h2>
+<h2>Exercises<a class="headerlink" href="#exercises-2" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="exercise-10-introducing-errors">
 <span id="nd-exer-introducingerrors"></span><h3>Exercise 10: Introducing errors<a class="headerlink" href="#exercise-10-introducing-errors" title="Permalink to this headline">¶</a></h3>
 <p>Write the program <code class="docutils literal"><span class="pre">ball_function.m</span></code> as given in the text and
@@ -922,9 +920,7 @@ The code reads:</p>
 Give the other side of the rectangle: 3
 Area:
 
-ans =
-
-     6
+ans = 6
 </pre></div>
 </div>
 <p>Filename: <code class="docutils literal"><span class="pre">function_area_rectangle.m</span></code>.</p>
@@ -954,10 +950,39 @@ Assume that <code class="docutils literal"><span class="pre">x</span></code> and
 you can calculate the area by alternative methods for comparison.</p>
 <p><strong>Solution.</strong>
 Code:</p>
-<p>Here is a missing file: polyarea</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="c">% Computes the area of a polygon from vertex</span>
+<span class="c">% coordinates only.</span>
+
+<span class="k">function</span><span class="w"> </span>area <span class="p">=</span><span class="w"> </span><span class="nf">polyarea</span><span class="p">(</span>x, y<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">n</span> <span class="p">=</span> <span class="nb">length</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="c">% next we may initialize area with those terms in the</span>
+    <span class="c">% sum that does not follow the &quot;increasing index pattern&quot;</span>
+    <span class="n">area</span> <span class="p">=</span> <span class="n">x</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">y</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">area</span> <span class="p">=</span> <span class="n">area</span> <span class="o">+</span> <span class="n">x</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="o">*</span><span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="p">(</span><span class="nb">i</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">end</span>
+    <span class="n">area</span> <span class="p">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="nb">abs</span><span class="p">(</span><span class="n">area</span><span class="p">);</span>
+<span class="k">end</span>
+</pre></div>
+</div>
 <p>The simple tests may be executed by running another function (<code class="docutils literal"><span class="pre">test_polyarea.m</span></code>) that
 calls the former:</p>
-<p>Here is a missing file: test_polyarea</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="c">% pentagon</span>
+<span class="n">x</span> <span class="p">=</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">2</span> <span class="mi">2</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">];</span>
+<span class="n">y</span> <span class="p">=</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">0</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">2</span><span class="p">];</span>
+<span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Area pentagon (true value = 5): %g\n&#39;</span><span class="p">,</span> <span class="n">polyarea</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">));</span>
+
+<span class="c">% quadrilateral</span>
+<span class="n">x</span> <span class="p">=</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">2</span> <span class="mi">2</span> <span class="mi">0</span><span class="p">];</span>
+<span class="n">y</span> <span class="p">=</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">0</span> <span class="mi">2</span> <span class="mi">2</span><span class="p">];</span>
+<span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Area quadrilateral (true value = 4): %g\n&#39;</span><span class="p">,</span> <span class="n">polyarea</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">));</span>
+
+<span class="c">% triangle</span>
+<span class="n">x</span> <span class="p">=</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">2</span> <span class="mi">0</span><span class="p">];</span>
+<span class="n">y</span> <span class="p">=</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">0</span> <span class="mi">2</span><span class="p">];</span>
+<span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Area triangle (true value = 2): %g\n&#39;</span><span class="p">,</span> <span class="n">polyarea</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">));</span>
+</pre></div>
+</div>
 <p>Filename: <code class="docutils literal"><span class="pre">polyarea.m</span></code>.</p>
 </div>
 <div class="section" id="exercise-15-average-of-integers">
@@ -1089,13 +1114,9 @@ an error tolerance of 0.01 (i.e. <code class="docutils literal"><span class="pre
 <div class="highlight-text"><div class="highlight"><pre>Give the number of check-points N: 400
 Give the error tolerance: 0.01
 
-ans =
+ans = 0.01002506265664
 
-   0.01002506265664
-
-ans =
-
-   0.99248120300752
+ans = 0.99248120300752
 </pre></div>
 </div>
 <p>We note that we do not get exactly 0 and 1 (which we know are the answers). This
@@ -1114,7 +1135,7 @@ exact solution. The numerical test just gives us an approximation which we may g
 </div>
 <div class="section" id="exercise-19-sort-array-with-numbers">
 <span id="nd-exer-sortnumbers"></span><h3>Exercise 19: Sort array with numbers<a class="headerlink" href="#exercise-19-sort-array-with-numbers" title="Permalink to this headline">¶</a></h3>
-<p id="index-43">The built-in function <code class="docutils literal"><span class="pre">rand</span></code> may be used to draw pseudo-random numbers
+<p id="index-49">The built-in function <code class="docutils literal"><span class="pre">rand</span></code> may be used to draw pseudo-random numbers
 for the standard uniform distribution between <span class="math">\(0\)</span> and <span class="math">\(1\)</span> (exclusive
 at both ends). See <code class="docutils literal"><span class="pre">help</span> <span class="pre">rand</span></code>.</p>
 <p>Write a script that generates an array of <span class="math">\(6\)</span> random numbers between
@@ -1125,12 +1146,42 @@ should appear on the screen so that comparison is made easy. Confirm
 that the array has been sorted correctly.</p>
 <p><strong>Solution.</strong>
 The code may be written as follows</p>
-<p>Here is a missing file: sort_numbers</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="n">N</span> <span class="p">=</span> <span class="mi">6</span><span class="p">;</span>
+<span class="n">numbers</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="c">% Draw random numbers</span>
+<span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">N</span>
+    <span class="n">numbers</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span> <span class="p">=</span> <span class="mi">10</span><span class="o">*</span><span class="nb">rand</span><span class="p">;</span>
+<span class="k">end</span>
+<span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Unsorted: %5.3f %5.3f %5.3f %5.3f %5.3f %5.3f \n&#39;</span><span class="p">,</span><span class="c">...</span>
+          <span class="n">numbers</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">numbers</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">numbers</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="c">...</span>
+          <span class="n">numbers</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">numbers</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">numbers</span><span class="p">(</span><span class="mi">6</span><span class="p">));</span>
+
+<span class="k">for</span> <span class="n">reference</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">N</span>
+    <span class="n">smallest</span> <span class="p">=</span> <span class="n">numbers</span><span class="p">(</span><span class="n">reference</span><span class="p">);</span>
+    <span class="n">i_smallest</span> <span class="p">=</span> <span class="n">reference</span><span class="p">;</span>
+    <span class="c">% Find the smallest number in remaining unprinted array</span>
+    <span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="p">(</span><span class="n">reference</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span><span class="n">N</span>
+        <span class="k">if</span> <span class="n">numbers</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span> <span class="o">&lt;</span><span class="p">=</span> <span class="n">smallest</span>
+            <span class="n">smallest</span> <span class="p">=</span> <span class="n">numbers</span><span class="p">(</span><span class="nb">i</span><span class="p">);</span>
+            <span class="n">i_smallest</span> <span class="p">=</span> <span class="nb">i</span><span class="p">;</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="c">% switch numbers, and use an extra variable for that</span>
+    <span class="n">switch_number</span> <span class="p">=</span> <span class="n">numbers</span><span class="p">(</span><span class="n">reference</span><span class="p">);</span>
+    <span class="n">numbers</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span> <span class="p">=</span> <span class="n">numbers</span><span class="p">(</span><span class="n">i_smallest</span><span class="p">);</span>
+    <span class="n">numbers</span><span class="p">(</span><span class="n">i_smallest</span><span class="p">)</span> <span class="p">=</span> <span class="n">switch_number</span><span class="p">;</span>
+<span class="k">end</span>
+<span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Sorted  : %5.3f %5.3f %5.3f %5.3f %5.3f %5.3f \n&#39;</span><span class="p">,</span><span class="c">...</span>
+          <span class="n">numbers</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">numbers</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">numbers</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="c">...</span>
+          <span class="n">numbers</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">numbers</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">numbers</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
 <p>Filename: <code class="docutils literal"><span class="pre">sort_numbers.m</span></code>.</p>
 </div>
 <div class="section" id="exercise-20-compute">
 <span id="nd-exer-computingpi"></span><h3>Exercise 20: Compute <span class="math">\(\pi\)</span><a class="headerlink" href="#exercise-20-compute" title="Permalink to this headline">¶</a></h3>
-<span class="target" id="index-44"></span><p id="index-45">Up through history, great minds have developed different computational
+<span class="target" id="index-50"></span><p id="index-51">Up through history, great minds have developed different computational
 schemes for the number <span class="math">\(\pi\)</span>. We will here consider two such schemes,
 one by Leibniz (<span class="math">\(1646-1716\)</span>), and one by Euler (<span class="math">\(1707-1783\)</span>).</p>
 <p>The scheme by Leibniz may be written</p>
@@ -1148,14 +1199,44 @@ achieved with both schemes, i.e. when the number of terms is <code class="docuti
 Run the program with <span class="math">\(N = 100\)</span> and explain briefly what the graphs show.</p>
 <p><strong>Solution.</strong>
 The code may be written as follows</p>
-<p>Here is a missing file: compute_pi</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="n">no_of_terms</span> <span class="p">=</span> <span class="n">input</span><span class="p">(</span><span class="s">&#39;Give number of terms in sum for pi: &#39;</span><span class="p">);</span>
+<span class="n">Leibniz_error</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">no_of_terms</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">Euler_error</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">no_of_terms</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="c">% Leibniz</span>
+<span class="n">sum1</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span> <span class="n">k</span> <span class="p">=</span> <span class="mi">0</span><span class="p">:(</span><span class="n">no_of_terms</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">sum1</span> <span class="p">=</span> <span class="n">sum1</span> <span class="o">+</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">((</span><span class="mi">4</span><span class="o">*</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">k</span> <span class="o">+</span> <span class="mi">3</span><span class="p">));</span>
+    <span class="n">Leibniz_error</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">=</span> <span class="nb">pi</span> <span class="o">-</span> <span class="mi">8</span><span class="o">*</span><span class="n">sum1</span><span class="p">;</span>
+<span class="k">end</span>
+<span class="n">sum1</span> <span class="p">=</span> <span class="mi">8</span><span class="o">*</span><span class="n">sum1</span><span class="p">;</span>
+<span class="n">final_Leibniz_error</span> <span class="p">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">pi</span> <span class="o">-</span> <span class="n">sum1</span><span class="p">);</span>
+<span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Leibniz: %g \n&#39;</span><span class="p">,</span> <span class="n">final_Leibniz_error</span><span class="p">)</span>
+
+<span class="c">% Euler</span>
+<span class="n">sum2</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span> <span class="n">k</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">no_of_terms</span>      <span class="c">% Note index range</span>
+    <span class="n">sum2</span> <span class="p">=</span> <span class="n">sum2</span> <span class="o">+</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">k</span>^<span class="mi">2</span><span class="p">;</span>
+    <span class="n">Euler_error</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="nb">pi</span> <span class="o">-</span> <span class="nb">sqrt</span><span class="p">(</span><span class="mi">6</span><span class="o">*</span><span class="n">sum2</span><span class="p">);</span>
+<span class="k">end</span>
+<span class="n">sum2</span> <span class="p">=</span> <span class="mi">6</span><span class="o">*</span><span class="n">sum2</span><span class="p">;</span>
+<span class="n">sum2</span> <span class="p">=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="n">sum2</span><span class="p">);</span>
+<span class="n">final_Euler_error</span> <span class="p">=</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">pi</span> <span class="o">-</span> <span class="n">sum2</span><span class="p">);</span>
+<span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Leibniz: %g \n&#39;</span><span class="p">,</span> <span class="n">final_Euler_error</span><span class="p">)</span>
+
+<span class="n">figure</span><span class="p">();</span> <span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">:</span><span class="n">no_of_terms</span><span class="p">],</span> <span class="n">Leibniz_error</span><span class="p">,</span> <span class="s">&#39;b-&#39;</span><span class="p">,</span><span class="c">...</span>
+               <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">no_of_terms</span><span class="p">],</span> <span class="n">Euler_error</span><span class="p">,</span> <span class="s">&#39;r-&#39;</span><span class="p">);</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;No of terms&#39;</span><span class="p">);</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;Error with Leibniz (blue) and Euler (red)&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
 <p>Running the program as told produces the dialog</p>
 <div class="highlight-text"><div class="highlight"><pre>Give number of terms in sum for pi: 100
 Leibniz: 0.00499996875098
 Euler: 0.00951612178069
 </pre></div>
 </div>
-<p>and the plot in Figure <a class="reference internal" href="#fig-pi-comp"><span>Error as a function of number of terms</span></a></p>
+<p>and the plot in Figure <a class="reference internal" href="#fig-pi-comp"><span class="std std-ref">Error as a function of number of terms</span></a></p>
 <div class="figure" id="id1">
 <span id="fig-pi-comp"></span><a class="reference internal image-reference" href="_images/pi_Leibniz_Euler.png"><img alt="_images/pi_Leibniz_Euler.png" src="_images/pi_Leibniz_Euler.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Error as a function of number of terms</em></span></p>
@@ -1271,7 +1352,20 @@ Use <code class="docutils literal"><span class="pre">1+floor(6*rand())</span></c
 a random integer between 1 and 6.</p>
 <p><strong>Solution.</strong>
 The code may be written as follows</p>
-<p>Here is a missing file: count_random_numbers</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="n">N</span> <span class="p">=</span> <span class="n">input</span><span class="p">(</span><span class="s">&#39;How many random numbers should be drawn? &#39;</span><span class="p">);</span>
+
+<span class="c">% Draw random numbers</span>
+<span class="n">M</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>    <span class="c">% Counter for the occurences of 6</span>
+<span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">N</span>
+    <span class="n">drawn_number</span> <span class="p">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">floor</span><span class="p">(</span><span class="mi">6</span><span class="o">*</span><span class="nb">rand</span><span class="p">());</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Draw number %d gave: %d \n&#39;</span><span class="p">,</span> <span class="nb">i</span><span class="p">,</span> <span class="n">drawn_number</span><span class="p">);</span>
+    <span class="k">if</span> <span class="n">drawn_number</span> <span class="o">==</span> <span class="mi">6</span>
+        <span class="n">M</span> <span class="p">=</span> <span class="n">M</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+<span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;The fraction M/N became: %g \n&#39;</span><span class="p">,</span> <span class="n">M</span><span class="o">/</span><span class="n">float</span><span class="p">(</span><span class="n">N</span><span class="p">));</span>
+</pre></div>
+</div>
 <p>Running the program produces the dialog</p>
 <div class="highlight-text"><div class="highlight"><pre>How many random numbers should be drawn? 10
 Draw number 1 gave: 2
@@ -1292,14 +1386,14 @@ single time, so one out of ten gives a fraction
 <code class="docutils literal"><span class="pre">M/N</span></code> of <span class="math">\(0.1\)</span>.</p>
 <p>Filename: <code class="docutils literal"><span class="pre">count_random_numbers.m</span></code>.</p>
 <div class="section" id="remarks-1">
-<h4>Remarks  (1)<a class="headerlink" href="#remarks-1" title="Permalink to this headline">¶</a></h4>
+<h4>Remarks<a class="headerlink" href="#remarks-1" title="Permalink to this headline">¶</a></h4>
 <p>For large <span class="math">\(N\)</span>, this program computes the probability <span class="math">\(M/N\)</span>
 of getting six eyes when throwing a die.</p>
 </div>
 </div>
 <div class="section" id="exercise-23-game-21">
 <span id="nd-exer-game21"></span><h3>Exercise 23: Game 21<a class="headerlink" href="#exercise-23-game-21" title="Permalink to this headline">¶</a></h3>
-<p id="index-46">Consider some game where each participant draws a series of random
+<p id="index-52">Consider some game where each participant draws a series of random
 integers evenly distributed from <span class="math">\(0\)</span> and <span class="math">\(10\)</span>, with the aim of getting
 the sum as close as possible to <span class="math">\(21\)</span>, but <em>not larger</em> than <span class="math">\(21\)</span>.  You
 are out of the game if the sum passes <span class="math">\(21\)</span>.  After each draw, you are
@@ -1311,7 +1405,29 @@ Use <code class="docutils literal"><span class="pre">floor(11*rand())</span></co
 random integers in <span class="math">\([0,10]\)</span>.</p>
 <p><strong>Solution.</strong>
 The code may be written as follows</p>
-<p>Here is a missing file: game_21</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="n">upper_limit</span> <span class="p">=</span> <span class="mi">21</span><span class="p">;</span>
+<span class="n">answer</span> <span class="p">=</span> <span class="n">input</span><span class="p">(</span><span class="s">&#39;Are you ready to make the first draw (y/n)? &#39;</span><span class="p">,</span> <span class="s">&#39;s&#39;</span><span class="p">);</span>
+<span class="n">not_finished</span> <span class="p">=</span> <span class="n">true</span><span class="p">;</span>
+<span class="n">sum</span> <span class="p">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">not_finished</span>
+    <span class="n">next_number</span> <span class="p">=</span> <span class="nb">floor</span><span class="p">(</span><span class="mi">11</span><span class="o">*</span><span class="nb">rand</span><span class="p">());</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;You got: %d \n&#39;</span><span class="p">,</span> <span class="n">next_number</span><span class="p">);</span>
+    <span class="n">sum</span> <span class="p">=</span> <span class="n">sum</span> <span class="o">+</span> <span class="n">next_number</span><span class="p">;</span>
+    <span class="k">if</span> <span class="n">sum</span> <span class="o">&gt;</span> <span class="n">upper_limit</span>
+       <span class="n">fprintf</span><span class="p">(</span><span class="c">...</span>
+       <span class="s">&#39;Game over, you passed 21 (with your %d points)! \n&#39;</span><span class="p">,</span> <span class="n">sum</span><span class="p">);</span>
+       <span class="n">not_finished</span> <span class="p">=</span> <span class="n">false</span><span class="p">;</span>
+    <span class="k">else</span>
+       <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Your score is now: %d points! \n&#39;</span><span class="p">,</span> <span class="n">sum</span><span class="p">);</span>
+       <span class="n">answer</span> <span class="p">=</span> <span class="n">input</span><span class="p">(</span><span class="s">&#39;Another draw (y/n)? &#39;</span><span class="p">,</span> <span class="s">&#39;s&#39;</span><span class="p">);</span>
+       <span class="k">if</span> <span class="n">answer</span> <span class="o">~=</span> <span class="s">&#39;y&#39;</span>
+           <span class="n">not_finished</span> <span class="p">=</span> <span class="n">false</span><span class="p">;</span>
+       <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+<span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Finished! \n&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
 <p>Running the program may produce this dialog</p>
 <div class="highlight-text"><div class="highlight"><pre>You got: 8
 Your score is now: 8 points!
@@ -1329,7 +1445,7 @@ Game over, you passed 21 (with your 22 points)!
 </div>
 <div class="section" id="exercise-24-linear-interpolation">
 <span id="nd-exer-linearinterpol"></span><h3>Exercise 24: Linear interpolation<a class="headerlink" href="#exercise-24-linear-interpolation" title="Permalink to this headline">¶</a></h3>
-<p id="index-47">Some measurements <span class="math">\(y_i\)</span>, <span class="math">\(i = 1,2,\ldots,N\)</span> (given below), of a
+<p id="index-53">Some measurements <span class="math">\(y_i\)</span>, <span class="math">\(i = 1,2,\ldots,N\)</span> (given below), of a
 quantity <span class="math">\(y\)</span> have been collected regularly, once every minute, at
 times <span class="math">\(t_i=i\)</span>, <span class="math">\(i=0,1,\ldots,N\)</span>.  We want to find the value <span class="math">\(y\)</span>
 <em>in between</em> the measurements, e.g., at <span class="math">\(t=3.2\)</span> min. Computing such
@@ -1367,7 +1483,40 @@ Perform separate hand calculations to check that the output from the
 program is correct.</p>
 <p><strong>Solution.</strong>
 The code may be written as follows</p>
-<p>Here is a missing file: linear_interpolation</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span><span class="nf">linear_interpolation</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="c">% From measurement data y (collected once every minute),</span>
+    <span class="c">% linear interpolation is used to find values in between</span>
+    <span class="c">% measured data.</span>
+
+    <span class="c">% Note: do not need to store the sequence of times</span>
+    <span class="n">N</span> <span class="p">=</span> <span class="mi">4</span><span class="p">;</span>           <span class="c">% Total number of measurements</span>
+    <span class="n">delta_t</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>     <span class="c">% Time difference between measurements</span>
+
+    <span class="c">% Note: y(1) is measurement at time zero</span>
+    <span class="n">y</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">y</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">=</span> <span class="mf">4.4</span><span class="p">;</span> <span class="n">y</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">=</span> <span class="mf">2.0</span><span class="p">;</span> <span class="n">y</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">=</span> <span class="mf">11.0</span><span class="p">;</span>
+    <span class="n">y</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="p">=</span> <span class="mf">21.5</span><span class="p">;</span> <span class="n">y</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="p">=</span> <span class="mf">7.5</span><span class="p">;</span>
+
+    <span class="n">find_y</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">N</span><span class="p">,</span><span class="n">delta_t</span><span class="p">);</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span>result <span class="p">=</span><span class="w"> </span><span class="nf">interpolate</span><span class="p">(</span>y, t, delta_t<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">% Uses linear interpolation to find intermediate y</span>
+    <span class="nb">i</span> <span class="p">=</span> <span class="nb">floor</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="c">% Scheme: y(t) = y_i + delta-y/delta-t * dt</span>
+    <span class="n">result</span> <span class="p">=</span> <span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span> <span class="o">+</span> <span class="p">((</span><span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="p">))</span><span class="o">/</span><span class="n">delta_t</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="nb">floor</span><span class="p">(</span><span class="n">t</span><span class="p">));</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="nf">find_y</span><span class="p">(</span>y, N, delta_t<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;For time t on the interval [0,%d]... \n&#39;</span><span class="p">,</span> <span class="n">N</span><span class="p">);</span>
+    <span class="n">t</span> <span class="p">=</span> <span class="n">input</span><span class="p">(</span><span class="s">&#39;Give your desired t: &#39;</span><span class="p">);</span>
+    <span class="k">while</span> <span class="n">t</span> <span class="o">&gt;</span><span class="p">=</span> <span class="mi">0</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;y(t) = %g \n&#39;</span><span class="p">,</span> <span class="n">interpolate</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">delta_t</span><span class="p">));</span>
+        <span class="n">t</span> <span class="p">=</span> <span class="n">input</span><span class="p">(</span><span class="s">&#39;Give new time t: &#39;</span><span class="p">);</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
 <p>Running the program may produce this dialog</p>
 <div class="highlight-text"><div class="highlight"><pre>For time t on the interval [0,4]...
 Give your desired t: 2.5
@@ -1394,7 +1543,28 @@ if the following requirement is fulfilled for each point:</p>
 on the line. Let <span class="math">\(c = 2\)</span> here.</p>
 <p><strong>Solution.</strong>
 The code may be written as follows</p>
-<p>Here is a missing file: test_straight_line</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="c">% For a straight line f(x) = ax + b, and the fixed point (2,f(2)) on</span>
+<span class="c">% the line, the script tests whether (f(x_i) - f(2)) / (x_i - 2) = a</span>
+<span class="c">% for randomly chosen x_i, i = 1,...,100.</span>
+
+<span class="n">a</span> <span class="p">=</span> <span class="mi">4</span><span class="p">;</span> <span class="n">b</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">f</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+<span class="n">c</span> <span class="p">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">f_c</span> <span class="p">=</span> <span class="n">f</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>       <span class="c">% Fixed point on the line</span>
+<span class="n">epsilon</span> <span class="p">=</span> <span class="mf">1e-6</span><span class="p">;</span>
+<span class="nb">i</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">100</span>
+    <span class="n">x</span> <span class="p">=</span> <span class="mi">10</span><span class="o">*</span><span class="nb">rand</span><span class="p">();</span>   <span class="c">% rand() returns number between 0 and 1 ...</span>
+    <span class="n">numerator</span> <span class="p">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">f_c</span><span class="p">;</span>
+    <span class="n">denominator</span> <span class="p">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">c</span><span class="p">;</span>
+    <span class="k">if</span> <span class="n">denominator</span> <span class="o">&gt;</span> <span class="n">epsilon</span>     <span class="c">% to avoid zero division</span>
+        <span class="n">fraction</span> <span class="p">=</span> <span class="n">numerator</span><span class="o">/</span><span class="n">denominator</span><span class="p">;</span>
+        <span class="c">% The following printout should be very close to zero in</span>
+        <span class="c">% each case IF the points are on the line</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;For x = %g : %g \n&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">fraction</span> <span class="o">-</span> <span class="n">a</span><span class="p">));</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
 <p>The potential problem of zero division is here simply handled by the <code class="docutils literal"><span class="pre">if</span></code> test, meaning
 that if the denominator is too close to zero, that particular <span class="math">\(x\)</span> is skipped.
 A more elegant procedure would be to use a <code class="docutils literal"><span class="pre">try-catch</span></code> construction.</p>
@@ -1410,7 +1580,7 @@ different values for <span class="math">\(x\)</span> (but still 0 for each test!
 </div>
 <div class="section" id="exercise-26-fit-straight-line-to-data">
 <span id="nd-exer-fitline"></span><h3>Exercise 26: Fit straight line to data<a class="headerlink" href="#exercise-26-fit-straight-line-to-data" title="Permalink to this headline">¶</a></h3>
-<p id="index-48">Assume some measurements <span class="math">\(y_i, i = 1,2,\ldots,5\)</span> have been collected,
+<p id="index-54">Assume some measurements <span class="math">\(y_i, i = 1,2,\ldots,5\)</span> have been collected,
 once every second. Your task is to write a program that
 fits a straight line to those data.</p>
 <p><strong>a)</strong>
@@ -1433,14 +1603,47 @@ Given the measurements <span class="math">\(0.5, 2.0, 1.0, 1.5, 7.5\)</span>, at
 for <span class="math">\(a\)</span> and <span class="math">\(b\)</span> such that <span class="math">\(e\)</span> is minimized.</p>
 <p><strong>Solution.</strong>
 The code may be written as follows</p>
-<p>Here is a missing file: fit_straight_line</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span><span class="nf">interactive_line_fit</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="n">data</span> <span class="p">=</span> <span class="p">[</span><span class="mf">0.5</span> <span class="mf">2.0</span> <span class="mf">1.0</span> <span class="mf">1.5</span> <span class="mf">7.5</span><span class="p">];</span>
+    <span class="n">time</span> <span class="p">=</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">];</span>
+
+    <span class="n">one_more</span> <span class="p">=</span> <span class="n">true</span><span class="p">;</span>
+    <span class="k">while</span> <span class="n">one_more</span>
+        <span class="n">a</span> <span class="p">=</span> <span class="n">input</span><span class="p">(</span><span class="s">&#39;Give a: &#39;</span><span class="p">)</span>
+        <span class="n">b</span> <span class="p">=</span> <span class="n">input</span><span class="p">(</span><span class="s">&#39;Give b: &#39;</span><span class="p">)</span>
+        <span class="n">error</span> <span class="p">=</span> <span class="n">find_error</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;The error is: %g \n&#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+        <span class="n">y</span> <span class="p">=</span> <span class="n">f</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+        <span class="n">figure</span><span class="p">();</span> <span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="s">&#39;*&#39;</span><span class="p">);</span>
+        <span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Time (s)&#39;</span><span class="p">);</span>
+        <span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;y (stars) and straight line f(t)&#39;</span><span class="p">);</span>
+        <span class="n">answer</span> <span class="p">=</span> <span class="n">input</span><span class="p">(</span><span class="s">&#39;Do you want another fit (y/n)? &#39;</span><span class="p">,</span><span class="s">&#39;s&#39;</span><span class="p">);</span>
+        <span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="s">&#39;n&#39;</span>
+            <span class="n">one_more</span> <span class="p">=</span> <span class="n">false</span><span class="p">;</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span>result <span class="p">=</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span>t, a, b<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">result</span> <span class="p">=</span> <span class="n">a</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span>result <span class="p">=</span><span class="w"> </span><span class="nf">find_error</span><span class="p">(</span>time, data, a, b<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">E</span> <span class="p">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+        <span class="n">E</span> <span class="p">=</span> <span class="n">E</span> <span class="o">+</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="nb">i</span><span class="p">),</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">data</span><span class="p">(</span><span class="nb">i</span><span class="p">))</span>^<span class="mi">2</span><span class="p">;</span>
+    <span class="k">end</span>
+    <span class="n">result</span> <span class="p">=</span> <span class="n">E</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
 <p>Running the program may produce this dialog</p>
 <div class="highlight-text"><div class="highlight"><pre>Give a: 1
 Give b: 0
 The error is: 16.75
 </pre></div>
 </div>
-<p>(followed by the plot seen in Figure <a class="reference internal" href="#fig-fit-line-1"><span>Straight line fitted to data with first choice of line parameters (a and b)</span></a>)</p>
+<p>(followed by the plot seen in Figure <a class="reference internal" href="#fig-fit-line-1"><span class="std std-ref">Straight line fitted to data with first choice of line parameters (a and b)</span></a>)</p>
 <div class="figure" id="id2">
 <span id="fig-fit-line-1"></span><a class="reference internal image-reference" href="_images/fit_straight_line_1.png"><img alt="_images/fit_straight_line_1.png" src="_images/fit_straight_line_1.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Straight line fitted to data with first choice of line parameters (a and b)</em></span></p>
@@ -1451,7 +1654,7 @@ Give b: 1
 The error is: 22.75
 </pre></div>
 </div>
-<p>(followed by the plot seen in Figure <a class="reference internal" href="#fig-fit-line-2"><span>Straight line fitted to data with second choice of line parameters (a and b)</span></a>)</p>
+<p>(followed by the plot seen in Figure <a class="reference internal" href="#fig-fit-line-2"><span class="std std-ref">Straight line fitted to data with second choice of line parameters (a and b)</span></a>)</p>
 <div class="figure" id="id3">
 <span id="fig-fit-line-2"></span><a class="reference internal image-reference" href="_images/fit_straight_line_2.png"><img alt="_images/fit_straight_line_2.png" src="_images/fit_straight_line_2.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Straight line fitted to data with second choice of line parameters (a and b)</em></span></p>
@@ -1461,7 +1664,7 @@ The error is: 22.75
 </div>
 <p>Filename: <code class="docutils literal"><span class="pre">fit_straight_line.m</span></code>.</p>
 <div class="section" id="remarks-2">
-<h4>Remarks  (2)<a class="headerlink" href="#remarks-2" title="Permalink to this headline">¶</a></h4>
+<h4>Remarks<a class="headerlink" href="#remarks-2" title="Permalink to this headline">¶</a></h4>
 <p>Fitting a straight line to measured data points is a very common
 task. The manual search procedure in c) can be automated by using a
 mathematical method called the <em>method of least squares</em>.</p>
@@ -1469,15 +1672,16 @@ mathematical method called the <em>method of least squares</em>.</p>
 </div>
 <div class="section" id="exercise-27-fit-sines-to-straight-line">
 <span id="nd-exer-fitsines"></span><h3>Exercise 27: Fit sines to straight line<a class="headerlink" href="#exercise-27-fit-sines-to-straight-line" title="Permalink to this headline">¶</a></h3>
-<p id="index-49">A lot of technology, especially most types of digital audio devices
+<p id="index-55">A lot of technology, especially most types of digital audio devices
 for processing sound, is based on representing a signal of time
 as a sum of sine functions. Say the signal is some function <span class="math">\(f(t)\)</span>
 on the interval <span class="math">\([-\pi,\pi]\)</span> (a more general interval <span class="math">\([a,b]\)</span>
 can easily be treated, but leads to slightly more complicated
 formulas). Instead of working with <span class="math">\(f(t)\)</span> directly,
 we approximate <span class="math">\(f\)</span> by the sum</p>
-<div class="math">
-\[S_N(t) = \sum_{n=1}^{N} b_n \sin(nt),\]</div>
+<div class="math" id="eq-auto1">
+\[\tag{1}
+S_N(t) = \sum_{n=1}^{N} b_n \sin(nt),\]</div>
 <p>where the coefficients <span class="math">\(b_n\)</span> must be adjusted such that <span class="math">\(S_N(t)\)</span> is
 a good approximation to <span class="math">\(f(t)\)</span>. We shall in this exercise adjust
 <span class="math">\(b_n\)</span> by a trial-and-error process.</p>
@@ -1552,25 +1756,119 @@ corresponding values of <span class="math">\(b_1\)</span>, <span class="math">\(
 <span class="math">\(f\)</span> and the approximation <span class="math">\(S_N\)</span> corresponding to the smallest error.</p>
 <p><strong>Solution.</strong>
 The code may be written as follows</p>
-<p>Here is a missing file: fit_sines</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span><span class="nf">fit_sines</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="c">% Search for b-values, - just pick limits and step</span>
+
+    <span class="n">left_end</span> <span class="p">=</span> <span class="o">-</span><span class="nb">pi</span><span class="p">;</span> <span class="n">right_end</span> <span class="p">=</span> <span class="nb">pi</span><span class="p">;</span>
+    <span class="n">N</span> <span class="p">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="n">b</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">f</span> <span class="p">=</span> <span class="p">@(</span><span class="n">t</span><span class="p">)</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="nb">pi</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="p">;</span>
+
+    <span class="n">M</span> <span class="p">=</span> <span class="mi">500</span><span class="p">;</span>
+
+    <span class="c">%test_sinesum();</span>
+    <span class="c">%trial(left_end, right_end, f, b, N, M);</span>
+
+    <span class="c">% Produce and store an initially &quot;smallest&quot; error</span>
+    <span class="n">b</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">b</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">b</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">test_b</span> <span class="p">=</span> <span class="n">b</span><span class="p">;</span>
+    <span class="n">smallest_E</span> <span class="p">=</span> <span class="n">error</span><span class="p">(</span><span class="n">left_end</span><span class="p">,</span> <span class="n">right_end</span><span class="p">,</span> <span class="n">test_b</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">M</span><span class="p">);</span>
+    <span class="n">db</span> <span class="p">=</span> <span class="mf">0.1</span><span class="p">;</span>
+    <span class="k">for</span> <span class="n">b1</span> <span class="p">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">db</span><span class="p">:</span><span class="mi">1</span>
+        <span class="k">for</span> <span class="n">b2</span> <span class="p">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">db</span><span class="p">:</span><span class="mi">1</span>
+            <span class="k">for</span> <span class="n">b3</span> <span class="p">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">db</span><span class="p">:</span><span class="mi">1</span>
+                <span class="n">test_b</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">=</span> <span class="n">b1</span><span class="p">;</span> <span class="n">test_b</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">=</span> <span class="n">b2</span><span class="p">;</span>
+                <span class="n">test_b</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">=</span> <span class="n">b3</span><span class="p">;</span>
+                <span class="n">E</span> <span class="p">=</span> <span class="n">error</span><span class="p">(</span><span class="n">left_end</span><span class="p">,</span> <span class="n">right_end</span><span class="p">,</span> <span class="n">test_b</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">M</span><span class="p">);</span>
+                <span class="k">if</span> <span class="n">E</span> <span class="o">&lt;</span> <span class="n">smallest_E</span>
+                    <span class="n">b</span> <span class="p">=</span> <span class="n">test_b</span><span class="p">;</span>
+                    <span class="n">smallest_E</span> <span class="p">=</span> <span class="n">E</span><span class="p">;</span>
+                <span class="k">end</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="n">b</span>
+    <span class="n">plot_compare</span><span class="p">(</span><span class="n">left_end</span><span class="p">,</span> <span class="n">right_end</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;b coeffiecients: %g %g and %g \n&#39;</span><span class="p">,</span> <span class="n">b</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">b</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">b</span><span class="p">(</span><span class="mi">3</span><span class="p">));</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Smallest error found: %g \n&#39;</span><span class="p">,</span> <span class="n">smallest_E</span><span class="p">);</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span>result <span class="p">=</span><span class="w"> </span><span class="nf">sinesum</span><span class="p">(</span>t, b<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="c">% Computes S as the sum over n of b_n * sin(n*t)</span>
+    <span class="c">% For each point in time (M) we loop over all b_n to</span>
+    <span class="c">% produce one element S(M), i.e. one element in</span>
+    <span class="c">% S corresponds to one point in time.</span>
+    <span class="n">S</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">for</span> <span class="n">M</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+            <span class="n">S</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="p">=</span> <span class="n">S</span><span class="p">(</span><span class="n">M</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">*</span><span class="nb">sin</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">t</span><span class="p">(</span><span class="n">M</span><span class="p">));</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="n">result</span> <span class="p">=</span> <span class="n">S</span><span class="p">;</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="nf">test_sinesum</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="n">t</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span> <span class="n">t</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">=</span> <span class="o">-</span><span class="nb">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span> <span class="n">t</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">=</span> <span class="nb">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">;</span>
+    <span class="n">b</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span> <span class="n">b</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">=</span> <span class="mf">4.0</span><span class="p">;</span> <span class="n">b</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">=</span> <span class="o">-</span><span class="mi">3</span><span class="p">;</span>
+    <span class="n">sinesum</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="nf">plot_compare</span><span class="p">(</span>left_end, right_end, f, b, N, M<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">time</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="n">left_end</span><span class="p">,</span> <span class="n">right_end</span><span class="p">,</span> <span class="n">M</span><span class="p">);</span>
+    <span class="n">y</span> <span class="p">=</span> <span class="n">f</span><span class="p">(</span><span class="n">time</span><span class="p">);</span>
+    <span class="n">S</span> <span class="p">=</span> <span class="n">sinesum</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+    <span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s">&#39;b-&#39;</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="s">&#39;r--&#39;</span><span class="p">);</span>
+    <span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;Time&#39;</span><span class="p">);</span>
+    <span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;f (blue) and S (red)&#39;</span><span class="p">);</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span>result <span class="p">=</span><span class="w"> </span><span class="nf">error</span><span class="p">(</span>left_end, right_end, b, f, M<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">time</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="n">left_end</span><span class="p">,</span> <span class="n">right_end</span><span class="p">,</span> <span class="n">M</span><span class="p">);</span>
+    <span class="n">y</span> <span class="p">=</span> <span class="n">f</span><span class="p">(</span><span class="n">time</span><span class="p">);</span>
+    <span class="n">S</span> <span class="p">=</span> <span class="n">sinesum</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+    <span class="n">E</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+        <span class="n">E</span> <span class="p">=</span> <span class="n">E</span> <span class="o">+</span> <span class="nb">sqrt</span><span class="p">((</span><span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span> <span class="o">-</span> <span class="n">S</span><span class="p">(</span><span class="nb">i</span><span class="p">))</span>^<span class="mi">2</span><span class="p">);</span>
+    <span class="k">end</span>
+    <span class="n">result</span> <span class="p">=</span> <span class="n">E</span><span class="p">;</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="nf">trial</span><span class="p">(</span>left_end, right_end, f, b, N, M<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">M</span> <span class="p">=</span> <span class="mi">500</span><span class="p">;</span>
+    <span class="n">new_trial</span> <span class="p">=</span> <span class="n">true</span><span class="p">;</span>
+    <span class="k">while</span> <span class="n">new_trial</span>
+        <span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">N</span>
+            <span class="n">text</span> <span class="p">=</span> <span class="n">strcat</span><span class="p">(</span><span class="s">&#39;Give b&#39;</span><span class="p">,</span> <span class="n">num2str</span><span class="p">(</span><span class="nb">i</span><span class="p">),</span> <span class="s">&#39; : \n&#39;</span><span class="p">);</span>
+            <span class="n">b</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span> <span class="p">=</span> <span class="n">input</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+        <span class="k">end</span>
+        <span class="n">plot_compare</span><span class="p">(</span><span class="n">left_end</span><span class="p">,</span> <span class="n">right_end</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Error: \n&#39;</span><span class="p">,</span><span class="n">error</span><span class="p">(</span><span class="n">left_end</span><span class="p">,</span> <span class="n">right_end</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">M</span><span class="p">));</span>
+        <span class="n">answer</span> <span class="p">=</span> <span class="n">input</span><span class="p">(</span><span class="s">&#39;Another trial (y/n)? &#39;</span><span class="p">,</span><span class="s">&#39;s&#39;</span><span class="p">);</span>
+        <span class="k">if</span> <span class="n">answer</span> <span class="o">==</span> <span class="s">&#39;n&#39;</span>
+            <span class="n">new_trial</span> <span class="p">=</span> <span class="n">false</span><span class="p">;</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
 <p>Running the program may produce this dialog</p>
 <div class="highlight-text"><div class="highlight"><pre>The b coefficients: [ 0.6 -0.2 0.1 ]
 The smallest error found: 67.1213886326
 </pre></div>
 </div>
-<p>and the plot seen in Figure <a class="reference internal" href="#fig-fit-sines"><span>Straight line fitted to data with first choice of line parameters (a and b)</span></a></p>
+<p>and the plot seen in Figure <a class="reference internal" href="#fig-fit-sines"><span class="std std-ref">Straight line fitted to data with first choice of line parameters (a and b)</span></a></p>
 <div class="figure" id="id4">
 <span id="fig-fit-sines"></span><a class="reference internal image-reference" href="_images/fit_sines.png"><img alt="_images/fit_sines.png" src="_images/fit_sines.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Straight line fitted to data with first choice of line parameters (a and b)</em></span></p>
 </div>
 <p>Filename: <code class="docutils literal"><span class="pre">fit_sines.m</span></code>.</p>
 <div class="section" id="remarks-3">
-<h4>Remarks  (3)<a class="headerlink" href="#remarks-3" title="Permalink to this headline">¶</a></h4>
+<h4>Remarks<a class="headerlink" href="#remarks-3" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic simple">
 <li>The function <span class="math">\(S_N(x)\)</span> is a special case of what is called a <em>Fourier series</em>. At the beginning of the 19th century, Joseph Fourier (1768-1830) showed that any function can be approximated analytically by a sum of cosines and sines. The approximation improves as the number of terms (<span class="math">\(N\)</span>) is increased. Fourier series are very important throughout science and engineering today.</li>
 </ol>
-<ol class="arabic simple">
-<li>Finding the coefficients <span class="math">\(b_n\)</span> is solved much more accurately in <a class="reference internal" href="._pylight004.html#sec-exer-revisitfitsines"><span>Exercise 40: Revisit fit of sines to a function</span></a>, by a procedure that also requires much less human and computer work!</li>
+<ol class="loweralpha simple">
+<li>Finding the coefficients <span class="math">\(b_n\)</span> is solved much more accurately in <a class="reference internal" href="._pylight004.html#sec-exer-revisitfitsines"><span class="std std-ref">Exercise 40: Revisit fit of sines to a function</span></a>, by a procedure that also requires much less human and computer work!</li>
 <li>In real applications, <span class="math">\(f(t)\)</span> is not known as a continuous function, but function values of <span class="math">\(f(t)\)</span> are provided. For example, in digital sound applications, music in a CD-quality WAV file is a signal with 44100 samples of the corresponding analog signal <span class="math">\(f(t)\)</span> per second.</li>
 </ol>
 </div>
@@ -1583,12 +1881,11 @@ string. For example, we may have a string like</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">gene</span> <span class="o">=</span> <span class="s">&#39;AGTCAATGGAATAGGCCAAGCGAATATTTGGGCTACCA&#39;</span>
 </pre></div>
 </div>
-<p>We may traverse this string, letter by letter,
-by the for loop <code class="docutils literal"><span class="pre">for</span> <span class="pre">letter</span> <span class="pre">in</span> <span class="pre">gene</span></code>. The length of the string
-is given by <code class="docutils literal"><span class="pre">len(gene)</span></code>, so an alternative traversal over an index <code class="docutils literal"><span class="pre">i</span></code> is
-<code class="docutils literal"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">in</span> <span class="pre">range(len(gene))</span></code>. Letter number <code class="docutils literal"><span class="pre">i</span></code> is reached through
-<code class="docutils literal"><span class="pre">gene[i]</span></code>, and a substring from index <code class="docutils literal"><span class="pre">i</span></code> up to, but not including <code class="docutils literal"><span class="pre">j</span></code>,
-is created by <code class="docutils literal"><span class="pre">gene[i:j]</span></code>.</p>
+<p>We may traverse this string letter by letter. The length of the string
+is given by <code class="docutils literal"><span class="pre">length(gene)</span></code>, so with a loop index <code class="docutils literal"><span class="pre">i</span></code>, <code class="docutils literal"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">=</span> <span class="pre">1:length(gene)</span></code>
+will produce the required index values. Letter number <code class="docutils literal"><span class="pre">i</span></code> is then reached through
+<code class="docutils literal"><span class="pre">gene(i)</span></code>, and a substring from index <code class="docutils literal"><span class="pre">i</span></code> up to and including <code class="docutils literal"><span class="pre">j</span></code>,
+is created by <code class="docutils literal"><span class="pre">gene(i:j)</span></code>.</p>
 <p><strong>a)</strong>
 Write a function <code class="docutils literal"><span class="pre">freq(letter,</span> <span class="pre">text)</span></code> that returns the frequency of the
 letter <code class="docutils literal"><span class="pre">letter</span></code> in the string <code class="docutils literal"><span class="pre">text</span></code>, i.e., the number of occurrences of
@@ -1608,9 +1905,62 @@ structure in the string <code class="docutils literal"><span class="pre">text</s
 too to control the computations by <code class="docutils literal"><span class="pre">mystruct</span></code>.</p>
 <p><strong>Solution.</strong>
 Here is a program:</p>
-<p>Here is a missing file: count_substrings</p>
+<div class="highlight-matlab"><div class="highlight"><pre><span class="k">function</span><span class="w"> </span><span class="nf">count_substrings</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="n">gene</span> <span class="p">=</span> <span class="s">&#39;AGTCAATGGAATAGGCCAAGCGAATATTTGGGCTACCA&#39;</span><span class="p">;</span>
+
+    <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;frequency of C: %.1f\n&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="p">(</span><span class="s">&#39;C&#39;</span><span class="p">,</span> <span class="n">gene</span><span class="p">));</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;frequency of G: %.1f\n&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="p">(</span><span class="s">&#39;G&#39;</span><span class="p">,</span> <span class="n">gene</span><span class="p">));</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;no of pairs AA: %d\n&#39;</span><span class="p">,</span> <span class="n">pairs</span><span class="p">(</span><span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="n">gene</span><span class="p">));</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;no of structures: %d\n&#39;</span><span class="p">,</span> <span class="n">mystruct</span><span class="p">(</span><span class="n">gene</span><span class="p">));</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span>result <span class="p">=</span><span class="w"> </span><span class="nf">freq</span><span class="p">(</span>letter, text<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">counter</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">text</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span> <span class="o">==</span> <span class="n">letter</span>
+            <span class="n">counter</span> <span class="p">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="n">result</span> <span class="p">=</span> <span class="n">counter</span><span class="o">/</span><span class="nb">length</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span>result <span class="p">=</span><span class="w"> </span><span class="nf">pairs</span><span class="p">(</span>letter, text<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">counter</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">i</span> <span class="o">&lt;</span><span class="p">=</span> <span class="nb">length</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">text</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span> <span class="o">==</span> <span class="n">letter</span><span class="c">...</span>
+                               <span class="o">&amp;&amp;</span> <span class="n">text</span><span class="p">(</span><span class="nb">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">letter</span>
+            <span class="n">counter</span> <span class="p">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="n">result</span> <span class="p">=</span> <span class="n">counter</span><span class="p">;</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span>result <span class="p">=</span><span class="w"> </span><span class="nf">mystruct</span><span class="p">(</span>text<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">counter</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="nb">i</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="c">%% Search for the structure from position i</span>
+        <span class="k">if</span> <span class="n">text</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;G&#39;</span>
+            <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;found G at %d\n&#39;</span><span class="p">,</span> <span class="nb">i</span><span class="p">);</span>
+            <span class="c">%% Search among A and T letters</span>
+            <span class="nb">j</span> <span class="p">=</span> <span class="nb">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">while</span> <span class="n">text</span><span class="p">(</span><span class="nb">j</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;A&#39;</span> <span class="o">||</span> <span class="n">text</span><span class="p">(</span><span class="nb">j</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;T&#39;</span>
+                <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;next is ok: %s\n&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">(</span><span class="nb">j</span><span class="p">));</span>
+                <span class="nb">j</span> <span class="p">=</span> <span class="nb">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">end</span>
+            <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;ending is %s\n&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">(</span><span class="nb">j</span><span class="p">:</span><span class="nb">j</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+            <span class="k">if</span> <span class="n">text</span><span class="p">(</span><span class="nb">j</span><span class="p">:</span><span class="nb">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;GG&#39;</span>
+                <span class="c">%% Correct ending of structure</span>
+                <span class="n">counter</span> <span class="p">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;yes\n&#39;</span><span class="p">);</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="n">result</span> <span class="p">=</span> <span class="n">counter</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
 <p>Filename: <code class="docutils literal"><span class="pre">count_substrings.m</span></code>.</p>
-<span class="target" id="sec-integrals"></span></div>
+</div>
 </div>
 </div>
 
@@ -1618,17 +1968,22 @@ Here is a program:</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+            <center>
+            <p class="logo"><a href="http://cbc.simula.no/" title="Go to Center for Biomedical Computing">
+              <img class="logo" src="_static/cbc_logo.png" alt="Logo"/>
+            </a></p>
+            </center>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Basic constructions</a><ul>
-<li><a class="reference internal" href="#if-tests-colon-and-indentation">If tests, colon and indentation</a></li>
+<li><a class="reference internal" href="#if-tests">If tests</a></li>
 <li><a class="reference internal" href="#functions">Functions</a></li>
 <li><a class="reference internal" href="#for-loops">For loops</a></li>
 <li><a class="reference internal" href="#while-loops">While loops</a></li>
 <li><a class="reference internal" href="#reading-from-and-writing-to-files">Reading from and writing to files</a></li>
-<li><a class="reference internal" href="#exercises-2">Exercises  (2)</a><ul>
+<li><a class="reference internal" href="#exercises-2">Exercises</a><ul>
 <li><a class="reference internal" href="#exercise-10-introducing-errors">Exercise 10: Introducing errors</a></li>
 <li><a class="reference internal" href="#exercise-11-compare-integers-a-and-b">Exercise 11: Compare integers a and b</a></li>
 <li><a class="reference internal" href="#exercise-12-functions-for-circumference-and-area-of-a-circle">Exercise 12: Functions for circumference and area of a circle</a></li>
@@ -1642,18 +1997,18 @@ Here is a program:</p>
 <li><a class="reference internal" href="#exercise-20-compute">Exercise 20: Compute <span class="math">\(\pi\)</span></a></li>
 <li><a class="reference internal" href="#exercise-21-compute-combinations-of-sets">Exercise 21: Compute combinations of sets</a></li>
 <li><a class="reference internal" href="#exercise-22-frequency-of-random-numbers">Exercise 22: Frequency of random numbers</a><ul>
-<li><a class="reference internal" href="#remarks-1">Remarks  (1)</a></li>
+<li><a class="reference internal" href="#remarks-1">Remarks</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#exercise-23-game-21">Exercise 23: Game 21</a></li>
 <li><a class="reference internal" href="#exercise-24-linear-interpolation">Exercise 24: Linear interpolation</a></li>
 <li><a class="reference internal" href="#exercise-25-test-straight-line-requirement">Exercise 25: Test straight line requirement</a></li>
 <li><a class="reference internal" href="#exercise-26-fit-straight-line-to-data">Exercise 26: Fit straight line to data</a><ul>
-<li><a class="reference internal" href="#remarks-2">Remarks  (2)</a></li>
+<li><a class="reference internal" href="#remarks-2">Remarks</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#exercise-27-fit-sines-to-straight-line">Exercise 27: Fit sines to straight line</a><ul>
-<li><a class="reference internal" href="#remarks-3">Remarks  (3)</a></li>
+<li><a class="reference internal" href="#remarks-3">Remarks</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#exercise-28-count-occurrences-of-a-string-in-a-string">Exercise 28: Count occurrences of a string in a string</a></li>
@@ -1669,15 +2024,17 @@ Here is a program:</p>
   <h4>Next topic</h4>
   <p class="topless"><a href="._pylight004.html"
                         title="next chapter">Computing integrals</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/._pylight003.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/._pylight003.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -1691,20 +2048,29 @@ Here is a program:</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2015, S. Linge and H. P. Langtangen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.4</a>
-      
-      |
-      <a href="_sources/._pylight003.txt"
-          rel="nofollow">Page source</a></li>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="._pylight004.html" title="Computing integrals"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="._pylight002.html" title="The first few steps"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Programming for Computations (MATLAB/Octave version)</a> &raquo;</li> 
+      </ul>
     </div>
+<div class="wrapper">
+  <div class="footer">
+    <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <br />
+    <br />
+      &copy;2015, Svein Linge and Hans Petter Langtangen.
+  </div>
+</div>
 
-    
-
-    
   </body>
 </html>

@@ -1,9 +1,6 @@
-
-
-.. |nbsp| unicode:: 0xA0
-   :trim:
-
 .. !split
+
+.. _2nd:BasicConstructins:
 
 Basic constructions
 %%%%%%%%%%%%%%%%%%%
@@ -51,6 +48,8 @@ The action is to move randomly to the north
 (N), east (E), south (S), or west (W) with the same probability.
 How can we implement such an action in life and in a computer program?
 
+.. index:: random walk
+
 We need to randomly draw one out of four numbers to select the direction
 in which to move.
 A deck of cards can be
@@ -92,6 +91,11 @@ could also read just ``else``, since we here cover all the remaining
 possible ``r`` values.
 
 The exact code in Python reads
+
+.. index:: random (function)
+
+.. index::
+   single: import; random (function)
 
 .. code-block:: python
 
@@ -138,7 +142,7 @@ Working with if tests requires mastering boolean expressions.
 Here are some basic boolean expressions involving the
 *logical operators* ``==``, ``!=``, ``<``, ``<=``, ``>``, and ``>=``.
 Given the assignment to ``temp``, you should go through each boolean
-expression and determine if it is true or false.
+expression below and determine if it is true or false.
 
 .. code-block:: python
 
@@ -155,12 +159,12 @@ expression and determine if it is true or false.
 Functions
 =========
 
+.. index:: def
+
 .. index:: function
 
 .. index::
    single: function; definition
-
-.. index:: def
 
 .. index:: return
 
@@ -192,7 +196,7 @@ Examples will be given to illustrate how functions can be written in various con
 
 If we modify the program ``ball.py`` from the chapter :ref:`1st:ex1`
 slightly, and include a function, we could let this be a new program
-`ball_function.py <https://github.com/hplgit/prog4comp/src/py/ball_function.py>`__
+`ball_function.py <https://github.com/hplgit/prog4comp/tree/master/src/py/ball_function.py>`__
 as
 
 .. code-block:: python
@@ -219,7 +223,7 @@ indentation). The *return statement* of the function ``y``, i.e.
 will be understood by Python as *first compute the expression, then
 send the result back (i.e., return) to where the function was called
 from*. Both ``def`` and ``return`` are reserved words. The function
-depends on one variable (or we say that it takes one *argument* or
+depends on ``t``, i.e., one variable (or we say that it takes one *argument* or
 *input parameter*), the value of which must be provided when the
 function is called.
 
@@ -236,13 +240,13 @@ executes one line at a time in the ``y`` function.
 In the final line, the arithmetic expression ``v0*t - 0.5*g*t**2``
 is computed, resulting in a number, and this number (or more
 precisely, the Python object representing the number) *replaces*
-the call ``y(time)`` in the calling code such that we have ``print``
-proceeded by a number rather than a function call.
+the call ``y(time)`` in the calling code such that the word ``print`` now
+precedes a number rather than a function call.
 
 Python proceeds with the next line and sets ``time`` to a new value.
 The next ``print`` statement triggers a new call to ``y(t)``, this time
 ``t`` is set to ``0.9``, the computations are done line by line in the
-``y`` function, and the returned results replaces ``y(time)``.
+``y`` function, and the returned result replaces ``y(time)``.
 Instead of writing ``print y(time)``, we could
 alternatively have stored the returned result from the ``y`` function
 in a variable,
@@ -286,6 +290,8 @@ place from any of the three return alternatives.
 
 
 
+.. index:: main program
+
 An expression you will often encounter when dealing with programming, is *main
 program*, or that some code is *in main*. This is nothing particular
 to Python, and simply refers to that part of the program which is
@@ -306,7 +312,7 @@ expressions in a new version of our program that prints the position
 of the ball for chosen times. Assume we want to evaluate these expressions at two
 points in time, :math:`t = 0.6s` and :math:`t = 0.9s`. We can pick some numbers
 for the initial velocity components ``v0y`` and ``v0x``, name the program
-`ball_position.py <https://github.com/hplgit/prog4comp/src/py/ball_position.py>`__,
+`ball_position.py <https://github.com/hplgit/prog4comp/tree/master/src/py/ball_position.py>`__,
 and write it for example as
 
 .. code-block:: python
@@ -334,6 +340,9 @@ now takes *two* arguments. Running the program gives the output
 
         1.2  1.2342
         1.8  0.52695
+
+.. index::
+   single: return; value
 
 A function may also have no return value, in which case we simply drop
 the return statement, or it may return more than one value. For
@@ -457,9 +466,6 @@ could, e.g., call ``xy`` as
 
 .. index:: doc string
 
-.. index::
-   single: function; handle
-
 In any programming language, it is a good habit to include a little
 explanation of what the function is doing, unless what is done by the
 function is obvious, e.g., when having only a few simple code lines. This
@@ -479,8 +485,11 @@ Note that other functions may be called from within other functions,
 and function input parameters are not required to be numbers. Any
 object will do, e.g., string variables or other functions.
 
+.. index::
+   single: function; handle
+
 Functions are straightforwardly passed as arguments to other functions, as illustrated by the following script
-`function_as_argument.py <https://github.com/hplgit/prog4comp/src/py/function_as_argument.py>`__:
+`function_as_argument.py <https://github.com/hplgit/prog4comp/tree/master/src/py/function_as_argument.py>`__:
 
 .. code-block:: python
 
@@ -563,12 +572,12 @@ function arguments:
 For loops
 =========
 
+.. index:: range
+
 .. index::
    single: loop; for
 
 .. index:: for loop
-
-.. index:: range
 
 .. index::
    single: loop; iteration
@@ -579,7 +588,7 @@ For loops
 Many computations are repetitive by nature and programming languages
 have certain *loop structures* to deal with this. Here we will present
 what is referred to as a *for loop* (another kind of loop is a *while*
-loop, to be presented below). Assume you want to calculate the square
+loop, to be presented afterwards). Assume you want to calculate the square
 of each integer from 3 to 7. This could be done with the following
 two-line program.
 
@@ -630,7 +639,7 @@ rather read
             print i**2
 
 By default, if ``range`` is called with only two parameters, these are taken
-to be ``stop`` and ``step``, in which case a start at 0 is understood.
+to be ``start`` and ``stop``, in which case a step of 1 is understood.
 If only a single parameter is used in the call to ``range``, this parameter is
 taken to be ``stop``. The default step of 1 is then used (combined with the
 starting at 0). Thus, calling ``range``, for example, as
@@ -648,7 +657,7 @@ arrays in either direction.
 Let us modify ``ball_plot.py`` from the chapter :ref:`1st:ex3` to illustrate how useful ``for`` loops are if you need to traverse arrays. In that example we computed the height of the ball at every milli-second during the first second of its (vertical) flight and plotted the height versus time.
 
 Assume we want to find the maximum height during that time, how can we do it with a computer program? One alternative may be to compute all the thousand heights, store them in an array, and then run through the array to pick out the maximum. The program, named
-`ball_max_height.py <https://github.com/hplgit/prog4comp/src/py/ball_ma_height.py>`__,
+`ball_max_height.py <https://github.com/hplgit/prog4comp/tree/master/src/py/ball_ma_height.py>`__,
 may look as follows.
 
 .. code-block:: python
@@ -674,6 +683,7 @@ may look as follows.
         plt.plot(t,y)
         plt.xlabel('Time (s)')
         plt.ylabel('Height (m)')
+        plt.show()
 
 There is nothing new here, except the ``for`` loop construction, so let us look at it in more detail. As explained above, Python understands that a ``for`` loop is desired when it sees the word ``for``.
 The ``range()`` function will produce integers from, and including, :math:`1`,
@@ -804,7 +814,8 @@ While loops
 Python also has another standard loop construction, the *while loop*,
 doing iterations with a loop index very much like the ``for`` loop. To
 illustrate what such a loop may look like, we consider another
-modification of ``ball_plot.py`` in the chapter :ref:`1st:ex3`. Assume
+modification of ``ball_plot.py`` in the chapter :ref:`1st:ex3`. We will now
+change it so that it finds the time of flight for the ball. Assume
 the ball is thrown with a slightly lower initial velocity, say
 :math:`4.5\hbox{ ms}^{-1}`, while everything else is kept unchanged. Since
 we still look at the first second of the flight, the heights at the
@@ -813,8 +824,8 @@ ball has fallen below its initial starting position, i.e., the height
 where it left the hand, so there is no problem with that. In our array
 ``y`` we will then have a series of heights which towards the end of ``y``
 become negative. Let us, in a program named
-`ball_time.py <https://github.com/hplgit/prog4comp/src/py/ball_time.py>`__
-find the time when heights starts to get negative, i.e., when the
+`ball_time.py <https://github.com/hplgit/prog4comp/tree/master/src/py/ball_time.py>`__
+find the time when heights start to get negative, i.e., when the
 ball crosses :math:`y=0`. The program could look like this
 
 .. code-block:: python
@@ -859,10 +870,10 @@ check of successive elements in the array ``y``.
 
 Compared to a ``for`` loop, the programmer does not have to specify the
 number of iterations when coding a ``while`` loop. It simply runs until
-the boolean expression becomes ``False``.
-However, the loop index is not
-increased automatically; it must be done explicitly by the
-programmer. Of course, just as in for loops and ``if`` blocks,
+the boolean expression becomes ``False``. Thus, a loop index
+(as we have in a ``for`` loop) is not required. Furthermore, if a loop index is used in a
+``while`` loop, it is not increased automatically; it must be done explicitly by the
+programmer. Of course, just as in ``for`` loops and ``if`` blocks,
 there might be (arbitrarily) many code lines in a ``while``
 loop. Any ``for`` loop may also be implemented as a ``while`` loop, but
 ``while`` loops are more general so not all of them can be expressed
@@ -874,6 +885,8 @@ expression of the ``while`` test never evaluates to ``False``, and the program c
 of the most frequent errors you will experience as a beginning
 programmer.  If you accidentally enter an infinite loop and the
 program just hangs forever, press ``Ctrl+c`` to stop the program.
+
+.. index:: stop program (Ctrl+c)
 
 .. _sec:lists:
 
@@ -1023,6 +1036,10 @@ be changed), stating that the tuple object has no such attribute.
 Reading from and writing to files
 =================================
 
+.. index:: read (from file)
+
+.. index:: write (to file)
+
 Input data for a program often come from files and the results of the
 computations are often written to file. To illustrate basic file
 handling, we consider an example where we read :math:`x` and :math:`y` coordinates
@@ -1040,7 +1057,7 @@ the input file is a heading that we can just skip:
 
 The relevant Python lines for reading the numbers and writing out
 a similar file are given in the file
-`file_handling.py <https://github.com/hplgit/prog4comp/src/py/file_handling.py>`__
+`file_handling.py <https://github.com/hplgit/prog4comp/tree/master/src/py/file_handling.py>`__
 
 .. code-block:: python
 
@@ -1073,11 +1090,15 @@ a similar file are given in the file
             outfile.write('%10.5f %10.5f\n' % (xi, yi))
         outfile.close()
 
+.. index:: loadtxt
+
+.. index:: savetxt
+
 Such a file with a comment line and numbers in tabular format is very
 common so ``numpy`` has functionality to ease reading and writing.
 Here is the same example using the ``loadtxt`` and ``savetxt`` functions
 in ``numpy`` for tabular data (file
-`file_handling_numpy.py <https://github.com/hplgit/prog4comp/src/py/file_handling_numpy.py>`__):
+`file_handling_numpy.py <https://github.com/hplgit/prog4comp/tree/master/src/py/file_handling_numpy.py>`__):
 
 .. code-block:: python
 
@@ -1093,8 +1114,8 @@ in ``numpy`` for tabular data (file
         outfile.write('# x and y coordinates\n')
         numpy.savetxt(outfile, data, fmt='%10.5f')
 
-Exercises  (2)
-==============
+Exercises          (2)
+======================
 
 .. --- begin exercise ---
 
@@ -2070,8 +2091,8 @@ Filename: ``count_random_numbers.py``.
 
 .. Closing remarks for this Exercise
 
-Remarks  (1)
-~~~~~~~~~~~~
+Remarks          (1)
+~~~~~~~~~~~~~~~~~~~~
 
 For large :math:`N`, this program computes the probability :math:`M/N`
 of getting six eyes when throwing a die.
@@ -2489,8 +2510,8 @@ Filename: ``fit_straight_line.py``.
 
 .. Closing remarks for this Exercise
 
-Remarks  (2)
-~~~~~~~~~~~~
+Remarks          (2)
+~~~~~~~~~~~~~~~~~~~~
 
 Fitting a straight line to measured data points is a very common
 task. The manual search procedure in c) can be automated by using a
@@ -2517,9 +2538,13 @@ can easily be treated, but leads to slightly more complicated
 formulas). Instead of working with :math:`f(t)` directly,
 we approximate :math:`f` by the sum
 
+.. _Eq:_auto1:
+
 .. math::
+
+    \tag{1}
+    S_N(t) = \sum_{n=1}^{N} b_n \sin(nt),
         
-        S_N(t) = \sum_{n=1}^{N} b_n \sin(nt),
         
 
 where the coefficients :math:`b_n` must be adjusted such that :math:`S_N(t)` is
@@ -2756,14 +2781,14 @@ Filename: ``fit_sines.py``.
 
 .. Closing remarks for this Exercise
 
-Remarks  (3)
-~~~~~~~~~~~~
+Remarks          (3)
+~~~~~~~~~~~~~~~~~~~~
 
 1. The function :math:`S_N(x)` is a special case of what is called a *Fourier series*. At the beginning of the 19th century, Joseph Fourier (1768-1830) showed that any function can be approximated analytically by a sum of cosines and sines. The approximation improves as the number of terms (:math:`N`) is increased. Fourier series are very important throughout science and engineering today.
 
-1. Finding the coefficients :math:`b_n` is solved much more accurately in :ref:`sec:exer:revisitFitSines`, by a procedure that also requires much less human and computer work!
+a. Finding the coefficients :math:`b_n` is solved much more accurately in :ref:`sec:exer:revisitFitSines`, by a procedure that also requires much less human and computer work!
 
-2. In real applications, :math:`f(t)` is not known as a continuous function, but function values of :math:`f(t)` are provided. For example, in digital sound applications, music in a CD-quality WAV file is a signal with 44100 samples of the corresponding analog signal :math:`f(t)` per second.
+b. In real applications, :math:`f(t)` is not known as a continuous function, but function values of :math:`f(t)` are provided. For example, in digital sound applications, music in a CD-quality WAV file is a signal with 44100 samples of the corresponding analog signal :math:`f(t)` per second.
 
 .. --- end exercise ---
 
@@ -2864,8 +2889,8 @@ Filename: ``count_substrings.py``.
 
 .. Closing remarks for this Exercise
 
-Remarks  (4)
-~~~~~~~~~~~~
+Remarks          (4)
+~~~~~~~~~~~~~~~~~~~~
 
 You are supposed to solve the tasks using simple programming with loops
 and variables. While a) and b) are quite straightforward, c) quickly
@@ -2878,6 +2903,4 @@ functionality for analysis of text in Python and this is particularly
 useful in analysis of gene sequences.
 
 .. --- end exercise ---
-
-.. _sec:integrals:
 

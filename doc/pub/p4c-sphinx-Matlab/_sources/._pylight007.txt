@@ -1,9 +1,6 @@
-
-
-.. |nbsp| unicode:: 0xA0
-   :trim:
-
 .. !split
+
+.. _4th:NonlinAlgEq:
 
 Solving nonlinear algebraic equations
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -12,22 +9,25 @@ Solving nonlinear algebraic equations
    :width: 800
 
 As a reader of this book you are probably well into mathematics and
-often "accused" of being particularly good at "solving equations" (typically
+often "accused" of being particularly good at "solving equations" (a
+typical comment
 at family dinners!). However, is it *really* true that you, with pen and paper, can
-solve *many* equations? How many kinds of equations can you actually solve?
-If we restrict our attention to *algebraic equations in one unknown* :math:`x`,
-you can certainly do linear equations: :math:`ax+b=0` and quadratic
+solve *many* types of equations?
+Restricting our attention to *algebraic equations in one unknown* :math:`x`,
+you can certainly do linear equations: :math:`ax+b=0`, and quadratic
 ones: :math:`ax^2 + bx + c = 0`. You may also know that there
 are formulas for the roots of cubic and quartic equations too.
 Maybe you can do the special trigonometric equation
 :math:`\sin x + \cos x = 1` as well, but there it (probably) stops. Equations that are
-not reducible to one of the mentioned cannot be solved, which
+not reducible to one of the mentioned cannot be solved by general analytical
+techniques, which
 means that most algebraic equations arising in applications cannot
 be treated with pen and paper!
 
-If we exchange the traditional idea of finding *exact* solutions to equations with
-the idea of rather finding *approximate* solutions, a whole new world of possibilities
-opens up! With such an approach, we can in principle solve *any* algebraic equation.
+If we exchange the traditional idea of finding *exact* solutions to
+equations with the idea of rather finding *approximate* solutions, a
+whole new world of possibilities opens up. With such an approach, we
+can in principle solve *any* algebraic equation.
 
 Let us start by introducing a common generic form for any algebraic equation:
 
@@ -58,11 +58,11 @@ maxima and minima are normally found by solving the algebraic equation
 :math:`F'(x)=0` if :math:`F(x)` is the function to be optimized.  Differential
 equations are very much used throughout science and engineering, and
 actually most engineering problems are optimization problems in the
-end because one wants a design that maximizes performance and
+end, because one wants a design that maximizes performance and
 minimizes cost.
 
 We restrict the attention here to one algebraic equation in one variable,
-with our usual emphasis how to program the algorithms.
+with our usual emphasis on how to program the algorithms.
 *Systems* of nonlinear algebraic equations with *many variables*
 arise from implicit methods for ordinary and partial differential
 equations as well as in multivariate optimization. However,
@@ -99,6 +99,8 @@ simple, such approaches are often referred to as *brute force*
 methods. However, we are not embarrassed of explaining the methods
 in detail and implementing them.
 
+.. index:: brute force method
+
 Brute force root finding
 ------------------------
 
@@ -115,10 +117,10 @@ point is above the :math:`x` axis, or the other way around.
 If this is found to be the case, we know that :math:`f` must be zero
 in between these two :math:`x` points.
 
-Numerical algorithm  (1)
-~~~~~~~~~~~~~~~~~~~~~~~~
+Numerical algorithm          (1)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-More precisely, we have a set of :math:`n+1` points :math:`(x_i, y_i))`,
+More precisely, we have a set of :math:`n+1` points :math:`(x_i, y_i)`,
 :math:`y_i=f(x_i)`, :math:`i=0,\ldots,n`, where
 :math:`x_0 < \ldots < x_n`.
 We check if :math:`y_i < 0` and :math:`y_{i+1} > 0` (or the other way around). A compact expression
@@ -138,12 +140,12 @@ which, when set equal to zero, gives the root
 .. math::
          x = x_i - \frac{x_{i+1}-x_i}{y_{i+1}-y_i}y_i\thinspace .
 
-Implementation  (6)
-~~~~~~~~~~~~~~~~~~~
+Implementation          (6)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Given some Matlab implementation ``f(x)`` of our mathematical
-function, straightforward programming of the above numerical
-algorithm leads to
+function, a straightforward implementation of the above numerical
+algorithm looks like
 
 .. code-block:: matlab
 
@@ -164,7 +166,7 @@ algorithm leads to
         end
 
 (See the file
-`brute_force_root_finder_flat.m <https://github.com/hplgit/prog4comp/src/m/brute_force_root_finder_flat.m>`__.)
+`brute_force_root_finder_flat.m <https://github.com/hplgit/prog4comp/tree/master/src/m/brute_force_root_finder_flat.m>`__.)
 
 Note the nice use of setting ``root`` to ``NaN``: we can simply test
 ``if isnan(root)`` to see if we found a root and overwrote the ``NaN``
@@ -200,13 +202,13 @@ for a good implementation of the brute force rooting finding algorithm:
         end
 
 This function is found in the file
-`brute_force_root_finder.m <https://github.com/hplgit/prog4comp/src/m/brute_force_foot_finder.m>`__.
+`brute_force_root_finder.m <https://github.com/hplgit/prog4comp/tree/master/src/m/brute_force_foot_finder.m>`__.
 
 This time we use another elegant technique to indicate if roots were found
 or not: ``roots`` is empty (an array of length zero) if the root finding was unsuccessful,
 otherwise it contains all the roots. Application of the function to
 the previous example can be coded as
-(`demo_brute_force_root_finder.m <https://github.com/hplgit/prog4comp/src/m/demo_brute_force_foot_finder.m>`__):
+(`demo_brute_force_root_finder.m <https://github.com/hplgit/prog4comp/tree/master/src/m/demo_brute_force_foot_finder.m>`__):
 
 .. code-block:: matlab
 
@@ -223,8 +225,8 @@ the previous example can be coded as
 Brute force optimization
 ------------------------
 
-Numerical algorithm  (2)
-~~~~~~~~~~~~~~~~~~~~~~~~
+Numerical algorithm          (2)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We realize that :math:`x_i`
 corresponds to a maximum point if :math:`y_{i-1} < y_i > y_{i+1}`.
@@ -235,11 +237,11 @@ In addition, we need to add an end
 point, :math:`i=0` or :math:`i=n`, if the corresponding :math:`y_i` is a global
 maximum or minimum.
 
-Implementation  (7)
-~~~~~~~~~~~~~~~~~~~
+Implementation          (7)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The algorithm above can be translated to the following Matlab function
-(file `brute_force_optimizer.m <https://github.com/hplgit/prog4comp/src/m/brute_force_optimizer.m>`__):
+(file `brute_force_optimizer.m <https://github.com/hplgit/prog4comp/tree/master/src/m/brute_force_optimizer.m>`__):
 
 .. code-block:: matlab
 
@@ -314,7 +316,7 @@ Model problem for algebraic equations
 We shall consider the
 very simple problem of finding the square root of 9, which is the
 positive solution of :math:`x^2=9`. The nice feature of solving an equation
-whose solution is known beforehand is that we can easier investigate
+whose solution is known beforehand is that we can easily investigate
 how the numerical method and the implementation perform in the search
 for the solution. The :math:`f(x)` function corresponding to the equation
 :math:`x^2=9` is
@@ -327,7 +329,7 @@ limit here is chosen somewhat arbitrarily).
 
 In the following, we will present several efficient and
 accurate methods for solving nonlinear algebraic equations, both
-single equations and systems of equations. The methods all have in
+single equation and systems of equations. The methods all have in
 common that they search for *approximate* solutions.
 The methods differ, however, in the
 way they perform the search for solutions. The idea for the search
@@ -341,7 +343,7 @@ need different methods for different problems.
 .. admonition:: What is the difference between linear and nonlinear equations
 
    You know how to solve linear equations :math:`ax+b=0`: :math:`x=-b/a`.
-   All other types of equations :math:`f(x)`, i.e., when :math:`f(x)` is not a linear
+   All other types of equations :math:`f(x)=0`, i.e., when :math:`f(x)` is not a linear
    function of :math:`x`, are called nonlinear.
    A typical way of recognizing a nonlinear equation is to observe
    that :math:`x` is "not alone" as in :math:`ax`,
@@ -356,8 +358,8 @@ need different methods for different problems.
 
 .. _4th:NonlinAlgEq:Newt:
 
-Newton's method
-===============
+Newton's method          (1)
+============================
 
 *Newton's method*, also known as *Newton-Raphson's method*, is a very
 famous and widely used method for solving nonlinear algebraic
@@ -366,8 +368,9 @@ generally the fastest one (usually by far). It does not guarantee
 that an existing solution will be found, however.
 
 A fundamental idea of numerical methods for nonlinear
-equations have been to construct a series of linear equations, since we
-can solve linear equations, such that solving the linear equations brings
+equations is to construct a series of linear equations (since we
+know how to solve linear equations) and hope that
+the solutions of these linear equations bring
 us closer and closer to the solution of the nonlinear equation.
 The idea will be clearer when we present Newton's method and the secant method.
 
@@ -437,13 +440,13 @@ The general scheme of Newton's method may be written as
 .. _Eq:eFourEleven:
 
 .. math::
-   :label: eFourEleven
-        
-        x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)},\quad n=0,1,2,\ldots
+
+    \tag{162}
+    x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)},\quad n=0,1,2,\ldots
         
         
 
-The computation in :eq:`eFourEleven` is repeated until
+The computation in :ref:`(162) <Eq:eFourEleven>` is repeated until
 :math:`f\left(x_n\right)` is close enough to zero. More precisely,
 we test if :math:`|f(x_n)|<\epsilon`, with :math:`\epsilon` being a small
 number.
@@ -573,6 +576,8 @@ because :math:`\tanh(x_7)` is 1.0 to machine precision, and then
 :math:`f'(x)=1 - \tanh(x)^2` becomes zero in the denominator in Newton's
 method.
 
+.. index:: divergence
+
 The underlying problem, leading to the division by zero in the above
 example, is that Newton's method *diverges*: the approximations move
 further and further away from :math:`x=0`. If it had not been for the
@@ -599,7 +604,7 @@ Newton's method where we
 
 A more robust and efficient version of the function, inserted in a
 complete program
-`Newtons_method.m <https://github.com/hplgit/prog4comp/src/m/Newtons_method.m>`__
+`Newtons_method.m <https://github.com/hplgit/prog4comp/tree/master/src/m/Newtons_method.m>`__
 for solving :math:`x^2 - 9 = 0`,
 is listed below.
 
@@ -642,12 +647,13 @@ is listed below.
         end
 
 .. index::
-   single: code; try-except
-
-.. index::
    single: code; exception
 
 Handling of the potential division by zero is done by a
+
+.. index::
+   single: code; try-catch
+
 ``try-catch`` construction, which works as follows. First, Matlab tries to execute the code in the ``try`` block, but if something goes wrong there, the ``catch`` block is executed instead and the execution is terminated by ``exit``.
 
 The division by zero will always be detected and the program will be
@@ -763,9 +769,9 @@ line that goes through the two most recent approximations :math:`x_n` and
 .. _Eq:eFourTwelve:
 
 .. math::
-   :label: eFourTwelve
-        
-        \frac{f(x_n)-f(x_{n-1})}{x_n - x_{n-1}}\thinspace .
+
+    \tag{163}
+    \frac{f(x_n)-f(x_{n-1})}{x_n - x_{n-1}}\thinspace .
         
         
 
@@ -781,14 +787,14 @@ or
 .. _Eq:eFourFourteen:
 
 .. math::
-   :label: eFourFourteen
-        
-        x_{n+1} = x_n - f(x_n) \frac{x_n - x_{n-1}}{f(x_n)-f(x_{n-1})}
+
+    \tag{164}
+    x_{n+1} = x_n - f(x_n) \frac{x_n - x_{n-1}}{f(x_n)-f(x_{n-1})}
         \thinspace .
         
         
 
-Comparing :eq:`eFourFourteen` to the graph in Figure
+Comparing :ref:`(164) <Eq:eFourFourteen>` to the graph in Figure
 :ref:`fig:illustrSecant`, we see how *two* chosen starting points (:math:`x_0
 = 1000`, :math:`x_1= 700`, and corresponding function values) are used to
 compute :math:`x_2`. Once we have :math:`x_2`, we similarly use :math:`x_1` and :math:`x_2` to
@@ -806,7 +812,7 @@ approximations. Therefore, we can make use of only three variables:
 ``x0`` and ``x1`` must be given (guessed) for the algorithm to start.
 
 A program
-`secant_method.m <https://github.com/hplgit/prog4comp/src/m/secant_method.m>`__
+`secant_method.m <https://github.com/hplgit/prog4comp/tree/master/src/m/secant_method.m>`__
 that solves our example problem may be written as:
 
 .. code-block:: matlab
@@ -882,7 +888,7 @@ solutions present, it finds only one of them, just as Newton's method
 and the secant method.  The bisection method is slower than the other
 two methods, so reliability comes with a cost of speed.
 
-To solve :math:`x^2 - 9 = 0`, :math:`x \in \left[0, 1000\right]` with the
+To solve :math:`x^2 - 9 = 0`, :math:`x \in \left[0, 1000\right]`, with the
 bisection method, we reason as follows.  The first key idea is that if :math:`f(x)
 = x^2 - 9` is *continuous* on the interval and the function values for
 the interval endpoints (:math:`x_L = 0`, :math:`x_R =1000`) have *opposite signs*,
@@ -909,7 +915,7 @@ zero, more precisely (as before): :math:`|f(x_M)|<\epsilon`, where
 The sketched strategy seems reasonable, so let us write a
 reusable function that can
 solve a general algebraic equation :math:`f(x)=0`
-(`bisection_method.m <https://github.com/hplgit/prog4comp/src/m/bisection_method.m>`__):
+(`bisection_method.m <https://github.com/hplgit/prog4comp/tree/master/src/m/bisection_method.m>`__):
 
 .. code-block:: matlab
 
@@ -954,8 +960,6 @@ solve a general algebraic equation :math:`f(x)=0`
 .. index::
    single: return; None
 
-.. index:: sys.exit
-
 Note that we first check if :math:`f` changes sign in :math:`[a,b]`, because that
 is a requirement for the algorithm to work. The algorithm also relies
 on a continuous :math:`f(x)` function, but this is very challenging
@@ -981,9 +985,9 @@ the number of function calls is much higher than with the previous methods.
    .. _Eq:eFourSeven:
 
 .. math::
-   :label: eFourSeven
-           
-           \frac{|b-a|}{2^n},
+
+    \tag{165}
+    \frac{|b-a|}{2^n},
            
            
    
@@ -1011,6 +1015,8 @@ stored as a separate file ``bisection.m`` for easy use by other programs.
 Rate of convergence
 ===================
 
+.. index:: rate of convergence
+
 With the methods above, we noticed that the number of iterations or
 function calls could differ quite substantially.
 The number of iterations needed
@@ -1022,9 +1028,9 @@ More precisely, we introduce the error in iteration :math:`n` as
 .. _Eq:eFourFifteen:
 
 .. math::
-   :label: eFourFifteen
-        
-        e_{n+1} = Ce_n^q,
+
+    \tag{166}
+    e_{n+1} = Ce_n^q,
         
         
 
@@ -1033,11 +1039,11 @@ is reduced from one iteration to the next. The larger :math:`q` is,
 the faster the error goes to zero, and the fewer iterations we
 need to meet the stopping criterion :math:`|f(x)|<\epsilon`.
 
-A single :math:`q` in :eq:`eFourFifteen` is defined in the limit
+A single :math:`q` in :ref:`(166) <Eq:eFourFifteen>` is defined in the limit
 :math:`n\rightarrow\infty`. For finite :math:`n`, and especially smaller :math:`n`,
 :math:`q` will vary with :math:`n`. To estimate :math:`q`, we can compute
 all the errors :math:`e_n` and set up
-:eq:`eFourFifteen` for three consecutive experiments :math:`n-1`, :math:`n`, and
+:ref:`(166) <Eq:eFourFifteen>` for three consecutive experiments :math:`n-1`, :math:`n`, and
 :math:`n+1`:
 
 .. math::
@@ -1059,13 +1065,15 @@ However, our previous implementations of Newton's method, the secant
 method, and the bisection method returned just the final approximation.
 
 Therefore, we have extended those previous implementations such that
-the user can choose whether the final value or the whole history of solutions is
-to be returned. The extended implementations are named ``Newton_solver``, ``secant_solver``
-and ``bisection_solver``. Compared to the previous implementations, each of these now takes
-an extra parameter ``return_x_list``. This parameter is a boolean, set to ``true`` if the
-function is supposed to return all the root approximations, or ``false``, if the function
-should only return the final approximation. As an example, let us take a closer look
-at ``Newton_solver``:
+the user can choose whether the final value or the whole history of
+solutions is to be returned. The extended implementations are named
+``Newton_solver``, ``secant_solver`` and ``bisection_solver``. Compared to
+the previous implementations, each of these now takes an extra
+parameter ``return_x_list``. This parameter is a boolean, set to ``true``
+if the function is supposed to return all the root approximations, or
+``false``, if the function should only return the final
+approximation. As an example, let us take a closer look at
+``Newton_solver``:
 
 .. code-block:: matlab
 
@@ -1103,7 +1111,7 @@ at ``Newton_solver``:
         end
 
 The function is found in the file
-`Newton_solver.m <https://github.com/hplgit/prog4comp/src/m/Newton_solver.m>`__.
+`Newton_solver.m <https://github.com/hplgit/prog4comp/tree/master/src/m/Newton_solver.m>`__.
 
 We can now make a call
 
@@ -1125,7 +1133,7 @@ and associated :math:`q_n` values with the compact function
             end
         end
 
-The error model :eq:`eFourFifteen` works well for Newton's method and
+The error model :ref:`(166) <Eq:eFourFifteen>` works well for Newton's method and
 the secant method. For the bisection method, however, it works well
 in the beginning, but not when the solution is approached.
 
@@ -1163,15 +1171,287 @@ Here it seems that :math:`q\approx 1.6` is the limit.
 **Remark.**
 If we in the bisection method think of the length of the current
 interval containing the solution as the error :math:`e_n`, then
-:eq:`eFourFifteen` works perfectly since :math:`e_{n+1}=\frac{1}{2}e_n`,
+:ref:`(166) <Eq:eFourFifteen>` works perfectly since :math:`e_{n+1}=\frac{1}{2}e_n`,
 i.e., :math:`q=1` and :math:`C=\frac{1}{2}`, but if :math:`e_n` is the true error
 :math:`|x-x_n|`, it is easily seen from a sketch that this error can
 oscillate between the current interval length and a potentially very small
 value as we approach the exact solution. The corresponding rates :math:`q_n`
 fluctuate widely and are of no interest.
 
-Exercises  (6)
-==============
+.. _nonlin:Newton:systems:
+
+Solving multiple nonlinear algebraic equations
+==============================================
+
+So far in this chapter, we have considered a single nonlinear algebraic equation. However, *systems* of such equations arise in a number of applications,
+foremost nonlinear ordinary and partial differential equations.
+Of the previous algorithms, only Newton's method is suitable for extension
+to systems of nonlinear equations.
+
+.. _nonlin:Newton:systems:notation:
+
+Abstract notation
+-----------------
+
+Suppose we have :math:`n` nonlinear equations, written in the following abstract
+form:
+
+.. _Eq:_auto57:
+
+.. math::
+
+    \tag{167}
+    F_0(x_0,x_1,\ldots,x_n) = 0,
+        
+        
+
+.. _Eq:_auto58:
+
+.. math::
+
+    \tag{168}
+    F_1(x_0,x_1,\ldots,x_n) = 0,
+        
+        
+
+.. _Eq:_auto59:
+
+.. math::
+
+    \tag{169}
+    \vdots = \vdots
+        
+        
+
+.. _Eq:_auto60:
+
+.. math::
+
+    \tag{170}
+    F_n(x_0,x_1,\ldots,x_n) = 0\thinspace .
+        
+        
+
+.. _Eq:_auto61:
+
+.. math::
+
+    \tag{171}
+    It will be convenient to introduce a *vector notation*
+
+.. math::
+         \boldsymbol{F} = (F_0,\ldots,F_1),\quad \boldsymbol{x} = (x_0,\ldots,x_n)\thinspace .
+
+The system can now be written as :math:`\boldsymbol{F} (\boldsymbol{x}) = \boldsymbol{0}`.
+
+As a specific example on the notation above, the system
+
+.. x=1, y=0
+
+.. _Eq:nonlin:Newton:systems:xeq:
+
+.. math::
+
+    \tag{172}
+    x^2 = y - x\cos(\pi x)
+        
+        
+
+.. _Eq:nonlin:Newton:systems:yeq:
+
+.. math::
+
+    \tag{173}
+    yx + e^{-y} = x^{-1}
+        
+        
+
+can be written in our abstract form by introducing :math:`x_0=x` and :math:`x_1=y`. Then
+
+.. math::
+        
+        F_0(x_0,x_1) &= x^2 - y + x\cos(\pi x) = 0,\\ 
+        F_1(x_0,x_1) &= yx + e^{-y} - x^{-1} = 0\thinspace .
+        
+
+Taylor expansions for multi-variable functions
+----------------------------------------------
+
+We follow the ideas of Newton's method for one equation in one variable:
+approximate the nonlinear :math:`f` by a linear function and find the root of
+that function. When :math:`n` variables are involved, we need to approximate
+a *vector function* :math:`\boldsymbol{F}(\boldsymbol{x})` by some linear function :math:`\tilde\boldsymbol{F} = \boldsymbol{J}\boldsymbol{x} + \boldsymbol{c}`,
+where :math:`\boldsymbol{J}` is an :math:`n\times n` matrix and :math:`\boldsymbol{c}` is some vector of length :math:`n`.
+
+The technique for approximating :math:`\boldsymbol{F}` by a linear function is to use
+the first two terms in a Taylor series expansion. Given the value of
+:math:`\boldsymbol{F}` and its partial derivatives with respect to :math:`\boldsymbol{x}` at some point
+:math:`\boldsymbol{x}_i`, we can approximate the value at some point :math:`\boldsymbol{x}_{i+1}` by
+the two first term in a Taylor series expansion around :math:`\boldsymbol{x}_i`:
+
+.. math::
+         \boldsymbol{F}(\boldsymbol{x}_{i+1}) \approx \boldsymbol{F}(\boldsymbol{x}_i) + \nabla\boldsymbol{F}(\boldsymbol{x}_i)(\boldsymbol{x}_{i+1}-\boldsymbol{x}_i)\thinspace .
+
+The next terms in the expansions are omitted here and of size
+:math:`||\boldsymbol{x}_{i+1}-\boldsymbol{x}_i||^2`, which are assumed to be small compared with the
+two terms above.
+
+The expression :math:`\nabla\boldsymbol{F}` is the matrix of all the partial derivatives
+of :math:`\boldsymbol{F}`. Component :math:`(i,j)` in :math:`\nabla\boldsymbol{F}` is
+
+.. math::
+         \frac{\partial F_i}{\partial x_j}\thinspace .
+
+For example, in our :math:`2\times 2` system :ref:`(172) <Eq:nonlin:Newton:systems:xeq>`-:ref:`(173) <Eq:nonlin:Newton:systems:yeq>` we can use SymPy to compute the Jacobian:
+
+.. code-block:: python
+
+        >>> from sympy import *
+        >>> x0, x1 = symbols('x0 x1')
+        >>> F0 = x0**2 - x1 + x0*cos(pi*x0)
+        >>> F1 = x0*x1 + exp(-x1) - x0**(-1)
+        >>> diff(F0, x0)
+        -pi*x0*sin(pi*x0) + 2*x0 + cos(pi*x0)
+        >>> diff(F0, x1)
+        -1
+        >>> diff(F1, x0)
+        x1 + x0**(-2)
+        >>> diff(F1, x1)
+        x0 - exp(-x1)
+
+We can then write
+
+.. math::
+         \nabla\boldsymbol{F} = \left(\begin{array}{ll}
+        \frac{\partial F_0}{\partial x_0} & \frac{\partial F_0}{\partial x_1}\\ 
+        \frac{\partial F_1}{\partial x_0} & \frac{\partial F_1}{\partial x_1}
+        \end{array}\right) =
+        \left(\begin{array}{ll}
+        2x_0 + \cos(\pi x_0) - \pi x_0\sin(\pi x_0) &
+        -1 \\ 
+        x_1 + x_0^{-2} & x_0 - e^{-x_1}
+        \end{array}\right)
+        
+
+The matrix :math:`\nabla\boldsymbol{F}` is called the *Jacobian* of :math:`\boldsymbol{F}` and often denoted
+by :math:`\boldsymbol{J}`.
+
+Newton's method          (2)
+----------------------------
+
+The idea of Newton's method is that we have some approximation :math:`\boldsymbol{x}_i`
+to the root and seek a new (and hopefully better) approximation :math:`\boldsymbol{x}_{i+1}`
+by approximating :math:`\boldsymbol{F}(\boldsymbol{x}_{i+1})` by a linear function and solve the corresponding
+linear system of algebraic equations.
+We approximate the nonlinear problem :math:`\boldsymbol{F}(\boldsymbol{x}_{i+1})=0` by the linear problem
+
+.. _Eq:nonlin:Newton:systems:lineq:
+
+.. math::
+
+    \tag{174}
+    \boldsymbol{F}(\boldsymbol{x}_i) + \boldsymbol{J}(\boldsymbol{x}_i)(\boldsymbol{x}_{i+1}-\boldsymbol{x}_i) = \boldsymbol{0},
+        
+        
+
+where :math:`\boldsymbol{J}(\boldsymbol{x}_i)` is just another notation for :math:`\nabla\boldsymbol{F}(\boldsymbol{x}_i)`.
+The equation :ref:`(174) <Eq:nonlin:Newton:systems:lineq>` is a linear system
+with coefficient matrix :math:`\boldsymbol{J}` and right-hand side vector :math:`\boldsymbol{F}(\boldsymbol{x}_i)`.
+We therefore write this system in the more familiar form
+
+.. math::
+         \boldsymbol{J}(\boldsymbol{x}_i)\boldsymbol{\delta} = -\boldsymbol{F}(\boldsymbol{x}_i),
+
+where we have introduce a symbol :math:`\boldsymbol{\delta}` for the
+unknown vector :math:`\boldsymbol{x}_{i+1}-\boldsymbol{x}_i` that multiplies the Jacobian :math:`\boldsymbol{J}`.
+
+The :math:`i`-th iteration of Newton's method for systems of algebraic
+equations consists of two steps:
+
+1. Solve the linear system :math:`\boldsymbol{J}(\boldsymbol{x}_i)\boldsymbol{\delta} = -\boldsymbol{F}(\boldsymbol{x}_i)` with respect
+   to :math:`\boldsymbol{\delta}`.
+
+2. Set :math:`\boldsymbol{x}_{i+1} = \boldsymbol{x}_i + \boldsymbol{\delta}`.
+
+Solving systems of linear equations must make use of appropriate
+software. Gaussian elimination is the most common, and in general
+the most robust, method for this purpose.
+Matlab interfaces the well-known LAPACK package with
+high-quality and very well tested subroutines for linear algebra.
+The backslash operator solves a linear system :math:`Ax=b` by ``x = A\b``
+by a method based on Gaussian elimination.
+
+When nonlinear systems of algebraic equations arise from discretization
+of partial differential equations, the Jacobian is very often sparse, i.e.,
+most of its elements are zero. In such cases it is important to use
+algorithms that can take advantage of the many zeros. Gaussian elimination
+is then a slow method, and (much)
+faster methods are based on iterative techniques.
+
+Implementation          (8)
+---------------------------
+
+Here is a very simple implementation of Newton's method for systems of
+nonlinear algebraic equations:
+
+.. code-block:: matlab
+
+        % Use Newton's method to solve systems of nonlinear algebraic equations.
+        
+        function [x, iteration_counter] = Newton_system(F, J, x, eps)
+            % Solve nonlinear system F=0 by Newton's method.
+            % J is the Jacobian of F. Both F and J must be functions of x.
+            % At input, x holds the start value. The iteration continues
+            % until ||F|| < eps.
+            
+            F_value = F(x);
+            F_norm = norm(F_value);  % l2 norm of vector
+            iteration_counter = 0;
+            while abs(F_norm) > eps && iteration_counter < 100
+                delta = J(x)\-F_value;
+                x = x + delta;
+                F_value = F(x);
+                F_norm = norm(F_value);
+                iteration_counter = iteration_counter + 1;
+            end
+        
+            % Here, either a solution is found, or too many iterations
+            if abs(F_norm) > eps
+                iteration_counter = -1;
+            end
+            
+        end
+
+We can test the function ``Newton_system`` with the
+:math:`2\times 2` system :ref:`(172) <Eq:nonlin:Newton:systems:xeq>`-:ref:`(173) <Eq:nonlin:Newton:systems:yeq>`:
+
+.. code-block:: matlab
+
+        function test_Newton_system1()       
+            expected = [1; 0];
+            tol = 1e-4;
+            [x, n] = Newton_system(@F, @J, [2; -1], 0.0001);
+            error = abs(expected - x);
+            assert(norm(error) < tol, 'err=%g', error);
+        end
+        
+        function F_vector = F(x)
+            F_vector = [x(1)^2 - x(2) + x(1)*cos(pi*x(1));...
+                        x(1)*x(2) + exp(-x(2)) - x(1)^(-1)];
+        end
+        
+        function J_matrix = J(x)
+            J_matrix = [2*x(1) + cos(pi*x(1)) - pi*x(1)*sin(pi*x(1)) -1;...
+                        x(2) + x(1)^(-2) x(1) - exp(-x(2))];   
+        end
+
+Here, the testing is based on the L2 norm of the error vector. Alternatively, we could test against the
+values of ``x`` that the algorithm finds, with appropriate tolerances.
+For example, as chosen for the error norm, if ``eps=0.0001``, a tolerance of :math:`10^{-4}` can be used for
+``x[0]`` and ``x[1]``.
+
+Exercises          (6)
+======================
 
 .. --- begin exercise ---
 
@@ -1191,34 +1471,66 @@ and the plotting when :math:`x_0=1.09`. Explain what you observe.
 **Solution.**
 The program may be written as:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: Newton_failure
-
+        function [solution, no_iterations] =...
+                                        Newton_failure(f, dfdx, x0, eps)
+            x = x0;
+            f_value = f(x);
+            iteration_counter = 0;
+            while abs(f_value) > eps && iteration_counter < 100
+                try
+                    fprintf('Current x vaule: %g \n', x);
+                    plot_line(f, x, f_value, dfdx(x));
+                    x = x - (f_value)/dfdx(x);
+                catch
+                    fprintf('Error! - derivative zero for x = \n', x)
+                    exit(1)
+                end
+                f_value = f(x);
+                iteration_counter = iteration_counter + 1;
+            end
+            % Here, either a solution is found, or too many iterations
+            if abs(f_value) > eps
+                iteration_counter = -1;
+            end
+            solution = x;
+            no_iterations = iteration_counter;
+        end
 
 which may be called from the script ``use_my_Newton_failure.m``:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: use_my_Newton_failure
-
+        f = @(x) tanh(x);
+        dfdx = @(x) 1 - tanh(x)^2;
+        
+        [solution, no_iterations] = Newton_failure(f, dfdx, 1.08, 0.001)
+        
+        if no_iterations > 0      % Solution found
+            fprintf('Number of function calls: %d \n', 1 + 2*no_iterations); 
+            fprintf('A solution is: %f \n', solution);
+        else
+            fprintf('Solution not found! \n');
+        end
 
 Note that ``Newton_failure.m`` calls the function ``plot_line`` (located in ``plot_line.m``),
 reading:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: plot_line
-
+        function plot_line(f, xn, f_xn, slope)
+            % Plot both f(x) and the tangent or secant
+            x_f = linspace(-2, 2, 100);
+            y_f = f(x_f);
+            x_t = linspace(xn-2, xn+2, 10);
+            y_t = slope*x_t + (f_xn - slope*xn); % Straight line: ax + b
+            figure(); 
+            plot(x_t, y_t, 'r-', x_f, y_f, 'b-');   grid('on');
+            xlabel('x'); ylabel('f(x)');
+            disp('...press enter to continue')
+            pause on; pause;
+        end
 
 (The function ``plot_line`` is placed as a separate m-file so that it may be used also
 by the function ``secant_failure``, which is to be written in another exercise.)
@@ -1276,23 +1588,30 @@ Try the initial guesses
 **Solution.**
 The program may be written as:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: secant_failure
-
+        % This file is not yet written.
 
 which may be called from the script ``use_my_secant_failure.m``:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: use_my_secant_failure
-
+        f = @(x) tanh(x);
+        dfdx = @(x) 1 - tanh(x)^2;
+        
+        % Requested trials:
+        %x0 = 1.08 , x1 = 1.09
+        %x0 = 1.09 , x1 = 1.1
+        %x0 = 1 , x1 = 2.3
+        %x0 = 1 , x1 = 2.4
+        [solution, no_iterations] = Secant_failure(f, 1, 2.4, 0.001)
+        
+        if no_iterations > 0       % Solution found
+            fprintf('Number of function calls: %d \n', 1 + 2*no_iterations); 
+            fprintf('A solution is: %f \n', solution);
+        else
+            fprintf('Solution not found! \n');
+        end
 
 Note that, as with ``Newton_failure.m``, the script ``plot_line.m`` is called for
 plotting each tangent.
@@ -1316,7 +1635,7 @@ Filename: ``secant_failure.*``.
 
 .. _4th:exer:Bisection:failure:
 
-Exercise 74: Understand how the bisection method cannot fail
+Exercise 74: Understand why the bisection method cannot fail
 ------------------------------------------------------------
 
 Solve the same problem as in :ref:`4th:exer:Newton:failure`,
@@ -1329,23 +1648,48 @@ during the iterations.
 **Solution.**
 The code may be written as:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: bisection_nonfailure
-
+        function [result1, result2] = ...
+                                   bisection_nonfailure(f, x_L, x_R, eps)
+            if f(x_L)*f(x_R) > 0
+               fprintf('Error! Function does not have opposite \n');
+               fprintf('signs at interval endpoints!');
+               exit(1); 
+            end
+            x_M = (x_L + x_R)/2;
+            f_M = f(x_M);
+            iteration_counter = 1;
+            while abs(f_M) > eps
+                left_f = f(x_L);
+                right_f = f(x_R);
+                if left_f*f_M > 0            % i.e., same sign
+                    x_L = x_M;
+                else
+                    x_R = x_M;
+                end
+                fprintf('interval: [%f, %f]\n', x_L, x_R); 
+                x_M = (x_L + x_R)/2;
+                f_M = f(x_M);
+                iteration_counter = iteration_counter + 1;
+            end
+            result1 = x_M;
+            result2 = iteration_counter;
+        end
 
 which may be called from the script ``use_my_bisection_nonfailure.m``:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: use_my_bisection_nonfailure
-
+        f = @(x) tanh(x);
+        
+        a = -5; b = 3;
+        
+        [solution, no_iterations] =...
+                           bisection_nonfailure(f, a, b, 1.0e-6);
+        
+        fprintf('Number of function calls: %d\n',1 + 2*no_iterations);
+        fprintf('A solution is: %f\n', solution);
 
 Running the program produces the following printout:
 
@@ -1372,8 +1716,7 @@ Exercise 75: Combine the bisection method with Newton's method
 .. solution=`sol_bisection_Newton.pdf`
 
 An attractive idea is to combine the reliability of the bisection method
-with the speed of Newton's method, even if the potential divergence with
-Newton's method then still is an issue. Such a combination is implemented
+with the speed of Newton's method. Such a combination is implemented
 by running the bisection method until we have a narrow interval, and then switch
 to Newton's method for speed.
 
@@ -1381,6 +1724,10 @@ Write a function that implements this idea.
 Start with an interval :math:`[a,b]` and switch to Newton's method when
 the current interval in the bisection method is a fraction :math:`s`
 of the initial interval (i.e., when the interval has length :math:`s(b-a)`).
+Potential divergence of
+Newton's method is still an issue, so if the approximate root jumps out
+of the narrowed interval (where the solution is known to lie),
+one can switch back to the bisection method.
 The value of :math:`s` must be given as an argument to the function, but
 it may have a default value of 0.1.
 
@@ -1391,23 +1738,50 @@ Try the new method on :math:`\tanh(x)=0` with an initial interval :math:`[-10,15
 **Solution.**
 The code may be written as:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: bisection_Newton
-
+        function [solution, no_iterations] = ...
+                              bisection_Newton(f, dfdx, x_L, x_R, eps, s)
+            f_L = f(x_L);
+            if f_L*f(x_R) > 0
+                fprintf('Error! Function does not have opposite');
+                fprintf('signs at interval endpoints!');
+                exit(1);
+            end
+            x_M = (x_L + x_R)/2;
+            f_M = f(x_M);
+            iteration_counter = 1;
+            interval_Newton = s*(x_R - x_L);  % Limit for swith to Newton
+            while (x_R - x_L) > interval_Newton
+                if f_L*f_M > 0    % i.e., same sign
+                    x_L = x_M;
+                    f_L = f_M;
+                else
+                    x_R = x_M;
+                end
+                x_M = (x_L + x_R)/2;
+                f_M = f(x_M);
+                iteration_counter = iteration_counter + 1;
+            end
+            [x, no_iter] = Newton(f, dfdx, x_M, eps);
+            solution = x;
+            no_iterations = iteration_counter + no_iter;
+        end
 
 which may be called from the script ``use_my_bisection_Newton.m``:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: use_my_bisection_Newton
-
+        f = @(x) tanh(x);
+        dfdx = @(x) 1 - tanh(x)^2; 
+        
+        eps = 1e-6;
+        a = -10; b = 15;
+        s = 0.1;
+        [solution, no_iterations] =...
+                                bisection_Newton(f, dfdx, a, b, eps, s);
+        fprintf('A solution x = %f was reached in %d iterations \n',...
+                                               solution, no_iterations);
 
 Running the program produces the following printout:
 
@@ -1429,7 +1803,8 @@ Exercise 76: Write a test function for Newton's method
 ------------------------------------------------------
 
 The purpose of this function is to verify the implementation of Newton's
-method in the ``Newton`` function in the file ``nonlinear_solvers.py``.
+method in the ``Newton`` function in the file
+ ``Newton.m``
 Construct an algebraic equation and perform two iterations of Newton's
 method by
 hand.
@@ -1444,13 +1819,25 @@ as a test function ``test_Newton()``.
 **Solution.**
 Here is the complete module with the test function.
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: test_Newton
-
+        function test_Newton()
+            f = @(x) cos(x) + sin(x);
+            dfdx = @(x) cos(x) - sin(x);
+            x0 = 2;                     % initial guess
+            %% Run two iterations with Newton's method
+            x1 = x0 - f(x0)/dfdx(x0);
+            x2 = x1 - f(x1)/dfdx(x1);
+            x_expected = zeros(2,1);
+            x_expected(1) = x1;  x_expected(2) = x2;
+            eps = f(x_expected(length(x_expected)));  % this eps gives two iterations
+        
+            [x_computed, it_counter] = Newton_solver(f, dfdx, x0, eps, true);
+            assert(it_counter == 2);
+            tol = 1E-15;
+            assert(abs(x_computed(1) - x_expected(1)) < tol);
+            assert(abs(x_computed(2) - x_expected(2)) < tol);
+        end
 
 .. --- end solution of exercise ---
 

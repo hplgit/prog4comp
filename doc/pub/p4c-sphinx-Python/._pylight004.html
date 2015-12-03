@@ -9,7 +9,7 @@
     
     <title>Computing integrals</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -25,6 +25,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
 
         <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
         <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
@@ -42,14 +43,10 @@
         </style>
 
     
-    <link rel="top" title="Programming for Computations" href="index.html" />
+    <link rel="top" title="Programming for Computations (Python version)" href="index.html" />
     <link rel="next" title="Solving ordinary differential equations" href="._pylight005.html" />
     <link rel="prev" title="Basic constructions" href="._pylight003.html" />
-
-   
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
-
+ 
   
        <style type="text/css">
          div.admonition {
@@ -59,8 +56,8 @@
        </style>
       </head>
     
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -72,18 +69,18 @@
         <li class="right" >
           <a href="._pylight003.html" title="Basic constructions"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Programming for Computations</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Programming for Computations (Python version)</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="computing-integrals">
-<h1>Computing integrals<a class="headerlink" href="#computing-integrals" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="index-0"></span><span class="target" id="index-1"></span><div class="figure" id="index-2">
+<span id="sec-integrals"></span><h1>Computing integrals<a class="headerlink" href="#computing-integrals" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><div class="figure" id="index-3">
 <a class="reference internal image-reference" href="_images/integral_comic_strip.png"><img alt="_images/integral_comic_strip.png" src="_images/integral_comic_strip.png" style="width: 800px;" /></a>
 </div>
 <div class="line-block">
@@ -99,7 +96,7 @@ much more powerful - you can essentially treat all integrals
 <span class="math">\(\int_a^bf(x)dx\)</span> in 10 lines of computer code (!). Integration also
 demonstrates the difference between exact mathematics by pen and paper
 and <em>numerical mathematics</em> on a computer. The latter approaches
-the result of the former without any worries about round-off errors
+the result of the former without any worries about rounding errors
 due to finite precision arithmetics in computers (in contrast to
 differentiation, where such errors prevent us from getting a result as accurate
 as we desire on the computer). Finally, integration is thought of
@@ -111,17 +108,18 @@ good habits to ensure your computer work is of the highest scientific
 quality. In particular, we have a strong focus on how to write
 Python code that is free of programming mistakes.</p>
 <p>Calculating an integral is traditionally done by</p>
-<div class="math" id="equation-eqn:FbFa">
-<span id="eq-eqn-fbfa"></span><span class="eqno">(1)</span>\[     \int_a^b f(x)\,dx = F(b) - F(a),\]</div>
+<div class="math" id="eq-eqn-fbfa">
+\[\tag{2}
+\int_a^b f(x)\,dx = F(b) - F(a),\]</div>
 <p>where</p>
 <div class="math">
 \[f(x) = \frac{dF}{dx} \thinspace .\]</div>
 <p>The major problem with this procedure is that we need to find
 the <em>anti-derivative</em> <span class="math">\(F(x)\)</span> corresponding to a given <span class="math">\(f(x)\)</span>.
 For some relatively simple integrands <span class="math">\(f(x)\)</span>,
-finding <span class="math">\(F(x)\)</span> is a doable task, but it can very quickly be challenging,
+finding <span class="math">\(F(x)\)</span> is a doable task, but it can very quickly become challenging,
 even impossible!</p>
-<p>The method <a href="#equation-eqn:FbFa">(1)</a> provides an <em>exact</em> or <em>analytical</em> value
+<p>The method <a class="reference internal" href="#eq-eqn-fbfa"><span class="std std-ref">(2)</span></a> provides an <em>exact</em> or <em>analytical</em> value
 of the integral. If we relax the requirement of the integral being
 exact, and instead look for <em>approximate</em> values, produced by
 <em>numerical methods</em>, integration becomes a very straightforward task
@@ -141,8 +139,9 @@ measured in a physical experiment.</p>
 <div class="section" id="basic-ideas-of-numerical-integration">
 <span id="sec-integrals-basic"></span><h2>Basic ideas of numerical integration<a class="headerlink" href="#basic-ideas-of-numerical-integration" title="Permalink to this headline">¶</a></h2>
 <p>We consider the integral</p>
-<div class="math" id="equation-sec:integr_fofx">
-<span id="eq-sec-integr-fofx"></span><span class="eqno">(2)</span>\[     \int_a^b f(x)dx\thinspace .\]</div>
+<div class="math" id="eq-sec-integr-fofx">
+\[\tag{3}
+\int_a^b f(x)dx\thinspace .\]</div>
 <p>Most numerical methods for computing this integral split
 up the original integral into a sum of several integrals, each
 covering a smaller part of the original integration interval
@@ -150,23 +149,26 @@ covering a smaller part of the original integration interval
 <em>integration points</em> <span class="math">\(x_i\)</span>, <span class="math">\(i = 0,1,\ldots,n\)</span> that are distributed on
 the interval <span class="math">\([a,b]\)</span>. Integration points may,
 or may not, be evenly distributed. An even distribution simplifies
-expressions and is often sufficient, so we will restrict ourselves to
+expressions and is often sufficient, so we will mostly restrict ourselves to
 that choice. The integration points are then computed as</p>
-<div class="math" id="equation-sec:integr_points">
-<span id="eq-sec-integr-points"></span><span class="eqno">(3)</span>\[     x_i = a + ih,\quad i = 0,1,\ldots,n,\]</div>
+<div class="math" id="eq-sec-integr-points">
+\[\tag{4}
+x_i = a + ih,\quad i = 0,1,\ldots,n,\]</div>
 <p>where</p>
-<div class="math" id="equation-sec:h_intgr_step">
-<span id="eq-sec-h-intgr-step"></span><span class="eqno">(4)</span>\[     h = \frac{b-a}{n}\thinspace .\]</div>
+<div class="math" id="eq-sec-h-intgr-step">
+\[\tag{5}
+h = \frac{b-a}{n}\thinspace .\]</div>
 <p>Given the integration points, the original
 integral is re-written as a sum of integrals, each integral being
 computed over the sub-interval between two consecutive integration
-points. The integral in <a href="#equation-sec:integr_fofx">(2)</a> is thus expressed as</p>
-<div class="math" id="equation-eqfdx">
-<span id="eq-eqfdx"></span><span class="eqno">(5)</span>\[     \int_a^b f(x)dx =
-     \int_{x_0}^{x_1} f(x)dx + \int_{x_1}^{x_2} f(x)dx + \ldots +
-     \int_{x_{n-1}}^{x_n} f(x)dx\thinspace .\]</div>
+points. The integral in <a class="reference internal" href="#eq-sec-integr-fofx"><span class="std std-ref">(3)</span></a> is thus expressed as</p>
+<div class="math" id="eq-eqfdx">
+\[\tag{6}
+\int_a^b f(x)dx =
+    \int_{x_0}^{x_1} f(x)dx + \int_{x_1}^{x_2} f(x)dx + \ldots +
+    \int_{x_{n-1}}^{x_n} f(x)dx\thinspace .\]</div>
 <p>Note that <span class="math">\(x_0 = a\)</span> and <span class="math">\(x_n = b\)</span>.</p>
-<p>Proceeding from <a href="#equation-eqfdx">(5)</a>, the different integration methods will
+<p>Proceeding from <a class="reference internal" href="#eq-eqfdx"><span class="std std-ref">(6)</span></a>, the different integration methods will
 differ in the way they approximate each integral on the right hand
 side.  The fundamental idea is that each term is an integral over a
 small interval <span class="math">\([x_i,x_{i+1}]\)</span>, and over this small interval, it makes
@@ -184,63 +186,72 @@ physics.  Assume that you speed up your car from rest and wonder how
 far you go in <span class="math">\(T\)</span> seconds. The distance is given by the integral
 <span class="math">\(\int_0^T v(t)dt\)</span>, where <span class="math">\(v(t)\)</span> is the velocity as a function of
 time. A rapidly increasing velocity function might be</p>
-<div class="math" id="equation-sec:vCar_foft">
-<span id="eq-sec-vcar-foft"></span><span class="eqno">(6)</span>\[     v\left(t\right) = 3t^{2}e^{t^3}\thinspace .\]</div>
+<div class="math" id="eq-sec-vcar-foft">
+\[\tag{7}
+v\left(t\right) = 3t^{2}e^{t^3}\thinspace .\]</div>
 <p>The distance after one second is</p>
-<div class="math" id="equation-sec:dCar_intgr">
-<span id="eq-sec-dcar-intgr"></span><span class="eqno">(7)</span>\[     \int_0^1 v(t)dt,\]</div>
+<div class="math" id="eq-sec-dcar-intgr">
+\[\tag{8}
+\int_0^1 v(t)dt,\]</div>
 <p>which is the integral we aim to compute by numerical methods.
 Fortunately, the chosen expression of the velocity has a form that makes it
 easy to calculate the anti-derivative as</p>
-<div class="math" id="equation-sec:pCar_Foft">
-<span id="eq-sec-pcar-foft"></span><span class="eqno">(8)</span>\[     V(t) = e^{t^3}-1\thinspace .\]</div>
+<div class="math" id="eq-sec-pcar-foft">
+\[\tag{9}
+V(t) = e^{t^3}-1\thinspace .\]</div>
 <p>We can therefore compute the exact value of the integral as
 <span class="math">\(V(1)-V(0)\approx 1.718\)</span> (rounded to 3 decimals for convenience).</p>
 </div>
 </div>
 <div class="section" id="the-composite-trapezoidal-rule">
 <span id="sec-integrals-trap"></span><h2>The composite trapezoidal rule<a class="headerlink" href="#the-composite-trapezoidal-rule" title="Permalink to this headline">¶</a></h2>
-<p>The integral <span class="math">\(\int_a^b f(x)dx\)</span> may be interpreted as the
+<span class="target" id="index-4"></span><p id="index-5">The integral <span class="math">\(\int_a^b f(x)dx\)</span> may be interpreted as the
 area between the <span class="math">\(x\)</span> axis and the graph <span class="math">\(y=f(x)\)</span> of the integrand.
-Figure <a class="reference internal" href="#fig-vcar"><span>The integral of  interpreted as the area under the graph of </span></a> illustrates this area for the choice
-<a href="#equation-sec:dCar_intgr">(7)</a>. Computing the integral <span class="math">\(\int_0^1f(t)dt\)</span>
+Figure <a class="reference internal" href="#fig-vcar"><span class="std std-ref">The integral of  interpreted as the area under the graph of </span></a> illustrates this area for the choice
+<a class="reference internal" href="#eq-sec-dcar-intgr"><span class="std std-ref">(8)</span></a>. Computing the integral <span class="math">\(\int_0^1f(t)dt\)</span>
 amounts to computing the area of the hatched region.</p>
 <div class="figure" id="id3">
 <span id="fig-vcar"></span><a class="reference internal image-reference" href="_images/integral_of_f.png"><img alt="_images/integral_of_f.png" src="_images/integral_of_f.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text">The integral of <span class="math">\(v(t)\)</span> interpreted as the area under the graph of <span class="math">\(v\)</span></span></p>
 </div>
-<p id="index-3">If we <em>replace</em> the true graph in Figure <a class="reference internal" href="#fig-vcar"><span>The integral of  interpreted as the area under the graph of </span></a> by a set of
+<p id="index-6">If we <em>replace</em> the true graph in Figure <a class="reference internal" href="#fig-vcar"><span class="std std-ref">The integral of  interpreted as the area under the graph of </span></a> by a set of
 straight line segments, we may view the area rather as composed of
 trapezoids, the areas of which are easy to compute. This is
-illustrated in Figure <a class="reference internal" href="#fig-vcartrapeze"><span>Computing approximately the integral of a function as the sum of the areas of the trapezoids</span></a>, where 4 straight line
+illustrated in Figure <a class="reference internal" href="#fig-vcartrapeze"><span class="std std-ref">Computing approximately the integral of a function as the sum of the areas of the trapezoids</span></a>, where 4 straight line
 segments give rise to 4 trapezoids, covering the time intervals
-<span class="math">\([0,0.2)\)</span>, <span class="math">\([0.2,0.6)\)</span>, <span class="math">\([0.6,0.8)\)</span> and <span class="math">\([0.8,1.0]\)</span>. Note that
-these intervals are <em>not</em> of the same size (although we very often we work
-with equal-sized trapezoids for simplicity).</p>
+<span class="math">\([0,0.2)\)</span>, <span class="math">\([0.2,0.6)\)</span>, <span class="math">\([0.6,0.8)\)</span> and <span class="math">\([0.8,1.0]\)</span>. Note that we have
+taken the opportunity here to demonstrate the computations with time
+intervals that differ in size.</p>
 <div class="figure" id="id4">
 <span id="fig-vcartrapeze"></span><a class="reference internal image-reference" href="_images/viz_trapezoidal.png"><img alt="_images/viz_trapezoidal.png" src="_images/viz_trapezoidal.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Computing approximately the integral of a function as the sum of the areas of the trapezoids</em></span></p>
 </div>
-<p>The areas of the 4 trapezoids shown in Figure <a class="reference internal" href="#fig-vcartrapeze"><span>Computing approximately the integral of a function as the sum of the areas of the trapezoids</span></a>
+<p>The areas of the 4 trapezoids shown in Figure <a class="reference internal" href="#fig-vcartrapeze"><span class="std std-ref">Computing approximately the integral of a function as the sum of the areas of the trapezoids</span></a>
 now constitute our approximation to the integral
-<a href="#equation-sec:dCar_intgr">(7)</a>:</p>
+<a class="reference internal" href="#eq-sec-dcar-intgr"><span class="std std-ref">(8)</span></a>:</p>
 <div class="math">
 \[\int_0^1 v(t)dt \approx
 h_1 (\frac{v(0)+v(0.2)}{2}) + h_2 (\frac{v(0.2)+v(0.6)}{2}) \nonumber\]</div>
-<div class="math" id="equation-sec:integr_Trap_split">
-<span id="eq-sec-integr-trap-split"></span><span class="eqno">(9)</span>\[     + h_3 (\frac{v(0.6)+v(0.8)}{2}) + h_4 (\frac{v(0.8)+v(1.0)}{2}),\]</div>
+<div class="math" id="eq-sec-integr-trap-split">
+\[\tag{10}
++ h_3 (\frac{v(0.6)+v(0.8)}{2}) + h_4 (\frac{v(0.8)+v(1.0)}{2}),\]</div>
 <p>where</p>
-<div class="math" id="equation-sec:integr_h1">
-<span id="eq-sec-integr-h1"></span><span class="eqno">(10)</span>\[     h_1 = (0.2 - 0.0),\]</div>
-<div class="math" id="equation-sec:integr_h2">
-<span id="eq-sec-integr-h2"></span><span class="eqno">(11)</span>\[     h_2 = (0.6 - 0.2),\]</div>
-<div class="math" id="equation-sec:integr_h3">
-<span id="eq-sec-integr-h3"></span><span class="eqno">(12)</span>\[     h_3 = (0.8 - 0.6),\]</div>
-<div class="math" id="equation-sec:integr_h4">
-<span id="eq-sec-integr-h4"></span><span class="eqno">(13)</span>\[     h_4 = (1.0 - 0.8)\thinspace\]</div>
-<p>With <span class="math">\(v(t) = 3t^{2}e^{t^3}\)</span>, each term in <a href="#equation-sec:integr_Trap_split">(9)</a> is readily computed and our approximate computation gives</p>
-<div class="math" id="equation-sec:integr_Trap_answer">
-<span id="eq-sec-integr-trap-answer"></span><span class="eqno">(14)</span>\[     \int_0^1 v(t)dt \approx 1.895\thinspace .\]</div>
+<div class="math" id="eq-sec-integr-h1">
+\[\tag{11}
+h_1 = (0.2 - 0.0),\]</div>
+<div class="math" id="eq-sec-integr-h2">
+\[\tag{12}
+h_2 = (0.6 - 0.2),\]</div>
+<div class="math" id="eq-sec-integr-h3">
+\[\tag{13}
+h_3 = (0.8 - 0.6),\]</div>
+<div class="math" id="eq-sec-integr-h4">
+\[\tag{14}
+h_4 = (1.0 - 0.8)\thinspace\]</div>
+<p>With <span class="math">\(v(t) = 3t^{2}e^{t^3}\)</span>, each term in <a class="reference internal" href="#eq-sec-integr-trap-split"><span class="std std-ref">(10)</span></a> is readily computed and our approximate computation gives</p>
+<div class="math" id="eq-sec-integr-trap-answer">
+\[\tag{15}
+\int_0^1 v(t)dt \approx 1.895\thinspace .\]</div>
 <p>Compared to the true answer of <span class="math">\(1.718\)</span>, this is off by about
 10%. However, note that we used just 4 trapezoids to approximate the
 area. With more trapezoids, the approximation would have become
@@ -251,20 +262,26 @@ though, but it is a perfect job for a computer! Let us therefore
 derive the expressions for approximating the integral
 by an arbitrary number of trapezoids.</p>
 <p>For a given function <span class="math">\(f(x)\)</span>, we want to approximate the
-integral <span class="math">\(\int_a^bf(x)dx\)</span> by <span class="math">\(n\)</span> trapezoids. We start out with
-<a href="#equation-eqfdx">(5)</a> and approximate each integral on the right hand side
+integral <span class="math">\(\int_a^bf(x)dx\)</span> by <span class="math">\(n\)</span> trapezoids (of equal width). We start out with
+<a class="reference internal" href="#eq-eqfdx"><span class="std std-ref">(6)</span></a> and approximate each integral on the right hand side
 with a single trapezoid. In detail,</p>
 <div class="math">
 \[\int_a^b f(x)\,dx = \int_{x_0}^{x_1} f(x) dx + \int_{x_1}^{x_2} f(x) dx + \ldots + \int_{x_{n-1}}^{x_n} f(x) dx,     \nonumber\]</div>
-<div class="math" id="equation-eqfdelta">
-<span id="eq-eqfdelta"></span><span class="eqno">(15)</span>\[                       \approx h \frac{f(x_0) + f(x_1)}{2} + h \frac{f(x_1) + f(x_2)}{2} + \ldots + h \frac{f(x_{n-1}) + f(x_n)}{2}\]</div>
-<p>By simplifying the right hand side of <a href="#equation-eqfdelta">(15)</a> we get</p>
-<div class="math" id="equation-eqn:314">
-<span id="eq-eqn-314"></span><span class="eqno">(16)</span>\[\begin{split}     \int_a^b f(x)\,dx \approx \\
-     \frac{h}{2}\left[f(x_0) + 2 f(x_1) + 2 f(x_2) + \ldots + 2 f(x_{n-1}) + f(x_n)\right]\end{split}\]</div>
+<div class="math">
+\[\approx h \frac{f(x_0) + f(x_1)}{2} +
+h \frac{f(x_1) + f(x_2)}{2} + \ldots + \nonumber\]</div>
+<div class="math" id="eq-eqfdelta">
+\[\tag{16}
+\quad h \frac{f(x_{n-1}) + f(x_n)}{2}\]</div>
+<p>By simplifying the right hand side of <a class="reference internal" href="#eq-eqfdelta"><span class="std std-ref">(16)</span></a> we get</p>
+<div class="math" id="eq-eqn-314">
+\[\begin{split}\tag{17}
+\int_a^b f(x)\,dx \approx \\
+    \frac{h}{2}\left[f(x_0) + 2 f(x_1) + 2 f(x_2) + \ldots + 2 f(x_{n-1}) + f(x_n)\right]\end{split}\]</div>
 <p>which is more compactly written as</p>
-<div class="math" id="equation-eqn:315">
-<span id="eq-eqn-315"></span><span class="eqno">(17)</span>\[     \int_a^b f(x)\,dx \approx h \left[\frac{1}{2}f(x_0) + \sum_{i=1}^{n-1}f(x_i) + \frac{1}{2}f(x_n) \right] \thinspace .\]</div>
+<div class="math" id="eq-eqn-315">
+\[\tag{18}
+\int_a^b f(x)\,dx \approx h \left[\frac{1}{2}f(x_0) + \sum_{i=1}^{n-1}f(x_i) + \frac{1}{2}f(x_n) \right] \thinspace .\]</div>
 <div class="admonition-composite-integration-rules admonition">
 <p class="first admonition-title">Composite integration rules</p>
 <p class="last">The word <em>composite</em> is often used when a numerical integration method
@@ -278,26 +295,26 @@ composite rule with many trapezoids.</p>
 </div>
 <div class="section" id="specific-or-general-implementation">
 <h3>Specific or general implementation?<a class="headerlink" href="#specific-or-general-implementation" title="Permalink to this headline">¶</a></h3>
-<p>Suppose our primary goal was to compute the specific integral
+<span class="target" id="index-7"></span><p id="index-8">Suppose our primary goal was to compute the specific integral
 <span class="math">\(\int_0^1 v(t)dt\)</span> with <span class="math">\(v(t)=3t^2e^{t^3}\)</span>. First we played around with
 a simple hand calculation to see what the method was about, before we
 (as one often does in mathematics) developed a general formula
-<a href="#equation-eqn:315">(17)</a> for the general or &#8220;abstract&#8221; integral
+<a class="reference internal" href="#eq-eqn-315"><span class="std std-ref">(18)</span></a> for the general or &#8220;abstract&#8221; integral
 <span class="math">\(\int_a^bf(x)dx\)</span>.  To solve our specific problem <span class="math">\(\int_0^1 v(t)dt\)</span> we
-must then apply the general formula <a href="#equation-eqn:315">(17)</a> to the given data
+must then apply the general formula <a class="reference internal" href="#eq-eqn-315"><span class="std std-ref">(18)</span></a> to the given data
 (function and integral limits) in our problem.  Although simple in
 principle, the practical steps are confusing for many because the
-notation in the abstract problem in <a href="#equation-eqn:315">(17)</a> differs from the
+notation in the abstract problem in <a class="reference internal" href="#eq-eqn-315"><span class="std std-ref">(18)</span></a> differs from the
 notation in our special problem.  Clearly, the <span class="math">\(f\)</span>, <span class="math">\(x\)</span>, and <span class="math">\(h\)</span> in
-<a href="#equation-eqn:315">(17)</a> correspond to <span class="math">\(v\)</span>, <span class="math">\(t\)</span>, and perhaps <span class="math">\(\Delta t\)</span> for the
+<a class="reference internal" href="#eq-eqn-315"><span class="std std-ref">(18)</span></a> correspond to <span class="math">\(v\)</span>, <span class="math">\(t\)</span>, and perhaps <span class="math">\(\Delta t\)</span> for the
 trapezoid width in our special problem.</p>
 <div class="admonition-the-programmer-s-dilemma admonition">
 <p class="first admonition-title">The programmer&#8217;s dilemma</p>
 <ol class="arabic simple">
 <li>Should we write a special program for the special integral,
-using the ideas from the general rule <a href="#equation-eqn:315">(17)</a>, but
+using the ideas from the general rule <a class="reference internal" href="#eq-eqn-315"><span class="std std-ref">(18)</span></a>, but
 replacing <span class="math">\(f\)</span> by <span class="math">\(v\)</span>, <span class="math">\(x\)</span> by <span class="math">\(t\)</span>, and <span class="math">\(h\)</span> by <span class="math">\(\Delta t\)</span>?</li>
-<li>Should we implement the general method <a href="#equation-eqn:315">(17)</a> as it stands in a
+<li>Should we implement the general method <a class="reference internal" href="#eq-eqn-315"><span class="std std-ref">(18)</span></a> as it stands in a
 general function <code class="docutils literal"><span class="pre">trapezoid(f,</span> <span class="pre">a,</span> <span class="pre">b,</span> <span class="pre">n)</span></code> and solve the specific
 problem at hand by a specialized call to this function?</li>
 </ol>
@@ -314,13 +331,13 @@ is the source of much confusion about mathematics!</p>
 <div class="section" id="implementation-with-functions">
 <h3>Implementation with functions<a class="headerlink" href="#implementation-with-functions" title="Permalink to this headline">¶</a></h3>
 <p>For the integral <span class="math">\(\int_a^bf(x)dx\)</span> computed by the formula
-<a href="#equation-eqn:315">(17)</a> we want the corresponding Python function <code class="docutils literal"><span class="pre">trapezoid</span></code>
+<a class="reference internal" href="#eq-eqn-315"><span class="std std-ref">(18)</span></a> we want the corresponding Python function <code class="docutils literal"><span class="pre">trapezoid</span></code>
 to take any <span class="math">\(f\)</span>, <span class="math">\(a\)</span>, <span class="math">\(b\)</span>, and <span class="math">\(n\)</span> as input and return the
 approximation to the integral.</p>
 <p>We write a Python function <code class="docutils literal"><span class="pre">trapezoidal</span></code>
-in a file <a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/trapezoidal.py">trapezoidal.py</a>
+in a file <a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/trapezoidal.py">trapezoidal.py</a>
 as close as possible
-to the formula <a href="#equation-eqn:315">(17)</a>, making sure variable names correspond
+to the formula <a class="reference internal" href="#eq-eqn-315"><span class="std std-ref">(18)</span></a>, making sure variable names correspond
 to the mathematical notation:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">trapezoidal</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="n">h</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
@@ -336,7 +353,7 @@ to the mathematical notation:</p>
 <h3>Solving our specific problem in a session<a class="headerlink" href="#solving-our-specific-problem-in-a-session" title="Permalink to this headline">¶</a></h3>
 <p>Just having the <code class="docutils literal"><span class="pre">trapezoidal</span></code> function as the only content
 of a file <code class="docutils literal"><span class="pre">trapezoidal.py</span></code> automatically
-makes that file to a module that we can import and test in an
+makes that file a module that we can import and test in an
 interactive session:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">trapezoidal</span> <span class="kn">import</span> <span class="n">trapezoidal</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">exp</span>
@@ -396,11 +413,11 @@ n=4: 1.9227167504675762, error: -0.204435
 </div>
 <div class="section" id="making-a-module">
 <h4>Making a module<a class="headerlink" href="#making-a-module" title="Permalink to this headline">¶</a></h4>
-<p>When we have the different pieces of our program as a collection of
+<span class="target" id="index-9"></span><span class="target" id="index-10"></span><p id="index-11">When we have the different pieces of our program as a collection of
 functions, it is very straightforward to create a <em>module</em> that can be
 imported in other programs. That is, having our code as a module,
 means that the <code class="docutils literal"><span class="pre">trapezoidal</span></code> function can easily be reused by other
-programs to solve other problems.  The requirements of a module are
+programs to solve other problems. The requirements of a module are
 simple: put everything inside functions and let function calls in the
 main program be in the so-called <em>test block</em>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
@@ -423,13 +440,13 @@ n=400: 1.7183030649495579, error: -2.12365e-05
 </div>
 <div class="section" id="alternative-flat-special-purpose-implementation">
 <h4>Alternative flat special-purpose implementation<a class="headerlink" href="#alternative-flat-special-purpose-implementation" title="Permalink to this headline">¶</a></h4>
-<p id="index-4">Let us illustrate the implementation implied by alternative 1
+<span class="target" id="index-12"></span><span class="target" id="index-13"></span><p id="index-14">Let us illustrate the implementation implied by alternative 1
 in the <em>Programmer&#8217;s dilemma</em> box in the section <span class="xref std std-ref">sec:integrals:trap:impl</span>.
 That is, we make a special-purpose code where we adapt the
-general formula <a href="#equation-eqn:315">(17)</a>
+general formula <a class="reference internal" href="#eq-eqn-315"><span class="std std-ref">(18)</span></a>
 to the specific problem <span class="math">\(\int_0^1 3t^2e^{t^3}dt\)</span>.</p>
 <p>Basically, we use a <code class="docutils literal"><span class="pre">for</span></code> loop to compute the sum. Each term with <span class="math">\(f(x)\)</span> in
-the formula <a href="#equation-eqn:315">(17)</a> is replaced by <span class="math">\(3t^2e^{t^3}\)</span>, <span class="math">\(x\)</span> by <span class="math">\(t\)</span>,
+the formula <a class="reference internal" href="#eq-eqn-315"><span class="std std-ref">(18)</span></a> is replaced by <span class="math">\(3t^2e^{t^3}\)</span>, <span class="math">\(x\)</span> by <span class="math">\(t\)</span>,
 and <span class="math">\(h\)</span> by <span class="math">\(\Delta t\)</span> <a class="footnote-reference" href="#deltat-replacement" id="id1">[1]</a>. A first try at writing a plain,
 flat program doing the special calculation is</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">exp</span>
@@ -461,7 +478,7 @@ a small time interval, so we adopt that common notation.</td></tr>
 </table>
 <p>The problem with the above code is at least three-fold:</p>
 <ol class="arabic simple">
-<li>We need to reformulate <a href="#equation-eqn:315">(17)</a> for our special
+<li>We need to reformulate <a class="reference internal" href="#eq-eqn-315"><span class="std std-ref">(18)</span></a> for our special
 problem with a different notation.</li>
 <li>The integrand <span class="math">\(3t^2e^{t^3}\)</span> is inserted many times in the
 code, which quickly leads to errors.</li>
@@ -513,7 +530,7 @@ call <code class="docutils literal"><span class="pre">erf(x)</span></code>.
 The <code class="docutils literal"><span class="pre">erf</span></code> function is found in the <code class="docutils literal"><span class="pre">math</span></code> module.</td></tr>
 </tbody>
 </table>
-<p>These changes are straightforward to implement, but <em>they are scattered
+<p id="index-15">These changes are straightforward to implement, but <em>they are scattered
 around in the program</em>, a fact that requires us to be very careful so
 we do not introduce new programming errors while we modify the code.
 It is also very easy to forget to make a required change.</p>
@@ -539,16 +556,17 @@ the algorithm after every change of the program.</p>
 In more challenging engineering problems the code quickly grows
 to hundreds and thousands of line. Without abstractions in terms
 of general algorithms in general reusable functions, the complexity
-of the program grows so fast that if will be extremely difficult
-to make sure that the entire program works properly.</p>
-<p>Another advantage of packaging mathematical algorithms in functions is
-that function can be reused by anyone to solve a problem by just
-calling the function with a proper set of arguments.  Understanding
-the function&#8217;s inner details is not necessary to compute a new
-integral. Similarly, you can find libraries of functions on the
-Internet and use these functions to solve your problems without
-specific knowledge of every mathematical detail in the functions.
-This desirable feature has its downside, of course: the user of a
+of the program grows so fast that it will be extremely difficult
+to make sure that the program works properly.</p>
+<p>Another advantage of packaging mathematical algorithms in functions
+is that a function can be reused by anyone to solve
+a problem by just calling the function with a proper set of arguments.
+Understanding the function&#8217;s
+inner details is not necessary to compute a new integral. Similarly,
+you can find libraries of functions on the Internet and use these
+functions to solve your problems without specific knowledge of
+every mathematical detail in the functions.</p>
+<p>This desirable feature has its downside, of course: the user of a
 function may misuse it, and the function may contain programming
 errors and lead to wrong answers. Testing the output of downloaded
 functions is therefore extremely important before relying on the
@@ -558,14 +576,14 @@ results.</p>
 </div>
 <div class="section" id="the-composite-midpoint-method">
 <span id="sec-integrals-midpoint"></span><h2>The composite midpoint method<a class="headerlink" href="#the-composite-midpoint-method" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="the-idea">
-<h3>The idea<a class="headerlink" href="#the-idea" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="index-16"></span><div class="section" id="the-idea">
+<span id="index-17"></span><h3>The idea<a class="headerlink" href="#the-idea" title="Permalink to this headline">¶</a></h3>
 <p>Rather than approximating the area under a curve by trapezoids, we can
 use plain rectangles. It may sound less accurate to use horizontal lines
 and not skew lines following the function to be integrated, but
-the integration method based on rectangles is in fact slightly more
+an integration method based on rectangles (the <em>midpoint method</em>) is in fact slightly more
 accurate than the one based on trapezoids!</p>
-<p>In the <em>midpoint method</em>, we construct a rectangle for every sub-interval
+<p>In the midpoint method, we construct a rectangle for every sub-interval
 where the height equals <span class="math">\(f\)</span> at the midpoint of the sub-interval.
 Let us do this for four rectangles, using the same sub-intervals as we
 had for hand calculations with the trapezoidal method:
@@ -574,12 +592,13 @@ had for hand calculations with the trapezoidal method:
 \[\int_0^1 f(t)dt \approx
    h_1 f\left(\frac{0 + 0.2}{2}\right) +
    h_2 f\left(\frac{0.2 + 0.6}{2}\right) \nonumber\]</div>
-<div class="math" id="equation-sec:integr_Midp_split">
-<span id="eq-sec-integr-midp-split"></span><span class="eqno">(18)</span>\[     + h_3 f\left(\frac{0.6 + 0.8}{2}\right) +
-        h_4 f\left(\frac{0.8 + 1.0}{2}\right),\]</div>
+<div class="math" id="eq-sec-integr-midp-split">
+\[\tag{19}
++ h_3 f\left(\frac{0.6 + 0.8}{2}\right) +
+       h_4 f\left(\frac{0.8 + 1.0}{2}\right),\]</div>
 <p>where <span class="math">\(h_1\)</span>, <span class="math">\(h_2\)</span>, <span class="math">\(h_3\)</span>, and <span class="math">\(h_4\)</span> are the widths of the sub-intervals,
 used previously with the trapezoidal method and defined in
-<a href="#equation-sec:integr_h1">(10)</a>-<a href="#equation-sec:integr_h4">(13)</a>.</p>
+<a class="reference internal" href="#eq-sec-integr-h1"><span class="std std-ref">(11)</span></a>-<a class="reference internal" href="#eq-sec-integr-h4"><span class="std std-ref">(14)</span></a>.</p>
 <div class="figure" id="id5">
 <span id="fig-vcarmidpoint"></span><a class="reference internal image-reference" href="_images/viz_midpoint.png"><img alt="_images/viz_midpoint.png" src="_images/viz_midpoint.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>Computing approximately the integral of a function as the sum of the areas of the rectangles</em></span></p>
@@ -590,30 +609,33 @@ small, but it is better than what we got with the trapezoidal method
 (<span class="math">\(10\%\)</span>) with the same sub-intervals. More rectangles give a
 better approximation.</p>
 <div class="section" id="the-general-formula-2">
-<h4>The general formula  (2)<a class="headerlink" href="#the-general-formula-2" title="Permalink to this headline">¶</a></h4>
-<p>Let us derive a formula for the midpoint method based on <span class="math">\(n\)</span> rectangles:</p>
+<h4>The general formula<a class="headerlink" href="#the-general-formula-2" title="Permalink to this headline">¶</a></h4>
+<p>Let us derive a formula for the midpoint method based on <span class="math">\(n\)</span> rectangles of equal width:</p>
 <div class="math">
 \[\int_a^b f(x)\,dx = \int_{x_0}^{x_1} f(x)dx + \int_{x_1}^{x_2} f(x)dx +
                      \ldots + \int_{x_{n-1}}^{x_n} f(x)dx,     \nonumber\]</div>
-<div class="math" id="equation-sec:Midp_general1">
-<span id="eq-sec-midp-general1"></span><span class="eqno">(19)</span>\[                       \approx h f\left(\frac{x_0 + x_1}{2}\right) +
-                        h f\left(\frac{x_1 + x_2}{2}\right) + \ldots +
-                        h f\left(\frac{x_{n-1} + x_n}{2}\right) ,\]</div>
-<div class="math" id="equation-sec:Midp_general2">
-<span id="eq-sec-midp-general2"></span><span class="eqno">(20)</span>\[                       \approx h \left(f\left(\frac{x_0 + x_1}{2}\right) +
-                       f\left(\frac{x_1 + x_2}{2}\right) + \ldots +
-                       f\left(\frac{x_{n-1} + x_n}{2}\right)\right)\thinspace .\]</div>
+<div class="math" id="eq-sec-midp-general1">
+\[\tag{20}
+\approx h f\left(\frac{x_0 + x_1}{2}\right) +
+                       h f\left(\frac{x_1 + x_2}{2}\right) + \ldots +
+                       h f\left(\frac{x_{n-1} + x_n}{2}\right) ,\]</div>
+<div class="math" id="eq-sec-midp-general2">
+\[\tag{21}
+\approx h \left(f\left(\frac{x_0 + x_1}{2}\right) +
+                      f\left(\frac{x_1 + x_2}{2}\right) + \ldots +
+                      f\left(\frac{x_{n-1} + x_n}{2}\right)\right)\thinspace .\]</div>
 <p>This sum may be written more compactly as</p>
-<div class="math" id="equation-sec:midpointFormula">
-<span id="eq-sec-midpointformula"></span><span class="eqno">(21)</span>\[     \int_a^b f(x) dx \approx h \sum_{i=0}^{n-1}f(x_i) ,\]</div>
+<div class="math" id="eq-sec-midpointformula">
+\[\tag{22}
+\int_a^b f(x) dx \approx h \sum_{i=0}^{n-1}f(x_i) ,\]</div>
 <p>where <span class="math">\(x_i = \left(a + \frac{h}{2}\right) + ih\)</span>.</p>
 </div>
 <div class="section" id="implementation-2">
-<span id="sec-midpoint-code"></span><h4>Implementation  (2)<a class="headerlink" href="#implementation-2" title="Permalink to this headline">¶</a></h4>
+<span id="sec-midpoint-code"></span><h4>Implementation<a class="headerlink" href="#implementation-2" title="Permalink to this headline">¶</a></h4>
 <p>We follow the advice and lessons learned from the implementation of
 the trapezoidal method and make a function <code class="docutils literal"><span class="pre">midpoint(f,</span> <span class="pre">a,</span> <span class="pre">b,</span> <span class="pre">n)</span></code>
-(in a file <a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/midpoint.py">midpoint.py</a>)
-for implementing the general formula <a href="#equation-sec:midpointFormula">(21)</a>:</p>
+(in a file <a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/midpoint.py">midpoint.py</a>)
+for implementing the general formula <a class="reference internal" href="#eq-sec-midpointformula"><span class="std std-ref">(22)</span></a>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">midpoint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="n">h</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
     <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
@@ -637,7 +659,7 @@ get the answer with an error about <span class="math">\(10^{-12}\)</span> in a c
 <p>The next example shows how easy we can combine the <code class="docutils literal"><span class="pre">trapezoidal</span></code> and <code class="docutils literal"><span class="pre">midpoint</span></code>
 functions to make a comparison of the two methods in the
 file
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/compare_integration_methods.py">compare_integration_methods.py</a>:</p>
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/compare_integration_methods.py">compare_integration_methods.py</a>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">trapezoidal</span> <span class="kn">import</span> <span class="n">trapezoidal</span>
 <span class="kn">from</span> <span class="nn">midpoint</span> <span class="kn">import</span> <span class="n">midpoint</span>
 <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">exp</span>
@@ -680,7 +702,7 @@ file
 <p>A visual inspection of the numbers shows how fast the digits
 stabilize in both methods. It appears that 13 digits have stabilized
 in the last two rows.</p>
-<div class="admonition-remark admonition">
+<span class="target" id="index-18"></span><div class="admonition-remark admonition" id="index-19">
 <p class="first admonition-title">Remark</p>
 <p>The trapezoidal and midpoint methods are just two examples in a jungle
 of numerical integration rules. Other famous methods are
@@ -707,7 +729,7 @@ section) look at the integral values and see that they stabilize as
 <span class="math">\(n\)</span> grows. Unfortunately, these are very weak test procedures and not
 at all satisfactory for claiming that the software we have produced is
 correctly implemented.</p>
-<p>To see this, we can introduce a bug in the
+<p id="index-20">To see this, we can introduce a bug in the
 <code class="docutils literal"><span class="pre">application</span></code> function that calls <code class="docutils literal"><span class="pre">trapezoidal</span></code>: instead of
 integrating <span class="math">\(3t^2e^{t^3}\)</span>, we write &#8220;accidentally&#8221; <span class="math">\(3t^3e^{t^3}\)</span>,
 but keep the same anti-derivative <span class="math">\(V(t)e^{t^3}\)</span> for computing the
@@ -728,9 +750,9 @@ the right errors should be <span class="math">\(369\)</span>, <span class="math"
 correct than in the buggy code. The problem, however, is that it is
 reduced in both codes, and we may stop further testing and believe
 everything is correctly implemented.</p>
-<div class="admonition-unit-testing admonition" id="index-5">
+<div class="admonition-unit-testing admonition" id="index-21">
 <p class="first admonition-title">Unit testing</p>
-<p class="last">A good habit is to test small pieces of a larger code at a time.
+<p class="last">A good habit is to test small pieces of a larger code individually, one at a time.
 This is known as <em>unit testing</em>. One identifies a (small) unit of
 the code, and then one makes a separate test for this unit. The unit test
 should be stand-alone in the sense that it can be run without the
@@ -741,7 +763,7 @@ approximation errors. A fortunate side effect of unit testing is that
 the programmer is forced to use functions to modularize the code into smaller,
 logical pieces.</p>
 </div>
-<p>There are three serious ways to test the implementation of
+<p id="index-22">There are three serious ways to test the implementation of
 numerical methods via unit tests:</p>
 <ol class="arabic simple">
 <li><em>Comparing with hand-computed results</em> in a problem with
@@ -765,18 +787,18 @@ it is known that the error depends on <span class="math">\(n\)</span> as <span c
 gives exactly the same results.</p>
 </div>
 <div class="section" id="solving-a-problem-without-numerical-errors-1">
-<h3>Solving a problem without numerical errors  (1)<a class="headerlink" href="#solving-a-problem-without-numerical-errors-1" title="Permalink to this headline">¶</a></h3>
-<p>The best unit tests for numerical algorithms involve mathematical problems
-where we know the numerical result beforehand. Usually, numerical
-results contain unknown approximation errors, so knowing the numerical
-result implies that we have a problem where the approximation errors
-vanish. This feature may be present in very simple mathematical problems.
-For example, the trapezoidal method is exact for
-integration of linear functions <span class="math">\(f(x)=ax+b\)</span>. We can therefore pick
-some linear function and construct a test function that checks
-equality (within a tolerance) between the exact analytical expression
-for the integral and the number computed by the implementation
-of the trapezoidal method.</p>
+<h3>Solving a problem without numerical errors<a class="headerlink" href="#solving-a-problem-without-numerical-errors-1" title="Permalink to this headline">¶</a></h3>
+<p>The best unit tests for numerical algorithms involve mathematical
+problems where we know the numerical result beforehand. Usually,
+numerical results contain unknown approximation errors, so knowing the
+numerical result implies that we have a problem where the
+approximation errors vanish. This feature may be present in very
+simple mathematical problems. For example, the trapezoidal method is
+exact for integration of linear functions <span class="math">\(f(x)=ax+b\)</span>. We can
+therefore pick some linear function and construct a test function that
+checks equality between the exact analytical expression for the
+integral and the number computed by the implementation of the
+trapezoidal method.</p>
 <p>A specific test case can be <span class="math">\(\int_{1.2}^{4.4} (6x-4)dx\)</span>. This
 integral involves an &#8220;arbitrary&#8221; interval  <span class="math">\([1.2, 4.4]\)</span> and
 an &#8220;arbitrary&#8221; linear function <span class="math">\(f(x) = 6x-4\)</span>. By &#8220;arbitrary&#8221;
@@ -786,26 +808,33 @@ forgetting to multiply is equivalent to multiplying by 1, and
 forgetting to add is equivalent to adding 0).</p>
 </div>
 <div class="section" id="demonstrating-correct-convergence-rates-1">
-<h3>Demonstrating correct convergence rates  (1)<a class="headerlink" href="#demonstrating-correct-convergence-rates-1" title="Permalink to this headline">¶</a></h3>
-<p>Normally, unit tests must be based on problems where the numerical approximation
-errors in our implementation remain unknown. However, we often know
-or may assume a certain <em>asymptotic</em> behavior of the error.
-We can do some experimental runs with the test problem
-<span class="math">\(\int_0^1 3t^2e^{t^3}dt\)</span> where <span class="math">\(n\)</span> is doubled in each run:
-<span class="math">\(n=4,8,16\)</span>. The corresponding errors are then 12%, 3% and 0.77%,
-respectively. These numbers indicate that the error is
-roughly reduced by a factor of 4 when doubling <span class="math">\(n\)</span>. We say that
-the <em>convergence rate</em> is <span class="math">\(n^{-2}\)</span>. In fact, this result can also
-be shown mathematically. The idea of a unit test is to run the
-algorithm for some <span class="math">\(n\)</span> values, compute the error (the absolute
-value of the difference between the exact analytical result and
-the one produced by the numerical method), and check that the error
-has <em>approximately</em> correct asymptotic behavior, i.e., that
-the error is proportional to <span class="math">\(n^{-2}\)</span>.</p>
-<p>Let us develop some more precise method for such unit tests based
-on convergence rates.
-We assume that the error <span class="math">\(E\)</span>
-depends on <span class="math">\(n\)</span> according to</p>
+<h3>Demonstrating correct convergence rates<a class="headerlink" href="#demonstrating-correct-convergence-rates-1" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="index-23"></span><span class="target" id="index-24"></span><p id="index-25">Normally, unit tests must be based on problems where the numerical
+approximation errors in our implementation remain unknown. However, we
+often know or may assume a certain <em>asymptotic</em> behavior of the error.
+We can do some experimental runs with the test problem <span class="math">\(\int_0^1
+3t^2e^{t^3}dt\)</span> where <span class="math">\(n\)</span> is doubled in each run: <span class="math">\(n=4,8,16\)</span>. The
+corresponding errors are then 12%, 3% and 0.77%, respectively. These
+numbers indicate that the error is roughly reduced by a factor of 4
+when doubling <span class="math">\(n\)</span>. Thus, the error converges to zero as <span class="math">\(n^{-2}\)</span> and
+we say that the <em>convergence rate</em> is 2. In
+fact, this result can also be shown mathematically for the trapezoidal
+and midpoint method.  Numerical integration methods usually have an error
+that converge to zero as <span class="math">\(n^{-p}\)</span> for some <span class="math">\(p\)</span> that depends on the
+method. With such a result, it does not matter if we do not know what
+the actual approximation error is: we know at what rate it is
+<em>reduced</em>, so running the implementation for two or more different <span class="math">\(n\)</span>
+values will put us in a position to measure the expected rate and see if
+it is achieved.</p>
+<p>The idea of a corresponding unit test is then to run the algorithm for some <span class="math">\(n\)</span> values,
+compute the error (the absolute value of the difference between the
+exact analytical result and the one produced by the numerical method),
+and check that the error has <em>approximately</em> correct asymptotic
+behavior, i.e., that the error is proportional to <span class="math">\(n^{-2}\)</span> in case of
+the trapezoidal and midpoint method.</p>
+<p>Let us develop a more precise method for such unit tests based on
+convergence rates.  We assume that the error <span class="math">\(E\)</span> depends on <span class="math">\(n\)</span>
+according to</p>
 <div class="math">
 \[E = Cn^r,\]</div>
 <p>where <span class="math">\(C\)</span> is an unknown constant and <span class="math">\(r\)</span> is the convergence rate.
@@ -815,31 +844,107 @@ We compute the corresponding errors
 <span class="math">\(E_0,\ldots,E_q\)</span>.
 For two consecutive experiments, number <span class="math">\(i\)</span> and <span class="math">\(i-1\)</span>,
 we have the error model</p>
-<div class="math">
-\[E_{i} = Cn_{i}^r,\]</div>
-<div class="math">
-\[E_{i-1} = Cn_{i-1}^r\thinspace .\]</div>
+<div class="math" id="eq-auto2">
+\[\tag{23}
+E_{i} = Cn_{i}^r,\]</div>
+<div class="math" id="eq-auto3">
+\[\tag{24}
+E_{i-1} = Cn_{i-1}^r\thinspace .\]</div>
 <p>These are two equations for two unknowns <span class="math">\(C\)</span> and <span class="math">\(r\)</span>.
 We can easily eliminate <span class="math">\(C\)</span> by dividing the equations by each other.
 Then solving for <span class="math">\(r\)</span> gives</p>
-<div class="math" id="equation-sec:integrals:testprocs:req">
-<span id="eq-sec-integrals-testprocs-req"></span><span class="eqno">(22)</span>\[     r_{i-1} = \frac{\ln (E_i/E_{i-1})}{\ln (n_i/n_{i-1})}\thinspace .\]</div>
+<div class="math" id="eq-sec-integrals-testprocs-req">
+\[\tag{25}
+r_{i-1} = \frac{\ln (E_i/E_{i-1})}{\ln (n_i/n_{i-1})}\thinspace .\]</div>
 <p>We have introduced a subscript <span class="math">\(i-1\)</span> in <span class="math">\(r\)</span>
 since the estimated
 value for <span class="math">\(r\)</span> varies with <span class="math">\(i\)</span>. Hopefully,
 <span class="math">\(r_{i-1}\)</span> approaches
-the correct convergence rate as the number of intervals increases in size
+the correct convergence rate as the number of intervals increases
 and <span class="math">\(i\rightarrow q\)</span>.</p>
+<div class="section" id="finite-precision-of-floating-point-numbers">
+<span id="sec-integrals-finite-prec"></span><h4>Finite precision of floating-point numbers<a class="headerlink" href="#finite-precision-of-floating-point-numbers" title="Permalink to this headline">¶</a></h4>
+<p id="index-26">The test procedures above lead to comparison of numbers for checking that
+calculations were correct.
+Such comparison is more complicated than what a newcomer might think.
+Suppose we have a calculation <code class="docutils literal"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></code> and want to check that the
+result is what we expect. We start with 1 + 2:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">expected</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">==</span> <span class="n">expected</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Then we proceed with 0.1 + 0.2:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">;</span> <span class="n">expected</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">==</span> <span class="n">expected</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+<p id="index-27">So why is <span class="math">\(0.1 + 0.2 \neq 0.3\)</span>? The reason is that real numbers cannot in
+general be exactly represented on a computer. They must instead be
+approximated by a <a class="reference external" href="https://en.wikipedia.org/wiki/Floating_point">floating-point number</a> that can only store a finite amount of information, usually about
+17 digits of a real number. Let us print 0.1, 0.2, 0.1 + 0.2, and 0.3
+with 17 decimals:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="s">&#39;</span><span class="si">%.17f</span><span class="se">\n</span><span class="si">%.17f</span><span class="se">\n</span><span class="si">%.17f</span><span class="se">\n</span><span class="si">%.17f</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
+<span class="go">0.10000000000000001</span>
+<span class="go">0.20000000000000001</span>
+<span class="go">0.30000000000000004</span>
+<span class="go">0.29999999999999999</span>
+</pre></div>
+</div>
+<p>We see that all of the numbers have an inaccurate digit in the 17th
+decimal place. Because 0.1 + 0.2 evaluates to 0.30000000000000004
+and 0.3 is represented as 0.29999999999999999, these two numbers
+are not equal. In general, real numbers in Python have (at most)
+16 correct decimals.</p>
+<span class="target" id="index-28"></span><p id="index-29">When we compute with real numbers, these numbers are inaccurately
+represented on the computer, and arithmetic operations with inaccurate
+numbers lead to small rounding errors in the final results. Depending on
+the type of numerical algorithm, the rounding errors may or may not
+accumulate.</p>
+<p>If we cannot make tests like <code class="docutils literal"><span class="pre">0.1</span> <span class="pre">+</span> <span class="pre">0.2</span> <span class="pre">==</span> <span class="pre">0.3</span></code>, what should we then do?
+The answer is that we must accept some small inaccuracy and make
+a test with a <em>tolerance</em>. Here is the recipe:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">;</span> <span class="n">expected</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">computed</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">expected</span> <span class="o">-</span> <span class="n">computed</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-15</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">diff</span> <span class="o">&lt;</span> <span class="n">tol</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>Here we have set the tolerance for comparison to <span class="math">\(10^{-15}\)</span>, but
+calculating <code class="docutils literal"><span class="pre">0.3</span> <span class="pre">-</span> <span class="pre">(0.1</span> <span class="pre">+</span> <span class="pre">0.2)</span></code> shows that it equals
+<code class="docutils literal"><span class="pre">-5.55e-17</span></code>, so a lower tolerance
+could be used in this particular example. However, in other calculations
+we have little idea about how accurate the answer is (there could be
+accumulation of rounding errors in more complicated algorithms),
+so <span class="math">\(10^{-15}\)</span> or <span class="math">\(10^{-14}\)</span> are robust values.
+As we demonstrate below, these tolerances depend on the magnitude of
+the numbers in the calculations.</p>
+<span class="target" id="index-30"></span><p id="index-31">Doing an experiment with <span class="math">\(10^k + 0.3 - (10^k + 0.1 + 0.2)\)</span> for
+<span class="math">\(k=1,\ldots,10\)</span> shows that the answer (which should be zero)
+is around <span class="math">\(10^{16-k}\)</span>. This means that the tolerance must be larger
+if we compute with larger numbers. Setting a proper tolerance therefore
+requires some experiments to see what level of accuracy one can expect.
+A way out of this difficulty is to work with <em>relative</em> instead of
+<em>absolute</em> differences. In a relative difference we divide by one of
+the operands, e.g.,</p>
+<div class="math">
+\[a = 10^k + 0.3,\quad b = (10^k + 0.1 + 0.2),\quad c = \frac{a - b}{a}\thinspace .\]</div>
+<p>Computing this <span class="math">\(c\)</span> for various <span class="math">\(k\)</span> shows a value around <span class="math">\(10^{-16}\)</span>.
+A safer procedure is thus to use <em>relative differences</em>.</p>
+</div>
 <div class="section" id="constructing-unit-tests-and-writing-test-functions">
 <span id="sec-integrals-test-functions"></span><h4>Constructing unit tests and writing test functions<a class="headerlink" href="#constructing-unit-tests-and-writing-test-functions" title="Permalink to this headline">¶</a></h4>
-<p>Python has several frameworks for automatically running and checking a
+<span class="target" id="index-32"></span><p id="index-33">Python has several frameworks for automatically running and checking a
 potentially very large number of tests for parts of your software by
 one command.
 This is an extremely useful feature during program
 development: whenever you have done some changes to one or more files,
 launch the test command and make sure nothing is broken because of
 your edits.</p>
-<p>The test frameworks <code class="docutils literal"><span class="pre">nose</span></code> and <code class="docutils literal"><span class="pre">py.test</span></code> are particularly attractive
+<span class="target" id="index-34"></span><span class="target" id="index-35"></span><p id="index-36">The test frameworks <code class="docutils literal"><span class="pre">nose</span></code> and <code class="docutils literal"><span class="pre">py.test</span></code> are particularly attractive
 as they are very easy to use.
 Tests are placed in special <em>test functions</em>
 that the frameworks can recognize and run for you. The requirements
@@ -872,6 +977,19 @@ tests in subdirectories: running <code class="docutils literal"><span class="pre
 run all tests in all <code class="docutils literal"><span class="pre">test*.py</span></code> files in all subdirectories, while
 <code class="docutils literal"><span class="pre">nosetests</span> <span class="pre">-s</span> <span class="pre">-v</span></code> restricts the attention to subdirectories whose
 names start with <code class="docutils literal"><span class="pre">test</span></code> or end with <code class="docutils literal"><span class="pre">_test</span></code> or <code class="docutils literal"><span class="pre">_tests</span></code>.</p>
+<p>As long as we add integers, the equality test in the <code class="docutils literal"><span class="pre">test_add</span></code>
+function is appropriate, but if we try to call <code class="docutils literal"><span class="pre">add(0.1,</span> <span class="pre">0.2)</span></code>
+instead, we will face the rounding error problems explained in
+the section <a class="reference internal" href="#sec-integrals-finite-prec"><span class="std std-ref">Finite precision of floating-point numbers</span></a>, and we must use a test
+with tolerance instead:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">test_add</span><span class="p">()</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="mf">0.3</span>
+    <span class="n">computed</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-14</span>
+    <span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">expected</span> <span class="o">-</span> <span class="n">computed</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">diff</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">,</span> <span class="s">&#39;diff=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">diff</span>
+</pre></div>
+</div>
 <p>Below we shall write test functions for each of the three test
 procedures we suggested: comparison with hand calculations,
 checking problems that can be exactly solved, and checking convergence
@@ -883,7 +1001,7 @@ test functions in one common file by the name <code class="docutils literal"><sp
 <h3>Hand-computed numerical results<a class="headerlink" href="#hand-computed-numerical-results" title="Permalink to this headline">¶</a></h3>
 <p>Our previous hand calculations for two trapezoids can be checked against
 the <code class="docutils literal"><span class="pre">trapezoidal</span></code> function inside a test function
-(in a file <a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/test_trapezoidal.py">test_trapezoidal.py</a>):</p>
+(in a file <a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/test_trapezoidal.py">test_trapezoidal.py</a>):</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">trapezoidal</span> <span class="kn">import</span> <span class="n">trapezoidal</span>
 
 <span class="k">def</span> <span class="nf">test_trapezoidal_one_exact_result</span><span class="p">():</span>
@@ -891,23 +1009,23 @@ the <code class="docutils literal"><span class="pre">trapezoidal</span></code> f
     <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">exp</span>
     <span class="n">v</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="n">t</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
-    <span class="n">numerical</span> <span class="o">=</span> <span class="n">trapezoidal</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-    <span class="n">exact</span> <span class="o">=</span> <span class="mf">2.463642041244344</span>
-    <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">exact</span> <span class="o">-</span> <span class="n">numerical</span><span class="p">)</span>
+    <span class="n">computed</span> <span class="o">=</span> <span class="n">trapezoidal</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="mf">2.463642041244344</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">expected</span> <span class="o">-</span> <span class="n">computed</span><span class="p">)</span>
     <span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-14</span>
-    <span class="n">success</span> <span class="o">=</span> <span class="n">err</span> <span class="o">&lt;</span> <span class="n">tol</span>
-    <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;error=</span><span class="si">%g</span><span class="s"> &gt; tol=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">tol</span><span class="p">)</span>
+    <span class="n">success</span> <span class="o">=</span> <span class="n">error</span> <span class="o">&lt;</span> <span class="n">tol</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;error=</span><span class="si">%g</span><span class="s"> &gt; tol=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">errror</span><span class="p">,</span> <span class="n">tol</span><span class="p">)</span>
     <span class="k">assert</span> <span class="n">success</span><span class="p">,</span> <span class="n">msg</span>
 </pre></div>
 </div>
 <p>Note the importance of checking <code class="docutils literal"><span class="pre">err</span></code> against <code class="docutils literal"><span class="pre">exact</span></code> with a tolerance:
-round-off errors from the arithmetics inside <code class="docutils literal"><span class="pre">trapezoidal</span></code> will not
+rounding errors from the arithmetics inside <code class="docutils literal"><span class="pre">trapezoidal</span></code> will not
 make the result exactly like the hand-computed one. The size of
 the tolerance is here set to <span class="math">\(10^{-14}\)</span>, which is a kind of all-round
 value for computations with numbers not deviating much from unity.</p>
 </div>
 <div class="section" id="solving-a-problem-without-numerical-errors-2">
-<h3>Solving a problem without numerical errors  (2)<a class="headerlink" href="#solving-a-problem-without-numerical-errors-2" title="Permalink to this headline">¶</a></h3>
+<h3>Solving a problem without numerical errors<a class="headerlink" href="#solving-a-problem-without-numerical-errors-2" title="Permalink to this headline">¶</a></h3>
 <p>We know that the trapezoidal rule is exact for linear integrands.
 Choosing the integral <span class="math">\(\int_{1.2}^{4.4} (6x-4)dx\)</span> as test case,
 the corresponding
@@ -917,19 +1035,19 @@ test function for this unit test may look like</p>
     <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">6</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">4</span>
     <span class="n">F</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span>  <span class="c"># Anti-derivative</span>
     <span class="n">a</span> <span class="o">=</span> <span class="mf">1.2</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">4.4</span>
-    <span class="n">exact</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">F</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">F</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
     <span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-14</span>
     <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">:</span>
-        <span class="n">numerical</span> <span class="o">=</span> <span class="n">trapezoidal</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-        <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">exact</span> <span class="o">-</span> <span class="n">numerical</span><span class="p">)</span>
-        <span class="n">success</span> <span class="o">=</span> <span class="n">err</span> <span class="o">&lt;</span> <span class="n">tol</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;n=</span><span class="si">%d</span><span class="s">, err=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+        <span class="n">computed</span> <span class="o">=</span> <span class="n">trapezoidal</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">expected</span> <span class="o">-</span> <span class="n">computed</span><span class="p">)</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="n">error</span> <span class="o">&lt;</span> <span class="n">tol</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;n=</span><span class="si">%d</span><span class="s">, err=</span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
         <span class="k">assert</span> <span class="n">success</span><span class="p">,</span> <span class="n">msg</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="demonstrating-correct-convergence-rates-2">
-<h3>Demonstrating correct convergence rates  (2)<a class="headerlink" href="#demonstrating-correct-convergence-rates-2" title="Permalink to this headline">¶</a></h3>
+<h3>Demonstrating correct convergence rates<a class="headerlink" href="#demonstrating-correct-convergence-rates-2" title="Permalink to this headline">¶</a></h3>
 <p>In the present example with integration, it is known that the
 approximation errors in the trapezoidal rule are proportional to
 <span class="math">\(n^{-2}\)</span>, <span class="math">\(n\)</span> being the number of subintervals used in the composite
@@ -943,7 +1061,7 @@ The algorithm typically goes like</p>
 <li><span class="math">\(n_i = 2^{i+1}\)</span></li>
 <li>Compute integral with <span class="math">\(n_i\)</span> intervals</li>
 <li>Compute the error <span class="math">\(E_i\)</span></li>
-<li>Estimate <span class="math">\(r_i\)</span> from <a href="#equation-sec:integrals:testprocs:req">(22)</a>
+<li>Estimate <span class="math">\(r_i\)</span> from <a class="reference internal" href="#eq-sec-integrals-testprocs-req"><span class="std std-ref">(25)</span></a>
 if <span class="math">\(i&gt;0\)</span></li>
 </ul>
 </li>
@@ -953,17 +1071,17 @@ if <span class="math">\(i&gt;0\)</span></li>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">convergence_rates</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">num_experiments</span><span class="o">=</span><span class="mi">14</span><span class="p">):</span>
     <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">log</span>
     <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">zeros</span>
-    <span class="n">exact</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">F</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">expected</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">F</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">num_experiments</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
     <span class="n">E</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">num_experiments</span><span class="p">)</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">num_experiments</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_experiments</span><span class="p">):</span>
         <span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">numerical</span> <span class="o">=</span> <span class="n">trapezoidal</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-        <span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">exact</span> <span class="o">-</span> <span class="n">numerical</span><span class="p">)</span>
+        <span class="n">computed</span> <span class="o">=</span> <span class="n">trapezoidal</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">expected</span> <span class="o">-</span> <span class="n">computed</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">r_im1</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">log</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-            <span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%.2f</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">r_im1</span><span class="p">)</span>  <span class="c"># Truncate to two decimals</span>
+            <span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%.2f</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">r_im1</span><span class="p">)</span> <span class="c"># Truncate to two decimals</span>
     <span class="k">return</span> <span class="n">r</span>
 </pre></div>
 </div>
@@ -978,23 +1096,25 @@ and then checking the value of <span class="math">\(r_i\)</span> for the largest
     <span class="n">r</span> <span class="o">=</span> <span class="n">convergence_rates</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
     <span class="k">print</span> <span class="n">r</span>
     <span class="n">tol</span> <span class="o">=</span> <span class="mf">0.01</span>
-    <span class="k">assert</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">,</span> <span class="n">r</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:])</span>  <span class="c"># show last 4 estimated rates</span>
+    <span class="k">assert</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">,</span> <span class="n">msg</span>
 </pre></div>
 </div>
 <p>Running the test shows that all <span class="math">\(r_i\)</span>, except the first one, equal
-the target limit 2 within two decimals.</p>
+the target limit 2 within two decimals. This observation suggest a
+tolerance of <span class="math">\(10^{-2}\)</span>.</p>
 </div>
 </div>
 <div class="section" id="vectorization-1">
-<h2>Vectorization  (1)<a class="headerlink" href="#vectorization-1" title="Permalink to this headline">¶</a></h2>
-<p>The functions <code class="docutils literal"><span class="pre">midpoint</span></code> and <code class="docutils literal"><span class="pre">trapezoid</span></code> usually run fast in Python
+<h2>Vectorization<a class="headerlink" href="#vectorization-1" title="Permalink to this headline">¶</a></h2>
+<p id="index-37">The functions <code class="docutils literal"><span class="pre">midpoint</span></code> and <code class="docutils literal"><span class="pre">trapezoid</span></code> usually run fast in Python
 and compute an integral to a satisfactory precision within a
-fraction of a second. However, long loops in Python may in more
-complicated implementations run slowly. To increase the speed, the loops
+fraction of a second. However, long loops in Python may run slowly in more
+complicated implementations. To increase the speed, the loops
 can be replaced by vectorized code. The integration functions constitute
 a simple and good example to illustrate how to vectorize loops.</p>
 <p>We have already seen simple examples on vectorization in
-the section <a class="reference internal" href="._pylight002.html#st-ex3"><span>A Python program with vectorization and plotting</span></a> when we could evaluate a mathematical function <span class="math">\(f(x)\)</span>
+the section <a class="reference internal" href="._pylight002.html#st-ex3"><span class="std std-ref">A Python program with vectorization and plotting</span></a> when we could evaluate a mathematical function <span class="math">\(f(x)\)</span>
 for a large number of <span class="math">\(x\)</span> values stored in an array.
 Basically, we can write</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
@@ -1045,7 +1165,7 @@ the integral value. The complete function is listed below.</p>
 </div>
 <p>The code is found in the
 file
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/integration_methods_vec.py">integration_methods_vec.py</a>.</p>
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/integration_methods_vec.py">integration_methods_vec.py</a>.</p>
 <p>Let us test the code interactively in a Python shell to compute
 <span class="math">\(\int_0^1 3t^2dt\)</span>. The file with the code above has the name
 <code class="docutils literal"><span class="pre">integration_methods_vec.py</span></code> and is a valid module from which we
@@ -1070,8 +1190,8 @@ loop-based implementation.</p>
 <p>We can use the same approach to vectorize the <code class="docutils literal"><span class="pre">trapezoid</span></code> function.
 However, the trapezoidal rule performs a sum where the end points
 have different weight. If we do <code class="docutils literal"><span class="pre">sum(f(x))</span></code>, we get the end points
-<code class="docutils literal"><span class="pre">f(a)</span></code> with <code class="docutils literal"><span class="pre">f(b)</span></code> weight unity instead of one half. A remedy
-is to subtract the error in <code class="docutils literal"><span class="pre">sum(f(x))</span></code>: <code class="docutils literal"><span class="pre">sum(f(x))</span> <span class="pre">-</span> <span class="pre">0.5*f(a)</span> <span class="pre">-</span> <span class="pre">0.5*f(b)</span></code>.
+<code class="docutils literal"><span class="pre">f(a)</span></code> and <code class="docutils literal"><span class="pre">f(b)</span></code> with weight unity instead of one half. A remedy
+is to subtract the error from <code class="docutils literal"><span class="pre">sum(f(x))</span></code>: <code class="docutils literal"><span class="pre">sum(f(x))</span> <span class="pre">-</span> <span class="pre">0.5*f(a)</span> <span class="pre">-</span> <span class="pre">0.5*f(b)</span></code>.
 The vectorized version of the trapezoidal method then becomes</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">trapezoidal</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="n">h</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>
@@ -1084,7 +1204,7 @@ The vectorized version of the trapezoidal method then becomes</p>
 </div>
 <div class="section" id="measuring-computational-speed">
 <h2>Measuring computational speed<a class="headerlink" href="#measuring-computational-speed" title="Permalink to this headline">¶</a></h2>
-<p>Now that we have created faster, vectorized versions of functions in
+<p id="index-38">Now that we have created faster, vectorized versions of functions in
 the previous section, it is interesting to measure how much faster
 they are. The purpose of the present section is therefore to
 explain how we can record the CPU time consumed by a function so
@@ -1120,7 +1240,7 @@ is independent of the number of intervals.</p>
 </div>
 <div class="section" id="double-and-triple-integrals">
 <span id="sec-int-double"></span><h2>Double and triple integrals<a class="headerlink" href="#double-and-triple-integrals" title="Permalink to this headline">¶</a></h2>
-<p>Given a double integral over a rectangular domain <span class="math">\([a,b]\times [c,d]\)</span>,</p>
+<span class="target" id="index-39"></span><p id="index-40">Given a double integral over a rectangular domain <span class="math">\([a,b]\times [c,d]\)</span>,</p>
 <div class="math">
 \[\int_a^b \int_c^d f(x,y) dydx,\]</div>
 <p>how can we approximate this integral by numerical methods?</p>
@@ -1143,18 +1263,18 @@ g(x) = \int_c^d f(x,y) dy\]</div>
 <p>can be discretized by any numerical
 integration rule for an integral in one variable. Let us use the
 midpoint method
-<a href="#equation-sec:midpointFormula">(21)</a>
+<a class="reference internal" href="#eq-sec-midpointformula"><span class="std std-ref">(22)</span></a>
 and start with <span class="math">\(g(x)=\int_c^d f(x,y)dy\)</span>. We introduce
 <span class="math">\(n_y\)</span> intervals on <span class="math">\([c,d]\)</span> with length <span class="math">\(h_y\)</span>. The midpoint rule
 for this integral then becomes</p>
 <div class="math">
 \[g(x) = \int_c^d f(x,y) dy \approx  h_y \sum_{j=0}^{n_y-1} f(x,y_j),
 \quad y_j = c + \frac{1}{2}{h_y} + jh_y \thinspace .\]</div>
-<p>The expression looks somewhat different from <a href="#equation-sec:midpointFormula">(21)</a>,
-but that is because of the notation: since we integrate in <span class="math">\(y\)</span> direction
+<p>The expression looks somewhat different from <a class="reference internal" href="#eq-sec-midpointformula"><span class="std std-ref">(22)</span></a>,
+but that is because of the notation: since we integrate in the <span class="math">\(y\)</span> direction
 and will have to work with both <span class="math">\(x\)</span> and <span class="math">\(y\)</span> as coordinates, we must
 use <span class="math">\(n_y\)</span> for <span class="math">\(n\)</span>, <span class="math">\(h_y\)</span> for <span class="math">\(h\)</span>, and the counter <span class="math">\(i\)</span> is more naturally
-called <span class="math">\(j\)</span> when integrating in <span class="math">\(y\)</span>. Integrals in <span class="math">\(x\)</span> direction will use
+called <span class="math">\(j\)</span> when integrating in <span class="math">\(y\)</span>. Integrals in the <span class="math">\(x\)</span> direction will use
 <span class="math">\(h_x\)</span> and <span class="math">\(n_x\)</span> for <span class="math">\(h\)</span> and <span class="math">\(n\)</span>, and <span class="math">\(i\)</span> as counter.</p>
 <p>The double integral is <span class="math">\(\int_a^b g(x)dx\)</span>, which can be approximated
 by the midpoint method:</p>
@@ -1165,33 +1285,34 @@ for a double integral</em>:</p>
 <div class="math">
 \[\int_a^b \int_c^d f(x,y) dydx \approx
 h_x \sum_{i=0}^{n_x-1} h_y \sum_{j=0}^{n_y-1} f(x_i,y_j)\nonumber\]</div>
-<div class="math" id="equation-sec:int:double:midpoint">
-<span id="eq-sec-int-double-midpoint"></span><span class="eqno">(23)</span>\[     =
-     h_xh_y \sum_{i=0}^{n_x-1} \sum_{j=0}^{n_y-1} f(a + \frac{h_x}{2} + ih_x, c + \frac{h_y}{2} + jh_y)\thinspace .\]</div>
+<div class="math" id="eq-sec-int-double-midpoint-rule">
+\[\tag{26}
+=
+    h_xh_y \sum_{i=0}^{n_x-1} \sum_{j=0}^{n_y-1} f(a + \frac{h_x}{2} + ih_x, c + \frac{h_y}{2} + jh_y)\thinspace .\]</div>
 </div>
 <div class="section" id="direct-derivation">
 <h3>Direct derivation<a class="headerlink" href="#direct-derivation" title="Permalink to this headline">¶</a></h3>
-<p>The formula <a href="#equation-sec:int:double:midpoint">(23)</a> can also be derived directly
+<p>The formula <a class="reference internal" href="#eq-sec-int-double-midpoint-rule"><span class="std std-ref">(26)</span></a> can also be derived directly
 in the two-dimensional case by applying the idea of the midpoint
 method. We divide the rectangle <span class="math">\([a,b]\times [c,d]\)</span> into
 <span class="math">\(n_x\times n_y\)</span> equal-sized cells. The idea of the midpoint method is
 to approximate <span class="math">\(f\)</span> by a constant over each cell, and evaluate the constant
 at the midpoint. Cell <span class="math">\((i,j)\)</span> occupies the area</p>
 <div class="math">
-\[[a+ih_x,c+(i+1)h_x]\times [c+jh_y, c+ (j+1)h_y],\]</div>
+\[[a+ih_x,a+(i+1)h_x]\times [c+jh_y, c+ (j+1)h_y],\]</div>
 <p>and the midpoint is <span class="math">\((x_i,y_j)\)</span> with</p>
 <div class="math">
 \[x_i=a + ih_x + \frac{1}{2}{h_x} ,\quad y_j = c + jh_y + \frac{1}{2}{h_y}
 \thinspace .\]</div>
 <p>The integral over the cell is therefore <span class="math">\(h_xh_y f(x_i,y_j)\)</span>, and
 the total double integral is the sum over all cells, which is
-nothing but formula <a href="#equation-sec:int:double:midpoint">(23)</a>.</p>
+nothing but formula <a class="reference internal" href="#eq-sec-int-double-midpoint-rule"><span class="std std-ref">(26)</span></a>.</p>
 </div>
 <div class="section" id="programming-a-double-sum">
 <h3>Programming a double sum<a class="headerlink" href="#programming-a-double-sum" title="Permalink to this headline">¶</a></h3>
-<p>The formula <a href="#equation-sec:int:double:midpoint">(23)</a> involves a double sum,
+<p id="index-41">The formula <a class="reference internal" href="#eq-sec-int-double-midpoint-rule"><span class="std std-ref">(26)</span></a> involves a double sum,
 which is normally implemented as a double for loop. A Python function
-implementing <a href="#equation-sec:int:double:midpoint">(23)</a> may look like</p>
+implementing <a class="reference internal" href="#eq-sec-int-double-midpoint-rule"><span class="std std-ref">(26)</span></a> may look like</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">midpoint_double1</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">):</span>
     <span class="n">hx</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">nx</span><span class="p">)</span>
     <span class="n">hy</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">ny</span><span class="p">)</span>
@@ -1205,7 +1326,7 @@ implementing <a href="#equation-sec:int:double:midpoint">(23)</a> may look like<
 </pre></div>
 </div>
 <p>If this function is stored in a module file
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/midpoint_double.py">midpoint_double.py</a>,
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/midpoint_double.py">midpoint_double.py</a>,
 we can compute some integral, e.g.,
 <span class="math">\(\int_2^3\int_0^2 (2x + y)dxdy=9\)</span> in an interactive shell
 and demonstrate that the function computes the right number:</p>
@@ -1220,8 +1341,8 @@ and demonstrate that the function computes the right number:</p>
 </div>
 <div class="section" id="reusing-code-for-one-dimensional-integrals">
 <h3>Reusing code for one-dimensional integrals<a class="headerlink" href="#reusing-code-for-one-dimensional-integrals" title="Permalink to this headline">¶</a></h3>
-<p>It is very natural to write a two-dimensional midpoint method as we did in
-function <code class="docutils literal"><span class="pre">midpoint_double</span></code> when we have the formula <a href="#equation-sec:int:double:midpoint">(23)</a>. However, we could alternatively ask, much as we did in the mathematics,
+<p id="index-42">It is very natural to write a two-dimensional midpoint method as we did in
+function <code class="docutils literal"><span class="pre">midpoint_double1</span></code> when we have the formula <a class="reference internal" href="#eq-sec-int-double-midpoint-rule"><span class="std std-ref">(26)</span></a>. However, we could alternatively ask, much as we did in the mathematics,
 can we reuse a well-tested implementation for one-dimensional integrals
 to compute double integrals? That is, can we use function <code class="docutils literal"><span class="pre">midpoint</span></code></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">midpoint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
@@ -1233,7 +1354,7 @@ to compute double integrals? That is, can we use function <code class="docutils 
     <span class="k">return</span> <span class="n">result</span>
 </pre></div>
 </div>
-<p>from the section <a class="reference internal" href="#sec-midpoint-code"><span>Implementation  (2)</span></a> &#8220;twice&#8221;?
+<p>from the section <a class="reference internal" href="#sec-midpoint-code"><span class="std std-ref">Implementation</span></a> &#8220;twice&#8221;?
 The answer is yes, if we think as we did in the mathematics: compute
 the double integral as a midpoint rule for integrating <span class="math">\(g(x)\)</span> and define
 <span class="math">\(g(x_i)\)</span> in terms of a midpoint
@@ -1261,7 +1382,7 @@ Also, any linear two-dimensional function <span class="math">\(f(x,y)=px+qy+r\)<
 exactly by the two-dimensional midpoint rule. We may pick
 <span class="math">\(f(x,y)=2x+y\)</span> and create a proper <em>test function</em> that can automatically
 verify our two alternative implementations of the two-dimensional
-midpoint rule. To compute the integral of <span class="math">\(f(x,xy)\)</span> we take advantage of
+midpoint rule. To compute the integral of <span class="math">\(f(x,y)\)</span> we take advantage of
 SymPy to eliminate the possibility of errors in hand calculations.
 The test function becomes</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">test_midpoint_double</span><span class="p">():</span>
@@ -1283,20 +1404,24 @@ The test function becomes</p>
         <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">I_computed2</span> <span class="o">-</span> <span class="n">I_expected</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span>
 </pre></div>
 </div>
-<p>If we now call <code class="docutils literal"><span class="pre">test_midpoint_double</span></code> and nothing happens, our implementations
+<div class="admonition-let-test-functions-speak-up admonition">
+<p class="first admonition-title">Let test functions speak up</p>
+<p class="last">If we call the above <code class="docutils literal"><span class="pre">test_midpoint_double</span></code> function
+and nothing happens, our implementations
 are correct. However, it is somewhat annoying to have a function that
 is completely silent when it works - are we sure all things are properly
 computed? During development it is therefore highly recommended to insert
 a print statement such that we can monitor the calculations and be
 convinced that the test function does what we want. Since a test
-function should have any print statement, we simply comment it out as
+function should not have any print statement, we simply comment it out as
 we have done in the function listed above.</p>
+</div>
 <p>The trapezoidal method can be used as alternative for the midpoint
 method.  The derivation of a formula for the double integral and the
 implementations follow exactly the same ideas as we explained with the
 midpoint method, but there are more terms to write in the
-formulas. <a class="reference internal" href="#sec-exer-trapezoidal-2d"><span>Exercise 42: Derive the trapezoidal rule for a double integral</span></a> asks you to carry out
-the details. That exercise is a very good test on the understanding of the
+formulas. <a class="reference internal" href="#sec-exer-trapezoidal-2d"><span class="std std-ref">Exercise 42: Derive the trapezoidal rule for a double integral</span></a> asks you to carry out
+the details. That exercise is a very good test on your understanding of the
 mathematical and programming ideas in the present section.</p>
 <div class="section" id="the-midpoint-rule-for-a-triple-integral">
 <h4>The midpoint rule for a triple integral<a class="headerlink" href="#the-midpoint-rule-for-a-triple-integral" title="Permalink to this headline">¶</a></h4>
@@ -1304,7 +1429,7 @@ mathematical and programming ideas in the present section.</p>
 </div>
 <div class="section" id="theory">
 <h3>Theory<a class="headerlink" href="#theory" title="Permalink to this headline">¶</a></h3>
-<p>Once a method that works for a one-dimensional problem is generalized
+<p id="index-43">Once a method that works for a one-dimensional problem is generalized
 to two dimensions, it is usually quite straightforward to extend the
 method to three dimensions. This will now be demonstrated for
 integrals. We have the triple integral</p>
@@ -1321,37 +1446,43 @@ q(x) &amp;= \int_c^d p(x,y) dy\\
 <div class="math">
 \[\begin{split}p(x,y) = \int_e^f g(x,y,z) dz
 &amp;\approx \sum_{k=0}^{n_z-1} g(x,y,z_k),
-\quad z_k=e + \frac{1}{2}h_z + kh_z\\
+\\
 q(x) = \int_c^d p(x,y) dy
 &amp;\approx \sum_{j=0}^{n_y-1} p(x,y_j),
-\quad y_j=c + \frac{1}{2}h_y + jh_y\\
+\\
 \int_{a}^{b} \int_c^d \int_e^f g(x,y,z) dzdydx = \int_a^b q(x)dx
-&amp;\approx \sum_{i=0}^{n_x-1} q(x_i),
-\quad x_i=a + \frac{1}{2}h_x + ih_x\thinspace .\end{split}\]</div>
-<p>Starting with the latter formula and inserting the other two results in</p>
+&amp;\approx \sum_{i=0}^{n_x-1} q(x_i),\end{split}\]</div>
+<p>where</p>
 <div class="math">
-\[\int_{a}^{b} \int_c^d \int_e^f  g(x,y,z)\, dzdydx\approx\nonumber\]</div>
-<div class="math" id="equation-sec:int:triple:midpoint">
-<span id="eq-sec-int-triple-midpoint"></span><span class="eqno">(24)</span>\[      h_xh_yh_z
-     \sum_{i=0}^{n_x-1}\sum_{j=0}^{n_y-1}\sum_{k=0}^{n_z-1}
-     g(a + \frac{1}{2}h_x + ih_x,
-     c + \frac{1}{2}h_y + jh_y,
-     e + \frac{1}{2}h_z + kh_z)\thinspace .\]</div>
+\[z_k=e + \frac{1}{2}h_z + kh_z,\quad y_j=c + \frac{1}{2}h_y + jh_y \quad
+x_i=a + \frac{1}{2}h_x + ih_x
+\thinspace .\]</div>
+<p>Starting with the formula for <span class="math">\(\int_{a}^{b} \int_c^d \int_e^f g(x,y,z) dzdydx\)</span>
+and inserting the two previous formulas gives</p>
+<div class="math">
+\[\int_{a}^{b} \int_c^d \int_e^f g(x,y,z)\, dzdydx\approx\nonumber\]</div>
+<div class="math" id="eq-sec-int-triple-midpoint">
+\[\tag{27}
+h_xh_yh_z
+    \sum_{i=0}^{n_x-1}\sum_{j=0}^{n_y-1}\sum_{k=0}^{n_z-1}
+    g(a + \frac{1}{2}h_x + ih_x,
+    c + \frac{1}{2}h_y + jh_y,
+    e + \frac{1}{2}h_z + kh_z)\thinspace .\]</div>
 <p>Note that we may apply the ideas under <em>Direct derivation</em> at
 the end of the section <span class="xref std std-ref">sec:int:double:midpoint</span> to arrive
-at <a href="#equation-sec:int:triple:midpoint">(24)</a> directly: divide
+at <a class="reference internal" href="#eq-sec-int-triple-midpoint"><span class="std std-ref">(27)</span></a> directly: divide
 the domain into <span class="math">\(n_x\times n_y\times n_z\)</span> cells of volumes
-<span class="math">\(h_xhh_yh_z\)</span>; approximate <span class="math">\(g\)</span>
+<span class="math">\(h_xh_yh_z\)</span>; approximate <span class="math">\(g\)</span>
 by a constant, evaluated at the midpoint <span class="math">\((x_i,y_j,z_k)\)</span>,
 in each cell; and
 sum the cell integrals <span class="math">\(h_xh_yh_zg(x_i,y_j,z_k)\)</span>.</p>
 </div>
 <div class="section" id="implementation-3">
-<h3>Implementation  (3)<a class="headerlink" href="#implementation-3" title="Permalink to this headline">¶</a></h3>
+<span id="index-44"></span><h3>Implementation<a class="headerlink" href="#implementation-3" title="Permalink to this headline">¶</a></h3>
 <p>We follow the ideas for the implementations of the midpoint rule
 for a double integral. The corresponding functions are shown below
 and found in the file
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/midpoint_triple.py">midpoint_triple.py</a>.</p>
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/midpoint_triple.py">midpoint_triple.py</a>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">midpoint_triple1</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nz</span><span class="p">):</span>
     <span class="n">hx</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">nx</span><span class="p">)</span>
     <span class="n">hy</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">ny</span><span class="p">)</span>
@@ -1409,7 +1540,7 @@ and found in the file
 </div>
 <div class="section" id="monte-carlo-integration-for-complex-shaped-domains">
 <span id="sec-int-complex-domain"></span><h4>Monte Carlo integration for complex-shaped domains<a class="headerlink" href="#monte-carlo-integration-for-complex-shaped-domains" title="Permalink to this headline">¶</a></h4>
-<span class="target" id="index-6"></span><p id="index-7">Repeated use of one-dimensional integration rules to handle double
+<span class="target" id="index-45"></span><span class="target" id="index-46"></span><p id="index-47">Repeated use of one-dimensional integration rules to handle double
 and triple integrals constitute a working strategy only if the
 integration domain is a rectangle or box. For any other shape of
 domain, completely different methods must be used. A common approach
@@ -1422,7 +1553,7 @@ called Monte Carlo integration. It can be implemented in half a page of
 code, but requires orders of magnitude more
 function evaluations in double integrals compared to the midpoint
 rule.</p>
-<p>However, Monte Carlo integration is very much more computationally
+<p>However, Monte Carlo integration is much more computationally
 efficient than the midpoint rule when computing
 higher-dimensional integrals in more than three variables over
 hypercube domains.
@@ -1441,9 +1572,9 @@ for handling complex domains and for handling integrals with many variables.</p>
 </div>
 <div class="section" id="the-monte-carlo-integration-algorithm">
 <h3>The Monte Carlo integration algorithm<a class="headerlink" href="#the-monte-carlo-integration-algorithm" title="Permalink to this headline">¶</a></h3>
-<p>The idea of Monte Carlo integration of <span class="math">\(\int_a^b f(dx)dx\)</span> is to
+<p>The idea of Monte Carlo integration of <span class="math">\(\int_a^b f(x)dx\)</span> is to
 use the mean-value theorem from calculus, which states that the
-integral <span class="math">\(\int_a^b f(dx)dx\)</span> equals the length of the integration
+integral <span class="math">\(\int_a^b f(x)dx\)</span> equals the length of the integration
 domain, here <span class="math">\(b-a\)</span>, times the <em>average</em> value of <span class="math">\(f\)</span>, <span class="math">\(\bar f\)</span>, in
 <span class="math">\([a,b]\)</span>. The average value can be computed by sampling <span class="math">\(f\)</span> at
 a set of <em>random</em> points inside the domain and take the mean of
@@ -1491,7 +1622,7 @@ random points is illustrated by black dots.</p>
 </div>
 </div>
 <div class="section" id="implementation-4">
-<h3>Implementation  (4)<a class="headerlink" href="#implementation-4" title="Permalink to this headline">¶</a></h3>
+<h3>Implementation<a class="headerlink" href="#implementation-4" title="Permalink to this headline">¶</a></h3>
 <p>A Python function implementing <span class="math">\(\int_\Omega f(x,y)dxdy\)</span> can be written
 like this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -1519,11 +1650,11 @@ like this:</p>
 </pre></div>
 </div>
 <p>(See the file
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/MC_double.py">MC_double.py</a>.)</p>
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/MC_double.py">MC_double.py</a>.)</p>
 </div>
 <div class="section" id="verification">
 <h3>Verification<a class="headerlink" href="#verification" title="Permalink to this headline">¶</a></h3>
-<p>A simple test case is to check the area of a rectangle <span class="math">\([0,2]\times[2,4.5]\)</span>
+<p>A simple test case is to check the area of a rectangle <span class="math">\([0,2]\times[3,4.5]\)</span>
 embedded in a rectangle <span class="math">\([0,3]\times [2,5]\)</span>. The right answer is 3,
 but Monte Carlo integration is, unfortunately, never exact so it is
 impossible to predict the output of the algorithm. All we know is that
@@ -1532,10 +1663,10 @@ goes to infinity. Also, for a fixed number of points, we can
 run the algorithm several times and get different numbers that fluctuate
 around the exact value, since different sample points are used in different
 calls to the Monte Carlo integration algorithm.</p>
-<p>The area of the rectangle can be computed by the integral <span class="math">\(\int_0^2\int_2^{4.5}
+<p>The area of the rectangle can be computed by the integral <span class="math">\(\int_0^2\int_3^{4.5}
 dydx\)</span>, so in this case we identify
 <span class="math">\(f(x,y)=1\)</span>, and the <span class="math">\(g\)</span> function can be specified as (e.g.)
-1 if <span class="math">\((x,y)\)</span> is inside <span class="math">\([0,2]\times[2,4.5]\)</span> and <span class="math">\(-1\)</span> otherwise.
+1 if <span class="math">\((x,y)\)</span> is inside <span class="math">\([0,2]\times[3,4.5]\)</span> and <span class="math">\(-1\)</span> otherwise.
 Here is an example on how we can utilize the <code class="docutils literal"><span class="pre">MonteCarlo_double</span></code>
 function to compute the area for different number of samples:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MC_double</span> <span class="kn">import</span> <span class="n">MonteCarlo_double</span>
@@ -1559,9 +1690,13 @@ function to compute the area for different number of samples:</p>
 <p>We see that the values fluctuate around 3, a fact that supports
 a correct implementation, but in principle, bugs could be hidden
 behind the inaccurate answers.</p>
+<p>It is mathematically known that the standard deviation of the Monte Carlo
+estimate of an integral converges as <span class="math">\(n^{-1/2}\)</span>, where <span class="math">\(n\)</span> is the number
+of samples. This kind of convergence rate estimate could be used to
+verify the implementation, but this topic is beyond the scope of this book.</p>
 </div>
 <div class="section" id="test-function-for-function-with-random-numbers">
-<span id="index-8"></span><h3>Test function for function with random numbers<a class="headerlink" href="#test-function-for-function-with-random-numbers" title="Permalink to this headline">¶</a></h3>
+<span id="index-48"></span><h3>Test function for function with random numbers<a class="headerlink" href="#test-function-for-function-with-random-numbers" title="Permalink to this headline">¶</a></h3>
 <p>To make a test function, we need a unit test that has identical
 behavior each time we run the test. This seems difficult when random
 numbers are involved, because these numbers are different every time
@@ -1588,7 +1723,7 @@ called. Our test function can then be written as shown below.</p>
     <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">I_expected</span> <span class="o">-</span> <span class="n">I_computed</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1E-14</span>
 </pre></div>
 </div>
-<p>(See the file <a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/MC_double.py">MC_double.py</a>.)</p>
+<p>(See the file <a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/MC_double.py">MC_double.py</a>.)</p>
 </div>
 <div class="section" id="integral-over-a-circle">
 <h3>Integral over a circle<a class="headerlink" href="#integral-over-a-circle" title="Permalink to this headline">¶</a></h3>
@@ -1626,11 +1761,11 @@ the test into a proper test function. Here is an example:</p>
     <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">I_expected</span> <span class="o">-</span> <span class="n">I_computed</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1E-15</span>
 </pre></div>
 </div>
-<p>(See the file <a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/MC_double.py">MC_double.py</a>.)</p>
+<p>(See the file <a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/MC_double.py">MC_double.py</a>.)</p>
 </div>
 </div>
 <div class="section" id="exercises-3">
-<h2>Exercises  (3)<a class="headerlink" href="#exercises-3" title="Permalink to this headline">¶</a></h2>
+<h2>Exercises<a class="headerlink" href="#exercises-3" title="Permalink to this headline">¶</a></h2>
 <p>Compute by hand the area composed of two trapezoids (of equal width) that
 approximates the integral <span class="math">\(\int_1^3 2x^3dx\)</span>. Make a test function
 that calls the <code class="docutils literal"><span class="pre">trapezoidal</span></code> function in <code class="docutils literal"><span class="pre">trapezoidal.py</span></code>
@@ -1739,9 +1874,9 @@ Compute the integral by hand and illustrate how the two numerical
 methods approximates the integral. Compare with the exact value.</p>
 <p><strong>Solution.</strong>
 Analytically, the integral computes to 2. By hand, with the trapezoidal method,
-we get 1.570. Graphically (Figure <a class="reference internal" href="#fig-intgr-sine-a-trap"><span>The integral computed with the trapezoidal method (n = 2)</span></a>), it is clear that
+we get 1.570. Graphically (Figure <a class="reference internal" href="#fig-intgr-sine-a-trap"><span class="std std-ref">The integral computed with the trapezoidal method (n = 2)</span></a>), it is clear that
 the numerical approach will have to under-estimate the true result.</p>
-<p>The area under the blue graph in Figure <a class="reference internal" href="#fig-intgr-sine-a-trap"><span>The integral computed with the trapezoidal method (n = 2)</span></a>
+<p>The area under the blue graph in Figure <a class="reference internal" href="#fig-intgr-sine-a-trap"><span class="std std-ref">The integral computed with the trapezoidal method (n = 2)</span></a>
 corresponds to the &#8220;true&#8221; area under the graph of the integrand. The area
 under the red graph corresponds to what you get with the trapezoidal method and
 two intervals.</p>
@@ -1749,9 +1884,9 @@ two intervals.</p>
 <span id="fig-intgr-sine-a-trap"></span><a class="reference internal image-reference" href="_images/integrate_sine_a_trap.png"><img alt="_images/integrate_sine_a_trap.png" src="_images/integrate_sine_a_trap.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>The integral computed with the trapezoidal method (n = 2)</em></span></p>
 </div>
-<p>By hand, with the midpoint method, we get 2.221. Graphically (Figure <a class="reference internal" href="#fig-intgr-sine-a-mid"><span>The integral computed with the midpoint method (n = 2)</span></a>),
+<p>By hand, with the midpoint method, we get 2.221. Graphically (Figure <a class="reference internal" href="#fig-intgr-sine-a-mid"><span class="std std-ref">The integral computed with the midpoint method (n = 2)</span></a>),
 we might see that the numerical approach will have to over-estimate the true result.
-Again, the area under the blue graph in Figure <a class="reference internal" href="#fig-intgr-sine-a-mid"><span>The integral computed with the midpoint method (n = 2)</span></a>
+Again, the area under the blue graph in Figure <a class="reference internal" href="#fig-intgr-sine-a-mid"><span class="std std-ref">The integral computed with the midpoint method (n = 2)</span></a>
 corresponds to the &#8220;true&#8221; area under the graph of the integrand. The area
 under the red graph corresponds to what you get with the midpoint method and
 two intervals.</p>
@@ -1762,7 +1897,7 @@ two intervals.</p>
 <p><strong>b)</strong>
 Do a) when <span class="math">\(b=2\pi\)</span>.</p>
 <p><strong>Solution.</strong>
-Analytically, the integral computes to zero. In this case, both numerical methods will correctly calculate the integral to zero even with just two intervals! Graphically, we see that they arrive at zero for &#8220;different reasons&#8221;. The trapezoidal method constructs both its trapezoids by use of the function (integrand) value at the midpoint of the whole interval. However, there the integrand crosses the x-axis, i.e. it evaluates to zero. The &#8220;area&#8221; computed by the trapezoidal method becomes the zero area located &#8220;between&#8221; the green graph and the x-axis in Figure <a class="reference internal" href="#fig-intgr-sine-b-trap-mid"><span>The integral computed with the trapezoidal and midpoint method (n = 2)</span></a>. The midpoint method computes the areas of two rectangles (red graph in Figure <a class="reference internal" href="#fig-intgr-sine-b-trap-mid"><span>The integral computed with the trapezoidal and midpoint method (n = 2)</span></a>), but since the signs of these equal areas differ, they add to zero.</p>
+Analytically, the integral computes to zero. In this case, both numerical methods will correctly calculate the integral to zero even with just two intervals! Graphically, we see that they arrive at zero for &#8220;different reasons&#8221;. The trapezoidal method constructs both its trapezoids by use of the function (integrand) value at the midpoint of the whole interval. However, there the integrand crosses the x-axis, i.e. it evaluates to zero. The &#8220;area&#8221; computed by the trapezoidal method becomes the zero area located &#8220;between&#8221; the green graph and the x-axis in Figure <a class="reference internal" href="#fig-intgr-sine-b-trap-mid"><span class="std std-ref">The integral computed with the trapezoidal and midpoint method (n = 2)</span></a>. The midpoint method computes the areas of two rectangles (red graph in Figure <a class="reference internal" href="#fig-intgr-sine-b-trap-mid"><span class="std std-ref">The integral computed with the trapezoidal and midpoint method (n = 2)</span></a>), but since the signs of these equal areas differ, they add to zero.</p>
 <div class="figure" id="id8">
 <span id="fig-intgr-sine-b-trap-mid"></span><a class="reference internal image-reference" href="_images/integrate_sine_b_trap_mid.png"><img alt="_images/integrate_sine_b_trap_mid.png" src="_images/integrate_sine_b_trap_mid.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-text"><em>The integral computed with the trapezoidal and midpoint method (n = 2)</em></span></p>
@@ -1849,19 +1984,18 @@ With the new function given, we get the error message that includes:</p>
 <p>The numerical calculation then obviously differs from the exact value by
 more than what is specified in the tolerance <code class="docutils literal"><span class="pre">tol</span></code>. We may understand this
 by considering the new function, i.e., <span class="math">\(f(x)=6\cdot 10^8 x - 4\cdot 10^6\)</span>.
-Any round-off error in <span class="math">\(x\)</span> will get magnified big time by the factor <span class="math">\(6\cdot 10^8\)</span> in front,
+Any rounding error in <span class="math">\(x\)</span> will get magnified big time by the factor <span class="math">\(6\cdot 10^8\)</span> in front,
 i.e. the slope of the line. This makes the numerical calculation more inaccurate than previously.
 To fix this problem, we have several options. One possibility is to relax the tolerance, but
 this is not very satisfactory. After all, the calculation is supposed to be &#8220;exact&#8221; for a straight
-line. Another alternative is to scale the interval <span class="math">\([a,b]\)</span> into, e.g., <span class="math">\([\frac{a}{6\cdot 10^8},\frac{b}{6\cdot 10^8}]\)</span>.
-This will neutralize the huge factor in front of <span class="math">\(x\)</span>, bringing the accuracy back to where it was previously. This
+line. Another alternative is to introduce a new integration variable such
+that we scale the interval <span class="math">\([a,b]\)</span> into <span class="math">\([\frac{a}{6\cdot 10^8},\frac{b}{6\cdot 10^8}]\)</span>, as
+this will neutralize the huge factor in front of <span class="math">\(x\)</span>, bringing the accuracy back to where it was previously. This
 alternative is implemented in
-<a class="reference external" href="https://github.com/hplgit/prog4comp/src/py/test_trapezoidal2.py">test_trapezoidal2.py</a>.</p>
-<p>A third alternative is to use the module <code class="docutils literal"><span class="pre">Decimal</span></code> that comes with Python, which
-allows number precision to be altered by the programmer (see Python documentation).</p>
+<a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/test_trapezoidal2.py">test_trapezoidal2.py</a>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">trapezoidal</span> <span class="kn">import</span> <span class="n">trapezoidal</span>
 
-<span class="k">def</span> <span class="nf">test_trapezoidal_linear</span><span class="p">():</span>
+<span class="k">def</span> <span class="nf">test_trapezoidal_linear_scale</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Check that linear functions are integrated exactly&quot;&quot;&quot;</span>
     <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">6E8</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mf">4E6</span>
     <span class="n">F</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">3E8</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mf">4E6</span><span class="o">*</span><span class="n">x</span>  <span class="c"># Anti-derivative</span>
@@ -1872,7 +2006,50 @@ allows number precision to be altered by the programmer (see Python documentatio
     <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">:</span>
         <span class="n">numerical</span> <span class="o">=</span> <span class="n">trapezoidal</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
         <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">exact</span> <span class="o">-</span> <span class="n">numerical</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="n">err</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">,</span> <span class="s">&#39;n = </span><span class="si">%d</span><span class="s">, err = </span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;n = </span><span class="si">%d</span><span class="s">, err = </span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">err</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">,</span> <span class="n">msg</span>
+        <span class="k">print</span> <span class="n">msg</span>
+</pre></div>
+</div>
+<p>A third alternative is to use the module <code class="docutils literal"><span class="pre">decimal</span></code> that comes with Python, which
+allows number precision to be altered by the programmer. An alternative,
+better suited for numerical computing, is the <code class="docutils literal"><span class="pre">mpmath</span></code> module in SymPy (since
+it supports standard mathematical functions such as <code class="docutils literal"><span class="pre">sin</span></code> and <code class="docutils literal"><span class="pre">cos</span></code> with
+arbitrary precision, while <code class="docutils literal"><span class="pre">decimal</span></code> can only the standard arithmetics with
+arbitrary precision).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">trapezoidal</span> <span class="kn">import</span> <span class="n">trapezoidal</span>
+
+<span class="k">def</span> <span class="nf">test_trapezoidal_linear_scale</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Check that linear functions are integrated exactly&quot;&quot;&quot;</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">6E8</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mf">4E6</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">3E8</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mf">4E6</span><span class="o">*</span><span class="n">x</span>  <span class="c"># Anti-derivative</span>
+    <span class="c">#a = 1.2;  b = 4.4</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mf">1.2</span><span class="o">/</span><span class="mf">6E8</span><span class="p">;</span>  <span class="n">b</span> <span class="o">=</span> <span class="mf">4.4</span><span class="o">/</span><span class="mf">6E8</span>       <span class="c"># Scale interval down</span>
+    <span class="n">exact</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">F</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-14</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">:</span>
+        <span class="n">numerical</span> <span class="o">=</span> <span class="n">trapezoidal</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">exact</span> <span class="o">-</span> <span class="n">numerical</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;n = </span><span class="si">%d</span><span class="s">, err = </span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">err</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">,</span> <span class="n">msg</span>
+        <span class="k">print</span> <span class="n">msg</span>
+
+<span class="k">def</span> <span class="nf">test_trapezoidal_linear_reldiff</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check that linear functions are integrated exactly.</span>
+<span class="sd">    Use relative and not absolute difference.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">6E8</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mf">4E6</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">3E8</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mf">4E6</span><span class="o">*</span><span class="n">x</span>  <span class="c"># Anti-derivative</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mf">1.2</span><span class="p">;</span>  <span class="n">b</span> <span class="o">=</span> <span class="mf">4.4</span>               <span class="c"># Scale interval down</span>
+    <span class="n">exact</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">F</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-14</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">:</span>
+        <span class="n">numerical</span> <span class="o">=</span> <span class="n">trapezoidal</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">exact</span> <span class="o">-</span> <span class="n">numerical</span><span class="p">)</span><span class="o">/</span><span class="n">exact</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;n = </span><span class="si">%d</span><span class="s">, err = </span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">err</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">,</span> <span class="n">msg</span>
+        <span class="k">print</span> <span class="n">msg</span>
 
 <span class="k">def</span> <span class="nf">test_trapezoidal_conv_rate</span><span class="p">():</span>
     <span class="sd">&quot;&quot;&quot;Check empirical convergence rates against the expected -2.&quot;&quot;&quot;</span>
@@ -1902,17 +2079,63 @@ allows number precision to be altered by the programmer (see Python documentatio
             <span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%.2f</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">r_im1</span><span class="p">)</span>  <span class="c"># Truncate, two decimals</span>
     <span class="k">return</span> <span class="n">r</span>
 
-<span class="n">test_trapezoidal_linear</span><span class="p">()</span>
+<span class="n">test_trapezoidal_linear_scale</span><span class="p">()</span>
+<span class="n">test_trapezoidal_linear_reldiff</span><span class="p">()</span>
 <span class="n">test_trapezoidal_conv_rate</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Regarding the convergence test, the convergence rates all become zero. This should be expected,
-since the integrand is a straight line function, which should give zero error at each step.
-However, the huge slope of the straight line integrand gives round-off errors that lift the
-error to about <span class="math">\(1\cdot 10^{-7}\)</span> at each step. The ratio of every two consecutive errors then becomes 1,
-the logarithm of which is zero. This causes the zero convergence rates (see the computation of <code class="docutils literal"><span class="pre">r_im1</span></code> in the code).
-Scaling the interval as we did previously, will reduce the error, but since the error for each step is the same,
-their ratio still becomes 1. Therefore, there is no point in changing the test.</p>
+<p>The best alternative, however, is to consider relative differences instead
+of absolute differences. That is, we compute <code class="docutils literal"><span class="pre">(exact</span> <span class="pre">-</span> <span class="pre">numerical)/exact</span></code>
+instead of just <code class="docutils literal"><span class="pre">exact</span> <span class="pre">-</span> <span class="pre">numerical</span></code>. This relative error is <span class="math">\(10^{-16}\)</span>
+even if we compute with very big numbers.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">test_trapezoidal_linear_reldiff</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check that linear functions are integrated exactly.</span>
+<span class="sd">    Use relative and not absolute difference.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">6E8</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mf">4E6</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">3E8</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mf">4E6</span><span class="o">*</span><span class="n">x</span>  <span class="c"># Anti-derivative</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mf">1.2</span><span class="p">;</span>  <span class="n">b</span> <span class="o">=</span> <span class="mf">4.4</span>               <span class="c"># Scale interval down</span>
+    <span class="n">exact</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">F</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">tol</span> <span class="o">=</span> <span class="mf">1E-14</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">:</span>
+        <span class="n">numerical</span> <span class="o">=</span> <span class="n">trapezoidal</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">exact</span> <span class="o">-</span> <span class="n">numerical</span><span class="p">)</span><span class="o">/</span><span class="n">exact</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;n = </span><span class="si">%d</span><span class="s">, err = </span><span class="si">%g</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">err</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">,</span> <span class="n">msg</span>
+        <span class="k">print</span> <span class="n">msg</span>
+
+<span class="k">def</span> <span class="nf">test_trapezoidal_conv_rate</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Check empirical convergence rates against the expected -2.&quot;&quot;&quot;</span>
+    <span class="c">#from math import exp</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">6E8</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mf">4E6</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">3E8</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mf">4E6</span><span class="o">*</span><span class="n">x</span>  <span class="c"># Anti-derivative</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mf">1.1</span><span class="p">;</span>  <span class="n">b</span> <span class="o">=</span> <span class="mf">1.9</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">convergence_rates</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">r</span>
+    <span class="n">tol</span> <span class="o">=</span> <span class="mf">0.01</span>
+    <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">,</span> <span class="n">r</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span>
+
+<span class="k">def</span> <span class="nf">convergence_rates</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">num_experiments</span><span class="o">=</span><span class="mi">14</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">log</span>
+    <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">zeros</span>
+    <span class="n">exact</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">F</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">num_experiments</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">num_experiments</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">num_experiments</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_experiments</span><span class="p">):</span>
+        <span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">numerical</span> <span class="o">=</span> <span class="n">trapezoidal</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">exact</span> <span class="o">-</span> <span class="n">numerical</span><span class="p">)</span>
+        <span class="k">print</span> <span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">r_im1</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">E</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">log</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="n">n</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">r</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%.2f</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">r_im1</span><span class="p">)</span>  <span class="c"># Truncate, two decimals</span>
+    <span class="k">return</span> <span class="n">r</span>
+</pre></div>
+</div>
+<p>Computing convergence rates is not meaningful in this test, because the
+error is mathematically zero.</p>
 <p>Filename: <code class="docutils literal"><span class="pre">test_trapezoidal2.py</span></code>.</p>
 <p>We want to test how the <code class="docutils literal"><span class="pre">trapezoidal</span></code> function works for the integral
 <span class="math">\(\int_0^4\sqrt{x}dx\)</span>. Two of the tests in <code class="docutils literal"><span class="pre">test_trapezoidal.py</span></code>
@@ -1968,7 +2191,7 @@ hand calculations are written into the code. The code then reads:</p>
 </div>
 <p>Filename: <code class="docutils literal"><span class="pre">test_trapezoidal3.py</span></code>.</p>
 <div class="section" id="remarks-5">
-<h3>Remarks  (5)<a class="headerlink" href="#remarks-5" title="Permalink to this headline">¶</a></h3>
+<h3>Remarks<a class="headerlink" href="#remarks-5" title="Permalink to this headline">¶</a></h3>
 <p>The convergence rate test fails. Printing out <code class="docutils literal"><span class="pre">r</span></code> shows that the
 actual convergence rate for this integral is <span class="math">\(-1.5\)</span> and not <span class="math">\(-2\)</span>.
 The reason is that the <a class="reference external" href="http://en.wikipedia.org/wiki/Trapezoidal_rule#Error_analysis">error in the trapezoidal method</a>
@@ -1983,7 +2206,7 @@ the convergence rate is indeed restored to -2.</p>
 subintervals and approximates the integral in each subinterval by
 a rectangle whose height equals the function value at the midpoint of
 the subinterval. Instead, one might use either the left or right end of
-the subinterval as illustrated in Figure <a class="reference internal" href="#fig-vcarrectangle"><span>Illustration of the rectangle method with evaluating the rectangle height by either the left or right point</span></a>.
+the subinterval as illustrated in Figure <a class="reference internal" href="#fig-vcarrectangle"><span class="std std-ref">Illustration of the rectangle method with evaluating the rectangle height by either the left or right point</span></a>.
 This defines a <em>rectangle method</em> of integration. The height of the
 rectangle can be based on the left or right end or the midpoint.</p>
 <div class="figure" id="id9">
@@ -2119,8 +2342,11 @@ to <span class="math">\(2n\)</span> is returned. Otherwise, we halve <span class
 It may be a good idea to organize your code so that the function <code class="docutils literal"><span class="pre">adaptive_integration</span></code> can be used
 easily in future programs you write.</p>
 <p><strong>a)</strong>
-Write a function <code class="docutils literal"><span class="pre">adaptive_integration(f,</span> <span class="pre">a,</span> <span class="pre">b,</span> <span class="pre">eps,</span> <span class="pre">method=midpoint)</span></code>
-that implements the idea above (<code class="docutils literal"><span class="pre">eps</span></code> corresponds to the tolerance
+Write a function</p>
+<div class="highlight-text"><div class="highlight"><pre>adaptive_integration(f, a, b, eps, method=midpoint)
+</pre></div>
+</div>
+<p>that implements the idea above (<code class="docutils literal"><span class="pre">eps</span></code> corresponds to the tolerance
 <span class="math">\(\epsilon\)</span>, and <code class="docutils literal"><span class="pre">method</span></code> can be <code class="docutils literal"><span class="pre">midpoint</span></code> or <code class="docutils literal"><span class="pre">trapezoidal</span></code>).</p>
 <p><strong>Solution.</strong>
 Easing the answers to the whole of this exercise, as well as preparing for easy use of
@@ -2235,14 +2461,14 @@ adding/removing <code class="docutils literal"><span class="pre">#</span></code>
 Make a plot of <span class="math">\(n\)</span> versus <span class="math">\(\epsilon \in [10^{-1}, 10^{-10}]\)</span> for
 <span class="math">\(\int_0^2\sqrt{x}dx\)</span>. Use logarithmic scale for <span class="math">\(\epsilon\)</span>.</p>
 <p><strong>Solution.</strong>
-From Figure <a class="reference internal" href="#fig-adaptintegr"><span>Showing ``n`` as a function of ``log(eps)`` when  \( int_0^2sqrt{x}dx \)  is computed by the midpoint (blue) and the trapezoidal (red) method</span></a>, we see that the stricter the value of epsilon, the larger the
+From Figure <a class="reference internal" href="#fig-adaptintegr"><span class="std std-ref">Showing n as a function of log(eps) when  is computed by the midpoint (blue) and the trapezoidal (red) method</span></a>, we see that the stricter the value of epsilon, the larger the
 difference between the midpoint and the trapezoidal methods. For a given value for epsilon, the
 midpoint method comes within the tolerance with fewer intervals (lower value of <code class="docutils literal"><span class="pre">n</span></code>) than does
 the trapezoidal method. This should be expected, since the midpoint method is somewhat more accurate
 than the trapezoidal method.</p>
 <div class="figure" id="id10">
 <span id="fig-adaptintegr"></span><a class="reference internal image-reference" href="_images/adaptive_integration.png"><img alt="_images/adaptive_integration.png" src="_images/adaptive_integration.png" style="width: 800px;" /></a>
-<p class="caption"><span class="caption-text"><em>Showing ``n`` as a function of ``log(eps)`` when  \( int_0^2sqrt{x}dx \)  is computed by the midpoint (blue) and the trapezoidal (red) method</em></span></p>
+<p class="caption"><span class="caption-text">Showing <code class="docutils literal"><span class="pre">n</span></code> as a function of <code class="docutils literal"><span class="pre">log(eps)</span></code> when <span class="math">\(\int_0^2\sqrt{x}dx\)</span> is computed by the midpoint (blue) and the trapezoidal (red) method</span></p>
 </div>
 <p>One way of producing this plot, is by using the code lines included at the end of
 <code class="docutils literal"><span class="pre">adaptive_integration.py</span></code> (see the above).</p>
@@ -2250,7 +2476,7 @@ than the trapezoidal method.</p>
 </div>
 </div>
 <div class="section" id="remarks-6">
-<h3>Remarks  (6)<a class="headerlink" href="#remarks-6" title="Permalink to this headline">¶</a></h3>
+<h3>Remarks<a class="headerlink" href="#remarks-6" title="Permalink to this headline">¶</a></h3>
 <p>The type of method explored in this exercise is called <em>adaptive</em>,
 because it tries to adapt the value of <span class="math">\(n\)</span> to meet a given
 error criterion. The true error can very seldom be computed
@@ -2268,7 +2494,7 @@ the number of intervals is doubled, is taken to reflect the error.</p>
 our claim is right. Note that Wolfram alpha does give you an answer, but that answer is an approximation, it is <em>not</em> exact. This is because
 Wolfram alpha too uses numerical methods to arrive at the answer, just as you will in this exercise). Therefore, we are forced to compute the integral by numerical methods. Compute a result that is right to four digits.</p>
 <p><strong>Hint.</strong>
-Use ideas from <a class="reference internal" href="#sec-exer-adaptive-int"><span>Exercise 38: Adaptive integration</span></a>.</p>
+Use ideas from <a class="reference internal" href="#sec-exer-adaptive-int"><span class="std std-ref">Exercise 38: Adaptive integration</span></a>.</p>
 <p><strong>Solution.</strong>
 When the function <code class="docutils literal"><span class="pre">adaptive_integration</span></code> is available, the code may be written as:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">adaptive_integration</span> <span class="kn">import</span> <span class="n">adaptive_integration</span>
@@ -2323,10 +2549,11 @@ Use the trapezoidal rule to compute <span class="math">\(I_{j,k}\)</span> for <s
 </div>
 <div class="section" id="exercise-41-revisit-fit-of-sines-to-a-function">
 <span id="sec-exer-revisitfitsines"></span><h4>Exercise 41: Revisit fit of sines to a function<a class="headerlink" href="#exercise-41-revisit-fit-of-sines-to-a-function" title="Permalink to this headline">¶</a></h4>
-<p>This is a continuation of <a class="reference internal" href="._pylight003.html#nd-exer-fitsines"><span>Exercise 28: Fit sines to straight line</span></a>. The task is to
+<p>This is a continuation of <a class="reference internal" href="._pylight003.html#nd-exer-fitsines"><span class="std std-ref">Exercise 28: Fit sines to straight line</span></a>. The task is to
 approximate a given function <span class="math">\(f(t)\)</span> on <span class="math">\([-\pi,\pi]\)</span> by a sum of sines,</p>
-<div class="math">
-\[S_N(t) = \sum_{n=1}^{N} b_n \sin(nt)\thinspace .\]</div>
+<div class="math" id="eq-auto4">
+\[\tag{28}
+S_N(t) = \sum_{n=1}^{N} b_n \sin(nt)\thinspace .\]</div>
 <p>We are now interested in computing the unknown coefficients <span class="math">\(b_n\)</span>
 such that <span class="math">\(S_N(t)\)</span> is in some sense the <em>best approximation</em> to <span class="math">\(f(t)\)</span>.
 One common way of doing this is to first set up a general expression
@@ -2487,7 +2714,7 @@ See code given above.</p>
 Run <code class="docutils literal"><span class="pre">plot_approx(f,</span> <span class="pre">N,</span> <span class="pre">M,</span> <span class="pre">filename)</span></code> for <span class="math">\(f(t) = \frac{1}{\pi}t\)</span>
 for <span class="math">\(N=3,6,12,24\)</span>. Observe how the approximation improves.</p>
 <p><strong>Solution.</strong>
-See code given above. Running the program will produce one plot (Figure <a class="reference internal" href="#fig-s-n3"><span>The function  and its approximation  when </span></a>, Figure <a class="reference internal" href="#fig-s-n6"><span>The function  and its approximation  when </span></a>, Figure <a class="reference internal" href="#fig-s-n12"><span>The function  and its approximation  when </span></a> and Figure <a class="reference internal" href="#fig-s-n24"><span>The function  and its approximation  when </span></a>) for each value of <span class="math">\(N\)</span>. We see from the plots that the larger the <span class="math">\(N\)</span>, the better the approximation.</p>
+See code given above. Running the program will produce one plot (Figure <a class="reference internal" href="#fig-s-n3"><span class="std std-ref">The function  and its approximation  when </span></a>, Figure <a class="reference internal" href="#fig-s-n6"><span class="std std-ref">The function  and its approximation  when </span></a>, Figure <a class="reference internal" href="#fig-s-n12"><span class="std std-ref">The function  and its approximation  when </span></a> and Figure <a class="reference internal" href="#fig-s-n24"><span class="std std-ref">The function  and its approximation  when </span></a>) for each value of <span class="math">\(N\)</span>. We see from the plots that the larger the <span class="math">\(N\)</span>, the better the approximation.</p>
 <div class="figure" id="id11">
 <span id="fig-s-n3"></span><a class="reference internal image-reference" href="_images/S_whenNis3.png"><img alt="_images/S_whenNis3.png" src="_images/S_whenNis3.png" style="width: 800px;" /></a>
 <p class="caption"><span class="caption-text">The function <span class="math">\(f(t)\)</span> and its approximation <span class="math">\(S_N(t)\)</span> when <span class="math">\(N = 3\)</span></span></p>
@@ -2509,7 +2736,7 @@ Run <code class="docutils literal"><span class="pre">plot_approx</span></code> f
 Observe a fundamental problem: regardless of <span class="math">\(N\)</span>, <span class="math">\(S_N(-\pi)=0\)</span>, not
 <span class="math">\(e^{2\pi}\approx 535\)</span>. (There are ways to fix this issue.)</p>
 <p><strong>Solution.</strong>
-See code given above. Running the program (also) produces the plot seen in Figure <a class="reference internal" href="#fig-new-f-s-n100"><span>The new function  and its approximation  when </span></a>. Clearly, the approximation is no good at the endpoints of the interval.</p>
+See code given above. Running the program (also) produces the plot seen in Figure <a class="reference internal" href="#fig-new-f-s-n100"><span class="std std-ref">The new function  and its approximation  when </span></a>. Clearly, the approximation is no good at the endpoints of the interval.</p>
 <div class="figure" id="id15">
 <span id="fig-new-f-s-n100"></span><a class="reference internal image-reference" href="_images/S_whenNis3.png"><img alt="_images/S_whenNis3.png" src="_images/S_whenNis3.png" style="width: 800px;" /></a>
 <p class="caption"><span class="caption-text">The new function <span class="math">\(f(t)\)</span> and its approximation <span class="math">\(S_N(t)\)</span> when <span class="math">\(N = 100\)</span></span></p>
@@ -2526,7 +2753,7 @@ We introduce a help function <span class="math">\(g(x)\)</span> and write</p>
 <div class="math">
 \[\int_a^b \int_c^d f(x,y) dydx = \int_a^b g(x)dx,\quad
 g(x) = \int_c^d f(x,y) dy\thinspace .\]</div>
-<p>Next, we apply the trapezoidal rule (<a class="reference internal" href="#sec-integrals-trap"><span>The composite trapezoidal rule</span></a>) to each of the integrals</p>
+<p>Next, we apply the trapezoidal rule (<a class="reference internal" href="#sec-integrals-trap"><span class="std std-ref">The composite trapezoidal rule</span></a>) to each of the integrals</p>
 <div class="math">
 \[\int_a^b g(x)dx,\quad
 g(x) = \int_c^d f(x,y) dy\thinspace .\]</div>
@@ -2534,9 +2761,9 @@ g(x) = \int_c^d f(x,y) dy\thinspace .\]</div>
 <span class="math">\(n_y\)</span> intervals on <span class="math">\([c,d]\)</span> with length <span class="math">\(h_y\)</span>. The trapezoidal rule
 for this integral then becomes</p>
 <div class="math">
-\[g(x) = \int_c^d f(x,y) dy \approx  h_y \left[\frac{1}{2}f(x,c) + \sum_{j=1}^{n_y-1}f(x,y_j) + \frac{1}{2}f(x,d) \right],
-\quad y_j = c + jh_y \thinspace .\]</div>
-<p>For the outer integral <span class="math">\(\int_a^b g(x)dx\)</span>, we get:</p>
+\[g(x) = \int_c^d f(x,y) dy \approx  h_y \left[\frac{1}{2}f(x,c) + \sum_{j=1}^{n_y-1}f(x,y_j) + \frac{1}{2}f(x,d) \right],\]</div>
+<p>with <span class="math">\(y_j = c + jh_y\)</span>.
+For the outer integral <span class="math">\(\int_a^b g(x)dx\)</span>, we get:</p>
 <div class="math">
 \[\int_a^b g(x)dx \approx h_x \left[\frac{1}{2}g(a) + \sum_{i=1}^{n_x-1}g(x_i) + \frac{1}{2}g(b) \right],
 \quad x_i=a + ih_x\thinspace .\]</div>
@@ -2544,15 +2771,23 @@ for this integral then becomes</p>
 for a double integral</em>:</p>
 <div class="math">
 \[\int_a^b \int_c^d f(x,y) dydx \approx
-h_x \left[\frac{1}{2}\left(h_y \left[\frac{1}{2}f(a,c) + \sum_{j=1}^{n_y-1}f(a,y_j) + \frac{1}{2}f(a,d) \right]\right)
-+ \sum_{i=1}^{n_x-1}\left(h_y \left[\frac{1}{2}f(x_i,c) + \sum_{j=1}^{n_y-1}f(x_i,y_j) + \frac{1}{2}f(x_i,d) \right]\right)
-+ \frac{1}{2}\left(h_y \left[\frac{1}{2}f(b,c) + \sum_{j=1}^{n_y-1}f(b,y_j) + \frac{1}{2}f(b,d) \right]\right) \right]\nonumber\]</div>
+h_x \biggl[\frac{1}{2}\left(h_y \left[\frac{1}{2}f(a,c) +
+\sum_{j=1}^{n_y-1}f(a,y_j) + \frac{1}{2}f(a,d) \right]\right) + \nonumber\]</div>
+<div class="math">
+\[\quad \sum_{i=1}^{n_x-1}\left(h_y \left[\frac{1}{2}f(x_i,c) + \sum_{j=1}^{n_y-1}f(x_i,y_j) + \frac{1}{2}f(x_i,d) \right]\right)+\nonumber\]</div>
+<div class="math">
+\[\quad \frac{1}{2}\left(h_y \left[\frac{1}{2}f(b,c) + \sum_{j=1}^{n_y-1}f(b,y_j) + \frac{1}{2}f(b,d) \right]\right) \biggr]\nonumber\]</div>
 <div class="math">
 \[=
-h_xh_y \left[\frac{1}{4}\left(f(a,c) + f(a,d) + f(b,c) + f(b,d) \right) +
-\frac{1}{2}\sum_{i=1}^{n_x-1}\left(f(a + ih_x,c) + f(a + ih_x,d)\right) +
-\frac{1}{2}\sum_{j=1}^{n_y-1}\left(f(a,c + jh_y) + f(b,c + jh_y)\right) +
-\sum_{i=1}^{n_x-1} \sum_{j=1}^{n_y-1} f(a + ih_x, c + jh_y)\right]\thinspace .
+h_xh_y \biggl[\frac{1}{4}\left(f(a,c) + f(a,d) + f(b,c) + f(b,d) \right) +\nonumber\]</div>
+<div class="math">
+\[\quad \frac{1}{2}\sum_{i=1}^{n_x-1}\left(f(a + ih_x,c) + f(a + ih_x,d)\right) +
+\nonumber\]</div>
+<div class="math">
+\[\quad \frac{1}{2}\sum_{j=1}^{n_y-1}\left(f(a,c + jh_y) + f(b,c + jh_y)\right) +
+\nonumber\]</div>
+<div class="math">
+\[\quad \sum_{i=1}^{n_x-1} \sum_{j=1}^{n_y-1} f(a + ih_x, c + jh_y)\biggr]\thinspace .
 \nonumber\]</div>
 <p>The formula may be implemented and tested as shown in <code class="docutils literal"><span class="pre">trapezoidal_double.py</span></code>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">trapezoidal_double</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">):</span>
@@ -2603,7 +2838,7 @@ h_xh_y \left[\frac{1}{4}\left(f(a,c) + f(a,d) + f(b,c) + f(b,d) \right) +
 </div>
 <div class="section" id="exercise-43-compute-the-area-of-a-triangle-by-monte-carlo-integration">
 <span id="sec-exer-mc-ellipse"></span><h4>Exercise 43: Compute the area of a triangle by Monte Carlo integration<a class="headerlink" href="#exercise-43-compute-the-area-of-a-triangle-by-monte-carlo-integration" title="Permalink to this headline">¶</a></h4>
-<p>Use the Monte Carlo method from the section <a class="reference internal" href="#sec-int-complex-domain"><span>Monte Carlo integration for complex-shaped domains</span></a> to
+<p>Use the Monte Carlo method from the section <a class="reference internal" href="#sec-int-complex-domain"><span class="std std-ref">Monte Carlo integration for complex-shaped domains</span></a> to
 compute the area of a triangle with vertices at <span class="math">\((-1,0)\)</span>, <span class="math">\((1,0)\)</span>,
 and <span class="math">\((3,0)\)</span>.</p>
 <p><strong>Solution.</strong>
@@ -2618,7 +2853,7 @@ The program <code class="docutils literal"><span class="pre">MC_triangle.py</spa
 </pre></div>
 </div>
 <p>Filename: <code class="docutils literal"><span class="pre">MC_triangle.py</span></code>.</p>
-<span class="target" id="th-solvodes"></span></div>
+</div>
 </div>
 </div>
 </div>
@@ -2627,8 +2862,13 @@ The program <code class="docutils literal"><span class="pre">MC_triangle.py</spa
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+            <center>
+            <p class="logo"><a href="http://cbc.simula.no/" title="Go to Center for Biomedical Computing">
+              <img class="logo" src="_static/cbc_logo.png" alt="Logo"/>
+            </a></p>
+            </center>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Computing integrals</a><ul>
@@ -2649,8 +2889,8 @@ The program <code class="docutils literal"><span class="pre">MC_triangle.py</spa
 </li>
 <li><a class="reference internal" href="#the-composite-midpoint-method">The composite midpoint method</a><ul>
 <li><a class="reference internal" href="#the-idea">The idea</a><ul>
-<li><a class="reference internal" href="#the-general-formula-2">The general formula  (2)</a></li>
-<li><a class="reference internal" href="#implementation-2">Implementation  (2)</a></li>
+<li><a class="reference internal" href="#the-general-formula-2">The general formula</a></li>
+<li><a class="reference internal" href="#implementation-2">Implementation</a></li>
 <li><a class="reference internal" href="#comparing-the-trapezoidal-and-the-midpoint-methods">Comparing the trapezoidal and the midpoint methods</a></li>
 </ul>
 </li>
@@ -2658,17 +2898,18 @@ The program <code class="docutils literal"><span class="pre">MC_triangle.py</spa
 </li>
 <li><a class="reference internal" href="#testing">Testing</a><ul>
 <li><a class="reference internal" href="#hand-computed-results">Hand-computed results</a></li>
-<li><a class="reference internal" href="#solving-a-problem-without-numerical-errors-1">Solving a problem without numerical errors  (1)</a></li>
-<li><a class="reference internal" href="#demonstrating-correct-convergence-rates-1">Demonstrating correct convergence rates  (1)</a><ul>
+<li><a class="reference internal" href="#solving-a-problem-without-numerical-errors-1">Solving a problem without numerical errors</a></li>
+<li><a class="reference internal" href="#demonstrating-correct-convergence-rates-1">Demonstrating correct convergence rates</a><ul>
+<li><a class="reference internal" href="#finite-precision-of-floating-point-numbers">Finite precision of floating-point numbers</a></li>
 <li><a class="reference internal" href="#constructing-unit-tests-and-writing-test-functions">Constructing unit tests and writing test functions</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#hand-computed-numerical-results">Hand-computed numerical results</a></li>
-<li><a class="reference internal" href="#solving-a-problem-without-numerical-errors-2">Solving a problem without numerical errors  (2)</a></li>
-<li><a class="reference internal" href="#demonstrating-correct-convergence-rates-2">Demonstrating correct convergence rates  (2)</a></li>
+<li><a class="reference internal" href="#solving-a-problem-without-numerical-errors-2">Solving a problem without numerical errors</a></li>
+<li><a class="reference internal" href="#demonstrating-correct-convergence-rates-2">Demonstrating correct convergence rates</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#vectorization-1">Vectorization  (1)</a><ul>
+<li><a class="reference internal" href="#vectorization-1">Vectorization</a><ul>
 <li><a class="reference internal" href="#vectorizing-the-midpoint-rule">Vectorizing the midpoint rule</a></li>
 <li><a class="reference internal" href="#vectorizing-the-trapezoidal-rule">Vectorizing the trapezoidal rule</a></li>
 </ul>
@@ -2684,24 +2925,24 @@ The program <code class="docutils literal"><span class="pre">MC_triangle.py</spa
 </ul>
 </li>
 <li><a class="reference internal" href="#theory">Theory</a></li>
-<li><a class="reference internal" href="#implementation-3">Implementation  (3)</a><ul>
+<li><a class="reference internal" href="#implementation-3">Implementation</a><ul>
 <li><a class="reference internal" href="#monte-carlo-integration-for-complex-shaped-domains">Monte Carlo integration for complex-shaped domains</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#the-monte-carlo-integration-algorithm">The Monte Carlo integration algorithm</a></li>
-<li><a class="reference internal" href="#implementation-4">Implementation  (4)</a></li>
+<li><a class="reference internal" href="#implementation-4">Implementation</a></li>
 <li><a class="reference internal" href="#verification">Verification</a></li>
 <li><a class="reference internal" href="#test-function-for-function-with-random-numbers">Test function for function with random numbers</a></li>
 <li><a class="reference internal" href="#integral-over-a-circle">Integral over a circle</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#exercises-3">Exercises  (3)</a><ul>
-<li><a class="reference internal" href="#remarks-5">Remarks  (5)</a><ul>
+<li><a class="reference internal" href="#exercises-3">Exercises</a><ul>
+<li><a class="reference internal" href="#remarks-5">Remarks</a><ul>
 <li><a class="reference internal" href="#exercise-37-rectangle-methods">Exercise 37: Rectangle methods</a></li>
 <li><a class="reference internal" href="#exercise-38-adaptive-integration">Exercise 38: Adaptive integration</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#remarks-6">Remarks  (6)</a><ul>
+<li><a class="reference internal" href="#remarks-6">Remarks</a><ul>
 <li><a class="reference internal" href="#exercise-39-integrating-x-raised-to-x">Exercise 39: Integrating x raised to x</a></li>
 <li><a class="reference internal" href="#exercise-40-integrate-products-of-sine-functions">Exercise 40: Integrate products of sine functions</a></li>
 <li><a class="reference internal" href="#exercise-41-revisit-fit-of-sines-to-a-function">Exercise 41: Revisit fit of sines to a function</a></li>
@@ -2721,15 +2962,17 @@ The program <code class="docutils literal"><span class="pre">MC_triangle.py</spa
   <h4>Next topic</h4>
   <p class="topless"><a href="._pylight005.html"
                         title="next chapter">Solving ordinary differential equations</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/._pylight004.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/._pylight004.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -2743,20 +2986,29 @@ The program <code class="docutils literal"><span class="pre">MC_triangle.py</spa
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2015, S. Linge and H. P. Langtangen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.4</a>
-      
-      |
-      <a href="_sources/._pylight004.txt"
-          rel="nofollow">Page source</a></li>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="._pylight005.html" title="Solving ordinary differential equations"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="._pylight003.html" title="Basic constructions"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Programming for Computations (Python version)</a> &raquo;</li> 
+      </ul>
     </div>
+<div class="wrapper">
+  <div class="footer">
+    <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <br />
+    <br />
+      &copy;2015, Svein Linge and Hans Petter Langtangen.
+  </div>
+</div>
 
-    
-
-    
   </body>
 </html>

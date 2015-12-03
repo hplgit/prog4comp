@@ -1,9 +1,6 @@
-
-
-.. |nbsp| unicode:: 0xA0
-   :trim:
-
 .. !split
+
+.. _sec:integrals:
 
 Computing integrals
 %%%%%%%%%%%%%%%%%%%
@@ -13,6 +10,9 @@ Computing integrals
 
 .. index::
    single: integral; exact
+
+.. index::
+   single: integral; numerically
 
 .. index::
    single: integral; approximately
@@ -32,7 +32,7 @@ much more powerful - you can essentially treat all integrals
 :math:`\int_a^bf(x)dx` in 10 lines of computer code (!). Integration also
 demonstrates the difference between exact mathematics by pen and paper
 and *numerical mathematics* on a computer. The latter approaches
-the result of the former without any worries about round-off errors
+the result of the former without any worries about rounding errors
 due to finite precision arithmetics in computers (in contrast to
 differentiation, where such errors prevent us from getting a result as accurate
 as we desire on the computer). Finally, integration is thought of
@@ -49,9 +49,9 @@ Calculating an integral is traditionally done by
 .. _Eq:eqn:FbFa:
 
 .. math::
-   :label: eqn:FbFa
-        
-        \int_a^b f(x)\,dx = F(b) - F(a), 
+
+    \tag{2}
+    \int_a^b f(x)\,dx = F(b) - F(a), 
         
 
 where
@@ -62,10 +62,10 @@ where
 The major problem with this procedure is that we need to find
 the *anti-derivative* :math:`F(x)` corresponding to a given :math:`f(x)`.
 For some relatively simple integrands :math:`f(x)`,
-finding :math:`F(x)` is a doable task, but it can very quickly be challenging,
+finding :math:`F(x)` is a doable task, but it can very quickly become challenging,
 even impossible!
 
-The method :eq:`eqn:FbFa` provides an *exact* or *analytical* value
+The method :ref:`(2) <Eq:eqn:FbFa>` provides an *exact* or *analytical* value
 of the integral. If we relax the requirement of the integral being
 exact, and instead look for *approximate* values, produced by
 *numerical methods*, integration becomes a very straightforward task
@@ -95,9 +95,9 @@ We consider the integral
 .. _Eq:sec:integr_fofx:
 
 .. math::
-   :label: sec:integr_fofx
-        
-        \int_a^b f(x)dx\thinspace .
+
+    \tag{3}
+    \int_a^b f(x)dx\thinspace .
         
         
 
@@ -108,15 +108,15 @@ covering a smaller part of the original integration interval
 *integration points* :math:`x_i`, :math:`i = 0,1,\ldots,n` that are distributed on
 the interval :math:`[a,b]`. Integration points may,
 or may not, be evenly distributed. An even distribution simplifies
-expressions and is often sufficient, so we will restrict ourselves to
+expressions and is often sufficient, so we will mostly restrict ourselves to
 that choice. The integration points are then computed as
 
 .. _Eq:sec:integr_points:
 
 .. math::
-   :label: sec:integr_points
-        
-        x_i = a + ih,\quad i = 0,1,\ldots,n,
+
+    \tag{4}
+    x_i = a + ih,\quad i = 0,1,\ldots,n,
         
         
 
@@ -125,23 +125,23 @@ where
 .. _Eq:sec:h_intgr_step:
 
 .. math::
-   :label: sec:h_intgr_step
-        
-        h = \frac{b-a}{n}\thinspace .
+
+    \tag{5}
+    h = \frac{b-a}{n}\thinspace .
         
         
 
 Given the integration points, the original
 integral is re-written as a sum of integrals, each integral being
 computed over the sub-interval between two consecutive integration
-points. The integral in :eq:`sec:integr_fofx` is thus expressed as
+points. The integral in :ref:`(3) <Eq:sec:integr_fofx>` is thus expressed as
 
 .. _Eq:eqfdx:
 
 .. math::
-   :label: eqfdx
-        
-        \int_a^b f(x)dx =
+
+    \tag{6}
+    \int_a^b f(x)dx =
         \int_{x_0}^{x_1} f(x)dx + \int_{x_1}^{x_2} f(x)dx + \ldots +
         \int_{x_{n-1}}^{x_n} f(x)dx\thinspace .
         
@@ -149,7 +149,7 @@ points. The integral in :eq:`sec:integr_fofx` is thus expressed as
 
 Note that :math:`x_0 = a` and :math:`x_n = b`.
 
-Proceeding from :eq:`eqfdx`, the different integration methods will
+Proceeding from :ref:`(6) <Eq:eqfdx>`, the different integration methods will
 differ in the way they approximate each integral on the right hand
 side.  The fundamental idea is that each term is an integral over a
 small interval :math:`[x_i,x_{i+1}]`, and over this small interval, it makes
@@ -173,9 +173,9 @@ time. A rapidly increasing velocity function might be
 .. _Eq:sec:vCar_foft:
 
 .. math::
-   :label: sec:vCar_foft
-        
-        v\left(t\right) = 3t^{2}e^{t^3}\thinspace .
+
+    \tag{7}
+    v\left(t\right) = 3t^{2}e^{t^3}\thinspace .
         
         
 
@@ -184,9 +184,9 @@ The distance after one second is
 .. _Eq:sec:dCar_intgr:
 
 .. math::
-   :label: sec:dCar_intgr
-        
-        \int_0^1 v(t)dt,
+
+    \tag{8}
+    \int_0^1 v(t)dt,
         
         
 
@@ -197,9 +197,9 @@ easy to calculate the anti-derivative as
 .. _Eq:sec:pCar_Foft:
 
 .. math::
-   :label: sec:pCar_Foft
-        
-        V(t) = e^{t^3}-1\thinspace .
+
+    \tag{9}
+    V(t) = e^{t^3}-1\thinspace .
         
         
 
@@ -211,10 +211,14 @@ We can therefore compute the exact value of the integral as
 The composite trapezoidal rule
 ==============================
 
+.. index:: Trapezoidal rule
+
+.. index:: composite trapezoidal rule
+
 The integral :math:`\int_a^b f(x)dx` may be interpreted as the
 area between the :math:`x` axis and the graph :math:`y=f(x)` of the integrand.
 Figure :ref:`fig:vCar` illustrates this area for the choice
-:eq:`sec:dCar_intgr`. Computing the integral :math:`\int_0^1f(t)dt`
+:ref:`(8) <Eq:sec:dCar_intgr>`. Computing the integral :math:`\int_0^1f(t)dt`
 amounts to computing the area of the hatched region.
 
 .. _fig:vCar:
@@ -232,9 +236,9 @@ straight line segments, we may view the area rather as composed of
 trapezoids, the areas of which are easy to compute. This is
 illustrated in Figure :ref:`fig:vCarTrapeze`, where 4 straight line
 segments give rise to 4 trapezoids, covering the time intervals
-:math:`[0,0.2)`, :math:`[0.2,0.6)`, :math:`[0.6,0.8)` and :math:`[0.8,1.0]`. Note that
-these intervals are *not* of the same size (although we very often we work
-with equal-sized trapezoids for simplicity).
+:math:`[0,0.2)`, :math:`[0.2,0.6)`, :math:`[0.6,0.8)` and :math:`[0.8,1.0]`. Note that we have
+taken the opportunity here to demonstrate the computations with time
+intervals that differ in size.
 
 .. _fig:vCarTrapeze:
 
@@ -245,7 +249,7 @@ with equal-sized trapezoids for simplicity).
 
 The areas of the 4 trapezoids shown in Figure :ref:`fig:vCarTrapeze`
 now constitute our approximation to the integral
-:eq:`sec:dCar_intgr`:
+:ref:`(8) <Eq:sec:dCar_intgr>`:
 
 .. math::
         
@@ -256,9 +260,9 @@ now constitute our approximation to the integral
 .. _Eq:sec:integr_Trap_split:
 
 .. math::
-   :label: sec:integr_Trap_split
-          
-        + h_3 (\frac{v(0.6)+v(0.8)}{2}) + h_4 (\frac{v(0.8)+v(1.0)}{2}),
+
+    \tag{10}
+    + h_3 (\frac{v(0.6)+v(0.8)}{2}) + h_4 (\frac{v(0.8)+v(1.0)}{2}),
         
         
 
@@ -267,47 +271,47 @@ where
 .. _Eq:sec:integr_h1:
 
 .. math::
-   :label: sec:integr_h1
-        
-        h_1 = (0.2 - 0.0),
+
+    \tag{11}
+    h_1 = (0.2 - 0.0),
           
         
 
 .. _Eq:sec:integr_h2:
 
 .. math::
-   :label: sec:integr_h2
-          
-        h_2 = (0.6 - 0.2),
+
+    \tag{12}
+    h_2 = (0.6 - 0.2),
           
         
 
 .. _Eq:sec:integr_h3:
 
 .. math::
-   :label: sec:integr_h3
-          
-        h_3 = (0.8 - 0.6),
+
+    \tag{13}
+    h_3 = (0.8 - 0.6),
           
         
 
 .. _Eq:sec:integr_h4:
 
 .. math::
-   :label: sec:integr_h4
-          
-        h_4 = (1.0 - 0.8)\thinspace
+
+    \tag{14}
+    h_4 = (1.0 - 0.8)\thinspace
         
         
 
-With :math:`v(t) = 3t^{2}e^{t^3}`, each term in :eq:`sec:integr_Trap_split` is readily computed and our approximate computation gives
+With :math:`v(t) = 3t^{2}e^{t^3}`, each term in :ref:`(10) <Eq:sec:integr_Trap_split>` is readily computed and our approximate computation gives
 
 .. _Eq:sec:integr_Trap_answer:
 
 .. math::
-   :label: sec:integr_Trap_answer
-        
-        \int_0^1 v(t)dt \approx 1.895\thinspace .
+
+    \tag{15}
+    \int_0^1 v(t)dt \approx 1.895\thinspace .
         
         
 
@@ -323,12 +327,12 @@ by an arbitrary number of trapezoids.
 
 .. _sec:integrals:formula:
 
-The general formula  (1)
-------------------------
+The general formula          (1)
+--------------------------------
 
 For a given function :math:`f(x)`, we want to approximate the
-integral :math:`\int_a^bf(x)dx` by :math:`n` trapezoids. We start out with
-:eq:`eqfdx` and approximate each integral on the right hand side
+integral :math:`\int_a^bf(x)dx` by :math:`n` trapezoids (of equal width). We start out with
+:ref:`(6) <Eq:eqfdx>` and approximate each integral on the right hand side
 with a single trapezoid. In detail,
 
 .. math::
@@ -336,22 +340,28 @@ with a single trapezoid. In detail,
         \int_a^b f(x)\,dx = \int_{x_0}^{x_1} f(x) dx + \int_{x_1}^{x_2} f(x) dx + \ldots + \int_{x_{n-1}}^{x_n} f(x) dx,     \nonumber 
         
 
+.. math::
+          
+                          \approx h \frac{f(x_0) + f(x_1)}{2} +
+        		  h \frac{f(x_1) + f(x_2)}{2} + \ldots + \nonumber 
+        
+
 .. _Eq:eqfdelta:
 
 .. math::
-   :label: eqfdelta
-          
-                          \approx h \frac{f(x_0) + f(x_1)}{2} + h \frac{f(x_1) + f(x_2)}{2} + \ldots + h \frac{f(x_{n-1}) + f(x_n)}{2} 
+
+    \tag{16}
+    \quad h \frac{f(x_{n-1}) + f(x_n)}{2} 
         
 
-By simplifying the right hand side of :eq:`eqfdelta` we get
+By simplifying the right hand side of :ref:`(16) <Eq:eqfdelta>` we get
 
 .. _Eq:eqn:314:
 
 .. math::
-   :label: eqn:314
-        
-        \int_a^b f(x)\,dx \approx \\ 
+
+    \tag{17}
+    \int_a^b f(x)\,dx \approx \\ 
         \frac{h}{2}\left[f(x_0) + 2 f(x_1) + 2 f(x_2) + \ldots + 2 f(x_{n-1}) + f(x_n)\right]              
         
 
@@ -360,9 +370,9 @@ which is more compactly written as
 .. _Eq:eqn:315:
 
 .. math::
-   :label: eqn:315
-        
-        \int_a^b f(x)\,dx \approx h \left[\frac{1}{2}f(x_0) + \sum_{i=1}^{n-1}f(x_i) + \frac{1}{2}f(x_n) \right] \thinspace .
+
+    \tag{18}
+    \int_a^b f(x)\,dx \approx h \left[\frac{1}{2}f(x_0) + \sum_{i=1}^{n-1}f(x_i) + \frac{1}{2}f(x_n) \right] \thinspace .
         
         
 
@@ -383,34 +393,40 @@ which is more compactly written as
 
 .. _sec:integrals:trap:impl:
 
-Implementation  (1)
--------------------
+Implementation          (1)
+---------------------------
 
 Specific or general implementation?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. index::
+   single: implementation; specific
+
+.. index::
+   single: implementation; general
 
 Suppose our primary goal was to compute the specific integral
 :math:`\int_0^1 v(t)dt` with :math:`v(t)=3t^2e^{t^3}`. First we played around with
 a simple hand calculation to see what the method was about, before we
 (as one often does in mathematics) developed a general formula
-:eq:`eqn:315` for the general or "abstract" integral
+:ref:`(18) <Eq:eqn:315>` for the general or "abstract" integral
 :math:`\int_a^bf(x)dx`.  To solve our specific problem :math:`\int_0^1 v(t)dt` we
-must then apply the general formula :eq:`eqn:315` to the given data
+must then apply the general formula :ref:`(18) <Eq:eqn:315>` to the given data
 (function and integral limits) in our problem.  Although simple in
 principle, the practical steps are confusing for many because the
-notation in the abstract problem in :eq:`eqn:315` differs from the
+notation in the abstract problem in :ref:`(18) <Eq:eqn:315>` differs from the
 notation in our special problem.  Clearly, the :math:`f`, :math:`x`, and :math:`h` in
-:eq:`eqn:315` correspond to :math:`v`, :math:`t`, and perhaps :math:`\Delta t` for the
+:ref:`(18) <Eq:eqn:315>` correspond to :math:`v`, :math:`t`, and perhaps :math:`\Delta t` for the
 trapezoid width in our special problem.
 
 
 .. admonition:: The programmer's dilemma
 
    1. Should we write a special program for the special integral,
-      using the ideas from the general rule :eq:`eqn:315`, but
+      using the ideas from the general rule :ref:`(18) <Eq:eqn:315>`, but
       replacing :math:`f` by :math:`v`, :math:`x` by :math:`t`, and :math:`h` by :math:`\Delta t`?
    
-   2. Should we implement the general method :eq:`eqn:315` as it stands in a
+   2. Should we implement the general method :ref:`(18) <Eq:eqn:315>` as it stands in a
       general function ``trapezoid(f, a, b, n)`` and solve the specific
       problem at hand by a specialized call to this function?
    
@@ -431,14 +447,14 @@ Implementation with functions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For the integral :math:`\int_a^bf(x)dx` computed by the formula
-:eq:`eqn:315` we want the corresponding Matlab function ``trapezoid``
+:ref:`(18) <Eq:eqn:315>` we want the corresponding Matlab function ``trapezoid``
 to take any :math:`f`, :math:`a`, :math:`b`, and :math:`n` as input and return the
 approximation to the integral.
 
 We write a Matlab function ``trapezoidal``
-in a file `trapezoidal.m <https://github.com/hplgit/prog4comp/src/m/trapezoidal.m>`__
+in a file `trapezoidal.m <https://github.com/hplgit/prog4comp/tree/master/src/m/trapezoidal.m>`__
 as close as possible
-to the formula :eq:`eqn:315`, making sure variable names correspond
+to the formula :ref:`(18) <Eq:eqn:315>`, making sure variable names correspond
 to the mathematical notation:
 
 .. code-block:: matlab
@@ -463,7 +479,7 @@ in ``trapezoidal.m`` to solve our particular problem :math:`\int_0^1v(t)dt`:
 
 .. code-block:: text
 
-        octave:1> v = @(t) 3*(t**2)*exp(t**3);
+        octave:1> v = @(t) 3*(t^2)*exp(t^3);
         octave:2> n = 4;
         octave:4> numerical = trapezoidal(v, 0, 1, n);
         octave:5> numerical
@@ -473,7 +489,7 @@ Let us compute the exact expression and the error in the approximation:
 
 .. code-block:: text
 
-        octave:6> V = @(t) exp(t**3);
+        octave:6> V = @(t) exp(t^3);
         octave:7> exact = V(1) - V(0);
         octave:8> error = exact - numerical
         ans = -0.20443
@@ -503,12 +519,12 @@ a function:
 .. code-block:: matlab
 
         function application()
-          v = @(t) 3*(t**2)*exp(t**3);
+          v = @(t) 3*(t^2)*exp(t^3);
           n = input('n: ')
           numerical = trapezoidal(v, 0, 1, n);
         
           % Compare with exact result
-          V = @(t) exp(t**3);
+          V = @(t) exp(t^3);
           exact = V(1) - V(0);
           error = exact - numerical;
           fprintf("n=%d: %.16f, error: %g", n, numerical, error)
@@ -521,7 +537,7 @@ The ``application`` function and its call is in the file
 
 .. code-block:: text
 
-        Terminal> octave trapezoidal_app.py
+        Terminal> octave trapezoidal_app.m
         ...
         n: 4
         n =  4
@@ -533,14 +549,19 @@ Alternative flat special-purpose implementation
 .. index::
    single: code; re-use
 
+.. index:: flat program
+
+.. index::
+   single: program; flat
+
 Let us illustrate the implementation implied by alternative 1
 in the *Programmer's dilemma* box in the section :ref:`sec:integrals:trap:impl`.
 That is, we make a special-purpose code where we adapt the
-general formula :eq:`eqn:315`
+general formula :ref:`(18) <Eq:eqn:315>`
 to the specific problem :math:`\int_0^1 3t^2e^{t^3}dt`.
 
 Basically, we use a ``for`` loop to compute the sum. Each term with :math:`f(x)` in
-the formula :eq:`eqn:315` is replaced by :math:`3t^2e^{t^3}`, :math:`x` by :math:`t`,
+the formula :ref:`(18) <Eq:eqn:315>` is replaced by :math:`3t^2e^{t^3}`, :math:`x` by :math:`t`,
 and :math:`h` by :math:`\Delta t` [#deltat-replacement]_. A first try at writing a plain,
 flat program doing the special calculation is
 
@@ -568,7 +589,7 @@ flat program doing the special calculation is
 
 The problem with the above code is at least three-fold:
 
-1. We need to reformulate :eq:`eqn:315` for our special
+1. We need to reformulate :ref:`(18) <Eq:eqn:315>` for our special
    problem with a different notation.
 
 2. The integrand :math:`3t^2e^{t^3}` is inserted many times in the
@@ -577,7 +598,7 @@ The problem with the above code is at least three-fold:
 3. A lot of edits are necessary to use the code to compute a different
    integral - these edits are likely to introduce errors.
 
-The potential errors involved in point 2 serve to illustrate how important it is to use Python functions as mathematical functions. Here we have chosen to use the lambda function to define the integrand as the variable ``v``:
+The potential errors involved in point 2 serve to illustrate how important it is to use Matlab functions as mathematical functions. Here we have chosen to use the lambda function to define the integrand as the variable ``v``:
 
 .. code-block:: matlab
 
@@ -620,6 +641,9 @@ to compute the new integral? Not so much:
    is a special function, called the `Error function <http://en.wikipedia.org/wiki/Error_function>`__ and written :math:`\mbox{erf}(x)`. In a code, you can
    call ``erf(x)``.
 
+.. index::
+   single: error; function (erf)
+
 These changes are straightforward to implement, but *they are scattered
 around in the program*, a fact that requires us to be very careful so
 we do not introduce new programming errors while we modify the code.
@@ -648,16 +672,18 @@ The present integral problems result in short code.
 In more challenging engineering problems the code quickly grows
 to hundreds and thousands of line. Without abstractions in terms
 of general algorithms in general reusable functions, the complexity
-of the program grows so fast that if will be extremely difficult
-to make sure that the entire program works properly.
+of the program grows so fast that it will be extremely difficult
+to make sure that the program works properly.
 
-Another advantage of packaging mathematical algorithms in functions is
-that function can be reused by anyone to solve a problem by just
-calling the function with a proper set of arguments.  Understanding
-the function's inner details is not necessary to compute a new
-integral. Similarly, you can find libraries of functions on the
-Internet and use these functions to solve your problems without
-specific knowledge of every mathematical detail in the functions.
+Another advantage of packaging mathematical algorithms in functions
+is that a function can be reused by anyone to solve
+a problem by just calling the function with a proper set of arguments.
+Understanding the function's
+inner details is not necessary to compute a new integral. Similarly,
+you can find libraries of functions on the Internet and use these
+functions to solve your problems without specific knowledge of
+every mathematical detail in the functions.
+
 This desirable feature has its downside, of course: the user of a
 function may misuse it, and the function may contain programming
 errors and lead to wrong answers. Testing the output of downloaded
@@ -669,16 +695,20 @@ results.
 The composite midpoint method
 =============================
 
+.. index:: Midpoint method
+
+.. index:: composite midpoint method
+
 The idea
 ~~~~~~~~
 
 Rather than approximating the area under a curve by trapezoids, we can
 use plain rectangles. It may sound less accurate to use horizontal lines
 and not skew lines following the function to be integrated, but
-the integration method based on rectangles is in fact slightly more
+an integration method based on rectangles (the *midpoint method*) is in fact slightly more
 accurate than the one based on trapezoids!
 
-In the *midpoint method*, we construct a rectangle for every sub-interval
+In the midpoint method, we construct a rectangle for every sub-interval
 where the height equals :math:`f` at the midpoint of the sub-interval.
 Let us do this for four rectangles, using the same sub-intervals as we
 had for hand calculations with the trapezoidal method:
@@ -694,16 +724,16 @@ had for hand calculations with the trapezoidal method:
 .. _Eq:sec:integr_Midp_split:
 
 .. math::
-   :label: sec:integr_Midp_split
-          
-        + h_3 f\left(\frac{0.6 + 0.8}{2}\right) +
+
+    \tag{19}
+    + h_3 f\left(\frac{0.6 + 0.8}{2}\right) +
            h_4 f\left(\frac{0.8 + 1.0}{2}\right),
         
         
 
 where :math:`h_1`, :math:`h_2`, :math:`h_3`, and :math:`h_4` are the widths of the sub-intervals,
 used previously with the trapezoidal method and defined in
-:eq:`sec:integr_h1`-:eq:`sec:integr_h4`.
+:ref:`(11) <Eq:sec:integr_h1>`-:ref:`(14) <Eq:sec:integr_h4>`.
 
 .. _fig:vCarMidpoint:
 
@@ -718,10 +748,10 @@ small, but it is better than what we got with the trapezoidal method
 (:math:`10\%`) with the same sub-intervals. More rectangles give a
 better approximation.
 
-The general formula  (2)
-------------------------
+The general formula          (2)
+--------------------------------
 
-Let us derive a formula for the midpoint method based on :math:`n` rectangles:
+Let us derive a formula for the midpoint method based on :math:`n` rectangles of equal width:
 
 .. math::
         
@@ -732,9 +762,9 @@ Let us derive a formula for the midpoint method based on :math:`n` rectangles:
 .. _Eq:sec:Midp_general1:
 
 .. math::
-   :label: sec:Midp_general1
-          
-                          \approx h f\left(\frac{x_0 + x_1}{2}\right) +
+
+    \tag{20}
+    \approx h f\left(\frac{x_0 + x_1}{2}\right) +
                            h f\left(\frac{x_1 + x_2}{2}\right) + \ldots +
                            h f\left(\frac{x_{n-1} + x_n}{2}\right) ,
           
@@ -743,9 +773,9 @@ Let us derive a formula for the midpoint method based on :math:`n` rectangles:
 .. _Eq:sec:Midp_general2:
 
 .. math::
-   :label: sec:Midp_general2
-          
-                          \approx h \left(f\left(\frac{x_0 + x_1}{2}\right) +
+
+    \tag{21}
+    \approx h \left(f\left(\frac{x_0 + x_1}{2}\right) +
                           f\left(\frac{x_1 + x_2}{2}\right) + \ldots +
                           f\left(\frac{x_{n-1} + x_n}{2}\right)\right)\thinspace .
         
@@ -756,9 +786,9 @@ This sum may be written more compactly as
 .. _Eq:sec:midpointFormula:
 
 .. math::
-   :label: sec:midpointFormula
-        
-        \int_a^b f(x) dx \approx h \sum_{i=0}^{n-1}f(x_i) ,
+
+    \tag{22}
+    \int_a^b f(x) dx \approx h \sum_{i=0}^{n-1}f(x_i) ,
         
         
 
@@ -766,13 +796,13 @@ where :math:`x_i = \left(a + \frac{h}{2}\right) + ih`.
 
 .. _sec:midpoint:code:
 
-Implementation  (2)
--------------------
+Implementation          (2)
+---------------------------
 
 We follow the advice and lessons learned from the implementation of
 the trapezoidal method and make a function ``midpoint(f, a, b, n)``
-(in a file `midpoint.m <https://github.com/hplgit/prog4comp/src/m/midpoint.m>`__)
-for implementing the general formula :eq:`sec:midpointFormula`:
+(in a file `midpoint.m <https://github.com/hplgit/prog4comp/tree/master/src/m/midpoint.m>`__)
+for implementing the general formula :ref:`(22) <Eq:sec:midpointFormula>`:
 
 .. code-block:: matlab
 
@@ -800,11 +830,11 @@ Comparing the trapezoidal and the midpoint methods
 The next example shows how easy we can combine the ``trapezoidal`` and ``midpoint``
 functions to make a comparison of the two methods in the
 file
-`compare_integration_methods.m <https://github.com/hplgit/prog4comp/src/m/compare_integration_methods.m>`__:
+`compare_integration_methods.m <https://github.com/hplgit/prog4comp/tree/master/src/m/compare_integration_methods.m>`__:
 
 .. code-block:: matlab
 
-        g = @(y) exp(-y**2);
+        g = @(y) exp(-y^2);
         a = 0;
         b = 2;
         fprintf('    n        midpoint          trapezoidal\n');
@@ -845,6 +875,10 @@ A visual inspection of the numbers shows how fast the digits
 stabilize in both methods. It appears that 13 digits have stabilized
 in the last two rows.
 
+.. index:: Simpson's rule
+
+.. index:: Gauss quadrature
+
 
 .. admonition:: Remark
 
@@ -880,6 +914,8 @@ section) look at the integral values and see that they stabilize as
 at all satisfactory for claiming that the software we have produced is
 correctly implemented.
 
+.. index:: bug
+
 To see this, we can introduce a bug in the
 ``application`` function that calls ``trapezoidal``: instead of
 integrating :math:`3t^2e^{t^3}`, we write "accidentally" :math:`3t^3e^{t^3}`,
@@ -908,7 +944,7 @@ everything is correctly implemented.
 
 .. admonition:: Unit testing
 
-   A good habit is to test small pieces of a larger code at a time.
+   A good habit is to test small pieces of a larger code individually, one at a time.
    This is known as *unit testing*. One identifies a (small) unit of
    the code, and then one makes a separate test for this unit. The unit test
    should be stand-alone in the sense that it can be run without the
@@ -924,8 +960,10 @@ everything is correctly implemented.
 
 .. _sec:integrals:testprocs:
 
-Test procedures
----------------
+Proper test procedures
+----------------------
+
+.. index:: testing procedures
 
 There are three serious ways to test the implementation of
 numerical methods via unit tests:
@@ -955,20 +993,20 @@ Let us use two trapezoids and compute the integral :math:`\int_0^1v(t)`,
 when :math:`h=0.5` is the width of the two trapezoids. Running the program
 gives exactly the same results.
 
-Solving a problem without numerical errors  (1)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Solving a problem without numerical errors          (1)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The best unit tests for numerical algorithms involve mathematical problems
-where we know the numerical result beforehand. Usually, numerical
-results contain unknown approximation errors, so knowing the numerical
-result implies that we have a problem where the approximation errors
-vanish. This feature may be present in very simple mathematical problems.
-For example, the trapezoidal method is exact for
-integration of linear functions :math:`f(x)=ax+b`. We can therefore pick
-some linear function and construct a test function that checks
-equality (within a tolerance) between the exact analytical expression
-for the integral and the number computed by the implementation
-of the trapezoidal method.
+The best unit tests for numerical algorithms involve mathematical
+problems where we know the numerical result beforehand. Usually,
+numerical results contain unknown approximation errors, so knowing the
+numerical result implies that we have a problem where the
+approximation errors vanish. This feature may be present in very
+simple mathematical problems. For example, the trapezoidal method is
+exact for integration of linear functions :math:`f(x)=ax+b`. We can
+therefore pick some linear function and construct a test function that
+checks equality between the exact analytical expression for the
+integral and the number computed by the implementation of the
+trapezoidal method.
 
 A specific test case can be :math:`\int_{1.2}^{4.4} (6x-4)dx`. This
 integral involves an "arbitrary" interval  :math:`[1.2, 4.4]` and
@@ -978,29 +1016,44 @@ these have special properties in arithmetic operations (e.g.,
 forgetting to multiply is equivalent to multiplying by 1, and
 forgetting to add is equivalent to adding 0).
 
-Demonstrating correct convergence rates  (1)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Demonstrating correct convergence rates          (1)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Normally, unit tests must be based on problems where the numerical approximation
-errors in our implementation remain unknown. However, we often know
-or may assume a certain *asymptotic* behavior of the error.
-We can do some experimental runs with the test problem
-:math:`\int_0^1 3t^2e^{t^3}dt` where :math:`n` is doubled in each run:
-:math:`n=4,8,16`. The corresponding errors are then 12%, 3% and 0.77%,
-respectively. These numbers indicate that the error is
-roughly reduced by a factor of 4 when doubling :math:`n`. We say that
-the *convergence rate* is :math:`n^{-2}`. In fact, this result can also
-be shown mathematically. The idea of a unit test is to run the
-algorithm for some :math:`n` values, compute the error (the absolute
-value of the difference between the exact analytical result and
-the one produced by the numerical method), and check that the error
-has *approximately* correct asymptotic behavior, i.e., that
-the error is proportional to :math:`n^{-2}`.
+.. index:: convergence rate
 
-Let us develop some more precise method for such unit tests based
-on convergence rates.
-We assume that the error :math:`E`
-depends on :math:`n` according to
+.. index:: rate of convergence
+
+.. index::
+   single: error; asymptotic
+
+Normally, unit tests must be based on problems where the numerical
+approximation errors in our implementation remain unknown. However, we
+often know or may assume a certain *asymptotic* behavior of the error.
+We can do some experimental runs with the test problem :math:`\int_0^1
+3t^2e^{t^3}dt` where :math:`n` is doubled in each run: :math:`n=4,8,16`. The
+corresponding errors are then 12%, 3% and 0.77%, respectively. These
+numbers indicate that the error is roughly reduced by a factor of 4
+when doubling :math:`n`. Thus, the error converges to zero as :math:`n^{-2}` and
+we say that the *convergence rate* is 2. In
+fact, this result can also be shown mathematically for the trapezoidal
+and midpoint method.  Numerical integration methods usually have an error
+that converge to zero as :math:`n^{-p}` for some :math:`p` that depends on the
+method. With such a result, it does not matter if we do not know what
+the actual approximation error is: we know at what rate it is
+*reduced*, so running the implementation for two or more different :math:`n`
+values will put us in a position to measure the expected rate and see if
+it is achieved.
+
+The idea of a corresponding unit test is then to run the algorithm for some :math:`n` values,
+compute the error (the absolute value of the difference between the
+exact analytical result and the one produced by the numerical method),
+and check that the error has *approximately* correct asymptotic
+behavior, i.e., that the error is proportional to :math:`n^{-2}` in case of
+the trapezoidal and midpoint method.
+
+Let us develop a more precise method for such unit tests based on
+convergence rates.  We assume that the error :math:`E` depends on :math:`n`
+according to
 
 .. math::
          E = Cn^r,
@@ -1013,14 +1066,22 @@ We compute the corresponding errors
 For two consecutive experiments, number :math:`i` and :math:`i-1`,
 we have the error model
 
-.. math::
-        
-        E_{i} = Cn_{i}^r,
-        
+.. _Eq:_auto2:
 
 .. math::
-          
-        E_{i-1} = Cn_{i-1}^r\thinspace .
+
+    \tag{23}
+    E_{i} = Cn_{i}^r,
+        
+        
+
+.. _Eq:_auto3:
+
+.. math::
+
+    \tag{24}
+    E_{i-1} = Cn_{i-1}^r\thinspace .
+        
         
 
 These are two equations for two unknowns :math:`C` and :math:`r`.
@@ -1030,9 +1091,9 @@ Then solving for :math:`r` gives
 .. _Eq:sec:integrals:testprocs:req:
 
 .. math::
-   :label: sec:integrals:testprocs:req
-        
-        r_i = \frac{\ln (E_i/E_{i-1})}{\ln (n_i/n_{i-1})}\thinspace .
+
+    \tag{25}
+    r_i = \frac{\ln (E_i/E_{i-1})}{\ln (n_i/n_{i-1})}\thinspace .
         
         
 
@@ -1040,13 +1101,123 @@ We have introduced a subscript :math:`i` in :math:`r`
 since the estimated
 value for :math:`r` varies with :math:`i`. Hopefully,
 :math:`r_i` approaches
-the correct convergence rate as the number of intervals increases in size
+the correct convergence rate as the number of intervals increases
 and :math:`i\rightarrow q`.
+
+.. _sec:integrals:finite_prec:
+
+Finite precision of floating-point numbers
+------------------------------------------
+
+.. index:: finite precision (of float)
+
+The test procedures above lead to comparison of numbers for checking that
+calculations were correct.
+Such comparison is more complicated than what a newcomer might think.
+Suppose we have a calculation ``a + b`` and want to check that the
+result is what we expect. We start with 1 + 2:
+
+.. code-block:: matlab
+
+        >> a = 1; b = 2; expected = 3;
+        >> a + b == expected
+        ans =  1
+
+Then we proceed with 0.1 + 0.2:
+
+.. code-block:: matlab
+
+        >> a = 0.1; b = 0.2; expected = 0.3;
+        >> a + b == expected
+        ans = 0
+
+.. index:: floating point number (float)
+
+So why is :math:`0.1 + 0.2 \neq 0.3`? The reason is that real numbers cannot in
+general be exactly represented on a computer. They must instead be
+approximated by a `floating-point number <https://en.wikipedia.org/wiki/Floating_point>`__ that can only store a finite amount of information, usually about
+17 digits of a real number. Let us print 0.1, 0.2, 0.1 + 0.2, and 0.3
+with 17 decimals:
+
+.. code-block:: matlab
+
+        >> fprintf('%.17f\n%.17f\n%.17f\n%.17f\n', 0.1, 0.2, 0.1 + 0.2, 0.3)
+        0.10000000000000001
+        0.20000000000000001
+        0.30000000000000004
+        0.29999999999999999
+
+We see that all of the numbers have an inaccurate digit in the 17th
+decimal place. Because 0.1 + 0.2 evaluates to 0.30000000000000004
+and 0.3 is represented as 0.29999999999999999, these two numbers
+are not equal. In general, real numbers in Matlab have (at most)
+16 correct decimals.
+
+.. index::
+   single: error; rounding
+
+.. index::
+   single: error; tolerance
+
+When we compute with real numbers, these numbers are inaccurately
+represented on the computer, and arithmetic operations with inaccurate
+numbers lead to small rounding errors in the final results. Depending on
+the type of numerical algorithm, the rounding errors may or may not
+accumulate.
+
+If we cannot make tests like ``0.1 + 0.2 == 0.3``, what should we then do?
+The answer is that we must accept some small inaccuracy and make
+a test with a *tolerance*. Here is the recipe:
+
+.. code-block:: matlab
+
+        >> a = 0.1; b = 0.2; expected = 0.3;
+        >> computed = a + b;
+        >> diff = abs(expected - computed);
+        >> tol = 1E-15;
+        >> diff < tol
+        ans =  1
+
+Here we have set the tolerance for comparison to :math:`10^{-15}`, but
+calculating ``0.3 - (0.1 + 0.2)`` shows that it equals
+``-5.55e-17``, so a lower tolerance
+could be used in this particular example. However, in other calculations
+we have little idea about how accurate the answer is (there could be
+accumulation of rounding errors in more complicated algorithms),
+so :math:`10^{-15}` or :math:`10^{-14}` are robust values.
+As we demonstrate below, these tolerances depend on the magnitude of
+the numbers in the calculations.
+
+.. index::
+   single: difference; absolute
+
+.. index::
+   single: difference; relative
+
+Doing an experiment with :math:`10^k + 0.3 - (10^k + 0.1 + 0.2)` for
+:math:`k=1,\ldots,10` shows that the answer (which should be zero)
+is around :math:`10^{16-k}`. This means that the tolerance must be larger
+if we compute with larger numbers. Setting a proper tolerance therefore
+requires some experiments to see what level of accuracy one can expect.
+A way out of this difficulty is to work with *relative* instead of
+*absolute* differences. In a relative difference we divide by one of
+the operands, e.g.,
+
+.. math::
+         a = 10^k + 0.3,\quad b = (10^k + 0.1 + 0.2),\quad c = \frac{a - b}{a}\thinspace .
+
+Computing this :math:`c` for various :math:`k` shows a value around :math:`10^{-16}`.
+A safer procedure is thus to use *relative differences*.
 
 .. _sec:integrals:test:functions:
 
 Constructing unit tests and writing test functions
 --------------------------------------------------
+
+.. index:: assert (function)
+
+.. index::
+   single: function; assert
 
 Software testing in other languages often applies comprehensive test
 frameworks to automatically run through large numbers of tests.
@@ -1054,6 +1225,8 @@ This is very
 advantageous as one can at any time check that the code works.
 It is a good habit to run the test suite after every edit of the
 source code files.
+
+.. index:: test function
 
 Matlab also has test frameworks, but we shall here just use
 the common ideas (across languages) for writing tests and not
@@ -1094,11 +1267,27 @@ names start with ``test_``. A simple script can be made to search for
 such files and run them automatically (essentially, this is what
 testing frameworks do).
 
+As long as we add integers, the equality test in the ``test_add``
+function is appropriate, but if we try to call ``add(0.1, 0.2)``
+instead, we will face the rounding error problems explained in
+the section :ref:`sec:integrals:finite_prec`, and we must use a test
+with tolerance instead:
+
+.. code-block:: matlab
+
+        function test_add
+          expected = 0.3;
+          computed = add(0.1, 0.2;
+          tol = 1E-14;
+          diff = abs(expected - computed);
+          assert(diff < tol, 'diff=%g', diff);
+        end
+
 Below we shall write test functions for each of the three test
 procedures we suggested: comparison with hand calculations,
 checking problems that can be exactly solved, and checking convergence
 rates. We stick to testing the trapezoidal integration code and collect all
-test functions in one common file by the name ``test_trapezoidal.py``.
+test functions in one common file by the name ``test_trapezoidal.m``.
 
 In Matlab, we need to enforce the following rules on files for the function
 to be tested and the test functions:
@@ -1114,7 +1303,7 @@ Hand-computed numerical results
 
 Our previous hand calculations for two trapezoids can be checked against
 the ``trapezoidal`` function inside a test function
-(in a file `test_trapezoidal.m <https://github.com/hplgit/prog4comp/src/m/test_trapezoidal.m>`__):
+(in a file `test_trapezoidal.m <https://github.com/hplgit/prog4comp/tree/master/src/m/test_trapezoidal.m>`__):
 
 .. code-block:: matlab
 
@@ -1122,21 +1311,21 @@ the ``trapezoidal`` function inside a test function
           % Compare one hand-computed result
           v = @(t) 3*(t^2)*exp(t^3);
           n = 2;
-          numerical = trapezoidal(v, 0, 1, n);
-          exact = 2.463642041244344;
-          err = abs(exact - numerical);
+          computed = trapezoidal(v, 0, 1, n);
+          expected = 2.463642041244344;
+          error = abs(expected - computed);
           tol = 1E-14;
-          assert(err < tol, 'error=%g > tol=%g', err, tol);
+          assert(error < tol, 'error=%g > tol=%g', error, tol);
         end
 
 Note the importance of checking ``err`` against ``exact`` with a tolerance:
-round-off errors from the arithmetics inside ``trapezoidal`` will not
+rounding errors from the arithmetics inside ``trapezoidal`` will not
 make the result exactly like the hand-computed one. The size of
 the tolerance is here set to :math:`10^{-14}`, which is a kind of all-round
 value for computations with numbers not deviating much from unity.
 
-Solving a problem without numerical errors  (2)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Solving a problem without numerical errors          (2)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We know that the trapezoidal rule is exact for linear integrands.
 Choosing the integral :math:`\int_{1.2}^{4.4} (6x-4)dx` as test case,
@@ -1148,19 +1337,19 @@ test function for this unit test may look like
         function test_trapezoidal_linear
           % Check that linear functions are integrated exactly
           f = @(x) 6*x - 4;
-          F = @(x) 3*x**2 - 4*x;  % Anti-derivative
+          F = @(x) 3*x^2 - 4*x;  % Anti-derivative
           a = 1.2; b = 4.4;
-          exact = F(b) - F(a);
+          expected = F(b) - F(a);
           tol = 1E-14;
           for n = [2 20 21]
-            numerical = trapezoidal(f, a, b, n);
-            err = abs(exact - numerical);
-            assert(err < tol, 'n=%d, err=%g', n, err);
+            computed = trapezoidal(f, a, b, n);
+            error = abs(expected - computed);
+            assert(error < tol, 'n=%d, err=%g', n, error);
           end
         end
 
-Demonstrating correct convergence rates  (2)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Demonstrating correct convergence rates          (2)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In the present example with integration, it is known that the
 approximation errors in the trapezoidal rule are proportional to
@@ -1179,7 +1368,7 @@ The algorithm typically goes like
 
    * Compute the error :math:`E_i`
 
-   * Estimate :math:`r_i` from :eq:`sec:integrals:testprocs:req`
+   * Estimate :math:`r_i` from :ref:`(25) <Eq:sec:integrals:testprocs:req>`
      if :math:`i>1`
 
 The corresponding code may look like
@@ -1190,13 +1379,13 @@ The corresponding code may look like
           n = zeros(num_experiments, 1);
           E = zeros(num_experiments, 1);
           r = zeros(num_experiments-1, 1);
-          exact = F(b) - F(a);
+          expected = F(b) - F(a);
         
           for i = 1:num_experiments
             n(i) = 2^i;
-            numerical = trapezoidal(f, a, b, n(i));
-            err = abs(exact - numerical);
-            E(i) = err;
+            computed = trapezoidal(f, a, b, n(i));
+            error = abs(expected - computed);
+            E(i) = error;
             if (i > 1)
               r(i-1) = log(E(i-1)/E(i))/log(n(i-1)/n(i));
               r(i-1) = round(r(i-1)*100)/100;  % Truncate, two decimals
@@ -1222,15 +1411,18 @@ and then checking the value of :math:`r_i` for the largest :math:`i`:
         end
 
 Running the test shows that all :math:`r_i`, except the first one, equal
-the target limit 2 within two decimals.
+the target limit 2 within two decimals. This observation suggest a
+tolerance of :math:`10^{-2}`.
 
-Vectorization  (1)
-==================
+Vectorization          (1)
+==========================
+
+.. index:: vectorization
 
 The functions ``midpoint`` and ``trapezoid`` usually run fast in Matlab
 and compute an integral to a satisfactory precision within a
-fraction of a second. However, long loops in Matlab may in more
-complicated implementations run slowly. To increase the speed, the loops
+fraction of a second. However, long loops in Matlab may run slowly in more
+complicated implementations. To increase the speed, the loops
 can be replaced by vectorized code. The integration functions constitute
 a simple and good example to illustrate how to vectorize loops.
 
@@ -1297,7 +1489,7 @@ the integral value. The complete function is listed below.
         end
 
 The code is found in the file
-`integration_methods_vec.m <https://github.com/hplgit/prog4comp/src/m/integration_methods_vec.m>`__.
+`integration_methods_vec.m <https://github.com/hplgit/prog4comp/tree/master/src/m/integration_methods_vec.m>`__.
 An interactive test reads
 
 .. code-block:: text
@@ -1320,8 +1512,8 @@ Vectorizing the trapezoidal rule
 We can use the same approach to vectorize the ``trapezoid`` function.
 However, the trapezoidal rule performs a sum where the end points
 have different weight. If we do ``sum(f(x))``, we get the end points
-``f(a)`` with ``f(b)`` weight unity instead of one half. A remedy
-is to subtract the error in ``sum(f(x))``: ``sum(f(x)) - 0.5*f(a) - 0.5*f(b)``.
+``f(a)`` and ``f(b)`` with weight unity instead of one half. A remedy
+is to subtract the error from ``sum(f(x))``: ``sum(f(x)) - 0.5*f(a) - 0.5*f(b)``.
 The vectorized version of the trapezoidal method then becomes
 
 .. code-block:: matlab
@@ -1334,6 +1526,8 @@ The vectorized version of the trapezoidal method then becomes
 
 Measuring computational speed
 =============================
+
+.. index:: computational speed (measuring)
 
 Now that we have created faster, vectorized versions of functions in
 the previous section, it is interesting to measure how much faster
@@ -1367,6 +1561,11 @@ Double and triple integrals
 The midpoint rule for a double integral
 ---------------------------------------
 
+.. index:: domain
+
+.. index::
+   single: double integral; midpoint
+
 Given a double integral over a rectangular domain :math:`[a,b]\times [c,d]`,
 
 .. math::
@@ -1398,7 +1597,7 @@ Each of the integrals
 can be discretized by any numerical
 integration rule for an integral in one variable. Let us use the
 midpoint method
-:eq:`sec:midpointFormula`
+:ref:`(22) <Eq:sec:midpointFormula>`
 and start with :math:`g(x)=\int_c^d f(x,y)dy`. We introduce
 :math:`n_y` intervals on :math:`[c,d]` with length :math:`h_y`. The midpoint rule
 for this integral then becomes
@@ -1407,11 +1606,11 @@ for this integral then becomes
          g(x) = \int_c^d f(x,y) dy \approx  h_y \sum_{j=0}^{n_y-1} f(x,y_j),
         \quad y_j = c + \frac{1}{2}{h_y} + jh_y \thinspace . 
 
-The expression looks somewhat different from :eq:`sec:midpointFormula`,
-but that is because of the notation: since we integrate in :math:`y` direction
+The expression looks somewhat different from :ref:`(22) <Eq:sec:midpointFormula>`,
+but that is because of the notation: since we integrate in the :math:`y` direction
 and will have to work with both :math:`x` and :math:`y` as coordinates, we must
 use :math:`n_y` for :math:`n`, :math:`h_y` for :math:`h`, and the counter :math:`i` is more naturally
-called :math:`j` when integrating in :math:`y`. Integrals in :math:`x` direction will use
+called :math:`j` when integrating in :math:`y`. Integrals in the :math:`x` direction will use
 :math:`h_x` and :math:`n_x` for :math:`h` and :math:`n`, and :math:`i` as counter.
 
 The double integral is :math:`\int_a^b g(x)dx`, which can be approximated
@@ -1429,12 +1628,12 @@ for a double integral*:
         h_x \sum_{i=0}^{n_x-1} h_y \sum_{j=0}^{n_y-1} f(x_i,y_j)\nonumber
         
 
-.. _Eq:sec:int:double:midpoint:
+.. _Eq:sec:int:double:midpoint:rule:
 
 .. math::
-   :label: sec:int:double:midpoint
-          
-        =
+
+    \tag{26}
+    =
         h_xh_y \sum_{i=0}^{n_x-1} \sum_{j=0}^{n_y-1} f(a + \frac{h_x}{2} + ih_x, c + \frac{h_y}{2} + jh_y)\thinspace .
         
         
@@ -1442,7 +1641,7 @@ for a double integral*:
 Direct derivation
 ~~~~~~~~~~~~~~~~~
 
-The formula :eq:`sec:int:double:midpoint` can also be derived directly
+The formula :ref:`(26) <Eq:sec:int:double:midpoint:rule>` can also be derived directly
 in the two-dimensional case by applying the idea of the midpoint
 method. We divide the rectangle :math:`[a,b]\times [c,d]` into
 :math:`n_x\times n_y` equal-sized cells. The idea of the midpoint method is
@@ -1450,7 +1649,7 @@ to approximate :math:`f` by a constant over each cell, and evaluate the constant
 at the midpoint. Cell :math:`(i,j)` occupies the area
 
 .. math::
-         [a+ih_x,c+(i+1)h_x]\times [c+jh_y, c+ (j+1)h_y],
+         [a+ih_x,a+(i+1)h_x]\times [c+jh_y, c+ (j+1)h_y],
 
 and the midpoint is :math:`(x_i,y_j)` with
 
@@ -1460,14 +1659,16 @@ and the midpoint is :math:`(x_i,y_j)` with
 
 The integral over the cell is therefore :math:`h_xh_y f(x_i,y_j)`, and
 the total double integral is the sum over all cells, which is
-nothing but formula :eq:`sec:int:double:midpoint`.
+nothing but formula :ref:`(26) <Eq:sec:int:double:midpoint:rule>`.
 
 Programming a double sum
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-The formula :eq:`sec:int:double:midpoint` involves a double sum,
+.. index:: double sum
+
+The formula :ref:`(26) <Eq:sec:int:double:midpoint:rule>` involves a double sum,
 which is normally implemented as a double for loop. A Matlab function
-implementing :eq:`sec:int:double:midpoint` may look like
+implementing :ref:`(26) <Eq:sec:int:double:midpoint:rule>` may look like
 
 .. code-block:: matlab
 
@@ -1485,9 +1686,9 @@ implementing :eq:`sec:int:double:midpoint` may look like
             result = I;
         end
 
-We may now with the aid of this function, stored in a file
-`midpoint_double1.m <https://github.com/hplgit/prog4comp/src/m/midpoint_double1.m>`__,
-compute some integral :math:`\int_2^3\int_)^2 (2x + y)dxdy=9` in an interactive shell
+With this function, which is available in the file
+`midpoint_double1.m <https://github.com/hplgit/prog4comp/tree/master/src/m/midpoint_double1.m>`__, we may now
+compute some integral :math:`\int_0^2\int_2^3 (2x + y)dydx=9` in an interactive shell
 and demonstrate that the function computes the right number:
 
 .. code-block:: python
@@ -1496,14 +1697,14 @@ and demonstrate that the function computes the right number:
         >>> midpoint_double1(f, 0, 2, 2, 3, 5, 5)
         9.0
 
-(The function is available in the file
-`midpoint_double1.m <https://github.com/hplgit/prog4comp/src/m/midpoint_double1.m>`__.)
-
 Reusing code for one-dimensional integrals
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. index::
+   single: code; re-use
+
 It is very natural to write a two-dimensional midpoint method as we did in
-function ``midpoint_double`` when we have the formula :eq:`sec:int:double:midpoint`. However, we could alternatively ask, much as we did in the mathematics,
+function ``midpoint_double1`` when we have the formula :ref:`(26) <Eq:sec:int:double:midpoint:rule>`. However, we could alternatively ask, much as we did in the mathematics,
 can we reuse a well-tested implementation for one-dimensional integrals
 to compute double integrals? That is, can we use function ``midpoint``
 
@@ -1551,7 +1752,7 @@ Also, any linear two-dimensional function :math:`f(x,y)=px+qy+r` will be integra
 exactly by the two-dimensional midpoint rule. We may pick
 :math:`f(x,y)=2x+y` and create a proper *test function* that can automatically
 verify our two alternative implementations of the two-dimensional
-midpoint rule. To compute the integral of :math:`f(x,xy)` we take advantage of
+midpoint rule. To compute the integral of :math:`f(x,y)` we take advantage of
 SymPy to eliminate the possibility of errors in hand calculations.
 The test function becomes
 
@@ -1579,21 +1780,28 @@ The test function becomes
             end
         end
 
-If we now call ``test_midpoint_double`` and nothing happens, our implementations
-are correct. However, it is somewhat annoying to have a function that
-is completely silent when it works - are we sure all things are properly
-computed? During development it is therefore highly recommended to insert
-a print statement such that we can monitor the calculations and be
-convinced that the test function does what we want. Since a test
-function should have any print statement, we simply comment it out as
-we have done in the function listed above.
+
+.. admonition:: Let test functions speak up
+
+   If we call the above ``test_midpoint_double`` function
+   and nothing happens, our implementations
+   are correct. However, it is somewhat annoying to have a function that
+   is completely silent when it works - are we sure all things are properly
+   computed? During development it is therefore highly recommended to insert
+   a print statement such that we can monitor the calculations and be
+   convinced that the test function does what we want. Since a test
+   function should not have any print statement, we simply comment it out as
+   we have done in the function listed above.
+
+
+
 
 The trapezoidal method can be used as alternative for the midpoint
 method.  The derivation of a formula for the double integral and the
 implementations follow exactly the same ideas as we explained with the
 midpoint method, but there are more terms to write in the
 formulas. :ref:`sec:exer:trapezoidal:2D` asks you to carry out
-the details. That exercise is a very good test on the understanding of the
+the details. That exercise is a very good test on your understanding of the
 mathematical and programming ideas in the present section.
 
 The midpoint rule for a triple integral
@@ -1601,6 +1809,9 @@ The midpoint rule for a triple integral
 
 Theory
 ~~~~~~
+
+.. index::
+   single: triple integral; midpoint
 
 Once a method that works for a one-dimensional problem is generalized
 to two dimensions, it is usually quite straightforward to extend the
@@ -1627,28 +1838,37 @@ For each of these one-dimensional integrals we apply the midpoint rule:
         
         p(x,y) = \int_e^f g(x,y,z) dz
         &\approx \sum_{k=0}^{n_z-1} g(x,y,z_k),
-        \quad z_k=e + \frac{1}{2}h_z + kh_z\\ 
+        \\ 
         q(x) = \int_c^d p(x,y) dy
         &\approx \sum_{j=0}^{n_y-1} p(x,y_j),
-        \quad y_j=c + \frac{1}{2}h_y + jh_y\\ 
+        \\ 
         \int_{a}^{b} \int_c^d \int_e^f g(x,y,z) dzdydx = \int_a^b q(x)dx
         &\approx \sum_{i=0}^{n_x-1} q(x_i),
-        \quad x_i=a + \frac{1}{2}h_x + ih_x\thinspace .
         
 
-Starting with the latter formula and inserting the other two results in
+where
 
 .. math::
         
-        \int_{a}^{b} \int_c^d \int_e^f  g(x,y,z)\, dzdydx\approx\nonumber
+        z_k=e + \frac{1}{2}h_z + kh_z,\quad y_j=c + \frac{1}{2}h_y + jh_y \quad
+        x_i=a + \frac{1}{2}h_x + ih_x
+        \thinspace .
+        
+
+Starting with the formula for :math:`\int_{a}^{b} \int_c^d \int_e^f g(x,y,z) dzdydx`
+and inserting the two previous formulas gives
+
+.. math::
+        
+         \int_{a}^{b} \int_c^d \int_e^f g(x,y,z)\, dzdydx\approx\nonumber
         
 
 .. _Eq:sec:int:triple:midpoint:
 
 .. math::
-   :label: sec:int:triple:midpoint
-          
-         h_xh_yh_z
+
+    \tag{27}
+    h_xh_yh_z
         \sum_{i=0}^{n_x-1}\sum_{j=0}^{n_y-1}\sum_{k=0}^{n_z-1}
         g(a + \frac{1}{2}h_x + ih_x,
         c + \frac{1}{2}h_y + jh_y,
@@ -1658,23 +1878,25 @@ Starting with the latter formula and inserting the other two results in
 
 Note that we may apply the ideas under *Direct derivation* at
 the end of the section :ref:`sec:int:double:midpoint` to arrive
-at :eq:`sec:int:triple:midpoint` directly: divide
+at :ref:`(27) <Eq:sec:int:triple:midpoint>` directly: divide
 the domain into :math:`n_x\times n_y\times n_z` cells of volumes
-:math:`h_xhh_yh_z`; approximate :math:`g`
+:math:`h_xh_yh_z`; approximate :math:`g`
 by a constant, evaluated at the midpoint :math:`(x_i,y_j,z_k)`,
 in each cell; and
 sum the cell integrals :math:`h_xh_yh_zg(x_i,y_j,z_k)`.
 
-Implementation  (3)
-~~~~~~~~~~~~~~~~~~~
+.. index:: domain
+
+Implementation          (3)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We follow the ideas for the implementations of the midpoint rule
 for a double integral. The corresponding functions are shown below
 and found in the files
-`midpoint_triple1.m <https://github.com/hplgit/prog4comp/src/m/midpoint_triple1.m>`__,
-`midpoint.m <https://github.com/hplgit/prog4comp/src/m/midpoint.m>`__,
-`midpoint_triple2.m <https://github.com/hplgit/prog4comp/src/m/midpoint_triple2.m>`__,
-`test_midpoint_triple.m <https://github.com/hplgit/prog4comp/src/m/test_midpoint_triple.m>`__.
+`midpoint_triple1.m <https://github.com/hplgit/prog4comp/tree/master/src/m/midpoint_triple1.m>`__,
+`midpoint.m <https://github.com/hplgit/prog4comp/tree/master/src/m/midpoint.m>`__,
+`midpoint_triple2.m <https://github.com/hplgit/prog4comp/tree/master/src/m/midpoint_triple2.m>`__,
+`test_midpoint_triple.m <https://github.com/hplgit/prog4comp/tree/master/src/m/test_midpoint_triple.m>`__.
 
 .. code-block:: matlab
 
@@ -1752,7 +1974,10 @@ and found in the files
 Monte Carlo integration for complex-shaped domains
 --------------------------------------------------
 
-.. index:: complex domains
+.. index::
+   single: domain; complex
+
+.. index:: domain
 
 .. index:: Monte Carlo integration
 
@@ -1770,7 +1995,7 @@ code, but requires orders of magnitude more
 function evaluations in double integrals compared to the midpoint
 rule.
 
-However, Monte Carlo integration is very much more computationally
+However, Monte Carlo integration is much more computationally
 efficient than the midpoint rule when computing
 higher-dimensional integrals in more than three variables over
 hypercube domains.
@@ -1789,9 +2014,9 @@ for handling complex domains and for handling integrals with many variables.
 The Monte Carlo integration algorithm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The idea of Monte Carlo integration of :math:`\int_a^b f(dx)dx` is to
+The idea of Monte Carlo integration of :math:`\int_a^b f(x)dx` is to
 use the mean-value theorem from calculus, which states that the
-integral :math:`\int_a^b f(dx)dx` equals the length of the integration
+integral :math:`\int_a^b f(x)dx` equals the length of the integration
 domain, here :math:`b-a`, times the *average* value of :math:`f`, :math:`\bar f`, in
 :math:`[a,b]`. The average value can be computed by sampling :math:`f` at
 a set of *random* points inside the domain and take the mean of
@@ -1850,8 +2075,8 @@ random points is illustrated by black dots.
 .. figure:: integral_complex_domain.png
    :width: 600
 
-Implementation  (4)
-~~~~~~~~~~~~~~~~~~~
+Implementation          (4)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A Matlab function implementing :math:`\int_\Omega f(x,y)dxdy` can be written
 like this:
@@ -1884,12 +2109,12 @@ like this:
         end
 
 (See the file
-`MonteCarlo_double.m <https://github.com/hplgit/prog4comp/src/m/MonteCarlo_double.m>`__.)
+`MonteCarlo_double.m <https://github.com/hplgit/prog4comp/tree/master/src/m/MonteCarlo_double.m>`__.)
 
 Verification
 ~~~~~~~~~~~~
 
-A simple test case is to check the area of a rectangle :math:`[0,2]\times[2,4.5]`
+A simple test case is to check the area of a rectangle :math:`[0,2]\times[3,4.5]`
 embedded in a rectangle :math:`[0,3]\times [2,5]`. The right answer is 3,
 but Monte Carlo integration is, unfortunately, never exact so it is
 impossible to predict the output of the algorithm. All we know is that
@@ -1899,10 +2124,10 @@ run the algorithm several times and get different numbers that fluctuate
 around the exact value, since different sample points are used in different
 calls to the Monte Carlo integration algorithm.
 
-The area of the rectangle can be computed by the integral :math:`\int_0^2\int_2^{4.5}
+The area of the rectangle can be computed by the integral :math:`\int_0^2\int_3^{4.5}
 dydx`, so in this case we identify
 :math:`f(x,y)=1`, and the :math:`g` function can be specified as (e.g.)
-1 if :math:`(x,y)` is inside :math:`[0,2]\times[2,4.5]` and :math:`-1` otherwise.
+1 if :math:`(x,y)` is inside :math:`[0,2]\times[3,4.5]` and :math:`-1` otherwise.
 Here is an example on how we can utilize the ``MonteCarlo_double``
 function to compute the area for different number of samples:
 
@@ -1931,6 +2156,11 @@ the parenthesis will evaluate to 0 and the number -1 (from :math:`-1 + 2*0`) is 
 We see that the values fluctuate around 3, a fact that supports
 a correct implementation, but in principle, bugs could be hidden
 behind the inaccurate answers.
+
+It is mathematically known that the standard deviation of the Monte Carlo
+estimate of an integral converges as :math:`n^{-1/2}`, where :math:`n` is the number
+of samples. This kind of convergence rate estimate could be used to
+verify the implementation, but this topic is beyond the scope of this book.
 
 .. index:: seed (random generators)
 
@@ -1964,7 +2194,7 @@ called. Our test function can then be written as shown below.
             assert(abs(I_expected - I_computed) < 1E-14);
         end
 
-(See the file `test_MonteCarlo_double_rectangle_area.m <https://github.com/hplgit/prog4comp/src/m/test_MonteCarlo_double_rectangle_area.m>`__.)
+(See the file `test_MonteCarlo_double_rectangle_area.m <https://github.com/hplgit/prog4comp/tree/master/src/m/test_MonteCarlo_double_rectangle_area.m>`__.)
 
 Integral over a circle
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -1990,9 +2220,9 @@ the test into a proper test function. Here is an example:
                 result =  R^2 - ((x-xc)^2 + (y-yc)^2);
             end
             g_handle = @g;
-            
+        
             % Exact: integral of r*r*dr over circle with radius R becomes
-            % 2*pi*1/3*R**3
+            % 2*pi*1/3*R^3
             syms r;
             I_exact = int(@(r) 2*pi*r*r, r, 0, 2);
             fprintf('Exact integral: %g\n', I_exact);
@@ -2006,7 +2236,7 @@ the test into a proper test function. Here is an example:
             assert(abs(I_computed - I_expected) < 1E-15);
         end
 
-(See the file `test_MonteCarlo_double_circle_r.m <https://github.com/hplgit/prog4comp/src/m/test_MonteCarlo_double_circle_r.m>`__.)
+(See the file `test_MonteCarlo_double_circle_r.m <https://github.com/hplgit/prog4comp/tree/master/src/m/test_MonteCarlo_double_circle_r.m>`__.)
 
 .. Adaptive integration as a project: use a crude discretization,
 
@@ -2016,8 +2246,8 @@ the test into a proper test function. Here is an example:
 
 .. Symbolic integration, conversion to py func (matlab?)
 
-Exercises  (3)
-==============
+Exercises          (3)
+======================
 
 .. --- begin exercise ---
 
@@ -2038,13 +2268,18 @@ and compares the return value with the hand-calculated value.
 **Solution.**
 The code may be written as follows
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: trapezoidal_test_func
-
+        function test_trapezoidal()
+            f = @(x) 2*x^3;
+            a = 1; b = 3; 
+            n = 2;
+            numerical = trapezoidal(f, a, b, n);
+            hand = 44.0;
+            error = abs(numerical - hand);
+            tol = 1E-14;
+            assert(error < tol, '%f', error);
+        end
 
 .. --- end solution of exercise ---
 
@@ -2071,13 +2306,18 @@ and compares the return value with the hand-calculated value.
 **Solution.**
 The code may be written as follows
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: midpoint_test_func
-
+        function test_midpoint()
+            f = @(x) 2*x^3;
+            a = 1; b = 3; 
+            n = 2;
+            numerical = midpoint(f, a, b, n);
+            hand = 38.0;
+            error = abs(numerical - hand);
+            tol = 1E-14;
+            assert(error < tol, '%f', error);
+        end
 
 .. --- end solution of exercise ---
 
@@ -2103,13 +2343,27 @@ Compute the error too.
 **Solution.**
 The code may be written as follows
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: integrate_parabola
-
+        function integrate_parabola()
+            f = @(x) x*(x-1);
+            a = 2; b = 6; 
+            n = 2
+            %n = 100
+        
+            numerical_trap = trapezoidal(f, a, b, n);
+            numerical_mid = midpoint(f, a, b, n);
+        
+            exact = 53.333        % Rounded
+            error_trap = abs(numerical_trap - exact);
+            error_mid = abs(numerical_mid - exact);
+        
+            fprintf('For n = %d, we get: \n', n);
+            fprintf('Numerical trapezoid: %g , Error: %g \n',...
+                                       numerical_trap, error_trap);
+            fprintf('Numerical midpoint: %g , Error: %g \n',...
+                                         numerical_mid, error_mid);
+        end
 
 In the code, we have taken the opportunity to show
 how commenting often is used to switch between two
@@ -2234,13 +2488,70 @@ Note that also the midpoint method will do an exact (to within machine precision
 integration when the integrand is a straight line. This is so, since the errors
 from each rectangle will cancel. The code reads:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: test_midpoint
-
+        function test_midpoint()
+            test_midpoint_one_exact_result();
+            test_midpoint_linear();
+            test_midpoint_conv_rate(); 
+        end
+            
+        function test_midpoint_one_exact_result()
+            % Compare one hand-computed result.
+            v = @(t) 3*(t^2)*exp(t^3);
+            n = 2;
+            numerical = midpoint(v, 0, 1, n);
+            exact = 1.3817914596908085;
+            err = abs(exact - numerical);
+            tol = 1E-14;
+            assert(err < tol, '%f', err);
+        end
+        
+        function test_midpoint_linear() 
+            % Check that linear functions are integrated exactly
+            % ...they should, because errors with each rectangle cancel
+            f = @(x) 6*x - 4;
+            F = @(x) 3*x^2 - 4*x;   % Anti-derivative
+            a = 1.2; b = 4.4;
+            exact = F(b) - F(a);
+            tol = 1E-14;
+            for n = [2 20 21]
+                numerical = midpoint(f, a, b, n);
+                err = abs(exact - numerical);
+                assert(err < tol, 'n = %d, err = %g', n, err);
+            end
+        end
+        
+        function test_midpoint_conv_rate()
+            % Check empirical convergence rates against the expected -2.
+            v = @(t) 3*(t^2)*exp(t^3);
+            V = @(t) exp(t^3);
+            a = 1.1; b = 1.9;
+            num_experiments = 14;
+            r = convergence_rates(v, V, a, b, num_experiments)
+            tol = 0.01;
+            assert(abs(r(num_experiments-1)) - 2 < tol,...
+                           '%f, %f, %f, %f, %f',...
+                           r((num_experiments-1)-4:num_experiments-1));
+        end
+        
+        function r = convergence_rates(f, F, a, b, num_experiments)
+            exact = F(b) - F(a);
+            n = zeros(num_experiments, 1);
+            E = zeros(num_experiments, 1);
+            r = zeros(num_experiments-1, 1);
+        
+            for i = 1:num_experiments
+                n(i) = 2^i;
+                numerical = midpoint(f, a, b, n(i));
+                err = abs(exact - numerical);
+                E(i) = err;
+                if (i > 1)
+                    r(i-1) = log(E(i-1)/E(i))/log(n(i-1)/n(i));
+                    r(i-1) = round(r(i-1)*100)/100;  % Truncate, two decimals
+                end
+            end
+        end
 
 .. --- end solution of exercise ---
 
@@ -2252,8 +2563,8 @@ Filename: ``test_midpoint.m``.
 
 .. _sec:exer:test:roundoff:
 
-Exercise 34: Explore round-off errors with large numbers
---------------------------------------------------------
+Exercise 34: Explore rounding errors with large numbers
+-------------------------------------------------------
 
 .. solution=`sol_test_trapezoidal2.pdf`
 
@@ -2277,30 +2588,91 @@ With the new function given, we get the error message that includes:
 The numerical calculation then obviously differs from the exact value by
 more than what is specified in the tolerance ``tol``. We may understand this
 by considering the new function, i.e., :math:`f(x)=6\cdot 10^8 x - 4\cdot 10^6`.
-Any round-off error in :math:`x` will get magnified big time by the factor :math:`6\cdot 10^8` in front,
+Any rounding error in :math:`x` will get magnified big time by the factor :math:`6\cdot 10^8` in front,
 i.e. the slope of the line. This makes the numerical calculation more inaccurate than previously.
 To fix this problem, we have several options. One possibility is to relax the tolerance, but
 this is not very satisfactory. After all, the calculation is supposed to be "exact" for a straight
-line. Another alternative is to scale the interval :math:`[a,b]` into, e.g., :math:`[\frac{a}{6\cdot 10^8},\frac{b}{6\cdot 10^8}]`.
-This will neutralize the huge factor in front of :math:`x`, bringing the accuracy back to where it was previously. This
+line. Another alternative is to introduce a new integration variable such
+that we scale the interval :math:`[a,b]` into :math:`[\frac{a}{6\cdot 10^8},\frac{b}{6\cdot 10^8}]`, as
+this will neutralize the huge factor in front of :math:`x`, bringing the accuracy back to where it was previously. This
 alternative is implemented in
-`test_trapezoidal2.m <https://github.com/hplgit/prog4comp/src/m/test_trapezoidal2.m>`__.
+`test_trapezoidal2.m <https://github.com/hplgit/prog4comp/tree/master/src/m/test_trapezoidal2.m>`__.
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
+        function test_trapezoidal_linear_scale()
+            % Check that linear functions are integrated exactly
+            f = @(x) 6E8*x - 4E6;
+            F = @(x) 3E8*x^2 - 4E6*x;       % Anti-derivative
+            a = 1.2/6E8;  b = 4.4/6E8;      % Scale interval down
+            exact = F(b) - F(a);
+            tol = 1E-14;
+            for n = [2 20 21]
+                numerical = trapezoidal(f, a, b, n);
+                err = abs(exact - numerical);
+                assert(err < tol, 'n = %d, err = %g', n, err);
+            end
+        end
 
-Here is a missing file: test_trapezoidal2
+.. code-block:: matlab
 
+        function test_trapezoidal2()
+            test_trapezoidal_linear_scale();
+            test_trapezoidal_linear_reldiff();
+            test_trapezoidal_conv_rate();
+        end
+        
+        function test_trapezoidal_linear_scale()
+            % Check that linear functions are integrated exactly
+            f = @(x) 6E8*x - 4E6;
+            F = @(x) 3E8*x^2 - 4E6*x;       % Anti-derivative
+            a = 1.2/6E8;  b = 4.4/6E8;      % Scale interval down
+            exact = F(b) - F(a);
+            tol = 1E-14;
+            for n = [2 20 21]
+                numerical = trapezoidal(f, a, b, n);
+                err = abs(exact - numerical);
+                assert(err < tol, 'n = %d, err = %g', n, err);
+            end
+        end
+        
+        function test_trapezoidal_linear_reldiff()
+            % Check that linear functions are integrated exactly
+            f = @(x) 6E8*x - 4E6;
+            F = @(x) 3E8*x^2 - 4E6*x;       % Anti-derivative
+            a = 1.2;  b = 4.4
+            exact = F(b) - F(a);
+            tol = 1E-14;
+            for n = [2 20 21]
+                numerical = trapezoidal(f, a, b, n);
+                err = abs(exact - numerical)/exact;
+                assert(err < tol, 'n = %d, err = %g', n, err);
+            end
+        end
 
-Regarding the convergence test, the convergence rates all become zero. This should be expected,
-since the integrand is a straight line function, which should give zero error at each step.
-However, the huge slope of the straight line integrand gives round-off errors that lift the
-error to about :math:`1\cdot 10^{-7}` at each step. The ratio of every two consecutive errors then becomes 1,
-the logarithm of which is zero. This causes the zero convergence rates (see the computation of ``r_im1`` in the code).
-Scaling the interval as we did previously, will reduce the error, but since the error for each step is the same,
-their ratio still becomes 1. Therefore, there is no point in changing the test.
+The best alternative, however, is to consider relative differences instead
+of absolute differences. That is, we compute ``(exact - numerical)/exact``
+instead of just ``exact - numerical``. This relative error is :math:`10^{-16}`
+even if we compute with very big numbers.
+
+.. code-block:: matlab
+
+        function test_trapezoidal_linear_reldiff()
+            % Check that linear functions are integrated exactly
+            f = @(x) 6E8*x - 4E6;
+            F = @(x) 3E8*x^2 - 4E6*x;       % Anti-derivative
+            a = 1.2;  b = 4.4
+            exact = F(b) - F(a);
+            tol = 1E-14;
+            for n = [2 20 21]
+                numerical = trapezoidal(f, a, b, n);
+                err = abs(exact - numerical)/exact;
+                assert(err < tol, 'n = %d, err = %g', n, err);
+            end
+        end
+
+Computing convergence rates is not meaningful in this test, because the
+error is mathematically zero.
 
 .. --- end solution of exercise ---
 
@@ -2330,13 +2702,54 @@ to handle the square root integral.
 Adjustments to the code are made according to the remark below and
 hand calculations are written into the code. The code then reads:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: test_trapezoidal3
-
+        function test_trapezoidal3()
+            test_trapezoidal_one_exact_result();
+            test_trapezoidal_conv_rate();   
+        end
+        
+        function test_trapezoidal_one_exact_result() 
+            % Compare one hand-computed result.
+            f = @(x) x^0.5;
+            tol = 1E-14;
+            exact = [4.82842712474619, 5.050258266979605]; %n=2, n=3
+            for n = [2 3]
+                numerical = trapezoidal(f, 0, 4, n);
+                err = abs(exact(n-1) - numerical);
+                assert(err < tol, '%f', err);
+            end
+        end
+        
+        
+        function test_trapezoidal_conv_rate()
+            % Check empirical convergence rates against the expected -2.
+            f = @(x) x^0.5; 
+            F = @(x) (2/3)*x^(3/2);
+            a = 0.0 + 0.1; b = 4.0;        % a adjusted by 0.1
+            num_experiments = 14;
+            r = convergence_rates(f, F, a, b, num_experiments)
+            tol = 0.01;
+            assert(abs(r(num_experiments-1)) - 2 < tol,...
+                           '%f, %f, %f, %f, %f',...
+                           r((num_experiments-1)-4:num_experiments-1));
+        end
+            
+        function r = convergence_rates(f, F, a, b, num_experiments)
+            exact = F(b) - F(a);
+            n = zeros(num_experiments, 1);
+            E = zeros(num_experiments, 1);
+            r = zeros(num_experiments-1, 1);
+            for i = 1:length(num_experiments)
+                n(i) = 2^(i+1);
+                numerical = trapezoidal(f, a, b, n(i));
+                E(i) = abs(exact - numerical);
+                if (i > 1)
+                    r(i-1) = log(E(i-1)/E(i))/log(n(i-1)/n(i));
+                    r(i-1) = round(r(i-1)*100)/100;  % Truncate, two decimals
+                end
+            end
+        end
 
 .. --- end solution of exercise ---
 
@@ -2344,8 +2757,8 @@ Filename: ``test_trapezoidal3.m``.
 
 .. Closing remarks for this Exercise
 
-Remarks  (4)
-~~~~~~~~~~~~
+Remarks          (4)
+~~~~~~~~~~~~~~~~~~~~
 
 The convergence rate test fails. Printing out ``r`` shows that the
 actual convergence rate for this integral is :math:`-1.5` and not :math:`-2`.
@@ -2393,13 +2806,116 @@ with height computed based on the value of ``height``, which is either
 **Solution.**
 Placing the code for both *a* and *b* into one file, the code may read:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: rectangle_methods
-
+        function rectangle_methods()
+            test_rectangle_one_exact_result();
+            test_rectangle_linear();
+            test_rectangle_conv_rate(); 
+        end
+        
+        function result = rectangle(f, a, b, n, height)
+            % Uses a rectangle method for integrating f. The height of
+            % each rectangle is computed either at the left end, middle or 
+            % right end of each sub-interval
+            h = (b-a)/n;
+            if height == 'l'
+                start = a;
+            elseif height == 'm'
+                start = a + h/2;
+            else                   % Must be right end
+                start = a + h;
+            end
+            result = 0;
+            for i = 0:(n-1)
+                result = result + f((start) + i*h);
+            end
+            result = h*result;
+        end
+            
+        function test_rectangle_one_exact_result()
+            % Compare one hand-computed result
+            v = @(t) 3*(t^2)*exp(t^3);
+            method = ['l'; 'm'; 'r'];  % ... left, mid and right
+            n = 2;
+            exact = [0.4249306699000599 1.3817914596908085...
+                                            4.5023534125886275];
+            tol = 1E-14;
+            for i = 1:length(method)
+                numerical = rectangle(v, 0, 1, n, method(i));
+                err = abs(exact(i) - numerical);
+                assert(err < tol, '%f', err);
+            end
+        end
+        
+        function test_rectangle_linear()
+            % Check that linear functions are integrated exactly 
+            % (with midpoint) or with a known correctable error (left 
+            % and right)
+            method = ['l'; 'm'; 'r'];  % ... left, mid and right
+            f = @(x) 6*x - 4;
+            slope = 6;
+            F = @(x) 3*x^2 - 4*x;     % Anti-derivative
+            % From the slope of f (i.e. 6), we know that left will 
+            % under-estimate the inegral by C (given below), while
+            % right will over-estimate by C
+            a = 1.2; b = 4.4;
+            exact = F(b) - F(a);
+            %tol = 1E-14
+            tol = 1E-13;        % Slightly relaxed compared to previously
+            for n = [2 20 21] 
+                h = (b-a)/n;
+                C = n*(0.5*slope*h^2);    % Correction term for left/right
+                for i = 1:length(method)
+                    numerical = rectangle(f, a, b, n, method(i));
+                    if (method(i) == 'l')
+                        numerical = numerical + C;
+                    elseif (method(i) == 'r')
+                        numerical = numerical - C;
+                    end
+                    err = abs(exact - numerical);
+                    assert(err < tol, 'n = %d, err = %g', n, err);
+                end
+            end
+        end
+        
+        function test_rectangle_conv_rate()
+            % Check empirical convergence rates against the expected rate,
+            % which is -2 for midpoint and -1 for left and right.
+            method = ['l'; 'm'; 'r'];  % ... left, mid and right
+            v = @(t) 3*(t^2)*exp(t^3);
+            V = @(t) exp(t^3);
+            a = 1.1; b = 1.9;
+            tol = 0.01;
+            for i = 1:length(method)
+                r = convergence_rates(v, V, a, b, method(i), 14)
+                if (method(i) == 'l') || (method(i) == 'r')
+                    assert(abs(r(length(r)-1)) - 1 < tol,...
+                           '%f, %f, %f, %f, %f',...
+                           r((num_experiments-1)-4:num_experiments-1));
+                else
+                    assert(abs(r(length(r)-1)) - 2 < tol,...
+                           '%f, %f, %f, %f, %f',...
+                           r((num_experiments-1)-4:num_experiments-1));
+                end
+            end
+        end
+        
+        function r = convergence_rates(f, F, a, b, height, num_experiments)
+            exact = F(b) - F(a);
+            n = zeros(num_experiments, 1);
+            E = zeros(num_experiments, 1);
+            r = zeros(num_experiments-1, 1);
+            for i = 1:num_experiments
+                n(i) = 2^i;
+                numerical = rectangle(f, a, b, n(i), height);
+                E(i) = abs(exact - numerical);
+                if (i > 1)
+                    r(i-1) = log(E(i-1)/E(i))/log(n(i-1)/n(i));
+                    r(i-1) = round(r(i-1)*100)/100;  % Truncate, two decimals
+                end
+            end
+        end
 
 .. --- end solution of exercise ---
 
@@ -2455,7 +2971,12 @@ easily in future programs you write.
 .. --- end hint in exercise ---
 
 **a)**
-Write a function ``adaptive_integration(f, a, b, eps, method=midpoint)``
+Write a function
+
+.. code-block:: text
+
+        adaptive_integration(f, a, b, eps, method=midpoint)
+
 that implements the idea above (``eps`` corresponds to the tolerance
 :math:`\epsilon`, and ``method`` can be ``midpoint`` or ``trapezoidal``).
 
@@ -2465,13 +2986,46 @@ that implements the idea above (``eps`` corresponds to the tolerance
 To ease future use of adaptive integration, we save the function ``adaptive_integration``
 in a separate file ``adaptive_integration.m``:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: adaptive_integration
-
+        function n_final = adaptive_integration(f, a, b, eps, method)
+            n_limit = 1000000; % Just a choice (to avoid inf loop)
+            n = 2; 
+            if (method == 't')
+                integral_n = trapezoidal(f, a, b, n);
+                integral_2n = trapezoidal(f, a, b, 2*n);
+                diff = abs(integral_2n - integral_n);
+                fprintf('trapezoidal diff: %g \n', diff); 
+                while (diff > eps) && (n < n_limit)
+                    integral_n = trapezoidal(f, a, b, n);
+                    integral_2n = trapezoidal(f, a, b, 2*n);
+                    diff = abs(integral_2n - integral_n);
+                    fprintf('trapezoidal diff: %g \n', diff);
+                    n = 2*n;
+                end
+            elseif method == 'm'
+                integral_n = midpoint(f, a, b, n);
+                integral_2n = midpoint(f, a, b, 2*n);
+                diff = abs(integral_2n - integral_n);
+                fprintf('midpoint diff: %g \n', diff); 
+                while (diff > eps) && (n < n_limit)
+                    integral_n = midpoint(f, a, b, n);
+                    integral_2n = midpoint(f, a, b, 2*n);
+                    diff = abs(integral_2n - integral_n);
+                    fprintf('midpoint diff: %g \n', diff);
+                    n = 2*n;
+                end
+            else
+                display('Error - adaptive integr called with unknown par');
+            end
+            % Now we check if acceptable n was found or not
+            if diff <= eps     % Success 
+                fprintf('The integral computes to: %g \n', integral_2n);
+                n_final = n;
+            else
+                n_final = -n;   % Return negative n to tell "not found"
+            end
+        end
 
 .. --- end solution of exercise ---
 
@@ -2485,13 +3039,66 @@ for :math:`\epsilon = 10^{-1}, 10^{-10}` and write out the exact error.
 The function ``adaptive_integration`` may be applied (as required in *b* and *c*)
 by the statements in ``use_my_adaptive_integration.m``:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: use_my_adaptive_integration
-
+        %...tasks b) and c)
+        
+        f = @(x) x^2;
+        g = @(x) sqrt(x);
+        
+        %eps = 1E-1;        % Just switch between these two eps values
+        eps = 1E-10;
+        
+        %a = 0.0;
+        a = 0.0 + 0.01;     % If we adjust a, sqrt(x) is handled easily
+        b = 2.0;
+        
+        %...f
+        
+        n = adaptive_integration(f, a, b, eps, 'm');  % 'm' for midpoint
+        if n > 0
+            fprintf('Sufficient n is: %d', n);
+        else
+            fprintf('No n was found in %d iterations \n', abs(n));
+        end
+        
+        n = adaptive_integration(f, a, b, eps, 't');  % 't' for trapezoid
+        if n > 0
+            fprintf('Sufficient n is: %d', n);
+        else
+            fprintf('No n was found in %d iterations \n', abs(n));
+        end
+        
+        %...g
+        
+        n = adaptive_integration(g, a, b, eps, 'm');
+        if n > 0
+            fprintf('Sufficient n is: %d', n);
+        else
+            fprintf('No n was found in %d iterations \n', abs(n));
+        end
+        
+        n = adaptive_integration(g, a, b, eps, 't');
+        if n > 0
+            fprintf('Sufficient n is: %d', n);
+        else
+            fprintf('No n was found in %d iterations \n', abs(n));
+        end
+        
+        %task c, make plot for both midpoint and trapezoidal
+            
+        eps = linspace(1E-1, 10E-10, 10);
+        n_m = zeros(length(eps), 1);
+        n_t = zeros(length(eps), 1);
+        for i = 1:length(n_m)
+            n_m(i) = adaptive_integration(g, a, b, eps(i), 'm');
+            n_t(i) = adaptive_integration(g, a, b, eps(i), 't');
+        end 
+        plot(log(eps), n_m, 'b-', log(eps), n_t, 'r-');
+        xlabel('log(eps)');
+        ylabel('n for midpoint (blue) and trapezoidal (red)');
+        n
+        eps
 
 Note that, in our suggested code, it is foreseen that the programmer switches between the
 two epsilon values by use of commenting, i.e.
@@ -2517,7 +3124,7 @@ than the trapezoidal method.
 .. figure:: adaptive_integration.png
    :width: 800
 
-   *Showing ``n`` as a function of ``log(eps)`` when :math:`\int_0^2\sqrt{x}dx` is computed by the midpoint (blue) and the trapezoidal (red) method*
+   Showing ``n`` as a function of ``log(eps)`` when :math:`\int_0^2\sqrt{x}dx` is computed by the midpoint (blue) and the trapezoidal (red) method
 
 One way of producing this plot, is by using the code lines included at the end of
 ``use_my_adaptive_integration.m`` (see the above).
@@ -2528,8 +3135,8 @@ Filename: ``adaptive_integration.m``.
 
 .. Closing remarks for this Exercise
 
-Remarks  (5)
-~~~~~~~~~~~~
+Remarks          (5)
+~~~~~~~~~~~~~~~~~~~~
 
 The type of method explored in this exercise is called *adaptive*,
 because it tries to adapt the value of :math:`n` to meet a given
@@ -2572,13 +3179,23 @@ Use ideas from :ref:`sec:exer:adaptive:int`.
 **Solution.**
 When the function ``adaptive_integration`` is available, the code may be written as:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: integrate_x2x
-
+        f = @(x) x^x;
+        
+        eps = 1E-4;
+        a = 0.0; b = 2.0
+        
+        % ...choose the midpoint method
+        n = adaptive_integration(f, a, b, eps, 'm');  % m for midpoint
+        
+        if n > 0
+            fprintf('Sufficient n is: %d \n', n); 
+        else
+            % The negative n is returned to signal that the upper 
+            % limit of n was passed. 
+            fprintf('No n was found in %d iterations \n', abs(n));
+        end
 
 Remember that ``adaptive_integration`` prints out the computed integral, so no effort
 in that respect is required here.
@@ -2644,9 +3261,13 @@ Exercise 40: Revisit fit of sines to a function
 This is a continuation of :ref:`2nd:exer:fitSines`. The task is to
 approximate a given function :math:`f(t)` on :math:`[-\pi,\pi]` by a sum of sines,
 
+.. _Eq:_auto4:
+
 .. math::
+
+    \tag{28}
+    S_N(t) = \sum_{n=1}^{N} b_n \sin(nt)\thinspace .
         
-        S_N(t) = \sum_{n=1}^{N} b_n \sin(nt)\thinspace .
         
 
 We are now interested in computing the unknown coefficients :math:`b_n`
@@ -2781,13 +3402,64 @@ by numerical integration, using :math:`M` intervals in the trapezoidal rule.
 Answers to all (programming) questions in this exercise are collected in one script
 which reads:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: autofit_sines
-
+        function autofit_sines()
+            f = @(t) (1/pi)*t;
+            N = 3;
+            M = 100;
+            b = integrate_coeffs(f, N, M)
+            for N = [3 6 12 24]
+               plot_filename = strcat('S_whenNis', num2str(N), '.pdf');
+               plot_approx(f, N, M, plot_filename);
+            end
+            
+            g = @(t) exp(-(t-pi));
+            plot_filename = ...
+                 strcat('new_f_S_whenNis', num2str(100), '.pdf');
+            plot_approx(g, 100, M, plot_filename);
+        end
+        
+        function b_coeffs = integrate_coeffs(f, N, M)
+            b = zeros(N,1);
+            left_end = -pi; right_end = pi;
+            for n = 1:N
+                f_sin = @(t) f(t)*sin(n*t);     
+                b(n) = (1/pi)*trapezoidal(f_sin, left_end, right_end, M);
+            end
+            b_coeffs = b;
+        end
+            
+        function test_integrate_coeffs()
+            % Check that sin(nt) are integrated exactly by trapezoidal
+            f = @() 1;
+            tol = 1E-14;
+            N = 10;  M = 100;
+            b = integrate_coeffs(f, N, M);
+            b
+            for i = 1:N
+                err = abs(b(i))  % Supposed to be zero
+                assert(err < tol, 'n = %d, err = %g', n, err);
+            end
+        end
+        
+        function plot_approx(f, N, M, filename)
+            function result = S_N(b,t)
+                sum = 0;
+                for i = 1:N
+                    sum = sum + b(i)*sin((i)*t);
+                end
+                result = sum;
+            end        
+            left_end = -pi;  right_end = pi;
+            time = linspace(-pi,pi,100);
+            y = f(time);
+            b = integrate_coeffs(f, N, M);
+            y_approx = S_N(b,time);
+            h = figure;    plot(time,y,'k-',time,y_approx,'k--');
+            xlabel('t');  ylabel('f (solid line) and S (dashed line)');
+            print(filename, '-dpdf');
+        end
 
 .. --- end solution of exercise ---
 
@@ -2946,8 +3618,8 @@ for this integral then becomes
 
 .. math::
          g(x) = \int_c^d f(x,y) dy \approx  h_y \left[\frac{1}{2}f(x,c) + \sum_{j=1}^{n_y-1}f(x,y_j) + \frac{1}{2}f(x,d) \right],
-        \quad y_j = c + jh_y \thinspace . 
 
+with :math:`y_j = c + jh_y`.
 For the outer integral :math:`\int_a^b g(x)dx`, we get:
 
 .. math::
@@ -2960,39 +3632,99 @@ for a double integral*:
 .. math::
         
         \int_a^b \int_c^d f(x,y) dydx \approx
-        h_x \left[\frac{1}{2}\left(h_y \left[\frac{1}{2}f(a,c) + \sum_{j=1}^{n_y-1}f(a,y_j) + \frac{1}{2}f(a,d) \right]\right)
-        + \sum_{i=1}^{n_x-1}\left(h_y \left[\frac{1}{2}f(x_i,c) + \sum_{j=1}^{n_y-1}f(x_i,y_j) + \frac{1}{2}f(x_i,d) \right]\right)
-        + \frac{1}{2}\left(h_y \left[\frac{1}{2}f(b,c) + \sum_{j=1}^{n_y-1}f(b,y_j) + \frac{1}{2}f(b,d) \right]\right) \right]\nonumber
+        h_x \biggl[\frac{1}{2}\left(h_y \left[\frac{1}{2}f(a,c) +
+        \sum_{j=1}^{n_y-1}f(a,y_j) + \frac{1}{2}f(a,d) \right]\right) + \nonumber
+        
+
+.. math::
+          
+        \quad \sum_{i=1}^{n_x-1}\left(h_y \left[\frac{1}{2}f(x_i,c) + \sum_{j=1}^{n_y-1}f(x_i,y_j) + \frac{1}{2}f(x_i,d) \right]\right)+\nonumber
+        
+
+.. math::
+          
+        \quad \frac{1}{2}\left(h_y \left[\frac{1}{2}f(b,c) + \sum_{j=1}^{n_y-1}f(b,y_j) + \frac{1}{2}f(b,d) \right]\right) \biggr]\nonumber
         
 
 .. math::
           
         =
-        h_xh_y \left[\frac{1}{4}\left(f(a,c) + f(a,d) + f(b,c) + f(b,d) \right) +
-        \frac{1}{2}\sum_{i=1}^{n_x-1}\left(f(a + ih_x,c) + f(a + ih_x,d)\right) +
-        \frac{1}{2}\sum_{j=1}^{n_y-1}\left(f(a,c + jh_y) + f(b,c + jh_y)\right) +
-        \sum_{i=1}^{n_x-1} \sum_{j=1}^{n_y-1} f(a + ih_x, c + jh_y)\right]\thinspace .
+        h_xh_y \biggl[\frac{1}{4}\left(f(a,c) + f(a,d) + f(b,c) + f(b,d) \right) +\nonumber
+        
+
+.. math::
+          
+        \quad \frac{1}{2}\sum_{i=1}^{n_x-1}\left(f(a + ih_x,c) + f(a + ih_x,d)\right) +
+        \nonumber
+        
+
+.. math::
+          
+        \quad \frac{1}{2}\sum_{j=1}^{n_y-1}\left(f(a,c + jh_y) + f(b,c + jh_y)\right) +
+        \nonumber
+        
+
+.. math::
+          
+        \quad \sum_{i=1}^{n_x-1} \sum_{j=1}^{n_y-1} f(a + ih_x, c + jh_y)\biggr]\thinspace .
         \nonumber
         
 
 The formula may be implemented and tested as shown in ``trapezoidal_double.m`` and
 ``test_trapezoidal_double.m``, respectively:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
+        function result = trapezoidal_double(f, a, b, c, d, nx, ny)
+            hx = (b - a)/nx;
+            hy = (d - c)/ny;
+            I = 0.25*(f(a, c) + f(a, d) + f(b, c) + f(b, d));
+            Ix = 0;
+            for i = 1:(nx-1)
+                xi = a + i*hx;
+                Ix = Ix + f(xi, c) + f(xi, d);
+            end
+            I = I + 0.5*Ix;
+            Iy = 0;
+            for j = 1:(ny-1)
+                yj = c + j*hy;
+                Iy = Iy + f(a, yj) + f(b, yj);
+            end
+            I = I + 0.5*Iy;
+            Ixy = 0;
+            for i = 1:(nx-1) 
+                for j = 1:(ny-1) 
+                    xi = a + i*hx;
+                    yj = c + j*hy;
+                    Ixy = Ixy + f(xi, yj);
+                end
+            end
+            I = I + Ixy;
+            I = hx*hy*I;
+            result = I;
+        end
 
-Here is a missing file: trapezoidal_double
+.. code-block:: matlab
 
-
-
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: test_trapezoidal_double
-
+        function test_trapezoidal_double()
+            % Test that a linear function is integrated exactly.
+            f = @(x, y) 2*x + y;
+        
+            a = 0;  b = 2;  c = 2;  d = 3;
+            syms x y;
+            I_expected = int(int(f, y, c, d), x, a, b);
+            % Test three cases: nx < ny, nx = ny, nx > ny
+            nx = 3;  ny = 5;
+            for i = (0:2)
+                nx = nx + 1;  ny = ny - 1;
+                I_computed = trapezoidal_double(f, a, b, c, d, nx, ny)
+                tol = 1E-14;       
+                %fprintf('I_expected = %g, I_computed = %g\n',...
+                %                                    I_expected, I_computed);
+                err = abs(I_computed - I_expected);
+                assert(absI_computed - I_expected) < tol);
+            end
+        end
 
 .. --- end solution of exercise ---
 
@@ -3016,19 +3748,17 @@ and :math:`(3,0)`.
 **Solution.**
 The program ``MC_triangle.m`` may be written as:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: MC_triangle
-
+        function MC_triangle()
+            % Utlize the symmetry of domain about y-axis
+            g = @(x, y) -1 + 2*(0 <= y && y <= -3*abs(x) + 3);
+            MonteCarlo_double(@(x, y) 1, g, -1, 1, 0, 3, 1000)
+        end
 
 .. --- end solution of exercise ---
 
 Filename: ``MC_triangle.m``.
 
 .. --- end exercise ---
-
-.. _5th:SolvODEs:
 

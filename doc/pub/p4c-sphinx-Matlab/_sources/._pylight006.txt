@@ -5,6 +5,8 @@
 
 .. !split
 
+.. _6th:SolvPDEs:
+
 Solving partial differential equations
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -50,6 +52,8 @@ influenced not only by diffusion, but also by the flow of the
 liquid. If present, the latter effect requires an extra term in the
 equation (known as an advection or convection term).
 
+.. index:: source term
+
 The term :math:`g` is known as the *source term* and
 represents generation, or loss, of heat (by some mechanism) within the body.
 For diffusive transport, :math:`g` models injection or extraction of the substance.
@@ -58,6 +62,12 @@ We should also mention that the diffusion equation may appear after simplifying
 more complicated partial differential equations. For example, flow of a viscous
 fluid between two flat and parallel plates is described by a one-dimensional
 diffusion equation, where :math:`u` then is the fluid velocity.
+
+.. index:: domain
+
+.. index:: initial conditions
+
+.. index:: boundary conditions
 
 A partial differential equation is solved in some *domain* :math:`\Omega` in
 space and for a time interval :math:`[0,T]`. The solution of the equation is
@@ -80,12 +90,12 @@ time :math:`t`. At one end of the rod, :math:`x=L`, we also assume that the surf
 insulated, but at the other end, :math:`x=0`, we assume that we have some device
 for controlling the temperature of the medium. Here, a function :math:`s(t)`
 tells what the temperature is in time. We therefore have a boundary
-condition :math:`u(0,t)=s(t)`. At the other, insulated end, :math:`x=L`,
+condition :math:`u(0,t)=s(t)`. At the other insulated end, :math:`x=L`,
 heat cannot escape, which is expressed by the boundary condition
 :math:`\partial u(L,t)/\partial x=0`. The surface along the rod is also
 insulated and hence subject to the same boundary condition (here
-generalized to :math:`\partial u/\partial n=0` at the curved surface),
-but since we have reduced
+generalized to :math:`\partial u/\partial n=0` at the curved surface). However,
+since we have reduced
 the problem to one dimension, we do not need this physical boundary
 condition in our mathematical model. In one dimension, we can set
 :math:`\Omega = [0,L]`.
@@ -96,41 +106,41 @@ conditions reads
 .. _Eq:eSixOne:
 
 .. math::
-   :label: eSixOne
-        
-        \frac{\partial u(x,t)}{\partial t} = \beta \frac{\partial^{2}u(x,t)}{\partial x^2} + g(x,t), x \in \left(0,L\right),  t \in (0,T],    
+
+    \tag{120}
+    \frac{\partial u(x,t)}{\partial t} = \beta \frac{\partial^{2}u(x,t)}{\partial x^2} + g(x,t), x \in \left(0,L\right),  t \in (0,T],    
         
 
 .. _Eq:eSixTwo:
 
 .. math::
-   :label: eSixTwo
-          
-        u(0,t) = s(t),  t \in (0,T],    
+
+    \tag{121}
+    u(0,t) = s(t),  t \in (0,T],    
         
 
 .. _Eq:eSixThree:
 
 .. math::
-   :label: eSixThree
-          
-        \frac{\partial}{\partial x}u(L,t) = 0, t \in (0,T],    
+
+    \tag{122}
+    \frac{\partial}{\partial x}u(L,t) = 0, t \in (0,T],    
         
 
 .. _Eq:eSixFour:
 
 .. math::
-   :label: eSixFour
-          
-        u(x,0) = I(x), x \in \left[0,L\right]
+
+    \tag{123}
+    u(x,0) = I(x), x \in \left[0,L\right]
         
         \thinspace .
         
 
 Mathematically, we assume that at :math:`t=0`, the initial condition
-:eq:`eSixFour` rules and that the partial differential equation
-:eq:`eSixOne` comes into play for :math:`t>0`. Similarly, at the end points,
-the boundary conditions :eq:`eSixTwo` and :eq:`eSixThree` govern :math:`u` and the equation therefore is
+:ref:`(123) <Eq:eSixFour>` holds and that the partial differential equation
+:ref:`(120) <Eq:eSixOne>` comes into play for :math:`t>0`. Similarly, at the end points,
+the boundary conditions :ref:`(121) <Eq:eSixTwo>` and :ref:`(122) <Eq:eSixThree>` govern :math:`u` and the equation therefore is
 valid for :math:`x\in (0,L)`.
 
 
@@ -165,7 +175,7 @@ surface of the rod).
 
 Mathematically, (with the temperature in Kelvin) this example has :math:`I(x)=283` K,
 except at the end point: :math:`I(0)=323` K, :math:`s(t) = 323` K, and :math:`g=0`.
-The figure below shows snapshots from the four different times in
+The figure below shows snapshots from four different times in
 the evolution of the temperature.
 
 | 
@@ -186,7 +196,14 @@ the evolution of the temperature.
             <source src='mov/rod_FE.ogg'  type='video/ogg;  codecs="theora, vorbis"'>
         </video>
         </div>
-        <p><em>Movie</em></p>
+        <p><em>Snapshots of temperature distribution.</em></p>
+        
+        <!-- Issue warning if in a Safari browser -->
+        <script language="javascript">
+        if (!!(window.safari)) {
+          document.write("<div style=\"width: 95%%; padding: 10px; border: 1px solid #100; border-radius: 4px;\"><p><font color=\"red\">The above movie will not play in Safari - use Chrome, Firefox, or Opera.</font></p></div>")}
+        </script>
+        
 
 .. _6th:SolvPDEs:MOLandFE:
 
@@ -215,7 +232,8 @@ spatial derivatives.
 Reduction of a PDE to a system of ODEs
 --------------------------------------
 
-.. index:: mesh points
+.. index::
+   single: mesh; points
 
 .. index:: cell
 
@@ -236,9 +254,9 @@ the internal mesh points only, :math:`x_1,\ldots,x_{N-1}`:
 .. _Eq:sec:pde:diff1D:sampled:
 
 .. math::
-   :label: sec:pde:diff1D:sampled
-        
-        \frac{\partial u(x_i,t)}{\partial t} = \beta
+
+    \tag{124}
+    \frac{\partial u(x_i,t)}{\partial t} = \beta
         \frac{\partial^{2}u(x_i,t)}{\partial x^2} + g(x_i,t),\quad i=1,\ldots,N-1
         \thinspace .
         
@@ -250,9 +268,9 @@ by a *finite difference*:
 .. _Eq:sec:pde:diff1D:2ndapprox:
 
 .. math::
-   :label: sec:pde:diff1D:2ndapprox
-        
-        \frac{\partial^{2}u(x_i,t)}{\partial x^2} \approx
+
+    \tag{125}
+    \frac{\partial^{2}u(x_i,t)}{\partial x^2} \approx
         \frac{u(x_{i+1},t) - 2u(x_i,t) + u(x_{i-1},t)}{\Delta x^2}\thinspace .
         
         
@@ -260,16 +278,16 @@ by a *finite difference*:
 It is common to introduce a short notation :math:`u_i(t)` for :math:`u(x_i,t)`, i.e.,
 :math:`u` approximated at some mesh point :math:`x_i` in space.
 With this new notation we can, after inserting
-:eq:`sec:pde:diff1D:2ndapprox` in :eq:`sec:pde:diff1D:sampled`, write
+:ref:`(125) <Eq:sec:pde:diff1D:2ndapprox>` in :ref:`(124) <Eq:sec:pde:diff1D:sampled>`, write
 an approximation to the partial differential equation at
 mesh point :math:`(x_i,t`) as
 
 .. _Eq:sec:pde:diff1D:discrete:
 
 .. math::
-   :label: sec:pde:diff1D:discrete
-        
-        \frac{d u_i(t)}{d t} = \beta
+
+    \tag{126}
+    \frac{d u_i(t)}{d t} = \beta
         \frac{u_{i+1}(t) - 2u_i(t) + u_{i-1}(t)}{\Delta x^2} + g_i(t),\quad i=1,\ldots,N-1
         \thinspace .
         
@@ -279,9 +297,9 @@ Note that we have adopted the notation :math:`g_i(t)` for :math:`g(x_i,t)` too.
 
 .. index:: method of lines
 
-What is :eq:`sec:pde:diff1D:discrete`? This is nothing but a *system of
-ordinary differential equations* in :math:`N+1` unknowns :math:`u_0(t),\ldots,u_N(t)`!
-In other words, with aid of the finite difference approximation :eq:`sec:pde:diff1D:2ndapprox`,
+What is :ref:`(126) <Eq:sec:pde:diff1D:discrete>`? This is nothing but a *system of
+ordinary differential equations* in :math:`N-1` unknowns :math:`u_1(t),\ldots,u_{N-1}(t)`!
+In other words, with aid of the finite difference approximation :ref:`(125) <Eq:sec:pde:diff1D:2ndapprox>`,
 we have reduced the single partial differential equation to a system of ODEs,
 which we know how to solve. In the literature, this strategy is called the *method of lines*.
 
@@ -290,21 +308,24 @@ initial condition :math:`u(x,0)=I(x)` translates to an initial condition for
 every unknown function :math:`u_i(t)`: :math:`u_i(0)=I(x_i)`, :math:`i=0,\ldots,N`. At
 the boundary :math:`x=0` we need an ODE in our ODE system, which must come
 from the boundary condition at this point. The boundary condition
-reads :math:`u(0,t)=s(t)`. We can make an ODE from this equation by
+reads :math:`u(0,t)=s(t)`. We can derive an ODE from this equation by
 differentiating both sides: :math:`u_0'(t)=s'(t)`. The ODE system above
 cannot be used for :math:`u_0'` since that equation involves some quantity
 :math:`u_{-1}'` outside the domain. Instead, we use the equation
 :math:`u_0'(t)=s'(t)` derived from the boundary condition. For this
-particular equation we also need make sure the initial condition is
+particular equation we also need to make sure the initial condition is
 :math:`u_0(0)=s(0)` (otherwise nothing will happen: we get :math:`u=283` K
 forever).
 
 We remark that a separate ODE for the (known) boundary condition
 :math:`u_0=s(t)` is not strictly needed. We can just work with the ODE
-system for :math:`u_1,\ldots,u_{N}`, and in the ODE for :math:`u_1` replace :math:`u_0(t)`
+system for :math:`u_1,\ldots,u_{N}`, and in the ODE for :math:`u_0`, replace :math:`u_0(t)`
 by :math:`s(t)`. However, these authors prefer to have an ODE for every
 point value :math:`u_i`, :math:`i=0,\ldots,N`, which requires formulating the known boundary
-at :math:`x=0` as an ODE.
+at :math:`x=0` as an ODE. The reason for including the boundary values in the ODE
+system is that the solution of the system is then the complete solution at
+*all* mesh points, which is convenient, since special treatment of the boundary values
+is then avoided.
 
 The condition :math:`\partial u/\partial x=0` at
 :math:`x=L` is a bit more complicated, but we can approximate the spatial derivative
@@ -314,21 +335,21 @@ by a centered finite difference:
          \left.\frac{\partial u}{\partial x}\right|_{i=N}\approx \frac{u_{N+1}-u_{N-1}}{2\Delta x} = 0\thinspace .
 
 This approximation involves a fictitious point :math:`x_{N+1}` outside the domain.
-A common trick is to use :eq:`sec:pde:diff1D:discrete` for :math:`i=N`
+A common trick is to use :ref:`(126) <Eq:sec:pde:diff1D:discrete>` for :math:`i=N`
 and eliminate :math:`u_{N+1}` by use of the discrete boundary condition
 (:math:`u_{N+1}=u_{N-1}`):
 
 .. _Eq:sec:pde:diff1D:discrete:N:
 
 .. math::
-   :label: sec:pde:diff1D:discrete:N
-        
-        \frac{d u_N(t)}{d t} = \beta
+
+    \tag{127}
+    \frac{d u_N(t)}{d t} = \beta
         \frac{2u_{N-1}(t) - 2u_N(t)}{\Delta x^2} + g_N(t)\thinspace .
         
         
 
-That is, we have a special version of :eq:`sec:pde:diff1D:discrete` at
+That is, we have a special version of :ref:`(126) <Eq:sec:pde:diff1D:discrete>` at
 the boundary :math:`i=N`.
 
 
@@ -354,24 +375,24 @@ the boundary :math:`i=N`.
 
 
 We are now in a position to summarize how we can approximate the
-partial differential equation problem :eq:`eSixOne`-:eq:`eSixFour`
+partial differential equation problem :ref:`(120) <Eq:eSixOne>`-:ref:`(123) <Eq:eSixFour>`
 by a system of ordinary differential equations:
 
 .. _Eq:sec:pde:diff1D:ode1:0:
 
 .. math::
-   :label: sec:pde:diff1D:ode1:0
-        
-        \frac{du_0}{dt} = s'(t),
+
+    \tag{128}
+    \frac{du_0}{dt} = s'(t),
         
         
 
 .. _Eq:sec:pde:diff1D:ode1:i:
 
 .. math::
-   :label: sec:pde:diff1D:ode1:i
-          
-        \frac{du_i}{dt} =  \frac{\beta}{\Delta x^2}
+
+    \tag{129}
+    \frac{du_i}{dt} =  \frac{\beta}{\Delta x^2}
         (u_{i+1}(t) - 2u_i(t) + u_{i-1}(t)) + g_i(t),\quad i=1,\ldots,N-1,
         
         
@@ -379,27 +400,35 @@ by a system of ordinary differential equations:
 .. _Eq:sec:pde:diff1D:ode1:N:
 
 .. math::
-   :label: sec:pde:diff1D:ode1:N
-          
-        \frac{du_N}{dt} =  \frac{2\beta}{\Delta x^2}
+
+    \tag{130}
+    \frac{du_N}{dt} =  \frac{2\beta}{\Delta x^2}
         (u_{N-1}(t) - u_N(t)) + g_N(t)\thinspace .
         
         
 
 The initial conditions are
 
-.. math::
-        
-        u_0(0) = s(0),
-        
+.. _Eq:_auto35:
 
 .. math::
-          
-        u_i(0) = I(x_i),\quad i=1,\ldots,N\thinspace .
+
+    \tag{131}
+    u_0(0) = s(0),
+        
+        
+
+.. _Eq:_auto36:
+
+.. math::
+
+    \tag{132}
+    u_i(0) = I(x_i),\quad i=1,\ldots,N\thinspace .
+        
         
 
 We can apply any method for systems of ODEs to solve
-:eq:`sec:pde:diff1D:ode1:0`-:eq:`sec:pde:diff1D:ode1:N`.
+:ref:`(128) <Eq:sec:pde:diff1D:ode1:0>`-:ref:`(130) <Eq:sec:pde:diff1D:ode1:N>`.
 
 .. _sec:pde:diff1D:testproblem:
 
@@ -411,7 +440,7 @@ However, partial differential equations constitute a non-trivial topic where
 mathematical and programming mistakes come easy. A better start is therefore to address
 a carefully designed test example where we can check that the
 method works. The most attractive examples for testing implementations
-are those without approximation errors, because then we know exactly what
+are those without approximation errors, because we know exactly what
 numbers the program should produce. It turns out that solutions
 :math:`u(x,t)` that are linear in time and in space can be exactly
 reproduced by most numerical methods for partial differential equations.
@@ -444,14 +473,14 @@ First we need to generalize our method to handle :math:`\partial u/\partial x=\g
          \frac{u_{N+1}(t)- u_{N-1}(t)}{2\Delta x}= \gamma\quad\Rightarrow
         \quad u_{N+1} = u_{N-1} + 2\gamma \Delta x,
 
-which inserted in :eq:`sec:pde:diff1D:discrete` gives
+which inserted in :ref:`(126) <Eq:sec:pde:diff1D:discrete>` gives
 
 .. _Eq:sec:pde:diff1D:discrete:N2:
 
 .. math::
-   :label: sec:pde:diff1D:discrete:N2
-        
-        \frac{d u_N(t)}{d t} = \beta
+
+    \tag{133}
+    \frac{d u_N(t)}{d t} = \beta
         \frac{2u_{N-1}(t) + 2\gamma\Delta x - 2u_N(t)}{\Delta x^2} + g_N(t)\thinspace .
         
         
@@ -463,11 +492,11 @@ In particular, we may use the Forward Euler method as implemented
 in the general function ``ode_FE`` in the module ``ode_system_FE``
 from the section :ref:`sec:de:flu:prog:generic`. The ``ode_FE`` function
 needs a specification of the right-hand side of the ODE system.
-This is a matter of translating :eq:`sec:pde:diff1D:ode1:0`,
-:eq:`sec:pde:diff1D:ode1:i`, and
-:eq:`sec:pde:diff1D:discrete:N2` to Matlab code
+This is a matter of translating :ref:`(128) <Eq:sec:pde:diff1D:ode1:0>`,
+:ref:`(129) <Eq:sec:pde:diff1D:ode1:i>`, and
+:ref:`(133) <Eq:sec:pde:diff1D:discrete:N2>` to Matlab code
 (in file
-`test_diffusion_pde_exact_linear.m <https://github.com/hplgit/prog4comp/src/m/test_diffusion_pde_exact_linear.m>`__):
+`test_diffusion_pde_exact_linear.m <https://github.com/hplgit/prog4comp/tree/master/src/m/test_diffusion_pde_exact_linear.m>`__):
 
 .. code-block:: matlab
 
@@ -477,24 +506,24 @@ This is a matter of translating :eq:`sec:pde:diff1D:ode1:0`,
             
             dudx = @(t) (3*t + 2);
             dsdt = @(t) 3*(-L);
-            f    = @(x, t) 3*(x-L);
+            g    = @(x, t) 3*(x-L);
         
             N = length(u) - 1;
             rhs = zeros(1, N+1);
             rhs(1) = dsdt(t);
             for i = 2:N 
                 rhs(i) = (beta/dx^2)*(u(i+1) - 2*u(i) + u(i-1)) +...
-                         f(x(i), t);
+                         g(x(i), t);
             end
             rhs(N+1) = (beta/dx^2)*(2*u(N) + 2*dx*dudx(t) -...
-                                   2*u(N+1)) + f(x(N+1), t);
+                                   2*u(N+1)) + g(x(N+1), t);
             right_hand_side = rhs;
         end
 
 Note that ``dudx`` is the function representing the :math:`\gamma` parameter
-in :eq:`sec:pde:diff1D:discrete:N2`.
+in :ref:`(133) <Eq:sec:pde:diff1D:discrete:N2>`.
 Also note that the ``rhs`` function relies on access to global variables
-``beta``, ``dx``, ``L``, ``x``, ``dsdt``, ``g``, and ``dudx``.
+``beta``, ``dx``, ``L``, and ``x``, and global functions ``dsdt``, ``g``, and ``dudx``.
 
 We expect the solution to be correct
 regardless of :math:`N` and :math:`\Delta t`, so we can choose a small :math:`N`, :math:`N=4`,
@@ -542,41 +571,18 @@ With :math:`N=4` we reproduce the linear solution exactly. This brings confidenc
 to the implementation, which is just what we need for attacking a real
 physical problem next.
 
-
-.. admonition:: Problems with reusing the ``rhs`` function
-
-   The ``rhs`` function *must* take ``u`` and ``t`` as arguments, because that
-   is required by the ``ode_FE`` function. What about the variables
-   ``beta``, ``dx``, ``L``, ``x``, ``dsdt``, ``g``, and ``dudx``
-   that the ``rhs`` function needs?
-   These are global in the solution we have presented so far.
-   Unfortunately, this has an undesired side effect: we cannot import
-   the ``rhs`` function in a new file, define ``dudx`` and ``dsdt``
-   in this new file and get the imported ``rhs`` to use these functions.
-   The imported ``rhs`` will use the global variables, including functions,
-   in its own module.
-   
-   How can we find solutions to this problem? Technically, we must
-   pack the extra data
-   ``beta``, ``dx``, ``L``, ``x``, ``dsdt``, ``g``, and ``dudx`` with the
-   ``rhs`` function, which requires more advanced programming considered
-   to beyond scope of this text.
-
-
-
-
 .. _sec:pde:diff1D:rod:
 
 Application: heat conduction in a rod
 -------------------------------------
 
 Let us return to the case with heat conduction in a rod
-:eq:`eSixOne`-:eq:`eSixFour`. Assume that the rod is 50 cm long
+:ref:`(120) <Eq:eSixOne>`-:ref:`(123) <Eq:eSixFour>`. Assume that the rod is 50 cm long
 and made of aluminum alloy 6082. The :math:`\beta` parameter equals
 :math:`\kappa/(\varrho c)`, where
 :math:`\kappa` is the heat conduction coefficient,
 :math:`\varrho` is the density, and :math:`c` is the heat
-capacity. We can find proper values for these values in case of
+capacity. We can find proper values for these physical quantities in the case of
 aluminum alloy 6082:
 :math:`\varrho = 2.7\cdot 10^3\hbox{ kg/m}^3`, :math:`\kappa = 200\,\,\frac{\hbox{W}}{\hbox{mK}}`,
 :math:`c=900\,\,\frac{\hbox{J}}{\hbox{Kkg}}`. This results in
@@ -613,7 +619,7 @@ section:
 Some new parameter values must also be set, and for the timestep, let us use :math:`\Delta t = 0.00034375`.
 We may also make an animation on the screen to see how :math:`u(x,t)` develops in time
 (see file
-`rod_FE.m <https://github.com/hplgit/prog4comp/src/m/rod_FE.m>`__):
+`rod_FE.m <https://github.com/hplgit/prog4comp/tree/master/src/m/rod_FE.m>`__):
 
 .. code-block:: matlab
 
@@ -722,23 +728,26 @@ The problem is that :math:`\Delta t` is too large, making the solution *unstable
 It turns out that the Forward Euler time integration method
 puts a restriction on the size of :math:`\Delta t`. For the heat equation and the
 way we have discretized it, this restriction can be shown to be
+[Ref22]_
 
 .. _Eq:sec:pde:diff1D:stabcrit:
 
 .. math::
-   :label: sec:pde:diff1D:stabcrit
-        
-        \Delta t \leq \frac{\Delta x^2}{2\beta}\thinspace .
+
+    \tag{134}
+    \Delta t \leq \frac{\Delta x^2}{2\beta}\thinspace .
         
         
 
 This is called a *stability criterion*. With the chosen parameters,
-:eq:`sec:pde:diff1D:stabcrit` tells us that the upper limit is
+:ref:`(134) <Eq:sec:pde:diff1D:stabcrit>` tells us that the upper limit is
 :math:`\Delta t=0.0003125`, which is smaller than our choice above.
 Rerunning the case with a :math:`\Delta t` equal to :math:`\Delta x^2/(2\beta)`, indeed
 shows a smooth evolution of
 :math:`u(x,t)`. Find the program ``rod_FE.m`` and run it to see
 an animation of the :math:`u(x,t)` function on the screen.
+
+.. index:: scaling
 
 
 .. admonition:: Scaling and dimensionless quantities
@@ -773,8 +782,8 @@ an animation of the :math:`u(x,t)` function on the screen.
            \frac{\partial^2 \bar u}{\partial \bar x^2},\quad \bar x\in (0,1)\thinspace .
    
    Note that in this equation, there are *no physical parameters*!
-   In other words, we have found a model that is independent of the
-   material the rod is made of and the length of it (!).
+   In other words, we have found a model that is independent of the length
+   of the rod and the material it is made of (!).
    
    We can easily solve this equation with our program by setting :math:`\beta=1`,
    :math:`L=1`, :math:`I(x)=0`, and :math:`s(t)=1`.
@@ -813,8 +822,10 @@ an animation of the :math:`u(x,t)` function on the screen.
 
    *Snapshots of the dimensionless solution of a scaled problem*
 
-Vectorization  (2)
-------------------
+Vectorization          (2)
+--------------------------
+
+.. index:: vectorization
 
 Occasionally in this book, we show how to speed up code by replacing
 loops over arrays by vectorized expressions.
@@ -878,8 +889,8 @@ method of order 4-5 (``RKFehlberg``) to solve the system.
         else:
             print '# time steps:', len(t)
 
-The very nice thing is that we can now experiment with a lot of
-time integration methods. Trying out some simple ones first, like
+The very nice thing is that we can now easily experiment with many different integration methods.
+Trying out some simple ones first, like
 ``RK2`` and ``RK4``, quickly reveals that the time step limitation of
 the Forward Euler scheme also applies to these more sophisticated
 Runge-Kutta methods, but their accuracy is better. However, the Odespy package
@@ -915,7 +926,7 @@ further in the next section.
 Implicit methods
 ----------------
 
-A major problem with the stability criterion :eq:`sec:pde:diff1D:stabcrit`
+A major problem with the stability criterion :ref:`(134) <Eq:sec:pde:diff1D:stabcrit>`
 is that the time step becomes very small if :math:`\Delta x` is small.
 For example, halving :math:`\Delta x` requires four times as many time
 steps and eight times the work. Now, with :math:`N=40`, which is a reasonable
@@ -935,32 +946,32 @@ no restrictions on :math:`\Delta t` for stability, but obviously, a large
 for a scalar ODE :math:`u' = f(u,t)` reads
 
 .. math::
-         \frac{u^{n+1} - u^{n}}{\Delta t} = f(u^{n+1}, t)\thinspace .
+         \frac{u^{n+1} - u^{n}}{\Delta t} = f(u^{n+1}, t_{n+1})\thinspace .
 
 This equation is to be solved for :math:`u^{n+1}`. If :math:`f` is linear in :math:`u`,
 it is a linear equation, but if :math:`f` is nonlinear in :math:`u`, one needs
 approximate methods for nonlinear equations (the chapter :ref:`4th:NonlinAlgEq`).
 
 In our case, we have a system of linear ODEs
-:eq:`sec:pde:diff1D:ode1:0`-:eq:`sec:pde:diff1D:ode1:N`. The Backward
+:ref:`(128) <Eq:sec:pde:diff1D:ode1:0>`-:ref:`(130) <Eq:sec:pde:diff1D:ode1:N>`. The Backward
 Euler scheme applied to each equation leads to
 
 .. _Eq:sec:pde:diff1D:ode1:0:BE:
 
 .. math::
-   :label: sec:pde:diff1D:ode1:0:BE
-        
-        \frac{u_0^{n+1}-u_0^n}{\Delta t} = s'(t),
+
+    \tag{135}
+    \frac{u_0^{n+1}-u_0^n}{\Delta t} = s'(t_{n+1}),
         
         
 
 .. _Eq:sec:pde:diff1D:ode1:i:BE:
 
 .. math::
-   :label: sec:pde:diff1D:ode1:i:BE
-          
-        \frac{u_i^{n+1} - u_i^{n}}{\Delta t} =  \frac{\beta}{\Delta x^2}
-        (u_{i+1}^{n+1}(t) - 2u_i^{n+1}(t) + u_{i-1}^{n+1}(t)) + g_i(t),
+
+    \tag{136}
+    \frac{u_i^{n+1} - u_i^{n}}{\Delta t} =  \frac{\beta}{\Delta x^2}
+        (u_{i+1}^{n+1} - 2u_i^{n+1} + u_{i-1}^{n+1}) + g_i(t_{n+1}),
         
         
 
@@ -972,10 +983,10 @@ Euler scheme applied to each equation leads to
 .. _Eq:sec:pde:diff1D:ode1:N:BE:
 
 .. math::
-   :label: sec:pde:diff1D:ode1:N:BE
-          
-        \frac{u_N^{n+1} - u_N^{n}}{\Delta t} =  \frac{2\beta}{\Delta x^2}
-        (u_{N-1}^{n+1}(t) - u_N^{n+1}(t)) + g_i(t)\thinspace .
+
+    \tag{137}
+    \frac{u_N^{n+1} - u_N^{n}}{\Delta t} =  \frac{2\beta}{\Delta x^2}
+        (u_{N-1}^{n+1} - u_N^{n+1}) + g_i(t_{n+1})\thinspace .
         
         
 
@@ -987,37 +998,37 @@ terms on the left-hand side and all the known terms on the right-hand side:
 .. _Eq:sec:pde:diff1D:ode1:0:BE:3:
 
 .. math::
-   :label: sec:pde:diff1D:ode1:0:BE:3
-        
-        u_0^{n+1} = u_0^n + \Delta t\,s'(t),
+
+    \tag{138}
+    u_0^{n+1} = u_0^n + \Delta t\,s'(t_{n+1}),
         
         
 
 .. _Eq:sec:pde:diff1D:ode1:i:BE:3:
 
 .. math::
-   :label: sec:pde:diff1D:ode1:i:BE:3
-          
-        u_1^{n+1} - \Delta t \frac{\beta}{\Delta x^2}
-        (u_{2}^{n+1}(t) - 2u_1^{n+1}(t) + u_{0}^{n+1}(t))
-        = u_1^{n}  + \Delta t\,g_1(t),
+
+    \tag{139}
+    u_1^{n+1} - \Delta t \frac{\beta}{\Delta x^2}
+        (u_{2}^{n+1} - 2u_1^{n+1} + u_{0}^{n+1})
+        = u_1^{n}  + \Delta t\,g_1(t_{n+1}),
         
         
 
 .. _Eq:sec:pde:diff1D:ode1:N:BE:3:
 
 .. math::
-   :label: sec:pde:diff1D:ode1:N:BE:3
-          
-        u_2^{n+1} - \Delta t\frac{2\beta}{\Delta x^2}
-        (u_{1}^{n+1}(t) - u_2^{n+1}(t))  = u_2^{n}  + \Delta t\,g_2(t)\thinspace .
+
+    \tag{140}
+    u_2^{n+1} - \Delta t\frac{2\beta}{\Delta x^2}
+        (u_{1}^{n+1} - u_2^{n+1})  = u_2^{n}  + \Delta t\,g_2(t_{n+1})\thinspace .
         
         
 
 A system of linear equations like this, is usually written on matrix form
 :math:`Au=b`, where :math:`A` is a coefficient matrix, :math:`u=(u_0^{n+1},\ldots,n_N^{n+1})`
 is the vector of unknowns, and :math:`b` is a vector of known values.
-The coefficient matrix for the case :eq:`sec:pde:diff1D:ode1:0:BE:3`-:eq:`sec:pde:diff1D:ode1:N:BE:3` becomes
+The coefficient matrix for the case :ref:`(138) <Eq:sec:pde:diff1D:ode1:0:BE:3>`-:ref:`(140) <Eq:sec:pde:diff1D:ode1:N:BE:3>` becomes
 
 .. math::
          A = \left(\begin{array}{ccc}
@@ -1028,73 +1039,121 @@ The coefficient matrix for the case :eq:`sec:pde:diff1D:ode1:0:BE:3`-:eq:`sec:pd
         \end{array}\right)
         
 
-In the general case :eq:`sec:pde:diff1D:ode1:0:BE`-:eq:`sec:pde:diff1D:ode1:N:BE`, the coefficient matrix is an :math:`(N+1)\times(N+1)` matrix with
+In the general case :ref:`(135) <Eq:sec:pde:diff1D:ode1:0:BE>`-:ref:`(137) <Eq:sec:pde:diff1D:ode1:N:BE>`, the coefficient matrix is an :math:`(N+1)\times(N+1)` matrix with
 zero entries, except for
 
-.. math::
-        
-        A_{1,1} = 1
-        
+.. _Eq:_auto37:
 
 .. math::
-          
-        A_{i,i-1} = -\Delta t \frac{\beta}{\Delta x^2},\quad i=2,\ldots,N-1
+
+    \tag{141}
+    A_{1,1} = 1
+        
         
 
-.. math::
-          
-        A_{i,i+1} = -\Delta t \frac{\beta}{\Delta x^2},\quad i=2,\ldots,N-1
-        
+.. _Eq:_auto38:
 
 .. math::
-          
-        A_{i,i} = 1 + 2\Delta t \frac{\beta}{\Delta x^2},\quad i=2,\ldots,N-1
+
+    \tag{142}
+    A_{i,i-1} = -\Delta t \frac{\beta}{\Delta x^2},\quad i=2,\ldots,N-1
+        
         
 
-.. math::
-          
-        A_{N,N-1}  = - \Delta t\frac{2\beta}{\Delta x^2}
-        
+.. _Eq:_auto39:
 
 .. math::
-          
-        A_{N,N} = 1 + \Delta t\frac{2\beta}{\Delta x^2}
+
+    \tag{143}
+    A_{i,i+1} = -\Delta t \frac{\beta}{\Delta x^2},\quad i=2,\ldots,N-1
+        
+        
+
+.. _Eq:_auto40:
+
+.. math::
+
+    \tag{144}
+    A_{i,i} = 1 + 2\Delta t \frac{\beta}{\Delta x^2},\quad i=2,\ldots,N-1
+        
+        
+
+.. _Eq:_auto41:
+
+.. math::
+
+    \tag{145}
+    A_{N,N-1}  = - \Delta t\frac{2\beta}{\Delta x^2}
+        
+        
+
+.. _Eq:_auto42:
+
+.. math::
+
+    \tag{146}
+    A_{N,N} = 1 + \Delta t\frac{2\beta}{\Delta x^2}
+        
         
 
 If we want to apply general methods for systems of ODEs on the form
 :math:`u'=f(u,t)`, we can assume a linear :math:`f(u,t)=Ku`. The coefficient
 matrix :math:`K` is found from the right-hand side of
-:eq:`sec:pde:diff1D:ode1:0:BE`-:eq:`sec:pde:diff1D:ode1:N:BE` to
+:ref:`(135) <Eq:sec:pde:diff1D:ode1:0:BE>`-:ref:`(137) <Eq:sec:pde:diff1D:ode1:N:BE>` to
 be
 
-.. math::
-        
-        K_{1,1} = 0
-        
+.. _Eq:_auto43:
 
 .. math::
-          
-        K_{i,i-1} = \frac{\beta}{\Delta x^2},\quad i=2,\ldots,N-1
+
+    \tag{147}
+    K_{1,1} = 0
+        
         
 
-.. math::
-          
-        K_{i,i+1} = \frac{\beta}{\Delta x^2},\quad i=2,\ldots,N-1
-        
+.. _Eq:_auto44:
 
 .. math::
-          
-        K_{i,i} = -\frac{2\beta}{\Delta x^2},\quad i=2,\ldots,N-1
+
+    \tag{148}
+    K_{i,i-1} = \frac{\beta}{\Delta x^2},\quad i=2,\ldots,N-1
+        
         
 
-.. math::
-          
-        K_{N,N-1}  = \frac{2\beta}{\Delta x^2}
-        
+.. _Eq:_auto45:
 
 .. math::
-          
-        K_{N,N} = -\frac{2\beta}{\Delta x^2}
+
+    \tag{149}
+    K_{i,i+1} = \frac{\beta}{\Delta x^2},\quad i=2,\ldots,N-1
+        
+        
+
+.. _Eq:_auto46:
+
+.. math::
+
+    \tag{150}
+    K_{i,i} = -\frac{2\beta}{\Delta x^2},\quad i=2,\ldots,N-1
+        
+        
+
+.. _Eq:_auto47:
+
+.. math::
+
+    \tag{151}
+    K_{N,N-1}  = \frac{2\beta}{\Delta x^2}
+        
+        
+
+.. _Eq:_auto48:
+
+.. math::
+
+    \tag{152}
+    K_{N,N} = -\frac{2\beta}{\Delta x^2}
+        
         
 
 We see that :math:`A=I-\Delta t\,K`.
@@ -1104,10 +1163,10 @@ and call a linear solver, or we can apply Odespy. We follow the
 latter strategy. Implicit methods in Odespy need the :math:`K` matrix above,
 given as an argument ``jac`` (Jacobian of :math:`f`) in the call to
 ``odespy.BackwardEuler``.
-Here is Python code for the right-hand side of the ODE system (``rhs``)
+Here is the Python code for the right-hand side of the ODE system (``rhs``)
 and the :math:`K` matrix (``K``) as well as statements
 for initializing and running the Odespy solver ``BackwardEuler``
-(in the file `rod_BE.m <https://github.com/hplgit/prog4comp/src/m/rod_BE.m>`__):
+(in the file `rod_BE.py <https://github.com/hplgit/prog4comp/tree/master/src/py/rod_BE.py>`__):
 
 .. code-block:: python
 
@@ -1146,8 +1205,13 @@ for initializing and running the Odespy solver ``BackwardEuler``
         u, t = solver.solve(time_points)
 
 The file ``rod_BE.py`` has all the details and shows a movie of
-the solution. We can run with any :math:`\Delta t` we want, its size just
+the solution. We can run it with any :math:`\Delta t` we want, its size just
 impacts the accuracy of the first steps.
+
+.. index:: tridiagonal matrix
+
+.. index::
+   single: matrix; tridiagonal
 
 
 .. admonition:: Odespy solvers apply dense matrices
@@ -1160,19 +1224,19 @@ impacts the accuracy of the first steps.
    on the zero entries in the matrix. It would be much more efficient to
    store the matrix as a *tridiagonal* matrix and apply a specialized
    Gaussian elimination solver for tridiagonal systems. Actually, this
-   reduces the work from :math:`\mathcal{O}(N^3)` to :math:`\mathcal{O}(N)`.
+   reduces the work from the order :math:`N^3` to the order :math:`N`.
    
    In one-dimensional diffusion problems, the savings of using a tridiagonal
    matrix are modest in practice, since the matrices are very small anyway.
    In two- and three-dimensional PDE problems, however, one cannot afford dense
    square matrices. Rather, one *must* resort to more efficient storage formats
-   and algorithms tailored to such formats, but this is beyond scope of the present text.
+   and algorithms tailored to such formats, but this is beyond the scope of the present text.
 
 
 
 
-Exercises  (5)
-==============
+Exercises          (5)
+======================
 
 .. --- begin exercise ---
 
@@ -1181,8 +1245,8 @@ Exercises  (5)
 Exercise 62: Simulate a diffusion equation by hand
 --------------------------------------------------
 
-Consider the problem given by :eq:`sec:pde:diff1D:ode1:0`, :eq:`sec:pde:diff1D:ode1:i`
-and :eq:`sec:pde:diff1D:discrete:N2`.
+Consider the problem given by :ref:`(128) <Eq:sec:pde:diff1D:ode1:0>`, :ref:`(129) <Eq:sec:pde:diff1D:ode1:i>`
+and :ref:`(133) <Eq:sec:pde:diff1D:discrete:N2>`.
 Set :math:`N=2` and compute :math:`u_i^0`, :math:`u_i^1` and :math:`u_i^2` by hand for :math:`i=0,1,2`.
 Use these values to construct a test function for checking that the
 implementation is correct.
@@ -1193,7 +1257,7 @@ and make a new test function ``test_diffusion_hand_calculation``.
 .. --- begin solution of exercise ---
 
 **Solution.**
-Applying the forward Euler method to :eq:`sec:pde:diff1D:ode1:0`, we get
+Applying the forward Euler method to :ref:`(128) <Eq:sec:pde:diff1D:ode1:0>`, we get
 
 .. math::
          u_0^{n+1}=u_0^n - \Delta t (3L),\quad n=0,1\thinspace .
@@ -1215,7 +1279,7 @@ For the requested ``n`` values, we then find that
         u_0^2 = u_0^1 - \Delta t (3L)=-3.45 - 0.1(3(1.5))=-3.90\thinspace .\nonumber
         
 
-Similarly, with forward Euler applied to :eq:`sec:pde:diff1D:ode1:i`, we get
+Similarly, with forward Euler applied to :ref:`(129) <Eq:sec:pde:diff1D:ode1:i>`, we get
 
 .. math::
          u_1^{n+1}=u_1^n + \frac{\beta \Delta t}{\Delta x^2} (u_2^n - 2u_1^n + u_0^n) + \Delta t (f_1^n),\quad n=0,1\thinspace .
@@ -1257,7 +1321,7 @@ For the requested ``n`` values, we find
               = -1.95\thinspace .\nonumber
         
 
-Finally, applying the forward Euler method to :eq:`sec:pde:diff1D:discrete:N2`, we get
+Finally, applying the forward Euler method to :ref:`(133) <Eq:sec:pde:diff1D:discrete:N2>`, we get
 
 .. math::
          u_2^{n+1}=u_2^n + \frac{2\beta \Delta t}{\Delta x^2} (u_1^n + \Delta x\gamma - u_2^n) + \Delta t (f_2^n),\quad n=0,1\thinspace .
@@ -1301,13 +1365,72 @@ For the requested ``n`` values, we find
 
 Code:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: test_rod_hand_calculations
-
+        %% Hand calc: Verify the implementation of the diffusion equation
+        
+        function test_rod_diffusion_hand()
+            global beta; global dx;   % needed in rhs
+            global L; global x;    
+        
+            function value = u_exact(x, t)
+                value = (3*t + 2)*(x - L);
+            end    
+            function value = s(t)
+                value = u_exact(0, t);
+            end
+        
+            L = 1.5;
+            beta = 0.5;
+            N = 2;
+            x = linspace(0, L, N+1);
+            dx = x(2) - x(1);
+            u = zeros(1, N+1);
+        
+            U_0 = zeros(1, N+1);
+            U_0(1) = s(0);
+            U_0(2:length(U_0)) = u_exact(x(2:length(x)), 0);
+            
+            u_hand = zeros(3, length(U_0));
+            u_hand(1,:) = [-3.0, -1.5, 0.0];	   % spatial indices: 0, 1 and 2
+            u_hand(2,:) = [-3.45, -1.725, 0.0];  
+            u_hand(3,:) = [-3.90, -1.95, 0.0];
+            
+            dt = 0.1;
+            T = 1.2; 
+            rhs_handle = @rhs;
+        
+            [u, t] = ode_FE(rhs_handle, U_0, dt, T);
+            
+            tol = 1E-12
+            for i = [1, 2, 3]
+        	      u_hand(i,:)
+        	      u(i,:)
+                diff = max(abs(u_hand(i,:) - u(i,:)))
+                assert(diff < tol, 'diff=%.16g', diff);
+                fprintf('diff=%g at t=%g\n', diff, t(i));
+            end
+        end
+           
+        function right_hand_side = rhs(u, t)
+            global beta; global dx;   
+            global L; global x;    
+            
+            dudx = @(t) (3*t + 2);
+            dsdt = @(t) 3*(-L);
+            f    = @(x, t) 3*(x-L);
+        
+            N = length(u) - 1;
+            rhs = zeros(1, N+1);
+            rhs(1) = dsdt(t);
+            for i = 2:N 
+                rhs(i) = (beta/dx^2)*(u(i+1) - 2*u(i) + u(i-1)) +...
+                         f(x(i), t);
+            end
+            rhs(N+1) = (beta/dx^2)*(2*u(N) + 2*dx*dudx(t) -...
+                                   2*u(N+1)) + f(x(N+1), t);
+            right_hand_side = rhs;
+        end
 
 .. --- end solution of exercise ---
 
@@ -1358,8 +1481,7 @@ Show that the present problem has an analytical solution of the form
 .. math::
          u(x,t) = A + Be^{-rx}\sin(\omega t - rx),
 
-for appropriate values of :math:`A`, :math:`B`, :math:`r`, and :math:`\omega`. Extend the
-program to also plot this analytical solution for comparison.
+for appropriate values of :math:`A`, :math:`B`, :math:`r`, and :math:`\omega`.
 
 .. --- begin solution of exercise ---
 
@@ -1426,13 +1548,77 @@ differences at :math:`t=0`)?
 **Solution.**
 Code:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: ground_temp
-
+        %% Temperature vertically down in the ground (with ForwardEuler.
+        
+        function ground_temp()
+            global beta; global dx;   
+            global L; global x;  global P; global Ta;
+        
+            T0 = 283;        % just some choice
+            Ta = 20;         % amplitude of temp osc
+            P = 24*60*60;    % period, 24 hours
+            s = @(t) T0 + Ta*sin((2*pi/P)*t);
+            L = 2;
+            beta = 1E-6;
+            N = 100;
+            x = linspace(0, L, N+1);
+            dx = x(2) - x(1);
+            u = zeros(1, N+1);
+        
+            U_0 = zeros(1, N+1);
+            U_0(1) = s(0);
+            U_0(2:length(U_0)) = 283;
+            dt = dx^2/(2*beta);
+            fprintf('stability limit: %g\n', dt);
+            %dt = 0.00034375
+            T = (24*60*60)*2;     % simulate 2 days
+            rhs_handle = @rhs;
+            
+            tic;
+            [u, t] = ode_FE(rhs_handle, U_0, dt, T);
+            cpu_time = toc;
+            fprintf('CPU time: %.1fs\n', cpu_time);
+        
+            % Make movie
+            delay = 0.001;
+            h = plot(x, u(1,:));
+            axis([x(1), x(length(x)), 283-30, 283+30]);
+            xlabel('x');  ylabel('u(x,t)');  
+            set(h, 'xData', x);
+            counter = 0;
+            for i = 2:length(u(:,1))
+                t(i)
+                set(h, 'yData', u(i,:));
+                legend(strcat('t=',num2str(t(i))), 'location', 'northeast');
+                pause(delay); 
+                if mod(i, 10) == 0
+                    filestem = sprintf('tmp_%04d', counter);
+                    print(filestem, '-dpng');
+                    counter = counter + 1;
+                end
+           end
+        end
+        
+        function right_hand_side = rhs(u, t)
+            global beta; global dx;   
+            global L; global x; global P; global Ta;   
+            
+            dudx = @(t) 0;
+            dsdt = @(t) (Ta*2*pi/P)*cos((2*pi/P)*t);
+            f    = @(x, t) 0;
+        
+            N = length(u) - 1;
+            rhs = zeros(1, N+1);
+            rhs(1) = dsdt(t);
+            for i = 2:N 
+                rhs(i) = (beta/dx^2)*(u(i+1) - 2*u(i) + u(i-1)) +...
+                         f(x(i), t);
+            end
+            rhs(N+1) = (beta/dx^2)*(2*u(N) - 2*u(N+1)) + f(x(N+1), t);
+            right_hand_side = rhs;
+        end
 
 .. --- end solution of exercise ---
 
@@ -1473,13 +1659,9 @@ Choose the model problem from the section :ref:`sec:pde:diff1D:rod`.
 **Solution.**
 Here is the code:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: rod_BE_vs_B2step
-
+        % No code yet..., but possibly use only py code.
 
 .. --- end solution of exercise ---
 
@@ -1518,6 +1700,8 @@ solvers:
 Experiment to see if you can use larger time steps than what is required
 by the Forward Euler method and get solutions with the same order of accuracy.
 
+.. index:: theta rule
+
 .. --- begin hint in exercise ---
 
 **Hint.**
@@ -1536,13 +1720,9 @@ by the other methods.
 **Solution.**
 Code:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: ground_temp_adaptive
-
+        %% No code yet, but possibly just use py code.
 
 From experiments it is clear that RKFehlberg uses many more steps, even
 at the Forward Euler stability limit than the other schemes without giving
@@ -1609,8 +1789,12 @@ explicitly the dependence on time :math:`t`. With the Crank-Nicolson method,  we
 .. math::
           
         \frac{u_i^{n+1} - u_i^n}{\Delta t} = \frac{1}{2}
-        \left(\frac{\beta}{\Delta x^2} (u_{i+1}^n - 2u_i^n + u_{i-1}^n) + f_i^n +
-        \frac{\beta}{\Delta x^2} (u_{i+1}^{n+1} - 2u_i^{n+1} + u_{i-1}^{n+1}) + f_i^{n+1}\right),\quad i=1,\ldots,N-1,
+        \biggl(\frac{\beta}{\Delta x^2} (u_{i+1}^n - 2u_i^n + u_{i-1}^n) + f_i^n +\nonumber
+        
+
+.. math::
+          
+        \quad \frac{\beta}{\Delta x^2} (u_{i+1}^{n+1} - 2u_i^{n+1} + u_{i-1}^{n+1}) + f_i^{n+1}\biggr),\quad i=1,\ldots,N-1,
         \nonumber
         
 
@@ -1633,14 +1817,24 @@ Collecting the unknowns on the left hand side, brings us to
 .. math::
           
         -\frac{\Delta t\beta}{2\Delta x^2}u_{i-1}^{n+1} + (1+\frac{\Delta t\beta}{\Delta x^2})u_i^{n+1} - \frac{\Delta t\beta}{2\Delta x^2}u_{i+1}^{n+1} =
-        u_i^n + \frac{\Delta t\beta}{2\Delta x^2}(u_{i+1}^n - 2u_i^n + u_{i-1}^n) + \frac{\Delta t}{2}(f_i^n + f_i^{n+1}),\quad i=1,\ldots,N-1,
+        u_i^n + \frac{\Delta t\beta}{2\Delta x^2}(u_{i+1}^n - 2u_i^n + u_{i-1}^n) +\nonumber
+        
+
+.. math::
+          
+        \quad \frac{\Delta t}{2}(f_i^n + f_i^{n+1}),\quad i=1,\ldots,N-1,
         \nonumber
         
 
 .. math::
           
         -\frac{\Delta t\beta}{\Delta x^2}u_{N-1}^{n+1} + (1+\frac{\Delta t\beta}{\Delta x^2})u_N^{n+1} =
-        u_N^n + \frac{\Delta t\beta}{\Delta x^2}(u_{N-1}^n - u_N^n) + \frac{\Delta t}{2}(f_N^n + f_N^{n+1})\thinspace .
+        u_N^n + \frac{\Delta t\beta}{\Delta x^2}(u_{N-1}^n - u_N^n) +\nonumber
+        
+
+.. math::
+          
+        \quad \frac{\Delta t}{2}(f_N^n + f_N^{n+1})\thinspace .
         \nonumber
         
 
@@ -1707,9 +1901,9 @@ known as the :math:`\theta` rule:
 
 For :math:`\theta =0` we recover the Forward Euler method, :math:`\theta=1` gives
 the Backward Euler scheme, and :math:`\theta=1/2` corresponds to the
-Crank-Nicolson method. The accuracy of the :math:`\theta` rule is
-:math:`\mathcal{O}(\Delta t)`, except for :math:`\theta =1/2` where it is
-:math:`\mathcal{O}(\Delta t^2)`. For :math:`\theta \geq 1/2` the method is
+Crank-Nicolson method. The approximation error in the :math:`\theta` rule is
+proportional to :math:`\Delta t`, except for :math:`\theta =1/2` where it is
+proportional to :math:`\Delta t^2`. For :math:`\theta \geq 1/2` the method is
 stable for all :math:`\Delta t`.
 
 Apply the :math:`\theta` rule to the ODE system for a one-dimensional
@@ -1729,8 +1923,12 @@ With the theta rule,  we get
 .. math::
           
         \frac{u_i^{n+1} - u_i^n}{\Delta t} =
-        (1-\theta)\left(\frac{\beta}{\Delta x^2} (u_{i+1}^n - 2u_i^n + u_{i-1}^n) + f_i^n\right) +
-        \theta \left(\frac{\beta}{\Delta x^2} (u_{i+1}^{n+1} - 2u_i^{n+1} + u_{i-1}^{n+1}) + f_i^{n+1}\right),\quad i=1,\ldots,N-1,
+        (1-\theta)\left(\frac{\beta}{\Delta x^2} (u_{i+1}^n - 2u_i^n + u_{i-1}^n) + f_i^n\right) +\nonumber
+        
+
+.. math::
+          
+        \quad \theta \left(\frac{\beta}{\Delta x^2} (u_{i+1}^{n+1} - 2u_i^{n+1} + u_{i-1}^{n+1}) + f_i^{n+1}\right),\quad i=1,\ldots,N-1,
         \nonumber
         
 
@@ -1752,14 +1950,21 @@ Collecting the unknowns on the left hand side gives
 .. math::
           
         -\theta\frac{\Delta t\beta}{\Delta x^2}u_{i-1}^{n+1} + \left(1+\theta\frac{2\Delta t\beta}{\Delta x^2}u_i^{n+1}\right) -
-        \theta\frac{\Delta t\beta}{\Delta x^2}u_{i+1}{n+1} = u_i^n +
-        \Delta t\left(1-\theta\right)\frac{\beta}{\Delta x^2}\left(u_{i+1}^n - 2u_i^n + u_{i-1}^n\right) +
-        \Delta t\left((1-\theta)f_i^n + \theta f_i^{n+1}\right),\quad i=1,\ldots,N-1,\nonumber
+        \theta\frac{\Delta t\beta}{\Delta x^2}u_{i+1}{n+1} = u_i^n +\nonumber
         
 
 .. math::
           
-        -\theta\frac{2\Delta t\beta}{\Delta x^2}u_{N-1}^{n+1} + \left(1+\theta\frac{2\Delta t\beta}{\Delta x^2}u_N^{n+1}\right) = u_N^n +
+        \Delta t\left(1-\theta\right)\frac{\beta}{\Delta x^2}\left(u_{i+1}^n - 2u_i^n + u_{i-1}^n\right) + \Delta t\left((1-\theta)f_i^n + \theta f_i^{n+1}\right),\quad i=1,\ldots,N-1,\nonumber
+        
+
+.. math::
+          
+        -\theta\frac{2\Delta t\beta}{\Delta x^2}u_{N-1}^{n+1} + \left(1+\theta\frac{2\Delta t\beta}{\Delta x^2}u_N^{n+1}\right) = u_N^n +\nonumber
+        
+
+.. math::
+          
         \Delta t(1-\theta)\frac{2\beta}{\Delta x^2}\left(u_{N-1}^n - u_N^n\right) + \Delta t\left((1-\theta)f_N^n + \theta f_N^{n+1}\right)\thinspace ,
         \nonumber
         
@@ -1839,13 +2044,9 @@ at all.
 
 Code:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: rod_ThetaRule
-
+        % No code yet..., but possibly use only py code.
 
 .. --- end solution of exercise ---
 
@@ -1853,8 +2054,8 @@ Filename: ``rod_ThetaRule.m``.
 
 .. Closing remarks for this Exercise
 
-Remarks  (7)
-~~~~~~~~~~~~
+Remarks          (7)
+~~~~~~~~~~~~~~~~~~~~
 
 Despite the fact that the Crank-Nicolson method, or the :math:`\theta` rule with
 :math:`\theta=1/2`, is theoretically more accurate than the Backward Euler and
@@ -1878,50 +2079,98 @@ Exercise 67: Compute the diffusion of a Gaussian peak
 
 Solve the following diffusion problem:
 
+.. _Eq:_auto49:
+
 .. math::
-        
-        \frac{\partial u}{\partial t} = \beta\frac{\partial^2 u}{\partial x^2},
+
+    \tag{153}
+    \frac{\partial u}{\partial t} = \beta\frac{\partial^2 u}{\partial x^2},
          x\in (-1,1),\ t\in (0,T]
         
+        
+
+.. _Eq:_auto50:
 
 .. math::
-          
-        u(x,0) = \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{x^2}{2\sigma^2}\right)},
+
+    \tag{154}
+    u(x,0) = \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{x^2}{2\sigma^2}\right)},
          x\in [-1,1],
         
-
-.. math::
-          
-        \frac{\partial}{\partial x}u(-1,t)  = 0  t\in (0,T],
         
 
+.. _Eq:_auto51:
+
 .. math::
-          
-        \frac{\partial}{\partial x}u(1,t)  = 0  t\in (0,T]\thinspace .
+
+    \tag{155}
+    \frac{\partial}{\partial x}u(-1,t)  = 0  t\in (0,T],
+        
+        
+
+.. _Eq:_auto52:
+
+.. math::
+
+    \tag{156}
+    \frac{\partial}{\partial x}u(1,t)  = 0  t\in (0,T]\thinspace .
+        
         
 
 The initial condition is the famous and widely used *Gaussian function*
 with standard deviation (or "width") :math:`\sigma`, which is here taken
 to be small, :math:`\sigma = 0.01`, such that the initial condition is a peak.
 This peak will then diffuse and become lower and wider.
-Compute :math:`u(x,t)` until :math:`u\approx 0`.
+Compute :math:`u(x,t)` until :math:`u` becomes approximately constant over the domain.
 
 .. --- begin solution of exercise ---
 
 **Solution.**
 Code:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: gaussian_diffusion
-
+        % ...no code yet, possibly use only Py version with odespy
 
 .. --- end solution of exercise ---
 
 Filename: ``gaussian_diffusion.m``.
+
+.. Closing remarks for this Exercise
+
+Remarks          (8)
+~~~~~~~~~~~~~~~~~~~~
+
+Running the simulation with :math:`\sigma =0.2` results in a constant solution
+:math:`u\approx 1` as :math:`t\rightarrow\infty`, while one might expect from "physics
+of diffusion" that the solution should approach zero. The reason is
+that we apply Neumann conditions as boundary conditions. One can then
+easily show that the area under the :math:`u` curve remains constant. Integrating
+the PDE gives
+
+.. math::
+         \int_{-1}^1 \frac{\partial u}{\partial t}dx = \beta \int_{-1}^1
+        \frac{\partial d^2 u}{\partial x^2}dx\thinspace .
+        
+
+Using the Gauss divergence theorem on the integral on the right-hand
+and moving the time-derivative outside the integral on the left-hand
+side results in
+
+.. math::
+         \frac{\partial}{\partial t} \int_{-1}^1 u(x,t) dx = \beta
+        \left[\frac{\partial du}{\partial x}\right]_{-1}^1 = 0.
+        
+
+(Recall that :math:`\partial u/\partial x=0` at the end points.)
+The result means that :math:`\int_{-1}^1 udx` remains constant during the
+simulation. Giving the PDE an interpretation in terms of heat conduction
+can easily explain the result: with Neumann conditions no heat can
+escape from the domain so the initial heat will just be evenly distributed,
+but not leak out, so the temperature cannot go to zero (or the scaled and
+translated temperature :math:`u`, to be precise). The area under the initial
+condition is 1, so with a sufficiently fine mesh, :math:`u\rightarrow 1`,
+regardless of :math:`\sigma`.
 
 .. --- end exercise ---
 
@@ -1955,23 +2204,42 @@ or more explicitly as ``sum(x(1:end-1).*y(1:end))``.
 **Solution.**
 Code:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: polyarea_vec
-
+        % Computes the area of a polygon from vertex 
+        % coordinates only. Vectorization is exploited.
+        
+        function area = polyarea_vec(x, y)
+            n = length(x);
+            area = 0.5*abs(dot(x(1:n-1),y(2:n)) - dot(y(1:n-1),x(2:n)) +...
+                           x(n)*y(1) - y(n)*x(1));
+        end
 
 Test function (``test_polyarea_vec.m``):
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: test_polyarea_vec
-
+        function test_polyarea_vec()
+            tol = 1E-14;
+            % pentagon
+            x1 = [0 2 2 1 0];
+            y1 = [0 0 2 3 2];
+            %fprintf('diff pentagon: %f\n',...
+            %                abs(polyarea(x1, y1) - polyarea_vec(x1, y1)));
+            assert(abs(polyarea(x1, y1) - polyarea_vec(x1, y1)) < tol);   
+            % quadrilateral
+            x2 = [0 2 2 0];
+            y2 = [0 0 2 2];
+            %fprintf('diff quadrilateral: %f\n',...
+            %                abs(polyarea(x2, y2) - polyarea_vec(x2, y2)));
+            assert(abs(polyarea(x2, y2) - polyarea_vec(x2, y2)) < tol);
+            % triangle
+            x3 = [0 2 0];
+            y3 = [0 0 2];
+            %fprintf('diff triangle: %f\n',...
+            %                abs(polyarea(x3, y3) - polyarea_vec(x3, y3)));
+            assert(abs(polyarea(x3, y3) - polyarea_vec(x3, y3)) < tol);
+        end
 
 .. --- end solution of exercise ---
 
@@ -1988,7 +2256,7 @@ Exercise 69: Explore symmetry
 
 One can observe (and also mathematically prove)
 that the solution :math:`u(x,t)` of the problem in :ref:`sec:pde:diff1D:exer:Gaussian` is symmetric around :math:`x=0`: :math:`u(-x,t) = u(x,t)`.
-In such cases, we can split the domain in two and compute :math:`u` in only
+In such a case, we can split the domain in two and compute :math:`u` in only
 one half, :math:`[-1,0]` or :math:`[0,1]`. At the symmetry line :math:`x=0` we have
 the symmetry boundary condition :math:`\partial u/\partial x=0`.
 Reformulate the problem in :ref:`sec:pde:diff1D:exer:Gaussian`
@@ -2001,37 +2269,49 @@ observe that it equals the right part of the solution in
 **Solution.**
 Reformulating gives
 
+.. _Eq:_auto53:
+
 .. math::
-        
-        \frac{\partial u}{\partial t} = \beta\frac{\partial^2 u}{\partial x^2},
+
+    \tag{157}
+    \frac{\partial u}{\partial t} = \beta\frac{\partial^2 u}{\partial x^2},
          x\in (0,1),\ t\in (0,T]
         
+        
+
+.. _Eq:_auto54:
 
 .. math::
-          
-        u(x,0) = \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{x^2}{2\sigma^2}\right)},
+
+    \tag{158}
+    u(x,0) = \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{x^2}{2\sigma^2}\right)},
          x\in [0,1],
         
-
-.. math::
-          
-        \frac{\partial}{\partial x}u(0,t)  = 0  t\in (0,T],
         
 
+.. _Eq:_auto55:
+
 .. math::
-          
-        \frac{\partial}{\partial x}u(1,t)  = 0  t\in (0,T]\thinspace .
+
+    \tag{159}
+    \frac{\partial}{\partial x}u(0,t)  = 0  t\in (0,T],
+        
+        
+
+.. _Eq:_auto56:
+
+.. math::
+
+    \tag{160}
+    \frac{\partial}{\partial x}u(1,t)  = 0  t\in (0,T]\thinspace .
+        
         
 
 Code:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: symmetric_gaussian_diffusion
-
+        % no file yet..., possibly use only Py code with odespy.
 
 .. --- end solution of exercise ---
 
@@ -2039,12 +2319,19 @@ Filename: ``symmetric_gaussian_diffusion.m``.
 
 .. Closing remarks for this Exercise
 
-Remarks  (8)
-~~~~~~~~~~~~
+Remarks          (9)
+~~~~~~~~~~~~~~~~~~~~
 
 In 2D and 3D problems, where the CPU time to compute a solution of PDE
 can be hours and days, it is very important to utilize symmetry as
 we do above to reduce the size of the problem.
+
+Also note the remarks in :ref:`sec:pde:diff1D:exer:Gaussian`
+about the constant area under the :math:`u(x,t)` curve: here, the area
+is 0.5 and :math:`u\rightarrow 0.5` as :math:`t\rightarrow 0.5` (if the mesh
+is sufficiently fine - one will get convergence to
+smaller values for small :math:`\sigma` if the mesh is not fine enough to
+properly resolve a thin-shaped initial condition).
 
 .. --- end exercise ---
 
@@ -2059,7 +2346,7 @@ Exercise 70: Compute solutions as :math:`t\rightarrow\infty`
 
 .. index:: Laplace equation
 
-Many diffusion problems reaches a stationary time-independent solution
+Many diffusion problems reach a stationary time-independent solution
 as :math:`t\rightarrow\infty`. The model problem from the section :ref:`sec:pde:diff1D:rod`
 is one example where :math:`u(x,t)=s(t)=\hbox{const}` for :math:`t\rightarrow\infty`.
 When :math:`u` does not depend on time, the diffusion equation reduces to
@@ -2083,27 +2370,27 @@ We now consider a one-dimensional problem
 .. _Eq:sec:pde:diff1D:exer:stationary:2ptBVP:
 
 .. math::
-   :label: sec:pde:diff1D:exer:stationary:2ptBVP
-        
-         -u''(x) = 0,\ x\in (0,L),\quad u(0)=C, \ u'(L)=0,
+
+    \tag{161}
+    -u''(x) = 0,\ x\in (0,L),\quad u(0)=C, \ u'(L)=0,
         
         
 
 which is known as a *two-point boundary value problem*. This is nothing
 but the stationary limit of the diffusion problem in
 the section :ref:`sec:pde:diff1D:rod`. How can we solve such a stationary
-problem :eq:`sec:pde:diff1D:exer:stationary:2ptBVP`?
+problem :ref:`(161) <Eq:sec:pde:diff1D:exer:stationary:2ptBVP>`?
 The simplest strategy, when we already have a solver for
 the corresponding time-dependent problem, is to use that solver and
 simulate until :math:`t\rightarrow\infty`, which in practice means that
 :math:`u(x,t)` no longer changes in time (within some tolerance).
 
 A nice feature of implicit methods like the Backward Euler scheme
-is that one can take *one very long time step to "infinity"* and
-produce the solution of :eq:`sec:pde:diff1D:exer:stationary:2ptBVP`.
+is that one can take *one very long time step* to "infinity" and
+produce the solution of :ref:`(161) <Eq:sec:pde:diff1D:exer:stationary:2ptBVP>`.
 
 **a)**
-Let :eq:`sec:pde:diff1D:exer:stationary:2ptBVP` be valid at mesh
+Let :ref:`(161) <Eq:sec:pde:diff1D:exer:stationary:2ptBVP>` be valid at mesh
 points :math:`x_i` in space, discretize :math:`u''` by a finite difference, and
 set up a system of equations for the point values :math:`u_i`,$i =0,\ldots,N$,
 where :math:`u_i` is the approximation at mesh point :math:`x_i`.
@@ -2179,13 +2466,13 @@ which is a system of linear equations in the unknowns :math:`u_i`, :math:`i=0,\l
 .. --- end solution of exercise ---
 
 **b)**
-Show that if :math:`\Delta t\rightarrow\infty` in :eq:`sec:pde:diff1D:ode1:0:BE` - :eq:`sec:pde:diff1D:ode1:N:BE`,
+Show that if :math:`\Delta t\rightarrow\infty` in :ref:`(135) <Eq:sec:pde:diff1D:ode1:0:BE>` - :ref:`(137) <Eq:sec:pde:diff1D:ode1:N:BE>`,
 it leads to the same equations as in a).
 
 .. --- begin solution of exercise ---
 
 **Solution.**
-From :eq:`sec:pde:diff1D:ode1:0:BE` - :eq:`sec:pde:diff1D:ode1:N:BE`,
+From :ref:`(135) <Eq:sec:pde:diff1D:ode1:0:BE>` - :ref:`(137) <Eq:sec:pde:diff1D:ode1:N:BE>`,
 letting :math:`\Delta t\rightarrow\infty`, we see that the left hand sides go to zero, i.e.
 
 .. math::
@@ -2213,7 +2500,7 @@ now that :math:`\Delta t\rightarrow\infty`, we see that the equations just deriv
 **c)**
 Demonstrate, by running a program,
 that you can take one large time step with the Backward Euler
-scheme and compute the solution of :eq:`sec:pde:diff1D:exer:stationary:2ptBVP`.
+scheme and compute the solution of :ref:`(161) <Eq:sec:pde:diff1D:exer:stationary:2ptBVP>`.
 The solution is very boring since it is constant: :math:`u(x)=C`.
 
 .. --- begin solution of exercise ---
@@ -2221,13 +2508,9 @@ The solution is very boring since it is constant: :math:`u(x)=C`.
 **Solution.**
 Code:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: rod_stationary
-
+        % ...no code yet, possibly just use Py code with odespy
 
 .. --- end solution of exercise ---
 
@@ -2235,8 +2518,8 @@ Filename: ``rod_stationary.m``.
 
 .. Closing remarks for this Exercise
 
-Remarks  (9)
-~~~~~~~~~~~~
+Remarks          (10)
+~~~~~~~~~~~~~~~~~~~~~
 
 If the interest is in the stationary limit of a diffusion equation,
 one can either solve the associated Laplace or Poisson equation directly,
@@ -2276,19 +2559,13 @@ for :math:`u(1)`.
 **Solution.**
 Code:
 
+.. code-block:: matlab
 
-.. The below box could be typeset as .. admonition: Attention
-   but we have decided not to do so since the admon needs a title
-   (the box formatting is therefore just ignored)
-
-Here is a missing file: 2ptBVP
-
+        % No code yet..., possibly use only odespy
 
 .. --- end solution of exercise ---
 
 Filename: ``2ptBVP.m``.
 
 .. --- end exercise ---
-
-.. _4th:NonlinAlgEq:
 

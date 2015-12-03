@@ -6,9 +6,27 @@
 
 .. Document title:
 
-Programming for Computations - A Gentle Introduction to Numerical Simulations with Python
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Programming for Computations (Python version)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :Authors: Svein Linge, Hans Petter Langtangen
-:Date: May 17, 2015
+
+.. This small preface is the back cover text, but will appear together
+
+.. with the title on the first page of latex pdf and html.
+
+This text teaches computer programming as a method for solving
+mathematical problems. There are two versions of this book, one for
+the MATLAB and one for Python. While it was inspired by the Springer
+text TCSE6: A Primer on Scientific Programming with Python (by
+Langtangen), its exposition is more accessible, simpler, and much
+shorter and aimed at engineering students. The authors have outlined
+the shortest possible path from zero knowledge about programming to a
+set of skills that will allow the students in engineering and science
+courses to write simple programs for solving common mathematical
+problems by numerical methods. This text places great emphasis on
+generic algorithms, clean program designs, function use, and automatic
+tests for verification.
+
+:Date: Dec 3, 2015
 

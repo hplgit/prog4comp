@@ -1,8 +1,3 @@
-
-
-.. |nbsp| unicode:: 0xA0
-   :trim:
-
 .. !split
 
 Preface
@@ -54,9 +49,9 @@ The computer language: Python
 We have chosen to use the programming language Python, because this language gives very compact and readable code that closely resembles the mathematical
 recipe for solving the problem at hand. Python also has a gentle learning curve. There is a
 MATLAB/Octave
-companion of this book in case that language is preferred.
-Comparing these two versions of the book provides an excellent demonstration of how similar these languages are. Other computer languages, like Fortran, C, and C++, have a strong position in science and engineering. During the last two decades, however, there has been a significant shift in popularity from these compiled languages to more
-high-level and easier-to-read languages like MATLAB, Python, R, Maple, Mathematica, and IDL, for instance. This latter class of languages is computationally less efficient, but superior with respect to overall human problem solving efficiency. This book emphasizes *how to think like a programmer*, rather than focusing on technical language details. Thus, the book should put the reader in a good position for learning other programming languages later, including the classic ones: Fortran, C, and C++.
+companion of this book in case that language is preferred. Comparing these two versions of the book provides an excellent demonstration of how similar these languages are.
+Other computer languages, like Fortran, C, and C++, have a strong position in science and engineering. During the last two decades, however, there has been a significant shift in popularity from these compiled languages to more
+high-level and easier-to-read languages like Matlab, Python, R, Maple, Mathematica, and IDL, for instance. This latter class of languages is computationally less efficient, but superior with respect to overall human problem solving efficiency. This book emphasizes *how to think like a programmer*, rather than focusing on technical language details. Thus, the book should put the reader in a good position for learning other programming languages later, including the classic ones: Fortran, C, and C++.
 
 How this book is different
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -64,32 +59,27 @@ How this book is different
 There are numerous texts on computer programming and numerical methods, so how does the present one differ from the existing literature? Compared to books on numerical methods, our book has a much stronger emphasis on the craft of programming and on verification. We want to give students a thorough understanding of how one thinks about programming as a problem solving method and how one can be sure that programs are correct (well, you can never be completely sure, but we show how you can provide convincing evidence for correctness).
 
 Even though there are lots of books on numerical methods where many algorithms have a corresponding computer implementation (see, e.g.,
-[Ref01]_ [Ref02]_ [Ref03]_ [Ref04]_ [Ref05]_ [Ref06]_ [Ref07]_ [Ref08]_ [Ref09]_ [Ref10]_ [Ref11]_ [Ref12]_ [Ref13]_ [Ref14]_ [Ref15]_ [Ref16]_ - the latter two are the only texts we know that apply Python),
-it is assumed that the reader "can program" beforehand. The present book teaches the craft of structured programming along with the numerical methods. Furthermore, we have so far not found any other numerical methods book that has a strong emphasis on verifying implementations. In this book, unit testing and corresponding test functions are introduced early on. We also put much emphasis on coding algorithms as *functions*, as opposed to "flat programs", which often dominate in the literature and among practitioners. Functions are reusable because they utilize the general formulation of a mathematical algorithm such that it becomes applicable to a large class of problems.
+[Ref01]_ [Ref02]_ [Ref03]_ [Ref04]_ [Ref05]_ [Ref06]_ [Ref07]_ [Ref08]_ [Ref09]_ [Ref10]_ [Ref11]_ [Ref12]_ [Ref13]_ [Ref14]_ [Ref15]_ [Ref16]_ [Ref17]_ - the latter two are the only texts we know that apply Python),
+it is assumed that the reader "can program" beforehand. The present book teaches the craft of structured programming along with the fundamental ideas of numerical methods. Furthermore, we have so far not found any other numerical methods book that has a strong emphasis on verifying implementations. In this book, unit testing and corresponding test functions are introduced early on. We also put much emphasis on coding algorithms as *functions*, as opposed to "flat programs", which often dominate in the literature and among practitioners. Functions are reusable because they utilize the general formulation of a mathematical algorithm such that it becomes applicable to a large class of problems.
 
-There are also numerous books on computer programming, but to our knowledge only one [Ref17]_ that aims to teach programming in the context of numerical methods and scientific applications. That book [Ref17]_ has its primary focus on teaching Python and is a very comprehensive introduction to Python as a language and the thinking about programming as a computer scientist. Sometimes one needs a text that does not go so deep into the language-specific details,
+There are also numerous books on computer programming, but to our knowledge only one [Ref18]_ that aims to teach how to *think* about programming in the context of numerical methods and scientific applications. That book [Ref18]_ has its primary focus on teaching Python and is a very comprehensive introduction to Python as a language and the thinking about programming as a computer scientist. Sometimes one needs a text that does not go so deep into the language-specific details,
 but instead targets the shortest path to reliable mathematical problem solving through programming. With this attitude in mind, a lot of topics were left out of the present book, simply because they were not *strictly* needed in the mathematical problem solving process.
-Examples of such topics are object-oriented programming and Python dictionaries (of which the latter omission is possibly subject to more debate). If you find the present book too shallow, [Ref17]_ might be the right choice for you. That source should also work nicely as a more in-depth successor of the present text.
+Examples of such topics are object-oriented programming and Python dictionaries (of which the latter omission is possibly subject to more debate). If you find the present book too shallow, [Ref18]_ might be the right choice for you. That source should also work nicely as a more in-depth successor of the present text.
 
 Whenever the need for a *structured introduction to programming* arises in science and engineering courses, this book may be your option, either for self-study or for use in organized teaching. The thinking, habits, and practice covered in a couple of hundred pages will put readers in a firm position for utilizing and understanding the power of computers for problem solving in science and engineering.
 
 Acknowledgments
 ~~~~~~~~~~~~~~~
 
-First of all we must thank all the classes at Telemark Engineering College that worked their way through early versions of this text and reported various kinds of problems.
-Special acknowledgement goes to Edirisinghe V. P. J. Manjula for his careful reading of the manuscript and for his constructive suggestions for improvement.
-The careful proof reading by Yapi Donatien Achou is also highly appreciated.
-Some colleagues???????????????????????
-Svein Linge is particularly thankful to Prof. Marius Lysaker
-for their fruitful collaboration on introducing programming as an integral part
-of mathematics and physics bachelor courses at Telemark Engineering College.
+First of all, we want to thank all students who attended the courses FM1006 Modelling and simulation of dynamic systems, FM1115 Scientific Computing, FB1012 Mathematics I and FB2112 Physics at Telemark University College over the last couple of years. They worked their way through early versions of this text and gave us constructive and positive feedback that helped us correct errors and improve the book in so many ways. Special acknowledgement goes to Guandong Kou and Edirisinghe V. P. J. Manjula for their careful reading of the manuscript and  constructive suggestions for improvement. The careful proof reading by Yapi Donatien Achou is also highly appreciated. We thank all our good colleagues at Telemark University College, University of Oslo, and Simula Research Laboratory for their continued support and interest, enlightening discussions, and for providing such an inspiring environment for teaching and science. In particular, Svein Linge is thankful to Marius Lysaker for their fruitful collaboration on introducing programming as an integral part
+of mathematics and physics bachelor courses at Telemark University College.
 
-The text was written in the `DocOnce <https://github.com/hplgit/doconce>`__ [Ref18]_ markup language,
+.. index:: DocOnce
+
+The text was written in the `DocOnce <https://github.com/hplgit/doconce>`__ [Ref19]_ markup language,
 which allowed us to work with a single text source for both the Python
 and the Matlab version of this book, and to produce various electronic
 versions of the book.
 
 .. Table of contents
-
-.. _1st:TheFirstFewSteps:
 

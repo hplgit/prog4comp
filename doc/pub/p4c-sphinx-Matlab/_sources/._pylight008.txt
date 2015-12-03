@@ -1,8 +1,3 @@
-
-
-.. |nbsp| unicode:: 0xA0
-   :trim:
-
 .. !split
 
 References
@@ -70,45 +65,56 @@ References
    2012.
 
 .. [Ref13]
+   **C. Greif and U. M. Ascher**. *A First Course in Numerical Methods*,
+   *Computational Science and Engineering*,
+   SIAM,
+   2011.
+
+.. [Ref14]
    **T. Lyche and J.-L. Merrien**. *Exercises in Computational Mathematics with MATLAB*,
    Springer,
    2014.
 
-.. [Ref14]
+.. [Ref15]
    **T. Siauw and A. Bayen**. *An Introduction to MATLAB Programming and Numerical Methods for Engineers*,
    Academic Press,
    2014,
    `http://www.sciencedirect.com/science/book/9780124202283 <http://www.sciencedirect.com/science/book/9780124202283>`_.
 
-.. [Ref15]
+.. [Ref16]
    **D. W. Harder and R.**. *Numerical Analysis for Engineering*,
    2015,
    `https://ece.uwaterloo.ca/~dwharder/NumericalAnalysis/ <https://ece.uwaterloo.ca/~dwharder/NumericalAnalysis/>`_.
 
-.. [Ref16]
+.. [Ref17]
    **T. Young and M. J. Mohlenkamp**. *Introduction to Numerical Methods and MATLAB Programming for Engineers*,
    2015,
    `https://www.math.ohiou.edu/courses/math3600/book.pdf <https://www.math.ohiou.edu/courses/math3600/book.pdf>`_.
 
-.. [Ref17]
+.. [Ref18]
    **L. Baochuan**. *Introduction to Numerical Methods*,
    2015,
    `http://en.wikibooks.org/wiki/Introduction_to_Numerical_Methods <http://en.wikibooks.org/wiki/Introduction_to_Numerical_Methods>`_.
 
-.. [Ref18]
+.. [Ref19]
    **J. Kiusalaas**. *Numerical Methods in Engineering with Python*,
    second edition,
    Cambridge,
    2014.
 
-.. [Ref19]
+.. [Ref20]
    **H. P. Langtangen**. *A Primer on Scientific Programming with Python*,
    fourth edition,
    *Texts in Computational Science and Engineering*,
    Springer,
    2014.
 
-.. [Ref20]
+.. [Ref21]
    **H. P. Langtangen**. DocOnce Publishing Platform,
    `https://github.com/hplgit/doconce <https://github.com/hplgit/doconce>`_.
+
+.. [Ref22]
+   **R. LeVeque**. *Finite Difference Methods for Ordinary and Partial Differential Equations: Steady-State and Time-Dependent Problems*,
+   SIAM,
+   2007.
 

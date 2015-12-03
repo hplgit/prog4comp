@@ -9,7 +9,7 @@
     
     <title>Preface</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -25,6 +25,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
 
         <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
         <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
@@ -42,14 +43,10 @@
         </style>
 
     
-    <link rel="top" title="Programming for Computations" href="index.html" />
+    <link rel="top" title="Programming for Computations (Python version)" href="index.html" />
     <link rel="next" title="The first few steps" href="._pylight002.html" />
-    <link rel="prev" title="Programming for Computations - A Gentle Introduction to Numerical Simulations with Python" href="._pylight000.html" />
-
-   
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
-
+    <link rel="prev" title="Programming for Computations (Python version)" href="._pylight000.html" />
+ 
   
        <style type="text/css">
          div.admonition {
@@ -59,8 +56,8 @@
        </style>
       </head>
     
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -70,16 +67,16 @@
           <a href="._pylight002.html" title="The first few steps"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="._pylight000.html" title="Programming for Computations - A Gentle Introduction to Numerical Simulations with Python"
+          <a href="._pylight000.html" title="Programming for Computations (Python version)"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Programming for Computations</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Programming for Computations (Python version)</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="preface">
 <h1>Preface<a class="headerlink" href="#preface" title="Permalink to this headline">¶</a></h1>
@@ -116,43 +113,43 @@ means compared to analytical methods, where much time and effort must be devoted
 <p>We have chosen to use the programming language Python, because this language gives very compact and readable code that closely resembles the mathematical
 recipe for solving the problem at hand. Python also has a gentle learning curve. There is a
 MATLAB/Octave
-companion of this book in case that language is preferred.
-Comparing these two versions of the book provides an excellent demonstration of how similar these languages are. Other computer languages, like Fortran, C, and C++, have a strong position in science and engineering. During the last two decades, however, there has been a significant shift in popularity from these compiled languages to more
-high-level and easier-to-read languages like MATLAB, Python, R, Maple, Mathematica, and IDL, for instance. This latter class of languages is computationally less efficient, but superior with respect to overall human problem solving efficiency. This book emphasizes <em>how to think like a programmer</em>, rather than focusing on technical language details. Thus, the book should put the reader in a good position for learning other programming languages later, including the classic ones: Fortran, C, and C++.</p>
+companion of this book in case that language is preferred. Comparing these two versions of the book provides an excellent demonstration of how similar these languages are.
+Other computer languages, like Fortran, C, and C++, have a strong position in science and engineering. During the last two decades, however, there has been a significant shift in popularity from these compiled languages to more
+high-level and easier-to-read languages like Matlab, Python, R, Maple, Mathematica, and IDL, for instance. This latter class of languages is computationally less efficient, but superior with respect to overall human problem solving efficiency. This book emphasizes <em>how to think like a programmer</em>, rather than focusing on technical language details. Thus, the book should put the reader in a good position for learning other programming languages later, including the classic ones: Fortran, C, and C++.</p>
 </div>
 <div class="section" id="how-this-book-is-different">
 <h2>How this book is different<a class="headerlink" href="#how-this-book-is-different" title="Permalink to this headline">¶</a></h2>
 <p>There are numerous texts on computer programming and numerical methods, so how does the present one differ from the existing literature? Compared to books on numerical methods, our book has a much stronger emphasis on the craft of programming and on verification. We want to give students a thorough understanding of how one thinks about programming as a problem solving method and how one can be sure that programs are correct (well, you can never be completely sure, but we show how you can provide convincing evidence for correctness).</p>
 <p>Even though there are lots of books on numerical methods where many algorithms have a corresponding computer implementation (see, e.g.,
-<a class="reference internal" href="._pylight009.html#ref01" id="id1">[Ref01]</a> <a class="reference internal" href="._pylight009.html#ref02" id="id2">[Ref02]</a> <a class="reference internal" href="._pylight009.html#ref03" id="id3">[Ref03]</a> <a class="reference internal" href="._pylight009.html#ref04" id="id4">[Ref04]</a> <a class="reference internal" href="._pylight009.html#ref05" id="id5">[Ref05]</a> <a class="reference internal" href="._pylight009.html#ref06" id="id6">[Ref06]</a> <a class="reference internal" href="._pylight009.html#ref07" id="id7">[Ref07]</a> <a class="reference internal" href="._pylight009.html#ref08" id="id8">[Ref08]</a> <a class="reference internal" href="._pylight009.html#ref09" id="id9">[Ref09]</a> <a class="reference internal" href="._pylight009.html#ref10" id="id10">[Ref10]</a> <a class="reference internal" href="._pylight009.html#ref11" id="id11">[Ref11]</a> <a class="reference internal" href="._pylight009.html#ref12" id="id12">[Ref12]</a> <a class="reference internal" href="._pylight009.html#ref13" id="id13">[Ref13]</a> <a class="reference internal" href="._pylight009.html#ref14" id="id14">[Ref14]</a> <a class="reference internal" href="._pylight009.html#ref15" id="id15">[Ref15]</a> <a class="reference internal" href="._pylight009.html#ref16" id="id16">[Ref16]</a> - the latter two are the only texts we know that apply Python),
-it is assumed that the reader &#8220;can program&#8221; beforehand. The present book teaches the craft of structured programming along with the numerical methods. Furthermore, we have so far not found any other numerical methods book that has a strong emphasis on verifying implementations. In this book, unit testing and corresponding test functions are introduced early on. We also put much emphasis on coding algorithms as <em>functions</em>, as opposed to &#8220;flat programs&#8221;, which often dominate in the literature and among practitioners. Functions are reusable because they utilize the general formulation of a mathematical algorithm such that it becomes applicable to a large class of problems.</p>
-<p>There are also numerous books on computer programming, but to our knowledge only one <a class="reference internal" href="._pylight009.html#ref17" id="id17">[Ref17]</a> that aims to teach programming in the context of numerical methods and scientific applications. That book <a class="reference internal" href="._pylight009.html#ref17" id="id18">[Ref17]</a> has its primary focus on teaching Python and is a very comprehensive introduction to Python as a language and the thinking about programming as a computer scientist. Sometimes one needs a text that does not go so deep into the language-specific details,
+<a class="reference internal" href="._pylight009.html#ref01" id="id1">[Ref01]</a> <a class="reference internal" href="._pylight009.html#ref02" id="id2">[Ref02]</a> <a class="reference internal" href="._pylight009.html#ref03" id="id3">[Ref03]</a> <a class="reference internal" href="._pylight009.html#ref04" id="id4">[Ref04]</a> <a class="reference internal" href="._pylight009.html#ref05" id="id5">[Ref05]</a> <a class="reference internal" href="._pylight009.html#ref06" id="id6">[Ref06]</a> <a class="reference internal" href="._pylight009.html#ref07" id="id7">[Ref07]</a> <a class="reference internal" href="._pylight009.html#ref08" id="id8">[Ref08]</a> <a class="reference internal" href="._pylight009.html#ref09" id="id9">[Ref09]</a> <a class="reference internal" href="._pylight009.html#ref10" id="id10">[Ref10]</a> <a class="reference internal" href="._pylight009.html#ref11" id="id11">[Ref11]</a> <a class="reference internal" href="._pylight009.html#ref12" id="id12">[Ref12]</a> <a class="reference internal" href="._pylight009.html#ref13" id="id13">[Ref13]</a> <a class="reference internal" href="._pylight009.html#ref14" id="id14">[Ref14]</a> <a class="reference internal" href="._pylight009.html#ref15" id="id15">[Ref15]</a> <a class="reference internal" href="._pylight009.html#ref16" id="id16">[Ref16]</a> <a class="reference internal" href="._pylight009.html#ref17" id="id17">[Ref17]</a> - the latter two are the only texts we know that apply Python),
+it is assumed that the reader &#8220;can program&#8221; beforehand. The present book teaches the craft of structured programming along with the fundamental ideas of numerical methods. Furthermore, we have so far not found any other numerical methods book that has a strong emphasis on verifying implementations. In this book, unit testing and corresponding test functions are introduced early on. We also put much emphasis on coding algorithms as <em>functions</em>, as opposed to &#8220;flat programs&#8221;, which often dominate in the literature and among practitioners. Functions are reusable because they utilize the general formulation of a mathematical algorithm such that it becomes applicable to a large class of problems.</p>
+<p>There are also numerous books on computer programming, but to our knowledge only one <a class="reference internal" href="._pylight009.html#ref18" id="id18">[Ref18]</a> that aims to teach how to <em>think</em> about programming in the context of numerical methods and scientific applications. That book <a class="reference internal" href="._pylight009.html#ref18" id="id19">[Ref18]</a> has its primary focus on teaching Python and is a very comprehensive introduction to Python as a language and the thinking about programming as a computer scientist. Sometimes one needs a text that does not go so deep into the language-specific details,
 but instead targets the shortest path to reliable mathematical problem solving through programming. With this attitude in mind, a lot of topics were left out of the present book, simply because they were not <em>strictly</em> needed in the mathematical problem solving process.
-Examples of such topics are object-oriented programming and Python dictionaries (of which the latter omission is possibly subject to more debate). If you find the present book too shallow, <a class="reference internal" href="._pylight009.html#ref17" id="id19">[Ref17]</a> might be the right choice for you. That source should also work nicely as a more in-depth successor of the present text.</p>
+Examples of such topics are object-oriented programming and Python dictionaries (of which the latter omission is possibly subject to more debate). If you find the present book too shallow, <a class="reference internal" href="._pylight009.html#ref18" id="id20">[Ref18]</a> might be the right choice for you. That source should also work nicely as a more in-depth successor of the present text.</p>
 <p>Whenever the need for a <em>structured introduction to programming</em> arises in science and engineering courses, this book may be your option, either for self-study or for use in organized teaching. The thinking, habits, and practice covered in a couple of hundred pages will put readers in a firm position for utilizing and understanding the power of computers for problem solving in science and engineering.</p>
 </div>
 <div class="section" id="acknowledgments">
 <h2>Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permalink to this headline">¶</a></h2>
-<p>First of all we must thank all the classes at Telemark Engineering College that worked their way through early versions of this text and reported various kinds of problems.
-Special acknowledgement goes to Edirisinghe V. P. J. Manjula for his careful reading of the manuscript and for his constructive suggestions for improvement.
-The careful proof reading by Yapi Donatien Achou is also highly appreciated.
-Some colleagues???????????????????????
-Svein Linge is particularly thankful to Prof. Marius Lysaker
-for their fruitful collaboration on introducing programming as an integral part
-of mathematics and physics bachelor courses at Telemark Engineering College.</p>
-<p>The text was written in the <a class="reference external" href="https://github.com/hplgit/doconce">DocOnce</a> <a class="reference internal" href="._pylight009.html#ref18" id="id20">[Ref18]</a> markup language,
+<p>First of all, we want to thank all students who attended the courses FM1006 Modelling and simulation of dynamic systems, FM1115 Scientific Computing, FB1012 Mathematics I and FB2112 Physics at Telemark University College over the last couple of years. They worked their way through early versions of this text and gave us constructive and positive feedback that helped us correct errors and improve the book in so many ways. Special acknowledgement goes to Guandong Kou and Edirisinghe V. P. J. Manjula for their careful reading of the manuscript and  constructive suggestions for improvement. The careful proof reading by Yapi Donatien Achou is also highly appreciated. We thank all our good colleagues at Telemark University College, University of Oslo, and Simula Research Laboratory for their continued support and interest, enlightening discussions, and for providing such an inspiring environment for teaching and science. In particular, Svein Linge is thankful to Marius Lysaker for their fruitful collaboration on introducing programming as an integral part
+of mathematics and physics bachelor courses at Telemark University College.</p>
+<p id="index-0">The text was written in the <a class="reference external" href="https://github.com/hplgit/doconce">DocOnce</a> <a class="reference internal" href="._pylight009.html#ref19" id="id21">[Ref19]</a> markup language,
 which allowed us to work with a single text source for both the Python
 and the Matlab version of this book, and to produce various electronic
 versions of the book.</p>
-<span class="target" id="st-thefirstfewsteps"></span></div>
+</div>
 </div>
 
 
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+            <center>
+            <p class="logo"><a href="http://cbc.simula.no/" title="Go to Center for Biomedical Computing">
+              <img class="logo" src="_static/cbc_logo.png" alt="Logo"/>
+            </a></p>
+            </center>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Preface</a><ul>
@@ -168,19 +165,21 @@ versions of the book.</p>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="._pylight000.html"
-                        title="previous chapter">Programming for Computations - A Gentle Introduction to Numerical Simulations with Python</a></p>
+                        title="previous chapter">Programming for Computations (Python version)</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="._pylight002.html"
                         title="next chapter">The first few steps</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/._pylight001.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/._pylight001.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -194,20 +193,29 @@ versions of the book.</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2015, S. Linge and H. P. Langtangen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.4</a>
-      
-      |
-      <a href="_sources/._pylight001.txt"
-          rel="nofollow">Page source</a></li>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="._pylight002.html" title="The first few steps"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="._pylight000.html" title="Programming for Computations (Python version)"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Programming for Computations (Python version)</a> &raquo;</li> 
+      </ul>
     </div>
+<div class="wrapper">
+  <div class="footer">
+    <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <br />
+    <br />
+      &copy;2015, Svein Linge and Hans Petter Langtangen.
+  </div>
+</div>
 
-    
-
-    
   </body>
 </html>

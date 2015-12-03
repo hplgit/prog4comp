@@ -1,8 +1,9 @@
 
 .. Master file automatically created by doconce sphinx_dir
 
-Programming for Computations
-============================
+
+Programming for Computations (Python version)
+=============================================
 
 Contents:
 
@@ -21,9 +22,7 @@ Contents:
    ._pylight009
 
 
-Indices and tables
-==================
+Index
+=====
 
 * :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

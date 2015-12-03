@@ -1,9 +1,6 @@
-
-
-.. |nbsp| unicode:: 0xA0
-   :trim:
-
 .. !split
+
+.. _1st:TheFirstFewSteps:
 
 The first few steps
 %%%%%%%%%%%%%%%%%%%
@@ -98,7 +95,7 @@ differs between the languages. Let us use an analogy.
 Assume you are an international kind of person, having friends abroad
 in England, Russia and China. They want to try your favorite
 cake. What can you do? Well, you may write down the recipe in those
-three languages and send them over. Now, if you have be able to think
+three languages and send them over. Now, if you have been able to think
 correctly when writing down the recipe, and you have written the
 explanations according to the rules in each language, each of your
 friends will produce the same cake. Your recipe is the "computer
@@ -115,7 +112,7 @@ messages. However, the response you get depends on the error and the
 programming language. You may even get no response, but simply the
 wrong "cake". Note that the rules of a programming language have to be
 followed very strictly. This differs from languages like English etc.,
-where the meaning might be understood even if with spelling errors and
+where the meaning might be understood even with spelling errors and
 "slang" included.
 
 This book comes in two versions, one that is based on Python, and one
@@ -125,7 +122,7 @@ version you are reading now, is the Matlab version.
 
 Readers who want to expand their scientific programming skills beyond
 the introductory level of the present exposition, are encouraged to
-study the book *A Primer on Scientific Programming with Python* [Ref19]_.
+study the book *A Primer on Scientific Programming with Python* [Ref20]_.
 This comprehensive book is
 as suitable for beginners as for professional programmers, and teaches
 the art of programming through a huge collection of dedicated
@@ -136,20 +133,29 @@ natural extension, of the programming matters in the present book.
 
 .. index:: script (and scripting)
 
-.. index:: implement
-
 
 .. admonition:: Some computer science terms
 
    Note that, quite often, the terms *script* and *scripting* are used as
-   synonyms for program and programming, respectively, especially
-   when using Matlab and a few lines of code can do much.
+   synonyms for program and programming, respectively.
    
    The inventor of the Perl programming language, Larry Wall, tried
    to explain the difference between script and program in a humorous way
    (from `perl.com <http://www.perl.com/pub/2007/12/06/soto-11.html>`__):
    *Suppose you went back to `Ada Lovelace <http://en.wikipedia.org/wiki/Ada_Lovelace>`__ and asked her the difference between a script and a program. She'd probably look at you funny, then say something like: Well, a script is what you give the actors, but a program is what you give the audience. That Ada was one sharp lady...
    Since her time, we seem to have gotten a bit more confused about what we mean when we say scripting. It confuses even me, and I'm supposed to be one of the experts.*
+   
+   .. index:: algorithm
+   
+   .. index:: execute (a program)
+   
+   .. index:: implement (a program)
+   
+   .. index:: bug
+   
+   .. index:: debugging
+   
+   .. index:: simulation
    
    There are many other widely used computer science terms to pick up. Writing
    a program (or script or code) is often expressed as
@@ -172,8 +178,11 @@ natural extension, of the programming matters in the present book.
 A Matlab program with variables
 ===============================
 
-Our first example regards programming the mathematical model for
-throwing a ball up in the air. From Newton's 2nd
+.. index::
+   single: model; mathematical
+
+Our first example regards programming a mathematical model that predicts the position of a
+ball thrown up in the air. From Newton's 2nd
 law, and by assuming negligible air resistance, one can derive a
 mathematical model that predicts the vertical position :math:`y` of the ball
 at time :math:`t`. From the model one gets the formula
@@ -195,7 +204,7 @@ The program
 Let us next look at a Matlab program for evaluating this simple formula.
 Assume the program is contained as text in a file named
 ``ball.m``. The text looks as follows (file
-`ball.m <https://github.com/hplgit/prog4comp/src/m/ball.m>`__):
+`ball.m <https://github.com/hplgit/prog4comp/tree/master/src/m/ball.m>`__):
 
 .. code-block:: matlab
 
@@ -234,24 +243,24 @@ interpreter, reads the program text and translates this text into
 specific actions.
 
 
-.. admonition:: You must learn to play a computer
+.. admonition:: You must learn to play the role of a computer
 
    Although Matlab is responsible for reading and understanding your
    program, it is of fundamental importance that you fully understand the
    program yourself. You have to know the implication of every
    instruction in the program and be able to figure out the consequences
-   of the instructions.  In other words, you must be able to play a
+   of the instructions.  In other words, you must be able to play the role of a
    computer. The reason for this strong demand of knowledge
-   is that you very often commit errors in the program text, and to
-   track down these errors, you have to simulate what the computer
+   is that errors unavoidably, and quite often, will be committed in the
+   program text, and to track down these errors, you have to simulate what the computer
    does with the program. Next, we shall explain all the text in
    ``ball.m`` in full detail.
 
 
 
 
-Matlab will next start to read your file, line by line, from the
-top. The first line it reads is
+When you run your program in Matlab, it will interpret the text in your file line by line, from the
+top, reading each line from left to right. The first line it reads is
 
 .. code-block:: matlab
 
@@ -265,7 +274,7 @@ it takes the rest of the line as a comment. Matlab then simply skips
 reading the rest of the line and jumps to the next line. In the code,
 you see several such comments and probably realize that they make it
 easier for you to understand (or guess) what is meant with the
-code. In this simple cases, comments are probably not much needed, but
+code. In simple cases, comments are probably not much needed, but
 will soon be justified as the level of complexity steps up.
 
 The next line read by Matlab is
@@ -313,7 +322,7 @@ Also, since the final line has no semi-colon, Matlab understands that
 we also want the result printed to screen. When ``ball.m`` is run,
 the number :math:`1.2342` appears on the screen.
 
-Note that the "skipping" of semi-colon provides an easy way to print
+Note that leaving out a semi-colon provides an easy way to print
 things to screen in general. Simply writing, e.g., ``v0`` in the program
 above, i.e. without the semi-colon, will make the content of ``v0`` be
 printed to screen.
@@ -339,14 +348,22 @@ second.  A much stronger argument, however, is that mathematical
 models from real life are often complicated and comprehensive.  The
 pocket calculator cannot cope with such problems, even not the
 programmable ones, because their computational power and their
-programming tools are far too weak compared to a real computer.
+programming tools are far too weak compared to what a real computer can offer.
 
 The importance of using a text editor to write programs
 -------------------------------------------------------
 
 .. index:: text editor
 
-.. index:: Idle
+.. index:: Emacs
+
+.. index:: Vim
+
+.. index:: Gedit
+
+.. index:: Notepad++
+
+.. index:: TextWrangler
 
 When Matlab interprets some code in a file, it is concerned with
 every character in the file, exactly as it was typed in.
@@ -355,7 +372,7 @@ the code into a file with word processors like, e.g., Microsoft Word,
 since such a program will insert extra characters, invisible to us, with
 information on how to format the text (e.g., the font size and type).
 Such extra information is necessary for the text to be nicely
-formatted for the human eye. Matlab will be much annoyed by
+formatted for the human eye. Matlab, however, will be much annoyed by
 the extra characters in the file inserted by a word processor.
 Therefore, it is fundamental that you write your program in a
 *text editor* where what you type on the keyboard is *exactly* the
@@ -379,16 +396,14 @@ Write and run your first program
 .. index::
    single: program; execute
 
-.. index:: ipython
-
 Reading *only* does not teach you computer programming: you have to
 program yourself and practice heavily before you master mathematical
 problem solving via programming. Therefore, it is crucial at this stage that you
 write and run a Matlab program. We just went through the program ``ball.m``
 above, so let us next write and run that code.
 
-But first a warning: there are many things at that must play
-together correctly for ``ball.m`` to run correctly on
+But first a warning: there are many things that must come
+together in the right way for ``ball.m`` to run correctly on
 your computer. There might
 be problems with your Matlab installation, with your writing of the
 program (it is very easy to introduce errors!),
@@ -431,8 +446,8 @@ Start Matlab and try out the following.
 1. Write the Matlab program ``ball.m``. Do this by choosing
    **File/New/Script** from the menu in the Command window. In the editor
    window that pops up, simply write the code lines there as they were
-   given above for ``ball.m``. Now save this with the name "ball.m" in the
-   right directory, i.e. ``MyCode``, via **Save As** from the **File** menu.
+   given above for ``ball.m``. Now save this with the name ``ball.m`` in the
+   right directory, i.e. ``myCode``, via **Save As** from the **File** menu.
    The program is now ready for use!
 
 2. Run the program. Do this in the Command window by writing the name of
@@ -449,17 +464,18 @@ Gedit on Linux computers; TextWrangler on Mac, or
 Notepad++ on Windows. Popular, but more advanced text editors,
 primarily Emacs and Vim, are also available for these platforms.
 
-1. Write the Matlab program ``ball.m``. Launch a text editor and
+1. Write the Matlab program ``ball.m`` by launching a text editor and
    write each line exactly as they are listed in the ``ball.m`` program.
    Save the file as ``ball.m`` in the ``mycode`` directory.
 
 2. Run the program. Type ``octave``. The Octave program is started and
    gives you a prompt ``octave:1>``, which indicates that you can
-   give Octave commands. Type ``run ball.m``.
+   give Octave commands. Type ``run ball.m`` and press enter. Octave will
+   now run the program.
 
 With a little luck, you should now get the number :math:`1.2342` out in the
 command window. If so, congratulations! You have just executed your
-first self-written computer program in Matlab, and you are ready to go
+first self-written computer program in Matlab (or Octave), and you are ready to go
 on studying this book!
 
 
@@ -494,7 +510,7 @@ Let us make a Matlab program for doing these calculations. We introduce
 variables ``x`` and ``y`` for the position data :math:`x` and :math:`y`, and the
 descriptive name ``angle`` for the angle :math:`\theta`.
 The program is stored in a file
-`ball_angle.m <https://github.com/hplgit/prog4comp/src/m/ball_angle.m>`__:
+`ball_angle.m <https://github.com/hplgit/prog4comp/tree/master/src/m/ball_angle.m>`__:
 
 .. code-block:: matlab
 
@@ -545,21 +561,6 @@ print the result to the screen. And yes, the famous
 ``pi`` (:math:`\pi`) is a variable that is known
 to Matlab.
 
-.. index:: library
-
-.. index::
-   single: library; function
-
-.. index:: from
-
-.. index:: import
-
-.. index:: math
-
-.. index:: module
-
-.. index:: package
-
 .. _1st:ex3:
 
 A Matlab program with vectorization and plotting
@@ -571,6 +572,8 @@ interested in :math:`y` at every milli-second for the first second of the
 flight. This requires repeating the calculation of :math:`y=v_0t-0.5gt^2`
 one thousand times.
 
+.. index:: plot
+
 We will also draw a graph of :math:`y` versus :math:`t` for :math:`t\in [0,1]`. Drawing
 such graphs on a computer essentially means drawing straight lines
 between points on the curve, so we need many points to make the visual
@@ -579,7 +582,7 @@ compute here, the curve looks indeed very smooth.
 
 In Matlab, the calculations and the visualization of the curve
 may be done with the program
-`ball_plot.m <https://github.com/hplgit/prog4comp/src/m/ball_plot.m>`__,
+`ball_plot.m <https://github.com/hplgit/prog4comp/tree/master/src/m/ball_plot.m>`__,
 reading
 
 .. code-block:: matlab
@@ -600,7 +603,7 @@ As you notice, the code lines from the ``ball.m`` program
 in the chapter :ref:`1st:ex1` have not changed much, but
 the height is now computed and plotted for a thousand points in time!
 
-Let us look at the differences the new program and our previous program.
+Let us take a look at the differences between the new program and our previous program.
 
 .. index:: linspace
 
@@ -615,7 +618,7 @@ arguments.  The ``linspace`` function generates ``n`` equally spaced
 coordinates, starting with ``start`` and ending with ``stop``. The
 expression ``linspace(0, 1, 1001)`` creates 1001 coordinates between 0
 and 1 (including both 0 and 1). The mathematically inclined reader
-will notice that 1001 coordinates corresponds to 1000 equal-sized
+will notice that 1001 coordinates correspond to 1000 equal-sized
 intervals in :math:`[0,1]` and that the coordinates are then given by :math:`t_i =
 i/1000` (:math:`i = 0, 1, ..., 1000`).
 
@@ -624,14 +627,17 @@ i/1000` (:math:`i = 0, 1, ..., 1000`).
 .. figure:: fig1_9.png
    :width: 400
 
-   *Plot generated by the script ``ball_plot.m`` showing the vertical position of the ball at a thousand points in time*
+   Plot generated by the script ``ball_plot.m`` showing the vertical position of the ball at a thousand points in time
 
-The value returned from ``linspace`` and stored in ``t`` is an *array*,
+The value returned from ``linspace`` (being stored in ``t``) is an *array*,
 i.e., a collection of numbers. When we start computing with this
 collection of numbers in the arithmetic expression
-``v0*t - 0.5*g*t^2``
-the expression is calculated for
+``v0*t - 0.5*g*t.^2``, the expression is calculated for
 every number in ``t`` (i.e., every :math:`t_i` for :math:`i = 0, 1,..., 1000`), yielding a similar collection of 1001 numbers in the result ``y``. That is, ``y`` is also an array.
+
+Note the dot that has been inserted in ``0.5*g*t.^2``, i.e. just before the operator ``^``. This is
+required to make Matlab do ``^`` to each number in ``t``. The same thing applies to other operators, as
+shown in several examples later.
 
 This technique of computing all numbers "in one chunk" is referred to
 as *vectorization*. When it can be used, it is very handy, since both
@@ -644,13 +650,15 @@ a corresponding ``for`` or ``while`` loop (the chapter :ref:`2nd:BasicConstructi
 
 .. index:: plot
 
+.. index:: array
+
 The plotting commands are simple:
 
 1. ``plot(t, y)`` means plotting all the ``y`` coordinates versus all the ``t`` coordinates
 
-2. ``xlabel('t (s)')`` places a text ``t (s)`` on the :math:`x` axis
+2. ``xlabel('t (s)')`` places the text ``t (s)`` on the :math:`x` axis
 
-3. ``xlabel('y (m)')`` places a text ``y (m)`` on the :math:`y` axis
+3. ``ylabel('y (m)')`` places the text ``y (m)`` on the :math:`y` axis
 
 At this stage, you are strongly encouraged to do :ref:`1st:exer:volumes3cubes`. It builds on the example above, but is
 much simpler both with respect to the mathematics and the amount of
@@ -664,7 +672,7 @@ programming to solve mathematical problems. Before we can go on with
 other and more realistic examples, we need to briefly treat some
 topics that will be frequently required in later chapters. These
 topics include computer science concepts like variables, objects,
-error messages, and warnings; more numerical concepts like round-off
+error messages, and warnings; more numerical concepts like rounding
 errors, arithmetic operator precedence, and integer division; in
 addition to more Matlab functionality when working with arrays,
 plotting, and printing.
@@ -674,27 +682,26 @@ Using Matlab interactively
 
 .. index:: interactive use (of Matlab)
 
-.. index:: import
-
 .. index::
    single: keyboard; arrow up/down
 
-You may also use Matlab interactively (i.e. without writing a program). For example, you may do calculations like the following directly at the command prompt ``>>`` (a *prompt* means a "ready sign", i.e. the programs allows you to enter
-a command, and different programs often have different looking prompts) in the Command window.
+.. index:: prompt
+
+You may also use Matlab interactively (i.e. without writing a program). For example, you may do calculations like the following directly at the command prompt ``>>`` in the Command window (a *prompt* means a "ready sign", i.e. the program allows you to enter a command, and different programs often have different looking prompts).
 
 .. code-block:: matlab
 
         >> 2+2
-        >> 4
+        ans = 4
         
         >> 2*3
-        >> 6
+        ans = 6
         
         >> 10/2
-        >> 5
+        ans = 5
         
         >> 2^3
-        >> 8
+        ans = 8
 
 You may also define variables and use formulas interactively as
 
@@ -709,10 +716,10 @@ You may also define variables and use formulas interactively as
         
            1.2342000000000
 
-Sometimes you would like to repeat a command you have given earlier, or perhaps give a command that is almost the same as an earlier one. Then you can use the "up-arrow" key. Pressing this one time gives you the previous command, pressing two times gives you the command before that, and so on. If you go too far, you may go back with the "down-arrow" key. When you have the command at the prompt, you may edit it before pressing enter (which lets Matlab read it).
+Sometimes you would like to repeat a command you have given earlier, or perhaps give a command that is almost the same as an earlier one. Then you can use the "up-arrow" key. Pressing this one time gives you the previous command, pressing two times gives you the command before that, and so on. If you go too far, you may go back with the "down-arrow" key. When you have the command at the prompt, it may be edited before pressing enter (which lets Matlab read it).
 
-Arithmetics, parentheses and round-off errors
----------------------------------------------
+Arithmetics, parentheses and rounding errors
+--------------------------------------------
 
 .. index::
    single: operator; Arithmetic
@@ -735,6 +742,8 @@ multiplied by 1 to give 25 again. The second term is ``10*3``, i.e.,
 30. So the first two terms add up to 55. The last term gives 0.25, so
 the final result is 54.75 which becomes the value of ``x``.
 
+.. index:: rounding error
+
 Note that parentheses are often very important to group parts of
 expressions together in the intended way. Let us say ``x = 4`` and that
 you want to divide 1.0 by ``x + 1``. We know the answer is 0.2, but the
@@ -745,16 +754,10 @@ following example.
 
         >> x = 4;
         >> 1.0/x+1
-        
-        ans =
-        
-           1.2500000000000
+        ans = 1.25000000000000000
         
         >> 1.0/(x+1)
-        
-        ans =
-        
-           0.2000000000000
+        ans = 0.20000000000000001
 
 In the first try, we see that 1.0 is divided by ``x`` (i.e., 4), giving
 0.25, which is then added to 1. Matlab did not understand that our
@@ -762,11 +765,12 @@ complete denominator was ``x+1``. In our second try, we used parentheses
 to "group" the denominator, and we got what we wanted. That is,
 *almost* what we wanted! Since most numbers can be represented only
 approximately on the computer, this gives rise to what is called
-*round-off* errors. We should have got 0.2 as our answer, but the
+*rounding* errors. We should have got 0.2 as our answer, but the
 inexact number representation gave a small error. Usually, such errors
-are so small compared to the other numbers of the calculation that we
+are so small compared to the other numbers of the calculation, that we
 do not need to bother with them. Still, keep it in mind, since you
-will encounter this issue from time to time.
+will encounter this issue from time to time. More details regarding number
+representations on a computer is given in the section :ref:`sec:integrals:finite_prec`.
 
 Variables
 ---------
@@ -901,7 +905,7 @@ possible, while on the second line, ``42`` is formatted in a
 text field of width equal to five characters.
 
 The following program,
-`formatted_print.m <https://github.com/hplgit/prog4comp/src/m/formatted_print.m>`__,
+`formatted_print.m <https://github.com/hplgit/prog4comp/tree/master/src/m/formatted_print.m>`__,
 applies the printf syntax to control
 the formatting displayed above:
 
@@ -917,7 +921,7 @@ The output of ``fprintf`` is a string,
 specified in terms of text and a set of variables to be inserted in the text.
 Variables are inserted in the text at places indicated by ``%``.
 After ``%`` comes a specification of the formatting, e.g, ``%f``
-(real number with six decimals), ``%d`` (integer), or ``%s`` (string).
+(real number), ``%d`` (integer), or ``%s`` (string).
 The format ``%9.3f`` means a real number in decimal notation, with
 3 decimals, written in a field of width equal to 9 characters.
 The variant ``%.3f`` means that the number is written as compactly as
@@ -928,52 +932,54 @@ is to be written in a field of width equal to 5 characters.
 Real numbers can also be specified with ``%g``, which is used
 to automatically choose between decimal or scientific
 notation, from what gives the most compact output
-(typically scientific notation for very small and very large numbers
+(typically, scientific notation is appropriate for very small and very large numbers
 and decimal notation for the intermediate range).
 
-A typical example when printf formatting is required arises when
-printing nicely aligned column of numbers. Suppose we want to
+A typical example of when printf formatting is required, arises when
+nicely aligned columns of numbers are to be printed. Suppose we want to
 print a column of :math:`t` values together with associated function
 values :math:`g(t)=t\sin(t)` in a second column. The simplest approach
 would be
 
 .. code-block:: matlab
 
-        n = 6;
         t0 = 2;
         dt = 0.55;
         % Unformatted print
-        for i = 1:n
-          t = t0 + i*dt;
-          g = t*sin(t);
-          fprintf('%f %f\n', t, g);
-        end
+        t = t0 + 0*dt; g = t*sin(t);
+        fprintf('%g %g\n', t, g);
+        
+        t = t0 + 1*dt; g = t*sin(t);
+        fprintf('%g %g\n', t, g);
+        
+        t = t0 + 2*dt; g = t*sin(t);
+        fprintf('%g %g\n', t, g);
 
 with output
 
 .. code-block:: text
 
-        2.550000 1.422093
-        3.100000 0.128900
-        3.650000 -1.776771
-        4.200000 -3.660618
-        4.750000 -4.746641
-        5.300000 -4.411017
+        2 1.81859
+        2.55 1.42209
+        3.1 0.1289
 
-The numbers are not nicely aligned. Using the printf syntax
-``'%6.2f  %8.3f'`` for ``t`` and ``g``, we can control how wide each
-column is and also the number of decimals such that the numbers
-in a column are written with the same precision. The output
+(Repeating the same set of statements multiple times, as done above,
+is not good programming practice - one should use a for loop, as
+explained later in the section :ref:`sec:for:loops`.)
+Observe that the numbers in the columns
+are not nicely aligned. Using the printf syntax
+``'%6.2f  %8.3f' % (t, g)`` for ``t`` and ``g``, we can control the width of each
+column and also the number of decimals, such that the numbers
+in a column are aligned under each other and
+written with the same precision. The output
 then becomes
 
 .. code-block:: text
 
+        Formatting via printf syntax
           2.00     1.819
           2.55     1.422
           3.10     0.129
-          3.65    -1.777
-          4.20    -3.661
-          4.75    -4.747
 
 We shall frequently use the printf syntax throughout the book so there
 will be plenty of further examples.
@@ -1056,6 +1062,8 @@ numbers occurred automatically "behind the scene".
 .. index::
    single: array; slice of
 
+.. index:: copy
+
 By use of a colon, you may pick out a *slice* of an array. For
 example, to create a new array from the two elements ``h(1)`` and
 ``h(2)``, we could write ``slice_h = h(1:2)``. For the generated ``slice_h``
@@ -1074,7 +1082,7 @@ the same plot. Assume we have ``h`` as above, and also an array ``H`` with
 the heights :math:`0.50` m, :math:`0.70` m, :math:`1.90` m,
 and :math:`1.75` m from a family next door. This may be done with the
 program
-`plot_heights.m <https://github.com/hplgit/prog4comp/src/m/plot_heights.m>`__
+`plot_heights.m <https://github.com/hplgit/prog4comp/tree/master/src/m/plot_heights.m>`__
 given as
 
 .. code-block:: matlab
@@ -1156,13 +1164,13 @@ data points. For example, writing
 will mark only the data points with the star symbol.
 Other symbols like circles etc. may be used as well.
 
-.. index:: title
+.. index:: title (plot)
 
-.. index:: legend
+.. index:: legend (plot)
 
-.. index:: axis
+.. index:: axis (plot)
 
-.. index:: hardcopy
+.. index:: hardcopy (plot)
 
 .. index::
    single: format; png
@@ -1200,12 +1208,7 @@ Saving the figure to file is achieved by the command
         print('some_plot', '-deps');   # Encanspulated PostScript format
 
 .. index::
-   single: matrix; mat
-
-.. index::
    single: matrix; vector product
-
-.. index:: transpose
 
 .. index:: linear algebra
 
@@ -1215,13 +1218,12 @@ Saving the figure to file is achieved by the command
 
 For the reader who is into linear algebra, it may be useful to know
 that standard matrix/vector operations are straightforward with
-arrays, e.g., matrix-vector multiplication. What is needed though, is
-to create the right variable types (after having imported an
-appropriate module). For example, assume you would like to calculate
+arrays, e.g., matrix-vector multiplication.
+For example, assume you would like to calculate
 the vector :math:`\bf{y}` (note that boldface is used for vectors and
 matrices) as :math:`\bf{y} = \bf{Ax}`, where :math:`\bf{A}` is a :math:`2 \times 2`
 matrix and :math:`\bf{x}` is a vector. We may do this as illustrated by
-the program `matrix_vector_product.m <https://github.com/hplgit/prog4comp/src/m/matrix_vector_product.m>`__ reading
+the program `matrix_vector_product.m <https://github.com/hplgit/prog4comp/tree/master/src/m/matrix_vector_product.m>`__ reading
 
 .. code-block:: matlab
 
@@ -1237,7 +1239,7 @@ the program `matrix_vector_product.m <https://github.com/hplgit/prog4comp/src/m/
 Here, ``x`` is first established as a column array with the ``zeros``
 function. Then the test values are plugged in (:math:`3` and :math:`2`). The
 matrix ``A`` is first created as a two dimensional array with ``A =
-zeros((2,2))`` before filling in values. Finally, the multiplication is
+zeros(2, 2)`` before filling in values. Finally, the multiplication is
 performed as ``y = A*x``. Running the program gives the following output
 on the screen:
 
@@ -1251,7 +1253,8 @@ on the screen:
 Error messages and warnings
 ---------------------------
 
-.. index:: error message
+.. index::
+   single: error; message
 
 All programmers experience error messages, and usually to a large
 extent during the early learning process. Sometimes error messages
@@ -1260,7 +1263,7 @@ to get used to them. One idea is to start with a program that
 initially is working, and then deliberately introduce errors in
 it, one by one. (But remember to take a copy of the original working
 code!)
-For each error you try to run the program to
+For each error, you try to run the program to
 see what Matlab's response is. Then you know what the problem is
 and understand what the error message is about. This will greatly
 help you when you get a similar error message or warning later.
@@ -1294,20 +1297,20 @@ removed and repeat the process with the new code. Using simple numbers
 and doing this in parallel with hand calculations on a piece of paper
 (for comparison) is often a very good idea.
 
-.. index:: try-exception
+.. index:: try-catch
 
 .. index:: exception handling
 
 .. index::
    single: program; crash
 
-Python also offers means to detect and handle errors by the program
+Matlab also offers means to detect and handle errors by the program
 itself! The programmer must then foresee (when writing the code) that
 there is a potential for error at some particular point. If, for
 example, some user of the program is asked (by the running program) to
 provide a number, and intends to give the number 5, but instead writes
 the word *five*, the program could run into trouble. A
-``*try-exception*.m`` construction may be used by
+``try-catch`` construction may be used by
 the programmer to check for such errors and act appropriately (see
 the chapter :ref:`4th:NonlinAlgEq:Newt` for an example), avoiding a program
 crash. This procedure of trying an action and then recovering from
@@ -1317,8 +1320,14 @@ is the modern way of dealing with errors in a program.
 .. index::
    single: program; testing
 
+.. index:: testing
+
 .. index::
    single: program; verification
+
+.. index:: verification
+
+.. index:: validation
 
 When a program finally runs without error messages, it might be
 tempting to think that *Ah..., I am finished!*. But no! Then comes
@@ -1357,12 +1366,6 @@ Input data
    single: program; output
 
 .. index:: input
-
-.. index:: raw input
-
-.. index:: list
-
-.. index:: tuple
 
 Computer programs need a set of input data and the purpose is to
 use these data to compute output data, i.e., results.
@@ -1440,7 +1443,7 @@ Each symbol is represented
 by a standard variable, but the name of the symbol must be
 declared with ``syms name`` for a single symbol, or ``syms name1 name2 ...`` for multiple symbols.
 The following script
-`example_symbolic.m <https://github.com/hplgit/prog4comp/src/m/example_symbolic.m>`__
+`example_symbolic.m <https://github.com/hplgit/prog4comp/tree/master/src/m/example_symbolic.m>`__
 is a quick demonstration
 of some of the basic symbolic operations that are supported in Matlab.
 
@@ -1471,7 +1474,7 @@ Other symbolic calculations like Taylor series expansion, linear algebra (with m
 
 .. index:: Mathematica
 
-Symbolic computations are also readily accessible through the free
+Symbolic computations are also readily accessible through the (partly) free
 online tool `WolframAlpha <http://www.wolframalpha.com>`__, which
 applies the very advanced `Mathematica <http://en.wikipedia.org/wiki/Mathematica>`__ package as symbolic engine.
 The disadvantage with WolframAlpha compared to the
@@ -1480,7 +1483,7 @@ automatically be imported into your code and used for further
 analysis. On the other hand, WolframAlpha has the advantage that it
 displays many additional mathematical results related to the given
 problem. For example, if we type ``2x + 3x - y`` in WolframAlpha, it
-not only reduced the expression to ``5x - y``, but it also makes plots
+not only simplifies the expression to ``5x - y``, but it also makes plots
 of the function :math:`f(x,y)=5x-y`, solves the equation :math:`5x - y = 0`, and
 calculates the integral :math:`\int\int(5x+y)dxdy`. The commercial Pro
 version can also show a step-by-step of the analytical computations in
@@ -1511,12 +1514,22 @@ Concluding remarks
 ------------------
 
 .. index::
-   single: Python; documentation
-
-.. index:: garbage collection
+   single: variable; delete
 
 .. index::
-   single: variable; delete
+   single: Matlab; documentation
+
+.. index::
+   single: Matlab; licence
+
+.. index:: long lines (splitting of)
+
+.. index:: fast code
+
+.. index::
+   single: Matlab; indent
+
+.. index:: commenting code
 
 
 .. admonition:: Programming demands you to be accurate
@@ -1607,10 +1620,10 @@ The present introductory book just provides a tiny bit of all the
 functionality that Matlab has to offer. An important source of
 information is the
 the homepage "of Matlab":  `<htpp://www.mathworks.com>`_.
-In addition, there are lots of excellent books.
+In addition, there are lots of excellent books (for references, see Preface).
 
-Exercises  (1)
-==============
+Exercises          (1)
+======================
 
 .. --- begin exercise ---
 
@@ -1875,8 +1888,7 @@ of :math:`L`, equally spaced on the interval :math:`[1,3]`.
 .. code-block:: ipy
 
         > linspace(1, 3, 3)
-        ans =
-         1 2 3
+        ans = 1 2 3
 
 .. --- end solution of exercise ---
 
@@ -1893,7 +1905,7 @@ output from the code.
 .. --- end solution of exercise ---
 
 **c)**
-In a program, write out the result ``V`` of ``V = L^3``
+In a program, write out the result ``V`` of ``V = L.^3``
 when ``L`` is an array with three elements as computed by ``linspace`` in a).
 Compare the resulting volumes with your hand calculations.
 
@@ -2059,11 +2071,9 @@ Invoke Matlab interactively and perform the following steps.
         > x = 2;
         > x = x + 3;
         > x + 1*2
-        ans =
-         7
+        ans = 7
         > (x + 1)*2
-        ans =
-         12
+        ans = 12
 
 The variable ``x`` is an integer throughout the interactive session. The function
 ``isinteger`` may be used to confirm that, see Matlab documentation.
@@ -2163,6 +2173,4 @@ change when you run the program again)
 Filename: ``drawing_random_numbers.m``.
 
 .. --- end exercise ---
-
-.. _2nd:BasicConstructins:
 

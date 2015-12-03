@@ -7,9 +7,9 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Programming for Computations</title>
+    <title>Programming for Computations (MATLAB/Octave version)</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -25,6 +25,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
 
         <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
         <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
@@ -42,13 +43,9 @@
         </style>
 
     
-    <link rel="top" title="Programming for Computations" href="#" />
-    <link rel="next" title="Programming for Computations - A Gentle Introduction to Numerical Simulations with MATLAB/Octave" href="._pylight000.html" />
-
-   
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
-
+    <link rel="top" title="Programming for Computations (MATLAB/Octave version)" href="#" />
+    <link rel="next" title="Programming for Computations (MATLAB/Octave version)" href="._pylight000.html" />
+ 
   
        <style type="text/css">
          div.admonition {
@@ -58,31 +55,31 @@
        </style>
       </head>
     
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="._pylight000.html" title="Programming for Computations - A Gentle Introduction to Numerical Simulations with MATLAB/Octave"
+          <a href="._pylight000.html" title="Programming for Computations (MATLAB/Octave version)"
              accesskey="N">next</a> |</li>
-        <li><a href="#">Programming for Computations</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="#">Programming for Computations (MATLAB/Octave version)</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
-  <div class="section" id="programming-for-computations">
-<h1>Programming for Computations<a class="headerlink" href="#programming-for-computations" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="programming-for-computations-matlab-octave-version">
+<h1>Programming for Computations (MATLAB/Octave version)<a class="headerlink" href="#programming-for-computations-matlab-octave-version" title="Permalink to this headline">¶</a></h1>
 <p>Contents:</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="._pylight000.html">Programming for Computations - A Gentle Introduction to Numerical Simulations with MATLAB/Octave</a></li>
+<li class="toctree-l1"><a class="reference internal" href="._pylight000.html">Programming for Computations (MATLAB/Octave version)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="._pylight001.html">Preface</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="._pylight001.html#why-learn-programming">Why learn programming?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._pylight001.html#target-audience-and-background-knowledge">Target audience and background knowledge</a></li>
@@ -106,7 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="._pylight002.html#a-matlab-program-with-vectorization-and-plotting">A Matlab program with vectorization and plotting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._pylight002.html#more-basic-concepts">More basic concepts</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="._pylight002.html#using-matlab-interactively">Using Matlab interactively</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._pylight002.html#arithmetics-parentheses-and-round-off-errors">Arithmetics, parentheses and round-off errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._pylight002.html#arithmetics-parentheses-and-rounding-errors">Arithmetics, parentheses and rounding errors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight002.html#variables">Variables</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight002.html#formatting-text-and-numbers">Formatting text and numbers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight002.html#arrays">Arrays</a></li>
@@ -117,7 +114,7 @@
 <li class="toctree-l3"><a class="reference internal" href="._pylight002.html#concluding-remarks">Concluding remarks</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="._pylight002.html#exercises-1">Exercises  (1)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._pylight002.html#exercises-1">Exercises</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="._pylight002.html#exercise-1-error-messages">Exercise 1: Error messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight002.html#exercise-2-volume-of-a-cube">Exercise 2: Volume of a cube</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight002.html#exercise-3-area-and-circumference-of-a-circle">Exercise 3: Area and circumference of a circle</a></li>
@@ -132,12 +129,12 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="._pylight003.html">Basic constructions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="._pylight003.html#if-tests-colon-and-indentation">If tests, colon and indentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._pylight003.html#if-tests">If tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._pylight003.html#functions">Functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._pylight003.html#for-loops">For loops</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._pylight003.html#while-loops">While loops</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._pylight003.html#reading-from-and-writing-to-files">Reading from and writing to files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._pylight003.html#exercises-2">Exercises  (2)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._pylight003.html#exercises-2">Exercises</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="._pylight003.html#exercise-10-introducing-errors">Exercise 10: Introducing errors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight003.html#exercise-11-compare-integers-a-and-b">Exercise 11: Compare integers a and b</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight003.html#exercise-12-functions-for-circumference-and-area-of-a-circle">Exercise 12: Functions for circumference and area of a circle</a></li>
@@ -179,14 +176,14 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="._pylight004.html#testing">Testing</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="._pylight004.html#hand-computed-results">Hand-computed results</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._pylight004.html#solving-a-problem-without-numerical-errors-1">Solving a problem without numerical errors  (1)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._pylight004.html#demonstrating-correct-convergence-rates-1">Demonstrating correct convergence rates  (1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._pylight004.html#solving-a-problem-without-numerical-errors-1">Solving a problem without numerical errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._pylight004.html#demonstrating-correct-convergence-rates-1">Demonstrating correct convergence rates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight004.html#hand-computed-numerical-results">Hand-computed numerical results</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._pylight004.html#solving-a-problem-without-numerical-errors-2">Solving a problem without numerical errors  (2)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._pylight004.html#demonstrating-correct-convergence-rates-2">Demonstrating correct convergence rates  (2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._pylight004.html#solving-a-problem-without-numerical-errors-2">Solving a problem without numerical errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._pylight004.html#demonstrating-correct-convergence-rates-2">Demonstrating correct convergence rates</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="._pylight004.html#vectorization-1">Vectorization  (1)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._pylight004.html#vectorization-1">Vectorization</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="._pylight004.html#vectorizing-the-midpoint-rule">Vectorizing the midpoint rule</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight004.html#vectorizing-the-trapezoidal-rule">Vectorizing the trapezoidal rule</a></li>
 </ul>
@@ -199,17 +196,17 @@
 <li class="toctree-l3"><a class="reference internal" href="._pylight004.html#reusing-code-for-one-dimensional-integrals">Reusing code for one-dimensional integrals</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight004.html#verification-via-test-functions">Verification via test functions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight004.html#theory">Theory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._pylight004.html#implementation-3">Implementation  (3)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._pylight004.html#implementation-3">Implementation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight004.html#the-monte-carlo-integration-algorithm">The Monte Carlo integration algorithm</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._pylight004.html#implementation-4">Implementation  (4)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._pylight004.html#implementation-4">Implementation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight004.html#verification">Verification</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight004.html#test-function-for-function-with-random-numbers">Test function for function with random numbers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight004.html#integral-over-a-circle">Integral over a circle</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="._pylight004.html#exercises-3">Exercises  (3)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="._pylight004.html#remarks-4">Remarks  (4)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._pylight004.html#remarks-5">Remarks  (5)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="._pylight004.html#exercises-3">Exercises</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._pylight004.html#remarks-4">Remarks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._pylight004.html#remarks-5">Remarks</a></li>
 </ul>
 </li>
 </ul>
@@ -217,7 +214,7 @@
 <li class="toctree-l1"><a class="reference internal" href="._pylight005.html">Solving ordinary differential equations</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="._pylight005.html#population-growth">Population growth</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="._pylight005.html#derivation-of-the-model">Derivation of the model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._pylight005.html#numerical-solution-1">Numerical solution  (1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._pylight005.html#numerical-solution-1">Numerical solution</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight005.html#programming-the-forward-euler-scheme-the-special-case">Programming the Forward Euler scheme; the special case</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight005.html#understanding-the-forward-euler-method">Understanding the Forward Euler method</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight005.html#programming-the-forward-euler-scheme-the-general-case">Programming the Forward Euler scheme; the general case</a></li>
@@ -228,7 +225,7 @@
 <li class="toctree-l2"><a class="reference internal" href="._pylight005.html#spreading-of-diseases">Spreading of diseases</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="._pylight005.html#spreading-of-a-flu">Spreading of a flu</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight005.html#a-forward-euler-method-for-the-differential-equation-system">A Forward Euler method for the differential equation system</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._pylight005.html#programming-the-numerical-method-the-special-case-1">Programming the numerical method; the special case  (1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._pylight005.html#programming-the-numerical-method-the-special-case-1">Programming the numerical method; the special case</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight005.html#outbreak-or-not">Outbreak or not</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight005.html#abstract-problem-and-notation">Abstract problem and notation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight005.html#programming-the-numerical-method-the-general-case">Programming the numerical method; the general case</a></li>
@@ -239,11 +236,11 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="._pylight005.html#oscillating-one-dimensional-systems">Oscillating one-dimensional systems</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="._pylight005.html#derivation-of-a-simple-model">Derivation of a simple model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._pylight005.html#numerical-solution-2">Numerical solution  (2)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._pylight005.html#programming-the-numerical-method-the-special-case-2">Programming the numerical method; the special case  (2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._pylight005.html#numerical-solution-2">Numerical solution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._pylight005.html#programming-the-numerical-method-the-special-case-2">Programming the numerical method; the special case</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight005.html#a-magic-fix-of-the-numerical-method">A magic fix of the numerical method</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight005.html#the-2nd-order-runge-kutta-method-or-heun-s-method">The 2nd-order Runge-Kutta method (or Heun&#8217;s method)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._pylight005.html#odespy-software-for-solving-odes">Odespy: software for solving ODEs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._pylight005.html#software-for-solving-odes">Software for solving ODEs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight005.html#the-4th-order-runge-kutta-method">The 4th-order Runge-Kutta method</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight005.html#more-effects-damping-nonlinearity-and-external-forces">More effects: damping, nonlinearity, and external forces</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight005.html#illustration-of-linear-damping">Illustration of linear damping</a></li>
@@ -253,7 +250,7 @@
 <li class="toctree-l3"><a class="reference internal" href="._pylight005.html#a-finite-difference-method-linear-damping">A finite difference method; linear damping</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="._pylight005.html#exercises-4">Exercises  (4)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._pylight005.html#exercises-4">Exercises</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="._pylight005.html#exercise-43-geometric-construction-of-the-forward-euler-method">Exercise 43: Geometric construction of the Forward Euler method</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight005.html#exercise-44-make-test-functions-for-the-forward-euler-method">Exercise 44: Make test functions for the Forward Euler method</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight005.html#exercise-45-implement-and-evaluate-heun-s-method">Exercise 45: Implement and evaluate Heun&#8217;s method</a></li>
@@ -283,12 +280,12 @@
 <li class="toctree-l3"><a class="reference internal" href="._pylight006.html#construction-of-a-test-problem-with-known-discrete-solution">Construction of a test problem with known discrete solution</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight006.html#implementation-forward-euler-method">Implementation: Forward Euler method</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight006.html#application-heat-conduction-in-a-rod">Application: heat conduction in a rod</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._pylight006.html#vectorization-2">Vectorization  (2)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._pylight006.html#vectorization-2">Vectorization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight006.html#using-odespy-to-solve-the-system-of-odes">Using Odespy to solve the system of ODEs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight006.html#implicit-methods">Implicit methods</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="._pylight006.html#exercises-5">Exercises  (5)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._pylight006.html#exercises-5">Exercises</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="._pylight006.html#exercise-62-simulate-a-diffusion-equation-by-hand">Exercise 62: Simulate a diffusion equation by hand</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight006.html#exercise-63-compute-temperature-variations-in-the-ground">Exercise 63: Compute temperature variations in the ground</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight006.html#exercise-64-compare-implicit-methods">Exercise 64: Compare implicit methods</a></li>
@@ -310,7 +307,7 @@
 <li class="toctree-l3"><a class="reference internal" href="._pylight007.html#model-problem-for-algebraic-equations">Model problem for algebraic equations</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="._pylight007.html#newton-s-method">Newton&#8217;s method</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._pylight007.html#newton-s-method-1">Newton&#8217;s method</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="._pylight007.html#deriving-and-implementing-newton-s-method">Deriving and implementing Newton&#8217;s method</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight007.html#making-a-more-efficient-and-robust-implementation">Making a more efficient and robust implementation</a></li>
 </ul>
@@ -318,10 +315,17 @@
 <li class="toctree-l2"><a class="reference internal" href="._pylight007.html#the-secant-method">The secant method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._pylight007.html#the-bisection-method">The bisection method</a></li>
 <li class="toctree-l2"><a class="reference internal" href="._pylight007.html#rate-of-convergence">Rate of convergence</a></li>
-<li class="toctree-l2"><a class="reference internal" href="._pylight007.html#exercises-6">Exercises  (6)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="._pylight007.html#solving-multiple-nonlinear-algebraic-equations">Solving multiple nonlinear algebraic equations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="._pylight007.html#abstract-notation">Abstract notation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._pylight007.html#taylor-expansions-for-multi-variable-functions">Taylor expansions for multi-variable functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._pylight007.html#newton-s-method-2">Newton&#8217;s method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._pylight007.html#implementation-8">Implementation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="._pylight007.html#exercises-6">Exercises</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="._pylight007.html#exercise-72-understand-why-newton-s-method-can-fail">Exercise 72: Understand why Newton&#8217;s method can fail</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight007.html#exercise-73-see-if-the-secant-method-fails">Exercise 73: See if the secant method fails</a></li>
-<li class="toctree-l3"><a class="reference internal" href="._pylight007.html#exercise-74-understand-how-the-bisection-method-cannot-fail">Exercise 74: Understand how the bisection method cannot fail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="._pylight007.html#exercise-74-understand-why-the-bisection-method-cannot-fail">Exercise 74: Understand why the bisection method cannot fail</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight007.html#exercise-75-combine-the-bisection-method-with-newton-s-method">Exercise 75: Combine the bisection method with Newton&#8217;s method</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight007.html#exercise-76-write-a-test-function-for-newton-s-method">Exercise 76: Write a test function for Newton&#8217;s method</a></li>
 <li class="toctree-l3"><a class="reference internal" href="._pylight007.html#exercise-77-solve-nonlinear-equation-for-a-vibrating-beam">Exercise 77: Solve nonlinear equation for a vibrating beam</a></li>
@@ -334,12 +338,10 @@
 </ul>
 </div>
 </div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="index">
+<h1>Index<a class="headerlink" href="#index" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><a class="reference internal" href="genindex.html"><span>Index</span></a></li>
-<li><a class="reference internal" href="py-modindex.html"><span>Module Index</span></a></li>
-<li><a class="reference internal" href="search.html"><span>Search Page</span></a></li>
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
 </ul>
 </div>
 
@@ -347,26 +349,33 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+            <center>
+            <p class="logo"><a href="http://cbc.simula.no/" title="Go to Center for Biomedical Computing">
+              <img class="logo" src="_static/cbc_logo.png" alt="Logo"/>
+            </a></p>
+            </center>
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Programming for Computations</a></li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+<li><a class="reference internal" href="#">Programming for Computations (MATLAB/Octave version)</a></li>
+<li><a class="reference internal" href="#index">Index</a></li>
 </ul>
 
   <h4>Next topic</h4>
   <p class="topless"><a href="._pylight000.html"
-                        title="next chapter">Programming for Computations - A Gentle Introduction to Numerical Simulations with MATLAB/Octave</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/index.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+                        title="next chapter">Programming for Computations (MATLAB/Octave version)</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -380,20 +389,26 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2015, S. Linge and H. P. Langtangen.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.4</a>
-      
-      |
-      <a href="_sources/index.txt"
-          rel="nofollow">Page source</a></li>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="._pylight000.html" title="Programming for Computations (MATLAB/Octave version)"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Programming for Computations (MATLAB/Octave version)</a> &raquo;</li> 
+      </ul>
     </div>
+<div class="wrapper">
+  <div class="footer">
+    <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+    <br />
+    <br />
+      &copy;2015, Svein Linge and Hans Petter Langtangen.
+  </div>
+</div>
 
-    
-
-    
   </body>
 </html>

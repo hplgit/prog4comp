@@ -1,9 +1,6 @@
-
-
-.. |nbsp| unicode:: 0xA0
-   :trim:
-
 .. !split
+
+.. _1st:TheFirstFewSteps:
 
 The first few steps
 %%%%%%%%%%%%%%%%%%%
@@ -98,7 +95,7 @@ differs between the languages. Let us use an analogy.
 Assume you are an international kind of person, having friends abroad
 in England, Russia and China. They want to try your favorite
 cake. What can you do? Well, you may write down the recipe in those
-three languages and send them over. Now, if you have be able to think
+three languages and send them over. Now, if you have been able to think
 correctly when writing down the recipe, and you have written the
 explanations according to the rules in each language, each of your
 friends will produce the same cake. Your recipe is the "computer
@@ -115,7 +112,7 @@ messages. However, the response you get depends on the error and the
 programming language. You may even get no response, but simply the
 wrong "cake". Note that the rules of a programming language have to be
 followed very strictly. This differs from languages like English etc.,
-where the meaning might be understood even if with spelling errors and
+where the meaning might be understood even with spelling errors and
 "slang" included.
 
 This book comes in two versions, one that is based on Python, and one
@@ -123,7 +120,7 @@ based on Matlab. Both Python and Matlab represent excellent
 programming environments for scientific and engineering tasks. The
 version you are reading now, is the Python version.
 
-Some of the strong properties of Python deserve mention here: Many
+Some of Python's strong properties deserve mention here: Many
 global functions can be placed in only *one* file, functions are
 straightforwardly transferred as arguments to other functions, there
 is good support for interfacing C, C++ and Fortran code (i.e., a
@@ -135,7 +132,7 @@ and will run on most platforms.
 
 Readers who want to expand their scientific programming skills beyond
 the introductory level of the present exposition, are encouraged to
-study the book *A Primer on Scientific Programming with Python* [Ref17]_.
+study the book *A Primer on Scientific Programming with Python* [Ref18]_.
 This comprehensive book is
 as suitable for beginners as for professional programmers, and teaches
 the art of programming through a huge collection of dedicated
@@ -146,20 +143,29 @@ natural extension, of the programming matters in the present book.
 
 .. index:: script (and scripting)
 
-.. index:: implement
-
 
 .. admonition:: Some computer science terms
 
    Note that, quite often, the terms *script* and *scripting* are used as
-   synonyms for program and programming, respectively, especially
-   when using Python and a few lines of code can do much.
+   synonyms for program and programming, respectively.
    
    The inventor of the Perl programming language, Larry Wall, tried
    to explain the difference between script and program in a humorous way
    (from `perl.com <http://www.perl.com/pub/2007/12/06/soto-11.html>`__):
    *Suppose you went back to `Ada Lovelace <http://en.wikipedia.org/wiki/Ada_Lovelace>`__ and asked her the difference between a script and a program. She'd probably look at you funny, then say something like: Well, a script is what you give the actors, but a program is what you give the audience. That Ada was one sharp lady...
    Since her time, we seem to have gotten a bit more confused about what we mean when we say scripting. It confuses even me, and I'm supposed to be one of the experts.*
+   
+   .. index:: algorithm
+   
+   .. index:: execute (a program)
+   
+   .. index:: implement (a program)
+   
+   .. index:: bug
+   
+   .. index:: debugging
+   
+   .. index:: simulation
    
    There are many other widely used computer science terms to pick up. Writing
    a program (or script or code) is often expressed as
@@ -182,8 +188,11 @@ natural extension, of the programming matters in the present book.
 A Python program with variables
 ===============================
 
-Our first example regards programming the mathematical model for
-throwing a ball up in the air. From Newton's 2nd
+.. index::
+   single: model; mathematical
+
+Our first example regards programming a mathematical model that predicts the position of a
+ball thrown up in the air. From Newton's 2nd
 law, and by assuming negligible air resistance, one can derive a
 mathematical model that predicts the vertical position :math:`y` of the ball
 at time :math:`t`. From the model one gets the formula
@@ -205,7 +214,7 @@ The program
 Let us next look at a Python program for evaluating this simple formula.
 Assume the program is contained as text in a file named
 ``ball.py``. The text looks as follows (file
-`ball.py <https://github.com/hplgit/prog4comp/src/py/ball.py>`__):
+`ball.py <https://github.com/hplgit/prog4comp/tree/master/src/py/ball.py>`__):
 
 .. code-block:: python
 
@@ -246,24 +255,24 @@ interpreter, reads the program text and translates this text into
 specific actions.
 
 
-.. admonition:: You must learn to play a computer
+.. admonition:: You must learn to play the role of a computer
 
    Although Python is responsible for reading and understanding your
    program, it is of fundamental importance that you fully understand the
    program yourself. You have to know the implication of every
    instruction in the program and be able to figure out the consequences
-   of the instructions.  In other words, you must be able to play a
+   of the instructions.  In other words, you must be able to play the role of a
    computer. The reason for this strong demand of knowledge
-   is that you very often commit errors in the program text, and to
-   track down these errors, you have to simulate what the computer
+   is that errors unavoidably, and quite often, will be committed in the
+   program text, and to track down these errors, you have to simulate what the computer
    does with the program. Next, we shall explain all the text in
    ``ball.py`` in full detail.
 
 
 
 
-Python will next start to read your file, line by line, from the
-top. The first line it reads is
+When you run your program in Python, it will interpret the text in your file line by line, from the
+top, reading each line from left to right. The first line it reads is
 
 .. code-block:: python
 
@@ -277,7 +286,7 @@ it takes the rest of the line as a comment. Python then simply skips
 reading the rest of the line and jumps to the next line. In the code,
 you see several such comments and probably realize that they make it
 easier for you to understand (or guess) what is meant with the
-code. In this simple cases, comments are probably not much needed, but
+code. In simple cases, comments are probably not much needed, but
 will soon be justified as the level of complexity steps up.
 
 The next line read by Python is
@@ -350,14 +359,22 @@ second.  A much stronger argument, however, is that mathematical
 models from real life are often complicated and comprehensive.  The
 pocket calculator cannot cope with such problems, even not the
 programmable ones, because their computational power and their
-programming tools are far too weak compared to a real computer.
+programming tools are far too weak compared to what a real computer can offer.
 
 The importance of using a text editor to write programs
 -------------------------------------------------------
 
 .. index:: text editor
 
-.. index:: Idle
+.. index:: Emacs
+
+.. index:: Vim
+
+.. index:: Gedit
+
+.. index:: Notepad++
+
+.. index:: TextWrangler
 
 When Python interprets some code in a file, it is concerned with
 every character in the file, exactly as it was typed in.
@@ -366,19 +383,25 @@ the code into a file with word processors like, e.g., Microsoft Word,
 since such a program will insert extra characters, invisible to us, with
 information on how to format the text (e.g., the font size and type).
 Such extra information is necessary for the text to be nicely
-formatted for the human eye. Python will be much annoyed by
+formatted for the human eye. Python, however, will be much annoyed by
 the extra characters in the file inserted by a word processor.
 Therefore, it is fundamental that you write your program in a
 *text editor* where what you type on the keyboard is *exactly* the
 characters that appear in the file and that Python will later read.
 There are many text editors around. Some are stand-alone programs like
 Emacs, Vim, Gedit, Notepad++, and TextWrangler.
+
+.. index:: Spyder
+
 Others are integrated in graphical development environments for
 Python, such as Spyder. This book will primarily refer to Spyder
 and its text editor. 
 
 Installation of Python
 ----------------------
+
+.. index::
+   single: Python;  installation
 
 You will need access  to Python and several add-on
 packages for doing mathematical computations and display graphics.
@@ -392,12 +415,15 @@ Appendix :ref:`app:accesspy`.
 
 The quickest way to get started with a rich Python installation for
 this book on your Windows or Mac computer, is to
-install `Anaconda <http://continuum.io/downloads>`__.
+install `Anaconda <http://continuum.io/downloads>`__ (both Python
+(we recommend version 2.7) and Spyder come with it).
 
 .. and thereafter SciTools as described in Appendix :ref:`sec:accesspy:anaconda`.
 
 Write and run your first program
 --------------------------------
+
+.. index:: IPython
 
 .. index:: prompt
 
@@ -410,16 +436,14 @@ Write and run your first program
 .. index::
    single: program; execute
 
-.. index:: ipython
-
 Reading *only* does not teach you computer programming: you have to
 program yourself and practice heavily before you master mathematical
 problem solving via programming. Therefore, it is crucial at this stage that you
 write and run a Python program. We just went through the program ``ball.py``
 above, so let us next write and run that code.
 
-But first a warning: there are many things at that must play
-together correctly for ``ball.py`` to run correctly on
+But first a warning: there are many things that must come
+together in the right way for ``ball.py`` to run correctly on
 your computer. There might
 be problems with your Python installation, with your writing of the
 program (it is very easy to introduce errors!),
@@ -485,7 +509,7 @@ Let us make a Python program for doing these calculations. We introduce
 variables ``x`` and ``y`` for the position data :math:`x` and :math:`y`, and the
 descriptive name ``angle`` for the angle :math:`\theta`.
 The program is stored in a file
-`ball_angle_first_try.py <https://github.com/hplgit/prog4comp/src/py/ball_angle_first_try.py>`__:
+`ball_angle_first_try.py <https://github.com/hplgit/prog4comp/tree/master/src/py/ball_angle_first_try.py>`__:
 
 .. code-block:: python
 
@@ -532,11 +556,6 @@ on the left-hand side of ``=``.
 Note that the trigonometric functions, such as ``atan``, work with
 angles in radians. The return value of ``atan`` must hence be converted
 to degrees, and that is why we perform the computation ``(angle/pi)*180``.
-Two things happen in the ``print`` statement: first, the computation
-of ``(angle/pi)*180`` is performed, resulting in a real number, and second,
-``print`` prints that real number. Again, we may think that the
-arithmetic expression is replaced by its results and then ``print``
-starts working with that result.
 
 .. index:: library
 
@@ -545,16 +564,22 @@ starts working with that result.
 
 .. index:: from
 
-.. index:: import
-
-.. index:: math
-
 .. index:: module
 
 .. index:: package
 
+Two things happen in the ``print`` statement: first, the computation
+of ``(angle/pi)*180`` is performed, resulting in a real number, and second,
+``print`` prints that real number. Again, we may think that the
+arithmetic expression is replaced by its results and then ``print``
+starts working with that result.
+
 If we next execute ``ball_angle_first_try.py``, we get an error message on
 the screen saying
+
+.. index:: NameError
+
+.. index:: WARNING
 
 .. code-block:: text
 
@@ -578,6 +603,11 @@ In Python, the ``atan`` function is grouped together with many
 other mathematical functions in the library called ``math``.
 Such a library is referred to as a *module* in correct Python language.
 To get access to ``atan`` in our program we have to write
+
+.. index::
+   single: import;  math
+
+.. index:: math
 
 .. code-block:: python
 
@@ -603,7 +633,7 @@ A quick way of importing everything in ``math`` at once, is
 We will often use this import statement and then get access to all
 common mathematical functions. This latter statement is inserted
 in a program named
-`ball_angle.py <https://github.com/hplgit/prog4comp/src/py/ball_angle.py>`__:
+`ball_angle.py <https://github.com/hplgit/prog4comp/tree/master/src/py/ball_angle.py>`__:
 
 .. code-block:: python
 
@@ -637,6 +667,8 @@ interested in :math:`y` at every milli-second for the first second of the
 flight. This requires repeating the calculation of :math:`y=v_0t-0.5gt^2`
 one thousand times.
 
+.. index:: plot
+
 We will also draw a graph of :math:`y` versus :math:`t` for :math:`t\in [0,1]`. Drawing
 such graphs on a computer essentially means drawing straight lines
 between points on the curve, so we need many points to make the visual
@@ -645,12 +677,13 @@ compute here, the curve looks indeed very smooth.
 
 In Python, the calculations and the visualization of the curve
 may be done with the program
-`ball_plot.py <https://github.com/hplgit/prog4comp/src/py/ball_plot.py>`__,
+`ball_plot.py <https://github.com/hplgit/prog4comp/tree/master/src/py/ball_plot.py>`__,
 reading
 
 .. code-block:: python
 
         from numpy import linspace
+        import matplotlib.pyplot as plt
         
         v0 = 5
         g = 9.81
@@ -658,7 +691,6 @@ reading
         
         y = v0*t - 0.5*g*t**2
         
-        import matplotlib.pyplot as plt
         plt.plot(t, y)
         plt.xlabel('t (s)')
         plt.ylabel('y (m)')
@@ -670,8 +702,18 @@ As you notice, the code lines from the ``ball.py`` program
 in the chapter :ref:`1st:ex1` have not changed much, but
 the height is now computed and plotted for a thousand points in time!
 
-Let us look at the differences the new program and our previous program.
+Let us take a look at the differences between the new program and our previous program.
 From the top, the first difference we notice are the lines
+
+.. index:: numpy
+
+.. index::
+   single: import; numpy
+
+.. index:: matplotlib.pyplot
+
+.. index::
+   single: import; matplotlib.pyplot
 
 .. code-block:: python
 
@@ -697,7 +739,7 @@ explicitly import what we need and not everything (the star ``*``):
         from matplotlib.pyplot import plot, xlabel, ylabel
 
 Others will claim that we should do a slightly different import
-and prefix and functions from libraries by the library name:
+and prefix library functions by the library name:
 
 .. code-block:: python
 
@@ -735,7 +777,7 @@ arguments.  The ``linspace`` function generates ``n`` equally spaced
 coordinates, starting with ``start`` and ending with ``stop``. The
 expression ``linspace(0, 1, 1001)`` creates 1001 coordinates between 0
 and 1 (including both 0 and 1). The mathematically inclined reader
-will notice that 1001 coordinates corresponds to 1000 equal-sized
+will notice that 1001 coordinates correspond to 1000 equal-sized
 intervals in :math:`[0,1]` and that the coordinates are then given by :math:`t_i =
 i/1000` (:math:`i = 0, 1, ..., 1000`).
 
@@ -744,13 +786,12 @@ i/1000` (:math:`i = 0, 1, ..., 1000`).
 .. figure:: fig1_9.png
    :width: 400
 
-   *Plot generated by the script ``ball_plot.py`` showing the vertical position of the ball at a thousand points in time*
+   Plot generated by the script ``ball_plot.py`` showing the vertical position of the ball at a thousand points in time
 
-The value returned from ``linspace`` and stored in ``t`` is an *array*,
+The value returned from ``linspace`` (being stored in ``t``) is an *array*,
 i.e., a collection of numbers. When we start computing with this
 collection of numbers in the arithmetic expression
-``v0*t - 0.5*g*t**2``
-the expression is calculated for
+``v0*t - 0.5*g*t**2``, the expression is calculated for
 every number in ``t`` (i.e., every :math:`t_i` for :math:`i = 0, 1,..., 1000`), yielding a similar collection of 1001 numbers in the result ``y``. That is, ``y`` is also an array.
 
 This technique of computing all numbers "in one chunk" is referred to
@@ -764,13 +805,15 @@ a corresponding ``for`` or ``while`` loop (the chapter :ref:`2nd:BasicConstructi
 
 .. index:: plot
 
+.. index:: array
+
 The plotting commands are simple:
 
 1. ``plot(t, y)`` means plotting all the ``y`` coordinates versus all the ``t`` coordinates
 
-2. ``xlabel('t (s)')`` places a text ``t (s)`` on the :math:`x` axis
+2. ``xlabel('t (s)')`` places the text ``t (s)`` on the :math:`x` axis
 
-3. ``xlabel('y (m)')`` places a text ``y (m)`` on the :math:`y` axis
+3. ``ylabel('y (m)')`` places the text ``y (m)`` on the :math:`y` axis
 
 At this stage, you are strongly encouraged to do :ref:`1st:exer:volumes3cubes`. It builds on the example above, but is
 much simpler both with respect to the mathematics and the amount of
@@ -784,7 +827,7 @@ programming to solve mathematical problems. Before we can go on with
 other and more realistic examples, we need to briefly treat some
 topics that will be frequently required in later chapters. These
 topics include computer science concepts like variables, objects,
-error messages, and warnings; more numerical concepts like round-off
+error messages, and warnings; more numerical concepts like rounding
 errors, arithmetic operator precedence, and integer division; in
 addition to more Python functionality when working with arrays,
 plotting, and printing.
@@ -794,13 +837,17 @@ Using Python interactively
 
 .. index:: interactive use (of Python)
 
-.. index:: import
-
 .. index::
    single: keyboard; arrow up/down
 
+.. index:: prompt
+
 .. index::
    single: Python; shell
+
+.. index:: IPython
+
+.. index:: import
 
 Python can also be used interactively. That is, we do not first write
 a program in a file and execute it, but we give statements and
@@ -808,7 +855,7 @@ expressions to what is known as a Python *shell*.  We recommend to use
 IPython as shell (because it is superior to alternative Python
 shells). With ``Spyder``, ``Ipython`` is available at startup, appearing
 as the lower right window.  Following the IPython prompt ``In [1]:`` (a
-*prompt* means a "ready sign", i.e. the programs allows you to enter
+*prompt* means a "ready sign", i.e. the program allows you to enter
 a command, and different programs often have different looking
 prompts), you may do calculations:
 
@@ -826,7 +873,7 @@ prompts), you may do calculations:
         In  [4]: 2**3
         Out [4]: 8
 
-The response from ``ipython`` is preceded by ``Out [q]:``,
+The response from ``IPython`` is preceded by ``Out [q]:``,
 where ``q`` equals ``p`` when the response is to input "number" ``p``.
 
 Note that, as in a program, you may have to use ``import`` before using
@@ -856,8 +903,8 @@ the down-arrow key you can go forward again.
 When you have the relevant command at the prompt, you may edit it before
 pressing enter (which lets Python read it and take action).
 
-Arithmetics, parentheses and round-off errors
----------------------------------------------
+Arithmetics, parentheses and rounding errors
+--------------------------------------------
 
 .. index::
    single: operator; Arithmetic
@@ -879,6 +926,8 @@ it first does ``5**2`` which equals 25. This is then
 multiplied by 1 to give 25 again. The second term is ``10*3``, i.e.,
 30. So the first two terms add up to 55. The last term gives 0.25, so
 the final result is 54.75 which becomes the value of ``x``.
+
+.. index:: rounding error
 
 Note that parentheses are often very important to group parts of
 expressions together in the intended way. Let us say ``x = 4`` and that
@@ -902,11 +951,12 @@ complete denominator was ``x+1``. In our second try, we used parentheses
 to "group" the denominator, and we got what we wanted. That is,
 *almost* what we wanted! Since most numbers can be represented only
 approximately on the computer, this gives rise to what is called
-*round-off* errors. We should have got 0.2 as our answer, but the
+*rounding* errors. We should have got 0.2 as our answer, but the
 inexact number representation gave a small error. Usually, such errors
-are so small compared to the other numbers of the calculation that we
+are so small compared to the other numbers of the calculation, that we
 do not need to bother with them. Still, keep it in mind, since you
-will encounter this issue from time to time.
+will encounter this issue from time to time. More details regarding number
+representations on a computer is given in the section :ref:`sec:integrals:finite_prec`.
 
 Variables and objects
 ---------------------
@@ -1008,7 +1058,7 @@ Integer division
 
 .. index:: integer division
 
-.. index:: round-off error
+.. index:: rounding error
 
 Another issue that is important to be aware of is *integer division*. Let us look at a small example, assuming we want to divide one by four.
 
@@ -1074,7 +1124,7 @@ possible, while on the second line, ``42`` is formatted in a
 text field of width equal to five characters.
 
 The following program,
-`formatted_print.py <https://github.com/hplgit/prog4comp/src/py/formatted_print.py>`__,
+`formatted_print.py <https://github.com/hplgit/prog4comp/tree/master/src/py/formatted_print.py>`__,
 applies the printf syntax to control
 the formatting displayed above:
 
@@ -1090,7 +1140,7 @@ The output of ``print`` is a string,
 specified in terms of text and a set of variables to be inserted in the text.
 Variables are inserted in the text at places indicated by ``%``.
 After ``%`` comes a specification of the formatting, e.g, ``%f``
-(real number with six decimals), ``%d`` (integer), or ``%s`` (string).
+(real number), ``%d`` (integer), or ``%s`` (string).
 The format ``%9.3f`` means a real number in decimal notation, with
 3 decimals, written in a field of width equal to 9 characters.
 The variant ``%.3f`` means that the number is written as compactly as
@@ -1101,11 +1151,11 @@ is to be written in a field of width equal to 5 characters.
 Real numbers can also be specified with ``%g``, which is used
 to automatically choose between decimal or scientific
 notation, from what gives the most compact output
-(typically scientific notation for very small and very large numbers
+(typically, scientific notation is appropriate for very small and very large numbers
 and decimal notation for the intermediate range).
 
-A typical example when printf formatting is required arises when
-printing nicely aligned column of numbers. Suppose we want to
+A typical example of when printf formatting is required, arises when
+nicely aligned columns of numbers are to be printed. Suppose we want to
 print a column of :math:`t` values together with associated function
 values :math:`g(t)=t\sin(t)` in a second column. The simplest approach
 would be
@@ -1114,15 +1164,18 @@ would be
 
         from math import sin
         
-        n = 6
         t0 = 2
         dt = 0.55
         
         # Unformatted print
-        for i in range(n):
-            t = t0 + i*dt
-            g = t*sin(t)
-            print t, g
+        t = t0 + 0*dt; g = t*sin(t)
+        print t, g
+        
+        t = t0 + 1*dt; g = t*sin(t)
+        print t, g
+        
+        t = t0 + 2*dt; g = t*sin(t)
+        print t, g
 
 with output
 
@@ -1131,24 +1184,24 @@ with output
         2.0 1.81859485365
         2.55 1.42209347935
         3.1 0.128900053543
-        3.65 -1.77677126759
-        4.2 -3.66061824414
-        4.75 -4.74664074763
 
-The numbers are not nicely aligned. Using the printf syntax
-``'%6.2f  %8.3f'`` for ``t`` and ``g``, we can control how wide each
-column is and also the number of decimals such that the numbers
-in a column are written with the same precision. The output
+(Repeating the same set of statements multiple times, as done above,
+is not good programming practice - one should use a for loop, as
+explained later in the section :ref:`sec:for:loops`.)
+Observe that the numbers in the columns
+are not nicely aligned. Using the printf syntax
+``'%6.2f  %8.3f' % (t, g)`` for ``t`` and ``g``, we can control the width of each
+column and also the number of decimals, such that the numbers
+in a column are aligned under each other and
+written with the same precision. The output
 then becomes
 
 .. code-block:: text
 
+        Formatting via printf syntax
           2.00     1.819
           2.55     1.422
           3.10     0.129
-          3.65    -1.777
-          4.20    -3.661
-          4.75    -4.747
 
 We shall frequently use the printf syntax throughout the book so there
 will be plenty of further examples.
@@ -1257,6 +1310,8 @@ numbers occurred automatically "behind the scene".
 .. index::
    single: array; slice of
 
+.. index:: copy
+
 By the use of a colon, you may pick out a *slice* of an array. For
 example, to create a new array from the two elements ``h[1]`` and
 ``h[2]``, we could write ``slice_h = h[1:3]``. Note that the index
@@ -1292,7 +1347,7 @@ the same plot. Assume we have ``h`` as above, and also an array ``H`` with
 the heights :math:`0.50` m, :math:`0.70` m, :math:`1.90` m,
 and :math:`1.75` m from a family next door. This may be done with the
 program
-`plot_heights.py <https://github.com/hplgit/prog4comp/src/py/plot_heights.py>`__
+`plot_heights.py <https://github.com/hplgit/prog4comp/tree/master/src/py/plot_heights.py>`__
 given as
 
 .. code-block:: python
@@ -1378,13 +1433,13 @@ data points. For example, writing
 will mark only the data points with the star symbol.
 Other symbols like circles etc. may be used as well.
 
-.. index:: title
+.. index:: title (plot)
 
-.. index:: legend
+.. index:: legend (plot)
 
-.. index:: axis
+.. index:: axis (plot)
 
-.. index:: hardcopy
+.. index:: hardcopy (plot)
 
 .. index::
    single: format; png
@@ -1424,10 +1479,10 @@ Saving the figure to file is achieved by the command
 .. index::
    single: matrix; mat
 
+.. index:: transpose (of matrix)
+
 .. index::
    single: matrix; vector product
-
-.. index:: transpose
 
 .. index:: linear algebra
 
@@ -1437,13 +1492,15 @@ Saving the figure to file is achieved by the command
 
 For the reader who is into linear algebra, it may be useful to know
 that standard matrix/vector operations are straightforward with
-arrays, e.g., matrix-vector multiplication. What is needed though, is
+arrays, e.g., matrix-vector multiplication.
+ What is needed though, is
 to create the right variable types (after having imported an
-appropriate module). For example, assume you would like to calculate
+appropriate module).
+For example, assume you would like to calculate
 the vector :math:`\bf{y}` (note that boldface is used for vectors and
 matrices) as :math:`\bf{y} = \bf{Ax}`, where :math:`\bf{A}` is a :math:`2 \times 2`
 matrix and :math:`\bf{x}` is a vector. We may do this as illustrated by
-the program `matrix_vector_product.py <https://github.com/hplgit/prog4comp/src/py/matrix_vector_product.py>`__ reading
+the program `matrix_vector_product.py <https://github.com/hplgit/prog4comp/tree/master/src/py/matrix_vector_product.py>`__ reading
 
 .. code-block:: python
 
@@ -1469,7 +1526,7 @@ line ``x = mat(x)``. This is followed by a transpose of ``x`` from
 dimension :math:`1 \times 2` (the default dimension) to :math:`2 \times 1` with
 the statement ``x = transpose(x)``, before some test values are plugged
 in. The matrix ``A`` is first created as a two dimensional array with ``A
-= zeros((2,2))`` before conversion and filling in values takes
+= zeros((2,2))`` before conversion and filling in values take
 place. Finally, the multiplication is performed as ``y = A*x``. Note the
 number of parentheses when creating the two dimensional array
 ``A``. Running the program gives the following output on the screen:
@@ -1482,7 +1539,8 @@ number of parentheses when creating the two dimensional array
 Error messages and warnings
 ---------------------------
 
-.. index:: error message
+.. index::
+   single: error; message
 
 All programmers experience error messages, and usually to a large
 extent during the early learning process. Sometimes error messages
@@ -1491,7 +1549,7 @@ to get used to them. One idea is to start with a program that
 initially is working, and then deliberately introduce errors in
 it, one by one. (But remember to take a copy of the original working
 code!)
-For each error you try to run the program to
+For each error, you try to run the program to
 see what Python's response is. Then you know what the problem is
 and understand what the error message is about. This will greatly
 help you when you get a similar error message or warning later.
@@ -1538,7 +1596,7 @@ there is a potential for error at some particular point. If, for
 example, some user of the program is asked (by the running program) to
 provide a number, and intends to give the number 5, but instead writes
 the word *five*, the program could run into trouble. A
-``*try-exception*.py`` construction may be used by
+``try-exception`` construction may be used by
 the programmer to check for such errors and act appropriately (see
 the chapter :ref:`4th:NonlinAlgEq:Newt` for an example), avoiding a program
 crash. This procedure of trying an action and then recovering from
@@ -1548,8 +1606,14 @@ is the modern way of dealing with errors in a program.
 .. index::
    single: program; testing
 
+.. index:: testing
+
 .. index::
    single: program; verification
+
+.. index:: verification
+
+.. index:: validation
 
 When a program finally runs without error messages, it might be
 tempting to think that *Ah..., I am finished!*. But no! Then comes
@@ -1581,6 +1645,12 @@ are correct.
 Input data
 ----------
 
+.. index:: list
+
+.. index:: tuple
+
+.. index:: raw input
+
 .. index::
    single: program; input
 
@@ -1588,12 +1658,6 @@ Input data
    single: program; output
 
 .. index:: input
-
-.. index:: raw input
-
-.. index:: list
-
-.. index:: tuple
 
 Computer programs need a set of input data and the purpose is to
 use these data to compute output data, i.e., results.
@@ -1685,7 +1749,7 @@ Each symbol is represented
 by a standard variable, but the name of the symbol must be
 declared with ``Symbol(name)`` for a single symbol, or ``symbols(name1 name2 ...)`` for multiple symbols..
 The following script
-`example_symbolic.py <https://github.com/hplgit/prog4comp/src/py/example_symbolic.py>`__
+`example_symbolic.py <https://github.com/hplgit/prog4comp/tree/master/src/py/example_symbolic.py>`__
 is a quick demonstration
 of some of the basic symbolic operations that are supported in Python.
 
@@ -1709,7 +1773,7 @@ Other symbolic calculations like Taylor series expansion, linear algebra (with m
 
 .. index:: Mathematica
 
-Symbolic computations are also readily accessible through the free
+Symbolic computations are also readily accessible through the (partly) free
 online tool `WolframAlpha <http://www.wolframalpha.com>`__, which
 applies the very advanced `Mathematica <http://en.wikipedia.org/wiki/Mathematica>`__ package as symbolic engine.
 The disadvantage with WolframAlpha compared to the
@@ -1718,7 +1782,7 @@ automatically be imported into your code and used for further
 analysis. On the other hand, WolframAlpha has the advantage that it
 displays many additional mathematical results related to the given
 problem. For example, if we type ``2x + 3x - y`` in WolframAlpha, it
-not only reduced the expression to ``5x - y``, but it also makes plots
+not only simplifies the expression to ``5x - y``, but it also makes plots
 of the function :math:`f(x,y)=5x-y`, solves the equation :math:`5x - y = 0`, and
 calculates the integral :math:`\int\int(5x+y)dxdy`. The commercial Pro
 version can also show a step-by-step of the analytical computations in
@@ -1749,12 +1813,18 @@ Concluding remarks
 ------------------
 
 .. index::
+   single: variable; delete
+
+.. index::
    single: Python; documentation
 
 .. index:: garbage collection
 
-.. index::
-   single: variable; delete
+.. index:: long lines (splitting of)
+
+.. index:: fast code
+
+.. index:: commenting code
 
 
 .. admonition:: Programming demands you to be accurate
@@ -1848,8 +1918,8 @@ excellent books are also available
 Langtangen's comprehensive book *A Primer on Scientific Programming
 with Python*, Springer, 2014.
 
-Exercises  (1)
-==============
+Exercises          (1)
+======================
 
 .. --- begin exercise ---
 
@@ -2442,6 +2512,4 @@ change when you run the program again)
 Filename: ``drawing_random_numbers.py``.
 
 .. --- end exercise ---
-
-.. _2nd:BasicConstructins:
 
