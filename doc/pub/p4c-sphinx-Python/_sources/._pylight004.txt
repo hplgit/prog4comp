@@ -1455,6 +1455,45 @@ Running the test shows that all :math:`r_i`, except the first one, equal
 the target limit 2 within two decimals. This observation suggest a
 tolerance of :math:`10^{-2}`.
 
+
+.. admonition:: Remark about version control of files
+
+   Having a suite of test functions for automatically checking that your
+   software works is considered as a fundamental requirement for reliable
+   computing. Equally important is a system that can keep track of
+   different versions of the files and the tests, known as a *version control
+   system*. Today's most popular version control system is `Git <https://en.wikipedia.org/wiki/Git_(software)>`__, which the
+   authors strongly recommend the reader to use for programming and writing
+   reports. The combination of Git and cloud storage such as GitHub is a
+   very common way of organizing scientific or engineering work.
+   We have a `quick intro <http://hplgit.github.io/teamods/bitgit/Langtangen_bitgit-bootstrap.html>`__ to Git and GitHub that gets you up and running within
+   minutes.
+   
+   The typical workflow with Git goes as follows.
+   
+   1. Before you start working with files, make sure you have the latest
+      version of them by running ``git pull``.
+   
+   2. Edit files, remove or create files (new files must be registered
+      by ``git add``).
+   
+   3. When a natural piece of work is done, *commit* your changes by the
+      ``git commit`` command.
+   
+   4. Implement your changes also in the cloud by doing ``git push``.
+   
+   A nice feature of Git is that people can edit the same file at the same
+   time and very often Git will be able to automatically merge the changes (!).
+   Therefore, version control is crucial when you work with others or when
+   you do your work on different types of computers.
+   Another key feature is that anyone can at any time view the history of
+   a file, see who did what when, and roll back the entire file collection
+   to a previous commit. This feature is, of course, fundamental for
+   reliable work.
+
+
+
+
 Vectorization          (1)
 ==========================
 

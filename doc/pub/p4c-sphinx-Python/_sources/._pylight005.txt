@@ -129,7 +129,7 @@ Derivation of the model
 -----------------------
 
 It can be instructive to show how an equation like :ref:`(29) <Eq:sec:de:eq:N>`
-arises. Consider some population of (say) an animal specie and let
+arises. Consider some population of (say) an animal species and let
 :math:`N(t)` be the number of individuals in a certain spatial region, e.g. an island.
 We are not concerned with the spatial distribution of the animals, just
 the number of them in some spatial area where there is no exchange
@@ -142,14 +142,14 @@ In a time interval :math:`\Delta t`, the net growth of the population
 will be
 
 .. math::
-         N(t+\Delta t) - N(t) = \hat b N(t) - \hat d N(t),
+         N(t+\Delta t) - N(t) = \bar b N(t) - \bar d N(t),
 
-where :math:`\hat bN(t)` is the number of newborns and :math:`\hat d N(t)` is
+where :math:`\bar bN(t)` is the number of newborns and :math:`\bar d N(t)` is
 the number of deaths. If we double :math:`\Delta t`, we expect the proportionality
-constants :math:`\hat b` and :math:`\hat d` to double too, so it makes sense to
-think of :math:`\hat b` and :math:`\hat d` as proportional to :math:`\Delta t` and
-"factor out" :math:`\Delta t`. That is, we introduce :math:`b=\hat b/\Delta t` and
-:math:`d=\hat d/\Delta t` to be proportionality constants for newborns and
+constants :math:`\bar b` and :math:`\bar d` to double too, so it makes sense to
+think of :math:`\bar b` and :math:`\bar d` as proportional to :math:`\Delta t` and
+"factor out" :math:`\Delta t`. That is, we introduce :math:`b=\bar b/\Delta t` and
+:math:`d=\bar d/\Delta t` to be proportionality constants for newborns and
 deaths independent of :math:`\Delta t`. Also, we introduce :math:`r=b-d`, which
 is the net rate of growth of the population per time unit.
 Our model then becomes

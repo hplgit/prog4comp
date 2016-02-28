@@ -1077,6 +1077,37 @@ and then checking the value of <span class="math">\(r_i\)</span> for the largest
 <p>Running the test shows that all <span class="math">\(r_i\)</span>, except the first one, equal
 the target limit 2 within two decimals. This observation suggest a
 tolerance of <span class="math">\(10^{-2}\)</span>.</p>
+<div class="admonition-remark-about-version-control-of-files admonition">
+<p class="first admonition-title">Remark about version control of files</p>
+<p>Having a suite of test functions for automatically checking that your
+software works is considered as a fundamental requirement for reliable
+computing. Equally important is a system that can keep track of
+different versions of the files and the tests, known as a <em>version control
+system</em>. Today&#8217;s most popular version control system is <a class="reference external" href="https://en.wikipedia.org/wiki/Git_(software)">Git</a>, which the
+authors strongly recommend the reader to use for programming and writing
+reports. The combination of Git and cloud storage such as GitHub is a
+very common way of organizing scientific or engineering work.
+We have a <a class="reference external" href="http://hplgit.github.io/teamods/bitgit/Langtangen_bitgit-bootstrap.html">quick intro</a> to Git and GitHub that gets you up and running within
+minutes.</p>
+<p>The typical workflow with Git goes as follows.</p>
+<ol class="arabic simple">
+<li>Before you start working with files, make sure you have the latest
+version of them by running <code class="docutils literal"><span class="pre">git</span> <span class="pre">pull</span></code>.</li>
+<li>Edit files, remove or create files (new files must be registered
+by <code class="docutils literal"><span class="pre">git</span> <span class="pre">add</span></code>).</li>
+<li>When a natural piece of work is done, <em>commit</em> your changes by the
+<code class="docutils literal"><span class="pre">git</span> <span class="pre">commit</span></code> command.</li>
+<li>Implement your changes also in the cloud by doing <code class="docutils literal"><span class="pre">git</span> <span class="pre">push</span></code>.</li>
+</ol>
+<p class="last">A nice feature of Git is that people can edit the same file at the same
+time and very often Git will be able to automatically merge the changes (!).
+Therefore, version control is crucial when you work with others or when
+you do your work on different types of computers.
+Another key feature is that anyone can at any time view the history of
+a file, see who did what when, and roll back the entire file collection
+to a previous commit. This feature is, of course, fundamental for
+reliable work.</p>
+</div>
 </div>
 </div>
 <div class="section" id="vectorization-1">
@@ -2924,7 +2955,7 @@ The program <code class="docutils literal"><span class="pre">MC_triangle.m</span
     <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
     <br />
     <br />
-      &copy;2015, Svein Linge and Hans Petter Langtangen.
+      &copy;2016, Svein Linge and Hans Petter Langtangen.
   </div>
 </div>
 

@@ -228,6 +228,12 @@ Assume the program is contained as text in a file named
         
         print y
 
+Computer programs and parts of programs are typeset with a blue background
+in this book. A slightly darker top and bottom bar, as above, indicates
+that the code is a complete program that can be run as it stands. Without
+the bars, the code is just a *snippet* and will (normally) need additional
+lines to run properly.
+
 Dissection of the program
 -------------------------
 
@@ -299,12 +305,14 @@ The next line read by Python is
 
 .. index:: assignment
 
-According to its rules, Python will now create a *variable* with the
-name ``v0`` and set (the value of) that variable equal to 5. We say that
-5 is *assigned* to ``v0``. This means that whenever Python reads ``v0``
-hereafter, it plugs in 5 instead of the name ``v0``, since it knows that
-``v0`` has the value 5. You may think of ``v0`` as a variable :math:`v_0`
-in mathematics. The next two lines
+In Python, a statement like ``v0 = 5`` is known as an *assignment* statement
+(very different from a mathematical equation!). The result on the
+right-hand side, here the integer 5, becomes an *object* and the
+variable name on the left-hand side is a named reference for that
+object. Whenever we write ``v0``, Python will replace it by an integer
+with value 5. Doing ``v1 = v0`` creates a new name, ``v1``, for the same
+integer object with value 5 and not a copy of an integer object with value 5.
+The next two lines
 
 .. code-block:: python
 
@@ -327,7 +335,7 @@ addition and division, if such signs had been present in the
 expression). Having read the line, Python performs the mathematics
 on the right-hand side,
 and then assigns the result (in this case the number :math:`1.2342`) to the
-variable ``y``.
+variable name ``y``.
 Finally, Python reads
 
 .. code-block:: python
@@ -361,8 +369,8 @@ pocket calculator cannot cope with such problems, even not the
 programmable ones, because their computational power and their
 programming tools are far too weak compared to what a real computer can offer.
 
-The importance of using a text editor to write programs
--------------------------------------------------------
+Why you must use a text editor to write programs
+------------------------------------------------
 
 .. index:: text editor
 
@@ -411,14 +419,13 @@ Alternatively, you can use cloud services for running Python,
 or you can remote login on a computer system at a school or university.
 Available and recommended techniques for getting access to Python
 and the needed packages are documented in
-Appendix :ref:`app:accesspy`.
+ :ref:`app:accesspy`.
 
-The quickest way to get started with a rich Python installation for
-this book on your Windows or Mac computer, is to
-install `Anaconda <http://continuum.io/downloads>`__ (both Python
-(we recommend version 2.7) and Spyder come with it).
+The quickest way to get started with a Python installation for
+this book on your Windows, Mac, or Linux computer, is to
+install `Anaconda <http://continuum.io/downloads>`__.
 
-.. and thereafter SciTools as described in Appendix :ref:`sec:accesspy:anaconda`.
+.. and thereafter SciTools as described in  :ref:`sec:accesspy:anaconda`.
 
 Write and run your first program
 --------------------------------
@@ -476,7 +483,7 @@ running the program.
 Start up Spyder and type in each line
 of the program ``ball.py`` shown earlier. Then run the program.
 More detailed descriptions of operating Spyder are found in
-Appendix :ref:`sec:accesspy:writerun`.
+ :ref:`sec:accesspy:writerun`.
 
 If you have had the necessary luck to get everything right,
 you should now get the number :math:`1.2342` out in the
@@ -506,7 +513,7 @@ kind of calculations that must be performed. Here, if the ball is
 the ground, where :math:`\tan\theta = y/x`. The angle is then :math:`\tan^{-1}(y/x)`.
 
 Let us make a Python program for doing these calculations. We introduce
-variables ``x`` and ``y`` for the position data :math:`x` and :math:`y`, and the
+names ``x`` and ``y`` for the position data :math:`x` and :math:`y`, and the
 descriptive name ``angle`` for the angle :math:`\theta`.
 The program is stored in a file
 `ball_angle_first_try.py <https://github.com/hplgit/prog4comp/tree/master/src/py/ball_angle_first_try.py>`__:
@@ -550,7 +557,7 @@ a computation is performed (:math:`\tan^{-1}(y/x)`) and the result "replaces"
 the text ``atan(y/x)``. This is actually no more magic than if we
 had written just ``y/x``: then the computation of ``y/x`` would take place,
 and the result of that division would replace the text ``y/x``.
-Thereafter, the result is assigned to the variable ``angle``
+Thereafter, the result is assigned to the name ``angle``
 on the left-hand side of ``=``.
 
 Note that the trigonometric functions, such as ``atan``, work with
@@ -1070,21 +1077,24 @@ Another issue that is important to be aware of is *integer division*. Let us loo
         In  [2]: 1.0/4
         Out [2]: 0.25
 
-We see two alternative ways of writing it, but only the last way of writing it gave the correct result! Why?
+We see two alternative ways of writing it, but only the last way of writing it gave the correct (i.e., expected) result! Why?
 
-The first alternative gives what is called *integer division*, i.e.,
-all decimals in the answer are disregarded, so the result is rounded
-down to the nearest integer. To avoid it, we may introduce an
-explicit decimal point in either the numerator, the denominator, or in
-both. If you are new to programming, this is certainly strange
-behavior. However, you will find the same thing in many programming
-languages, not only Python. If your numerator or denominator is a
-variable, say you have ``1/x``, you may write ``1/float(x)`` to be on safe
-grounds.
+With Python version 2, the first alternative gives what is called
+*integer division*, i.e., all decimals in the answer are disregarded,
+so the result is rounded down to the nearest integer. To avoid it, we
+may introduce an explicit decimal point in either the numerator, the
+denominator, or in both. If you are new to programming, this is
+certainly strange behavior. However, you will find the same feature in
+many programming languages, not only Python, but actually all languages
+with significant inheritance from C. If your numerator or denominator
+is a variable, say you have ``1/x``, you may write ``1/float(x)`` to be on
+safe grounds.
 
-**Remark.**
-In version 3, Python will interpret an integer divided by
-an integer (e.g., ``1/4``) as a float division.
+Python version 3 implements mathematical real number division by  ``/``
+and requires the operator ``//`` for integer division (``//`` is also
+available in Python version 2). Although Python version 3 eliminates
+the problems with unintended integer division, it is important to know
+about integer division when doing computing in most other languages.
 
 Formatting text and numbers
 ---------------------------
@@ -1333,8 +1343,8 @@ writing
 
 In this case we do not get :math:`1.85` out on the screen, but :math:`5.0`. To
 really get a copy that is decoupled from the original array, you may
-write ``new_h = copy(h)``. However, copying a slice works straight
-forwardly (as shown above), i.e. an explicit use of ``copy`` is not
+write ``new_h = copy(h)``. However, copying a slice works
+straightforwardly (as shown above), i.e. an explicit use of ``copy`` is not
 required.
 
 Plotting
@@ -1574,7 +1584,7 @@ procedure, that often brings you a long way, is to print information
 to the screen from different places in the program. First of all, this
 is something you should do (several times) during program development
 anyway, so that things get checked as you go along. However, if the
-final program still ends up with error messages, you might save a copy
+final program still ends up with error messages, you may save a copy
 of it, and do some testing on the copy. Useful testing may then be to
 remove, e.g., the latter half of the program (by inserting comment
 signs ``#``), and insert print commands at clever places to see what is
@@ -1618,10 +1628,11 @@ is the modern way of dealing with errors in a program.
 When a program finally runs without error messages, it might be
 tempting to think that *Ah..., I am finished!*. But no! Then comes
 program *testing*, you need to *verify* that the program does the
-computations as planned. This is almost an art and usually takes
-much more time than to develop the program, but the program is
+computations as planned. This is almost an art and may take
+more time than to develop the program, but the program is
 useless unless you have much evidence showing that the computations
-are correct.
+are correct. Also, having a set of (automatic) tests saves huge amounts
+of time when you further develop the program.
 
 
 .. admonition:: Verification versus validation

@@ -471,7 +471,7 @@ function arguments:</p>
 </div>
 <div class="admonition-overhead-of-function-calls admonition">
 <p class="first admonition-title">Overhead of function calls</p>
-<p class="last">Function calls have the downside of slowing down program execution.
+<p>Function calls have the downside of slowing down program execution.
 Usually, it is a good thing to split a program into functions, but
 in very computing intensive parts, e.g., inside long loops, one
 must balance the convenience of calling a function and the
@@ -479,6 +479,28 @@ computational efficiency of avoiding function calls. It is a good
 rule to develop a program using plenty of functions and then
 in a later optimization stage, when everything computes correctly,
 remove function calls that are quantified to slow down the code.</p>
+<p>Here is a little example in IPython where we calculate the CPU time for
+doing array computations with and without a helper function:</p>
+<div class="highlight-ipy"><div class="highlight"><pre><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="gp">In [2]: </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1000000</span><span class="p">)</span>
+
+<span class="gp">In [3]: </span><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="gp">   ...: </span>    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="gp">   ...:</span>
+
+<span class="gp">In [4]: </span><span class="o">%</span><span class="k">timeit</span> for i in range(len(a)): a[i] = add(i, i+1)
+<span class="go">The slowest run took 16.01 times longer than the fastest.</span>
+<span class="go">This could mean that an intermediate result is being cached</span>
+<span class="go">1 loops, best of 3: 178 ms per loop</span>
+
+<span class="gp">In [5]: </span><span class="o">%</span><span class="k">timeit</span> for i in range(len(a)): a[i] = i + (i+1)
+<span class="go">10 loops, best of 3: 109 ms per loop</span>
+</pre></div>
+</div>
+<p class="last">We notice that there is some overhead in function calls. The
+impact of the overhead reduces quickly with the amount of
+computational work inside the function.</p>
 </div>
 </div>
 <div class="section" id="for-loops">
@@ -514,13 +536,14 @@ in the next iteration). Make sure you understand how program execution
 flows here, it is important.</p>
 <p>In Python, integer values specified for the loop variable are often produced by the built-in
 function <code class="docutils literal"><span class="pre">range</span></code>. The function <code class="docutils literal"><span class="pre">range</span></code> may be called in different ways, that either
-explicitly, or implicitly, specify the start, stop and step (i.e. change) of the loop
-variable. Generally, a call to <code class="docutils literal"><span class="pre">range</span></code> may read</p>
+explicitly, or implicitly, specify the start, stop and step (i.e., change)
+of the loop
+variable. Generally, a call to <code class="docutils literal"><span class="pre">range</span></code> reads</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This call makes <code class="docutils literal"><span class="pre">range</span></code> return the integers from (and including) <code class="docutils literal"><span class="pre">start</span></code>,
-up to (and excluding) <code class="docutils literal"><span class="pre">stop</span></code>, in steps of <code class="docutils literal"><span class="pre">step</span></code>. Note here that <code class="docutils literal"><span class="pre">stop-1</span></code>
+up to (but excluding!) <code class="docutils literal"><span class="pre">stop</span></code>, in steps of <code class="docutils literal"><span class="pre">step</span></code>. Note here that <code class="docutils literal"><span class="pre">stop-1</span></code>
 is that last integer included. With <code class="docutils literal"><span class="pre">range</span></code>, the previous example would
 rather read</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
@@ -535,7 +558,7 @@ starting at 0). Thus, calling <code class="docutils literal"><span class="pre">r
 <div class="highlight-python"><div class="highlight"><pre><span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>would return the list of integers <code class="docutils literal"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">5]</span></code>.</p>
+<p>would return the integers <code class="docutils literal"><span class="pre">0,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">5</span></code>.</p>
 <p>Note that decreasing integers may be produced by letting <code class="docutils literal"><span class="pre">start</span> <span class="pre">&gt;</span> <span class="pre">stop</span></code> combined
 with a negative step. This makes it easy to, e.g., traverse
 arrays in either direction.</p>
@@ -2203,7 +2226,7 @@ useful in analysis of gene sequences.</p>
     <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
     <br />
     <br />
-      &copy;2015, Svein Linge and Hans Petter Langtangen.
+      &copy;2016, Svein Linge and Hans Petter Langtangen.
   </div>
 </div>
 

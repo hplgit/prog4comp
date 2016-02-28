@@ -219,6 +219,11 @@ Assume the program is contained as text in a file named
 <span class="k">print</span> <span class="n">y</span>
 </pre></div>
 </div>
+<p>Computer programs and parts of programs are typeset with a blue background
+in this book. A slightly darker top and bottom bar, as above, indicates
+that the code is a complete program that can be run as it stands. Without
+the bars, the code is just a <em>snippet</em> and will (normally) need additional
+lines to run properly.</p>
 </div>
 <div class="section" id="dissection-of-the-program">
 <h3>Dissection of the program<a class="headerlink" href="#dissection-of-the-program" title="Permalink to this headline">¶</a></h3>
@@ -261,12 +266,14 @@ will soon be justified as the level of complexity steps up.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">v0</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c"># Initial velocity</span>
 </pre></div>
 </div>
-<span class="target" id="index-30"></span><p id="index-31">According to its rules, Python will now create a <em>variable</em> with the
-name <code class="docutils literal"><span class="pre">v0</span></code> and set (the value of) that variable equal to 5. We say that
-5 is <em>assigned</em> to <code class="docutils literal"><span class="pre">v0</span></code>. This means that whenever Python reads <code class="docutils literal"><span class="pre">v0</span></code>
-hereafter, it plugs in 5 instead of the name <code class="docutils literal"><span class="pre">v0</span></code>, since it knows that
-<code class="docutils literal"><span class="pre">v0</span></code> has the value 5. You may think of <code class="docutils literal"><span class="pre">v0</span></code> as a variable <span class="math">\(v_0\)</span>
-in mathematics. The next two lines</p>
+<span class="target" id="index-30"></span><p id="index-31">In Python, a statement like <code class="docutils literal"><span class="pre">v0</span> <span class="pre">=</span> <span class="pre">5</span></code> is known as an <em>assignment</em> statement
+(very different from a mathematical equation!). The result on the
+right-hand side, here the integer 5, becomes an <em>object</em> and the
+variable name on the left-hand side is a named reference for that
+object. Whenever we write <code class="docutils literal"><span class="pre">v0</span></code>, Python will replace it by an integer
+with value 5. Doing <code class="docutils literal"><span class="pre">v1</span> <span class="pre">=</span> <span class="pre">v0</span></code> creates a new name, <code class="docutils literal"><span class="pre">v1</span></code>, for the same
+integer object with value 5 and not a copy of an integer object with value 5.
+The next two lines</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span>  <span class="c"># Acceleration of gravity</span>
 <span class="n">t</span> <span class="o">=</span> <span class="mf">0.6</span>   <span class="c"># Time</span>
 </pre></div>
@@ -285,7 +292,7 @@ addition and division, if such signs had been present in the
 expression). Having read the line, Python performs the mathematics
 on the right-hand side,
 and then assigns the result (in this case the number <span class="math">\(1.2342\)</span>) to the
-variable <code class="docutils literal"><span class="pre">y</span></code>.
+variable name <code class="docutils literal"><span class="pre">y</span></code>.
 Finally, Python reads</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="n">y</span>
 </pre></div>
@@ -313,8 +320,8 @@ pocket calculator cannot cope with such problems, even not the
 programmable ones, because their computational power and their
 programming tools are far too weak compared to what a real computer can offer.</p>
 </div>
-<div class="section" id="the-importance-of-using-a-text-editor-to-write-programs">
-<h3>The importance of using a text editor to write programs<a class="headerlink" href="#the-importance-of-using-a-text-editor-to-write-programs" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="why-you-must-use-a-text-editor-to-write-programs">
+<h3>Why you must use a text editor to write programs<a class="headerlink" href="#why-you-must-use-a-text-editor-to-write-programs" title="Permalink to this headline">¶</a></h3>
 <span class="target" id="index-33"></span><span class="target" id="index-34"></span><span class="target" id="index-35"></span><span class="target" id="index-36"></span><span class="target" id="index-37"></span><p id="index-38">When Python interprets some code in a file, it is concerned with
 every character in the file, exactly as it was typed in.
 This makes it troublesome to write
@@ -342,12 +349,12 @@ a Python environment for scientific computing on your machine.
 Alternatively, you can use cloud services for running Python,
 or you can remote login on a computer system at a school or university.
 Available and recommended techniques for getting access to Python
-and the needed packages are documented in
-Appendix <a class="reference internal" href="._pylight008.html#app-accesspy"><span class="std std-ref">Appendix: Getting access to Python</span></a>.</p>
-<p>The quickest way to get started with a rich Python installation for
-this book on your Windows or Mac computer, is to
-install <a class="reference external" href="http://continuum.io/downloads">Anaconda</a> (both Python
-(we recommend version 2.7) and Spyder come with it).</p>
+and the needed packages are documented in</p>
+<blockquote>
+<div><a class="reference internal" href="._pylight008.html#app-accesspy"><span class="std std-ref">Appendix: Getting access to Python</span></a>.</div></blockquote>
+<p>The quickest way to get started with a Python installation for
+this book on your Windows, Mac, or Linux computer, is to
+install <a class="reference external" href="http://continuum.io/downloads">Anaconda</a>.</p>
 </div>
 <div class="section" id="write-and-run-your-first-program">
 <h3>Write and run your first program<a class="headerlink" href="#write-and-run-your-first-program" title="Permalink to this headline">¶</a></h3>
@@ -374,8 +381,9 @@ and a terminal window (<em>Terminal</em> on Mac, <em>Power Shell</em> on Windows
 running the program.
 Start up Spyder and type in each line
 of the program <code class="docutils literal"><span class="pre">ball.py</span></code> shown earlier. Then run the program.
-More detailed descriptions of operating Spyder are found in
-Appendix <a class="reference internal" href="._pylight008.html#sec-accesspy-writerun"><span class="std std-ref">How to write and run a Python program</span></a>.</p>
+More detailed descriptions of operating Spyder are found in</p>
+<blockquote>
+<div><a class="reference internal" href="._pylight008.html#sec-accesspy-writerun"><span class="std std-ref">How to write and run a Python program</span></a>.</div></blockquote>
 <p>If you have had the necessary luck to get everything right,
 you should now get the number <span class="math">\(1.2342\)</span> out in the
 rightmost lower window in the Spyder GUI.
@@ -400,7 +408,7 @@ kind of calculations that must be performed. Here, if the ball is
 <span class="math">\(x\)</span> m away and <span class="math">\(y\)</span> m up in the air, it makes an angle <span class="math">\(\theta\)</span> with
 the ground, where <span class="math">\(\tan\theta = y/x\)</span>. The angle is then <span class="math">\(\tan^{-1}(y/x)\)</span>.</p>
 <p>Let us make a Python program for doing these calculations. We introduce
-variables <code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code> for the position data <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, and the
+names <code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code> for the position data <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, and the
 descriptive name <code class="docutils literal"><span class="pre">angle</span></code> for the angle <span class="math">\(\theta\)</span>.
 The program is stored in a file
 <a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/py/ball_angle_first_try.py">ball_angle_first_try.py</a>:</p>
@@ -423,7 +431,7 @@ a computation is performed (<span class="math">\(\tan^{-1}(y/x)\)</span>) and th
 the text <code class="docutils literal"><span class="pre">atan(y/x)</span></code>. This is actually no more magic than if we
 had written just <code class="docutils literal"><span class="pre">y/x</span></code>: then the computation of <code class="docutils literal"><span class="pre">y/x</span></code> would take place,
 and the result of that division would replace the text <code class="docutils literal"><span class="pre">y/x</span></code>.
-Thereafter, the result is assigned to the variable <code class="docutils literal"><span class="pre">angle</span></code>
+Thereafter, the result is assigned to the name <code class="docutils literal"><span class="pre">angle</span></code>
 on the left-hand side of <code class="docutils literal"><span class="pre">=</span></code>.</p>
 <p>Note that the trigonometric functions, such as <code class="docutils literal"><span class="pre">atan</span></code>, work with
 angles in radians. The return value of <code class="docutils literal"><span class="pre">atan</span></code> must hence be converted
@@ -778,19 +786,22 @@ float.</p>
 <span class="n">Out</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="mf">0.25</span>
 </pre></div>
 </div>
-<p>We see two alternative ways of writing it, but only the last way of writing it gave the correct result! Why?</p>
-<p>The first alternative gives what is called <em>integer division</em>, i.e.,
-all decimals in the answer are disregarded, so the result is rounded
-down to the nearest integer. To avoid it, we may introduce an
-explicit decimal point in either the numerator, the denominator, or in
-both. If you are new to programming, this is certainly strange
-behavior. However, you will find the same thing in many programming
-languages, not only Python. If your numerator or denominator is a
-variable, say you have <code class="docutils literal"><span class="pre">1/x</span></code>, you may write <code class="docutils literal"><span class="pre">1/float(x)</span></code> to be on safe
-grounds.</p>
-<p><strong>Remark.</strong>
-In version 3, Python will interpret an integer divided by
-an integer (e.g., <code class="docutils literal"><span class="pre">1/4</span></code>) as a float division.</p>
+<p>We see two alternative ways of writing it, but only the last way of writing it gave the correct (i.e., expected) result! Why?</p>
+<p>With Python version 2, the first alternative gives what is called
+<em>integer division</em>, i.e., all decimals in the answer are disregarded,
+so the result is rounded down to the nearest integer. To avoid it, we
+may introduce an explicit decimal point in either the numerator, the
+denominator, or in both. If you are new to programming, this is
+certainly strange behavior. However, you will find the same feature in
+many programming languages, not only Python, but actually all languages
+with significant inheritance from C. If your numerator or denominator
+is a variable, say you have <code class="docutils literal"><span class="pre">1/x</span></code>, you may write <code class="docutils literal"><span class="pre">1/float(x)</span></code> to be on
+safe grounds.</p>
+<p>Python version 3 implements mathematical real number division by  <code class="docutils literal"><span class="pre">/</span></code>
+and requires the operator <code class="docutils literal"><span class="pre">//</span></code> for integer division (<code class="docutils literal"><span class="pre">//</span></code> is also
+available in Python version 2). Although Python version 3 eliminates
+the problems with unintended integer division, it is important to know
+about integer division when doing computing in most other languages.</p>
 </div>
 <div class="section" id="formatting-text-and-numbers">
 <h3>Formatting text and numbers<a class="headerlink" href="#formatting-text-and-numbers" title="Permalink to this headline">¶</a></h3>
@@ -972,8 +983,8 @@ writing</p>
 </div>
 <p>In this case we do not get <span class="math">\(1.85\)</span> out on the screen, but <span class="math">\(5.0\)</span>. To
 really get a copy that is decoupled from the original array, you may
-write <code class="docutils literal"><span class="pre">new_h</span> <span class="pre">=</span> <span class="pre">copy(h)</span></code>. However, copying a slice works straight
-forwardly (as shown above), i.e. an explicit use of <code class="docutils literal"><span class="pre">copy</span></code> is not
+write <code class="docutils literal"><span class="pre">new_h</span> <span class="pre">=</span> <span class="pre">copy(h)</span></code>. However, copying a slice works
+straightforwardly (as shown above), i.e. an explicit use of <code class="docutils literal"><span class="pre">copy</span></code> is not
 required.</p>
 </div>
 <div class="section" id="plotting">
@@ -1142,7 +1153,7 @@ procedure, that often brings you a long way, is to print information
 to the screen from different places in the program. First of all, this
 is something you should do (several times) during program development
 anyway, so that things get checked as you go along. However, if the
-final program still ends up with error messages, you might save a copy
+final program still ends up with error messages, you may save a copy
 of it, and do some testing on the copy. Useful testing may then be to
 remove, e.g., the latter half of the program (by inserting comment
 signs <code class="docutils literal"><span class="pre">#</span></code>), and insert print commands at clever places to see what is
@@ -1165,10 +1176,11 @@ is the modern way of dealing with errors in a program.</p>
 <span class="target" id="index-129"></span><span class="target" id="index-130"></span><span class="target" id="index-131"></span><span class="target" id="index-132"></span><p id="index-133">When a program finally runs without error messages, it might be
 tempting to think that <em>Ah..., I am finished!</em>. But no! Then comes
 program <em>testing</em>, you need to <em>verify</em> that the program does the
-computations as planned. This is almost an art and usually takes
-much more time than to develop the program, but the program is
+computations as planned. This is almost an art and may take
+more time than to develop the program, but the program is
 useless unless you have much evidence showing that the computations
-are correct.</p>
+are correct. Also, having a set of (automatic) tests saves huge amounts
+of time when you further develop the program.</p>
 <div class="admonition-verification-versus-validation admonition">
 <p class="first admonition-title">Verification versus validation</p>
 <p class="last">Verification is important, but <em>validation</em> is equally
@@ -1727,7 +1739,7 @@ change when you run the program again)</p>
 <li><a class="reference internal" href="#the-program">The program</a></li>
 <li><a class="reference internal" href="#dissection-of-the-program">Dissection of the program</a></li>
 <li><a class="reference internal" href="#why-not-just-use-a-pocket-calculator">Why not just use a pocket calculator?</a></li>
-<li><a class="reference internal" href="#the-importance-of-using-a-text-editor-to-write-programs">The importance of using a text editor to write programs</a></li>
+<li><a class="reference internal" href="#why-you-must-use-a-text-editor-to-write-programs">Why you must use a text editor to write programs</a></li>
 <li><a class="reference internal" href="#installation-of-python">Installation of Python</a></li>
 <li><a class="reference internal" href="#write-and-run-your-first-program">Write and run your first program</a></li>
 </ul>
@@ -1815,7 +1827,7 @@ change when you run the program again)</p>
     <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
     <br />
     <br />
-      &copy;2015, Svein Linge and Hans Petter Langtangen.
+      &copy;2016, Svein Linge and Hans Petter Langtangen.
   </div>
 </div>
 

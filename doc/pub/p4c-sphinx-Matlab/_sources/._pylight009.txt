@@ -97,10 +97,10 @@ References
 
 .. [Ref18]
    **H. P. Langtangen**. *A Primer on Scientific Programming with Python*,
-   fourth edition,
+   fifth edition,
    *Texts in Computational Science and Engineering*,
    Springer,
-   2014.
+   2016.
 
 .. [Ref19]
    **H. P. Langtangen**. DocOnce Publishing Platform,

@@ -733,7 +733,8 @@ The secant method
 When finding the derivative :math:`f'(x)` in Newton's method is problematic,
 or when function evaluations take too long; we may adjust the method
 slightly. Instead of using tangent lines to the graph we may use
-secants. The approach is referred to as the *secant method*, and the
+`secants <https://en.wikipedia.org/wiki/Secant_line>`__.
+The approach is referred to as the *secant method*, and the
 idea is illustrated graphically in Figure :ref:`fig:illustrSecant` for
 our example problem :math:`x^2 - 9 = 0`.
 

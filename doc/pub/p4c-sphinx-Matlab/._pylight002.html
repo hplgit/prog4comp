@@ -208,6 +208,11 @@ Assume the program is contained as text in a file named
 <span class="n">y</span> <span class="p">=</span> <span class="n">v0</span><span class="o">*</span><span class="n">t</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="n">t</span>^<span class="mi">2</span>   <span class="c">% Vertical position</span>
 </pre></div>
 </div>
+<p>Computer programs and parts of programs are typeset with a blue background
+in this book. A slightly darker top and bottom bar, as above, indicates
+that the code is a complete program that can be run as it stands. Without
+the bars, the code is just a <em>snippet</em> and will (normally) need additional
+lines to run properly.</p>
 </div>
 <div class="section" id="dissection-of-the-program">
 <h3>Dissection of the program<a class="headerlink" href="#dissection-of-the-program" title="Permalink to this headline">¶</a></h3>
@@ -274,7 +279,7 @@ addition and division, if such signs had been present in the
 expression). Having read the line, Matlab performs the mathematics
 on the right-hand side,
 and then assigns the result (in this case the number <span class="math">\(1.2342\)</span>) to the
-variable <code class="docutils literal"><span class="pre">y</span></code>.
+variable name <code class="docutils literal"><span class="pre">y</span></code>.
 Also, since the final line has no semi-colon, Matlab understands that
 we also want the result printed to screen. When <code class="docutils literal"><span class="pre">ball.m</span></code> is run,
 the number <span class="math">\(1.2342\)</span> appears on the screen.</p>
@@ -302,8 +307,8 @@ pocket calculator cannot cope with such problems, even not the
 programmable ones, because their computational power and their
 programming tools are far too weak compared to what a real computer can offer.</p>
 </div>
-<div class="section" id="the-importance-of-using-a-text-editor-to-write-programs">
-<h3>The importance of using a text editor to write programs<a class="headerlink" href="#the-importance-of-using-a-text-editor-to-write-programs" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="why-you-must-use-a-text-editor-to-write-programs">
+<h3>Why you must use a text editor to write programs<a class="headerlink" href="#why-you-must-use-a-text-editor-to-write-programs" title="Permalink to this headline">¶</a></h3>
 <span class="target" id="index-34"></span><span class="target" id="index-35"></span><span class="target" id="index-36"></span><span class="target" id="index-37"></span><span class="target" id="index-38"></span><p id="index-39">When Matlab interprets some code in a file, it is concerned with
 every character in the file, exactly as it was typed in.
 This makes it troublesome to write
@@ -410,7 +415,7 @@ kind of calculations that must be performed. Here, if the ball is
 <span class="math">\(x\)</span> m away and <span class="math">\(y\)</span> m up in the air, it makes an angle <span class="math">\(\theta\)</span> with
 the ground, where <span class="math">\(\tan\theta = y/x\)</span>. The angle is then <span class="math">\(\tan^{-1}(y/x)\)</span>.</p>
 <p>Let us make a Matlab program for doing these calculations. We introduce
-variables <code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code> for the position data <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, and the
+names <code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">y</span></code> for the position data <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, and the
 descriptive name <code class="docutils literal"><span class="pre">angle</span></code> for the angle <span class="math">\(\theta\)</span>.
 The program is stored in a file
 <a class="reference external" href="https://github.com/hplgit/prog4comp/tree/master/src/m/ball_angle.m">ball_angle.m</a>:</p>
@@ -432,7 +437,7 @@ a computation is performed (<span class="math">\(\tan^{-1}(y/x)\)</span>) and th
 the text <code class="docutils literal"><span class="pre">atan(y/x)</span></code>. This is actually no more magic than if we
 had written just <code class="docutils literal"><span class="pre">y/x</span></code>: then the computation of <code class="docutils literal"><span class="pre">y/x</span></code> would take place,
 and the result of that division would replace the text <code class="docutils literal"><span class="pre">y/x</span></code>.
-Thereafter, the result is assigned to the variable <code class="docutils literal"><span class="pre">angle</span></code>
+Thereafter, the result is assigned to the name <code class="docutils literal"><span class="pre">angle</span></code>
 on the left-hand side of <code class="docutils literal"><span class="pre">=</span></code>.</p>
 <p>Note that the trigonometric functions, such as <code class="docutils literal"><span class="pre">atan</span></code>, work with
 angles in radians. The return value of <code class="docutils literal"><span class="pre">atan</span></code> must hence be converted
@@ -950,7 +955,7 @@ procedure, that often brings you a long way, is to print information
 to the screen from different places in the program. First of all, this
 is something you should do (several times) during program development
 anyway, so that things get checked as you go along. However, if the
-final program still ends up with error messages, you might save a copy
+final program still ends up with error messages, you may save a copy
 of it, and do some testing on the copy. Useful testing may then be to
 remove, e.g., the latter half of the program (by inserting comment
 signs <code class="docutils literal"><span class="pre">%</span></code>), and insert print commands at clever places to see what is
@@ -973,10 +978,11 @@ is the modern way of dealing with errors in a program.</p>
 <span class="target" id="index-109"></span><span class="target" id="index-110"></span><span class="target" id="index-111"></span><span class="target" id="index-112"></span><p id="index-113">When a program finally runs without error messages, it might be
 tempting to think that <em>Ah..., I am finished!</em>. But no! Then comes
 program <em>testing</em>, you need to <em>verify</em> that the program does the
-computations as planned. This is almost an art and usually takes
-much more time than to develop the program, but the program is
+computations as planned. This is almost an art and may take
+more time than to develop the program, but the program is
 useless unless you have much evidence showing that the computations
-are correct.</p>
+are correct. Also, having a set of (automatic) tests saves huge amounts
+of time when you further develop the program.</p>
 <div class="admonition-verification-versus-validation admonition">
 <p class="first admonition-title">Verification versus validation</p>
 <p class="last">Verification is important, but <em>validation</em> is equally
@@ -1509,7 +1515,7 @@ change when you run the program again)</p>
 <li><a class="reference internal" href="#the-program">The program</a></li>
 <li><a class="reference internal" href="#dissection-of-the-program">Dissection of the program</a></li>
 <li><a class="reference internal" href="#why-not-just-use-a-pocket-calculator">Why not just use a pocket calculator?</a></li>
-<li><a class="reference internal" href="#the-importance-of-using-a-text-editor-to-write-programs">The importance of using a text editor to write programs</a></li>
+<li><a class="reference internal" href="#why-you-must-use-a-text-editor-to-write-programs">Why you must use a text editor to write programs</a></li>
 <li><a class="reference internal" href="#write-and-run-your-first-program">Write and run your first program</a><ul>
 <li><a class="reference internal" href="#write-and-run-a-program-in-matlab">Write and run a program in Matlab</a></li>
 <li><a class="reference internal" href="#write-a-program-in-a-text-editor-and-run-it-in-octave">Write a program in a text editor and run it in Octave</a></li>
@@ -1598,7 +1604,7 @@ change when you run the program again)</p>
     <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
     <br />
     <br />
-      &copy;2015, Svein Linge and Hans Petter Langtangen.
+      &copy;2016, Svein Linge and Hans Petter Langtangen.
   </div>
 </div>
 

@@ -62,6 +62,40 @@ add-on packages are
  * `SciPy <http://scipy.org>`__
    [Ref31]_ for advanced scientific computing
 
+
+.. admonition:: Python 2 or 3
+
+   Python comes in two versions, version 2 and 3, and these are not
+   fully compatible. However, for the programs in this book, the differences
+   are very small,
+   the major one being ``print``, which in Python 2 is a statement like
+   
+   .. code-block:: python
+   
+           print 'a:', a, 'b:', b
+   
+   while in Python 3 it is a function call
+   
+   .. code-block:: python
+   
+           print( 'a:', a, 'b:', b)
+   
+   The authors have written Python v2.7 code in this book in a way that
+   makes porting to version 3.4 or later trivial: most programs will just
+   need a fix of the ``print`` statement. This can be automatically done by
+   running ``2to3 prog.py`` to transform a Python 2 program ``prog.py`` to
+   its Python 3 counterpart. One can also use tools like ``future`` or
+   ``six`` to easily write programs that run under both versions 2 and 3,
+   or the ``futurize`` program can automatically do this for you based on
+   v2.7 code.
+   
+   Since many tools for doing scientific computing in Python are still
+   only available for Python version 2, we use this version in the
+   present book, but emphasize that it has to be v2.7 and not older versions.
+
+
+
+
 There are different ways to get access to Python with the required packages:
 
 1. Use a computer system at an institution where the software is

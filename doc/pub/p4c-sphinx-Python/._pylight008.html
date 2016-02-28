@@ -132,6 +132,31 @@ for compiling Python to C</li>
 <a class="reference internal" href="._pylight009.html#ref31" id="id12">[Ref31]</a> for advanced scientific computing</li>
 </ul>
 </div></blockquote>
+<div class="admonition-python-2-or-3 admonition">
+<p class="first admonition-title">Python 2 or 3</p>
+<p>Python comes in two versions, version 2 and 3, and these are not
+fully compatible. However, for the programs in this book, the differences
+are very small,
+the major one being <code class="docutils literal"><span class="pre">print</span></code>, which in Python 2 is a statement like</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span> <span class="s">&#39;a:&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s">&#39;b:&#39;</span><span class="p">,</span> <span class="n">b</span>
+</pre></div>
+</div>
+<p>while in Python 3 it is a function call</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">print</span><span class="p">(</span> <span class="s">&#39;a:&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s">&#39;b:&#39;</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The authors have written Python v2.7 code in this book in a way that
+makes porting to version 3.4 or later trivial: most programs will just
+need a fix of the <code class="docutils literal"><span class="pre">print</span></code> statement. This can be automatically done by
+running <code class="docutils literal"><span class="pre">2to3</span> <span class="pre">prog.py</span></code> to transform a Python 2 program <code class="docutils literal"><span class="pre">prog.py</span></code> to
+its Python 3 counterpart. One can also use tools like <code class="docutils literal"><span class="pre">future</span></code> or
+<code class="docutils literal"><span class="pre">six</span></code> to easily write programs that run under both versions 2 and 3,
+or the <code class="docutils literal"><span class="pre">futurize</span></code> program can automatically do this for you based on
+v2.7 code.</p>
+<p class="last">Since many tools for doing scientific computing in Python are still
+only available for Python version 2, we use this version in the
+present book, but emphasize that it has to be v2.7 and not older versions.</p>
+</div>
 <p>There are different ways to get access to Python with the required packages:</p>
 <ol class="arabic simple">
 <li>Use a computer system at an institution where the software is
@@ -556,7 +581,7 @@ lines above write <code class="docutils literal"><span class="pre">%pylab</span>
     <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
     <br />
     <br />
-      &copy;2015, Svein Linge and Hans Petter Langtangen.
+      &copy;2016, Svein Linge and Hans Petter Langtangen.
   </div>
 </div>
 

@@ -216,6 +216,12 @@ Assume the program is contained as text in a file named
         
         y = v0*t - 0.5*g*t^2   % Vertical position
 
+Computer programs and parts of programs are typeset with a blue background
+in this book. A slightly darker top and bottom bar, as above, indicates
+that the code is a complete program that can be run as it stands. Without
+the bars, the code is just a *snippet* and will (normally) need additional
+lines to run properly.
+
 Dissection of the program
 -------------------------
 
@@ -317,7 +323,7 @@ addition and division, if such signs had been present in the
 expression). Having read the line, Matlab performs the mathematics
 on the right-hand side,
 and then assigns the result (in this case the number :math:`1.2342`) to the
-variable ``y``.
+variable name ``y``.
 Also, since the final line has no semi-colon, Matlab understands that
 we also want the result printed to screen. When ``ball.m`` is run,
 the number :math:`1.2342` appears on the screen.
@@ -350,8 +356,8 @@ pocket calculator cannot cope with such problems, even not the
 programmable ones, because their computational power and their
 programming tools are far too weak compared to what a real computer can offer.
 
-The importance of using a text editor to write programs
--------------------------------------------------------
+Why you must use a text editor to write programs
+------------------------------------------------
 
 .. index:: text editor
 
@@ -507,7 +513,7 @@ kind of calculations that must be performed. Here, if the ball is
 the ground, where :math:`\tan\theta = y/x`. The angle is then :math:`\tan^{-1}(y/x)`.
 
 Let us make a Matlab program for doing these calculations. We introduce
-variables ``x`` and ``y`` for the position data :math:`x` and :math:`y`, and the
+names ``x`` and ``y`` for the position data :math:`x` and :math:`y`, and the
 descriptive name ``angle`` for the angle :math:`\theta`.
 The program is stored in a file
 `ball_angle.m <https://github.com/hplgit/prog4comp/tree/master/src/m/ball_angle.m>`__:
@@ -550,7 +556,7 @@ a computation is performed (:math:`\tan^{-1}(y/x)`) and the result "replaces"
 the text ``atan(y/x)``. This is actually no more magic than if we
 had written just ``y/x``: then the computation of ``y/x`` would take place,
 and the result of that division would replace the text ``y/x``.
-Thereafter, the result is assigned to the variable ``angle``
+Thereafter, the result is assigned to the name ``angle``
 on the left-hand side of ``=``.
 
 Note that the trigonometric functions, such as ``atan``, work with
@@ -1288,7 +1294,7 @@ procedure, that often brings you a long way, is to print information
 to the screen from different places in the program. First of all, this
 is something you should do (several times) during program development
 anyway, so that things get checked as you go along. However, if the
-final program still ends up with error messages, you might save a copy
+final program still ends up with error messages, you may save a copy
 of it, and do some testing on the copy. Useful testing may then be to
 remove, e.g., the latter half of the program (by inserting comment
 signs ``%``), and insert print commands at clever places to see what is
@@ -1332,10 +1338,11 @@ is the modern way of dealing with errors in a program.
 When a program finally runs without error messages, it might be
 tempting to think that *Ah..., I am finished!*. But no! Then comes
 program *testing*, you need to *verify* that the program does the
-computations as planned. This is almost an art and usually takes
-much more time than to develop the program, but the program is
+computations as planned. This is almost an art and may take
+more time than to develop the program, but the program is
 useless unless you have much evidence showing that the computations
-are correct.
+are correct. Also, having a set of (automatic) tests saves huge amounts
+of time when you further develop the program.
 
 
 .. admonition:: Verification versus validation

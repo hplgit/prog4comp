@@ -563,6 +563,31 @@ function arguments:
    rule to develop a program using plenty of functions and then
    in a later optimization stage, when everything computes correctly,
    remove function calls that are quantified to slow down the code.
+   
+   Here is a little example in IPython where we calculate the CPU time for
+   doing array computations with and without a helper function:
+   
+   .. code-block:: ipy
+   
+           In [1]: import numpy as np
+           
+           In [2]: a = np.zeros(1000000)
+           
+           In [3]: def add(a, b):
+              ...:     return a + b
+              ...:
+           
+           In [4]: %timeit for i in range(len(a)): a[i] = add(i, i+1)
+           The slowest run took 16.01 times longer than the fastest.
+           This could mean that an intermediate result is being cached
+           1 loops, best of 3: 178 ms per loop
+           
+           In [5]: %timeit for i in range(len(a)): a[i] = i + (i+1)
+           10 loops, best of 3: 109 ms per loop
+   
+   We notice that there is some overhead in function calls. The
+   impact of the overhead reduces quickly with the amount of
+   computational work inside the function.
 
 
 
@@ -621,15 +646,16 @@ flows here, it is important.
 
 In Python, integer values specified for the loop variable are often produced by the built-in
 function ``range``. The function ``range`` may be called in different ways, that either
-explicitly, or implicitly, specify the start, stop and step (i.e. change) of the loop
-variable. Generally, a call to ``range`` may read
+explicitly, or implicitly, specify the start, stop and step (i.e., change)
+of the loop
+variable. Generally, a call to ``range`` reads
 
 .. code-block:: python
 
         range(start, stop, step)
 
 This call makes ``range`` return the integers from (and including) ``start``,
-up to (and excluding) ``stop``, in steps of ``step``. Note here that ``stop-1``
+up to (but excluding!) ``stop``, in steps of ``step``. Note here that ``stop-1``
 is that last integer included. With ``range``, the previous example would
 rather read
 
@@ -648,7 +674,7 @@ starting at 0). Thus, calling ``range``, for example, as
 
         range(6)
 
-would return the list of integers ``[0, 1, 2, 3, 4, 5]``.
+would return the integers ``0, 1, 2, 3, 4, 5``.
 
 Note that decreasing integers may be produced by letting ``start > stop`` combined
 with a negative step. This makes it easy to, e.g., traverse
