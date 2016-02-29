@@ -1925,9 +1925,10 @@ official Python documentation website
 (`<http://docs.python.org/>`_), which provides a Python tutorial, the
 *Python Library Reference*, a *Language Reference*, and more. Several
 excellent books are also available
-(`<http://wiki.python.org/moin/PythonBooks>`_), e.g., Hans Petter
+(`<http://wiki.python.org/moin/PythonBooks>`_), but not so many with
+a scientific computing focus. One exception is
 Langtangen's comprehensive book *A Primer on Scientific Programming
-with Python*, Springer, 2014.
+with Python*, Springer, 2016.
 
 Exercises          (1)
 ======================
