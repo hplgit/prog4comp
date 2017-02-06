@@ -6,7 +6,7 @@ beta = 10./(40*8*24)
 gamma = 3./(15*24)
 dt = 0.1             # 6 min
 D = 30               # Simulate for D days
-N_t = int(D*24/dt)   # Corresponding no of hours
+N_t = int(D*24/dt)   # Corresponding no of time steps
 
 t = linspace(0, N_t*dt, N_t+1)
 S = zeros(N_t+1)

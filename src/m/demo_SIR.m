@@ -3,7 +3,7 @@ function demo_SIR()
     
     dt = 0.1;               % 6 min
     D = 30;                 % Simulate for D days
-    N_t = floor(D*24/dt);   % Corresponding no of hours
+    N_t = floor(D*24/dt);   % Corresponding no of time steps
     T = dt*N_t;             % End time
     U_0 = [50 1 0];
     

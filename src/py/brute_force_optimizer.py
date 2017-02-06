@@ -6,7 +6,7 @@ def brute_force_optimizer(f, a, b, n):
     # to (local) maxima and minima points
     minima = []
     maxima = []
-    for i in range(n-1):
+    for i in range(1, n-1):
         if y[i-1] < y[i] > y[i+1]:
             maxima.append(i)
         if y[i-1] > y[i] < y[i+1]:

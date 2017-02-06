@@ -22,7 +22,7 @@ def demo_SIR():
     gamma = 3./(15*24)
     dt = 0.1             # 6 min
     D = 30               # Simulate for D days
-    N_t = int(D*24/dt)   # Corresponding no of hours
+    N_t = int(D*24/dt)   # Corresponding no of time steps
     T = dt*N_t           # End time
     U_0 = [50, 1, 0]
 
@@ -41,8 +41,10 @@ def demo_SIR():
     N = S[0] + I[0] + R[0]
     eps = 1E-12  # Tolerance for comparing real numbers
     for n in range(len(S)):
-        success = abs(S[n] + I[n] + R[n] - N) < eps
-        assert success
+        SIR_sum = S[n] + I[n] + R[n]
+        if abs(SIR_sum - N) > eps:
+            print '*** consistency check failed: S+I+R=%g != %g' %\
+                  (SIR_sum, N)
 
 if __name__ == '__main__':
     demo_SIR()

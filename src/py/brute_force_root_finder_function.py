@@ -7,6 +7,9 @@ def brute_force_root_finder(f, a, b, n):
         if y[i]*y[i+1] < 0:
             root = x[i] - (x[i+1] - x[i])/(y[i+1] - y[i])*y[i]
             roots.append(root)
+        elif y[i] == 0:      
+            root = x[i]
+            roots.append(root)
     return roots
 
 def demo():

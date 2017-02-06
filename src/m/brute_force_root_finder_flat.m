@@ -8,6 +8,9 @@ for i = 1:(length(x)-1)
     if y(i)*y(i+1) < 0
          root = x(i) - (x(i+1) - x(i))/(y(i+1) - y(i))*y(i);
          break;  % Jump out of loop
+    elseif y(i) == 0
+        root = x(i);
+        break;   % Jump out of loop
     end
 end
 if isnan(root)

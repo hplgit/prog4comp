@@ -2,8 +2,8 @@ N_0 = input('Give initial population size N_0: ');
 r   = input('Give net growth rate r: ');
 dt  = input('Give time step size: ');
 N_t = input('Give number of steps: ');
-t = linspace(0, (N_t+1)*dt, N_t+2);
-N = zeros(N_t+2, 1);
+t = linspace(0, N_t*dt, N_t+1);
+N = zeros(N_t+1, 1);
 
 N(1) = N_0;
 for n = 1:N_t
