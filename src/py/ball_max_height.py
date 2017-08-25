@@ -1,3 +1,4 @@
+from numpy import linspace
 import matplotlib.pyplot as plt
 
 v0 = 5                    # Initial velocity
@@ -19,3 +20,4 @@ print "The largest height achieved was %f m" % (largest_height)
 plt.plot(t,y)
 plt.xlabel('Time (s)')
 plt.ylabel('Height (m)')
+plt.show()
